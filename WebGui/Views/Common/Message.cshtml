@@ -1,0 +1,606 @@
+﻿@{
+    ViewBag.Title = "Message";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Scripts/css/lib/bootstrap-reset.css")" rel="stylesheet">
+<link href="@Url.Content("~/Bootstrap/css/bootstrap-datetimepicker.min.css")" rel="stylesheet">
+<link href="@Url.Content("~/Scripts/css/lib/flatui.css")" rel="stylesheet">
+<link href="@Url.Content("~/Scripts/css/lib/flatui-responsive.css")" rel="stylesheet">
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/ckeditor.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap-datetimepicker.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap-multiselect.js")"></script>
+<link rel="stylesheet" href="@Url.Content("~/Scripts/css/lib/bootstrap-multiselect.css")" type="text/css" />
+>
+<style>
+    body {
+        background-color: #eaeaea;
+    }
+
+    #wrapper {
+        margin-top: 10px;
+    }
+
+    #page-wrapper {
+        padding: 5px;
+    }
+
+    .mail-box .inbox-body {
+        padding-left: 35px;
+    }
+
+    .mail-box .lg-side .sm-side-toggle {
+        position: fixed;
+        width: 20px;
+        height: 50px;
+        border: 1px solid #E7E7E7;
+        background: none repeat scroll 0% 0% #FCFCFC;
+        top: 100px;
+        cursor: pointer;
+        padding-top: 16px;
+        padding-left: 2px;
+    }
+
+        .mail-box .lg-side .sm-side-toggle:hover {
+            background: none repeat scroll 0% 0% #F5F5F5;
+        }
+
+    #msgNavBar li {
+        cursor: pointer;
+    }
+
+    .multiselect-container {
+        position: absolute;
+        list-style-type: none;
+        margin-left: 0;
+        padding-left: 20px;
+        height: 300px;
+        overflow: scroll;
+    }
+
+    .inbox-pagination {
+        cursor: pointer;
+    }
+
+    .modal-backdrop {
+        width: 100% !important;
+    }
+</style>
+<script type="text/javascript">
+
+    function getMessageData(pageIdx, pageSize, status) {
+        $("#footLoading").fadeIn(500);
+        //conditions sopt_Status=eq&Status=1
+        //var conditions = "sopt_Status=eq&Status=" + status + "&sopt_GroupId=eq&GroupId=" + getCookie("plv3.passport.groupid");
+        //MANA10所属集团没有资料，先去掉该条件
+        var conditions = "";
+        if (status != '4') {
+            conditions = "sopt_Status=eq&Status=" + status;
+        }
+
+        $.ajax({
+            type: "get",
+            url: rootPath + "Common/GetMessage?page=" + pageIdx + "&status=" + status + "&rows=" + pageSize + "&conditions=" + escape(conditions),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (data) {
+                var source;
+                if (status == 2) {
+                    source = $("#msg-template").html();
+                }
+                else {
+                    source = $("#ReadMsg-template").html();
+                }
+                var template = Handlebars.compile(source);
+                var html = template(data.rows);
+                $("#footLoading").fadeOut(500);
+                $('#msgTable tbody').html(html).fadeIn(500);
+
+                var recordsCount = data.records,
+                    totalPages = data.total,
+                    fromIdx = 0,
+                    toIdx = 0;
+                $("#tatalRow").text(recordsCount);
+
+                if (data.rows.length > 0) {
+                    fromIdx = data.rows[0].Index;
+                    toIdx = data.rows[0].Index + data.rows.length - 1;
+                    //toIdx = data.rows[0].__seq + data.rows.length - 1;
+                }
+                if (status == 2) {
+                    $("#unreadcount").text(recordsCount);
+                    $(window.top.document).find(".badge").text(recordsCount);
+                }
+                $("#rowNow").text(fromIdx);
+                $("#rowTo").text(toIdx);
+
+                if (document.getElementById("pageSelect").length != totalPages) {
+                    $("#pageSelect").empty();
+                    for (var i = 1; i <= totalPages; i++) {
+                        $('#pageSelect').append('<option value="' + i + '">' + i + '</option>');
+                    }
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    //设置消息为已读
+    function setRead(options, status) {
+        var dataArr = "";
+        $.each(options, function (index, item) {
+            if (index != 0)
+                dataArr += ",";
+            dataArr += "{ \"groupId\": \"" + item.groupId + "\", \"msgId\": \"" + item.msgId + "\" }";
+        });
+        dataArr = "[" + dataArr + "]";
+
+        $.ajax({
+            type: "post",
+            url: rootPath + "Common/SetMessageRead",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({ "msgList": escape(dataArr), "status": status }),
+            success: function (data) {
+                if (data) {
+                    //CommonFunc.Notify("", "设置成功", 500, "success");
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    function getSelectOptions() {
+        $.ajax({
+            async: false,
+            url: rootPath + "Common/GetRoleOption",
+            type: 'POST',
+            "error": function (xmlHttpRequest, errMsg) {
+                alert(errMsg);
+            },
+            success: function (data) {
+                var roleOptions = data.Role;
+                appendSelectOption($("#Group"), roleOptions);
+                $('#Group').multiselect({
+                    enableFiltering: true,
+                    filterPlaceholder: 'Search for something...',
+                    maxWidth: '510px',
+                    buttonWidth: '510px'
+                });
+            }
+        });
+    }
+
+    /*设置select的选项*/
+    function appendSelectOption(selectId, options) {
+        selectId.empty();
+        $.each(options, function (idx, option) {
+            selectId.append("<option value=\"" + option.cd + "\">" + option.cdDescp + "</option>");
+        });
+    }
+
+    jQuery(document).ready(function ($) {
+         MenuBarFuncArr.RemoveAllMenu();
+
+        getMessageData(1, 20, 2);
+
+        //var msgStr  = "[{\"index\":1,\"title\":\"title1\",\"MsgContent\":\"content1\",\"Messager\":\"messager1\",\"Datetime\":\"2015-04-01\"}]";
+        //var msgData = JSON.parse(msgStr.replace(/&quot;/g, '"'));
+        //var source    = $("#msg-template").html();
+        //var template  = Handlebars.compile(source);
+        //var html      = template(msgData);
+        //$('#msgTable tbody').html(html);
+
+        $(window).resize(function (event) {
+            $(".sm-side").removeAttr('style');
+            if ($(window).width() < 768) {
+                if ($(".sm-side").css("diplay") != "none") {
+                    $(".sm-side").css("diplay", "block");
+                }
+            }
+            else {
+                if ($(".sm-side").css("diplay") != "none") {
+                    $(".sm-side").css("diplay", "table-cell");
+                }
+            }
+        });
+        $(".sm-side-toggle").on("click", function () {
+            $(".sm-side").fadeToggle(function () {
+                if ($(window).width() < 768) {
+                    if ($(this).css("diplay") != "none") {
+                        $(this).css("diplay", "block");
+                    }
+                }
+                else {
+                    if ($(this).css("diplay") != "none") {
+                        $(this).css("diplay", "table-cell");
+                    }
+                }
+            });
+
+            $(this).find("i").toggleClass('glyphicon-chevron-right');
+
+        });
+        $(".mail-group-checkbox").on("click", function () {
+            if ($(".mail-checkbox").prop("checked")) {
+                $("input[name='msgCheckbox[]']").each(function () {
+                    $(this).prop("checked", true);
+                });
+            }
+            else {
+                $("input[name='msgCheckbox[]']").each(function () {
+                    $(this).prop("checked", false);
+                });
+            }
+        });
+
+        $("#msgNavBar li").on("click", function () {
+            $(this).siblings('li').removeClass('active');
+            $(this).addClass('active');
+            var status = $(this).attr("id") === "unread" ? 2 : 3;
+            if ($(this).attr("id") === "send") {
+                status = 4;
+            }
+            getMessageData(1, 20, status);
+        });
+
+        $("#msgTable").on("click", "tr", function (event) {
+            var target = $(event.target);
+            var page = $("#pageSelect").val();
+
+            if(target.hasClass('mail-checkbox') === false)
+            {
+                var title = $(this).attr("title");
+                var content = $(this).attr("content");
+                $('#myModal .modal-title').text(title);
+                $('#myModal .modal-body p').text(content);
+            }
+            //return;
+            var options = new Array();
+            options.push({ "groupId": $(this).attr("groupId"), "msgId": $(this).attr("msgId") });
+            setRead(options, 3);
+            getMessageData(page, 20 * page, 2);
+        });
+
+        $("#pageSelect").change(function(){
+            var page = $(this).val();
+            var status = $("#msgNavBar").children(".active").attr("id") === "unread" ? 2 : 3;
+            if ($("#msgNavBar").children(".active").attr("id") === "send") {
+                status = 4;
+            }
+            getMessageData(page, 20, status);
+        });
+
+        $(".pageLeft").on("click", function(){
+            var $pageSelect = $("#pageSelect");
+            var nowPage = $pageSelect.val();
+            var prevPage = parseInt(nowPage) - 1;
+            if (prevPage <= 0)
+                return;
+            $pageSelect.val(prevPage);
+            $pageSelect.trigger('change');
+        });
+
+        $(".pageRight").on("click", function () {
+            var $pageSelect = $("#pageSelect");
+            var nowPage = $pageSelect.val();
+            var nextPage = parseInt(nowPage) + 1;
+            if (nextPage > document.getElementById("pageSelect").length)
+                return;
+            $pageSelect.val(nextPage);
+            $pageSelect.trigger('change');
+        });
+
+        $("#btnrefresh").bind("click", function () {
+            var status = $("#unread").hasClass("active") ? 2 : 3;
+            getMessageData(1, 20, status);
+            $("#pageSelect").val(1);
+        });
+
+        //设置已读/未读
+        $(".dropdown-menu a").on("click", function () {
+            var $obj = $(this),
+                status = $obj.attr("id") === "read-btn" ? 3 : 2,
+                options = new Array(),
+                $checkedRows = $($("input[name='msgCheckbox[]']:checked"));
+            $checkedRows.each(function () {
+                var $tr = $(this).parents("tr");
+                options.push({ "groupId": $tr.attr("groupId"), "msgId": $tr.attr("msgId") });
+            });
+            setRead(options, status);
+        });
+        var titletmp = '@ViewBag.titletmp';
+        var contenttmp = '@ViewBag.contenttmp';
+        var msgidtmp = '@ViewBag.msgidtmp';
+        if (titletmp != "" && contenttmp != "" && msgidtmp != "")
+        {
+            $('#myModal .modal-title').text(titletmp);
+            $('#myModal .modal-body p').text(contenttmp);
+            $('#myModal').modal('show')
+        }
+
+        //init send msg model
+        $("#sendMsg").bind("click", function () {
+            $('#sendModel .modal-title').text("Send Message");
+            //$('#sendModel .modal-body p').text("Mail Content");
+            ajustamodal('#sendModel',100,100);
+            $('#sendModel').modal('show')
+        });
+
+        $('#NoticeDate').datetimepicker({
+            format: 'YYYYMMDD',
+            defaultDate: new Date()
+        });
+        /*CKEDITOR.replace('BullContent');
+        CKEDITOR.instances.BullContent.on('change', function () {
+            CKEDITOR.instances.BullContent.updateElement()
+
+            $('textarea[fieldname=BullContent]').text(CKEDITOR.instances.BullContent.getData());
+        });*/
+
+
+
+        //init send message method
+
+        $('#sendMsgBtn').bind("click", function () {
+            var formData = convFormData2Json("sendForm");
+            console.log(formData);
+            $.ajax({
+                type: "post",
+                url: rootPath + "Common/SendMessage",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ "data": formData}),
+                success: function (data) {
+                    if (data) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_Message_SetS", 500, "success");
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        getSelectOptions();
+
+        if (pmsList.indexOf("SendMsg") == -1) {
+            $("#sendMsg").remove();
+        }
+    });
+</script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>&hellip;</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <div class="modal fade" id="sendModel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="panel panel-default">
+                                    <form action="POST" name="sendForm" id="sendForm">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="pure-u-sm-24-24">
+                                                    <div class="form-group">
+                                                        <label for="NoticeSubject">@Resources.Locale.L_AddBulletin_UID:</label>
+                                                        <input type="text" class="form-control input-sm" id="NoticeSubject" dt="mt" name="NoticeSubject" fieldname="NoticeSubject">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="pure-u-sm-6-24">
+                                                    <div class="form-group">
+                                                        <label for="NoticeDate">@Resources.Locale.L_Message_SendDate:</label>
+                                                        <div class='input-group date' id='NoticeDate'>
+                                                            <input type='text' class="form-control input-sm" dt="mt" fieldname="NoticeDate" name="NoticeDate" />
+                                                            <span class="input-group-addon" style="padding-top: 4px;">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="pure-u-sm-6-24">
+                                                    <div class="form-group">
+                                                        <label for="NoticeType">@Resources.Locale.L_Message_SendWay:</label>
+                                                        <select class="form-control input-sm" id="NoticeType" dt="mt" name="NoticeType" fieldname="NoticeType">
+                                                            <option value="0">Both</option>
+                                                            <option value="1">Email</option>
+                                                            <option value="2">Message</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="pure-u-sm-24-24">
+                                                    <div class="form-group">
+                                                        <label for="Group">@Resources.Locale.L_Message_SendGroup:</label><br />
+                                                        <select class="form-control input-sm" id="Group" dt="mt" name="Group" fieldname="Group" multiple="multiple"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="pure-u-sm-24-24">
+                                                    <div class="form-group">
+                                                        <label for="Account">@Resources.Locale.L_Message_SendTo:</label>
+                                                        <textarea class="form-control" id="Account" dt="mt" name="Account" fieldname="Account"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="pure-u-sm-24-24">
+                                                    <div class="form-group">
+                                                        <label for="GROUP_ID">@Resources.Locale.L_Message_Content:</label>
+                                                        <textarea class="form-control" id="BullContent" dt="mt" name="BullContent" fieldname="BullContent"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <p>&hellip;</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="sendMsgBtn" class="btn btn-success" data-dismiss="modal">Send</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div><!-- /.sendModel-content -->
+                </div><!-- /.sendModel-dialog -->
+            </div><!-- /.sendModel -->
+            <!--mail inbox-box -->
+            <div class="mail-box">
+                <aside class="sm-side">
+                    <div class="user-head" style="min-height:40px"></div>
+                    <ul class="inbox-nav inbox-divider" id="msgNavBar">
+                        <li id="unread" class="active">
+                            <a><i class="glyphicon glyphicon-envelope"></i>@Resources.Locale.L_Message_UnreadMeg<span id="unreadcount" class="label label-danger pull-right">2</span></a>
+                        </li>
+                        <li id="read">
+                            <a><i class="glyphicon glyphicon-file"></i>@Resources.Locale.L_Message_ReadMeg</a>
+                        </li>
+                        <li id="send">
+                            <a><i class="glyphicon glyphicon-inbox"></i>@Resources.Locale.L_Message_SendMeg</a>
+                        </li>
+                    </ul>
+
+                </aside>
+                <aside class="lg-side">
+                    <div class="sm-side-toggle"><i class="glyphicon glyphicon-chevron-left  pagination-left"></i></div>
+                    <div class="inbox-head" style="min-height:30px"></div>
+                    <div class="inbox-body">
+                        <div class="mail-option">
+                            <div class="chk-all">
+                                <input class="mail-checkbox mail-group-checkbox" type="checkbox">
+                                <div class="btn-group">
+                                    <a aria-expanded="false" class="btn mini all" href="#" data-toggle="dropdown">
+                                        All
+                                        <i class="glyphicon glyphicon-chevron-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a id="read-btn" href="#"> Read</a></li>
+                                        <li><a id="unread-btn" href="#"> Unread</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="btn-group">
+                                <a id="btnrefresh" aria-expanded="false" class="btn mini tooltips" href="#" data-toggle="dropdown" data-placement="top" data-original-title="Refresh">
+                                    <i class="glyphicon glyphicon-refresh"></i>
+                                </a>
+                            </div>
+                            <div class="btn-group hidden-phone">
+                                <a aria-expanded="false" class="btn mini blue" href="#">
+                                    @Resources.Locale.L_Message_Job
+                                </a>
+                            </div>
+                            <div class="btn-group" id="navbar button">
+                                <a aria-expanded="false" class="btn mini blue" href="#" id="sendMsg">
+                                    @Resources.Locale.L_Message_Send
+                                </a>
+                            </div>
+
+                            <ul class="unstyled inbox-pagination">
+                                <li><span id="rowNow">1</span>-<span id="rowTo">50</span> of <span id="tatalRow">234</span></li>
+                                <li>
+                                    <select class="form-control" id="pageSelect">
+                                        <option value="1">1</option>
+                                        <option value="1">2</option>
+                                        <option value="1">3</option>
+                                    </select>
+                                </li>
+                                <li class="pageLeft">
+                                    <a class="np-btn"><i class="glyphicon glyphicon-chevron-left  pagination-left"></i></a>
+                                </li>
+                                <li class="pageRight">
+                                    <a class="np-btn"><i class="glyphicon glyphicon-chevron-right pagination-right"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <table class="table table-inbox table-hover" id="msgTable">
+                            <tbody style="display:none"></tbody>
+                            <tfoot id="footLoading" style="display:none">
+                                <tr>
+                                    <td colspan="5">
+                                        <div class="spinner">
+                                            <div class="spinner-container container1">
+                                                <div class="circle1"></div>
+                                                <div class="circle2"></div>
+                                                <div class="circle3"></div>
+                                                <div class="circle4"></div>
+                                            </div>
+                                            <div class="spinner-container container2">
+                                                <div class="circle1"></div>
+                                                <div class="circle2"></div>
+                                                <div class="circle3"></div>
+                                                <div class="circle4"></div>
+                                            </div>
+                                            <div class="spinner-container container3">
+                                                <div class="circle1"></div>
+                                                <div class="circle2"></div>
+                                                <div class="circle3"></div>
+                                                <div class="circle4"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </aside>
+            </div>
+            <!--mail inbox-box end -->
+        </div>
+    </div>
+</div>
+
+<script id="msg-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <tr class="unread" data-toggle="modal" data-target="#myModal" title="{{Title}}" content="{{Content}}" groupid="{{GroupId}}" msgid="{{MsgId}}">
+        <td><input class="mail-checkbox" type="checkbox" name="msgCheckbox[]"></td>
+        <td>{{Index}}</td>
+        <td>{{CreateBy}}</td>
+        <td>{{CreateDate}}</td>
+        <td>{{Title}}</td>
+    </tr>
+    {{/each}}
+</script>
+
+<script id="ReadMsg-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <tr data-toggle="modal" data-target="#myModal" title="{{Title}}" content="{{Content}}">
+        <td><input class="mail-checkbox" type="checkbox" name="msgCheckbox[]"></td>
+        <td>{{Index}}</td>
+        <td>{{CreateBy}}</td>
+        <td>{{CreateDate}}</td>
+        <td>{{Title}}</td>
+    </tr>
+    {{/each}}
+</script>

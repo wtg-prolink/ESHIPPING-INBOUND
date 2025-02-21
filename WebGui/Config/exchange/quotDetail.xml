@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+从name插入到fieldname，询价转报价
+-->
+<table name="SMQTD">
+  <column name="region code"  fieldname="REGION" dataType="string" defalutValue="" >
+  </column>
+  <column name="POD"  fieldname="POD_CD" dataType="string" defalutValue="">
+  </column>
+  <column name="Port / City"  fieldname="POD_NM" dataType="string" defalutValue="" >
+  </column>
+  <column name="POL" fieldname="POL_CD" dataType="string" defalutValue="" >
+  </column>
+  <column name="Loading Port" fieldname="POL_NM"  dataType="string"  defalutValue="">
+  </column>
+  <column name="carrier" fieldname="CARRIER" dataType="string"  defalutValue="">
+  </column>
+  <column name="20'RFQ" fieldname="F2" dataType="number" defalutValue="" >
+  </column>
+  <column name="40'RFQ" fieldname="F3" dataType="number" defalutValue="O">
+  </column>
+  <column name="HQ RFQ"  fieldname="F4" dataType="number" defalutValue="">
+  </column>
+  <column name="20' (BUC/BAF/FAF)"  fieldname="F12" dataType="number" defalutValue="">
+  </column>
+  <column name="40' (BUC/BAF/FAF)"  fieldname="F13" dataType="number" defalutValue="">
+  </column>
+  <column name="HQ (BUC/BAF/FAF)"  fieldname="F14" dataType="number" defalutValue="">
+  </column>
+  <column name="sailing day (departure)"  fieldname="SAILING_DAY" dataType="string" defalutValue="">
+  </column>
+  <column name="Free original detention (days)"  fieldname="FREE_ODT" dataType="number" defalutValue="">
+  </column>
+  <column name="Free original demurrage (days)"  fieldname="FREE_ODM" dataType="number" defalutValue="">
+  </column>
+  <column name="Free destination detention (days)"  fieldname="FREE_DDT" dataType="number" defalutValue="">
+  </column>
+  <column name="Free destination demurrage(days)"  fieldname="FREE_DDM" dataType="number" defalutValue="">
+  </column>
+  <column name="T/T"  fieldname="TT" dataType="number" defalutValue="">
+  </column>
+  <column name="Routing"  fieldname="VIA_NM" dataType="string" defalutValue="">
+  </column>
+  <column name="Note"  fieldname="NOTE" dataType="string" defalutValue="">
+  </column>
+  <column name="Remark"  fieldname="REMARK" dataType="string" defalutValue="">
+  </column>
+</table>

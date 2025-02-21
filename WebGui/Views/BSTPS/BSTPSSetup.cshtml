@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "BSTPSSetup";
+}
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/BSTPS/BSTPSSetup.js?20240815")"></script>
+<script type="text/javascript">
+	var _uid = "@ViewBag.UId";
+	var schemas = "@ViewBag.schemas.Content";
+</script>
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Cmp" class="control-label">@Resources.Locale.L_UserSetUp_Cmp</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" ref="Cmp" id="CmpNm" name="CmpNm" fieldname="CmpNm" readonly />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="TranType" class="control-label required">@Resources.Locale.L_DTFreightQuery_Views_503</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="TranType" name="TranType" fieldname="TranType" iskey="true" required>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PortCd" class="control-label">POD</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PortCd" name="PortCd" fieldname="PortCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PortCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" ref="PortCd" id="PortNm" name="PortNm" fieldname="PortNm" readonly />
+                        </div>
+
+                        <div class="pure-u-sm-5-60">
+                            <label for="DlvArea" class="control-label">Delivery Area</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="DlvArea" name="DlvArea" fieldname="DlvArea" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="DlvAreaLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" ref="DlvArea" id="DlvAreaNm" name="DlvAreaNm" fieldname="DlvAreaNm" readonly />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Remark" class="control-label">@Resources.Locale.L_BSCSSetup_Remark</label>
+                        </div>
+                        <div class="pure-u-sm-55-60 control-group">
+                            <textarea class="form-control" dt="mt" id="Remark" name="Remark" fieldname="Remark"></textarea>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="CreateBy" class="control-label">@Resources.Locale.L_IpPart_CreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" fieldname="CreateBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" fieldname="CreateDate" readonly>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ModifyBy" class="control-label">@Resources.Locale.L_IpPart_ModifyBy</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" fieldname="ModifyBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" fieldname="ModifyDate" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" isKey="true" />

@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "GateSetup";
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+@Html.RazorJSInline("~/Scripts/GateManage/GateSetupNew.js")
+<style>
+    #page-wrapper {padding: 5px;}
+</style>
+<script type="text/javascript">
+    // var Cmp = "@ViewBag.Cmp";
+    // var CmpNm = "@ViewBag.CmpNm";
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+</script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+        	<div class="panel panel-default">
+        	    <div class="panel-body">
+        	    	 <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Cmp" class="control-label">@Resources.Locale.L_UserSetUp_Cmp</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                             <label for="MfNo" class="control-label required">@Resources.Locale.L_DNManage_FacCd</label>
+                         </div>
+                         <div class="pure-u-sm-10-60 control-group">
+                             <input type="text" class="form-control input-sm" dt="mt" id="MfNo" name="MfNo" fieldname="MfNo" required/>
+                             <p class="help-block tooltips"></p>
+                         </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                             <label for="WsCd" class="control-label">@Resources.Locale.L_GateAnalysis_WsCd</label>
+                         </div>
+                         <div class="pure-u-sm-10-60 control-group">
+                             <input type="text" class="form-control input-sm" dt="mt" id="WsCd" name="WsCd" fieldname="WsCd" />
+                             <p class="help-block tooltips"></p>
+                         </div>
+                         <div class="pure-u-sm-5-60 label-right">
+                              <label for="WsNm" class="control-label">@Resources.Locale.L_GateSetup_WsNm</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="WsNm" name="WsNm" fieldname="WsNm" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div> 
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="GateNumber" class="control-label">@Resources.Locale.L_GateSetup_GateNumber</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="GateNumber" name="GateNumber" fieldname="GateNumber" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ProductLine" class="control-label">@Resources.Locale.L_GateReserveSetup_ProLine</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ProductLine" name="ProductLine" fieldname="ProductLine" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="RefGate" class="control-label">@Resources.Locale.L_DNManage_RefGate</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="RefGate" name="RefGate" fieldname="RefGate" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Pic" class="control-label">@Resources.Locale.L_GateSetup_Pic</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Pic" name="Pic" fieldname="Pic" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PicLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+			    	@* <div class="pure-g">
+						<div class="pure-u-sm-60-60">
+				            <table id="MainGrid" class="_tableGrid" style="width: 100%">
+				                <tr>
+				                
+				                </tr>
+				            </table>
+				        </div>		        
+			    	</div> *@
+			    	<div class="pure-g">
+			    		<div class="pure-u-sm-60-60">
+			    			<table id="MainGrid" class="_tableGrid" style="width: 100%">
+			    			    <tr>
+			    			      
+			    			    </tr>
+			    			</table>
+			    		</div>
+			    	</div>
+			    </div>
+			</div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" />

@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "ModifyPwd";
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/System/ModifyPwd.js?20240815")"></script>
+<style>
+    /*隐藏ie自带眼睛*/
+    ::-ms-reveal {
+        display: none;
+    }
+
+    #seeOpwd, #seeUpwd, #seeCpwd {
+        display: inline-block;
+        position: absolute;
+        right: 10px;
+        z-index: -100;
+        cursor: pointer;
+        top: 25%;
+    }
+</style>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Opwd" class="control-label">@Resources.Locale.L_ModifyExpridPwd_Opwds</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div id="pwdOgroup" style="position:relative;z-index:10;">
+                                <input type="password" class="form-control input-sm" id="Opwd" name="Opwd" fieldname="Opwd" />
+                                <span id="seeOpwd" class="glyphicon glyphicon-eye-open pwdeye"></span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="UPassword" class="control-label">@Resources.Locale.L_ModifyPwd_NewPwd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div id="pwdUgroup" style="position:relative;z-index:10;">
+                                <input type="password" class="form-control input-sm" dt="mt" id="UPassword" name="UPassword" fieldname="UPassword" />
+                                <span id="seeUpwd" class="glyphicon glyphicon-eye-open pwdeye"></span>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ConfirmPwd" class="control-label">@Resources.Locale.L_ModifyPwd_CnfPwd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div id="pwdCgroup" style="position:relative;z-index:10;">
+                                <input type="password" class="form-control input-sm" id="ConfirmPwd" name="ConfirmPwd" disabled />
+                                <span id="seeCpwd" class="glyphicon glyphicon-eye-open pwdeye"></span>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <label>@Resources.Locale.L_ModifyPwd_Notes1</label>
+                    </div>
+                    <div class="pure-g">
+                        <label>1.@Resources.Locale.L_ModifyPwd_Notes2</label>
+                    </div>
+                    <div class="pure-g">
+                        <label>2.@Resources.Locale.L_ModifyPwd_Notes3 </label>
+                    </div>
+                    <div class="pure-g">
+                        <label>3.@Resources.Locale.L_ModifyPwd_Notes4</label>
+                    </div>
+                    <div class="pure-g">
+                        <label>4.@Resources.Locale.L_ModifyPwd_Notes5</label>
+                    </div>
+                    <div class="pure-g">
+                        <label>5.@Resources.Locale.L_ModifyPwd_Notes6</label>
+                    </div>
+                    <div class="pure-g">
+                        <label>6.@Resources.Locale.L_ModifyPwd_Notes7</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

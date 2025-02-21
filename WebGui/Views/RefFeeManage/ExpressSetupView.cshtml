@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "ExpressSetupView";
+}
+
+<script>
+	var _VenderCd = "@ViewBag.VenderCd";
+	var schemas = "@ViewBag.schemas.Content";
+	var  jslang = [];
+	jslang["L_ReffeeManage_CostList"] = "Rule Code Item";
+	jslang["L_ExpressSetupView_Msg1"] = "Please Enter Vender";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/ReffeeManage/ExpressSetupView.js?20240815")"></script>
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+			<div class="pure-u-sm-5-60">
+			    <label for="VenderCd" class="control-label required">@Resources.Locale.L_ReffeeManage_VenderCd</label>
+			</div>
+			<div class="pure-u-sm-5-60 control-group">
+			    <div class="input-group">
+	                	        <input type="text" class="form-control input-sm" dt="mt" id="VenderCd" name="VenderCd" fieldname="VenderCd" isKey="true" required/>
+	                	        <span class="input-group-btn">
+	                	            <button class="btn btn-sm btn-default" type="button" id="VenderCdLookup">
+	                	                <span class="glyphicon glyphicon-search"></span>
+	                	            </button>
+	                	        </span>
+	                	    </div>
+			    <p class="help-block tooltips"></p>
+			</div>
+			<div class="pure-u-sm-15-60 control-group">
+			    <input type="text" class=" form-control input-sm" dt="mt" id="VenderNm" name="VenderNm" fieldname="VenderNm" readonly="readonly" />
+			    <p class="help-block tooltips"></p>
+			</div>
+			<div class="pure-u-sm-5-60 label-right">
+			    <label for="Punit" class="control-label required">@Resources.Locale.L_AirQuery_Punit</label>
+			</div>
+			<div class="pure-u-sm-5-60 control-group">
+				<select dt="mt" name="Punit" id="Punit" fieldname="Punit" class="form-control input-sm">
+					<option value="CBM">CBM</option>
+					<option value="PLT">PALLET</option>
+					<option value="KGS">KILOGRAMS</option>
+					<option value="CW">Charge Weight</option>
+				</select>
+			</div>
+                    </div>
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-60-60 control-group">
+	                    	<table id="MainGrid" class="_tableGrid" style="width: 100%">
+	                    	    <tr></tr>
+	                    	</table>
+                    	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

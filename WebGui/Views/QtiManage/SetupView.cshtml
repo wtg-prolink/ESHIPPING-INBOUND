@@ -1,0 +1,291 @@
+﻿@{
+    ViewBag.Title = "SetupView";
+}
+<script>
+	var _uid = "@ViewBag.Uid";
+	var schemas = "@ViewBag.schemas.Content";
+	var CntTypeSel = "@ViewBag.CntTypeSel";
+    var BscodeSel = "@ViewBag.BscodeSel";
+	console.log(CntTypeSel);
+	var  jslang = [];
+	jslang["L_ReffeeManage_CostList"] = "Rule Code Item";
+	jslang["L_SetupView_Msg1"] = "Please Enter Location";
+    jslang["L_SetupView_Msg2"] = "Please Enter POD";
+    jslang["L_SetupView_Msg3"] = "Please Enter Tran Mode";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/QtiManage/SetupView.js?20241122")"></script>
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Cmp" class="control-label required">@Resources.Locale.L_SMQTI_Cmp</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" isKey="true" required />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="TranType" class="control-label">Tran Mode</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <select name="TranType" id="TranType" fieldname="TranType" dt="mt" class="form-control input-sm" isKey="true">
+                                <option value="R">R:Railway</option>
+                                <option value="F">F:FCL</option>
+                                <option value="A">A:AIR</option>
+                            </select>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PodCd" class="control-label required">@Resources.Locale.L_SMQTI_PodCd</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PodCd" name="PodCd" fieldname="PodCd" isKey="true" required />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PodCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="TerminalCd" class="control-label">@Resources.Locale.L_SMAL_TerminalCd</label>
+                        </div><!--Consignee-->
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TerminalCd" name="TerminalCd" fieldname="TerminalCd" isKey="true" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="TerminalCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="TerminalNm" name="TerminalNm" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="ShareTo" class="control-label required">Share To</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShareTo" name="ShareTo" fieldname="ShareTo" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="ShareToLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="FromCmp" class="control-label">From Cmp</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" id="FromCmp" name="FromCmp" fieldname="FromCmp" readonly />
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ChgDayType" class="control-label">Charged Days Type</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <select name="ChgDayType" id="ChgDayType" fieldname="ChgDayType" dt="mt" class="form-control input-sm">
+                                <option value="C">C:Calendar Day</option>
+                                <option value="W">W:Working Day</option> 
+                            </select>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                    </div>
+                    <div class="pure-g">
+                        @*<div class="pure-u-sm-5-60">
+            <label for="IType" class="control-label">Type</label>
+        </div>
+        <div class="pure-u-sm-10-60 control-group">
+            <select name="IType" id="IType" fieldname="IType" dt="mt" class="form-control input-sm" >
+                <option value="DSTF">Storage</option>
+                <option value="DDEM">Demurrage</option>
+                <option value="DDET">Detention</option>
+                <option value="BOTH">DEM/DET</option>
+                <option value="USAGE">Usage</option>
+            </select>
+        </div>
+        <div class="pure-u-sm-5-60 label-right">
+            <label for="SDay" class="control-label">Start Day</label>
+        </div>
+        <div class="pure-u-sm-5-60">
+            <input type="text" class="form-control input-sm" dt="mt" id="SDay" name="SDay" fieldname="SDay"/>
+            <p class="help-block tooltips"></p>
+        </div>
+        <div class="pure-u-sm-5-60 label-right">
+            <label for="EDay" class="control-label">End Day</label>
+        </div>
+        <div class="pure-u-sm-5-60">
+            <input type="text" class="form-control input-sm" dt="mt" id="EDay" name="EDay" fieldname="EDay"/>
+            <p class="help-block tooltips"></p>
+        </div>*@
+                        <div class="pure-u-sm-5-60">
+                            <label for="LspNo" class="control-label">Forwarder No</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="LspNo" name="LspNo" fieldname="LspNo" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="LspNoLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" class="form-control input-sm" id="LspNm" name="LspNm" fieldname="LspNm" readonly />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="CarrierCd" class="control-label">Carrier Code</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CarrierCd" name="CarrierCd" fieldname="CarrierCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CarrierCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="CalType" class="control-label">Calculate Method</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <select name="CalType" id="CalType" fieldname="CalType" dt="mt" class="form-control input-sm">
+                                <option value="C">Summation</option>
+                                <option value="F">Constant</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Cur" class="control-label">Cur</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cur" name="Cur" fieldname="Cur" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CurLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    @*<div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="FeePerDay" class="control-label">Fee</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="FeePerDay" name="FeePerDay" fieldname="FeePerDay" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Percentage" class="control-label">Percentage</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Percentage" name="Percentage" fieldname="Percentage" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="FobCif" class="control-label">FobCif</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <select name="FobCif" id="FobCif" fieldname="FobCif" dt="mt" class="form-control input-sm">
+                                <option value=""></option>
+                                <option value="F">FOB</option>
+                                <option value="C">CIF</option>
+                                <option value="B">FOB&CIF</option>
+                            </select>
+                        </div>
+                    </div>*@
+                <div class="pure-g">
+                    <div class="pure-u-sm-5-60">
+                        <label for="CntType" class="control-label">Container Type</label>
+                    </div>
+                    <div class="pure-u-sm-10-60 control-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CntType" name="CntType" fieldname="CntType" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="CntTypeLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" class="form-control input-sm" dt="mt" id="CntDescp" name="CntDescp" fieldname="CntDescp" />
+                        <p class="help-block tooltips"></p>
+                    </div>
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label for="CalDate" class="control-label">Calculation Date</label>
+                    </div>
+                    <div class="pure-u-sm-5-60">
+                        <select name="CalDate" id="CalDate" fieldname="CalDate" dt="mt" class="form-control input-sm">
+                            <option value="A">ATA</option>
+                            <option value="D">ATD</option>
+                        </select>
+                    </div>
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label for="EffectDate" class="control-label">Effective Date</label>
+                    </div>
+                    <div class="pure-u-sm-5-60">
+                        <input type="text" class="form-control input-sm" dt="mt" id="EffectDate" name="EffectDate" fieldname="EffectDate" />
+                        <p class="help-block tooltips"></p>
+                    </div>
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label for="ExpiratDate" class="control-label">Expirat Date</label>
+                    </div>
+                    <div class="pure-u-sm-5-60">
+                        <input type="text" class="form-control input-sm" dt="mt" id="ExpiratDate" name="ExpiratDate" fieldname="ExpiratDate" />
+                        <p class="help-block tooltips"></p>
+                    </div>
+                    
+                </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60 control-group">
+                            <table id="MainGrid" class="_tableGrid" style="width: 100%">
+                                <tr></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "BSCODESetup";
+}
+<style>
+    #page-wrapper {
+        padding: 5px;
+    }
+</style>
+<script type="text/javascript">
+    var lang = [];
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+    var Cmp = "@ViewBag.Cmp";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/BscodeNew/BSCODESetup.js?tiime=20240815")"></script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Cmp" class="control-label">Cmp</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class=" form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="CdType" class="control-label">@Resources.Locale.L_BSCODE_CdType</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class=" form-control input-sm" dt="mt" id="CdType" name="CdType" fieldname="CdType" isKey="true" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="CdDescp" class="control-label">@Resources.Locale.L_BSCODE_CdDescp</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class=" form-control input-sm" dt="mt" id="CdDescp" name="CdDescp" fieldname="CdDescp" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <table id="MainGrid" class="_tableGrid" style="width: 100%">
+                                <tr>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

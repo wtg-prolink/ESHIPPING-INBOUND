@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  设置需要自定义列功能的表及表中的哪些字段可以自己定义
+  每个画面上的table对应一个table结点 column_count设定每一行有几列
+
+  control中的属性:
+  id:控件id
+  column_type:控件类别,包括1:文本输入框,2:带放大镜输入框,3:下拉框,4:勾选框,5:Label,6:组合控件
+  column_name:与该控件值比较的字段名,
+  charCase:大小写控制
+  charSet:日期值控件
+  size:控件栏位大小
+  defaultValue:默认值
+  caption:标签
+  displayFormat:日期控件正常显示时的日期格式
+  editFormat:日期控件处于编辑状态时的日期格式
+  storeFormat:日期控件处于保存状态时的日期格式
+  baseValue:勾选框控件的值
+  valueList:下拉框的列表值,如(valueList="SO_NO(=)SO No;STATUS(=)Status;AWB_NO(=)AWB No"),SO_NO是最终值,SO No是显示信息
+  inq_type:该栏位的查询模式,包括0:期间,1:完全匹配,2:栏位开头,3:栏位任何部分,4:自定义表达式
+   <control id="ORDER_STATUS" column_type="3" inq_type="1" column_name="ORDER_STATUS" valueList="(=);A(=)提货未派车;B(=)提货已派车;C(=)收货点进仓;D(=)干线在途;E(=)送货点进仓;F(=)送货已派车;G(=)回单已签收" size="20" caption="状态"></control>
+    <control id="SALES_CMP" column_type="1" inq_type="1" column_name="SALES_CMP" size="20" caption="营业所"></control>
+-->
+<config>
+  <AMS>
+    <control id="CNTRY_CODE" column_type="1" inq_type="1" column_name="CNTRY_CODE"  size="20" caption="國別"></control>
+    <control id="SHIPPER" column_type="1" inq_type="3" column_name="SHIPPER"  size="40" caption="出貨人"></control>
+    <control id="TOTAL_WEIGHT" column_type="1" inq_type="1" column_name="TOTAL_WEIGHT"  size="20" caption="總重量"></control>
+    <control id="WEIGHT_UNIT" column_type="1" inq_type="1" column_name="WEIGHT_UNIT"  size="20" caption="重量單位"></control>
+    <control id="MEASURE" column_type="1" inq_type="1" column_name="MEASURE"  size="20" caption="測量數值"></control>
+    <control id="MEASURE_UNIT" column_type="1" inq_type="1" column_name="MEASURE_UNIT"  size="20" caption="測量單位"></control>
+    <control id="QTY" column_type="1" inq_type="1" column_name="QTY"  size="20" caption="數量"></control>
+    <control id="IMO_NUM" column_type="1" inq_type="3" column_name="IMO_NUM"  size="20" caption="IMO號碼"></control>
+    <control id="CNTRY_ORI" column_type="1" inq_type="3" column_name="CNTRY_ORI"  size="20" caption="原始港國家"></control>
+    <control id="ARRIVAL_PORT" column_type="1" inq_type="1" column_name="ARRIVAL_PORT"  size="40" caption="目的港"></control>
+    <control id="FINIAL_DEST" column_type="1" inq_type="1" column_name="FINIAL_DEST"  size="40" caption="最終目的地"></control>
+    <control id="ARRIVAL_DATE" column_type="1" inq_type="0" column_name="ARRIVAL_DATE" charSet="Date" size="20" displayFormat="YYYY/MM/DD" editFormat="YYYYMMDD" storeFormat="YYYYMMDD" caption="抵港日期"></control>
+    <control id="CONT_NO" column_type="1" inq_type="3" column_name="CONT_NO"  size="40" caption="貨櫃號"></control>
+    <control id="CONT_PIECE_COUNT" column_type="1" inq_type="1" column_name="CONT_PIECE_COUNT"  size="20" caption="容器件數"></control>
+    <control id="COMMODITY" column_type="1" inq_type="3" column_name="COMMODITY"  size="40" caption="備註"></control>
+    <control id="CLEAR_DISTRICT" column_type="1" inq_type="1" column_name="CLEAR_DISTRICT"  size="20" caption="結帳地點"></control>
+  </AMS>
+  <IPQ050>
+    <control id="POL" column_type="1" inq_type="3" column_name="POL"  size="40" caption="POL"></control>
+    <control id="SHPR_NM" column_type="1" inq_type="3" column_name="SHPR_NM"  size="40" caption="Shipment"></control>
+    <control id="CONT_NO" column_type="1" inq_type="3" column_name="CONT_NO"  size="40" caption="CONT#"></control>
+    <control id="PKG" column_type="1" inq_type="1" column_name="PKG"  size="20" caption="PKG"></control>
+    <control id="CBM" column_type="1" inq_type="1" column_name="CBM"  size="20" caption="CBM"></control>
+    <control id="GW" column_type="1" inq_type="1" column_name="GW"  size="20" caption="GW"></control>
+    <control id="ETD" column_type="1" inq_type="0" column_name="ETD" charSet="Date" size="20" displayFormat="YYYY/MM/DD" editFormat="YYYYMMDD" storeFormat="YYYYMMDD" caption="ETD"></control>
+  </IPQ050>
+  <IPVOYM>
+    <control id="CARR_CODE" column_type="1" inq_type="3" column_name="Vessel Owner"  size="40" caption="Vessel Owner"></control>
+    <control id="VSL_NM" column_type="1" inq_type="3" column_name="VSL_NN"  size="40" caption="Vessel Name"></control>
+    <control id="VOYAGE" column_type="1" inq_type="3" column_name="VOYAGE"  size="40" caption="Voyage"></control>
+    <control id="PortName" column_type="1" inq_type="3" column_name="PortName"  size="40" caption="Port Name"></control>
+    <control id="CARR_CODE" column_type="1" inq_type="0" column_name="CARR_CODE"   charSet="Date" size="20" displayFormat="YYYY/MM/DD" editFormat="YYYYMMDD" storeFormat="YYYYMMDD" caption="CARR_CODE"></control>
+    <control id="CARR_CODE" column_type="1" inq_type="0" column_name="CARR_CODE"   charSet="Date" size="20" displayFormat="YYYY/MM/DD" editFormat="YYYYMMDD" storeFormat="YYYYMMDD" caption="CARR_CODE"></control>
+  </IPVOYM>
+
+
+  <IP_GOVDATA_1>
+    <control id="IP_YEAR1" column_type="1" inq_type="1" column_name="IP_YEAR"  size="40" caption="年度"></control>
+    <control id="IP_MONTH1" column_type="1" inq_type="1" column_name="IP_MONTH"  size="40" caption="月份"></control>
+    <control id="EX_ALL1" column_type="1" inq_type="0"  charSet="int" size="20" column_name="EX_ALL"   caption="出口總值"></control>
+    <control id="EX_TOTAL1" column_type="1" inq_type="0"  charSet="int" size="20" column_name="EX_TOTAL"   caption="出口"></control>
+    <control id="RE_EX_TOTAL1" column_type="1" inq_type="0"  charSet="int" size="20" column_name="RE_EX_TOTAL"   caption="復出口"></control>
+    <control id="IM_ALL1" column_type="1" inq_type="0"  charSet="int" size="20" column_name="IM_ALL"   caption="進口總值"></control>
+    <control id="IM_TOTAL1" column_type="1" inq_type="0"  charSet="int" size="20" column_name="IM_TOTAL"   caption="進口"></control>
+    <control id="RE_IM_TOTAL1" column_type="1" inq_type="0"  charSet="int" size="20" column_name="RE_IM_TOTAL"   caption="復進口"></control>
+    <control id="EI_OVER1" column_type="1" inq_type="0"  charSet="int" size="20" column_name="EI_OVER"   caption="出入超"></control>
+  </IP_GOVDATA_1>
+  <IP_GOVDATA_2>
+    <control id="IP_YEAR2" column_type="1" inq_type="1" column_name="IP_YEAR"  size="40" caption="年度"></control>
+    <control id="IP_MONTH2" column_type="1" inq_type="1" column_name="IP_MONTH"  size="40" caption="月份"></control>
+    <control id="IP_PORT2" column_type="1" inq_type="1" column_name="IP_PORT"  size="40" caption="港口"></control>
+    <control id="IP_TOTAL2" column_type="1" inq_type="0"  charSet="int" size="20" column_name="IP_TOTAL"   caption="總計"></control>
+    <control id="IP_VESSEL2" column_type="1" inq_type="0"  charSet="int" size="20" column_name="IP_VESSEL"   caption="艘次"></control>
+    <control id="IP_TOTAL_TUN2" column_type="1" inq_type="0"  charSet="int" size="20" column_name="IP_TOTAL_TUN"   caption="總噸位"></control>
+  </IP_GOVDATA_2>
+  <IP_GOVDATA_3>
+    <control id="IP_YEAR3" column_type="1" inq_type="1" column_name="IP_YEAR"  size="40" caption="年度"></control>
+    <control id="IP_MONTH3" column_type="1" inq_type="1" column_name="IP_MONTH"  size="40" caption="月份"></control>
+    <control id="IM_TOTAL_USD3" column_type="1" inq_type="0"  charSet="int" size="20" column_name="IM_TOTAL_USD"   caption="進口總計(USD)"></control>
+    <control id="IM_TOTAL_NTD3" column_type="1" inq_type="0"  charSet="int" size="20" column_name="IM_TOTAL_NTD"   caption="進口總計(NTD)"></control>
+    <control id="PR_DB_USD3" column_type="1" inq_type="0"  charSet="int" size="20" column_name="PR_DB_USD"   caption="資本設備(USD)"></control>
+    <control id="PR_DB_NTD3" column_type="1" inq_type="0"  charSet="int" size="20" column_name="PR_DB_NTD"   caption="資本設備(NTD)"></control>
+    <control id="FR_RE_USD3" column_type="1" inq_type="0"  charSet="int" size="20" column_name="FR_RE_USD"   caption="農工原料(USD)"></control>
+    <control id="FR_RE_NTD3" column_type="1" inq_type="0"  charSet="int" size="20" column_name="FR_RE_NTD"   caption="農工原料(NTD)"></control>
+    <control id="CONSUM_USD3" column_type="1" inq_type="0"  charSet="int" size="20" column_name="CONSUM_USD"   caption="消費品(USD)"></control>
+    <control id="CONSUM_NTD3" column_type="1" inq_type="0"  charSet="int" size="20" column_name="CONSUM_NTD"   caption="消費品(NTD)"></control>
+    <control id="OTH_USD3" column_type="1" inq_type="0"  charSet="int" size="20" column_name="OTH_USD"   caption="其他(USD)"></control>
+    <control id="OTH_NTD3" column_type="1" inq_type="0"  charSet="int" size="20" column_name="OTH_NTD"   caption="其他(NTD)"></control>
+  </IP_GOVDATA_3>
+
+  <IP_GOVDATA_4>
+    <control id="IP_YEAR4" column_type="1" inq_type="1" column_name="IP_YEAR"  size="40" caption="年度"></control>
+    <control id="IP_MONTH4" column_type="1" inq_type="1" column_name="IP_MONTH"  size="40" caption="月份"></control>
+    <control id="EX_TOTAL_USD4" column_type="1" inq_type="1" size="40" column_name="EX_TOTAL_USD"  caption="出口總計(USD)"></control>
+    <control id="EX_TOTAL_NTD4" column_type="1" inq_type="0"  charSet="int" size="20" column_name="EX_TOTAL_NTD"   caption="出口總計(NTD)"></control>
+    <control id="FRPD_USD4" column_type="1" inq_type="0"  charSet="int" size="20" column_name="FRPD_USD"   caption="農產品(USD)"></control>
+    <control id="FRPD_NTD4" column_type="1" inq_type="0"  charSet="int" size="20" column_name="FRPD_NTD"   caption="農產品(NTD)"></control>
+    <control id="FRRW_USD4" column_type="1" inq_type="0"  charSet="int" size="20" column_name="FRRW_USD"   caption="農產加工品(USD)"></control>
+    <control id="FRRW_NTD4" column_type="1" inq_type="0"  charSet="int" size="20" column_name="FRRW_NTD"   caption="農產加工品(NTD)"></control>
+    <control id="FTPD_USD4" column_type="1" inq_type="0"  charSet="int" size="20" column_name="FTPD_USD"   caption="工業產品小計(USD)"></control>
+    <control id="FTPD_NTD4" column_type="1" inq_type="0"  charSet="int" size="20" column_name="FTPD_NTD"   caption="工業產品小計(NTD)"></control>
+    <control id="HFPD_USD4" column_type="1" inq_type="0"  charSet="int" size="20" column_name="HFPD_USD"   caption="重化工業產品(USD)"></control>
+    <control id="HFPD_NTD4" column_type="1" inq_type="0"  charSet="int" size="20"  column_name="HFPD_NTD" caption="重化工業產品(NTD))"></control>
+  </IP_GOVDATA_4>
+
+  <IP_GOVDATA_5>
+    <control id="IP_YEAR5" column_type="1" inq_type="1" column_name="IP_YEAR"  size="40"  caption="年度"></control>
+    <control id="TYPE5" column_type="1" inq_type="1" column_name="TYPE"  size="40"  caption="類別"></control>
+    <control id="TOTAL5" column_type="1" inq_type="0"  charSet="int" size="20"  column_name="TOTAL" caption="Total"></control>
+    <control id="GOODS_BOP5" column_type="1" inq_type="0"  charSet="int" size="20"  column_name="GOODS_BOP" caption="Goods BOP"></control>
+    <control id="SERVICES5" column_type="1" inq_type="0"  charSet="int" size="20"  column_name="SERVICES" caption="Services"></control>
+  </IP_GOVDATA_5>
+  <IP_GOVDATA_6>
+    <control id="IP_YEAR6" column_type="1" inq_type="1" column_name="IP_YEAR"  size="40"  caption="年度"></control>
+    <control id="TYPE6" column_type="1" inq_type="1" column_name="TYPE"  size="40"  caption="類別"></control>
+    <control id="BOP_BASIS6" column_type="1" inq_type="0"  charSet="int" size="20"  column_name="BOP_BASIS" caption="BOP Basis"></control>
+    <control id="CENSUS_BASIS6" column_type="1" inq_type="0"  charSet="int" size="20"  column_name="CENSUS_BASIS" caption="Census Basis"></control>
+  </IP_GOVDATA_6>
+
+  <IP_GOVDATA_0>
+    <control id="SHPR_NAME" column_name="SHPR_NAME"  column_type="1" inq_type="3"  size="40" caption="Shipper Name" ></control>
+    <control id="SHPR_ADDR1" column_name="SHPR_ADDR1"  column_type="1" inq_type="3"  size="40" caption="Shipper Address1" ></control>
+    <control id="SHPR_ADDR2" column_name="SHPR_ADDR2"  column_type="1" inq_type="3"  size="40" caption="Shipper Address2" ></control>
+    <control id="SHPR_ADDR3" column_name="SHPR_ADDR3"  column_type="1" inq_type="3"  size="40" caption="Shipper Address3" ></control>
+    <control id="CNEE_NAME" column_name="CNEE_NAME"  column_type="1" inq_type="3"  size="40" caption="Consignee Name" ></control>
+    <control id="CNEE_ADDR1" column_name="CNEE_ADDR1"  column_type="1" inq_type="3"  size="40" caption="Consignee Address1" ></control>
+    <control id="CNEE_ADDR2" column_name="CNEE_ADDR3"  column_type="1" inq_type="3"  size="40" caption="Consignee Address2" ></control>
+    <control id="CNEE_ADDR3" column_name="CNEE_ADDR3"  column_type="1" inq_type="3"  size="40" caption="Consignee Address3" ></control>
+    <control id="NOTIFY_NAME" column_name="NOTIFY_NAME"  column_type="1" inq_type="3"  size="40" caption="Notify Party Name" ></control>
+    <control id="NOTIFY_ADDR1" column_name="NOTIFY_ADDR1"  column_type="1" inq_type="3"  size="40" caption="Notify Party Address1" ></control>
+    <control id="NOTIFY_ADDR2" column_name="NOTIFY_ADDR2"  column_type="1" inq_type="3"  size="40" caption="Notify Party Address2" ></control>
+    <control id="NOTIFY_ADDR3" column_name="NOTIFY_ADDR3"  column_type="1" inq_type="3"  size="40" caption="Notify Party Address3" ></control>
+    <control id="ALSO_NOTIFY_NAME" column_name="ALSO_NOTIFY_NAME"  column_type="1" inq_type="3"  size="40" caption="Also Notify Party Name" ></control>
+    <control id="ALSO_NOTIFY_ADDR1" column_name="ALSO_NOTIFY_ADDR1"  column_type="1" inq_type="3"  size="40" caption="Also Notify Party Address1" ></control>
+    <control id="ALSO_NOTIFY_ADDR2" column_name="ALSO_NOTIFY_ADDR2"  column_type="1" inq_type="3"  size="40" caption="Also Notify Party Address2" ></control>
+    <control id="ALSO_NOTIFY_ADDR3" column_name="ALSO_NOTIFY_ADDR3"  column_type="1" inq_type="3"  size="40" caption="Also Notify Party Address3" ></control>
+    <control id="WEIGHT" column_name="WEIGHT"  column_type="1" inq_type="0"  charSet="int" size="20"  caption="Weight" ></control>
+    <control id="WEI_UNIT" column_name="WEI_UNIT"  column_type="1" inq_type="3"  size="40" caption="Weight Unit" ></control>
+    <control id="MEASURE"  column_name="MEASURE" column_type="1" inq_type="0"  charSet="int" size="20"  caption="Measure" ></control>
+    <control id="MEA_UNIT" column_name="MEA_UNIT"  column_type="1" inq_type="3"  size="40" caption="Measure Unit" ></control>
+    <control id="QTY" column_name="QTY" column_type="1" inq_type="0"  charSet="int" size="20" caption="Quantity" ></control>
+    <control id="QTY_TYPE" column_name="QTY_TYPE"  column_type="1" inq_type="3"  size="40" caption="Quantity Type" ></control>
+
+    <control id="CARR_NAME" column_name="CARR_NAME"  column_type="1" inq_type="3"  size="40" caption="Carrier Name" ></control>
+    <control id="SCAC_CODE" column_name="SCAC_CODE"  column_type="1" inq_type="3"  size="40" caption="SCAC" ></control>
+
+    <control id="VESSEL_NAME" column_name="VESSEL_NAME"  column_type="1" inq_type="3"  size="40" caption="Vessel Name" ></control>
+    <control id="VOYAGE" column_name="VOYAGE"  column_type="1" inq_type="3"  size="40" caption="Voyage Number" ></control>
+    <control id="BILL_LADING" column_name="BILL_LADING"  column_type="1" inq_type="3"  size="40" caption="Bill of Lading Number" ></control>
+    <control id="IMO_NO" column_name="IMO_NO"  column_type="1" inq_type="3"  size="40" caption="IMO Number" ></control>
+    <control id="ORI_CTRY" column_name="ORI_CTRY"  column_type="1" inq_type="3"  size="40" caption="Country of Origin" ></control>
+    <control id="ORI_REG" column_name="ORI_REG"  column_type="1" inq_type="3"  size="40" caption="Region of Origin" ></control>
+    <control id="ARR_PORT" column_name="ARR_PORT"  column_type="1" inq_type="3"  size="40" caption="Port of Arrival" ></control>
+    <control id="DEP_PORT" column_name="DEP_PORT"  column_type="1" inq_type="3"  size="40" caption="Port of Departure" ></control>
+    <control id="FINAL_DEST" column_name="FINAL_DEST"  column_type="1" inq_type="3"  size="40" caption="Final Destination" ></control>
+    <control id="ARR_DATE" column_name="ARR_DATE"  column_type="1" inq_type="3"  size="40" caption="Arrival Date" ></control>
+    <control id="CON_NO" column_name="CON_NO"  column_type="1" inq_type="3"  size="40" caption="Container Number" ></control>
+    <control id="CON_PIECE"  column_name="CON_PIECE" column_type="1" inq_type="0"  charSet="int" size="20" caption="Container Piece Count" ></control>
+    <control id="COMMODITY" column_name="COMMODITY"  column_type="1" inq_type="3"  size="40" caption="Commodity" ></control>
+    <control id="CON_NO_MARK" column_name="CON_NO_MARK"  column_type="1" inq_type="3"  size="40" caption="Marks Container Number" ></control>
+    <control id="DESCP_MARK" column_name="DESCP_MARK"  column_type="1" inq_type="3"  size="40" caption="Marks Description" ></control>
+    <control id="CLEAR_DIS" column_name="CLEAR_DIS" column_type="1" inq_type="3"  size="40" caption="Clearing District" ></control>
+    <control id="PLACE_RECEIPT" column_name="PLACE_RECEIPT" column_type="1" inq_type="3" caption="Place of Receipt" ></control>
+  </IP_GOVDATA_0>
+</config>

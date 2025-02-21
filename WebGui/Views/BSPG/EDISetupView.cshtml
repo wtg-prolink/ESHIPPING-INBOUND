@@ -1,0 +1,169 @@
+﻿@{
+    ViewBag.Title = "MessageSetupView";
+}
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+@Html.RazorJSInline("~/Scripts/BSPG/EDISetup.js")
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+					<!-- <div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="EdiId" class="control-label">EDI Code</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="EdiId" name="EdiId" fieldname="EdiId" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="EdiNm" class="control-label">EDI Name</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="EdiNm" name="EdiNm" fieldname="EdiNm" />
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div> -->
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="CustCd" class="control-label">EDI Obj.</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="CustCd" name="CustCd" fieldname="CustCd" placeholder="@Resources.Locale.L_Layout_EDITarget" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="CustNm" class="control-label">Obj. Name</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="CustNm" name="CustNm" fieldname="CustNm" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="CustType" class="control-label">Type</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<select class="form-control input-sm" dt="mt" id="CustType" name="CustType" fieldname="CustType">
+								<option value="C">C: @Resources.Locale.L_EDISetup_Need</option>
+								<option value="R">R: @Resources.Locale.L_EDISetup_Select</option>
+								<option value="E">E: @Resources.Locale.L_EDISetup_Change</option>
+							</select>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="AttnNm" class="control-label">@Resources.Locale.L_BSCSSetup_CmpAttn</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="AttnNm" name="AttnNm" fieldname="AttnNm" />
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="AttnMail" class="control-label">@Resources.Locale.L_BSCSSetup_CmpEmail</label>
+						</div>
+						<div class="pure-u-sm-25-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="AttnMail" name="AttnMail" fieldname="AttnMail" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="AttnTel" class="control-label">@Resources.Locale.L_BSCSSetup_CmpTel</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="AttnTel" name="AttnTel" fieldname="AttnTel" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="AttnFax" class="control-label">Fax.</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="AttnFax" name="AttnFax" fieldname="AttnFax" />
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="AttnAddr" class="control-label">Address</label>
+						</div>
+						<div class="pure-u-sm-55-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="AttnAddr" name="AttnAddr" fieldname="AttnAddr" />
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="EdiAccount" class="control-label">EDI Account</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="EdiAccount" name="EdiAccount" fieldname="EdiAccount" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="EdiPwd" class="control-label">EDI Pwd.</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="EdiPwd" name="EdiPwd" fieldname="EdiPwd" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="EdiIp" class="control-label">EDI IP</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="EdiIp" name="EdiIp" fieldname="EdiIp" />
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Remark" class="control-label">Remark</label>
+						</div>
+						<div class="pure-u-sm-55-60 control-group">
+							<textarea class="form-control" dt="mt" id="Remark" name="Remark" fieldname="Remark"></textarea>
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="CreateBy" class="control-label">@Resources.Locale.L_DNApproveManage_CreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" fieldname="CreateBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" fieldname="CreateDate" readonly>
+                        </div>
+                        <div class="pure-u-sm-6-60 label-right">
+                            <label for="ModifyBy" class="control-label">@Resources.Locale.L_DNApproveManage_ModifyBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" fieldname="ModifyBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" fieldname="ModifyDate" readonly />
+                        </div>
+                    </div>
+					
+					<div class="pure-g">
+					    <div class="pure-u-sm-60-60">
+					        <ul class="list-inline">
+					          <li><button class="btn btn-sm btn-primary" id="addDetailBtn">@Resources.Locale.L_EDISetup_EntDetail</button></li>
+					          <li><button class="btn btn-sm btn-primary" id="reloadBtn">Reload</button></li>
+					        </ul>
+					    </div>
+					</div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <table id="MainGrid" class="_tableGrid" style="width: 100%">
+                                <tr></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" />

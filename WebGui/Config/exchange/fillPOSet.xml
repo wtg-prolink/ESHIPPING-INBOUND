@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+功能说明：
+根据用户传过来的xml串与该配置档中的节点进行解析后，获取与节点相对应的数据库字段名，然后将表名、字段名、字段值对应后写入数据库，至于转出的操作也是一样的。
+==================================================
+配置说明：
+name:表名或从用户传过来的xml数据的节点名
+fieldname：与该栏位对应的数据库中的字段
+dataType:该栏位的数据类型，如果为CustomDate表示自定义的日期(InOrOutApp类处理的需要)
+defalutValue:在数据库中设置的默认值,有些情况下，如果数据库中没有设置默认值，那在这边也可以提供一个默认值
+★★★length:在数据库中定义的字段的字节长度，注意，这边只有string型字段才会设置长度，这边的长度是指字节(精确到字节是为了出现避免溢出错误),另外要注意的sql server这边以n开头的数据类型，在数据库定义那边表示可存储多少个字符(每个字符占用两个字节，如nvarchar(2),表示4个字节),另外要注意的是如果不判断字节长度是否溢出，那可不用配置该项
+key:表示主键(值为true)，若该字段不是主键，则不需要配置该属性
+-->
+<table name="TKBLPO">
+  <column name="PONO" fieldname="PO_NO" dataType="string" defalutValue="" length="40">
+  </column>
+  <column name="BuyerPN" fieldname="BUYER_PN" dataType="string" defalutValue="" length="60">
+  </column>
+  <column name="PartNo" fieldname="PART_NO" dataType="string" defalutValue="" length="60" >
+  </column>
+  <column name="SellerPN" fieldname="SELLER_PN" dataType="string" defalutValue="" length="60">
+  </column>
+  <column name="PLT" fieldname="PLT" dataType="string" defalutValue="" length="60" >
+  </column>
+  <column name="BatchNo" fieldname="BATCH_NO" dataType="string" defalutValue="" length="60" >
+  </column>
+  <column name="Product1" fieldname="PRODUCT" dataType="string" defalutValue="" length="60" >
+  </column>
+  <column name="QTY" fieldname="QTY" dataType="int" defalutValue="">
+  </column>
+  <column name="QTYUnit" fieldname="QTYU" dataType="string" defalutValue="" length="6" >
+  </column>
+  <column name="GW_UNIT" fieldname="GWU" dataType="string" defalutValue="" length="2" >
+  </column>
+  <column name="REFNo1" fieldname="REF_NO" dataType="string" defalutValue="" length="60" >
+  </column>
+  <column name="Product2" fieldname="STYLE_NO" dataType="string" defalutValue="" length="60" >
+  </column>
+  <column name="InvoiceNo" fieldname="INV_NO" dataType="string" defalutValue="" length="60">
+  </column>
+  <column name="ContainerNo" fieldname="CNTR_NO" dataType="string" defalutValue="" length="60" >
+  </column>
+  <column name="GW"  fieldname="GW" dataType="FLOAT" defalutValue="">
+  </column>
+</table>

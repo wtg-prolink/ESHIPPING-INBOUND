@@ -1,0 +1,439 @@
+﻿@{
+    ViewBag.Title = "TransloadSetupView";
+}
+
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240912")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/SMSMI/TransloadSetupView.js?20240912")"></script>
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var PTlist = "@ViewBag.PTlist";
+    var schemas = "@ViewBag.schemas.Content";
+    var TRAN_TYPE = 'F';
+    var Priority = "@ViewBag.Priority";
+    var Ccchannel = "@ViewBag.Ccchannel";
+    var _selects = "@ViewBag.selects";
+    try {
+        _selects = JSON.parse(decodeHtml(_selects));
+    }
+    catch (e) { _selects = {} }
+    var PartyLang = [
+     '@Resources.Locale.L_SMSMIPT_UId',
+	   	'@Resources.Locale.L_SMSMIPT_PartyType',
+	   	'@Resources.Locale.L_SMSMIPT_TypeDescp',
+	   	'@Resources.Locale.L_SMSMIPT_PartyNo',
+	   	'@Resources.Locale.L_SMSMIPT_PartyName',
+	   	'@Resources.Locale.L_SMSMIPT_PartyName2',
+	   	'@Resources.Locale.L_SMSMIPT_PartyName3',
+	   	'@Resources.Locale.L_SMSMIPT_PartyName4',
+	   	'@Resources.Locale.L_SMSMIPT_DebitTo',
+	   	'@Resources.Locale.L_SMSMIPT_PartyAttn',
+	   	'@Resources.Locale.L_SMSMIPT_PartyTel',
+	   	'@Resources.Locale.L_SMSMIPT_FaxNo',
+	   	'@Resources.Locale.L_SMSMIPT_PartyMail',
+	   	'@Resources.Locale.L_SMSMIPT_PartyAddr1',
+	   	'@Resources.Locale.L_SMSMIPT_PartyAddr2',
+	   	'@Resources.Locale.L_SMSMIPT_PartyAddr3',
+	   	'@Resources.Locale.L_SMSMIPT_PartyAddr4',
+	   	'@Resources.Locale.L_SMSMIPT_PartyAddr5',
+	   	'@Resources.Locale.L_SMSMIPT_Cnty',
+	   	'@Resources.Locale.L_SMSMIPT_CntyNm',
+	   	'@Resources.Locale.L_SMSMIPT_City',
+	   	'@Resources.Locale.L_SMSMIPT_CityNm',
+	   	'@Resources.Locale.L_SMSMIPT_State',
+	   	'@Resources.Locale.L_SMSMIPT_Zip',
+	   	'@Resources.Locale.L_SMSMIPT_TaxNo',
+	   	'@Resources.Locale.L_SMSMIPT_OrderBy',
+    ];
+
+    var CntrGridLang = [
+        'UId',
+        '@Resources.Locale.L_SMICNTR_CntrNo',
+       '@Resources.Locale.L_SMICNTR_CntrType',
+       '@Resources.Locale.L_SMSMI_ProductionDate',
+       'ETA MSL (DATE)',
+       'ETA MSL (TIME)',
+       'New Seal No',
+       '@Resources.Locale.L_SMICNTR_SealNo1',
+       '@Resources.Locale.L_SMICNTR_SealNo2',
+       '@Resources.Locale.L_SMICNTR_DnNo',
+       '@Resources.Locale.L_SMICNTR_DivisionDescp',
+       '@Resources.Locale.L_SMICNTR_DlvArea',
+       '@Resources.Locale.L_SMICNTR_DlvAreaNm',
+       '@Resources.Locale.L_SMICNTR_AddrCode',
+       '@Resources.Locale.L_SMICNTR_DlvAddr',
+       '@Resources.Locale.L_SMICNTR_Pol1',
+       '@Resources.Locale.L_SMICNTR_PolNm1',
+       '@Resources.Locale.L_SMICNTR_Pod1',
+       '@Resources.Locale.L_SMICNTR_PodNm1',
+       '@Resources.Locale.L_SMICNTR_TranType1',
+       '@Resources.Locale.L_SMICNTR_DepAddr1',
+       '@Resources.Locale.L_SMICNTR_Trucker1',
+       '@Resources.Locale.L_SMICNTR_TruckerNm1',
+       '@Resources.Locale.L_SMICNTR_Pol2',
+       '@Resources.Locale.L_SMICNTR_PolNm2',
+       '@Resources.Locale.L_SMICNTR_Pod2',
+       '@Resources.Locale.L_SMICNTR_PodNm2',
+       '@Resources.Locale.L_SMICNTR_TranType2',
+       '@Resources.Locale.L_SMICNTR_DepAddr2',
+       '@Resources.Locale.L_SMICNTR_Trucker2',
+       '@Resources.Locale.L_SMICNTR_TruckerNm2',
+       '@Resources.Locale.L_SMICNTR_Pol3',
+       '@Resources.Locale.L_SMICNTR_PolNm3',
+       '@Resources.Locale.L_SMICNTR_Pod3',
+       '@Resources.Locale.L_SMICNTR_PodNm3',
+       '@Resources.Locale.L_SMICNTR_TranType3',
+       '@Resources.Locale.L_SMICNTR_DepAddr3',
+       '@Resources.Locale.L_SMICNTR_Trucker3',
+       '@Resources.Locale.L_SMICNTR_TruckerNm3',
+       '@Resources.Locale.L_SMSMI_BackLocation',
+       '@Resources.Locale.L_SMSMI_EmptyTime',
+       '@Resources.Locale.L_BaseLookup_PickupCdate',
+       'Pin No.',
+       'Discharge Date',
+       '@Resources.Locale.L_SMSMI_Priority',
+       'End of DET Free Time',
+        'End of DEM Free Time',
+        'End of STO Free Time',
+        'Call Truck Status',
+        'In Date',
+        'Upload POD Date',
+        'Out Date',
+        'PO NO'
+    ];
+
+    var SubGrid2Lang = [{ "name": "UId", "title": "UId" },
+        { "name": "GroupId", "title": "@Resources.Locale.L_SMIDN_GroupId" },
+        { "name": "Cmp", "title": "@Resources.Locale.L_SMIDN_Cmp" },
+        { "name": "Stn", "title": "@Resources.Locale.L_SMIDN_Stn" },
+        { "name": "DnNo", "title": "@Resources.Locale.L_SMIDN_DnNo" },
+        { "name": "InvNo", "title": "@Resources.Locale.L_SMIDN_InvoiceNo" },
+        { "name": "ScmrequestDate", "title": "@Resources.Locale.L_SMSMI_ProductionDate" },
+        { "name": "EtaMsl", "title": "ETA MSL (DATE)" },
+        { "name": "EtaMslTime", "title": "ETA MSL (TIME)" },
+        { "name": "InvPrice", "title": "@Resources.Locale.L_ActDeatilManage_Views_65" },
+        { "name": "InvCur", "title": "@Resources.Locale.L_ActUpdate_Views_163" },
+		{ "name": "Amount", "title": "@Resources.Locale.L_DNApproveManage_Amount" },
+        { "name": "Nw", "title": "@Resources.Locale.L_SMIDN_Nw" },
+        { "name": "Gw", "title": "@Resources.Locale.L_SMIDN_Gw" },
+        { "name": "Gwu", "title": "@Resources.Locale.L_SMIDN_Gwu" },
+        { "name": "Cbm", "title": "@Resources.Locale.L_SMIDN_Cbm" },
+        { "name": "Cbmu", "title": "@Resources.Locale.L_SMIDN_Cbmu" },
+        { "name": "Qty", "title": "@Resources.Locale.L_SMIDN_Qty" },
+        { "name": "Qtyu", "title": "@Resources.Locale.L_SMIDN_Qtyu" },
+        { "name": "PkgNum", "title": "@Resources.Locale.L_SMIDN_PkgNum" },
+        { "name": "PkgUnit", "title": "@Resources.Locale.L_SMIDN_PkgUnit" },
+        { "name": "PkgUnitDesc", "title": "@Resources.Locale.L_SMIDN_PkgUnitDesc" },
+        { "name": "Cnt20", "title": "@Resources.Locale.L_SMIDN_Cnt20" },
+        { "name": "Cnt40", "title": "@Resources.Locale.L_SMIDN_Cnt40" },
+        { "name": "Cnt40hq", "title": "@Resources.Locale.L_SMIDN_Cnt40hq" },
+        { "name": "OthCntType", "title": "@Resources.Locale.L_SMIDN_OthCntType" },
+        { "name": "OthCntNum", "title": "@Resources.Locale.L_SMIDN_OthCntNum" },
+        { "name": "DlvArea", "title": "@Resources.Locale.L_SMIDN_DlvArea" },
+        { "name": "DlvAreaNm", "title": "@Resources.Locale.L_SMIDN_DlvAreaNm" },
+        { "name": "AddrCode", "title": "@Resources.Locale.L_SMIDN_AddrCode" },
+        { "name": "DlvAddr", "title": "@Resources.Locale.L_SMIDN_DlvAddr" },
+        { "name": "DivisionDescp", "title": "@Resources.Locale.L_SMICNTR_DivisionDescp" },
+        { "name": "PickupCdate", "title": "@Resources.Locale.L_BaseLookup_PickupCdate" },
+        { "name": "DischargeDate", "title": "Discharge Date" },
+        { "name": "StorageDueDate", "title": "End of STO Free Time" },
+        { "name": "Priority", "title": "@Resources.Locale.L_SMSMI_Priority" },
+        { "name": "CallTruckStatus", "title": "Call Truck Status" },
+        { "name": "IdateL", "title": "In Date" },
+        { "name": "PodDateL", "title": "Upload POD Date" },
+        { "name": "OdateL", "title": "Out Date" },
+        { "name": "PoNo", "title": "PO NO" },
+        { "name": "WsCd", "title": "Ws Cd" },
+		{ "name": "WsNm", "title": "Ws Name" },
+        { "name": "IsPostbill", "title": "Is Post bill" },
+        { "name": "PostBillDate", "title": "Post Bill Date" },
+        { "name": "Dep", "title": "@Resources.Locale.L_SMIDN_Dep" }
+    ];
+
+    var SubGrid3Lang = [
+		'UId',
+		'UFid',
+		'@Resources.Locale.L_SMIDNP_CntrNo',
+		'@Resources.Locale.L_SMIDNP_CntrType',
+		'@Resources.Locale.L_SMIDNP_DnNo',
+		'@Resources.Locale.L_SMIDNP_InvNo',
+		'@Resources.Locale.L_SMIDNP_OpartNo',
+		'@Resources.Locale.L_SMIDNP_IpartNo',
+		'@Resources.Locale.L_SMIDNP_GoodsDescp',
+		'@Resources.Locale.L_SMIDNP_ProdDescp',
+		'@Resources.Locale.L_SMIDNP_Qty',
+		'@Resources.Locale.L_SMIDNP_Gw',
+		'@Resources.Locale.L_SMIDNP_Cbm',
+		'@Resources.Locale.L_SMIDNP_SealNo1',
+		'@Resources.Locale.L_SMIDNP_SealNo2',
+		'@Resources.Locale.L_SMIDN_DlvArea',
+		'@Resources.Locale.L_SMIDN_DlvAreaNm',
+		'@Resources.Locale.L_SMIDN_AddrCode',
+		'@Resources.Locale.L_SMIDN_DlvAddr',
+		'@Resources.Locale.L_SMIDNP_SoNo',
+        'PO NO',
+        'Model Name',
+        'HS of Importation',
+        'HS of Exportation',
+        'Resolution',
+        'ASN NO'
+    ]
+
+    var DnGridLang = [
+        'Dn No',
+        '@Resources.Locale.L_DNManage_BLType',
+         '@Resources.Locale.L_DNApproveManage_ExportNo',
+         '@Resources.Locale.L_DNApproveManage_Unicode',
+         '@Resources.Locale.L_DNApproveManage_ApprovalNo',
+         '@Resources.Locale.L_DNManage_RqDelaDate',
+         '@Resources.Locale.L_DNApproveManage_EdeclNo',
+         '@Resources.Locale.L_BaseLookup_DeclDate',
+         '@Resources.Locale.L_DNManage_RelDate',
+         '@Resources.Locale.L_NEXT_NUMBER',
+         '@Resources.Locale.L_BSCSSetup_Remark',
+         'ETA MSL (DATE)',
+         'ETA MSL (TIME)',
+    ]
+
+    var CcGridLang = [
+        'UId',
+        '@Resources.Locale.L_SMIDN_InvoiceNo',
+        '@Resources.Locale.L_SMIDN_ImportNo',
+        '@Resources.Locale.L_SMIDN_DecNo',
+        '@Resources.Locale.L_SMIDN_CerNo',
+        '@Resources.Locale.L_SMIDN_DecDate',
+        '@Resources.Locale.L_SMIDN_RelDate',
+        '@Resources.Locale.L_SMIDN_TcCcChannel',
+        '@Resources.Locale.L_SMIDN_Inspection',
+        '@Resources.Locale.L_SMIDN_DecCust',
+        '@Resources.Locale.L_SMIDN_DecReply',
+        '@Resources.Locale.L_SMIDN_Icdf',
+        '@Resources.Locale.L_SMIDN_HsCode',
+        '@Resources.Locale.L_BaseLookup_Country',
+        'PD_QTY',
+        'FOB',
+        'CIF',
+        'PLI#',
+        'LI#',
+        'SUFRAMA Cost',
+        'CC Declaration Exchange Rate',
+        'Addition QTY',
+        'SISCOMEX Fee'
+    ];
+
+    var TcGridLang = [
+        'UId',
+        '@Resources.Locale.L_SMIDN_InvoiceNo',
+    '@Resources.Locale.L_SMIDN_TcImportNo',
+    '@Resources.Locale.L_SMIDN_TcDecNo',
+    '@Resources.Locale.L_SMIDN_TcCerNo',
+    '@Resources.Locale.L_SMIDN_TcDecDate',
+    '@Resources.Locale.L_SMIDN_TcRelDate',
+    '@Resources.Locale.L_SMIDN_TcCcChannel',
+    '@Resources.Locale.L_SMIDN_TcInspection',
+    '@Resources.Locale.L_SMIDN_TcDecCust',
+    '@Resources.Locale.L_SMIDN_TcDecReply',
+    '@Resources.Locale.L_SMIDN_TcIcdf',
+    '@Resources.Locale.L_SMIDN_HsCode',
+    '@Resources.Locale.L_BaseLookup_Country'
+    ];
+
+    var commonLang = [];
+    commonLang["L_SMSMI_InvoiceDetailCC"] = "@Resources.Locale.L_SMSMI_InvoiceDetailCC";
+    commonLang["L_SMSMI_InvoiceDetailTC"] = "@Resources.Locale.L_SMSMI_InvoiceDetailTC";
+    commonLang["L_SMSMI_InvoiceDetail"] = "@Resources.Locale.L_SMSMI_InvoiceDetail";
+    commonLang["L_SMSMI_ContainerInfo"] = "@Resources.Locale.L_SMSMI_ContainerInfo";
+    commonLang["L_DNManage_FCLBDnDetail"] = "@Resources.Locale.L_DNManage_FCLBDnDetail";
+    commonLang["L_DNManage_DNDeclaInfo"] = "@Resources.Locale.L_DNManage_DNDeclaInfo";
+    commonLang["L_UserQuery_ComBA"] = "@Resources.Locale.L_UserQuery_ComBA";
+    commonLang["L_SMSMI_btn02"] = "@Resources.Locale.L_SMSMI_btn02";
+    commonLang["L_SMSMI_MBSendAddr"] = "@Resources.Locale.L_SMSMI_MBSendAddr";
+</script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table id="SubGrid" class="_tableGrid" style="width: 100%">
+                        <tr></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title" style="font-weight: 700; font-size: 11pt; color: black;">
+                        <a data-toggle="collapse" href="#AddArea2" aria-expanded="true" aria-controls="AddArea1" class="">Inbound Consignment Info.:</a>
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in" id="AddArea2" aria-expanded="true">
+                    <div class="panel-body" id="PickInfo2">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="CsmNo" class="control-label">Consignment No</label><!--Shipment ID-->
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CsmNo" name="CsmNo" fieldname="CsmNo" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="BlNoInfo" class="control-label">BL NO Info.</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="BlNoInfo" name="BlNoInfo" fieldname="BlNoInfo" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="CntrInfo" class="control-label">Container No Info.</label><!--Shipment ID-->
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CntrInfo" name="CntrInfo" fieldname="CntrInfo" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="InvoiceInfo" class="control-label">Invoice No Info.</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="InvoiceInfo" name="InvoiceInfo" fieldname="InvoiceInfo" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="TcDecNo" class="control-label">Transit Customs Declaration No</label><!--Shipment ID-->
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TcDecNo" name="TcDecNo" fieldname="TcDecNo" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="TcDecDate" class="control-label">Transit Customs Declaration Date</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TcDecDate" name="TcDecDate" fieldname="TcDecDate"  />
+                                <p class="help-block tooltips"></p>
+                            </div>
+
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="TsTrailer" class="control-label">Transload Trailer</label><!--Shipment ID-->
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TsTrailer" name="TsTrailer" fieldname="TsTrailer" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="TsTruck" class="control-label">Transload Truck</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TsTruck" name="TsTruck" fieldname="TsTruck" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="PalletQty" class="control-label">Pallets QTY</label><!--Shipment ID-->
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PalletQty" name="PalletQty" fieldname="PalletQty" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="TsSealNo" class="control-label">Transload Truck Seal</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TsSealNo" name="TsSealNo" fieldname="TsSealNo" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="CiOutNo" class="control-label">CI Gate Out #</label><!--Shipment ID-->
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CiOutNo" name="CiOutNo" fieldname="CiOutNo" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="CiOutDate" class="control-label">CI Gate Out Date</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CiOutDate" name="CiOutDate" fieldname="CiOutDate"  />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="CiInDate" class="control-label">Customs Truck Gate In Date</label><!--Shipment ID-->
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CiInDate" name="CiInDate" fieldname="CiInDate"  />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="DecInfo" class="control-label">Customs Declaration No</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="DecInfo" name="DecInfo" fieldname="DecInfo" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="DecDateInfo" class="control-label">Customs Declaration Date</label><!--Shipment ID-->
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="DecDateInfo" name="DecDateInfo" fieldname="DecDateInfo" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="RelDate" class="control-label">CC Declaration Release Date</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="RelDate" name="RelDate" fieldname="RelDate"  />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="PodUpdateDate" class="control-label">POD Date</label><!--Shipment ID-->
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PodUpdateDate" name="PodUpdateDate" fieldname="PodUpdateDate"  />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table id="ShipmentGrid" class="_tableGrid" style="width: 100%">
+                    <tr></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table id="SubGrid5" class="_tableGrid" style="width: 100%">
+                    <tr></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table id="CntrGrid" class="_tableGrid" style="width: 100%">
+                    <tr></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="UId" dt="mt" fieldname="UId" iskey="true" />
+<input type="hidden" id="ShipmentId" dt="mt" fieldname="ShipmentId" iskey="true" />
+<input type="hidden" id="TranType" dt="mt" fieldname="TranType" iskey="true" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/SMSMI/iBooking.js?20241121")"></script>

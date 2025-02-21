@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "QAQueryView";
+}
+
+
+@Html.RazorJSInline("~/Scripts/BaseColModel.js")
+<script type="text/javascript">
+var col_sel = "@ViewBag.col_sel";
+$(document).ready(function ($) {
+    //init Search
+    var gop = {};
+    var numberTemplate = "2";
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 230;
+    gop.gridColModel = [
+	    { name: 'UId', title: 'ID', index: 'UId', width: 120, sorttype: 'string', classes: "uppercase", hidden: true },
+	    { name: 'QaType', title: '@Resources.Locale.L_AddBulletin_QABullType', index: 'QaType', width: 100, sorttype: 'string' },
+	    { name: 'QaTitle', title: 'Title', index: 'QaTitle', width: 200, sorttype: 'string' },
+	    //{ name: 'QaAnswer', title: 'Answer', index: 'QaAnswer', width: 200, sorttype: 'string' },
+	    { name: 'CreateBy', title: 'Create By', index: 'CreateBy', width: 150, sorttype: 'string' },
+	    { name: 'CreateDate', title: 'Create Date', index: 'CreateDate', width: 150, sorttype: 'string', formatter: "date", formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+	    { name: 'ModifyBy', title: 'Modify By', index: 'ModifyBy', width: 150, sorttype: 'string' },
+	    { name: 'ModifyDate', title: 'Modify Date', index: 'ModifyDate', width: 150, sorttype: 'string', formatter: "date", formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+	    { name: 'GroupId', title: '@Resources.Locale.L_UserSetUp_GroupId', index: 'GroupId', width: 180, sorttype: 'string', hidden: true },
+	    { name: 'Cmp', title: '@Resources.Locale.L_PartyDocSetup_Cmp', index: 'Cmp', width: 180, sorttype: 'string', hidden: true },
+	    { name: 'Stn', title: '@Resources.Locale.L_IpPart_MafNo', index: 'Stn', width: 200, sorttype: 'string', hidden: true }
+	];
+    gop.AddUrl = { "url": rootPath + "QA/QASetupView", "title": "@Resources.Locale.L_SYS_QAINPUT", "id": "QASetupView" };
+    gop.gridId = "containerInfoGrid";
+    gop.gridAttr = { caption: "Q&A List", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    gop.gridSearchUrl = rootPath + "QA/QueryData";
+    gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+    //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea"; 
+    gop.StatusAreaId = "StatusArea";
+    gop.BtnGroupId = "BtnGroupArea";
+
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        dblClick(map);
+    }
+
+    gop.baseConditionFunc = function () {
+        return getCreateDateParams("CreateDate", gop);
+    }
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+
+
+    initSearch(gop);
+
+    function dblClick(map) {
+        var UId = map.UId;
+        top.topManager.openPage({
+            href: rootPath + "QA/QASetupView/" + UId,
+            title: '@Resources.Locale.L_SYS_QAINPUT',
+            reload: true,
+            id: 'QASetupView',
+            search : 'uid=' + UId
+        });
+    }
+
+});
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

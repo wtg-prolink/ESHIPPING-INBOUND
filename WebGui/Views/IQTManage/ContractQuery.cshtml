@@ -1,0 +1,520 @@
+﻿@{
+    ViewBag.Title = "ContractQuery";
+}
+
+
+<script type="text/javascript">
+    var select_tranmode = "@ViewBag.SelectTranMode";
+    var select_trantype = "@ViewBag.SelectTranType";
+    var _selectTRGN = "@ViewBag.SelectTRGN";
+    var _selectSTATE = "@ViewBag.SelectSTATE";
+    var select_role = "@ViewBag.SelectRole";
+    var upri_role = "@ViewBag.Upri";
+    $(document).ready(function ($) {
+        ajustamodal("#QtdWindow");
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        gop.gridColModel = [
+            { "name": "UId", "title": "UId", "index": "UId", "width": 110, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "Status", "title": "@Resources.Locale.L_ContractSetup_Status", "index": "Status", "width": 70, "align": "left", "sorttype": "string", "hidden": false, "formatter": "select", "editoptions": { "value": 'N:@Resources.Locale.L_ContractQuery_Views_477;Y:@Resources.Locale.L_ContractQuery_Views_478;A:@Resources.Locale.L_QTSetup_StatusPass;V:@Resources.Locale.L_MenuBar_Audit;E:@Resources.Locale.L_BSCSSetup_Expire' } },
+            { name: 'ApproveTo', title: '@Resources.Locale.L_DNApproveManage_ApproveTo', index: 'ApproveTo', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_role } },
+            { "name": "JobNo", "title": "@Resources.Locale.L_ContractSetup_JobNo", "index": "JobNo", "width": 90, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "RfqNo", "title": "@Resources.Locale.L_ContractSetup_RfqNo", "index": "RfqNo", "width": 90, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "CtNo", "title": "@Resources.Locale.L_ContractSetup_CtNo", "index": "CtNo", "width": 90, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "CtDate", "title": "@Resources.Locale.L_ContractSetup_CtDate", "index": "CtDate", "width": 100, "align": "left", "sorttype": "string", "formatter": "date", "formatoptions": { "srcformat": "ISO8601Long", "newformat": "Y-m-d" }, "hidden": false },
+            { "name": "EffectTo", "title": "@Resources.Locale.L_ContractSetup_EffectTo", "index": "EffectTo", "width": 100, "align": "left", "sorttype": "string", "formatter": "date", "formatoptions": { "srcformat": "ISO8601Long", "newformat": "Y-m-d" }, "hidden": false },
+            { "name": "Exten", "title": "@Resources.Locale.L_ContractSetup_Exten", "index": "Exten", "width": 90, "align": "left", "sorttype": "string", "hidden": false, "formatter": "select", "editoptions": { "value": 'N:@Resources.Locale.L_ContractQuery_Script_47' } },
+            { "name": "LspNo", "title": "@Resources.Locale.L_ContractSetup_LspNo", "index": "LspNo", "width": 80, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "LspNm", "title": "@Resources.Locale.L_ContractSetup_LspNm", "index": "LspNm", "width": 130, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "Location", "title": "@Resources.Locale.L_ContractSetup_Location", "index": "Location", "width": 80, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "LocName", "title": "@Resources.Locale.L_ContractSetup_LocName", "index": "LocName", "width": 130, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "LspCt", "title": "@Resources.Locale.L_ContractSetup_LspCt", "index": "LspCt", "width": 90, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "QuotNo", "title": "@Resources.Locale.L_ContractSetup_QuotNo", "index": "QuotNo", "width": 90, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "LspPic", "title": "@Resources.Locale.L_ContractSetup_LspPic", "index": "LspPic", "width": 80, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "LocPic", "title": "@Resources.Locale.L_ContractSetup_LocPic", "index": "LocPic", "width": 80, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "Copy", "title": "@Resources.Locale.L_ContractSetup_Copy", "index": "Copy", "width": 120, "align": "right", "formatter": "integer", "hidden": false },
+            { "name": "Emttoport", "title": "@Resources.Locale.L_ContractSetup_Emttoport", "index": "Emttoport", "width": 120, "align": "right", "formatter": "integer", "hidden": false },
+            { "name": "Porttoatd", "title": "@Resources.Locale.L_ContractSetup_Porttoatd", "index": "Porttoatd", "width": 120, "align": "right", "formatter": "integer", "hidden": false },
+            { "name": "Emttoatd", "title": "@Resources.Locale.L_ContractSetup_Emttoatd", "index": "Emttoatd", "width": 120, "align": "right", "formatter": "integer", "hidden": false },
+            { "name": "Remark", "title": "@Resources.Locale.L_ContractSetup_Remark", "index": "Remark", "width": 80, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "Region", "title": "@Resources.Locale.L_ContractSetup_Region", "index": "Region", "width": 70, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "Cnty", "title": "@Resources.Locale.L_ContractSetup_Cnty", "index": "Cnty", "width": 70, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "Cmp", "title": "@Resources.Locale.L_RoleSetUp_CMP", "index": "Cmp", "width": 70, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "CreateBy", "title": "@Resources.Locale.L_DNApproveManage_CreateBy", "index": "CreateBy", "width": 80, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "CreateDep", "title": "@Resources.Locale.L_GateReserveSetup_CreateDep", "index": "CreateDep", "width": 80, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "CreateExt", "title": "@Resources.Locale.L_GateReserveSetup_CreateExt", "index": "CreateExt", "width": 80, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "CreateDate", "title": "@Resources.Locale.L_DNApproveManage_CreateDate", "index": "CreateDate", "width": 120, "align": "left", "sorttype": "string", "formatter": "date", "formatoptions": { "srcformat": "ISO8601Long", "newformat": "Y-m-d H:i" }, "hidden": true },
+            { "name": "ModifyBy", "title": "@Resources.Locale.L_DNApproveManage_ModifyBy", "index": "ModifyBy", "width": 80, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "ModifyDate", "title": "@Resources.Locale.L_DNApproveManage_ModifyDate", "index": "ModifyDate", "width": 120, "align": "left", "sorttype": "string", "formatter": "date", "formatoptions": { "srcformat": "ISO8601Long", "newformat": "Y-m-d H:i" }, "hidden": true }
+        ];
+        gop.AddUrl = { "url": rootPath + "QTManage/ContractSetup", "title": "@Resources.Locale.L_QTSetup_IpCntr", "id": "ContractSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_QTSetup_CntrList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "QTManage/SMCTMQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+        gop.multiselect = true;
+        gop.multiboxonly = true;
+
+        gop.statusDefaultId = "";
+        var status_group = select_role.split(';');
+        var _statusgroup = [];
+        $.each(status_group, function (index, val) {
+            var _val = val.split(':');
+            var _object = {};
+            if (index == 0) {
+                var _all = {};
+                _all.id = '';
+                _all.label = 'All';
+                _statusgroup.push(_all);
+            }
+            if (_val.length >= 2) {
+                _object.id = _val[0];
+                _object.label = _val[1];
+            }
+            if (upri_role == "G") {
+                _statusgroup.push(_object);
+            }
+            else {
+                _approveroles = approveroles.split(';');
+                var ispush = false;
+                for (var i = 0; i < _approveroles.length; i++) {
+                    if (_approveroles[i] == _object.id) {
+                        ispush = true;
+                    }
+                }
+                if (ispush) {
+                    _statusgroup.push(_object);
+                }
+            }
+
+        });
+        var _finish = {};
+        _finish.id = 'Finish';
+        _finish.label = 'Finish';
+        if (upri_role != "G") {
+            _statusgroup.push(_finish);
+        }
+
+        console.log(_statusgroup);
+
+        gop.statusGroup = _statusgroup;
+        gop.statusField = "ApproveTo";
+        gop.baseCondition = " GROUP_ID='" + groupId + "'  AND CMP='" + cmp + "'";
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "UId";
+        }
+
+        gop.btnGroup = [
+            {
+                id: "btn03",
+                name: "@Resources.Locale.L_DNManage_AdDetail",
+                func: function () {
+                    CheckDetailed();
+                }
+            },
+            {
+                id: "btn04",
+                name: "@Resources.Locale.L_RQQuery_QuoDetail",
+                func: function () {
+                    @*var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var RfqNo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'RfqNo');
+                    if (!RfqNo) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+
+                    $("#QtdWindow").modal("show");*@
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var QuotNo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'QuotNo');
+                    if (!selRowId) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    if (!QuotNo) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_ContractSetup_tip4", 500, "warning");
+                        return;
+                    }
+                    $.ajax({
+                        async: true,
+                        url: rootPath + "QTManage/GetQTDetail",
+                        type: 'POST',
+                        data: { QuotNo: QuotNo },
+                        "complete": function (xmlHttpRequest, successMsg) {
+                        },
+                        "error": function (xmlHttpRequest, errMsg) {
+                        },
+                        success: function (result) {
+                            if (result != undefined && result.flag == "Y") {
+                                var UId = result.uid;
+                                var tranmode = result.TranMode;
+                                var title = "";
+                                var _url = "RQSetup";
+                                if (tranmode == "A") {  //空运
+                                    _url = "AirSetup";
+                                    title = "AIR_";
+                                } else if (tranmode == "F" || tranmode == "R") {   //海运整柜
+                                    if (tranmode == "F")
+                                        title = "FCL_";
+                                    else
+                                        title = "R_";
+                                    if (result.Period === "B")
+                                        _url = "FCLFSFSetup";
+                                    else
+                                        _url = "FCLFSetup";
+                                } else if (tranmode == "D") {   //国内快递  D
+                                    title = "INLAND EXPRESS_";
+                                    _url = "DESetup";
+                                } else if (tranmode == "E") {   //国际快递
+                                    title = "EXPRESS_";
+                                    _url = "IESetup";
+                                } else if (tranmode == "L") {   //海运散货
+                                    title = "LCL_";
+                                    _url = "LCLSetup";
+                                } else if (tranmode == "T") {   //国内运输 T
+                                    title = "Truck_";
+                                    _url = "DTSetup";
+                                }
+
+                                top.topManager.openPage({
+                                    href: rootPath + "QTManage/" + _url + "?UId=" + UId,
+                                    title: title + '@Resources.Locale.L_QTSetup_EntQuote',
+                                    id: _url,
+                                    search: 'uid=' + UId,
+                                    reload: true
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+        ];
+
+        initSearch(gop);
+
+        function dblClick(map) {
+            var UId = map.UId;
+            top.topManager.openPage({
+                href: rootPath + "QTManage/ContractSetup/" + UId,
+                title: '@Resources.Locale.L_QTSetup_IpCntr',
+                id: 'ContractSetup',
+                search: 'uid=' + UId,
+                reload: true
+            });
+        }
+
+
+        function isEmpty(val) {
+            if (val === undefined || val === "" || val == null)
+                return true;
+            return false;
+        }
+
+        function getData(url, data, callBackFn) {
+            CommonFunc.ToogleLoading(true);
+            $.ajax({
+                async: true,
+                url: url,
+                type: 'POST',
+                data: data,
+                "complete": function (xmlHttpRequest, successMsg) {
+                    CommonFunc.ToogleLoading(false);
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                },
+                success: function (result) {
+                    console.log(result);
+                    var resJson = $.parseJSON(result);
+                    callBackFn(resJson);
+                }
+            });
+        }
+
+        var colModel = [
+           { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, editable: false, hidden: true },
+           { name: 'TranType', title: '@Resources.Locale.L_UserSetUp_TranType', index: 'TranType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_trantype }, edittype: 'select' },
+           { name: 'TranMode', title: '@Resources.Locale.L_RQQuery_TranMode', index: 'TranMode', sorttype: 'string', width: 100, hidden: true },
+           { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', sorttype: 'string', width: 100, editable: false, hidden: true },
+           { name: 'RfqNo', title: '@Resources.Locale.L_RQQuery_RfqNo', index: 'RfqNo', sorttype: 'string', width: 100, editable: false, hidden: true },
+           { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', sorttype: 'string', width: 100, editable: false, hidden: true },
+           { name: 'LspCd', title: '@Resources.Locale.L_AirQuery_LspCd', index: 'LspCd', sorttype: 'string', width: 100, editable: false, hidden: true },
+           { name: 'AllIn', title: '@Resources.Locale.L_AirSetup_AllIn', index: 'AllIn', sorttype: 'string', width: 100, editable: false, hidden: true },
+           { name: 'Incoterm', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'Incoterm', sorttype: 'string', width: 100, editable: false, hidden: true },
+           { name: 'PolCd', title: '@Resources.Locale.L_AirQuery_PolCd', index: 'PolCd', sorttype: 'string', width: 100, hidden: false },
+           { name: 'PolNm', title: '@Resources.Locale.L_AirQuery_PolNm', index: 'PolNm', sorttype: 'string', width: 150, hidden: false },
+           { name: 'PodCd', title: '@Resources.Locale.L_AirQuery_PodCd', index: 'PodCd', sorttype: 'string', width: 100, hidden: false },
+           { name: 'PodNm', title: '@Resources.Locale.L_DTQuery_PodNm', index: 'PodNm', sorttype: 'string', width: 150, hidden: false },
+            { name: 'Region', title: '@Resources.Locale.L_DTQuery_Region', index: 'Region', sorttype: 'string', width: 100, hidden: false, formatter: "select", editoptions: { value: _selectTRGN }, edittype: 'select' },
+           { name: 'State', title: '@Resources.Locale.L_DTQuery_State', index: 'State', sorttype: 'string', width: 100, hidden: false, formatter: "select", editoptions: { value: _selectSTATE }, edittype: 'select' },
+           { name: 'Tt', title: '@Resources.Locale.L_DTQuery_Tt', index: 'Tt', width: 100, align: 'right', formatter: 'integer', hidden: false },
+           { name: 'F10', title: "@Resources.Locale.L_RQSetup_ChrWeight", index: 'F10', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, idden: false },
+           { name: 'F1', title: "@Resources.Locale.L_DTQuery_F1", index: 'F1', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, idden: false },
+           { name: 'F2', title: "@Resources.Locale.L_DTQuery_F2", index: 'F2', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+           { name: 'F3', title: "@Resources.Locale.L_DTQuery_F3", index: 'F3', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+           { name: 'F4', title: "@Resources.Locale.L_DTQuery_F4", index: 'F4', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+           { name: 'F5', title: "@Resources.Locale.L_DTQuery_F5", index: 'F5', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+           { name: 'F6', title: "@Resources.Locale.L_DTQuery_F6", index: 'F6', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+           { name: 'F7', title: "@Resources.Locale.L_DTQuery_F7", index: 'F7', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+           { name: 'F8', title: "@Resources.Locale.L_DTQuery_F8", index: 'F8', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+           { name: 'F9', title: "@Resources.Locale.L_ContractQuery_TFVehicle", index: 'F9', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+           { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 150, align: 'left', sorttype: 'string', hidden: false, editoptions: { size: 500, maxlength: 500 } },
+           { name: 'SeqNo', title: '@Resources.Locale.L_NRSSetup_SeqNo', index: 'SeqNo', sorttype: 'string', width: 250, hidden: true, editable: false },
+           { name: 'QuotNo', title: '@Resources.Locale.L_QTQuery_QuotNo', index: 'QuotNo', sorttype: 'string', width: 100, editable: false, hidden: true }
+        ];
+
+        new genGrid(
+            $("#MainGrid"),
+            {
+                datatype: "local",
+                loadonce: true,
+                colModel: colModel,
+                caption: "@Resources.Locale.L_RQQuery_QuoDetail",
+                height: 500,
+                rows: 999999,
+                refresh: false,
+                cellEdit: false,//禁用grid编辑功能
+                pginput: false,
+                sortable: false,
+                pgbuttons: false,
+                exportexcel: false,
+                toppager: false,
+                multiselect: false,
+                multiboxonly: true,
+                footerrow: true,
+                sortname: "PolCd"
+            }
+        );
+
+        $("#QtdWindow").on("show.bs.modal", function () {
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+            var RfqNo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'RfqNo');
+            var LspNo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'LspNo');
+            if (!RfqNo) {
+                CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                return;
+            }
+            else {
+                $.ajax({
+                    url: rootPath + 'QTManage/GetQtdData',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { "RfqNo": RfqNo, "LspNo": LspNo },
+                    beforeSend: function () {
+                        CommonFunc.ToogleLoading(true);
+                    }
+                })
+                .done(function (data) {
+                    CommonFunc.ToogleLoading(false);
+                    console.log(data);
+                    $("#MainGrid").jqGrid("setGridParam", {
+                        datatype: 'local',
+                        data: data["main"]
+                    }).trigger("reloadGrid");
+                })
+                .fail(function () {
+                    CommonFunc.Notify("", "error", 1000, "danger");
+                    CommonFunc.ToogleLoading(false);
+                })
+                .always(function () {
+                    //console.log("complete");
+                });
+            }
+        });
+    });
+    function CheckDetailed() {
+
+        if ($("#ApproveDetail").length <= 0) {
+            $("body").append(_showApproveModal);
+        }
+
+        if ($("#ApproveDetailTemplate").length <= 0) {
+            $("body").append(_showApproveTemplate);
+        }
+
+        var $_grid = $("#containerInfoGrid");
+        var $_templeat = $("#ApproveDetailTemplate");
+        var $_DetailTable = $("#ApproveDetailTemplate");
+        var $_Detail = $('#ApproveDetail');
+        var selRowId = $_grid.jqGrid('getGridParam', 'selrow');
+        var dnNo = $_grid.jqGrid('getCell', selRowId, 'JobNo');
+        if (!dnNo) {
+            CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+            return;
+        }
+
+        $.ajax({
+            async: true,
+            url: rootPath + "DNManage/GetApproveInfo",
+            type: 'POST',
+            data: {
+                "DnNo": dnNo
+            },
+            "complete": function (xmlHttpRequest, successMsg) {
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+            },
+            success: function (result) {
+                console.log(result);
+                var resJson = $.parseJSON(result)
+                var source = $_templeat.html();
+                var data = {
+                    rowData: [
+                        { "SeqNo": 1, "StatusFlag": "Y", "ApproveName": "@Resources.Locale.L_SMIPR_CreateBy", "Status": "@Resources.Locale.L_QTSetup_StatusPass", "NotifyDate": "2015-10-30 15:00", "CreateBy": "Tim", "CreateDate": "2015-10-30 16:00", "ApproveTime": 60, "ActualTime": 60, "Remark": "xxx" }
+                    ]
+                };
+                //data = resJson;
+                var newResJson = [];
+                $.each(resJson, function (index, val) {
+                    var resJsonItem = val;
+                    if (resJsonItem.Status == "0") {
+                        resJsonItem.Status = '@Resources.Locale.L_ActManage_No';
+                    } else if (resJsonItem.Status == "1") {
+                        resJsonItem.Status = '@Resources.Locale.L_ApproveGroupSetup_Approved';
+                    }
+                    newResJson.push(resJsonItem);
+                });
+                var data = { rowData: newResJson, maxNum: 1 };
+                var template = Handlebars.compile(source);
+                var html = template(data);
+                $("#ApproveDetailTable").html(html);
+
+                $('#ApproveDetail').modal('show'); //顯示彈出視窗
+                ajustamodal("#ApproveDetail");
+            }
+        });
+    };
+
+    var _showApproveModal = '<div class="modal fade" id="ApproveDetail" Sid="">\
+  <div class="modal-dialog modal-lg">\
+    <div class="modal-content">\
+      <div class="modal-header">\
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+        <h4 class="modal-title">@Resources.Locale.L_ActManage_ApDetail</h4>\
+      </div>\
+      <div class="modal-body" id="ApproveContent">\
+        <table class="table table-bordered table-hover" id="ApproveDetailTable">\
+        </table>\
+      </div>\
+      <div class="modal-footer">\
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="ModalClose">Close</button>\
+      </div>\
+    </div>\
+  </div>\
+</div>';
+
+    var _showApproveTemplate = '<script id="ApproveDetailTemplate" type="text/x-handlebars-template">\
+    <thead>\
+        <tr class="info">\
+            <td>@Resources.Locale.L_DNApproveManage_ApproveType</td>\
+            <td>@Resources.Locale.L_ActManage_AprOrder</td>\
+            <td>@Resources.Locale.L_ApproveGroupSetup_ApproveDep</td>\
+            <td>@Resources.Locale.L_DNApproveManage_ApproveTo</td>\
+            <td>@Resources.Locale.L_EventSetup_NotifyDate</td>\
+            <td>@Resources.Locale.L_ActManage_Aprer</td>\
+            <td>@Resources.Locale.L_ActManage_AprTm</td>\
+            <td>@Resources.Locale.L_ActManage_EstTm</td>\
+            <td>@Resources.Locale.L_ActManage_ActMd</td>\
+            <td>@Resources.Locale.L_ActManage_AprCont</td>\
+        </tr>\
+    </thead>\
+    <tbody>\
+        {{#each rowData}}\
+            {{#ifbig this.ActualTime ../maxNum }}\
+            <tr class="danger">\
+            {{else}}\
+            <tr>\
+            {{/ifbig}}\
+                <td>{{this.ApproveCodename}}</td>\
+                <td>{{this.ApproveLevel}}</td>\
+                <td>{{this.ApproveRole}}</td>\
+                <td>{{this.Status}}</td>\
+                <td>{{this.NotifyDate}}</td>\
+                <td>{{this.ApproveBy}}</td>\
+                <td>{{this.ApproveDate}}</td>\
+                <td>{{this.ApproveTime}}</td>\
+                <td>{{this.ActualTime}}</td>\
+                <td>{{this.Remark}}</td>\
+            </tr>\
+{{/each}}\
+</tbody><\/script>';
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="QtdWindow" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_RQQuery_QuoDetail</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12-12">
+                        <table id="MainGrid" class="_tableGrid" style="width: 100%">
+                            <tr></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

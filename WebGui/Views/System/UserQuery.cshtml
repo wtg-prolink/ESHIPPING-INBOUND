@@ -1,0 +1,507 @@
+﻿@{
+    ViewBag.Title = "UserQuery";
+}
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        $("#ItsdArDailog").find(".modal-dialog").width($(document).width() - 60);
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        gop.gridColModel = [
+            { name: 'UId', title: '@Resources.Locale.L_UserSetUp_U_ID', index: 'UId', sorttype: 'string', hidden: false },
+            { name: 'UName', title: '@Resources.Locale.L_UserSetUp_U_NAME', index: 'UName', width: 150, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'UStatus', title: '@Resources.Locale.L_UserQuery_UStatus', index: 'UStatus', width: 90, align: 'left', sorttype: 'string', hidden: false, formatter: "select", multiselect: "true",editoptions: { value: '0:@Resources.Locale.L_UserSetUp_Enable;1:@Resources.Locale.L_UserSetUp_Disable;2:@Resources.Locale.L_UserSetUp_Leave' } },
+            { name: 'GroupId', title: '@Resources.Locale.L_UserSetUp_GroupId', index: 'GroupId', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Cmp', title: '@Resources.Locale.L_UserSetUp_Cmp', index: 'Cmp', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Stn', title: 'Stn', index: 'Stn', sorttype: 'string', hidden: true },
+            { name: 'Dep', title: '@Resources.Locale.L_UserSetUp_Dep', index: 'Dep', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'UPhone', title: '@Resources.Locale.L_UserSetUp_UPhone', index: 'UPhone', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'UEmail', title: '@Resources.Locale.L_UserSetUp_UEmail', index: 'UEmail', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'UWechat', title: '@Resources.Locale.L_UserQuery_UWechat', index: 'UWechat', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'UQq', title: '@Resources.Locale.L_UserQuery_UQq', index: 'UQq', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'UManager', title: '@Resources.Locale.L_UserSetUp_UManager', index: 'UManager', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ModiPwDate', title: '@Resources.Locale.L_UserSetUp_ModiPwDate', index: 'ModiPwDate', width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'UpdatePriDate', title: '@Resources.Locale.L_UserSetUp_NextDate', index: 'UpdatePriDate', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'MailFlag', title: '@Resources.Locale.L_UserQuery_MailFlag', index: 'MailFlag', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'MsgFlag', title: '@Resources.Locale.L_UserQuery_MsgFlag', index: 'MsgFlag', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'WechatFlag', title: '@Resources.Locale.L_UserQuery_WechatFlag', index: 'WechatFlag', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'QqFlag', title: '@Resources.Locale.L_UserQuery_QqFlag', index: 'QqFlag', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'UPri', title: '@Resources.Locale.L_UserSetUp_UPri', index: 'UPri', width: 150, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'G:@Resources.Locale.L_BSCSSetup_GroupId;C:Location;D:@Resources.Locale.L_GateReserveSetup_CreateDep;U:@Resources.Locale.L_UserSetUp_Personal' } },
+            { name: 'SapId', title: 'SAP ID', index: 'SapId', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CardNo', title: 'Card No', index: 'CardNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TranType', title: '@Resources.Locale.L_DNApproveManage_TranMode', index: 'TranType', width: 150, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'D:@Resources.Locale.L_DNManage_IntSa;C:@Resources.Locale.L_UserSetUp_Cost' } },
+            { name: 'UExt', title: '@Resources.Locale.L_GateReserveSetup_CreateExt', index: 'UExt', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            //{ name: 'UManager', title: '@Resources.Locale.L_UserSetUp_UManager', index: 'UManager', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Rc', title: '@Resources.Locale.L_UserSetUp_CostData', index: 'Rc', width: 150, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'B:@Resources.Locale.L_UserSetUp_All;R: @Resources.Locale.L_UserSetUp_Income;C:@Resources.Locale.L_UserSetUp_Cost' } },
+            { name: 'Tcmp', title: '@Resources.Locale.L_UserSetUp_DNCom', index: 'Tcmp', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PlantPri', title: '@Resources.Locale.L_DNApproveManage_Plant', index: 'PlantPri', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateBy', title: '@Resources.Locale.L_BsrptManage_CreateBy', index: 'CreateBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateDate', title: '@Resources.Locale.L_BookingQuery_Views_293', index: 'CreateDate', width: 150, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'ModifyBy', title: '@Resources.Locale.L_BsrptManage_ModifBy', index: 'ModifyBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ModifyDate', title: '@Resources.Locale.L_BsrptManage_ModifyDate', index: 'ModifyDate', width: 150, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'Whs', title: '@Resources.Locale.L_UserSetUp_Whs', index: 'Whs', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LoginDate', title: '@Resources.Locale.L_UserSetup_LoginDate', index: 'LoginDate', width: 150, align: 'left',formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'StopBy', title: '@Resources.Locale.L_UserSetup_StopBy', index: 'StopBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'StopDate', title: '@Resources.Locale.L_UserSetup_StopDate', index: 'StopDate', width: 150, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'PermissionBy', title: '@Resources.Locale.L_UserSetup_PermissionBy', index: 'StopBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PermissionDateL', title: '@Resources.Locale.L_UserSetup_PermissionDate', index: 'StopDate', width: 150, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'ViewSubBg', title: 'View Sub-BG', index: 'ViewSubBg', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LeaveDate', title: '@Resources.Locale.L_UserSetUp_LeaveDate', index: 'LeaveDate', width: 120, align: 'left', formatter: "date", formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'ResumeDate', title: '@Resources.Locale.L_UserSetUp_ResumeDate', index: 'ResumeDate', width: 120, align: 'left', formatter: "date", formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'ItSd', title: 'ITSD#', index: 'ItSd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'KeyUser', title: 'Key User', index: 'KeyUser', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Lang', title: '@Resources.Locale.TLB_LANG', index: 'Lang', width: 150, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'zh-CN:@Resources.Locale.L_Login_Views_461;zh-TW: @Resources.Locale.L_Login_Views_462;en-US:English;ru-RU:Russia' } },
+            { name: 'DefaultSite', title: '@Resources.Locale.L_DefaultCmp', index: 'DefaultSite', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RoleAssign', title: 'Role Assign', index: 'RoleAssign', width: 200, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'QtmPri', title: 'Viewed other site bills', index: 'QtmPri', width: 160, align: 'left', sorttype: 'string', hidden: false },
+        ];
+        gop.AddUrl = { "url": rootPath + "System/UserSetUp", "title": "@Resources.Locale.L_UserQuery_UserSetup", "id": "UserSetUp" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_UserQuery_UserSetup", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.baseCondition = " GROUP_ID='" + groupId + "'  AND IO_FLAG='I'";
+        gop.gridSearchUrl = rootPath + "System/UserQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "";
+        }
+        gop.btnGroup = [
+            {
+                id: "ItsdArBtn",
+                name: "ITSD AR",
+                func: function () {
+                    $("#ItsdArDailog").modal({
+                        backdrop: 'static'
+                    });
+                    $("#ItsdArDailog").modal("show");
+                }
+            }
+        ];
+
+        initSearch(gop);
+
+        function dblClick(map) {
+            var UId = map.UId;
+            var GroupId = map.GroupId;
+            var Cmp = map.Cmp;
+            var Stn = map.Stn;
+            top.topManager.openPage({
+                href: rootPath + "System/UserSetUp?UId=" + UId + "&GroupId=" + GroupId + "&Cmp=" + Cmp + "&Stn=" + Stn,
+                title: '@Resources.Locale.L_UserQuery_UserSetup',
+                id: 'UserSetUp',
+                search: 'uid=' + UId
+            });
+        }
+
+        //公司放大鏡
+        CmpOpt = {};
+        CmpOpt.gridUrl = rootPath + "TPVCommon/GetItsdArSiteLookup";
+        CmpOpt.registerBtn = $("#SiteLookup");
+        CmpOpt.isMutiSel = true;
+        CmpOpt.focusItem = $("#Site");
+        CmpOpt.columnID = "Cd";
+        CmpOpt.param = "";
+        CmpOpt.responseMethod = function (data) {
+            var str = "";
+            $.each(data, function (index, val) {
+                str = str + data[index].Cd + ";";
+            });
+            $("#Site").val(str);
+        }
+        CmpOpt.lookUpConfig = LookUpConfig.SiteLookup3;
+        initLookUp(CmpOpt);
+    });
+
+    $(function () {
+          var colModel1 = [
+            { name: 'ItSd', title: 'ITSD#', index: 'ItSd', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+            { name: 'AppDate', title: '@Resources.Locale.TLB_RequestDate', index: 'AppDate', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+            { name: 'ItsdState', title: '@Resources.Locale.TLB_ITSDStatus', index: 'ItsdState', width: 150, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: '3:@Resources.Locale.TLB_InProgress;6: @Resources.Locale.TLB_UserApproving;1: @Resources.Locale.TLB_Submitted;2: @Resources.Locale.TLB_InITApprovalProcess;0:@Resources.Locale.TLB_ReturnToRequestor;4:@Resources.Locale.TLB_Close;5:HR Cosign:7:@Resources.Locale.TLB_Consult;8:@Resources.Locale.TLB_Reassign;9:HR Approving;10:@Resources.Locale.TLB_ReturnToPreviousStep;11:@Resources.Locale.TLB_AuditorReview' } },
+            { name: 'Module', title: '@Resources.Locale.TLB_Model', index: 'Module', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+            { name: 'Functional', title: '@Resources.Locale.TLB_FunctionClass', index: 'Functional', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+            { name: 'AreaName', title: '@Resources.Locale.TLB_Site', index: 'AreaName', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+            { name: 'AppContent', title: '@Resources.Locale.TLB_AppContent', index: 'Site', width: 120, align: 'left', sorttype: 'string', hidden: true, editable: false },
+            { name: 'UId', title: '@Resources.Locale.L_UserSetUp_U_ID', index: 'Ad', width: 120, align: 'left', sorttype: 'string', hidden: true, editable: false },
+            { name: 'UName', title: '@Resources.Locale.L_UserSetUp_U_NAME', index: 'UName', width: 120, align: 'left', sorttype: 'string', hidden: true, editable: false },
+            { name: 'UPhone', title: '@Resources.Locale.L_UserSetUp_UPhone', index: 'UPhone', width: 120, align: 'left', sorttype: 'string', hidden: true, editable: false },
+            { name: 'UExt', title: '@Resources.Locale.L_GateReserveSetup_CreateExt', index: 'UExt', width: 120, align: 'left', sorttype: 'string', hidden: true, editable: false },
+            { name: 'UEmail', title: '@Resources.Locale.L_UserSetUp_UEmail', index: 'UEmail', width: 120, align: 'left', sorttype: 'string', hidden: true, editable: false },
+            { name: 'UManager', title: '@Resources.Locale.L_UserSetUp_UManager', index: 'UManager', width: 120, align: 'left', sorttype: 'string', hidden: true, editable: false },
+            { name: 'SapId', title: '@Resources.Locale.L_UserSetUp_SapId', index: 'SapId', width: 120, align: 'left', sorttype: 'string', hidden: true, editable: false },
+            { name: 'CardNo', title: '@Resources.Locale.L_UserSetUp_CardNo', index: 'CardNo', width: 120, align: 'left', sorttype: 'string', hidden: true, editable: false },
+            { name: 'Content', title: '@Resources.Locale.TLB_Content', index: 'Content', width: 120, align: 'left', sorttype: 'string', hidden: true, editable: false }
+          ];
+        _handler.intiGrid("ItsdArMainGrid", $("#ItsdArMainGrid"), {
+            colModel: colModel1, caption: "ITSD AR", height: "auto", sortname: "ItSd", datatype: "local", loadonce: true, cellEdit: false, height: 320,
+            multiselect: true, multiboxonly: true,  exportexcel: false, editOnly: false,
+            savelayout: true,showcolumns: true,
+			    rowattr: function (rd) {
+			    },
+			    afterSaveCellFunc: function(rowid, name, val, iRow)
+			    {
+			    },
+			    loadComplete: function(data)
+                {
+
+			    }
+            }
+        );
+
+
+        $("#ItsdArDailog").on("show.bs.modal", function () {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = (now.getMonth() + 1).toString().padStart(2, '0');
+            var day = now.getDate().toString().padStart(2, '0');
+            $("#Model").val("");
+            $("#Itsd").val("");
+            $("#FunctionClass").val("");
+            $("#ItsdStatus").val("");
+            $("#RequestDateFrom").val(year + "/" + month + "/" + day + " 00:00:00");
+            $("#RequestDateTo").val(year + "/" + month + "/" + day + " 23:59:59");
+            $("#Site").val("");
+            $("#ItsdArMainGrid").jqGrid("clearGridData");
+            gridEditableCtrl({ editable: false, gridId: "ItsdArMainGrid" });
+
+            $.ajax({
+                url: rootPath + 'System/GetItsdAr',
+                type: 'POST',
+                dataType: 'JSON',
+                data: {},
+                beforeSend: function () {
+                    CommonFunc.ToogleLoading(true);
+                }
+            })
+                .done(function (data) {
+                    CommonFunc.ToogleLoading(false);
+                    console.log(data);
+                })
+                .fail(function () {
+                    CommonFunc.Notify("", "error", 1000, "danger");
+                    CommonFunc.ToogleLoading(false);
+                })
+                .always(function () {
+                });
+        });
+
+        $("#RequestDateFrom").wrap('<div class="input-group">')
+            .datetimepicker({
+                showOn: "button",
+                changeYear: true,
+                dateFormat: "yy/mm/dd",
+                timeFormat: 'HH:mm',
+                beforeShow: function () {
+                    setTimeout(function () {
+                        $('.ui-datepicker').css('z-index', 99999999999999);
+                    }, 0);
+                },
+                onClose: function (text, inst) {
+                    $(this).focus();
+                }
+            })
+            .next("button").button({
+                icons: { primary: "ui-icon-calendar" },
+                label: "Select a date",
+                text: false
+            })
+            .addClass("btn btn-sm btn-default").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+            .wrap('<span class="input-group-btn">')
+            .find('.ui-button-text')
+            .css({
+                'visibility': 'hidden',
+                'display': 'inline'
+            });
+
+        $("#RequestDateTo").wrap('<div class="input-group">')
+            .datetimepicker({
+                showOn: "button",
+                changeYear: true,
+                dateFormat: "yy/mm/dd",
+                timeFormat: 'HH:mm',
+                beforeShow: function () {
+                    setTimeout(function () {
+                        $('.ui-datepicker').css('z-index', 99999999999999);
+                    }, 0);
+                },
+                onClose: function (text, inst) {
+                    $(this).focus();
+                }
+            })
+            .next("button").button({
+                icons: { primary: "ui-icon-calendar" },
+                label: "Select a date",
+                text: false
+            })
+            .addClass("btn btn-sm btn-default").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+            .wrap('<span class="input-group-btn">')
+            .find('.ui-button-text')
+            .css({
+                'visibility': 'hidden',
+                'display': 'inline'
+            });
+
+
+        $("#ArSearchBtn").click(function(event) {
+            var Model = $("#Model").val();
+            var Itsd = $("#Itsd").val();
+            var FunctionClass = $("#FunctionClass").val();
+            var ItsdStatus = $("#ItsdStatus").val();
+            var RequestDateFrom = $("#RequestDateFrom").val();
+            var RequestDateTo = $("#RequestDateTo").val();
+            var Site = $("#Site").val();
+            var postData = { 'Model': Model, 'Itsd': Itsd, 'FunctionClass': FunctionClass, 'ItsdStatus': ItsdStatus, 'RequestDateFrom': RequestDateFrom, 'RequestDateTo': RequestDateTo, 'Site': Site };
+            console.log(postData);
+            $.ajax({
+                async: true,
+                url: rootPath + 'System/ItsdArGetInfo',
+                type: 'POST',
+                dataType: 'json',
+                data:postData,
+                beforeSend: function(){
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (result) {
+                    CommonFunc.ToogleLoading(false);
+                    console.log(result);
+                    var Data = $.parseJSON(result.data.Content);
+                    $("#ItsdArMainGrid").jqGrid("clearGridData");
+                    $("#ItsdArMainGrid").jqGrid("setGridParam", {
+                        datatype: 'local',
+                        data: Data.rows
+                    }).trigger("reloadGrid");
+                    var col = $("#ItsdArMainGrid").jqGrid('getCol', 'ItSd', false);
+                    $.each(col, function (index, colname) {
+                        $("#ItsdArMainGrid").jqGrid('setRowData', index + 1, false, 'gridTagClass');
+                    });
+                    if (result.code!=200) {
+                        CommonFunc.Notify("", result.msg, 1000, "danger");
+                    }
+
+                },
+                error: function(){
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+                    CommonFunc.ToogleLoading(false);
+                    $("#ItsdArDailog").modal("hide");
+                }
+            });
+        });
+
+
+        $("#ArProcessing").click(function(event) {
+
+            var cId = $("#ItsdArMainGrid").jqGrid('getGridParam', 'selarrrow');
+            var ArProcessData = {};
+            ArProcessData['mt'] = [];
+            if (cId.length <= 0) {
+                CommonFunc.Notify("", "@Resources.Locale.L_ChgApproveManage_Views_185", 500, "warning");
+                return;
+            }
+
+            for(var k=0; k<cId.length; k++)
+            {
+                ArProcessData['mt'].push($("#ItsdArMainGrid").getRowData(cId[k]));
+            }
+
+            var postData = { 'ArProcessData': JSON.stringify(ArProcessData)};
+            console.log(postData);
+            $.ajax({
+                async: true,
+                url: rootPath + 'System/ArProcess',
+                type: 'POST',
+                dataType: 'json',
+                data:postData,
+                beforeSend: function(){
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (result) {
+                    if (result.IsOk != "Y")
+                    {
+                        CommonFunc.Notify("", result.message, 500, "warning");
+                    }
+                    else {
+                        CommonFunc.Notify("", "@Resources.Locale.L_ActManage_Controllers_68", 1000, result.message);
+                    }
+                    CommonFunc.ToogleLoading(false);
+                },
+                error: function(){
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+                    CommonFunc.ToogleLoading(false);
+                    $("#ItsdArDailog").modal("hide");
+                }
+            });
+        });
+    });
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ItsdArDailog">
+    <div class="modal-dialog modal-lg" style="WIDTH: 950px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">ITSD AR</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-5-60">
+                        <label for="Model" class="control-label">@Resources.Locale.TLB_Model</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <select class="form-control input-sm" id="Model" name="Model">
+                            <option value=""></option>
+                            <option value="Internal">@Resources.Locale.TLB_Internal</option>
+                            <option value="External">@Resources.Locale.TLB_External</option>
+                        </select>
+                    </div>
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label for="Itsd" class="control-label">ITSD#</label>
+                    </div>
+                    <div class="pure-u-sm-10-60 control-group">
+                        <input type="text" class="form-control input-sm" id="Itsd" name="Itsd" />
+                        <p class="help-block tooltips"></p>
+                    </div>
+
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label for="FunctionClass" class="control-label">@Resources.Locale.TLB_FunctionClass</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <select class="form-control input-sm" id="FunctionClass" name="FunctionClass">
+                            <option value=""></option>
+                            <option value="Account Creation">@Resources.Locale.TLB_AccountCreation</option>
+                            <option value="Permission Change">@Resources.Locale.TLB_PermissionChange</option>
+                            <option value="Password Reset">@Resources.Locale.TLB_PasswordReset</option>
+                            <option value="Account Activation">@Resources.Locale.TLB_AccountActivation</option>
+                        </select>
+                    </div>
+
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label for="ItsdStatus" class="control-label">@Resources.Locale.TLB_ITSDStatus</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <select class="form-control input-sm" id="ItsdStatus" name="ItsdStatus">
+                            <option value=""></option>
+                            <option value="3">@Resources.Locale.TLB_InProgress</option>
+                            <option value="6">@Resources.Locale.TLB_UserApproving</option>
+                            <option value="1">@Resources.Locale.TLB_Submitted</option>
+                            <option value="2">@Resources.Locale.TLB_InITApprovalProcess</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="pure-g">
+                    <div class="pure-u-sm-5-60">
+                        <label for="RequestDateFrom" class="control-label">@Resources.Locale.TLB_RequestDateFrom</label>
+                    </div>
+                    <div class="pure-u-sm-10-60 control-group">
+                        <input type="text" class="form-control input-sm" id="RequestDateFrom" name="RequestDateFrom" />
+                        <p class="help-block tooltips"></p>
+                    </div>
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label for="RequestDateTo" class="control-label">@Resources.Locale.TLB_To</label>
+                    </div>
+                    <div class="pure-u-sm-10-60 control-group">
+                        <input type="text" class="form-control input-sm" id="RequestDateTo" name="RequestDateTo" />
+                        <p class="help-block tooltips"></p>
+                    </div>
+
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label for="Site" class="control-label">@Resources.Locale.TLB_Site</label>
+                    </div>
+                    <div class="pure-u-sm-25-60 control-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" id="Site" name="Site" fieldname="Site" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="SiteLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin: 0;padding: 0;position: relative;left:20px;color: red;">
+                @Resources.Locale.TLB_ItSdInfoTitle
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-info" id="ArProcessing">@Resources.Locale.TLB_ArProcessing</button>
+                <button type="submit" class="btn btn-sm btn-info" id="ArSearchBtn">@Resources.Locale.L_BaseLookup_Ser</button>
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">@Resources.Locale.L_BSCSDateQuery_Cancel</button>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-60-60">
+                        <table id="ItsdArMainGrid" class="_tableGrid" style="width: 100%">
+                            <tr></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

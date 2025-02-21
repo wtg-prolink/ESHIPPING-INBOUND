@@ -1,0 +1,983 @@
+﻿@{
+    ViewBag.Title = "InternalTranQuery";
+}
+
+<style>
+    .gridTagClass {background: #bbbbbb !important;}
+</style>
+
+<script type="text/javascript">
+	var OrdNos = "",FrtTerm="",Torder="", UseDatetime = "", CntNumber = 0;
+	var WsSelect = "@ViewBag.WsSelect";
+    var TranTypeSel = "@ViewBag.TranType";
+    var WsCol = "@Html.Raw(ViewBag.WsCol)";
+	$(document).ready(function ($) {
+		var WsSelArr = WsSelect.split("(*)");
+		var str = "<option value=''></option>";
+		$.each(WsSelArr, function(index, val) {
+			var WsCdArr = WsSelArr[index].split(")*(");
+			if(WsCdArr[0] != "")
+				str += "<option value='"+WsCdArr[0]+"'>"+WsCdArr[0]+":"+WsCdArr[1]+"</option>";
+		});
+		$("#OrderCarWsCd").html(str);
+		$("#MutiWsCd").html(str);
+		$("#FclOrderCarWsCd").html(str);
+
+		//init Search
+		var gop = {};
+		var numberTemplate = "2";
+		var docHeight = $(document).height();
+		gridHeight = docHeight - 260;
+
+		gop.AddUrl = false;
+		gop.gridId = "containerInfoGrid";
+		gop.gridAttr = { caption: "Internal Transport Order List", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+		gop.gridSearchUrl = rootPath + "IbGateManage/InternalTranQueryData";
+		gop.multiselect = true;
+		gop.multiboxonly = true;
+
+		//SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+		gop.searchFormId = "ConditionArea";
+		gop.searchDivId = "SearchArea";
+		gop.StatusAreaId = "StatusArea";
+		gop.BtnGroupId = "BtnGroupArea";
+
+		gop.searchFormId = "ConditionArea";
+		gop.searchDivId = "SearchArea";
+
+		gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+		gop.statusGroup = [
+            { "id": "Y", "label": "@Resources.Locale.L_SMSMI_CstatusY" },
+            { "id": "D", "label": "@Resources.Locale.L_SMSMI_CstatusF" }
+		];
+
+		gop.statusField = "Cstatus";
+		gop.statusDefaultId = "Y";
+
+
+
+		gop.btnGroup = [
+			{
+				id: "btn01",
+				name: "@Resources.Locale.L_IbGateManage_btn01",
+				func: function () {
+					var selRowId =  mygrid.jqGrid('getGridParam', 'selarrrow');
+					var responseData = [];
+					var dnitems = "";
+					$.each(selRowId, function (index, val) {
+						responseData.push(mygrid.getRowData(selRowId[index]));
+					});
+
+					if (responseData.length < 1) {
+						CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+						return;
+					}
+
+					var shipments = "";
+					for (var i = 0; i < responseData.length; i++) {
+					    var TranType = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'TranType');
+					    if (TranType != "F" && TranType != "R") {
+					        CommonFunc.Notify("", "Limit FCL and Railway！！", 500, "warning");
+					        return;
+					    }
+						dnitems += responseData[i].OrdNo + ",";
+						if (shipments.length > 0)
+							shipments += ",";
+						shipments += responseData[i].OrdNo;
+					}
+
+					OrdNos = shipments;
+
+					$("#OrderCarDailog").modal("show");
+
+				}
+			},
+			{
+				id: "btn02",
+				name: "@Resources.Locale.L_IbGateManage_btn02",
+				func: function () {
+				    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', "selarrrow");
+				    console.log(selRowId);
+				    if (selRowId.length == 0) {
+				        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+			            return;
+			        }
+				    var oTrucker = "";
+				    var oDepAddr1 = "";
+				    for (var i = 0; i < selRowId.length; i++) {
+				        var TranType = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'TranType');
+				        var Trucker1 = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'Trucker1');
+				        var DepAddr1 = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'DepAddr');
+				        var Cstatus = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'Cstatus');
+				        if (TranType != "L" && TranType != "A" && TranType != "E") {
+				            CommonFunc.Notify("", "Limit LCL！！", 500, "warning");
+				            return;
+				        }
+				        if (i == 0) {
+				            oTrucker = Trucker1;
+				            oDepAddr1 = DepAddr1;
+				        }
+
+				        if (Cstatus != "Y") {
+				            alert("The order not Call Truck!!");
+				            return;
+				        }
+
+				        if (oTrucker != Trucker1) {
+				            CommonFunc.Notify("", "Trucker is different！！", 500, "warning");
+				            return;
+				        }
+				        if (oDepAddr1 != DepAddr1) {
+				            CommonFunc.Notify("", "Departure Address is different！！", 500, "warning");
+				            return;
+				        }
+
+				        oTrucker = Trucker1;
+				        oDepAddr1 = DepAddr1;
+
+				    }
+
+				    $("#DnOrderCarDailog").modal('show');
+
+				}
+			},
+			{
+				id: "btn03",
+				name: "@Resources.Locale.L_DNManage_CallInfo",
+				func: function () {
+					var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+					var OrdNo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'OrdNo');
+					CommonFunc.ToogleLoading(true);
+					$.post(rootPath + 'IbGateManage/GetSmRvByOrdNo', { "OrdNo": OrdNo, "Pagesize": 100 }, function (data, textStatus, xhr) {
+						CommonFunc.ToogleLoading(false);
+						$("#SubGrid").jqGrid("clearGridData");
+						$("#SubGrid").jqGrid("setGridParam", {
+							datatype: 'local',
+							sortorder: "asc",
+							sortname: "ReserveNo",
+							data: data.rows,
+						}).trigger("reloadGrid");
+					}, "JSON");
+				}
+			},
+			{
+				id: "btn05",
+				name: "@Resources.Locale.L_BSTQuery_ExpExcel",
+				func: function () {
+					var url = rootPath + "GateManage/exportOrderCarToExcel";
+					var colModel1 = [
+							{ name: 'DnNo', title: 'DN NO', index: 'DnNo', width: 150, align: 'left', sorttype: 'string', hidden: false, caption: 'DN NO' },
+							{ name: 'ShipmentId', title: 'DN NO', index: 'ShipmentId', width: 150, align: 'left', sorttype: 'string', hidden: false, caption: 'Shipment ID' },
+							{ name: 'ProductLine', title: '@Resources.Locale.L_GateReserveSetup_ProLine', index: 'ProductLine', width: 70, align: 'left', sorttype: 'string', hidden: false, caption: '@Resources.Locale.L_DNManage_Line' },
+							{ name: 'IpartNo', title: '@Resources.Locale.L_DNApproveManage_IpartNo', index: 'IpartNo', width: 150, align: 'left', sorttype: 'string', hidden: false, caption: '@Resources.Locale.L_DNApproveManage_IpartNo' }
+
+					];
+					var conditions = "";
+					var baseCondition = "";
+					var orderBy = " ORDER BY DN_NO ASC";
+					var caption = "@Resources.Locale.L_DNManage_CallCarMag";
+					postAndRedirect(url, { "ColumnList": JSON.stringify(colModel1).replace(new RegExp('"', "gm"), "'"), "conditions": conditions, "baseCondition": baseCondition, "resultType": "excel", "ReportTitle": caption,"excelName":"FQ-USER" });
+				}
+			},
+			{
+				id: "btn04",
+				name: "@Resources.Locale.L_DNManage_CanCalCar",
+				func: function () {
+					var selRowId =  mygrid.jqGrid('getGridParam', 'selarrrow');
+					var responseData = [];
+					var shipments ="";
+					$.each(selRowId, function (index, val) {
+						responseData.push(mygrid.getRowData(selRowId[index]));
+					});
+
+					if (responseData.length < 1) {
+						CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+						return;
+					}
+
+					if (confirm("@Resources.Locale.L_DNManage_ConfCalCall"))
+					{
+						for (var i = 0; i < responseData.length; i++) {
+							if (shipments.length > 0)
+								shipments += ",";
+							shipments += responseData[i].OrdNo;
+						}
+						$.ajax({
+							url: rootPath + 'IbGateManage/CancelOrderTruck',
+							type: 'POST',
+							dataType: 'json',
+							data: {"shipments": shipments},
+							beforeSend: function(){
+								StatusBarArr.nowStatus("@Resources.Locale.L_OrderCarQuery_Script_44");
+								CommonFunc.ToogleLoading(true);
+							},
+							success: function(result){
+								if(result.message == "success")
+								{
+									CommonFunc.Notify("", "@Resources.Locale.L_DNManage_CancelS", 1000, "success");
+									$("#SummarySearch").click();
+								}
+								else
+								{
+									CommonFunc.Notify("", result.message, 1000, "warning");
+								}
+
+								StatusBarArr.nowStatus("");
+								CommonFunc.ToogleLoading(false);
+
+							},
+							error: function(){
+								CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+								CommonFunc.ToogleLoading(false);
+							}
+						});
+					}
+				}
+			}
+		];
+
+		var colModelSetting = [
+			{ name: 'ShipmentId', width: 130, order: 1},
+			{ name: 'CntrNo', width: 130 , order: 2},
+			{ name: 'CntrType', width: 130, order: 3},
+			{ name: 'TranType', formatter: "select", editoptions: { value: TranTypeSel } },
+			{ name: 'TranType1', formatter: "select", editoptions: { value: "I:Intermodal;R:Railway;S:Ocean Shipping;A: Air;T: Truck" } },
+			{ name: 'Status', formatter: "select", editoptions: { value:"A:@Resources.Locale.L_SMSMI_StatusA;B:@Resources.Locale.L_SMSMI_StatusB;C:@Resources.Locale.L_SMSMI_StatusC;D:@Resources.Locale.L_SMSMI_StatusD;E:@Resources.Locale.L_SMSMI_StatusE;F:@Resources.Locale.L_SMSMI_StatusF;G:@Resources.Locale.L_SMSMI_StatusG;H:@Resources.Locale.L_SMSMI_StatusH;I:@Resources.Locale.L_SMSMI_StatusI;P:@Resources.Locale.L_SMSMI_StatusP;X:@Resources.Locale.L_SMSMI_StatusX" } },
+		];
+
+	    genColModel("SMORD", "U_ID", "L_SMORD", colModelSetting).done(function (result) {
+			for(var i=0; i<result.length; i++)
+			{
+				if(result[i].name == 'Light'){
+					result[i]['formatter'] = function formatLight(cellValue, options, rowObject) {
+
+										var htmlStr = "<ul class='light-ul'>";
+
+										if(cellValue != "" && cellValue != null)
+										{
+											var array1 = cellValue.split(")*(");
+											for (var i = 0; i < array1.length; i++) {
+												var array2 = array1[i].split('(*)');
+												var li = "";
+												if(array2[2] == 1)
+												{
+													li = "<li><div class='grid-circle circle-green' title='"+array2[1]+"'></div></li>";
+												}
+												else
+												{
+													li = "<li><div class='grid-circle circle-default' title='"+array2[1]+"'></div></li>";
+												}
+												htmlStr += li;
+											}
+
+
+										}
+										else
+										{
+											for(var i=0; i < 5; i++ )
+											{
+												var li = "<li><div class='grid-circle circle-default' title=''></div></li>";
+												htmlStr += li;
+											}
+										}
+										htmlStr += "</ul>";
+
+										return htmlStr;
+									}
+					break;
+				}
+			}
+			gop.gridColModel = result;
+
+			gop.searchColumns = getSelectColumn(gop.gridColModel);
+			initSearch(gop);
+		});
+
+
+
+
+		$("#UseDatetime").wrap('<div class="input-group">')
+		.datetimepicker({
+			showOn: "button",
+			changeYear: true,
+			dateFormat: "yy/mm/dd",
+			timeFormat: 'HH:mm',
+			beforeShow: function() {
+				setTimeout(function(){
+					$('.ui-datepicker').css('z-index', 99999999999999);
+				}, 0);
+			},
+			onClose: function (text, inst) {
+				$(this).focus();
+			}
+		})
+		.next("button").button({
+			icons: { primary: "ui-icon-calendar" },
+			label: "Select a date",
+			text: false
+		})
+		.addClass("btn btn-sm btn-default").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+		.wrap('<span class="input-group-btn">')
+		.find('.ui-button-text')
+		.css({
+			'visibility': 'hidden',
+			'display': 'inline'
+		});
+
+		$("#ArrivalDate").wrap('<div class="input-group">')
+		.datetimepicker({
+			showOn: "button",
+			changeYear: true,
+			dateFormat: "yy/mm/dd",
+			timeFormat: 'HH:mm',
+			beforeShow: function() {
+				setTimeout(function(){
+					$('.ui-datepicker').css('z-index', 99999999999999);
+				}, 0);
+			},
+			onClose: function (text, inst) {
+				$(this).focus();
+			}
+		})
+		.next("button").button({
+			icons: { primary: "ui-icon-calendar" },
+			label: "Select a date",
+			text: false
+		})
+		.addClass("btn btn-sm btn-default").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+		.wrap('<span class="input-group-btn">')
+		.find('.ui-button-text')
+		.css({
+			'visibility': 'hidden',
+			'display': 'inline'
+		});
+
+		$("#orderCarBtn").click(function(event) {
+			var UseDatetime = $("#UseDatetime").val();
+			var ArrivalDate = $("#ArrivalDate").val();
+
+			if(UseDatetime == "")
+			{
+				CommonFunc.Notify("", "Please enter Pickup Date!!", 1000, "warning");
+				return;
+			}
+
+			if(ArrivalDate == "")
+			{
+				CommonFunc.Notify("", "Please enter Arrival Date!!", 1000, "warning");
+				return;
+			}
+
+			$.ajax({
+				url: rootPath + 'IbGateManage/OneByOneOrderTruck',
+				type: 'POST',
+				dataType: 'json',
+				data: {"OrdNos": OrdNos, "UseDatetime": UseDatetime, "ArrivalDate": ArrivalDate},
+				beforeSend: function(){
+					StatusBarArr.nowStatus("@Resources.Locale.L_OrderCarQuery_Script_42");
+					CommonFunc.ToogleLoading(true);
+				},
+				success: function(result){
+					if(result.message == "success")
+					{
+						CommonFunc.Notify("", "@Resources.Locale.L_DNManage_CallS", 1000, "success");
+					}
+					else
+					{
+						alert(result.message);
+					}
+
+					StatusBarArr.nowStatus("");
+					CommonFunc.ToogleLoading(false);
+
+					$("#OrderCarDailog").modal("hide");
+				},
+				error: function(){
+					CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+					CommonFunc.ToogleLoading(false);
+				}
+			});
+		});
+
+	    $("#DnOrderCarDailog").find(".modal-dialog").width($(document).width() - 60);
+
+	    $(function () {
+	        var colModel1 = [
+                    { name: 'UId', title: 'UId', index: 'UId', width: 120, align: 'left', sorttype: 'string', hidden: true },
+                    { name: 'ReserveNo', title: 'ReserveNo', index: 'ReserveNo', width: 120, align: 'left', sorttype: 'string', hidden: true },
+                    { name: 'OrdNo', title: 'OrdNo', index: 'OrdNo', width: 120, align: 'left', sorttype: 'string', hidden: true },
+                     {
+                         name: 'PickupDate', title: 'Pickup Date', index: 'PickupDate', sorttype: 'string', width: 110, hidden: false, editable: true,
+                         formatter: 'date', formatoptions: { newformat: 'Y-m-d H:i:s' }, hidden: false, editable: false,
+                         editoptions: myEditDateTimeInit,
+                         formatter: 'date',
+                         formatoptions: {
+                             srcformat: 'ISO8601Long',
+                             newformat: 'Y-m-d H:i:s',
+                             defaultValue: ""
+                         }
+                     },
+                     {
+                         name: 'ArrivalDate', title: 'Arrival Date', index: 'ArrivalDate', sorttype: 'string', width: 110, hidden: false, editable: true,
+                         formatter: 'date', formatoptions: { newformat: 'Y-m-d H:i:s' }, hidden: false, editable: true,
+                         editoptions: myEditDateTimeInit,
+                         formatter: 'date',
+                         formatoptions: {
+                             srcformat: 'ISO8601Long',
+                             newformat: 'Y-m-d H:i:s',
+                             defaultValue: ""
+                         }
+                     },
+                { name: 'WsCd', title: 'Warehouse Code', index: 'WsCd', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+                { name: 'WsNm', title: 'Warehouse Name', index: 'WsNm', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+                { name: 'AddPoint', title: 'Add Point', index: 'AddPoint', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: true, formatter: "select", editoptions: { value: ':;Y:Yes', }, edittype: 'select' },
+                    { name: 'ShipmentId', title: 'Shipment ID', index: 'ShipmentId', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+                    { name: 'DnNo', title: 'DN No', index: 'DnNo', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+                    { name: 'InvNo', title: 'Invoice No', index: 'InvNo', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+                    { name: 'DecNo', title: 'Declaration No', index: 'DecNo', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+                    { name: 'Goods', title: 'Commodity', index: 'Goods', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+                    { name: 'DlvArea', title: '', index: 'DlvArea', width: 120, align: 'left', sorttype: 'string', hidden: true, editable: false },
+                    { name: 'DlvAreaNm', title: 'Delivery Area Name', index: 'DlvAreaNm', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+                    { name: 'AddrCode', title: '', index: 'AddrCode', width: 120, align: 'left', sorttype: 'string', hidden: true, editable: false },
+                    { name: 'DlvAddr', title: 'Delivery Address', index: 'DlvAddr', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+                    {
+                        name: 'Qty', title: 'QTY', index: 'Qty', width: 70, align: 'right', sorttype: 'float', editable: false,
+                        formatter: 'number',
+                        formatoptions: {
+                            decimalSeparator: ".",
+                            thousandsSeparator: ",",
+                            decimalPlaces: 0,
+                            defaultValue: '0'
+                        }
+                    },
+                    {
+                        name: 'Gw', title: 'GW', index: 'Gw', width: 70, align: 'right', sorttype: 'float', editable: false,
+                        formatter: 'number',
+                        formatoptions: {
+                            decimalSeparator: ".",
+                            thousandsSeparator: ",",
+                            decimalPlaces: 3,
+                            defaultValue: '0.000'
+                        }
+                    },
+                    { name: 'Gwu', title: 'GW Unit', index: 'Gwu', width: 120, align: 'left', sorttype: 'string', hidden: false },
+                    {
+                        name: 'Cbm', title: 'CBM', index: 'Cbm', width: 70, align: 'right', sorttype: 'float', editable: false,
+                        formatter: 'number',
+                        formatoptions: {
+                            decimalSeparator: ".",
+                            thousandsSeparator: ",",
+                            decimalPlaces: 3,
+                            defaultValue: '0.000'
+                        }
+                    },
+                    { name: 'Wo', title: 'WO', index: 'Wo', width: 80, align: 'left', sorttype: 'string', hidden: false, editable: false }
+	        ];
+	        new genGrid(
+                $("#DnMainGrid"),
+                {
+                    datatype: "local",
+                    loadonce: true,
+                    colModel: colModel1,
+                    caption: "Container List",
+                    height: "auto",
+                    rows: 999999,
+                    refresh: false,
+                    cellEdit: false,//禁用grid编辑功能
+                    pginput: false,
+                    sortable: false,
+                    pgbuttons: false,
+                    exportexcel: false,
+                    toppager: false,
+                    multiselect: true,
+                    multiboxonly: true,
+                    footerrow: false,
+                    sortname: "SubordNo",
+                    rowattr: function (rd) {
+                        if (rd.ReserveNo != null) {
+                            return {
+                                "class": "ui-state-disabled ui-jqgrid-disablePointerEvents"
+                            };
+                        }
+                    },
+                    afterSaveCellFunc: function (rowid, name, val, iRow) {
+
+                    },
+                    loadComplete: function (data) {
+                        var col = $("#DnMainGrid").jqGrid('getCol', 'IsOrder', false);
+                        $.each(col, function (index, colname) {
+                            console.log(colname);
+                            if (colname == "Y") {
+                                $("#DnMainGrid").jqGrid('setRowData', index + 1, false, 'gridTagClass');
+                            }
+                        });
+                    }
+                }
+            );
+
+
+	        $("#DnOrderCarBtn").click(function (event) {
+	            var TrsMode = $("#TrsMode").val();
+	            var CarType = $("#CarType").val();
+	            var PickupDate = $("#DnUseDatetime").val();
+	            var DepAddr = $("#DepAddr_DN").val();
+	            var EtaMslTime = $("#EtaMslTime_DN").val();
+	            var cId = $("#DnMainGrid").jqGrid('getGridParam', 'selarrrow');
+	            $("#DnMainGrid").jqGrid('saveRow', cId, false, 'clientArray');
+	            $("#DnMainGrid").jqGrid('getGridParam', "endEdit")();
+	            var CallData = {};
+	            CallData['mt'] = [];
+
+	            if (cId.length <= 0) {
+	                CommonFunc.Notify("", "@Resources.Locale.L_ChgApproveManage_Views_185", 500, "warning");
+                return;
+            }
+            if (cId.length > 0) {
+                for (var i = 0; i < cId.length; i++) {
+                    var ArrivalDate = $("#DnMainGrid").jqGrid('getCell', cId[i], 'ArrivalDate');
+                    var WsCd = $("#DnMainGrid").jqGrid('getCell', cId[i], 'WsCd');
+                    ArrivalDate = ArrivalDate.trim();
+                    WsCd = WsCd.trim();
+                    if (ArrivalDate == "") {
+                        CommonFunc.Notify("", "ArrivalDate is empty", 500, "warning");
+                        return;
+                    }
+                }
+                for (var k = 0; k < cId.length; k++) {
+                    CallData['mt'].push($("#DnMainGrid").getRowData(cId[k]));
+                }
+            }
+            var postData = { 'CallData': JSON.stringify(CallData), 'TrsMode': TrsMode, 'CarType': CarType, 'PickupDate': PickupDate, 'EtaMslTime': EtaMslTime, 'QuotNo': $("#DnQuotNo").val() };
+
+            $.ajax({
+                url: rootPath + 'IbGateManage/OrderTruckByDn',
+                type: 'POST',
+                dataType: 'json',
+                data: postData,
+                beforeSend: function () {
+                    gridEditableCtrl({ editable: false, gridId: "DnMainGrid" });
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (result) {
+                    gridEditableCtrl({ editable: true, gridId: "DnMainGrid" });
+
+                    alert(result.message);
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', "selarrrow");
+                    var o_str = "";
+                    for (var i = 0; i < selRowId.length; i++) {
+                        var OrdNo = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'OrdNo');
+                        o_str += OrdNo + ";";
+                    }
+
+                    $.ajax({
+                        url: rootPath + 'IbGateManage/GetDnByShipment',
+                        type: 'POST',
+                        dataType: 'JSON',
+                        data: { 'OrdNos': o_str },
+                        beforeSend: function () {
+                            CommonFunc.ToogleLoading(true);
+                        }
+                    })
+					.done(function (data) {
+					    CommonFunc.ToogleLoading(false);
+					    console.log(data);
+					    $("#DnMainGrid").jqGrid("clearGridData");
+					    $("#DnMainGrid").jqGrid("setGridParam", {
+					        datatype: 'local',
+					        data: data.rows
+					    }).trigger("reloadGrid");
+
+					})
+					.fail(function () {
+					    CommonFunc.Notify("", "error", 1000, "danger");
+					    CommonFunc.ToogleLoading(false);
+					})
+					.always(function () {
+					    //console.log("complete");
+					});
+
+                    CommonFunc.ToogleLoading(false);
+
+                    $("#FclOrderCarDailog").modal("hide");
+                },
+                error: function () {
+                    gridEditableCtrl({ editable: true, gridId: "DnMainGrid" });
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+                    CommonFunc.ToogleLoading(false);
+                }
+            });
+        });
+
+        $("#DnUseDatetime").wrap('<div class="input-group">')
+		.datetimepicker({
+		    showOn: "button",
+		    changeYear: true,
+		    dateFormat: "yy/mm/dd",
+		    timeFormat: 'HH:mm',
+		    beforeShow: function () {
+		        setTimeout(function () {
+		            $('.ui-datepicker').css('z-index', 99999999999999);
+		        }, 0);
+		    },
+		    onClose: function (text, inst) {
+		        $(this).focus();
+		    }
+		})
+		.next("button").button({
+		    icons: { primary: "ui-icon-calendar" },
+		    label: "Select a date",
+		    text: false
+		})
+		.addClass("btn btn-sm btn-default").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+		.wrap('<span class="input-group-btn">')
+		.find('.ui-button-text')
+		.css({
+		    'visibility': 'hidden',
+		    'display': 'inline'
+		});
+
+        $("#DnOrderCarDailog").on("show.bs.modal", function () {
+            gridEditableCtrl({ editable: true, gridId: "DnMainGrid" });
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', "selarrrow");
+            var DepAddr = $("#containerInfoGrid").jqGrid('getCell', selRowId[0], 'DepAddr');
+            var EtaMsl = $("#containerInfoGrid").jqGrid('getCell', selRowId[0], 'EtaMsl');
+            var EtaMslTime = $("#containerInfoGrid").jqGrid('getCell', selRowId[0], 'EtaMslTime');
+            var o_str = "";
+            for (var i = 0; i < selRowId.length; i++) {
+                var OrdNo = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'OrdNo');
+                o_str += OrdNo + ";";
+            }
+
+            $.ajax({
+                url: rootPath + 'IbGateManage/GetDnByShipment',
+                type: 'POST',
+                dataType: 'JSON',
+                data: { 'OrdNos': o_str },
+                beforeSend: function () {
+                    CommonFunc.ToogleLoading(true);
+                }
+            })
+			.done(function (data) {
+			    CommonFunc.ToogleLoading(false);
+			    console.log(DepAddr);
+			    $("#DepAddr_DN").val(DepAddr);
+			    $("#EtaMslTime_DN").val(EtaMslTime);
+			    $("#DnMainGrid").jqGrid("clearGridData");
+			    $("#DnMainGrid").jqGrid("setGridParam", {
+			        datatype: 'local',
+			        data: data.rows
+			    }).trigger("reloadGrid");
+
+			})
+			.fail(function () {
+			    CommonFunc.Notify("", "error", 1000, "danger");
+			    CommonFunc.ToogleLoading(false);
+			})
+			.always(function () {
+			    //console.log("complete");
+			});
+        });
+    });
+
+	    $("#MutiOrderCarBtn").click(function (event) {
+	        var UseDatetime = $("#MutiUseDatetime").val();
+	        var WsCd = $("#MutiWsCd").val();
+	        var CntNumber = $("#CntNumber").val();
+	        var DlvArea2 = $("#DlvArea2").val();
+	        var DlvAddr = $("#DlvAddr2").val();
+	        var AddrCode = $("#AddrCode2").val();
+	        if (UseDatetime == "") {
+	            CommonFunc.Notify("", "@Resources.Locale.L_DNManage_NoDateCanotCall", 1000, "warning");
+                return;
+            }
+            if (WsCd == "") {
+                CommonFunc.Notify("", "@Resources.Locale.L_DNManage_EntWhCd", 1000, "warning");
+                return;
+            }
+            if (DlvArea2 == "") {
+                CommonFunc.Notify("", "@Resources.Locale.L_DNManage_EntDlvArea", 1000, "warning");
+                return;
+            }
+
+            $.ajax({
+                url: rootPath + 'IbGateManage/MutilOrderTruck',
+                type: 'POST',
+                dataType: 'json',
+                data: { "ShipmentId": ShipmentId, "UseDatetime": UseDatetime, "CntNumber": CntNumber, "WsCd": WsCd, "CallType": "2", "DlvArea": $("#DlvArea2").val(), "DlvAddr": DlvAddr, "AddrCode": AddrCode },
+                beforeSend: function () {
+                    StatusBarArr.nowStatus("@Resources.Locale.L_OrderCarQuery_Script_42");
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (result) {
+                    if (result.message == "success") {
+                        CommonFunc.Notify("", "@Resources.Locale.L_DNManage_CallS", 1000, "success");
+                    }
+                    else {
+                        //CommonFunc.Notify("", result.message, 1000, "warning");
+                        alert(result.message);
+                    }
+
+                    StatusBarArr.nowStatus("");
+                    CommonFunc.ToogleLoading(false);
+
+                    $("#MutiOrderCarDailog").modal("hide");
+                },
+                error: function () {
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+                    CommonFunc.ToogleLoading(false);
+                }
+            });
+        });
+
+		var colModel = [
+			{ name: 'UId', title: 'ID', index: 'UId', width: 150, align: 'left', sorttype: 'string', hidden: true },
+			{ name: 'Status', title: '@Resources.Locale.L_ContainerManage_Status', index: 'Status', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'D:@Resources.Locale.L_OrderCarQuery_Script_43;R:@Resources.Locale.L_DNManage_Reserved;C:@Resources.Locale.L_DNManage_Confirmed;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;V:@Resources.Locale.L_BSCSDateQuery_Cancel;P:@Resources.Locale.L_UserQuery_SealCnt;O:@Resources.Locale.L_UserQuery_Out;E:@Resources.Locale.L_DNManage_TempOut;'} },
+			{ name: 'ReserveNo', title: '@Resources.Locale.L_GateAnalysis_ReserveNo', index: 'ReserveNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'ShipmentId', title: 'Shipment ID', index: 'ShipmentId', width: 150, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'DnNo', title: '@Resources.Locale.L_DNApproveManage_DnNo', index: 'DnNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Trucker', title: '@Resources.Locale.L_GateReserve_Trucker', index: 'Trucker', width: 100, align: 'left', sorttype: 'string', hidden: true },
+			{ name: 'TruckerNm', title: '@Resources.Locale.L_GateReserve_Trucker', index: 'TruckerNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'TruckCntrno', title: '@Resources.Locale.L_ContainerManage_TruckCntrno', index: 'TruckCntrno', width: 80, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'TruckSealno', title: '@Resources.Locale.L_ContainerManage_TruckSealno', index: 'TruckSealno', width: 80, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'CntType', title: '@Resources.Locale.L_ContainerManage_CntType', index: 'CntType', width: 80, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'CallDate', title: '@Resources.Locale.L_GateReserveSetup_CallDate', index: 'CallDate', width: 70, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+			{ name: 'UseDate', title: '@Resources.Locale.L_BaseLookup_PickupCdate', index: 'UseDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+			{ name: 'CntrNo', title: '@Resources.Locale.L_GateReserve_CntrNo', index: 'CntrNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'WsCd', title: 'Warehouse Code', index: 'WsCd', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+            { name: 'WsNm', title: 'Warehouse Name', index: 'WsNm', width: 120, align: 'left', sorttype: 'string', hidden: false, editable: false },
+			{ name: 'GateNo', title: '@Resources.Locale.L_GateAnalysis_GateNo', index: 'GateNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'CutPortDate', title: '@Resources.Locale.L_BaseLookup_CutPortDate', index: 'CutPortDate', width: 90, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+			{ name: 'PortDate', title: '@Resources.Locale.L_BaseLookup_PortDate', index: 'PortDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+			//{ name: '', title: '放櫃時間', index: '', width: 70, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+			{ name: 'InDate', title: '@Resources.Locale.L_ContainerManage_InBy', index: 'InDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+			{ name: 'SealDate', title: '@Resources.Locale.L_ContainerManage_SealDate', index: 'SealDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+			{ name: 'SealNo1', title: '@Resources.Locale.L_GateReserveSetup_SealNo 1', index: 'SealNo1', width: 100, align: 'left', sorttype: 'string', hidden: false },//
+			{ name: 'SealNo2', title: '@Resources.Locale.L_GateReserveSetup_SealNo 2', index: 'SealNo2', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'OutDate', title: '@Resources.Locale.L_ContainerManage_OutBy', index: 'OutDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+			{ name: 'Yard', title: '@Resources.Locale.L_ContainerManage_Yard', index: 'Yard', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'InyardDate', title: '@Resources.Locale.L_GateAnalysis_InyardDate', index: 'InyardDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+			{ name: 'OutyardDate', title: '@Resources.Locale.L_GateAnalysis_OutyardDate', index: 'OutyardDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+			{ name: 'AportDate', title: '@Resources.Locale.L_ContainerManage_AportDate', index: 'AportDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+			{ name: 'Atd', title: '@Resources.Locale.L_BaseLookup_Atd', index: 'Atd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Carrier', title: '@Resources.Locale.L_ForecastQueryData_Carrier', index: 'Carrier', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'TruckNo', title: '@Resources.Locale.L_GateReserve_TruckNo', index: 'TruckNo', width: 70, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Driver', title: '@Resources.Locale.L_GateReserve_Driver', index: 'Driver', width: 70, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Tel', title: '@Resources.Locale.L_GateReserve_Tel', index: 'Tel', width: 70, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'MoveNumber', title: '@Resources.Locale.L_GateAnalysis_MoveNumber', index: 'MoveNumber', width: 70, align: 'right', sorttype: 'float', hidden: false },
+			{ name: 'SCode', title: '@Resources.Locale.L_ContainerManage_SCode', index: 'SCode', width: 70, align: 'left', sorttype: 'string', hidden: false }
+		];
+		$SubGrid = $("#SubGrid");
+		new genGrid(
+			$SubGrid,
+			{
+				datatype: "local",
+				data: [],
+				loadonce: true,
+				colModel: colModel,
+				caption: '@Resources.Locale.L_DNManage_CallInfo',
+				height: "AUTO",
+				refresh: true,
+				cellEdit: false,//禁用grid编辑功能
+				exportexcel: false,
+				footerrow: false
+			}
+		);
+
+		//setTimeout(function () {
+
+		//	$("#searchStatus_Y").click();
+		//	//$("#containerInfoGrid").jqGrid('setFrozenColumns');
+		//	//$(".frozen-div").height(25);
+		//}, 100);
+	});
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body" style="overflow-x:inherit">
+					<!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g" id="BtnGroupArea">
+					</div>
+					<div class="pure-g" id="StatusArea">
+					</div>
+					<div class="form-group">
+						<div class="pure-g">
+							<div class="pure-u-sm-60-60">
+								<table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+									<tr></tr>
+								</table>
+							</div>
+						</div>
+						<div class="pure-g">
+							<div class="pure-u-sm-60-60">
+								<table id="SubGrid" class="_tableGrid" style="width: 100%">
+									<tr></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--叫車視窗-->
+<div class="modal fade" id="OrderCarDailog">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">@Resources.Locale.L_DNManage_CallConf</h4>
+			</div>
+			<div class="modal-body">
+				<div class="pure-g">
+					<div class="pure-u-sm-15-60">
+						<label for="UseDatetime" class="control-label">Pickup Date</label>
+					</div>
+					<div class="pure-u-sm-20-60 control-group">
+						<input type="text" class="form-control input-sm" id="UseDatetime" name="UseDatetime"/>
+						<p class="help-block tooltips"></p>
+					</div>
+				</div>
+				<div class="pure-g">
+					<div class="pure-u-sm-15-60">
+						<label for="ArrivalDate" class="control-label">Arrival Date</label>
+					</div>
+					<div class="pure-u-sm-20-60 control-group">
+						<input type="text" class="form-control input-sm" id="ArrivalDate" name="ArrivalDate"/>
+						<p class="help-block tooltips"></p>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-sm btn-info" id="orderCarBtn">@Resources.Locale.L_Layout_Confirm</button>
+				<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">@Resources.Locale.L_BSCSDateQuery_Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--叫車視窗-->
+
+
+<div class="modal fade" id="DnOrderCarDailog">
+	<div class="modal-dialog modal-md" style="WIDTH: 950px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Order Truck By DN</h4>
+			</div>
+			<div class="modal-body" style="overflow: auto; height: 300px;">
+				<div class="pure-g">
+					<div class="pure-u-sm-10-60">
+						<label for="DnUseDatetime" class="control-label">@Resources.Locale.L_BaseLookup_PickupCdate</label>
+					</div>
+					<div class="pure-u-sm-20-60 control-group">
+						<input type="text" class="form-control input-sm" id="DnUseDatetime" name="DnUseDatetime"/>
+						<p class="help-block tooltips"></p>
+					</div>
+                    <div class="pure-u-sm-10-60 label-right">
+                        <label for="DnUseDatetime" class="control-label">Departure Address</label>
+                    </div>
+                    <div class="pure-u-sm-20-60 control-group">
+                        <input type="text" class="form-control input-sm" id="DepAddr_DN" name="DepAddr_DN" readonly />
+                        <p class="help-block tooltips"></p>
+                    </div>
+				</div>
+				<div class="pure-g">
+					<div class="pure-u-sm-10-60 ">
+						<label for="CarType" class="control-label">@Resources.Locale.L_IbGateManage_CarType</label>
+					</div>
+					<div class="pure-u-sm-15-60">
+						<select class="form-control input-sm" id="CarType" name="CarType" fieldname="CarType">
+							@Html.Raw(ViewBag.CarType)
+						</select>
+					</div>
+                    <div class="pure-u-sm-4-60">
+							<select class="form-control input-sm" dt="mt" id="EtaMslTime_DN" name="EtaMslTime_DN" required>
+								<option value="0">00:00</option>
+								<option value="1">01:00</option>
+								<option value="2">02:00</option>
+								<option value="3">03:00</option>
+								<option value="4">04:00</option>
+								<option value="5">05:00</option>
+								<option value="6">06:00</option>
+								<option value="7">07:00</option>
+								<option value="8">08:00</option>
+								<option value="9">09:00</option>
+								<option value="10">10:00</option>
+								<option value="11">11:00</option>
+								<option value="12">12:00</option>
+								<option value="13">13:00</option>
+								<option value="14">14:00</option>
+								<option value="15">15:00</option>
+								<option value="16">16:00</option>
+								<option value="17">17:00</option>
+								<option value="18">18:00</option>
+								<option value="19">19:00</option>
+								<option value="20">20:00</option>
+								<option value="21">21:00</option>
+								<option value="22">22:00</option>
+								<option value="23">23:00</option>
+							</select>
+						</div>
+				</div>
+				<div class="pure-g">
+					<div class="pure-u-sm-10-60">
+						<label for="TrsMode" class="control-label">@Resources.Locale.L_IbGateManage_TrsMode</label>
+					</div>
+					<div class="pure-u-sm-15-60">
+						<select class="form-control input-sm" id="TrsMode" name="TrsMode" fieldname="TrsMode">
+							<option value="Y">Y:Full Truck Load</option>
+							<option value="N">N:Less Than Truck Load</option>
+						</select>
+					</div>
+				</div>
+				<div class="pure-g">
+					<div class="pure-u-sm-10-60">
+						<label for="DnQuotNo" class="control-label">Trailer quotation</label>
+					</div>
+					<div class="pure-u-sm-20-60 control-group">
+						<div class="input-group">
+							<input type="text" class="form-control input-sm" id="DnQuotNo" name="DnQuotNo" fieldname="DnQuotNo" />
+							<span class="input-group-btn">
+							<button class="btn btn-sm btn-default" type="button" id="DnQuotNoLookup">
+							<span class="glyphicon glyphicon-search"></span>
+							</button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="pure-g">
+					<div class="pure-u-sm-60-60">
+						<table id="DnMainGrid" class="_tableGrid" style="width: 100%">
+							<tr></tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-sm btn-info" id="DnOrderCarBtn">@Resources.Locale.L_Layout_Confirm</button>
+				<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">@Resources.Locale.L_BSCSDateQuery_Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>

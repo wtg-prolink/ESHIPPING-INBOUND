@@ -1,0 +1,1492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ws.tpvaoc.com/accws" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ws.tpvaoc.com/accws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ws.tpvaoc.com/accws">
+      <s:element name="CheckAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckADResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckSysUserLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SystemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SafeCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserPwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckSysUserLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckSysUserLoginResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckUserAction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SystemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SafeCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ActionID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckUserActionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckUserActionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckUserActionSimply">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SystemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SafeCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ActionID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckUserActionSimplyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckUserActionSimplyResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserSystem01">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SystemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SafeCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserSystem01Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserSystem01Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserGroup01">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SystemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SafeCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ActGrpID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserGroup01Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserGroup01Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeUserPwd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SystemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SafeCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OldPwd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewPwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeUserPwdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChangeUserPwdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeUserGlobalPwd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OldPwd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewPwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeUserGlobalPwdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChangeUserGlobalPwdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfoByUserID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfoByUserIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserInfoByUserIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserDetailByUserID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserDetailByUserIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserDetailByUserIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfoByUserAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserAD" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfoByUserADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserInfoByUserADResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserDetailByUserAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserAD" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserDetailByUserADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserDetailByUserADResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSysUserByRoleID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SystemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SafeCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RoleID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSysUserByRoleIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSysUserByRoleIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckUserGlobalPwd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserPwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckUserGlobalPwdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckUserGlobalPwdResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetServerIP">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetServerIPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetServerIPResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLeaveEmp">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SiteCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreateDate_s" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreateDate_e" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLeaveEmpResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLeaveEmpResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CheckADSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckAD" />
+  </wsdl:message>
+  <wsdl:message name="CheckADSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckADResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckSysUserLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckSysUserLogin" />
+  </wsdl:message>
+  <wsdl:message name="CheckSysUserLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckSysUserLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserActionSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckUserAction" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserActionSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckUserActionResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserActionSimplySoapIn">
+    <wsdl:part name="parameters" element="tns:CheckUserActionSimply" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserActionSimplySoapOut">
+    <wsdl:part name="parameters" element="tns:CheckUserActionSimplyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserSystem01SoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserSystem01" />
+  </wsdl:message>
+  <wsdl:message name="GetUserSystem01SoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserSystem01Response" />
+  </wsdl:message>
+  <wsdl:message name="GetUserGroup01SoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserGroup01" />
+  </wsdl:message>
+  <wsdl:message name="GetUserGroup01SoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserGroup01Response" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPwdSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeUserPwd" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPwdSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeUserPwdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserGlobalPwdSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeUserGlobalPwd" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserGlobalPwdSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeUserGlobalPwdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUserIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByUserID" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUserIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByUserIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailByUserIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserDetailByUserID" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailByUserIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserDetailByUserIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUserADSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByUserAD" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUserADSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByUserADResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailByUserADSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserDetailByUserAD" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailByUserADSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserDetailByUserADResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSysUserByRoleIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSysUserByRoleID" />
+  </wsdl:message>
+  <wsdl:message name="GetSysUserByRoleIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSysUserByRoleIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserGlobalPwdSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckUserGlobalPwd" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserGlobalPwdSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckUserGlobalPwdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetServerIPSoapIn">
+    <wsdl:part name="parameters" element="tns:GetServerIP" />
+  </wsdl:message>
+  <wsdl:message name="GetServerIPSoapOut">
+    <wsdl:part name="parameters" element="tns:GetServerIPResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLeaveEmpSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLeaveEmp" />
+  </wsdl:message>
+  <wsdl:message name="GetLeaveEmpSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLeaveEmpResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckADHttpGetIn">
+    <wsdl:part name="domain" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="pwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckADHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CheckSysUserLoginHttpGetIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="UserPwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckSysUserLoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserActionHttpGetIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="ActionID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserActionHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserActionSimplyHttpGetIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="ActionID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserActionSimplyHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserSystem01HttpGetIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserSystem01HttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserGroup01HttpGetIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="ActGrpID" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserGroup01HttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPwdHttpGetIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="OldPwd" type="s:string" />
+    <wsdl:part name="NewPwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPwdHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserGlobalPwdHttpGetIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="OldPwd" type="s:string" />
+    <wsdl:part name="NewPwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserGlobalPwdHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUserIDHttpGetIn">
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUserIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailByUserIDHttpGetIn">
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailByUserIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUserADHttpGetIn">
+    <wsdl:part name="UserAD" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUserADHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailByUserADHttpGetIn">
+    <wsdl:part name="UserAD" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailByUserADHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetSysUserByRoleIDHttpGetIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="RoleID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSysUserByRoleIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserGlobalPwdHttpGetIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="UserPwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserGlobalPwdHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetServerIPHttpGetIn" />
+  <wsdl:message name="GetServerIPHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLeaveEmpHttpGetIn">
+    <wsdl:part name="SiteCode" type="s:string" />
+    <wsdl:part name="CreateDate_s" type="s:string" />
+    <wsdl:part name="CreateDate_e" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLeaveEmpHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="CheckADHttpPostIn">
+    <wsdl:part name="domain" type="s:string" />
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="pwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckADHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CheckSysUserLoginHttpPostIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="UserPwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckSysUserLoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserActionHttpPostIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="ActionID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserActionHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserActionSimplyHttpPostIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="ActionID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserActionSimplyHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserSystem01HttpPostIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserSystem01HttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserGroup01HttpPostIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="ActGrpID" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserGroup01HttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPwdHttpPostIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="OldPwd" type="s:string" />
+    <wsdl:part name="NewPwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPwdHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserGlobalPwdHttpPostIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="OldPwd" type="s:string" />
+    <wsdl:part name="NewPwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserGlobalPwdHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUserIDHttpPostIn">
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUserIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailByUserIDHttpPostIn">
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailByUserIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUserADHttpPostIn">
+    <wsdl:part name="UserAD" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUserADHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailByUserADHttpPostIn">
+    <wsdl:part name="UserAD" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDetailByUserADHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetSysUserByRoleIDHttpPostIn">
+    <wsdl:part name="SystemID" type="s:string" />
+    <wsdl:part name="SafeCode" type="s:string" />
+    <wsdl:part name="RoleID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSysUserByRoleIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserGlobalPwdHttpPostIn">
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="UserPwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserGlobalPwdHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetServerIPHttpPostIn" />
+  <wsdl:message name="GetServerIPHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLeaveEmpHttpPostIn">
+    <wsdl:part name="SiteCode" type="s:string" />
+    <wsdl:part name="CreateDate_s" type="s:string" />
+    <wsdl:part name="CreateDate_e" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLeaveEmpHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="CheckAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">AD验证，返回布尔值</wsdl:documentation>
+      <wsdl:input message="tns:CheckADSoapIn" />
+      <wsdl:output message="tns:CheckADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSysUserLogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登录验证，验证成功则返回“OK-卡号”，如：OK-11071616。返回其他格式的信息均为验证失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:CheckSysUserLoginSoapIn" />
+      <wsdl:output message="tns:CheckSysUserLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserAction">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">操作权限检测，返回非空值均为检测不通过的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:CheckUserActionSoapIn" />
+      <wsdl:output message="tns:CheckUserActionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserActionSimply">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">简单操作权限检测，返回非空值均为检测不通过的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:CheckUserActionSimplySoapIn" />
+      <wsdl:output message="tns:CheckUserActionSimplySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSystem01">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取用户在整个系统的权限01串，返回的首字符若非0和1，则均为权限获取失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:GetUserSystem01SoapIn" />
+      <wsdl:output message="tns:GetUserSystem01SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroup01">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取用户在系统某模块的权限01串，返回的首字符若非0和1，则均为权限获取失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:GetUserGroup01SoapIn" />
+      <wsdl:output message="tns:GetUserGroup01SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPwd">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">修改用户系统密码，返回非空值均为密码修改失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:ChangeUserPwdSoapIn" />
+      <wsdl:output message="tns:ChangeUserPwdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserGlobalPwd">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">修改用户全局密码，返回非空值均为密码修改失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:ChangeUserGlobalPwdSoapIn" />
+      <wsdl:output message="tns:ChangeUserGlobalPwdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据卡号查询用户基本信息，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetUserInfoByUserIDSoapIn" />
+      <wsdl:output message="tns:GetUserInfoByUserIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据卡号查询用户详细信息，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetUserDetailByUserIDSoapIn" />
+      <wsdl:output message="tns:GetUserDetailByUserIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据AD查询用户基本信息，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetUserInfoByUserADSoapIn" />
+      <wsdl:output message="tns:GetUserInfoByUserADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据AD查询用户详细信息，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetUserDetailByUserADSoapIn" />
+      <wsdl:output message="tns:GetUserDetailByUserADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSysUserByRoleID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据角色查询用户列表，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetSysUserByRoleIDSoapIn" />
+      <wsdl:output message="tns:GetSysUserByRoleIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserGlobalPwd">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登录验证，验证成功则返回“OK-卡号”，如：OK-11071616。返回其他格式的信息均为验证失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:CheckUserGlobalPwdSoapIn" />
+      <wsdl:output message="tns:CheckUserGlobalPwdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServerIP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询服务器信息</wsdl:documentation>
+      <wsdl:input message="tns:GetServerIPSoapIn" />
+      <wsdl:output message="tns:GetServerIPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaveEmp">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取离职人员信息，返回DataSet数据集。传入参数说明：SiteCode:Site代码，与员工卡号前两位对应，多个以英文逗号[,]分隔；CreateDate_s，CreateDate_e:员工信息创建日期查询区间，格式yyyymmdd</wsdl:documentation>
+      <wsdl:input message="tns:GetLeaveEmpSoapIn" />
+      <wsdl:output message="tns:GetLeaveEmpSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ServiceHttpGet">
+    <wsdl:operation name="CheckAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">AD验证，返回布尔值</wsdl:documentation>
+      <wsdl:input message="tns:CheckADHttpGetIn" />
+      <wsdl:output message="tns:CheckADHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSysUserLogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登录验证，验证成功则返回“OK-卡号”，如：OK-11071616。返回其他格式的信息均为验证失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:CheckSysUserLoginHttpGetIn" />
+      <wsdl:output message="tns:CheckSysUserLoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserAction">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">操作权限检测，返回非空值均为检测不通过的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:CheckUserActionHttpGetIn" />
+      <wsdl:output message="tns:CheckUserActionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserActionSimply">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">简单操作权限检测，返回非空值均为检测不通过的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:CheckUserActionSimplyHttpGetIn" />
+      <wsdl:output message="tns:CheckUserActionSimplyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSystem01">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取用户在整个系统的权限01串，返回的首字符若非0和1，则均为权限获取失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:GetUserSystem01HttpGetIn" />
+      <wsdl:output message="tns:GetUserSystem01HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroup01">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取用户在系统某模块的权限01串，返回的首字符若非0和1，则均为权限获取失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:GetUserGroup01HttpGetIn" />
+      <wsdl:output message="tns:GetUserGroup01HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPwd">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">修改用户系统密码，返回非空值均为密码修改失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:ChangeUserPwdHttpGetIn" />
+      <wsdl:output message="tns:ChangeUserPwdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserGlobalPwd">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">修改用户全局密码，返回非空值均为密码修改失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:ChangeUserGlobalPwdHttpGetIn" />
+      <wsdl:output message="tns:ChangeUserGlobalPwdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据卡号查询用户基本信息，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetUserInfoByUserIDHttpGetIn" />
+      <wsdl:output message="tns:GetUserInfoByUserIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据卡号查询用户详细信息，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetUserDetailByUserIDHttpGetIn" />
+      <wsdl:output message="tns:GetUserDetailByUserIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据AD查询用户基本信息，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetUserInfoByUserADHttpGetIn" />
+      <wsdl:output message="tns:GetUserInfoByUserADHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据AD查询用户详细信息，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetUserDetailByUserADHttpGetIn" />
+      <wsdl:output message="tns:GetUserDetailByUserADHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSysUserByRoleID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据角色查询用户列表，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetSysUserByRoleIDHttpGetIn" />
+      <wsdl:output message="tns:GetSysUserByRoleIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserGlobalPwd">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登录验证，验证成功则返回“OK-卡号”，如：OK-11071616。返回其他格式的信息均为验证失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:CheckUserGlobalPwdHttpGetIn" />
+      <wsdl:output message="tns:CheckUserGlobalPwdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServerIP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询服务器信息</wsdl:documentation>
+      <wsdl:input message="tns:GetServerIPHttpGetIn" />
+      <wsdl:output message="tns:GetServerIPHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaveEmp">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取离职人员信息，返回DataSet数据集。传入参数说明：SiteCode:Site代码，与员工卡号前两位对应，多个以英文逗号[,]分隔；CreateDate_s，CreateDate_e:员工信息创建日期查询区间，格式yyyymmdd</wsdl:documentation>
+      <wsdl:input message="tns:GetLeaveEmpHttpGetIn" />
+      <wsdl:output message="tns:GetLeaveEmpHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ServiceHttpPost">
+    <wsdl:operation name="CheckAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">AD验证，返回布尔值</wsdl:documentation>
+      <wsdl:input message="tns:CheckADHttpPostIn" />
+      <wsdl:output message="tns:CheckADHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSysUserLogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登录验证，验证成功则返回“OK-卡号”，如：OK-11071616。返回其他格式的信息均为验证失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:CheckSysUserLoginHttpPostIn" />
+      <wsdl:output message="tns:CheckSysUserLoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserAction">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">操作权限检测，返回非空值均为检测不通过的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:CheckUserActionHttpPostIn" />
+      <wsdl:output message="tns:CheckUserActionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserActionSimply">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">简单操作权限检测，返回非空值均为检测不通过的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:CheckUserActionSimplyHttpPostIn" />
+      <wsdl:output message="tns:CheckUserActionSimplyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSystem01">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取用户在整个系统的权限01串，返回的首字符若非0和1，则均为权限获取失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:GetUserSystem01HttpPostIn" />
+      <wsdl:output message="tns:GetUserSystem01HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroup01">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取用户在系统某模块的权限01串，返回的首字符若非0和1，则均为权限获取失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:GetUserGroup01HttpPostIn" />
+      <wsdl:output message="tns:GetUserGroup01HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPwd">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">修改用户系统密码，返回非空值均为密码修改失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:ChangeUserPwdHttpPostIn" />
+      <wsdl:output message="tns:ChangeUserPwdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserGlobalPwd">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">修改用户全局密码，返回非空值均为密码修改失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:ChangeUserGlobalPwdHttpPostIn" />
+      <wsdl:output message="tns:ChangeUserGlobalPwdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据卡号查询用户基本信息，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetUserInfoByUserIDHttpPostIn" />
+      <wsdl:output message="tns:GetUserInfoByUserIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据卡号查询用户详细信息，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetUserDetailByUserIDHttpPostIn" />
+      <wsdl:output message="tns:GetUserDetailByUserIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据AD查询用户基本信息，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetUserInfoByUserADHttpPostIn" />
+      <wsdl:output message="tns:GetUserInfoByUserADHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据AD查询用户详细信息，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetUserDetailByUserADHttpPostIn" />
+      <wsdl:output message="tns:GetUserDetailByUserADHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSysUserByRoleID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据角色查询用户列表，返回DataSet数据集</wsdl:documentation>
+      <wsdl:input message="tns:GetSysUserByRoleIDHttpPostIn" />
+      <wsdl:output message="tns:GetSysUserByRoleIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserGlobalPwd">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登录验证，验证成功则返回“OK-卡号”，如：OK-11071616。返回其他格式的信息均为验证失败的提示信息</wsdl:documentation>
+      <wsdl:input message="tns:CheckUserGlobalPwdHttpPostIn" />
+      <wsdl:output message="tns:CheckUserGlobalPwdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServerIP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询服务器信息</wsdl:documentation>
+      <wsdl:input message="tns:GetServerIPHttpPostIn" />
+      <wsdl:output message="tns:GetServerIPHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaveEmp">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取离职人员信息，返回DataSet数据集。传入参数说明：SiteCode:Site代码，与员工卡号前两位对应，多个以英文逗号[,]分隔；CreateDate_s，CreateDate_e:员工信息创建日期查询区间，格式yyyymmdd</wsdl:documentation>
+      <wsdl:input message="tns:GetLeaveEmpHttpPostIn" />
+      <wsdl:output message="tns:GetLeaveEmpHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CheckAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/CheckAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSysUserLogin">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/CheckSysUserLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserAction">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/CheckUserAction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserActionSimply">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/CheckUserActionSimply" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSystem01">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/GetUserSystem01" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroup01">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/GetUserGroup01" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPwd">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/ChangeUserPwd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserGlobalPwd">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/ChangeUserGlobalPwd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/GetUserInfoByUserID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/GetUserDetailByUserID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/GetUserInfoByUserAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/GetUserDetailByUserAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysUserByRoleID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/GetSysUserByRoleID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserGlobalPwd">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/CheckUserGlobalPwd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerIP">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/GetServerIP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaveEmp">
+      <soap:operation soapAction="http://ws.tpvaoc.com/accws/GetLeaveEmp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CheckAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/CheckAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSysUserLogin">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/CheckSysUserLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserAction">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/CheckUserAction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserActionSimply">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/CheckUserActionSimply" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSystem01">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/GetUserSystem01" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroup01">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/GetUserGroup01" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPwd">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/ChangeUserPwd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserGlobalPwd">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/ChangeUserGlobalPwd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/GetUserInfoByUserID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/GetUserDetailByUserID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/GetUserInfoByUserAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/GetUserDetailByUserAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysUserByRoleID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/GetSysUserByRoleID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserGlobalPwd">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/CheckUserGlobalPwd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerIP">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/GetServerIP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaveEmp">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/accws/GetLeaveEmp" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceHttpGet" type="tns:ServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="CheckAD">
+      <http:operation location="/CheckAD" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSysUserLogin">
+      <http:operation location="/CheckSysUserLogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserAction">
+      <http:operation location="/CheckUserAction" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserActionSimply">
+      <http:operation location="/CheckUserActionSimply" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSystem01">
+      <http:operation location="/GetUserSystem01" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroup01">
+      <http:operation location="/GetUserGroup01" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPwd">
+      <http:operation location="/ChangeUserPwd" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserGlobalPwd">
+      <http:operation location="/ChangeUserGlobalPwd" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserID">
+      <http:operation location="/GetUserInfoByUserID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserID">
+      <http:operation location="/GetUserDetailByUserID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserAD">
+      <http:operation location="/GetUserInfoByUserAD" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserAD">
+      <http:operation location="/GetUserDetailByUserAD" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysUserByRoleID">
+      <http:operation location="/GetSysUserByRoleID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserGlobalPwd">
+      <http:operation location="/CheckUserGlobalPwd" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerIP">
+      <http:operation location="/GetServerIP" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaveEmp">
+      <http:operation location="/GetLeaveEmp" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceHttpPost" type="tns:ServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="CheckAD">
+      <http:operation location="/CheckAD" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSysUserLogin">
+      <http:operation location="/CheckSysUserLogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserAction">
+      <http:operation location="/CheckUserAction" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserActionSimply">
+      <http:operation location="/CheckUserActionSimply" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserSystem01">
+      <http:operation location="/GetUserSystem01" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroup01">
+      <http:operation location="/GetUserGroup01" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPwd">
+      <http:operation location="/ChangeUserPwd" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserGlobalPwd">
+      <http:operation location="/ChangeUserGlobalPwd" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserID">
+      <http:operation location="/GetUserInfoByUserID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserID">
+      <http:operation location="/GetUserDetailByUserID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUserAD">
+      <http:operation location="/GetUserInfoByUserAD" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDetailByUserAD">
+      <http:operation location="/GetUserDetailByUserAD" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysUserByRoleID">
+      <http:operation location="/GetSysUserByRoleID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserGlobalPwd">
+      <http:operation location="/CheckUserGlobalPwd" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerIP">
+      <http:operation location="/GetServerIP" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaveEmp">
+      <http:operation location="/GetLeaveEmp" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://172.20.32.27:8080/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://172.20.32.27:8080/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceHttpGet" binding="tns:ServiceHttpGet">
+      <http:address location="http://172.20.32.27:8080/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceHttpPost" binding="tns:ServiceHttpPost">
+      <http:address location="http://172.20.32.27:8080/Service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

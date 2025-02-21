@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "BSCAASetupVeiw";
+}
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+@Html.RazorJSInline("~/Scripts/BSCAA/BSCAASetup.js")
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+</script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+						<div class="pure-u-sm-5-60">
+						    <label for="Carrier" class="control-label">Carrier</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="Carrier" name="Carrier" fieldname="Carrier" />
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="CarrierLookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+						    <input type="text" class="form-control input-sm" dt="mt" id="CarrierNm" name="CarrierNm" fieldname="CarrierNm" readonly />
+						</div>
+						<div class="pure-u-sm-3-60 label-right">
+							<label for="Area" class="control-label">Area</label>
+						</div>
+						<div class="pure-u-sm-5-60 control-group">
+							<input type="text" class="form-control input-sm" id="Area" dt="mt" name="Area" fieldname="Area" value="@ViewBag.Area" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-20-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="AreaNm" name="AreaNm" fieldname="AreaNm" value="@ViewBag.AreaNm" ref="Area" />
+						    <p class="help-block tooltips"></p>
+						</div>
+                    </div>
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-5-60">
+                    		<label for="AtdAtp" class="control-label">@Resources.Locale.L_BaseColModel_AtdAtp</label>
+                    	</div>
+                    	<div class="pure-u-sm-10-60">
+                    		<select class="form-control input-sm" dt="mt" id="AtdAtp" name="AtdAtp" fieldname="AtdAtp">
+                    			<option value="ATD">ATD</option>
+                    			<option value="ATP">ATP</option>
+                    		</select>
+                    	</div>
+                    </div>
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-60-60">
+                    		<table id="MainGrid" class="_tableGrid" style="width: 100%">
+                    		    <tr></tr>
+                    		</table>
+                    	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" />

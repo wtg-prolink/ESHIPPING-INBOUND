@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "ReffeeSetupView";
+}
+
+
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/ReffeeManage/ReffeeSetupView.js?20240815")"></script>
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="ChgCd" class="control-label">@Resources.Locale.L_ReffeeManage_ChgCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class=" form-control input-sm" dt="mt" id="ChgCd" name="ChgCd" fieldname="ChgCd" isKey="true" readonly="readonly" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ChgDescp" class="control-label">@Resources.Locale.L_ReffeeManage_ChgDescp</label>
+                        </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class=" form-control input-sm" dt="mt" id="ChgDescp" name="ChgDescp" fieldname="ChgDescp" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="SeqNo" class="control-label">@Resources.Locale.L_ReffeeManage_SeqNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class=" form-control input-sm" dt="mt" id="SeqNo" name="SeqNo" fieldname="SeqNo" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Gw" class="control-label">@Resources.Locale.L_ReffeeManage_Gw</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <input type="text" class=" form-control input-sm" dt="mt" id="Gw" name="Gw" fieldname="Gw" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <input type="text" class=" form-control input-sm" value="KG" readonly="readonly" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Cbm" class="control-label">@Resources.Locale.L_ReffeeManage_Cbm</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class=" form-control input-sm" dt="mt" id="Cbm" name="Cbm" fieldname="Cbm" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Remark" class="control-label">@Resources.Locale.L_ReffeeManage_Remark</label>
+                        </div>
+                        <div class="pure-u-sm-55-60 control-group">
+                            <textarea class=" form-control"  dt="mt" id="Remark" name="Remark" fieldname="Remark"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" isKey="ture" />
+<input type="hidden" class=" form-control input-sm" dt="mt" id="FeeType" name="FeeType" fieldname="FeeType" />

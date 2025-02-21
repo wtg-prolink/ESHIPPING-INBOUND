@@ -1,0 +1,2306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+-->
+<list>
+  <!-- 
+-->
+  <pms-list>
+    <pms languageId="TLB_USE" caption="使用" />
+    <pms languageId="TLB_SHOW" caption="显示" />
+    <pms languageId="TLB_MODIFY" caption="修改" />
+  </pms-list>
+  <function languageId="TLB_NODE_FUN" caption="功能" />
+  <control languageId="TLB_NODE_CTRL" caption="栏位" />
+  <programe-list>
+
+    <object pmsId="MESSAGE" pms-list="YNN" default-pms="YNN">
+      TLB_MSG
+      <object pmsId="MESSAGE_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_WATCH" />
+      <object pmsId="MESSAGE_SendMsg" pms-list="YNN" default-pms="YNN" languageId="TLB_SENTMSG" />
+    </object>
+
+    <object pmsId="NOTIFY" pms-list="YNN" default-pms="YNN">
+      TLB_MSGNOTICE
+      <object pmsId="NOTIFY_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+
+    </object>
+    <object pmsId="EDM" pms-list="YNN" default-pms="YNN">
+      TLB_EDMManage
+      <object pmsId="EDM_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+
+    </object>
+    <object pmsId="ACTRANTYPE" pms-list="YNN" default-pms="YNN">
+      TLB_ACTRANTYPE
+      <object pmsId="ACTRANTYPE_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+    <object pmsId="MATERIALTYPE" pms-list="YNN" default-pms="YNN">
+      TLB_MATERIALTYPE
+      <object pmsId="MATERIALTYPE_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="POSTBILL" pms-list="YNN" default-pms="YNN">
+      TLB_POSTBILL
+      <object pmsId="POSTBILL_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="DESTMAPPING" pms-list="YNN" default-pms="YNN">
+      TLB_DestMapping
+      <object pmsId="DESTMAPPING_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+    <!-- <object pmsId="AUTONO" pms-list="YNN" default-pms="YNN">
+      AutoNo Setup
+      <object pmsId="AUTONO_NEW" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="AUTONO_DELETE" pms-list="YNN" default-pms="YNN" languageId="TLB_DELETE" /> 
+      <object pmsId="AUTONO_EDIT" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="AUTONO_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object> -->
+
+    <object pmsId="IPB010" pms-list="YNN" default-pms="YNN">
+      TLB_IPB010
+      <object pmsId="IPB010_NEW" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="IPB010_DELETE" pms-list="YNN" default-pms="YNN" languageId="TLB_DELETE" />
+      <object pmsId="IPB010_EDIT" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IPB010_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object>
+    <object pmsId="IPB020" pms-list="YNN" default-pms="YNN">
+      TLB_IPB020
+      <object pmsId="IPB020_NEW" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="IPB020_DELETE" pms-list="YNN" default-pms="YNN" languageId="TLB_DELETE" />
+      <object pmsId="IPB020_EDIT" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IPB020_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object>
+
+    <object pmsId="MODIFYPWD" pms-list="YNN" default-pms="YNN">
+      TLB_MODIFYPWD
+      <object pmsId="MODIFYPWD_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="ROLE" pms-list="YNN" default-pms="YNN">
+      TLB_ROLE
+      <object pmsId="ROLE_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="ROLE_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="ROLE_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="ROLE_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="ROLE_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="ROLE_MBRoleLog" pms-list="YNN" default-pms="YNN" languageId="TLB_PermissionLog" />
+    </object>
+
+    <object pmsId="USERSETUP" pms-list="YNN" default-pms="YNN">
+      TLB_USERSETUP
+      <object pmsId="USERSETUP_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="USERSETUP_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="USERSETUP_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="USERSETUP_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="USERSETUP_MBClearFailCount" pms-list="YNN" default-pms="YNN" languageId="TLB_MBClearFailcount" />
+      <object pmsId="USERSETUP_MBUpdatePwd" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdatePwd" />
+      <object pmsId="USERSETUP_MBRoleAss" pms-list="YNN" default-pms="YNN" languageId="TLB_RoleAss" />
+	  <object pmsId="USERSETUP_MBResume" pms-list="YNN" default-pms="YNN" languageId="TLB_Resume" />
+	  <object pmsId="USERSETUP_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="USERSETUP_MBRoleLog" pms-list="YNN" default-pms="YNN" languageId="TLB_RoleLog" />
+	  <object pmsId="USERSETUP_PermissionCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_PermissionCopy" />
+	  <object pmsId="USERSETUP_ItsdArBtn" pms-list="YNN" default-pms="YNN" languageId="ITSD AR" />
+    </object>
+
+    <object pmsId="OUSERSETUP" pms-list="YNN" default-pms="YNN">
+      TLB_OUSERSETUP
+      <object pmsId="OUSERSETUP_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="OUSERSETUP_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="OUSERSETUP_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="OUSERSETUP_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="OUSERSETUP_MBClearFailCount" pms-list="YNN" default-pms="YNN" languageId="TLB_MBClearFailcount" />
+      <object pmsId="OUSERSETUP_MBUpdatePwd" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdatePwd" />
+      <object pmsId="OUSERSETUP_MBRoleAss" pms-list="YNN" default-pms="YNN" languageId="TLB_RoleAss" />
+      <object pmsId="OUSERSETUP_MBRoleLog" pms-list="YNN" default-pms="YNN" languageId="TLB_RoleLog" />
+    </object>
+
+    <object pmsId="SYSGROUP" pms-list="YNN" default-pms="YNN">
+      TLB_SYSGROUP
+      <object pmsId="SYSGROUP_MBSAVE" pms-list="YNN" default-pms="YNN" languageId="TLB_SAVE" />
+    </object>
+
+    <object pmsId="SYSPERMIS" pms-list="YNN" default-pms="YNN">
+      TLB_SYSPERMIS
+      <object pmsId="SYSPERMIS_MBSave" pms-list="YNN" default-pms="YNN" languageId="TLB_SAVE" />
+    </object>
+
+    <object pmsId="AgentMap" programeUrl="AgentMap.aspx" target="mainFrame">
+      TLB_AgentMap
+      <object pmsId="AgentMap_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object>
+
+    <object pmsId="DHBULLETIN" programeUrl="AgentMap.aspx" target="mainFrame">
+      Bulletin
+      <object pmsId="DHBULLETIN_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_WATCH" />
+    </object>
+
+    <object pmsId="DHADDBULLETIN" programeUrl="AgentMap.aspx" target="mainFrame">
+      TLB_DHADDBULLETIN
+      <object pmsId="DHADDBULLETIN_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="DHADDBULLETIN_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="DHADDBULLETIN_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DHADDBULLETIN_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="DHADDBULLETIN_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="DHADDBULLETIN_MBAttachment" pms-list="YNN" default-pms="YNN" languageId="Attachment" />
+    </object>
+
+    <object pmsId="EA010" pms-list="YNN" default-pms="YNN">
+      TLB_EA010
+      <object pmsId="EA010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="EA010_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="EA020" pms-list="YNN" default-pms="YNN">
+      TLB_EA020
+      <object pmsId="EA020_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="EA020_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="BSCODE" pms-list="YNN" default-pms="YNN">
+      TLB_BSCODE
+      <object pmsId="BSCODE_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+    
+    <object pmsId="BSCODEOB" pms-list="YNN" default-pms="YNN">
+      TLB_BSCODE
+      <object pmsId="BSCODEOB_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+    
+    <object pmsId="SMCHG" pms-list="YNN" default-pms="YNN">
+      TLB_SMCHG
+      <object pmsId="SMCHG_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="SMCHG_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="SMCHG_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="SMCHG_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="SMCHG_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="BSTPS" pms-list="YNN" default-pms="YNN">
+      L_BSTPSSetup
+      <object pmsId="BSTPS_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BSTPS_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BSTPS_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BSTPS_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BSTPS_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="EA030" pms-list="YNN" default-pms="YNN">
+      TLB_EA030
+      <object pmsId="EA030_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="EA030_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="BSTRUCK" pms-list="YNN" default-pms="YNN">
+      TLB_BSTRUCK
+      <object pmsId="BSTRUCK_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BSTRUCK_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="BSSTATE" pms-list="YNN" default-pms="YNN">
+      TLB_BSSTATE
+      <object pmsId="BSSTATE_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BSSTATE_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BSSTATE_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BSSTATE_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BSSTATE_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="EXPRELA" pms-list="YNN" default-pms="YNN">
+      TLB_EXPRELA
+      <object pmsId="EXPRELA_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="EXPRELA_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+
+    </object>
+
+
+    <object pmsId="DNI030" pms-list="YNN" default-pms="YNN">
+      TLB_DNI030
+      <object pmsId="DNI030_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DNI030_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+
+    </object>
+
+    <object pmsId="TruckPortQuery" pms-list="YNN" default-pms="YNN">
+      TLB_TruckPortQuery
+      <object pmsId="TruckPortQuery_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="TruckPortQuery_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="TruckPortQuery_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="TruckPortQuery_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="TruckPortQuery_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+    <object pmsId="DestinationQuery" pms-list="YNN" default-pms="YNN">
+      TLB_DestinationQuery
+      <object pmsId="DestinationQuery_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DestinationQuery_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="DestinationQuery_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="DestinationQuery_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DestinationQuery_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="BSCSSETUP" pms-list="YNN" default-pms="YNN">
+      TLB_BSCSSETUP
+      <object pmsId="BSCSSETUP_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BSCSSETUP_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BSCSSETUP_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BSCSSETUP_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BSCSSETUP_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BSCSSETUP_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_GETPARTY" />
+      <object pmsId="BSCSSETUP_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_GetPartyFilter" />
+	  <object pmsId="BSCSSETUP_btn03" pms-list="YNN" default-pms="YNN" languageId="Create Customer" />
+    </object>
+
+    <object pmsId="BSTSETUP" pms-list="YNN" default-pms="YNN">
+      TLB_BSTSETUP
+      <object pmsId="BSTSETUP_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BSTSETUP_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BSTSETUP_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BSTSETUP_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BSTSETUP_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="BSTSETUP_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_SynchroSAP" />
+      <object pmsId="BSTSETUP_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportSI" />
+      <object pmsId="BSTSETUP_MBReloadProfile" pms-list="YNN" default-pms="YNN" languageId="TLB_ReloadProfile" />
+    </object>
+    <object pmsId="TPVPORT" pms-list="YNN" default-pms="YNN">
+      TLB_TPVPORT
+      <object pmsId="TPVPORT_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="TPVPORT_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="TPVPORT_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="TPVPORT_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="TPVPORT_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="TKSETUP" pms-list="YNN" default-pms="YNN">
+      TLB_TKSETUP
+      <object pmsId="TKSETUP_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="TKSETUP_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="TKSETUP_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="TKSETUP_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="BSB010SETUP" pms-list="YNN" default-pms="YNN">
+      TLB_BSB010SETUP
+      <object pmsId="BSB010SETUP_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="ExchangeRateSetup" pms-list="YNN" default-pms="YNN">
+      TLB_ExchangeRateSetup
+      <object pmsId="ExchangeRateSetup_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="ExchangeRateSetup_MBSync" pms-list="YNN" default-pms="YNN" languageId="TLB_Sync" />
+    </object>
+
+    <object pmsId="ExpressSetup" pms-list="YNN" default-pms="YNN">
+      TLB_ExpressSetup
+      <object pmsId="ExpressSetup_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="ExpressSetup_MBErrMsg" pms-list="YNN" default-pms="YNN" languageId="TLB_ErrMsg" />
+    </object>
+
+
+    <object pmsId="CitySetup" pms-list="YNN" default-pms="YNN">
+      TLB_CitySetup
+      <object pmsId="CitySetup_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="CitySetup_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="CitySetup_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="CitySetup_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="CitySetup_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="CntySetup" pms-list="YNN" default-pms="YNN">
+      TLB_CntySetup
+      <object pmsId="CntySetup_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="CntySetup_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="CntySetup_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="CntySetup_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="GROUP" pms-list="YNN" default-pms="YNN">
+      TLB_GROUP
+      <object pmsId="GROUP_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object>
+
+    <object pmsId="TKB010" pms-list="YNN" default-pms="YNN">
+      TLB_TKB010
+      <object pmsId="TKB010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="TKB010_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_Cargodetails" />
+      <object pmsId="TKB010_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_ContainerDetail" />
+      <object pmsId="TKB010_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_DNDetail" />
+      <object pmsId="TKB010_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_Shipment" />
+      <object pmsId="TKB010_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_Cargoentry" />
+      <object pmsId="TKB010_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="TKB010_btnExcelSt" pms-list="YNN" default-pms="YNN" languageId="TLB_Excel" />
+    </object>
+
+    <object pmsId="TKB020" pms-list="YNN" default-pms="YNN">
+      TLB_TKB020
+      <object pmsId="TKB020_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="TKB020_MBErrMsg" pms-list="YNN" default-pms="YNN" languageId="TLB_ErrMsg" />
+    </object>
+
+    <object pmsId="TKB030" pms-list="YNN" default-pms="YNN">
+      TLB_TKB030
+      <object pmsId="TKB030_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="TKB030_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="TKB030_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="TKB030_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="TKB030_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+    </object>
+
+    <object pmsId="TKB040" pms-list="YNN" default-pms="YNN">
+      TLB_TKB040
+      <object pmsId="TKB040_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="TKB040_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="TKB040_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="TKB040_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="TKB050" pms-list="YNN" default-pms="YNN">
+      TLB_TKB050
+      <object pmsId="TKB050_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="TKB050_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_repeat" />
+    </object>
+
+    <object pmsId="TKB060" pms-list="YNN" default-pms="YNN">
+      TLB_TKB060
+      <object pmsId="TKB060_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="TKB060_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="TKB060_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="TKB060_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="TKB060_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+    </object>
+
+    <object pmsId="TKPMT" pms-list="YNN" default-pms="YNN">
+      TLB_TKPMT
+      <object pmsId="TKPMT_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="TKPMT_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="TKPMT_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="TKPMT_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="TKPMT_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="DN010" pms-list="YNN" default-pms="YNN">
+      TLB_DN010
+      <object pmsId="DN010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN010_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_PendingDN" />
+      <object pmsId="DN010_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="DN010_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="DN010_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_Signaturedetails" />
+      <object pmsId="DN010_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DNDetail" />
+      <object pmsId="DN010_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN010_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="DN010_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_AssociationDN" />
+      <object pmsId="DN010_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="DN010_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="DN010_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN010_MBQuad" pms-list="YNN" default-pms="YNN" languageId="TLB_quaternionform" />
+      <object pmsId="DN010_MBVoid" pms-list="YNN" default-pms="YNN" languageId="TLB_Void" />
+      <object pmsId="DN010_MBCancelB" pms-list="YNN" default-pms="YNN" languageId="TLB_Delayedshipment" />
+      <object pmsId="DN010_MBExcepted" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="DN010_MBBookingInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_Bookinginfo" />
+      <object pmsId="DN010_MBShowFee" pms-list="YNN" default-pms="YNN" languageId="TLB_AmountCost" />
+      <object pmsId="DN010_MBSpellCTN" pms-list="YNN" default-pms="YNN" languageId="TLB_Cabinet" />
+      <object pmsId="DN010_MBCancelSpellCTN" pms-list="YNN" default-pms="YNN" languageId="TLB_CancelCabinet" />
+      <object pmsId="DN010_MBReloadDN" pms-list="YNN" default-pms="YNN" languageId="TLB_ReloadDN" />
+      <object pmsId="DN010_MBReloadQTY" pms-list="YNN" default-pms="YNN" languageId="TLB_ReloadDNNum" />
+      <object pmsId="DN010_poLetUpload" pms-list="YNN" default-pms="YNN" languageId="TLB_POImport" />
+      <object pmsId="DN010_btnDnPriceImport" pms-list="YNN" default-pms="YNN" languageId="TLB_Exfactoryprice" />
+    </object>
+
+    <object pmsId="DN020" pms-list="YNN" default-pms="YNN">
+      TLB_DN020
+      <object pmsId="DN020_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN020_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFYDN" />
+      <object pmsId="DN020_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_VOIDDN" />
+      <object pmsId="DN020_btn11" pms-list="YNN" default-pms="YNN" languageId="TLB_PartialDelivery" />
+      <object pmsId="DN020_btn12" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingSpace" />
+      <object pmsId="DN020_btn13" pms-list="YNN" default-pms="YNN" languageId="TLB_Paidbill" />
+      <object pmsId="DN020_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_Signaturedetails" />
+      <object pmsId="DN020_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DNDetail" />
+      <object pmsId="DN020_btn14" pms-list="YNN" default-pms="YNN" languageId="TLB_BkDetail" />
+      <object pmsId="DN020_btn15" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN020_btn16" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="DN020_btn17" pms-list="YNN" default-pms="YNN" languageId="TLB_Invoice" />
+      <object pmsId="DN020_btn18" pms-list="YNN" default-pms="YNN" languageId="TLB_ContainerDetail" />
+      <object pmsId="DN020_btn19" pms-list="YNN" default-pms="YNN" languageId="TLB_AssociationDN" />
+      <object pmsId="DN020_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="DN020_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="DN020_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN020_MBQuad" pms-list="YNN" default-pms="YNN" languageId="TLB_quaternionform" />
+      <object pmsId="DN020_MBVoid" pms-list="YNN" default-pms="YNN" languageId="TLB_Void" />
+      <object pmsId="DN020_MBCancelB" pms-list="YNN" default-pms="YNN" languageId="TLB_Delayedshipment" />
+      <object pmsId="DN020_MBExcepted" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="DN020_MBBookingInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_Bookinginfo" />
+      <object pmsId="DN020_MBShowFee" pms-list="YNN" default-pms="YNN" languageId="TLB_AmountCost" />
+      <object pmsId="DN020_MBSpellCTN" pms-list="YNN" default-pms="YNN" languageId="TLB_Cabinet" />
+      <object pmsId="DN020_MBCancelSpellCTN" pms-list="YNN" default-pms="YNN" languageId="TLB_CancelCabinet" />
+      <object pmsId="DN020_RPT_RP01" pms-list="YNN" default-pms="YNN" languageId="TLB_Report1" />
+      <object pmsId="DN020_RPT_RP02" pms-list="YNN" default-pms="YNN" languageId="TLB_Report2" />
+      <object pmsId="DN020_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="DN020_MBReloadDN" pms-list="YNN" default-pms="YNN" languageId="TLB_ReloadDN" />
+      <object pmsId="DN020_MBReloadQTY" pms-list="YNN" default-pms="YNN" languageId="TLB_ReloadDNNum" />
+      <object pmsId="DN020_poLetUpload" pms-list="YNN" default-pms="YNN" languageId="TLB_POImport" />
+      <object pmsId="DN020_btnDnPriceImport" pms-list="YNN" default-pms="YNN" languageId="TLB_Exfactoryprice" />
+      <object pmsId="DN020_btnDownloadDN" pms-list="YNN" default-pms="YNN" languageId="TLB_DownLoadDN" />
+      <object pmsId="DN020_btnDnDeafultUpload" pms-list="YNN" default-pms="YNN" languageId="TLB_UploadDN" />
+      <object pmsId="DN020_btn_bookrevoke" pms-list="YNN" default-pms="YNN" languageId="TLB_bookrevoke" />
+    </object>
+
+    <object pmsId="DN025" pms-list="YNN" default-pms="YNN">
+      TLB_DN025
+      <object pmsId="DN025_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="DN030" pms-list="YNN" default-pms="YNN">
+      TLB_DN030
+      <object pmsId="DN030_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN030_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_ForeignBooking" />
+      <object pmsId="DN030_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidBooking" />
+      <object pmsId="DN030_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeDeclaration" />
+      <object pmsId="DN030_combineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedBill" />
+      <object pmsId="DN030_SpellcombineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedBill" />
+      <object pmsId="DN030_combineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedShipment" />
+      <object pmsId="DN030_SpellCombineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedShipment" />
+      <object pmsId="DN030_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_RetreatTransport" />
+      <object pmsId="DN030_Hand" pms-list="YNN" default-pms="YNN" languageId="TLB_Hand" />
+      <object pmsId="DN030_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_BkDetail" />
+      <object pmsId="DN030_ShipFee" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="DN030_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DN" />
+      <!--<object pmsId="DN030_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />-->
+      <object pmsId="DN030_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="DN030_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="DN030_Inv" pms-list="YNN" default-pms="YNN" languageId="TLB_Invoice" />
+      <object pmsId="DN030_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="DN030_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="DN030_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="DN030_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN030_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="DN030_MBVoid" pms-list="YNN" default-pms="YNN" languageId="TLB_ReturnShipmentUnit" />
+      <object pmsId="DN030_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="DN030_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN030_FCL01" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingForm" />
+      <object pmsId="DN030_FCL02" pms-list="YNN" default-pms="YNN" languageId="TLB_DraftBL" />
+      <object pmsId="DN030_FCL03" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingformC" />
+      <object pmsId="DN030_FCL01P" pms-list="YNN" default-pms="YNN" languageId="TLB_PreviewBookingForm" />
+      <object pmsId="DN030_FCL02P" pms-list="YNN" default-pms="YNN" languageId="TLB_PDraftBL" />
+      <object pmsId="DN030_FCL03P" pms-list="YNN" default-pms="YNN" languageId="TLB_PBookingformC" />
+      <object pmsId="DN030_MBSiInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_SI" />
+      <object pmsId="DN030_CallCar" pms-list="YNN" default-pms="YNN" languageId="TLB_CarContainerInfo" />
+      <object pmsId="DN030_MBNoticeBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillNotif" />
+      <object pmsId="DN030_MBConfirmBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillConfirm" />
+      <object pmsId="DN030_pmsCombineInv" pms-list="YNN" default-pms="YNN" languageId="TLB_CombineInvoice" />
+      <object pmsId="DN030_ISFSEND" pms-list="YNN" default-pms="YNN" languageId="TLB_ISFSendPermiss" />
+      <object pmsId="DN030_send2isf" pms-list="YNN" default-pms="YNN" languageId="TLB_SendISF" />
+      <object pmsId="DN030_openIsf" pms-list="YNN" default-pms="YNN" languageId="TLB_ISFManage" />
+      <object pmsId="DN030_ISF01P" pms-list="YNN" default-pms="YNN" languageId="TLB_PISFReport" />
+      <object pmsId="DN030_ISF01" pms-list="YNN" default-pms="YNN" languageId="TLB_ISFReport" />
+      <object pmsId="DN030_MBChangeDate" pms-list="YNN" default-pms="YNN" languageId="TLB_ChangeSchedule" />
+      <object pmsId="DN030_ComBillSend" pms-list="YNN" default-pms="YNN" languageId="TLB_CombBLNotify" />
+      <object pmsId="DN030_CalCulCost" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="DN030_btnPartyImport" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="DN030_btnFiBlRemark" pms-list="YNN" default-pms="YNN" languageId="TLB_BLREMARKModify" />
+      <object pmsId="DN030_MBChangePod" pms-list="YNN" default-pms="YNN" languageId="TLB_ChangePod" />
+    </object>
+
+    <object pmsId="DN035" pms-list="YNN" default-pms="YNN">
+      TLB_DN035
+      <object pmsId="DN035_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN035_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_ForeignBooking" />
+      <object pmsId="DN035_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidBooking" />
+      <object pmsId="DN035_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeDeclaration" />
+      <object pmsId="DN035_combineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedBill" />
+      <object pmsId="DN035_SpellcombineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedBill" />
+      <object pmsId="DN035_combineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedShipment" />
+      <object pmsId="DN035_SpellCombineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedShipment" />
+      <object pmsId="DN035_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_RetreatTransport" />
+      <object pmsId="DN035_Hand" pms-list="YNN" default-pms="YNN" languageId="TLB_Hand" />
+      <object pmsId="DN035_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_BkDetail" />
+      <object pmsId="DN035_ShipFee" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="DN035_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DN" />
+      <!--<object pmsId="DN035_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />-->
+      <object pmsId="DN035_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="DN035_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="DN035_Inv" pms-list="YNN" default-pms="YNN" languageId="TLB_Invoice" />
+      <object pmsId="DN035_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="DN035_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="DN035_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="DN035_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN035_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="DN035_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN035_MBVoid" pms-list="YNN" default-pms="YNN" languageId="TLB_ReturnShipmentUnit" />
+      <object pmsId="DN035_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="DN035_FCL01" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingForm" />
+      <object pmsId="DN035_FCL02" pms-list="YNN" default-pms="YNN" languageId="TLB_DraftBL" />
+      <object pmsId="DN035_FCL03" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingformC" />
+      <object pmsId="DN035_FCL01P" pms-list="YNN" default-pms="YNN" languageId="TLB_PreviewBookingForm" />
+      <object pmsId="DN035_FCL02P" pms-list="YNN" default-pms="YNN" languageId="TLB_PDraftBL" />
+      <object pmsId="DN035_FCL03P" pms-list="YNN" default-pms="YNN" languageId="TLB_PBookingformC" />
+      <object pmsId="DN035_MBSiInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_SI" />
+      <object pmsId="DN035_CallCar" pms-list="YNN" default-pms="YNN" languageId="TLB_CarContainerInfo" />
+      <object pmsId="DN035_MBNoticeBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillNotif" />
+      <object pmsId="DN035_MBConfirmBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillConfirm" />
+      <object pmsId="DN035_pmsCombineInv" pms-list="YNN" default-pms="YNN" languageId="TLB_CombineInvoice" />
+      <object pmsId="DN035_ISFSEND" pms-list="YNN" default-pms="YNN" languageId="TLB_ISFSendPermiss" />
+      <object pmsId="DN035_send2isf" pms-list="YNN" default-pms="YNN" languageId="TLB_SendISF" />
+      <object pmsId="DN035_openIsf" pms-list="YNN" default-pms="YNN" languageId="TLB_ISFManage" />
+      <object pmsId="DN035_ISF01P" pms-list="YNN" default-pms="YNN" languageId="TLB_PISFReport" />
+      <object pmsId="DN035_ISF01" pms-list="YNN" default-pms="YNN" languageId="TLB_ISFReport" />
+      <object pmsId="DN035_MBChangeDate" pms-list="YNN" default-pms="YNN" languageId="TLB_ChangeSchedule" />
+      <object pmsId="DN035_ComBillSend" pms-list="YNN" default-pms="YNN" languageId="TLB_CombBLNotify" />
+      <object pmsId="DN035_CalCulCost" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="DN035_btnPartyImport" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="DN035_btnFiBlRemark" pms-list="YNN" default-pms="YNN" languageId="TLB_BLREMARKModify" />
+      <object pmsId="DN035_MBChangePod" pms-list="YNN" default-pms="YNN" languageId="TLB_ChangePod" />
+    </object>
+
+    <object pmsId="DN040" pms-list="YNN" default-pms="YNN">
+      TLB_DN040
+      <object pmsId="DN040_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN040_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_ForeignBooking" />
+      <object pmsId="DN040_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidBooking" />
+      <object pmsId="DN040_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeDeclaration" />
+      <object pmsId="DN040_combineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedBill" />
+      <object pmsId="DN040_SpellcombineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedBill" />
+      <object pmsId="DN040_combineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedShipment" />
+      <object pmsId="DN040_SpellCombineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedShipment" />
+      <object pmsId="DN040_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_RetreatTransport" />
+      <object pmsId="DN040_Hand" pms-list="YNN" default-pms="YNN" languageId="TLB_Hand" />
+      <object pmsId="DN040_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_BkDetail" />
+      <object pmsId="DN040_ShipFee" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="DN040_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DN" />
+      <!--<object pmsId="DN040_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />-->
+      <object pmsId="DN040_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="DN040_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="DN040_Inv" pms-list="YNN" default-pms="YNN" languageId="TLB_Invoice" />
+      <object pmsId="DN040_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="DN040_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="DN040_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="DN040_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN040_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="DN040_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN040_MBVoid" pms-list="YNN" default-pms="YNN" languageId="TLB_ReturnShipmentUnit" />
+      <object pmsId="DN040_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="DN040_FCL01" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingForm" />
+      <object pmsId="DN040_FCL02" pms-list="YNN" default-pms="YNN" languageId="TLB_DraftBL" />
+      <object pmsId="DN040_AIR01" pms-list="YNN" default-pms="YNN" languageId="TLB_DraftBLA" />
+      <object pmsId="DN040_FCL03" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingformC" />
+      <object pmsId="DN040_FCL01P" pms-list="YNN" default-pms="YNN" languageId="TLB_PreviewBookingForm" />
+      <object pmsId="DN040_FCL02P" pms-list="YNN" default-pms="YNN" languageId="TLB_PDraftBL" />
+      <object pmsId="DN040_AIR01P" pms-list="YNN" default-pms="YNN" languageId="TLB_PDraftBLA" />
+      <object pmsId="DN040_FCL03P" pms-list="YNN" default-pms="YNN" languageId="TLB_PBookingformC" />
+      <object pmsId="DN040_MBSiInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_SI" />
+      <object pmsId="DN040_CallCar" pms-list="YNN" default-pms="YNN" languageId="TLB_CarContainerInfo" />
+      <object pmsId="DN040_MBNoticeBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillNotif" />
+      <object pmsId="DN040_MBConfirmBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillConfirm" />
+      <object pmsId="DN040_pmsCombineInv" pms-list="YNN" default-pms="YNN" languageId="TLB_CombineInvoice" />
+      <object pmsId="DN040_ComBillSend" pms-list="YNN" default-pms="YNN" languageId="TLB_CombBLNotify" />
+      <object pmsId="DN040_CalCulCost" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="DN040_btnPartyImport" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="DN040_btnFiBlRemark" pms-list="YNN" default-pms="YNN" languageId="TLB_BLREMARKModify" />
+      <object pmsId="DN040_MBChangePod" pms-list="YNN" default-pms="YNN" languageId="TLB_ChangePod" />
+    </object>
+
+    <object pmsId="DN050" pms-list="YNN" default-pms="YNN">
+      TLB_DN050
+      <object pmsId="DN050_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN050_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_ForeignBooking" />
+      <object pmsId="DN050_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidBooking" />
+      <object pmsId="DN050_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeDeclaration" />
+      <object pmsId="DN050_combineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedBill" />
+      <object pmsId="DN050_SpellcombineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedBill" />
+      <object pmsId="DN050_combineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedShipment" />
+      <object pmsId="DN050_SpellCombineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedShipment" />
+      <object pmsId="DN050_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_RetreatTransport" />
+      <object pmsId="DN050_Hand" pms-list="YNN" default-pms="YNN" languageId="TLB_Hand" />
+      <object pmsId="DN050_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_BkDetail" />
+      <object pmsId="DN050_ShipFee" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="DN050_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DN" />
+      <!--<object pmsId="DN050_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />-->
+      <object pmsId="DN050_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="DN050_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="DN050_Inv" pms-list="YNN" default-pms="YNN" languageId="TLB_Invoice" />
+      <object pmsId="DN050_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="DN050_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="DN050_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="DN050_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN050_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="DN050_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN050_MBVoid" pms-list="YNN" default-pms="YNN" languageId="TLB_ReturnShipmentUnit" />
+      <object pmsId="DN050_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="DN050_FCL01" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingForm" />
+      <object pmsId="DN050_FCL02" pms-list="YNN" default-pms="YNN" languageId="TLB_DraftBL" />
+      <object pmsId="DN050_FCL03" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingformC" />
+      <object pmsId="DN050_FCL01P" pms-list="YNN" default-pms="YNN" languageId="TLB_PreviewBookingForm" />
+      <object pmsId="DN050_FCL02P" pms-list="YNN" default-pms="YNN" languageId="TLB_PDraftBL" />
+      <object pmsId="DN050_FCL03P" pms-list="YNN" default-pms="YNN" languageId="TLB_PBookingformC" />
+      <object pmsId="DN050_MBSiInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_SI" />
+      <object pmsId="DN050_CallCar" pms-list="YNN" default-pms="YNN" languageId="TLB_CarContainerInfo" />
+      <object pmsId="DN050_MBNoticeBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillNotif" />
+      <object pmsId="DN050_MBConfirmBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillConfirm" />
+      <object pmsId="DN050_pmsCombineInv" pms-list="YNN" default-pms="YNN" languageId="TLB_CombineInvoice" />
+      <object pmsId="DN050_ComBillSend" pms-list="YNN" default-pms="YNN" languageId="TLB_CombBLNotify" />
+      <object pmsId="DN050_CalCulCost" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="DN050_btnPartyImport" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="DN050_btnFiBlRemark" pms-list="YNN" default-pms="YNN" languageId="TLB_BLREMARKModify" />
+      <object pmsId="DN050_MBChangePod" pms-list="YNN" default-pms="YNN" languageId="TLB_ChangePod" />
+    </object>
+
+    <object pmsId="DN060" pms-list="YNN" default-pms="YNN">
+      TLB_DN060
+      <object pmsId="DN060_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN060_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_ForeignBooking" />
+      <object pmsId="DN060_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidBooking" />
+      <object pmsId="DN060_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeDeclaration" />
+      <object pmsId="DN060_combineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedBill" />
+      <object pmsId="DN060_SpellcombineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedBill" />
+      <object pmsId="DN060_combineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedShipment" />
+      <object pmsId="DN060_SpellCombineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedShipment" />
+      <object pmsId="DN060_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_RetreatTransport" />
+      <object pmsId="DN060_Hand" pms-list="YNN" default-pms="YNN" languageId="TLB_Hand" />
+      <object pmsId="DN060_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_BkDetail" />
+      <object pmsId="DN060_ShipFee" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="DN060_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DN" />
+      <!--<object pmsId="DN060_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />-->
+      <object pmsId="DN060_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="DN060_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="DN060_Inv" pms-list="YNN" default-pms="YNN" languageId="TLB_Invoice" />
+      <object pmsId="DN060_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="DN060_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="DN060_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="DN060_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN060_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="DN060_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN060_MBVoid" pms-list="YNN" default-pms="YNN" languageId="TLB_ReturnShipmentUnit" />
+      <object pmsId="DN060_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="DN060_FCL01" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingForm" />
+      <object pmsId="DN060_FCL02" pms-list="YNN" default-pms="YNN" languageId="TLB_DraftBL" />
+      <object pmsId="DN060_FCL03" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingformC" />
+      <object pmsId="DN060_FCL01P" pms-list="YNN" default-pms="YNN" languageId="TLB_PreviewBookingForm" />
+      <object pmsId="DN060_FCL02P" pms-list="YNN" default-pms="YNN" languageId="TLB_PDraftBL" />
+      <object pmsId="DN060_FCL03P" pms-list="YNN" default-pms="YNN" languageId="TLB_PBookingformC" />
+      <object pmsId="DN060_MBSiInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_SI" />
+      <object pmsId="DN060_CallCar" pms-list="YNN" default-pms="YNN" languageId="TLB_CarContainerInfo" />
+      <object pmsId="DN060_MBNoticeBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillNotif" />
+      <object pmsId="DN060_MBConfirmBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillConfirm" />
+      <object pmsId="DN060_pmsCombineInv" pms-list="YNN" default-pms="YNN" languageId="TLB_CombineInvoice" />
+      <object pmsId="DN060_CalCulCost" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="DN060_btnPartyImport" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="DN060_btnFiBlRemark" pms-list="YNN" default-pms="YNN" languageId="TLB_BLREMARKModify" />
+      <object pmsId="DN060_MBChangePod" pms-list="YNN" default-pms="YNN" languageId="TLB_ChangePod" />
+    </object>
+
+    <object pmsId="DN070" pms-list="YNN" default-pms="YNN">
+      TLB_DN070
+      <object pmsId="DN070_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN070_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_ForeignBooking" />
+      <object pmsId="DN070_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidBooking" />
+      <object pmsId="DN070_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeDeclaration" />
+      <object pmsId="DN070_combineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedBill" />
+      <object pmsId="DN070_SpellcombineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedBill" />
+      <object pmsId="DN070_combineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedShipment" />
+      <object pmsId="DN070_SpellCombineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedShipment" />
+      <object pmsId="DN070_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_RetreatTransport" />
+      <object pmsId="DN070_Hand" pms-list="YNN" default-pms="YNN" languageId="TLB_Hand" />
+      <object pmsId="DN070_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_BkDetail" />
+      <object pmsId="DN070_ShipFee" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="DN070_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DN" />
+      <!--<object pmsId="DN070_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />-->
+      <object pmsId="DN070_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="DN070_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="DN070_Inv" pms-list="YNN" default-pms="YNN" languageId="TLB_Invoice" />
+      <object pmsId="DN070_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="DN070_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="DN070_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="DN070_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN070_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="DN070_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN070_MBVoid" pms-list="YNN" default-pms="YNN" languageId="TLB_ReturnShipmentUnit" />
+      <object pmsId="DN070_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="DN070_FCL01" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingForm" />
+      <object pmsId="DN070_FCL02" pms-list="YNN" default-pms="YNN" languageId="TLB_DraftBL" />
+      <object pmsId="DN070_FCL03" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingForm" />
+      <object pmsId="DN070_FCL01P" pms-list="YNN" default-pms="YNN" languageId="TLB_PreviewBookingForm" />
+      <object pmsId="DN070_FCL02P" pms-list="YNN" default-pms="YNN" languageId="TLB_PDraftBL" />
+      <object pmsId="DN070_FCL03P" pms-list="YNN" default-pms="YNN" languageId="TLB_PBookingformC" />
+      <object pmsId="DN070_MBSiInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_SI" />
+      <object pmsId="DN070_CallCar" pms-list="YNN" default-pms="YNN" languageId="TLB_CarContainerInfo" />
+      <object pmsId="DN070_MBNoticeBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillNotif" />
+      <object pmsId="DN070_MBConfirmBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillConfirm" />
+      <object pmsId="DN070_pmsCombineInv" pms-list="YNN" default-pms="YNN" languageId="TLB_CombineInvoice" />
+      <object pmsId="DN070_CalCulCost" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="DN070_btnPartyImport" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="DN070_btnFiBlRemark" pms-list="YNN" default-pms="YNN" languageId="TLB_BLREMARKModify" />
+      <object pmsId="DN070_MBChangePod" pms-list="YNN" default-pms="YNN" languageId="TLB_ChangePod" />
+    </object>
+
+    <object pmsId="DN080" pms-list="YNN" default-pms="YNN">
+      TLB_DN080
+      <object pmsId="DN080_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN080_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_ForeignBooking" />
+      <object pmsId="DN080_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidBooking" />
+      <object pmsId="DN080_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeDeclaration" />
+      <object pmsId="DN080_combineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedBill" />
+      <object pmsId="DN080_SpellcombineBL" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedBill" />
+      <object pmsId="DN080_combineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_CombinedShipment" />
+      <object pmsId="DN080_SpellCombineSM" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCombinedShipment" />
+      <object pmsId="DN080_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_RetreatTransport" />
+      <object pmsId="DN080_Hand" pms-list="YNN" default-pms="YNN" languageId="TLB_Hand" />
+      <object pmsId="DN080_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_BkDetail" />
+      <object pmsId="DN080_ShipFee" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="DN080_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DN" />
+      <!--<object pmsId="DN080_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />-->
+      <object pmsId="DN080_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="DN080_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="DN080_Inv" pms-list="YNN" default-pms="YNN" languageId="TLB_Invoice" />
+      <object pmsId="DN080_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="DN080_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="DN080_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="DN080_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN080_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="DN080_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN080_MBVoid" pms-list="YNN" default-pms="YNN" languageId="TLB_ReturnShipmentUnit" />
+      <object pmsId="DN080_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="DN080_FCL01" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingForm" />
+      <object pmsId="DN080_FCL02" pms-list="YNN" default-pms="YNN" languageId="TLB_DraftBL" />
+      <object pmsId="DN080_FCL03" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingForm" />
+      <object pmsId="DN080_FCL01P" pms-list="YNN" default-pms="YNN" languageId="TLB_PreviewBookingForm" />
+      <object pmsId="DN080_FCL02P" pms-list="YNN" default-pms="YNN" languageId="TLB_PDraftBL" />
+      <object pmsId="DN080_FCL03P" pms-list="YNN" default-pms="YNN" languageId="TLB_PBookingformC" />
+      <object pmsId="DN080_MBSiInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_SI" />
+      <object pmsId="DN080_CallCar" pms-list="YNN" default-pms="YNN" languageId="TLB_CarContainerInfo" />
+      <object pmsId="DN080_MBNoticeBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillNotif" />
+      <object pmsId="DN080_MBConfirmBill" pms-list="YNN" default-pms="YNN" languageId="TLB_BillConfirm" />
+      <object pmsId="DN080_pmsCombineInv" pms-list="YNN" default-pms="YNN" languageId="TLB_CombineInvoice" />
+      <object pmsId="DN080_CalCulCost" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="DN080_btnPartyImport" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="DN080_btnFiBlRemark" pms-list="YNN" default-pms="YNN" languageId="TLB_BLREMARKModify" />
+      <object pmsId="DN080_MBChangePod" pms-list="YNN" default-pms="YNN" languageId="TLB_ChangePod" />
+    </object>
+
+    <object pmsId="DN090" pms-list="YNN" default-pms="YNN">
+      TLB_DN090
+      <object pmsId="DN090_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN090_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeDeclaration" />
+      <object pmsId="DN090_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_CancelCustoms" />
+      <object pmsId="DN090_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_Signaturedetails" />
+      <object pmsId="DN090_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DNDetail" />
+      <object pmsId="DN090_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN090_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="DN090_ShipFee" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="DN090_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN090_MBSEND" pms-list="YNN" default-pms="YNN" languageId="TLB_Send" />
+      <object pmsId="DN090_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+
+    <object pmsId="DN110" pms-list="YNN" default-pms="YNN">
+      TLB_DN110
+      <object pmsId="DN110_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN110_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_EnterBookingInfo" />
+      <object pmsId="DN110_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_Excel" />
+      <object pmsId="DN110_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN110_CallCar" pms-list="YNN" default-pms="YNN" languageId="TLB_CarContainerInfo" />
+      <object pmsId="DN110_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingConfirm" />
+      <object pmsId="DN110_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN110_DownloadExcelF" pms-list="YNN" default-pms="YNN" languageId="TLB_DownloadBillF" />
+      <object pmsId="DN110_DownloadExcelL" pms-list="YNN" default-pms="YNN" languageId="TLB_DownloadBillF" />
+    </object>
+
+    <object pmsId="DN120" pms-list="YNN" default-pms="YNN">
+      TLB_DN120
+      <object pmsId="DN120_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN120_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_EnterBookingInfo" />
+      <object pmsId="DN120_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_Excel" />
+      <object pmsId="DN120_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN120_CallCar" pms-list="YNN" default-pms="YNN" languageId="TLB_CarContainerInfo" />
+      <object pmsId="DN120_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingConfirm" />
+      <object pmsId="DN120_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN120_DownloadExcelF" pms-list="YNN" default-pms="YNN" languageId="TLB_DownloadBillF" />
+      <object pmsId="DN120_DownloadExcelL" pms-list="YNN" default-pms="YNN" languageId="TLB_DownloadBillF" />
+      <object pmsId="DN120_BatchGWAndCBM" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchcChangeWV" />
+    </object>
+
+    <object pmsId="DN130" pms-list="YNN" default-pms="YNN">
+      TLB_DN130
+      <object pmsId="DN130_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN130_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_EnterBookingInfo" />
+      <object pmsId="DN130_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_Excel" />
+      <object pmsId="DN130_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN130_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingConfirm" />
+      <object pmsId="DN130_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN130_DownloadExcelF" pms-list="YNN" default-pms="YNN" languageId="TLB_DownloadBillF" />
+      <object pmsId="DN130_DownloadExcelL" pms-list="YNN" default-pms="YNN" languageId="TLB_DownloadBillF" />
+      <object pmsId="DN130_BatchGWAndCBM" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchcChangeWV" />
+    </object>
+
+    <object pmsId="DN140" pms-list="YNN" default-pms="YNN">
+      TLB_DN140
+      <object pmsId="DN140_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN140_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_EnterBookingInfo" />
+      <object pmsId="DN140_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_Excel" />
+      <object pmsId="DN140_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN140_CallCar" pms-list="YNN" default-pms="YNN" languageId="TLB_CarContainerInfo" />
+      <object pmsId="DN140_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingConfirm" />
+      <object pmsId="DN140_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN140_DownloadExcelF" pms-list="YNN" default-pms="YNN" languageId="TLB_DownloadBillF" />
+      <object pmsId="DN140_DownloadExcelL" pms-list="YNN" default-pms="YNN" languageId="TLB_DownloadBillF" />
+    </object>
+
+    <object pmsId="DN150" pms-list="YNN" default-pms="YNN">
+      TLB_DN150
+      <object pmsId="DN150_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN150_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_EnterBookingInfo" />
+      <object pmsId="DN150_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_Excel" />
+      <object pmsId="DN150_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN150_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingConfirm" />
+      <object pmsId="DN150_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN150_DownloadExcelF" pms-list="YNN" default-pms="YNN" languageId="TLB_DownloadBillF" />
+      <object pmsId="DN150_DownloadExcelL" pms-list="YNN" default-pms="YNN" languageId="TLB_DownloadBillF" />
+      <object pmsId="DN150_BatchGWAndCBM" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchcChangeWV" />
+    </object>
+
+    <object pmsId="DN160" pms-list="YNN" default-pms="YNN">
+      TLB_DN160
+      <object pmsId="DN160_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN160_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_EnterBookingInfo" />
+      <object pmsId="DN160_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_Excel" />
+      <object pmsId="DN160_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN160_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingConfirm" />
+      <object pmsId="DN160_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN160_DownloadExcel" pms-list="YNN" default-pms="YNN" languageId="TLB_DownloadBill" />
+    </object>
+
+    <object pmsId="DN170" pms-list="YNN" default-pms="YNN">
+      TLB_DN170
+      <object pmsId="DN170_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN170_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_EnterBookingInfo" />
+      <object pmsId="DN170_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_Excel" />
+      <object pmsId="DN170_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN170_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingConfirm" />
+      <object pmsId="DN170_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN170_DownloadExcel" pms-list="YNN" default-pms="YNN" languageId="TLB_DownloadBill" />
+      <object pmsId="DN170_BatchGWAndCBM" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchcChangeWV" />
+    </object>
+
+    <object pmsId="DN180" pms-list="YNN" default-pms="YNN">
+      TLB_DN180
+      <object pmsId="DN180_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN180_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_EnterBookingInfo" />
+      <object pmsId="DN180_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_Excel" />
+      <object pmsId="DN180_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN180_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN180_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_CustomsConfirm" />
+      <object pmsId="DN180_MBContainer" pms-list="YNN" default-pms="YNN" languageId="TLB_ContainerInfo" />
+      <object pmsId="DN180_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="DN180_DownloadExcel" pms-list="YNN" default-pms="YNN" languageId="TLB_DownloadBill" />
+    </object>
+
+
+    <object pmsId="SM010" pms-list="YNN" default-pms="YNN">
+      TLB_SM010
+      <object pmsId="SM010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="SM010_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="SM010_MBReserve" pms-list="YNN" default-pms="YNN" languageId="TLB_Reserve" />
+      <object pmsId="SM010_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="SM010_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_CombineReserve" />
+      <object pmsId="SM010_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_RelieveCombine" />
+      <object pmsId="SM010_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchReserve" />
+      <object pmsId="SM010_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidReserve" />
+    </object>
+
+    <object pmsId="SM080" pms-list="YNN" default-pms="YNN">
+      TLB_SM080
+      <object pmsId="SM080_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="SM030" pms-list="YNN" default-pms="YNN">
+      TLB_SM030
+      <object pmsId="SM030_GetEnterTruck" pms-list="YNN" default-pms="YNN" languageId="TLB_IncomingVehicle" />
+      <object pmsId="SM030_moveGatePms" pms-list="YNN" default-pms="YNN" languageId="TLB_MoveContainer" />
+    </object>
+
+    <object pmsId="SM040" pms-list="YNN" default-pms="YNN">
+      TLB_SM040
+      <object pmsId="SM040_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="SM050" pms-list="YNN" default-pms="YNN">
+      TLB_SM050
+      <object pmsId="SM050_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="SM050_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="SM050_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DELETE" />
+      <object pmsId="SM050_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="SM050_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="SM060" pms-list="YNN" default-pms="YNN">
+      TLB_SM060
+      <object pmsId="SM060_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="SM060_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="SM060_MBReserveConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_ReserveComfirm" />
+      <object pmsId="SM060_MBModifyConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_ModifyComfirm" />
+      <object pmsId="SM060_MBWHDelivery" pms-list="YNN" default-pms="YNN" languageId="TLB_WarehouseShipment" />
+    </object>
+
+    <object pmsId="SM070" pms-list="YNN" default-pms="YNN">
+      TLB_SM070
+      <object pmsId="SM070_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="SM070_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_NotDownload" />
+      <object pmsId="SM070_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_ExcelExport" />
+      <object pmsId="SM070_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_CalledCar" />
+      <object pmsId="SM070_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_ContainerInfo" />
+      <object pmsId="SM070_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_DNDetail" />
+      <object pmsId="SM070_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_Signaturedetails" />
+      <object pmsId="SM070_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportScheduling" />
+      <object pmsId="SM070_MBSeal" pms-list="YNN" default-pms="YNN" languageId="TLB_SealCabinet" />
+      <object pmsId="SM070_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="SM070_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+
+
+
+    <object pmsId="FC010" pms-list="YNN" default-pms="YNN">
+      TLB_FC010
+      <object pmsId="FC010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="FC010_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="FC010_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_ForecastExcel" />
+      <object pmsId="FC010_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_GrabActualVolume" />
+      <object pmsId="FC010_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_TurnAllocation" />
+      <object pmsId="FC010_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="FC010_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="FC010_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="FC010_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="FC010_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="FC020" pms-list="YNN" default-pms="YNN">
+      TLB_FC020
+      <object pmsId="FC020_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="FC020_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingDetails" />
+    </object>
+
+    <object pmsId="FC030" pms-list="YNN" default-pms="YNN">
+      TLB_FC030
+      <object pmsId="FC030_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="FC030_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="FC030_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="FC030_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="FC030_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="FC030_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="FC040" pms-list="YNN" default-pms="YNN">
+      TLB_FC040
+      <object pmsId="FC040_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="FC040_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="FC040_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="FC040_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="FC040_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="FC040_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="FC050" pms-list="YNN" default-pms="YNN">
+      TLB_FC050
+      <object pmsId="FC050_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="FC050_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="FC050_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="FC050_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="FC050_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="FC050_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="FC060" pms-list="YNN" default-pms="YNN">
+      TLB_FC060
+      <object pmsId="FC060_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="FC060_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="FC060_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="FC060_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="FC060_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="FC060_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+
+    <object pmsId="TKBS010" pms-list="YNN" default-pms="YNN">
+      TLB_TKBS010
+      <object pmsId="TKBS010_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object>
+
+    <object pmsId="RQ020" pms-list="YNN" default-pms="YNN">
+      TLB_RQ020
+      <object pmsId="RQ020_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="RQ030" pms-list="YNN" default-pms="YNN">
+      TLB_RQ030
+      <object pmsId="RQ030_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="RQ040" pms-list="YNN" default-pms="YNN">
+      TLB_RQ040
+      <object pmsId="RQ040_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="RQ050" pms-list="YNN" default-pms="YNN">
+      TLB_RQ050
+      <object pmsId="RQ050_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="RQ060" pms-list="YNN" default-pms="YNN">
+      TLB_RQ060
+      <object pmsId="RQ060_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="RQ070" pms-list="YNN" default-pms="YNN">
+      TLB_RQ070
+      <object pmsId="RQ070_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+    <object pmsId="QT020" pms-list="YNN" default-pms="YNN">
+      TLB_QT020
+      <object pmsId="QT020_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object>
+
+    <object pmsId="QT030" pms-list="YNN" default-pms="YNN">
+      TLB_QT030
+      <object pmsId="QT030_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object>
+
+    <object pmsId="QT040" pms-list="YNN" default-pms="YNN">
+      TLB_QT040
+      <object pmsId="QT040_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object>
+
+    <object pmsId="QT050" pms-list="YNN" default-pms="YNN">
+      TLB_QT050
+      <object pmsId="QT050_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object>
+
+    <object pmsId="QT060" pms-list="YNN" default-pms="YNN">
+      TLB_QT060
+      <object pmsId="QT060_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object>
+
+    <object pmsId="QT070" pms-list="YNN" default-pms="YNN">
+      TLB_QT070
+      <object pmsId="QT070_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object>
+
+    <object pmsId="QT080" pms-list="YNN" default-pms="YNN">
+      TLB_QT080
+      <object pmsId="QT080_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object>
+
+    <object pmsId="AC010" pms-list="YNN" default-pms="YNN">
+      TLB_AC010
+      <object pmsId="AC010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC010_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <!--<object pmsId="AC010_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_Shipment" />-->
+      <object pmsId="AC010_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_Statement" />
+      <object pmsId="AC010_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_UnStatement" />
+      <!--<object pmsId="AC010_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_BillFormatTurn" />
+      <object pmsId="AC010_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_ExcelTransfer" />-->
+      <object pmsId="AC010_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="AC010_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="AC010_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="AC010_SEND_BTN" pms-list="YNN" default-pms="YNN" languageId="TLB_Send" />
+      <!--<object pmsId="AC010_RFB02" pms-list="YNN" default-pms="YNN" languageId="TLB_RFB02" />-->
+      <object pmsId="AC010_MBVatNo" pms-list="YNN" default-pms="YNN" languageId="Input InvoiceNo" />
+      <object pmsId="AC010_UPLOAD_BTN" pms-list="YNN" default-pms="YNN" languageId="TLB_Upload" />
+    </object>
+
+
+    <object pmsId="AC030" pms-list="YNN" default-pms="YNN">
+      TLB_AC030
+      <object pmsId="AC030_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    
+      <object pmsId="AC030_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_ActManage_PASS" />
+      <object pmsId="AC030_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      
+      <object pmsId="AC030_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_Bill_EN" />
+      <object pmsId="AC030_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_SAP" />
+      <object pmsId="AC030_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="AC030_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_ActManage_ApDetail" />
+      <object pmsId="AC030_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="AC030_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="AC030_RFB04" pms-list="YNN" default-pms="YNN" languageId="TLB_RFB02E" />
+	  <object pmsId="AC030_RFB03" pms-list="YNN" default-pms="YNN" languageId="TLB_Bill_EN" />
+      <object pmsId="AC030_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="AC030_btnLSTINVDescp" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateINVDescp" />
+      <object pmsId="AC030_btnFSSP" pms-list="YNN" default-pms="YNN" languageId="TLB_TransferFSSP" />
+      <object pmsId="AC030_UPLOAD_BTN" pms-list="YNN" default-pms="YNN" languageId="TLB_Upload" />
+    </object>
+
+    <object pmsId="AC999" pms-list="YNN" default-pms="YNN">
+      TLB_AC999
+      <object pmsId="AC999_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC999_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_PendingBill" />
+      <object pmsId="AC999_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="AC999_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_REJECT" />
+      <object pmsId="AC999_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="AC999_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_AuditDetails" />
+      <object pmsId="AC999_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      
+    </object>
+
+    <object pmsId="AC040" pms-list="YNN" default-pms="YNN">
+      TLB_AC040
+      <object pmsId="AC040_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC040_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_AuditDetails" />
+      <object pmsId="AC040_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_CopeRecalculation" />
+      <object pmsId="AC040_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_Paymentconfirm" />
+    </object>
+
+    <object pmsId="AC050" pms-list="YNN" default-pms="YNN">
+      TLB_AC050
+      <object pmsId="AC050_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_INQUIRY" />
+    </object>
+
+    <object pmsId="DN011" pms-list="YNN" default-pms="YNN">
+      TLB_DN011
+      <object pmsId="DN011_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN011_uploadPackingBtn" pms-list="YNN" default-pms="YNN" languageId="Upload Packing" />
+      <object pmsId="DN011_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="DN011_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="DN011_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="DN011_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="DN011_MBReload" pms-list="YNN" default-pms="YNN" languageId="TLB_ReloadInvoice" />
+      <object pmsId="DN011_IPQ05" pms-list="YNN" default-pms="YNN" languageId="TLB_OutClearanceP" />
+      <object pmsId="DN011_IPQ06" pms-list="YNN" default-pms="YNN" languageId="TLB_OutClearance" />
+      <object pmsId="DN011_IPQ03" pms-list="YNN" default-pms="YNN" languageId="TLB_CKDSKDP" />
+      <object pmsId="DN011_IPQ03C" pms-list="YNN" default-pms="YNN" languageId="TLB_NCKDSKDI" />
+      <object pmsId="DN011_IPQ03PL" pms-list="YNN" default-pms="YNN" languageId="TLB_NCKDSKDIPL" />
+      <object pmsId="DN011_IPQ03BR" pms-list="YNN" default-pms="YNN" languageId="TLB_NCKDSKDIBR" />
+      <object pmsId="DN011_IPQ04" pms-list="YNN" default-pms="YNN" languageId="TLB_CKDSKD" />
+      <object pmsId="DN011_IPQ01" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportedClearanceP" />
+      <object pmsId="DN011_IPQ02" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportedClearance" />
+      <object pmsId="DN011_IPQ05C" pms-list="YNN" default-pms="YNN" languageId="TLB_CKDSKDTP" />
+      <object pmsId="DN011_IPQ06C" pms-list="YNN" default-pms="YNN" languageId="TLB_Contract" />
+      <object pmsId="DN011_IPQ05P" pms-list="YNN" default-pms="YNN" languageId="TLB_POutClearanceP" />
+      <object pmsId="DN011_IPQ06P" pms-list="YNN" default-pms="YNN" languageId="TLB_POutClearance" />
+      <object pmsId="DN011_IPQ03P" pms-list="YNN" default-pms="YNN" languageId="TLB_PCKDSKDP" />
+      <object pmsId="DN011_IPQ03CP" pms-list="YNN" default-pms="YNN" languageId="TLB_NPreviewCKDSKDI" />
+      <object pmsId="DN011_IPQ03PLP" pms-list="YNN" default-pms="YNN" languageId="TLB_NPreviewCKDSKDIPL" />
+      <object pmsId="DN011_IPQ03BRP" pms-list="YNN" default-pms="YNN" languageId="TLB_NPreviewCKDSKDIBR" />
+      <object pmsId="DN011_IPQ04P" pms-list="YNN" default-pms="YNN" languageId="TLB_PreviewCKDSKDI" />
+      <object pmsId="DN011_IPQ01P" pms-list="YNN" default-pms="YNN" languageId="TLB_PImportedClearanceP" />
+      <object pmsId="DN011_IPQ02P" pms-list="YNN" default-pms="YNN" languageId="TLB_PImportedClearance" />
+      <object pmsId="DN011_IPQ06CP" pms-list="YNN" default-pms="YNN" languageId="TLB_PContract" />
+      <object pmsId="DN011_IPQ05CP" pms-list="YNN" default-pms="YNN" languageId="TLB_PreviewCKDSKDTTLP" />
+      <object pmsId="DN011_IPQ07" pms-list="YNN" default-pms="YNN" languageId="TLB_PackingIncoterm" />
+      <object pmsId="DN011_IPQ08" pms-list="YNN" default-pms="YNN" languageId="TLB_InvoiceIncoterm" />
+      <object pmsId="DN011_IPQ09" pms-list="YNN" default-pms="YNN" languageId="TLB_PackingDLVTerm" />
+      <object pmsId="DN011_IPQ10" pms-list="YNN" default-pms="YNN" languageId="TLB_InvoiceDLVTerm" />
+      <object pmsId="DN011_IPQ07P" pms-list="YNN" default-pms="YNN" languageId="TLB_PreviewPackingIncoterm" />
+      <object pmsId="DN011_IPQ08P" pms-list="YNN" default-pms="YNN" languageId="TLB_PreviewInvoiceIncoterm" />
+      <object pmsId="DN011_IPQ09P" pms-list="YNN" default-pms="YNN" languageId="TLB_PreviewPackingDLVTerm" />
+      <object pmsId="DN011_IPQ10P" pms-list="YNN" default-pms="YNN" languageId="TLB_PreviewInvoiceDLVTerm" />
+      <object pmsId="DN011_MBSEND" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeDeclaration" />
+      <object pmsId="DN011_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="DN011_btnBatchPackO" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchFileExportDeclarationP" />
+      <object pmsId="DN011_btnBatchInvO" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchFileExportDeclarationI" />
+      <object pmsId="DN011_btnBatchReload" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchReloadInvoice" />
+      <object pmsId="DN011_btnBatchContract" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchFileContract" />
+      <object pmsId="DN011_btnBatchSendSAP" pms-list="YNN" default-pms="YNN" languageId="TLB_SendSAP" />
+      <object pmsId="DN011_btnBatchSendBroker" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeDeclaration" />
+      <object pmsId="DN011_btnPackingSendToSAP" pms-list="YNN" default-pms="YNN" languageId="TLB_PackingSendToSAP" />
+    </object>
+
+   
+
+    <object pmsId="TKSTMP" pms-list="YNN" default-pms="YNN">
+      TLB_TKSTMP
+      <object pmsId="TKSTMP_NEW" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="TKSTMP_DELETE" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="TKSTMP_EDIT" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="TKSTMP_INQUIRY" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="CAR110" pms-list="YNN" default-pms="YNN">
+      TLB_CAR110
+      <object pmsId="CAR110_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="CAR110_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_CalledCar" />
+      <object pmsId="CAR110_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_CallCarInfo" />
+      <object pmsId="CAR110_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_ExcelExport" />
+    </object>
+   
+    <object pmsId="EDOC" pms-list="YNN" default-pms="YNN">
+      TLB_EDOCE
+      <object pmsId="EDOC_UP" pms-list="YNN" default-pms="YNN" languageId="TLB_Upload" />
+      <object pmsId="EDOC_DEL" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="EDOC_DOWN" pms-list="YNN" default-pms="YNN" languageId="TLB_Download" />
+      <object pmsId="EDOC_ALLDEL" pms-list="YNN" default-pms="YNN" languageId="TLB_DELALL" />
+    </object>
+    <object pmsId="SMEXSetup" pms-list="YNN" default-pms="YNN">
+      TLB_SMEXSetup
+      <object pmsId="SMEXSetup_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="SMEXSetup_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="SMEXSetup_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="SMEXSetup_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="SMEXSetup_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+ 
+ 
+    <object pmsId="DN210" pms-list="YNN" default-pms="YNN">
+      TLB_DN210
+      <object pmsId="DN210_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="DN210_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_BkDetail" />
+      <object pmsId="DN210_ShipFee" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="DN210_CalCulCost" pms-list="YNN" default-pms="YNN" languageId="TLB_CostRecalculation" />
+      <object pmsId="DN210_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DN" />
+      <object pmsId="DN210_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="DN210_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="DN210_Inv" pms-list="YNN" default-pms="YNN" languageId="TLB_Invoice" />
+      <object pmsId="DN210_pmsCombineInv" pms-list="YNN" default-pms="YNN" languageId="TLB_CombineInvoice" />
+      <object pmsId="DN210_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="DN210_ComBillSend" pms-list="YNN" default-pms="YNN" languageId="TLB_CombBLNotify" />
+      <object pmsId="DN210_ASDQReport" pms-list="YNN" default-pms="YNN" languageId="TLB_ASDW" />
+      <object pmsId="DN210_ASDReport" pms-list="YNN" default-pms="YNN" languageId="TLB_ASDR" />
+      <object pmsId="DN210_BtnToInbound" pms-list="YNN" default-pms="YNN" languageId="TLB_SendToInbound" />
+    </object>
+
+    <object pmsId="SMGSTM" pms-list="YNN" default-pms="YNN">
+      TLB_SMGSTM
+      <object pmsId="SMGSTM_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="SMGSTM_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="SMRV01" pms-list="YNN" default-pms="YNN">
+      TLB_SMRV01
+      <object pmsId="SMRV01_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="SMRV01_MBIn0" pms-list="YNN" default-pms="YNN" languageId="TLB_IntoFactoryConfirmN" />
+      <object pmsId="SMRV01_MBIn1" pms-list="YNN" default-pms="YNN" languageId="TLB_IntoFactoryConfirmE" />
+      <object pmsId="SMRV01_MBOut0" pms-list="YNN" default-pms="YNN" languageId="TLB_OutFactoryConfirmN" />
+      <object pmsId="SMRV01_MBOut1" pms-list="YNN" default-pms="YNN" languageId="TLB_OutFactoryConfirmE" />
+    </object>
+
+    <object pmsId="CostCenter" pms-list="YNN" default-pms="YNN">
+      TLB_CostCenter
+      <object pmsId="CostCenter_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="CostCenter_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="CostCenter_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="CostCenter_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="CostCenter_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="MSG01" pms-list="YNN" default-pms="YNN">
+      TLB_MSG01
+      <object pmsId="MSG01_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="MSG01_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="MSG01_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="MSG01_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="MSG01_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="MSG01_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+
+    <object pmsId="MSG02" pms-list="YNN" default-pms="YNN">
+      TLB_MSG02
+      <object pmsId="MSG02_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="AC060" pms-list="YNN" default-pms="YNN">
+      TLB_AC060
+      <object pmsId="AC060_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <!--<object pmsId="AC060_UploadExcelOB" pms-list="YNN" default-pms="YNN" languageId="TLB_CostUpload" />-->
+      <!--<object pmsId="AC060_DownloadExcel" pms-list="YNN" default-pms="YNN" languageId="TLB_CostDown" />-->
+      <object pmsId="AC060_Ibde" pms-list="YNN" default-pms="YNN" languageId="expense download(inbound)" />
+      <object pmsId="AC060_Ibue" pms-list="YNN" default-pms="YNN" languageId="charges upload(inbound)" />
+    </object>
+
+    <object pmsId="QA010" pms-list="YNN" default-pms="YNN">
+      TLB_QA010
+      <object pmsId="QA010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="QA010_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="QA010_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="QA010_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="QA010_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="QA010_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+
+    <object pmsId="AccountApplyInquiry" pms-list="YNN" default-pms="YNN">Account Apply Inquiry</object>
+    <object pmsId="CustomerInquiry" pms-list="YNN" default-pms="NNN">Customer Inquiry</object>
+    <object pmsId="LOGIN" pms-list="YNN" default-pms="YNN">Relogin</object>
+
+    <object pmsId="AC070" pms-list="YNN" default-pms="YNN">
+      TLB_AC070
+      <object pmsId="AC070_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="AC070_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+    </object>
+
+
+    <object pmsId="AC020E" pms-list="YNN" default-pms="YNN">
+      TLB_AC020E
+      <object pmsId="AC020E_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC020E_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="AC020E_MBPass" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="AC020E_MBReject" pms-list="YNN" default-pms="YNN" languageId="TLB_REFUSE" />
+    </object>
+
+    <object pmsId="AC030F" pms-list="YNN" default-pms="YNN">
+      TLB_AC030F
+      <object pmsId="AC030F_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC030F_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_PendingBill" />
+      <object pmsId="AC030F_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="AC030F_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="AC030F_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_BillPrinting" />
+      <object pmsId="AC030F_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_SAP" />
+      <object pmsId="AC030F_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="AC030F_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_AuditDetails" />
+      <object pmsId="AC030F_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="AC030L" pms-list="YNN" default-pms="YNN">
+      TLB_AC030L
+      <object pmsId="AC030L_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC030L_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_PendingBill" />
+      <object pmsId="AC030L_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="AC030L_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="AC030L_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_BillPrinting" />
+      <object pmsId="AC030L_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_SAP" />
+      <object pmsId="AC030L_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="AC030L_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_AuditDetails" />
+      <object pmsId="AC030L_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="AC030A" pms-list="YNN" default-pms="YNN">
+      TLB_AC030A
+      <object pmsId="AC030A_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC030A_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_PendingBill" />
+      <object pmsId="AC030A_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="AC030A_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="AC030A_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_BillPrinting" />
+      <object pmsId="AC030A_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_SAP" />
+      <object pmsId="AC030A_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="AC030A_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_AuditDetails" />
+      <object pmsId="AC030A_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="AC030T" pms-list="YNN" default-pms="YNN">
+      TLB_AC030T
+      <object pmsId="AC030T_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC030T_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_PendingBill" />
+      <object pmsId="AC030T_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="AC030T_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="AC030T_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_BillPrinting" />
+      <object pmsId="AC030T_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_SAP" />
+      <object pmsId="AC030T_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="AC030T_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_AuditDetails" />
+      <object pmsId="AC030T_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="AC030R" pms-list="YNN" default-pms="YNN">
+      TLB_AC030R
+      <object pmsId="AC030R_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC030R_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_PendingBill" />
+      <object pmsId="AC030R_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="AC030R_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="AC030R_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_BillPrinting" />
+      <object pmsId="AC030R_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_SAP" />
+      <object pmsId="AC030R_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="AC030R_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_AuditDetails" />
+      <object pmsId="AC030R_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="AC030B" pms-list="YNN" default-pms="YNN">
+      TLB_AC030B
+      <object pmsId="AC030B_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC030B_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_PendingBill" />
+      <object pmsId="AC030B_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="AC030B_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="AC030B_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_BillPrinting" />
+      <object pmsId="AC030B_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_SAP" />
+      <object pmsId="AC030B_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="AC030B_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_AuditDetails" />
+      <object pmsId="AC030B_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="AC030C" pms-list="YNN" default-pms="YNN">
+      TLB_AC030C
+      <object pmsId="AC030C_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC030C_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_PendingBill" />
+      <object pmsId="AC030C_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="AC030C_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="AC030C_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_BillPrinting" />
+      <object pmsId="AC030C_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_SAP" />
+      <object pmsId="AC030C_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="AC030C_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_AuditDetails" />
+      <object pmsId="AC030C_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="AC030P" pms-list="YNN" default-pms="YNN">
+      TLB_AC030P
+      <object pmsId="AC030P_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC030P_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_PendingBill" />
+      <object pmsId="AC030P_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="AC030P_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="AC030P_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_BillPrinting" />
+      <object pmsId="AC030P_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_SAP" />
+      <object pmsId="AC030P_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="AC030P_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_AuditDetails" />
+      <object pmsId="AC030P_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="AC030E" pms-list="YNN" default-pms="YNN">
+      TLB_AC030E
+      <object pmsId="AC030E_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC030E_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_PendingBill" />
+      <object pmsId="AC030E_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="AC030E_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="AC030E_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_BillPrinting" />
+      <object pmsId="AC030E_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_SAP" />
+      <object pmsId="AC030E_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="AC030E_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_AuditDetails" />
+      <object pmsId="AC030E_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="AC080" pms-list="YNN" default-pms="YNN">
+      TLB_AC080
+      <object pmsId="AC080_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AC080_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="AC080_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="AC080_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="AC080_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="AC080_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="AC080_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_Excel" />
+      <object pmsId="AC080_MBPrint" pms-list="YNN" default-pms="YNN" languageId="TLB_Print" />
+      <object pmsId="AC080_MBACheck" pms-list="YNN" default-pms="YNN" languageId="TLB_ClaimAmountConfirm" />
+      <object pmsId="AC080_MBFCheck" pms-list="YNN" default-pms="YNN" languageId="TLB_FinancialAudit" />
+      <object pmsId="AC080_MBClosed" pms-list="YNN" default-pms="YNN" languageId="TLB_EndCase" />
+      <object pmsId="AC080_MBApplication" pms-list="YNN" default-pms="YNN" languageId="TLB_Apply" />
+    </object>
+
+    <object pmsId="BSRPT" pms-list="YNN" default-pms="YNN">
+      TLB_BSRPT
+      <object pmsId="BSRPT_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BSRPT_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BSRPT_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BSRPT_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BSRPT_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="AC090" pms-list="YNN" default-pms="YNN">
+      TLB_AC090
+      <object pmsId="AC090_UnApproveBtn" pms-list="YNN" default-pms="YNN" languageId="TLB_NotPass" />
+      <object pmsId="AC090_ApproveBtn" pms-list="YNN" default-pms="YNN" languageId="TLB_ActManage_PASS" />
+      <object pmsId="AC090_DownloadExcel" pms-list="YNN" default-pms="YNN" languageId="TLB_CostPreview" />
+      <object pmsId="AC090_ShipFee" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <!--<object pmsId="AC090_ShipmentInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingDetails" />-->
+      <object pmsId="AC090_ShipmentInboundInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_InboundBookingDetails" />
+    </object>
+
+    <object pmsId="BK010" pms-list="YNN" default-pms="YNN">
+      TLB_BK010
+      <object pmsId="BK010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BK010_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BK010_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="BK010_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BK010_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BK010_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BK010_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_NotifyBorker" />
+      <object pmsId="BK010_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeLogistics" />
+      <object pmsId="BK010_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeCustoms" />
+      <object pmsId="BK010_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="BK010_DirectlyNOB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNOB" />
+      <object pmsId="BK010_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="BK010_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="BK010_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="BK010_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="BK010_btn10" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdatePriorityData" />
+      <object pmsId="BK010_btn11" pms-list="YNN" default-pms="YNN" languageId="TLB_CancelNoticeLogistics" />
+      <object pmsId="BK010_BtnCancelBroker" pms-list="YNN" default-pms="YNN" languageId="TLB_BtnCancelBroker" />
+      <object pmsId="BK010_btn12" pms-list="YNN" default-pms="YNN" languageId="TLB_MBExcelImport" />
+      <object pmsId="BK010_btn13" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="BK010_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BK010_SuperModify" pms-list="YNN" default-pms="YNN" languageId="Modify Booking" />
+      <object pmsId="BK010_UploadSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_UploadSCMDate" />
+      <object pmsId="BK010_DownSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_DownSCMDate" />
+      <object pmsId="BK010_DownSCMByModel" pms-list="YNN" default-pms="YNN" languageId="TLB_DownSCMDateByModel" />
+      <object pmsId="BK010_UploadSCMModel" pms-list="YNN" default-pms="YNN" languageId="TLB_UploadSCMDateModel" />
+      <object pmsId="BK010_UpdateETAData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateETAData" />
+      <object pmsId="BK010_PoNumberInput" pms-list="YNN" default-pms="YNN" languageId="TLB_PoNumberInput" />
+      <object pmsId="BK010_ISFSEND" pms-list="YNN" default-pms="YNN" languageId="TLB_ISFSendPermiss" />
+      <object pmsId="BK010_send2isf" pms-list="YNN" default-pms="YNN" languageId="TLB_SendISF" />
+      <object pmsId="BK010_openIsf" pms-list="YNN" default-pms="YNN" languageId="TLB_ISFManage" />
+      <object pmsId="BK010_DownVizioDate" pms-list="YNN" default-pms="YNN" languageId="TLB_DownVizio" />
+      <object pmsId="BK010_ASDQReport" pms-list="YNN" default-pms="YNN" languageId="TLB_ASDW" />
+      <object pmsId="BK010_ASDReport" pms-list="YNN" default-pms="YNN" languageId="TLB_ASDR" />
+      <object pmsId="BK010_btnPostbill" pms-list="YNN" default-pms="YNN" languageId="TLB_POSTBILLSAP" />
+      <object pmsId="BK010_UnreachToFinish" pms-list="YNN" default-pms="YNN" languageId="TLB_ToFinish" />
+      <object pmsId="BK010_OutSourcingBTN" pms-list="YNN" default-pms="YNN" languageId="Outsourcing to inbound" />
+      <object pmsId="BK010_BatchDelUnReach" pms-list="YNN" default-pms="YNN" languageId="Delete by Batch" />
+      <object pmsId="BK010_UploadSCMASN" pms-list="YNN" default-pms="YNN" languageId="Upload ASN" />
+      <object pmsId="BK010_UploadSCMGR" pms-list="YNN" default-pms="YNN" languageId="Upload GR" />
+      <object pmsId="BK010_ResendToO" pms-list="YNN" default-pms="YNN" languageId="Resend To Outbound" />
+      <object pmsId="BK010_btnException" pms-list="YNN" default-pms="YNN" languageId="Exception" />
+      <object pmsId="BK010_DirectlyNB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNB" />
+      <object pmsId="BK010_ToDoorDeliver" pms-list="YNN" default-pms="YNN" languageId="TLB_ToDoorDeliver" />
+    </object>
+
+    <object pmsId="BK020" pms-list="YNN" default-pms="YNN">
+      TLB_BK020
+      <object pmsId="BK020_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BK020_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BK020_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="BK020_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BK020_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BK020_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BK020_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_NotifyBorker" />
+      <object pmsId="BK020_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeLogistics" />
+      <object pmsId="BK020_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeCustoms" />
+      <object pmsId="BK020_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="BK020_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DNDetail" />
+      <object pmsId="BK020_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="BK020_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="BK020_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="BK020_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="BK020_btn10" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdatePriorityData" />
+      <object pmsId="BK020_btn11" pms-list="YNN" default-pms="YNN" languageId="TLB_CancelNoticeLogistics" />
+      <object pmsId="BK020_BtnCancelBroker" pms-list="YNN" default-pms="YNN" languageId="TLB_BtnCancelBroker" />
+      <object pmsId="BK020_btn12" pms-list="YNN" default-pms="YNN" languageId="TLB_MBExcelImport" />
+      <object pmsId="BK020_btn13" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="BK020_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BK020_MBSendAddr" pms-list="YNN" default-pms="YNN" languageId="TLB_MBSendAddr" />
+      <object pmsId="BK020_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BK020_DownSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_DownSCMDate" />
+      <object pmsId="BK020_UploadSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_UploadSCMDate" />
+      <object pmsId="BK020_DirectlyNB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNB" />
+      <object pmsId="BK020_DirectlyNOB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNOB" />
+      <object pmsId="BK020_DirectlyNTB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNTB" />
+      <object pmsId="BK020_ToDoorDeliver" pms-list="YNN" default-pms="YNN" languageId="TLB_ToDoorDeliver" />
+      <object pmsId="BK020_PoNumberInput" pms-list="YNN" default-pms="YNN" languageId="TLB_PoNumberInput" />
+      <object pmsId="BK020_ISFSEND" pms-list="YNN" default-pms="YNN" languageId="TLB_ISFSendPermiss" />
+      <object pmsId="BK020_send2isf" pms-list="YNN" default-pms="YNN" languageId="TLB_SendISF" />
+      <object pmsId="BK020_openIsf" pms-list="YNN" default-pms="YNN" languageId="TLB_ISFManage" />
+      <object pmsId="BK020_OutSourcingBTN" pms-list="YNN" default-pms="YNN" languageId="Outsourcing to inbound" />
+      <object pmsId="BK020_btnException" pms-list="YNN" default-pms="YNN" languageId="Exception" />
+    </object>
+    <object pmsId="BK030" pms-list="YNN" default-pms="YNN">
+      TLB_BK030
+      <object pmsId="BK030_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BK030_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BK030_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="BK030_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BK030_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BK030_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BK030_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_NotifyBorker" />
+      <object pmsId="BK030_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeLogistics" />
+      <object pmsId="BK030_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeCustoms" />
+      <object pmsId="BK030_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="BK030_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DNDetail" />
+      <object pmsId="BK030_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="BK030_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="BK030_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="BK030_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="BK030_btn10" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdatePriorityData" />
+      <object pmsId="BK030_btn11" pms-list="YNN" default-pms="YNN" languageId="TLB_CancelNoticeLogistics" />
+      <object pmsId="BK030_BtnCancelBroker" pms-list="YNN" default-pms="YNN" languageId="TLB_BtnCancelBroker" />
+      <object pmsId="BK030_btn12" pms-list="YNN" default-pms="YNN" languageId="TLB_MBExcelImport" />
+      <object pmsId="BK030_btn13" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="BK030_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BK030_MBSendAddr" pms-list="YNN" default-pms="YNN" languageId="TLB_MBSendAddr" />
+      <object pmsId="BK030_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BK030_SuperModify" pms-list="YNN" default-pms="YNN" languageId="Modify Booking" />
+      <object pmsId="BK030_DownSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_DownSCMDate" />
+      <object pmsId="BK030_UploadSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_UploadSCMDate" />
+      <object pmsId="BK030_DirectlyNB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNB" />
+      <object pmsId="BK030_DirectlyNOB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNOB" />
+      <object pmsId="BK030_DirectlyNTB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNTB" />
+      <object pmsId="BK030_ToDoorDeliver" pms-list="YNN" default-pms="YNN" languageId="TLB_ToDoorDeliver" />
+      <object pmsId="BK030_PoNumberInput" pms-list="YNN" default-pms="YNN" languageId="TLB_PoNumberInput" />
+      <object pmsId="BK030_ISFSEND" pms-list="YNN" default-pms="YNN" languageId="TLB_ISFSendPermiss" />
+      <object pmsId="BK030_send2isf" pms-list="YNN" default-pms="YNN" languageId="TLB_SendISF" />
+      <object pmsId="BK030_openIsf" pms-list="YNN" default-pms="YNN" languageId="TLB_ISFManage" />
+      <object pmsId="BK030_OutSourcingBTN" pms-list="YNN" default-pms="YNN" languageId="Outsourcing to inbound" />
+      <object pmsId="BK030_btnException" pms-list="YNN" default-pms="YNN" languageId="Exception" />
+    </object>
+    <object pmsId="BK040" pms-list="YNN" default-pms="YNN">
+      TLB_BK040
+      <object pmsId="BK040_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BK040_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BK040_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="BK040_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BK040_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BK040_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BK040_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_NotifyBorker" />
+      <object pmsId="BK040_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeLogistics" />
+      <object pmsId="BK040_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeCustoms" />
+      <object pmsId="BK040_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="BK040_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DNDetail" />
+      <object pmsId="BK040_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="BK040_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="BK040_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="BK040_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="BK040_btn10" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdatePriorityData" />
+      <object pmsId="BK040_btn11" pms-list="YNN" default-pms="YNN" languageId="TLB_CancelNoticeLogistics" />
+      <object pmsId="BK040_BtnCancelBroker" pms-list="YNN" default-pms="YNN" languageId="TLB_BtnCancelBroker" />
+      <object pmsId="BK040_btn12" pms-list="YNN" default-pms="YNN" languageId="TLB_MBExcelImport" />
+      <object pmsId="BK040_btn13" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="BK040_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BK040_MBSendAddr" pms-list="YNN" default-pms="YNN" languageId="TLB_MBSendAddr" />
+      <object pmsId="BK040_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BK040_SuperModify" pms-list="YNN" default-pms="YNN" languageId="Modify Booking" />
+      <object pmsId="BK040_DownSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_DownSCMDate" />
+      <object pmsId="BK040_UploadSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_UploadSCMDate" />
+      <object pmsId="BK040_DirectlyNB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNB" />
+      <object pmsId="BK040_DirectlyNOB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNOB" />
+      <object pmsId="BK040_DirectlyNTB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNTB" />
+      <object pmsId="BK040_ToDoorDeliver" pms-list="YNN" default-pms="YNN" languageId="TLB_ToDoorDeliver" />
+      <object pmsId="BK040_PoNumberInput" pms-list="YNN" default-pms="YNN" languageId="TLB_PoNumberInput" />
+      <object pmsId="BK040_OutSourcingBTN" pms-list="YNN" default-pms="YNN" languageId="Outsourcing to inbound" />
+      <object pmsId="BK040_btnException" pms-list="YNN" default-pms="YNN" languageId="Exception" />
+    </object>
+    <object pmsId="BK050" pms-list="YNN" default-pms="YNN">
+      TLB_BK050
+      <object pmsId="BK050_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BK050_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BK050_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="BK050_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BK050_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BK050_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BK050_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_NotifyBorker" />
+      <object pmsId="BK050_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeLogistics" />
+      <object pmsId="BK050_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeCustoms" />
+      <object pmsId="BK050_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="BK050_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DNDetail" />
+      <object pmsId="BK050_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="BK050_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="BK050_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="BK050_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="BK050_btn10" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdatePriorityData" />
+      <object pmsId="BK050_btn11" pms-list="YNN" default-pms="YNN" languageId="TLB_CancelNoticeLogistics" />
+      <object pmsId="BK050_BtnCancelBroker" pms-list="YNN" default-pms="YNN" languageId="TLB_BtnCancelBroker" />
+      <object pmsId="BK050_btn12" pms-list="YNN" default-pms="YNN" languageId="TLB_MBExcelImport" />
+      <object pmsId="BK050_btn13" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="BK050_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BK050_MBSendAddr" pms-list="YNN" default-pms="YNN" languageId="TLB_MBSendAddr" />
+      <object pmsId="BK050_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BK050_SuperModify" pms-list="YNN" default-pms="YNN" languageId="Modify Booking" />
+      <object pmsId="BK050_DownSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_DownSCMDate" />
+      <object pmsId="BK050_UploadSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_UploadSCMDate" />
+      <object pmsId="BK050_DirectlyNB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNB" />
+      <object pmsId="BK050_DirectlyNOB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNOB" />
+      <object pmsId="BK050_DirectlyNTB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNTB" />
+      <object pmsId="BK050_ToDoorDeliver" pms-list="YNN" default-pms="YNN" languageId="TLB_ToDoorDeliver" />
+      <object pmsId="BK050_PoNumberInput" pms-list="YNN" default-pms="YNN" languageId="TLB_PoNumberInput" />
+      <object pmsId="BK050_OutSourcingBTN" pms-list="YNN" default-pms="YNN" languageId="Outsourcing to inbound" />
+      <object pmsId="BK050_btnException" pms-list="YNN" default-pms="YNN" languageId="Exception" />
+    </object>
+    <object pmsId="BK070" pms-list="YNN" default-pms="YNN">
+      TLB_BK070
+      <object pmsId="BK070_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY"/>
+      <object pmsId="BK070_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BK070_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="BK070_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BK070_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BK070_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BK070_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_NotifyBorker" />
+      <object pmsId="BK070_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeLogistics" />
+      <object pmsId="BK070_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeCustoms" />
+      <object pmsId="BK070_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="BK070_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DNDetail" />
+      <object pmsId="BK070_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="BK070_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="BK070_btn08" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsAbnormal" />
+      <object pmsId="BK070_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="BK070_btn10" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdatePriorityData" />
+      <object pmsId="BK070_btn11" pms-list="YNN" default-pms="YNN" languageId="TLB_CancelNoticeLogistics" />
+      <object pmsId="BK070_BtnCancelBroker" pms-list="YNN" default-pms="YNN" languageId="TLB_BtnCancelBroker" />
+      <object pmsId="BK070_btn12" pms-list="YNN" default-pms="YNN" languageId="TLB_MBExcelImport" />
+      <object pmsId="BK070_btn13" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="BK070_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BK070_MBSendAddr" pms-list="YNN" default-pms="YNN" languageId="TLB_MBSendAddr" />
+      <object pmsId="BK070_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BK070_SuperModify" pms-list="YNN" default-pms="YNN" languageId="Modify Booking" />
+      <object pmsId="BK070_DownSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_DownSCMDate" />
+      <object pmsId="BK070_UploadSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_UploadSCMDate" />
+      <object pmsId="BK070_DirectlyNB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNB" />
+      <object pmsId="BK070_DirectlyNOB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNOB" />
+      <object pmsId="BK070_DirectlyNTB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNTB" />
+      <object pmsId="BK070_ToDoorDeliver" pms-list="YNN" default-pms="YNN" languageId="TLB_ToDoorDeliver" />
+      <object pmsId="BK070_PoNumberInput" pms-list="YNN" default-pms="YNN" languageId="TLB_PoNumberInput" />
+      <object pmsId="BK070_OutSourcingBTN" pms-list="YNN" default-pms="YNN" languageId="Outsourcing to inbound" />
+      <object pmsId="BK070_btnException" pms-list="YNN" default-pms="YNN" languageId="Exception" />
+    </object>
+    <object pmsId="BK080" pms-list="YNN" default-pms="YNN">
+      TLB_BK080
+      <object pmsId="BK080_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BK080_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BK080_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="BK080_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BK080_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <!--<object pmsId="BK080_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />-->
+      <object pmsId="BK080_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <!--<object pmsId="BK080_MBVoid" pms-list="YNN" default-pms="YNN" languageId="TLB_ReturnShipmentUnit" />-->
+      <object pmsId="BK080_DirectlyNOB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNOB" />
+      <!--<object pmsId="BK080_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_NotifyBorker" />-->
+      <object pmsId="BK080_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeLogistics" />
+      <object pmsId="BK080_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_NoticeCustoms" />
+      <object pmsId="BK080_MBAllocation" pms-list="YNN" default-pms="YNN" languageId="TLB_Allocation" />
+      <object pmsId="BK080_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_LotStatus" />
+      <object pmsId="BK080_btn07" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+      <object pmsId="BK080_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_LogisticsCost" />
+      <object pmsId="BK080_btn10" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdatePriorityData" />
+      <object pmsId="BK080_btn11" pms-list="YNN" default-pms="YNN" languageId="TLB_CancelNoticeLogistics" />
+      <object pmsId="BK080_BtnCancelBroker" pms-list="YNN" default-pms="YNN" languageId="TLB_BtnCancelBroker" />
+      <object pmsId="BK080_btn12" pms-list="YNN" default-pms="YNN" languageId="TLB_MBExcelImport" />
+      <object pmsId="BK080_btn13" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="BK080_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BK080_MBSendAddr" pms-list="YNN" default-pms="YNN" languageId="TLB_MBSendAddr" />
+      <object pmsId="BK080_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BK080_DownSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_DownSCMDate" />
+      <object pmsId="BK080_UploadSCMDate" pms-list="YNN" default-pms="YNN" languageId="TLB_UploadSCMDate" />
+      <object pmsId="BK080_DirectlyNB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNB" />
+      <object pmsId="BK080_ToDoorDeliver" pms-list="YNN" default-pms="YNN" languageId="TLB_ToDoorDeliver" />
+      <object pmsId="BK080_DirectlyNTB" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectlyNTB" />
+      <object pmsId="BK080_PoNumberInput" pms-list="YNN" default-pms="YNN" languageId="TLB_PoNumberInput" />
+      <object pmsId="BK080_OutSourcingBTN" pms-list="YNN" default-pms="YNN" languageId="Outsourcing to inbound" />
+    </object>
+    <object pmsId="BK060" pms-list="YNN" default-pms="YNN">
+      TLB_BK060
+      <object pmsId="BK060_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BK060_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_NotifyBorker" />
+      <object pmsId="BK060_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DNDetail" />
+      <object pmsId="BK060_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BK060_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="BK060_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BK060_MBSEND" pms-list="YNN" default-pms="YNN" languageId="TLB_Send" />
+      <object pmsId="BK060_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BK060_btn12" pms-list="YNN" default-pms="YNN" languageId="TLB_MBExcelImport" />
+      <object pmsId="BK060_btn13" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportParty" />
+      <object pmsId="BK060_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BK060_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BK060_btnException" pms-list="YNN" default-pms="YNN" languageId="Exception" />
+    </object>
+
+    <object pmsId="BKC020" pms-list="YNN" default-pms="YNN">
+      TLB_BKC020
+      <object pmsId="BKC020_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BKC020_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BKC020_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingConfirm" />
+      <object pmsId="BKC020_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BKC020_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BKC020_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BKC020_btn15" pms-list="YNN" default-pms="YNN" languageId="TLB_SampleExcel" />
+      <object pmsId="BKC020_btn16" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportPinNo" />
+      <object pmsId="BKC020_UpdateDischargeData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateDischargeData" />
+      <object pmsId="BKC020_UpdateATAData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateATAData" />
+      <object pmsId="BKC020_EmptyReturnDownload" pms-list="YNN" default-pms="YNN" languageId="L_EmptyReturnDownload" />
+      <object pmsId="BKC020_EmptyReturnUpload" pms-list="YNN" default-pms="YNN" languageId="L_EmptyReturnUpload" />
+    </object>
+    <object pmsId="BKC030" pms-list="YNN" default-pms="YNN">
+      TLB_BKC030
+      <object pmsId="BKC030_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BKC030_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BKC030_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BKC030_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingConfirm" />
+      <object pmsId="BKC030_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BKC030_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BKC030_btn15" pms-list="YNN" default-pms="YNN" languageId="TLB_SampleExcel" />
+      <object pmsId="BKC030_btn16" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportPinNo" />
+      <object pmsId="BKC030_UpdateDischargeData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateDischargeData" />
+      <object pmsId="BKC030_UpdateATAData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateATAData" />
+    </object>
+    <object pmsId="BKC040" pms-list="YNN" default-pms="YNN">
+      TLB_BKC040
+      <object pmsId="BKC040_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BKC040_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BKC040_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BKC040_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingConfirm" />
+      <object pmsId="BKC040_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BKC040_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BKC040_btn15" pms-list="YNN" default-pms="YNN" languageId="TLB_SampleExcel" />
+      <object pmsId="BKC040_btn16" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportPinNo" />
+      <object pmsId="BKC040_UpdateDischargeData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateDischargeData" />
+      <object pmsId="BKC040_UpdateATAData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateATAData" />
+    </object>
+    <object pmsId="BKC050" pms-list="YNN" default-pms="YNN">
+      TLB_BKC050
+      <object pmsId="BKC050_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BKC050_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BKC050_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BKC050_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingConfirm" />
+      <object pmsId="BKC050_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BKC050_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BKC050_btn15" pms-list="YNN" default-pms="YNN" languageId="TLB_SampleExcel" />
+      <object pmsId="BKC050_btn16" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportPinNo" />
+      <object pmsId="BKC050_UpdateDischargeData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateDischargeData" />
+      <object pmsId="BKC050_UpdateATAData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateATAData" />
+    </object>
+
+    <object pmsId="BKC070" pms-list="YNN" default-pms="YNN">
+      TLB_BKC070
+      <object pmsId="BKC070_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BKC070_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BKC070_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BKC070_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingConfirm" />
+      <object pmsId="BKC070_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BKC070_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BKC070_btn14" pms-list="YNN" default-pms="YNN" languageId="TLB_SampleExcel" />
+      <object pmsId="BKC070_btn15" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportPinNo" />
+      <object pmsId="BKC070_UpdateDischargeData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateDischargeData" />
+      <object pmsId="BKC070_UpdateATAData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateATAData" />
+      <object pmsId="BKC070_EmptyReturnDownload" pms-list="YNN" default-pms="YNN" languageId="TLB_EmptyReturnDownload" />
+      <object pmsId="BKC070_EmptyReturnUpload" pms-list="YNN" default-pms="YNN" languageId="TLB_EmptyReturnUpload" />
+    </object>
+    <object pmsId="BKC080" pms-list="YNN" default-pms="YNN">
+      TLB_BKC080
+      <object pmsId="BKC080_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BKC080_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BKC080_MBConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_BookingConfirm" />
+      <object pmsId="BKC080_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BKC080_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BKC080_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BKC080_btn14" pms-list="YNN" default-pms="YNN" languageId="TLB_SampleExcel" />
+      <object pmsId="BKC080_btn15" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportPinNo" />
+      <object pmsId="BKC080_UpdateDischargeData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateDischargeData" />
+      <object pmsId="BKC080_UpdateATAData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateATAData" />
+    </object>
+
+    <object pmsId="BKC060" pms-list="YNN" default-pms="YNN">
+      TLB_BKC060
+      <object pmsId="BKC060_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <!--<object pmsId="BKC060_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />-->
+      <object pmsId="BKC060_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_Excep" />
+      <object pmsId="BKC060_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BKC060_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="BKC060_MBCconfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_CustomsConfirm" />
+      <object pmsId="BKC060_MBTconfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_TurnCustomsConfirm" />
+      <object pmsId="BKC060_MBContainer" pms-list="YNN" default-pms="YNN" languageId="TLB_ContainerInfo" />
+      <object pmsId="BKC060_SendToFTP" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchExport" />
+      <object pmsId="BKC060_BatchUploadEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchToEdoc" />
+      <object pmsId="BKC060_MBExcelDownload" pms-list="YNN" default-pms="YNN" languageId="TLB_CustomsDownload" />
+      <object pmsId="BKC060_btn14" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportDecInfo" />
+      <object pmsId="BKC060_MBTCExcelDownload" pms-list="YNN" default-pms="YNN" languageId="TLB_TCDownload" />
+      <object pmsId="BKC060_MBTCExcelUpload" pms-list="YNN" default-pms="YNN" languageId="TLB_TCUpload" />
+    </object>
+
+    <object pmsId="BKC090" pms-list="YNN" default-pms="YNN">
+      TLB_BKC090
+      <object pmsId="BKC090_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BKC090_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BKC090_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_TransloadDownload" />
+      <object pmsId="BKC090_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_TransloadUpload" />
+    </object>
+
+    <object pmsId="IBRV090" pms-list="YNN" default-pms="YNN">
+      TLB_IBRV090
+      <object pmsId="IBRV090_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IBRV090_btn01" pms-list="YNN" default-pms="YNN" languageId="TLB_OneOneCar" />
+      <object pmsId="IBRV090_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_ManyOneCar" />
+      <object pmsId="IBRV090_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_DN_CallCarInfo" />
+      <object pmsId="IBRV090_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidCallCar" />
+    </object>
+
+    <object pmsId="IBRV010" pms-list="YNN" default-pms="YNN">
+      TLB_IBRV010
+      <object pmsId="IBRV010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IBRV010_btn06" pms-list="YNN" default-pms="YNN" languageId="Order Truck By Container" />
+      <object pmsId="IBRV010_btn07" pms-list="YNN" default-pms="YNN" languageId="Order Truck By Dn" />
+      <object pmsId="IBRV010_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_DN_CallCarInfo" />
+      <object pmsId="IBRV010_btn05" pms-list="YNN" default-pms="YNN" languageId="Rebuild Order" />
+      <object pmsId="IBRV010_btn08" pms-list="YNN" default-pms="YNN" languageId="Input ETA MSL" />
+      <object pmsId="IBRV010_ShipmentInboundInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_InboundBookingDetails" />
+      <object pmsId="IBRV010_DeliveryAddressInput" pms-list="YNN" default-pms="YNN" languageId="TLB_MBChangeAddr" />
+      <object pmsId="IBRV010_TruckerInput" pms-list="YNN" default-pms="YNN" languageId="TLB_MBChangeTrucker" />
+      <object pmsId="IBRV010_addremark" pms-list="YNN" default-pms="YNN" languageId="Add Remark" />
+      <object pmsId="IBRV010_CancelSmrvBtnBatch" pms-list="YNN" default-pms="YNN" languageId="Cancel truck calling" /> 
+	  <object pmsId="IBRV010_UpdateDischargeData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateDischargeData" />
+	  <object pmsId="IBRV010_UpdateATAData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateATAData" />
+	  <object pmsId="IBRV010_AutoCalculate" pms-list="YNN" default-pms="YNN" languageId="TLB_AutomaticValuation" />
+	  <object pmsId="IBRV010_UpdateETAData" pms-list="YNN" default-pms="YNN" languageId="TLB_UpdateETAData" />
+	  <object pmsId="IBRV010_UpdateWsRmk" pms-list="YNN" default-pms="YNN" languageId="TPV LST Remark" />
+      <object pmsId="IBRV010_Estimation" pms-list="YNN" default-pms="YNN" languageId="STO_DEM_DET Estimation" />
+	</object>
+
+    <object pmsId="IBRV020" pms-list="YNN" default-pms="YNN">
+      TLB_IBRV020
+      <object pmsId="IBRV020_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="IBRV050" pms-list="YNN" default-pms="YNN">
+      TLB_IBRV050
+      <object pmsId="IBRV050_GetEnterTruck" pms-list="YNN" default-pms="YNN" languageId="TLB_IncomingVehicle" />
+      <object pmsId="IBRV050_moveGatePms" pms-list="YNN" default-pms="YNN" languageId="TLB_MoveContainer" />
+    </object>
+
+    <object pmsId="IBRV060" pms-list="YNN" default-pms="YNN">
+      TLB_IBRV060
+      <object pmsId="IBRV060_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="IBRV070" pms-list="YNN" default-pms="YNN">
+      TLB_IBRV070
+      <object pmsId="IBRV070_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IBRV070_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="IBRV070_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DELETE" />
+      <object pmsId="IBRV070_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IBRV070_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="IBRV040" pms-list="YNN" default-pms="YNN">
+      TLB_IBRV040
+      <object pmsId="IBRV040_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IBRV040_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IBRV040_MBReserveConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_ReserveComfirm" />
+      <object pmsId="IBRV040_MBModifyConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_ModifyComfirm" />
+      <object pmsId="IBRV040_CreateSmrv" pms-list="YNN" default-pms="YNN" languageId="TLB_CreateSmrv" />
+      <object pmsId="IBRV040_BatchAppointment" pms-list="YNN" default-pms="YNN" languageId="TLB_BatchAppointment" />
+      <object pmsId="IBRV040_EditTrucker" pms-list="YNN" default-pms="YNN" languageId="TLB_EditTrucker" />
+      <object pmsId="IBRV040_SetVoid" pms-list="YNN" default-pms="YNN" languageId="TLB_V_Void" />
+    </object>
+    <object pmsId="IBRV030" pms-list="YNN" default-pms="YNN">
+      TLB_IBRV030
+      <object pmsId="IBRV030_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IBRV030_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IBRV030_MBReserve" pms-list="YNN" default-pms="YNN" languageId="TLB_Reserve" />
+      <object pmsId="IBRV030_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="IBRV030_UploadPODEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_UploadPod" />
+      <object pmsId="IBRV030_btnUseDate" pms-list="YNN" default-pms="YNN" languageId="TLB_PartialDelivery" />
+      <object pmsId="IBRV030_btnGetET" pms-list="YNN" default-pms="YNN" languageId="Download Input Empty Return" />
+      <object pmsId="IBRV030_btPutET" pms-list="YNN" default-pms="YNN" languageId="Upload Empty Return" />
+      <object pmsId="IBRV030_btnDownApptInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_DownApptInfo" />
+      <object pmsId="IBRV030_btUploadApptInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_UploadApptInfo" />
+      <object pmsId="IBRV030_DirectlyUploadPOD" pms-list="YNN" default-pms="YNN" languageId="TLB_PODUpload" />
+    </object>
+    <object pmsId="IBRVTSA" pms-list="YNN" default-pms="YNN">
+      TLB_IBRVTSA
+      <object pmsId="IBRVTSA_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IBRVTSA_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IBRVTSA_MBReserveConfirm" pms-list="YNN" default-pms="YNN" languageId="TLB_TsaConfirm" />
+      <object pmsId="IBRVTSA_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="IBRVTSA_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_VoidReserve" />
+      <object pmsId="IBRVTSA_UploadPODEDOC" pms-list="YNN" default-pms="YNN" languageId="TLB_Upload" />
+      <object pmsId="IBRVTSA_btnDownApptInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_DownApptInfo" />
+      <object pmsId="IBRVTSA_btUploadApptInfo" pms-list="YNN" default-pms="YNN" languageId="TLB_UploadApptInfo" />
+      <object pmsId="IBRVTSA_TSACreateSmrv" pms-list="YNN" default-pms="YNN" languageId="Transloading" />
+      <object pmsId="IBRVTSA_TSADirectDelivery" pms-list="YNN" default-pms="YNN" languageId="TLB_DirectDelivery" />
+      <object pmsId="IBRVTSA_TSAVoid" pms-list="YNN" default-pms="YNN" languageId="TLB_V_Void" />
+      <object pmsId="IBRVTSA_TSARestore" pms-list="YNN" default-pms="YNN" languageId="Restore" />
+      <object pmsId="IBRVTSA_MBAddConatiner" pms-list="YNN" default-pms="YNN" languageId="Add Container" />
+      <object pmsId="IBRVTSA_MBRemoveConatiner" pms-list="YNN" default-pms="YNN" languageId="Remove Container" />
+      <object pmsId="IBRVTSA_DownShipVizio" pms-list="YNN" default-pms="YNN" languageId="TLB_SHIPReportVizio" />
+      <object pmsId="IBRVTSA_DownClosedVizio" pms-list="YNN" default-pms="YNN" languageId="TLB_ClosedReportVizio" />
+      <object pmsId="IBRVTSA_btnGetET" pms-list="YNN" default-pms="YNN" languageId="Download Input Empty Return" />
+      <object pmsId="IBRVTSA_btPutET" pms-list="YNN" default-pms="YNN" languageId="Upload Empty Return" />
+    </object>
+    <object pmsId="AL010" pms-list="YNN" default-pms="YNN">
+      TLB_AL010
+      <object pmsId="AL010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AL010_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="AL010_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="AL010_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="AL010_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+	<object pmsId="IST001" pms-list="YNN" default-pms="YNN">
+	    TLB_IST001
+	    <object pmsId="IST001_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" /> 
+	</object>
+    <object pmsId="BSLIGHT" pms-list="YNN" default-pms="YNN">
+      TLB_BSLIGHT
+      <object pmsId="BSLIGHT_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BSLIGHT_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BSLIGHT_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="BSLIGHT_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BSLIGHT_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+    <object pmsId="Bsdate010" pms-list="YNN" default-pms="YNN">
+      TLB_Bsdate010
+      <object pmsId="Bsdate010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="Bsdate010_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="Bsdate010_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="Bsdate010_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="Bsdate010_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="Bsdate010_MBImportCalender" pms-list="YNN" default-pms="YNN" languageId="TLB_ImportCalendar" />
+    </object>
+    <object pmsId="TermVSCharges" pms-list="YNN" default-pms="YNN">
+      TLB_TermVSCharges
+      <object pmsId="TermVSCharges_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="TermVSCharges_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="TermVSCharges_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="TermVSCharges_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="TermVSCharges_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+    
+    <object pmsId="SCMReqSetup" pms-list="YNN" default-pms="YNN">
+      TLB_SCMReqSetup
+      <object pmsId="SCMReqSetup_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+    <object pmsId="InboundBillPostSetup" pms-list="YNN" default-pms="YNN">
+      TLB_InboundBillPostSetup
+      <object pmsId="InboundBillPostSetup_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+    <object pmsId="CostAllocationRule" pms-list="YNN" default-pms="YNN">
+      TLB_CostAllocation
+      <object pmsId="CostAllocationRule_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+    <object pmsId="AUTONO" pms-list="YNN" default-pms="YNN">
+      TLB_AUTONO
+      <object pmsId="AUTONO_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="AUTONO_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="AUTONO_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="AUTONO_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="AUTONO_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+    <object pmsId="BscodeNew" pms-list="YNN" default-pms="YNN">
+      TLB_BscodeNew
+      <object pmsId="BscodeNew_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BscodeNew_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BscodeNew_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BscodeNew_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+    </object>
+    <object pmsId="IBRV080" pms-list="YNN" default-pms="YNN">
+      TLB_IBRV080
+      <object pmsId="IBRV080_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IBRV080_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IBRV080_MBIn0" pms-list="YNN" default-pms="YNN" languageId="TLB_MBIn0" />
+      <object pmsId="IBRV080_MBOut0" pms-list="YNN" default-pms="YNN" languageId="TLB_MBOut0" />
+      <object pmsId="IBRV080_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="IBRV080_MBArrival" pms-list="YNN" default-pms="YNN" languageId="Arrival" />
+      <object pmsId="IBRV080_MBCancel" pms-list="YNN" default-pms="YNN" languageId="Cancel" />
+      <object pmsId="IBRV080_InUploadBtn" pms-list="YNN" default-pms="YNN" languageId="Upload In Picture" />
+      <object pmsId="IBRV080_OutUploadBtn" pms-list="YNN" default-pms="YNN" languageId="Upload Out Picture" />
+      <object pmsId="IBRV080_PodUploadBtn" pms-list="YNN" default-pms="YNN" languageId="Upload POD" />
+      <object pmsId="IBRV080_MBToday" pms-list="YNN" default-pms="YNN" languageId="Today Delivery" />
+      <object pmsId="IBRV080_MBTomorrow" pms-list="YNN" default-pms="YNN" languageId="Tomorrow Delivery" />
+      <object pmsId="IBRV080_WHBoard" pms-list="YNN" default-pms="YNN" languageId="TLB_WHBoard" />
+      <object pmsId="IBRV080_HZTWHboard" pms-list="YNN" default-pms="YNN" languageId="TLB_HZTWHBoard" />
+      <object pmsId="IBRV080_btnSecurityRemark" pms-list="YNN" default-pms="YNN" languageId="TLB_SecurityRemarkEdit" />
+    </object>
+
+    <object pmsId="IRQ010" pms-list="YNN" default-pms="YNN">
+      TLB_IRQ010
+      <object pmsId="IRQ010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IRQ010_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="IRQ010_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="IRQ010_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IRQ010_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_SEARCH" />
+      <object pmsId="IRQ010_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="IRQ010_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="IRQ010_EXCEL_BTN" pms-list="YNN" default-pms="YNN" languageId="TLB_RqsetupExcel" />
+      <object pmsId="IRQ010_RQST_FWD" pms-list="YNN" default-pms="YNN" languageId="TLB_SelectLogisticsProviders" />
+      <object pmsId="IRQ010_RQST_SEND" pms-list="YNN" default-pms="YNN" languageId="TLB_SendNotice" />
+      <object pmsId="IRQ010_RQST_QDET" pms-list="YNN" default-pms="YNN" languageId="TLB_QuotDetail" />
+      <object pmsId="IRQ010_RQST_PCAL" pms-list="YNN" default-pms="YNN" languageId="TLB_ParityCalculation" />
+      <object pmsId="IRQ010_RQST_PDET" pms-list="YNN" default-pms="YNN" languageId="TLB_ParityDetail" />
+      <object pmsId="IRQ010_RQST_NNOT" pms-list="YNN" default-pms="YNN" languageId="TLB_UnsuccessfulNotice" />
+      <object pmsId="IRQ010_RQST_BNOT" pms-list="YNN" default-pms="YNN" languageId="TLB_BidNotice" />
+      <object pmsId="IRQ010_RQST_FBNOT" pms-list="YNN" default-pms="YNN" languageId="TLB_FBidNotice" />
+      <object pmsId="IRQ010_NOTEDIT_INFO" pms-list="YNN" default-pms="YNN" languageId="TLB_ProhibitEditInquiryContent" />
+      <object pmsId="IRQ010_VoidBtn" pms-list="YNN" default-pms="YNN" languageId="TLB_Void" />
+	  <object pmsId="IRQ010_TerminateBtn" pms-list="YNN" default-pms="YNN" languageId="TLB_TerminateBtn" />
+    </object>
+    <object pmsId="IQT016" pms-list="YNN" default-pms="YNN">
+      TLB_IQT016
+      <object pmsId="IQT016_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IQT016_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="IQT016_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="IQT016_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IQT016_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="IQTB01" pms-list="YNN" default-pms="YNN">
+      TLB_IQTB01
+      <object pmsId="IQTB01_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="IQTB01_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="IQTB01_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IQTB01_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_Search1" />
+      <object pmsId="IQTB01_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="IQTB01_QuotTypeBtn" pms-list="YNN" default-pms="YNN" languageId="TLB_QuotationSubmission" />
+      <object pmsId="IQTB01_VoidBtn" pms-list="YNN" default-pms="YNN" languageId="TLB_Void" />
+      <!--<object pmsId="IQTB01_ApproveBtn" pms-list="YNN" default-pms="YNN" languageId="TLB_Auditing" />-->
+      <object pmsId="IQTB01_IQQT" pms-list="YNN" default-pms="YNN" languageId="TLB_Inquery" />
+      <object pmsId="IQTB01_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+
+    <object pmsId="IQTC01" pms-list="YNN" default-pms="YNN">
+      TLB_IQTC01
+      <object pmsId="IQTC01_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="IQTC01_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="IQTC01_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IQTC01_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_Search1" />
+      <object pmsId="IQTC01_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="IQTC01_QuotTypeBtn" pms-list="YNN" default-pms="YNN" languageId="TLB_QuotationSubmission" />
+      <object pmsId="IQTC01_VoidBtn" pms-list="YNN" default-pms="YNN" languageId="TLB_Void" />
+      <!--<object pmsId="IQTC01_ApproveBtn" pms-list="YNN" default-pms="YNN" languageId="TLB_Auditing" />-->
+      <object pmsId="IQTC01_IQQT" pms-list="YNN" default-pms="YNN" languageId="TLB_Inquery" />
+      <object pmsId="IQTC01_MBbtn01" pms-list="YNN" default-pms="YNN" languageId="TLB_QuotTrailerADD" />
+      <object pmsId="IQTC01_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+
+    <object pmsId="IQTX01" pms-list="YNN" default-pms="YNN">
+      TLB_IQTX01
+      <object pmsId="IQTX01_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="IQTX01_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="IQTX01_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IQTX01_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_Search1" />
+      <object pmsId="IQTX01_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="IQTX01_QuotTypeBtn" pms-list="YNN" default-pms="YNN" languageId="TLB_QuotationSubmission" />
+      <object pmsId="IQTX01_VoidBtn" pms-list="YNN" default-pms="YNN" languageId="TLB_Void" />
+      <!--<object pmsId="IQTX01_ApproveBtn" pms-list="YNN" default-pms="YNN" languageId="TLB_Auditing" />-->
+      <object pmsId="IQTX01_IQQT" pms-list="YNN" default-pms="YNN" languageId="TLB_Inquery" />
+      <object pmsId="IQTX01_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+    <object pmsId="IQT010" pms-list="YNN" default-pms="YNN">
+      TLB_IQT010
+      <object pmsId="IQT010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IQT010_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IQT010_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+      <object pmsId="IQT010_QuotTypeBtn" pms-list="YYY" default-pms="YYY" languageId="TLB_SubmitQuotationTender" />
+      <object pmsId="IQT010_VoidBtn" pms-list="YYY" default-pms="YYY" languageId="TLB_Void" />
+      <object pmsId="IQT010_EXCEL_BTN" pms-list="YYY" default-pms="YYY" languageId="TLB_QtbaseExcel" />
+	  <object pmsId="IQT010_TerminateBtn" pms-list="YYY" default-pms="YYY" languageId="TLB_TerminateBtn" /> 
+	  <object pmsId="IQT010_btnDownload" pms-list="YNN" default-pms="YNN" languageId="TLB_FCLFreightDownload" />
+	  <object pmsId="IQT010_btnUpload" pms-list="YNN" default-pms="YNN" languageId="TLB_UploadContract" />
+    </object>
+    <object pmsId="IQT013" pms-list="YNN" default-pms="YNN">
+      TLB_IQT013
+      <object pmsId="IQT013_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IQT013_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="IQT013_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="IQT013_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IQT013_MBSearch" pms-list="YNN" default-pms="YNN" languageId="TLB_Search1" />
+      <object pmsId="IQT013_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+      <object pmsId="IQT013_IQQT" pms-list="YNN" default-pms="YNN" languageId="TLB_Inquery" />
+    </object>
+    <object pmsId="IQT017" pms-list="YNN" default-pms="YNN">
+      TLB_IQT017
+      <object pmsId="IQT017_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IQT017_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="IQT017_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="IQT017_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="IQT017_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+
+    <object pmsId="IQT018" pms-list="YNN" default-pms="YNN">
+      TLB_IQT018
+      <object pmsId="IQT018_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IQT018_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="IQT018_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="IQT018_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+
+    <object pmsId="IQT019" pms-list="YNN" default-pms="YNN">
+      TLB_IQT019
+      <object pmsId="IQT019_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IQT019_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="IQT019_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="IQT019_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+    <object pmsId="IQT020" pms-list="YNN" default-pms="YNN">
+      TLB_IQT020
+      <object pmsId="IQT020_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="IQT020_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="IQT020_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="IQT020_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+    </object>
+    
+    <object pmsId="IQT021" pms-list="YNN" default-pms="YNN">
+      TLB_IQT021
+      <object pmsId="IQT021_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="IQT021_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="IQT021_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_Signaturedetails" />
+      <object pmsId="IQT021_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailPass" />
+      <object pmsId="IQT021_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailBack" />
+      <object pmsId="IQT021_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailCheck" />
+	  <object pmsId="IQT021_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+
+    <object pmsId="IQT021F" pms-list="YNN" default-pms="YNN">
+      TLB_IQT021F
+      <object pmsId="IQT021F_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="IQT021F_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="IQT021F_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_Signaturedetails" />
+      <object pmsId="IQT021F_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailPass" />
+      <object pmsId="IQT021F_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailBack" />
+      <object pmsId="IQT021F_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailCheck" />
+	  <object pmsId="IQT021F_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+
+    <object pmsId="IQT021L" pms-list="YNN" default-pms="YNN">
+      TLB_IQT021L
+      <object pmsId="IQT021L_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="IQT021L_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="IQT021L_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_Signaturedetails" />
+      <object pmsId="IQT021L_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailPass" />
+      <object pmsId="IQT021L_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailBack" />
+      <object pmsId="IQT021L_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailCheck" />
+	  <object pmsId="IQT021L_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+
+    <object pmsId="IQT021A" pms-list="YNN" default-pms="YNN">
+      TLB_IQT021A
+      <object pmsId="IQT021A_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="IQT021A_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="IQT021A_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_Signaturedetails" />
+      <object pmsId="IQT021A_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailPass" />
+      <object pmsId="IQT021A_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailBack" />
+      <object pmsId="IQT021A_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailCheck" />
+	  <object pmsId="IQT021A_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+
+    <object pmsId="IQT021T" pms-list="YNN" default-pms="YNN">
+      TLB_IQT021T
+      <object pmsId="IQT021T_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="IQT021T_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="IQT021T_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_Signaturedetails" />
+      <object pmsId="IQT021T_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailPass" />
+      <object pmsId="IQT021T_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailBack" />
+      <object pmsId="IQT021T_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailCheck" />
+	  <object pmsId="IQT021T_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+
+    <object pmsId="IQT021R" pms-list="YNN" default-pms="YNN">
+      TLB_IQT021R
+      <object pmsId="IQT021R_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="IQT021R_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="IQT021R_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_Signaturedetails" />
+      <object pmsId="IQT021R_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailPass" />
+      <object pmsId="IQT021R_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailBack" />
+      <object pmsId="IQT021R_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailCheck" />
+	  <object pmsId="IQT021R_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+
+    <object pmsId="IQT021E" pms-list="YNN" default-pms="YNN">
+      TLB_IQT021E
+      <object pmsId="IQT021E_btn02" pms-list="YNN" default-pms="YNN" languageId="TLB_PASS" />
+      <object pmsId="IQT021E_btn09" pms-list="YNN" default-pms="YNN" languageId="TLB_BACK" />
+      <object pmsId="IQT021E_btn05" pms-list="YNN" default-pms="YNN" languageId="TLB_Signaturedetails" />
+      <object pmsId="IQT021E_btn03" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailPass" />
+      <object pmsId="IQT021E_btn04" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailBack" />
+      <object pmsId="IQT021E_btn06" pms-list="YNN" default-pms="YNN" languageId="TLB_DetailCheck" />
+	  <object pmsId="IQT021E_MBEdoc" pms-list="YNN" default-pms="YNN" languageId="TLB_Edoc" />
+    </object>
+
+    <object pmsId="QTI010" pms-list="YNN" default-pms="YNN">
+      TLB_QTI010
+      <object pmsId="QTI010_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="QTI010_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="QTI010_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="QTI010_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="QTI010_UploadWin" pms-list="YNN" default-pms="YNN" languageId="TLB_Upload" />
+    </object>
+
+    <object pmsId="IP01" pms-list="YNN" default-pms="YNN">
+      IP Log
+      <object pmsId="IP01_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+    </object>
+
+    <object pmsId="BsdistManage" pms-list="YNN" default-pms="YNN">
+      TLB_BsdistManage
+      <object pmsId="BsdistManage_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+      <object pmsId="BsdistManage_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+      <object pmsId="BsdistManage_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+      <object pmsId="BsdistManage_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+      <object pmsId="BsdistManage_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+    </object>
+    	  <object pmsId="IEXPADD" pms-list="YNN" default-pms="YNN">
+		  TLB_EXPADD
+		  <object pmsId="IEXPADD_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+		  <object pmsId="IEXPADD_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+		  <object pmsId="IEXPADD_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+		  <object pmsId="IEXPADD_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+		  <object pmsId="IEXPADD_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+	  </object>
+	  <object pmsId="ICWSET" pms-list="YNN" default-pms="YNN">
+		  TLB_CWSET
+		  <object pmsId="ICWSET_SummarySearch" pms-list="YNN" default-pms="YNN" languageId="TLB_QUERY" />
+		  <object pmsId="ICWSET_MBAdd" pms-list="YNN" default-pms="YNN" languageId="TLB_ADD" />
+		  <object pmsId="ICWSET_MBDel" pms-list="YNN" default-pms="YNN" languageId="TLB_DEL" />
+		  <object pmsId="ICWSET_MBEdit" pms-list="YNN" default-pms="YNN" languageId="TLB_MODIFY" />
+		  <object pmsId="ICWSET_MBCopy" pms-list="YNN" default-pms="YNN" languageId="TLB_COPY" />
+	  </object>
+  </programe-list>
+</list>

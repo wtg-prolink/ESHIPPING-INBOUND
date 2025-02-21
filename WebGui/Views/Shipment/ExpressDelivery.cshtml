@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = "ExpressDelivery";
+}
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>;
+@Html.RazorJSInline("~/Scripts/Shipment/ExpressDelivery.js")
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-30-30">
+                            <table id="SubGrid" class="_tableGrid" style="width: 100%">
+                                <tr>
+                                    
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-5-60">
+                            <label for="ShipmentID" class="control-label">@Resources.Locale.L_DNApproveManage_ShipmentId</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="hidden" id="UId" dt="mt" fieldname="UId" iskey="true" />
+                            <input type="text" dt="mt" class="form-control input-sm" id="ShipmentId" name="ShipmentId" fieldname="ShipmentId" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ShippingDate" class="control-label">@Resources.Locale.L_InvPkgSetup_ShippingDate</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="ShippingDate" name="ShippingDate" fieldname="ShippingDate" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                    	    <label for="Incoterm" class="control-label">@Resources.Locale.L_DNApproveManage_Incoterm</label>
+                    	</div>
+                    	<div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="Incoterm" name="Incoterm" fieldname="Incoterm">
+                                <option value="">FOB</option>
+                                <option value=""></option>
+                            </select>
+                    	</div>
+
+                    	<div class="pure-u-sm-5-60 label-right">
+                            <label for="Cstatus" class="control-label">@Resources.Locale.L_TKBLQuery_Cstatus</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="Cstatus" name="Cstatus" fieldname="Cstatus" readonly>
+                                <option value="1">Pickup</option>
+                                <option value="2">receive</option>
+                                <option value="3">Onboard</option>
+                                <option value="4">Arrival</option>
+                                <option value="5">Delivery</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-5-60">
+                            <label for="HouseNo" class="control-label">@Resources.Locale.L_IEBookingSetup_HouseNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="HouseNo" name="HouseNo" fieldname="HouseNo" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Eta" class="control-label">@Resources.Locale.L_DTransport_Eta</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="Eta" name="Eta" fieldname="Eta" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Etd" class="control-label">@Resources.Locale.L_DTransport_Etd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="Etd" name="Etd" fieldname="Etd" />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-5-60">
+                            <label for="PickupPort" class="control-label">@Resources.Locale.L_BaseLookup_PickupPort</label>
+                        </div>
+                        <div class="pure-u-sm-8-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PickupPort" name="PickupPort" fieldname="PickupPort"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PickupPortLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-17-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="PickupNm" name="PickupNm" fieldname="PickupNm" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="DeliveryPort" class="control-label">@Resources.Locale.L_BaseLookup_DeliveryPort</label>
+                        </div>
+                        <div class="pure-u-sm-8-60  control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="DeliveryPort" name="DeliveryPort" fieldname="DeliveryPort"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="DeliveryPortLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-17-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="DeliveryNm" name="DeliveryNm" fieldname="DeliveryNm" />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-5-60">
+                            <label for="Qty" class="control-label">@Resources.Locale.L_ForecastQueryData_Qty</label>
+                        </div>
+                        <div class="pure-u-sm-6-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Qty" fieldname="Qty" name="Qty"  />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Qtyu" fieldname="Qtyu" name="Qtyu"  />
+                        </div>
+
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Gw" class="control-label">@Resources.Locale.L_BaseLookup_Gw</label>
+                        </div>
+                        <div class="pure-u-sm-6-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Gw" fieldname="Gw" name="Gw"/>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Gwu" fieldname="Gwu" name="Gwu"/>
+                        </div>
+                    </div>                  
+                </div>
+            </div>       
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <table id="SubGrid2" class="_tableGrid" style="width: 100%">
+                                <tr>                                        
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="SubGrid3" class="_tableGrid" style="width: 100%">
+                                    <tr>                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>
+</div>
+<input type="hidden" id="OUid" dt="mt" fieldname="OUid"  />
+<input type="hidden" id="OLocation" dt="mt" fieldname="OLocation"  />

@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "ConfirmReserve";
+}
+
+
+                    <script type="text/javascript">
+    $(document).ready(function ($) {
+
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        gop.gridColModel = [
+            { name: 'UId', title: '@Resources.Locale.L_GateReserve_UId', index:'UId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'TranType', title: '@Resources.Locale.L_BaseLookup_TranType', index: 'TranType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'F:FCL;L:LCL;A:AIR;D:INLAND EXPRESS;E:EXPRESS;R:Railroad;T:TRUCK;' }},
+            { name: 'UseDate', title: '@Resources.Locale.L_BaseLookup_PickupCdate', index: 'UseDate', width: 100, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'CargoType', title: '@Resources.Locale.L_DNApproveManage_CargoType', index: 'CargoType', width: 100, align: 'left', sorttype: 'string', hidden: false,formatter: "select",remark: 'A:@Resources.Locale.L_DNManage_Product;B:@Resources.Locale.L_DNManage_Mater;C:@Resources.Locale.L_ConfirmReserve_Script_29', editoptions:{ value: 'A:@Resources.Locale.L_DNManage_Product;B:@Resources.Locale.L_DNManage_Mater;C:@Resources.Locale.L_ConfirmReserve_Script_29'}},
+            { name: 'ReserveNo', title: '@Resources.Locale.L_GateReserve_ReveseNo', index: 'ReserveNo', width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BatNo', title: '@Resources.Locale.L_GateReserve_BatNo', index: 'BatNo', width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Status', title: '@Resources.Locale.L_GateReserve_Status', index: 'Status', width: 70, align: 'left', sorttype: 'string', hidden: false, formatter: "select",remark:'D:@Resources.Locale.L_DNManage_Called;R:@Resources.Locale.L_DNManage_Reserved;C:@Resources.Locale.L_DNManage_Confirmed;E:@Resources.Locale.L_DNManage_TempOut;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;V:@Resources.Locale.L_BSCSDateQuery_Cancel;P:@Resources.Locale.L_UserQuery_SealCnt;O:@Resources.Locale.L_UserQuery_Out;', editoptions: { value: 'D:@Resources.Locale.L_DNManage_Called;R:@Resources.Locale.L_DNManage_Reserved;C:@Resources.Locale.L_DNManage_Confirmed;E:@Resources.Locale.L_DNManage_TempOut;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;V:@Resources.Locale.L_BSCSDateQuery_Cancel;P:@Resources.Locale.L_UserQuery_SealCnt;O:@Resources.Locale.L_UserQuery_Out;' } },
+            { name: 'CallDate', title: '@Resources.Locale.L_GateReserveSetup_CallDate', index: 'CallDate', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DnNo', title: '@Resources.Locale.L_DNApproveManage_DnNo', index: 'DnNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ReserveDate', title: '@Resources.Locale.L_GateReserve_ReveseDate', index: 'ReserveDate', width: 80, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'ReserveFrom', title: '@Resources.Locale.L_GateStatus_ReserveFrom', index: 'ReserveFrom', width: 100, sorttype: 'string', editable: false, formatter: "select", editoptions: { value: '0:00\:00;1:01\:00;2:02\:00;3:03\:00;4:04\:00;5:05\:00;6:06\:00;7:07\:00;8:08\:00;9:09\:00;10:10\:00;11:11\:00;12:12\:00;13:13\:00;14:14\:00;15:15\:00;16:16\:00;17:17\:00;18:18\:00;19:19\:00;20:20\:00;21:21\:00;22:22\:00;23:23\:00' } },
+            { name: 'ReserveHour', title: '@Resources.Locale.L_GateReserveSetup_ReserveHour', index: 'ReserveHour', width: 80, align: 'right', sorttype: 'string', hidden: false },
+            { name: 'CutPortDate', title: '@Resources.Locale.L_BaseLookup_CutPortDate', index: 'CutPortDate', width: 90, align: 'left', sorttype: 'date', hidden: false, formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'PortDate', title: '@Resources.Locale.L_BaseLookup_PortDate', index: 'PortDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'GateNo', title: '@Resources.Locale.L_GateReserve_GateNo', index: 'GateNo', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Trucker', title: '@Resources.Locale.L_GateReserve_Trucker', index: 'Trucker', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TruckerNm', title: '@Resources.Locale.L_BSCSSetup_CmpName111', index: 'TruckerNm', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TruckNo', title: '@Resources.Locale.L_GateReserve_TruckNo', index: 'TruckNo', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CarrierNm', title: '@Resources.Locale.L_BaseLookup_Carrier', index: 'CarrierNm', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TruckCntrno', title: '@Resources.Locale.L_GateReserve_TruckCntrno', index: 'TruckCntrno', width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TruckSealno', title: '@Resources.Locale.L_GateReserve_TruckSealno', index: 'TruckSealno', width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntType', title: '@Resources.Locale.L_GateAnalysis_CntrType', index: 'CntType', width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntNumber', title: '@Resources.Locale.L_BaseLookup_CntNumber', index: 'CntNumber', width: 70, align: 'right', formatter: 'integer', hidden: false },
+            { name: 'Driver', title: '@Resources.Locale.L_GateReserve_Driver', index: 'Driver', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Tel', title: '@Resources.Locale.L_GateReserve_Tel', index: 'Tel', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'MfNo', title: '@Resources.Locale.L_GateAnalysis_MfNo', index: 'MfNo', width: 70, align: 'left', sorttype: 'string', hidden: false, classes: "uppercase" },
+            { name: 'WsCd', title: '@Resources.Locale.L_GateReserve_WsCd', index: 'WsCd', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RefGate', title: '@Resources.Locale.L_GateReserveSetup_REFGate', index: 'RefGate', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntrNo', title: '@Resources.Locale.L_GateReserve_CntrNo', index: 'CntrNo', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'OrderBy', title: '@Resources.Locale.L_GateReserve_ReserveBy', index: 'OrderBy', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ReserveDate', title: '@Resources.Locale.L_GateReserve_ReserveDate', index: 'ReserveDate', width: 80, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'PickDate', title: '@Resources.Locale.L_DNManage_PickCntr', index: 'PickDate', width: 80, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'Cmp', title: '@Resources.Locale.L_IpPart_Cmp', index: 'Cmp', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateDep', title: '@Resources.Locale.L_GateReserveSetup_CreateDep', index: 'CreateDep', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateExt', title: '@Resources.Locale.L_GateReserveSetup_CreateExt', index: 'CreateExt', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ConfirmBy', title: '@Resources.Locale.L_GateReserve_ConfirmBy', index: 'ConfirmBy', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ConfirmDate', title: '@Resources.Locale.L_GateReserve_ConfirmDate', index: 'ConfirmDate', width: 80, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'SmcreateBy', title: '@Resources.Locale.L_GateReserve_SmcreateBy', index: 'SmcreateBy', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'EptIdate', title: '@Resources.Locale.L_GateAnalysis_EptIdate', index: 'EptIdate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'EptOdate', title: '@Resources.Locale.L_GateAnalysis_EptOdate', index: 'EptOdate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'Gw', title: '@Resources.Locale.L_BaseLookup_Gw', index: 'Gw', width: 70, align:'right', sorttype: 'float', editable: true,
+                formatter: 'number',
+                formatoptions: {
+                    decimalSeparator: ".",
+                    thousandsSeparator: ",",
+                    decimalPlaces: 3,
+                    defaultValue: '0.000'
+                }
+            },
+            { name: 'Cbm', title: '@Resources.Locale.L_DNManage_Volume', index: 'Cbm', width: 70, align:'right', sorttype: 'float', editable: true,
+                formatter: 'number',
+                formatoptions: {
+                    decimalSeparator: ".",
+                    thousandsSeparator: ",",
+                    decimalPlaces: 3,
+                    defaultValue: '0.000'
+                }
+            },
+            { name: 'ReleaseNo', title: '@Resources.Locale.M_SYS_ReleaseNo', index: 'ReleaseNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ShipmentId', title: '@Resources.Locale.L_DNApproveManage_ShipmentId', index: 'ShipmentId', width: 130, align: 'left', sorttype: 'string', hidden: false }
+    ];
+    //gop.AddUrl = { "url": rootPath + "GateManage/ConfirmReserveSetup", "title": "@Resources.Locale.L_DNManage_ReserveConfSet", "id": "ConfirmReserveSetup" };
+    gop.AddUrl = false;
+    gop.gridId = "containerInfoGrid";
+    gop.gridAttr = { caption: "@Resources.Locale.L_DNManage_ReserveConf", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    gop.gridSearchUrl = rootPath + "GateManage/GetGateData";
+    gop.searchColumns = getSelectColumn(gop.gridColModel);
+    //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+
+    gop.BtnGroupId = "BtnGroupArea";
+
+    gop.StatusAreaId = "StatusArea";
+    gop.statusGroup = [
+        { "id": "R", "label": "@Resources.Locale.L_DNManage_Reserved" },
+        { "id": "C", "label": "@Resources.Locale.L_DNManage_Confirmed" },
+        { "id": "I", "label": "@Resources.Locale.L_UserQuery_In" },
+        { "id": "G", "label": "@Resources.Locale.L_DNManage_Gated" },
+        { "id": "P", "label": "@Resources.Locale.L_UserQuery_SealCnt" },
+        { "id": "O", "label": "@Resources.Locale.L_UserQuery_Out" },
+        { "id": "V", "label": "@Resources.Locale.L_BSCSDateQuery_Cancel" },
+        { "id": "E", "label": "@Resources.Locale.L_DNManage_TempOut" }
+    ];
+
+    gop.statusField = "Status";
+    gop.statusDefaultId = "R";
+    gop.statusPreLoad = true;
+
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        dblClick(map);
+    }
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.loadCompleteFunc = function () {
+        var $grid = $("#containerInfoGrid");
+        if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+            $grid[0].p.sortname = "CreateDate";
+    }
+
+    initSearch(gop);
+
+    function dblClick(map) {
+        var UId = map.UId;
+        top.topManager.openPage({
+            href: rootPath + "GateManage/ConfirmReserveSetup/" + UId,
+            title: '@Resources.Locale.L_DNManage_ReserveConfSet',
+            id: 'ConfirmReserveSetup',
+            search: 'uid=' + UId
+        });
+    }
+    });
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

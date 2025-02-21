@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "TpvPortSetup";
+}
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Flag" class="control-label">@Resources.Locale.L_TpvPortQuery_Flag</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="Flag" name="Flag" fieldname="Flag">
+                                <option value="L">@Resources.Locale.L_TpvPortQuery_Pol</option>
+                                <option value="D">@Resources.Locale.L_TpvPortQuery_Pod</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Cnty" class="control-label">@Resources.Locale.L_CitySetup_CntryCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cnty" name="Cnty" fieldname="Cnty" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CntyLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CntyNm" name="CntyNm" fieldname="CntyNm" readonly />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Port" class="control-label">@Resources.Locale.L_TpvPortQuery_Port</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Port" name="Port" fieldname="Port" style="text-transform:uppercase" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PortNm" class="control-label">@Resources.Locale.L_TpvPortQuery_PortNm</label>
+                        </div>
+                        <div class="pure-u-sm-25-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PortNm" name="PortNm" fieldname="PortNm" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="ProlinkCd" class="control-label">@Resources.Locale.L_TpvPortQuery_ProlinkCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ProlinkCd" name="ProlinkCd" fieldname="ProlinkCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="ProlinkCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="TruckPort" class="control-label">@Resources.Locale.L_TpvPortQuery_TruckPort</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TruckPort" name="TruckPort" fieldname="TruckPort" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="TruckPortLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class ="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="CreateBy" class="control-label">@Resources.Locale.L_IpPart_CreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" fieldname="CreateBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" fieldname="CreateDate" readonly>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ModifyBy" class="control-label">@Resources.Locale.L_IpPart_ModifyBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" fieldname="ModifyBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" fieldname="ModifyDate" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.RazorJSInclude("~/Scripts/System/TpvPortSetup.js")
+<script type="text/javascript">
+    var flag = "@ViewBag.Flag";
+    var cnty = "@ViewBag.Cnty";
+    var port = "@ViewBag.Port";
+    var schemas = "@ViewBag.schemas.Content";
+</script>

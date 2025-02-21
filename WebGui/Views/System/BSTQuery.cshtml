@@ -1,0 +1,324 @@
+﻿@{
+    ViewBag.Title = "BSTQuery";
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        gop.gridColModel = [
+            {"name":"UId","index":"UId","title":"NUId","width":80,"align":"left","sorttype":"string","hidden":true},
+            {"name":"Profile","index":"Profile","title":"Profile ID","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"ProfileNm","index":"ProfileNm","title":"Profile Name","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Cmp","index":"Cmp","title":"Location","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"CmpNm","index":"CmpNm","title":"Location Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"CustCd","index":"CustCd","title":"Customer Code","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"CustNm","index":"CustNm","title":"Customer Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"InvFlow","index":"InvFlow","title":"InvFlow","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"ModelName","index":"ModelName","title":"@Resources.Locale.L_BSTQuery_ModelName","width":100,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Stn","index":"Stn","title":"Company","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"StnNm","index":"StnNm","title":"Company Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"BlType","index":"BlType","title":"BL Type","width":61,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Seller","index":"Seller","title":"Seller","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"SellerNm","index":"SellerNm","title":"SellerNm","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Buyer1","index":"Buyer1","title":"Buyer1","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Buyer1Nm","index":"Buyer1Nm","title":"Buyer1 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Incoterm1","index":"Incoterm1","title":"Incoterm1","width":63,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Buyer2","index":"Buyer2","title":"Buyer2","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Buyer2Nm","index":"Buyer2Nm","title":"Buyer2 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Incoterm2","index":"Incoterm2","title":"Incoterm2","width":63,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Buyer3","index":"Buyer3","title":"Buyer3","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Buyer3Nm","index":"Buyer3Nm","title":"Buyer3 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Incoterm3","index":"Incoterm3","title":"Incoterm3","width":63,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Buyer4","index":"Buyer4","title":"Buyer4","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Buyer4Nm","index":"Buyer4Nm","title":"Buyer4 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Incoterm4","index":"Incoterm4","title":"Incoterm4","width":63,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Buyer5","index":"Buyer5","title":"Buyer5","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Buyer5Nm","index":"Buyer5Nm","title":"Buyer5 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Incoterm5","index":"Incoterm5","title":"Incoterm5","width":63,"align":"left","sorttype":"string","hidden":false},
+            //{"name":"Dest","index":"Dest","title":"Dest","width":65,"align":"left","sorttype":"string","hidden":false},
+            {"name":"CneeCd","index":"CneeCd","title":"@Resources.Locale.L_ForecastQueryData_Consignee","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"CneeNm","index":"CneeNm","title":"Consignee Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"ShprCd","index":"ShprCd","title":"Shipper Code","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"ShprNm","index":"Shipper","title":"Shipper Name","width":160,"align":"left","sorttype":"string","hidden":false},
+            {"name":"ShippingMode","index":"ShippingMode","title":"Shipping Mode","width":64,"align":"left","sorttype":"string","hidden":false},
+            {"name":"ShippingNm","index":"ShippingNm","title":"Shipping Name","width":90,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Notify1","index":"Notify1","title":"Notify1","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Notify1Nm","index":"Notify1Nm","title":"Notify1 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Notify2","index":"Notify2","title":"Notify2","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Notify2Nm","index":"Notify2Nm","title":"Notify2 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Notify3","index":"Notify3","title":"Notify3","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Notify3Nm","index":"Notify3Nm","title":"Notify3 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Carrier1","index":"Carrier1","title":"Carrier1","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"CarrierNm1","index":"CarrierNm1","title":"Carrier1 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"ContactNo1","index":"ContactNo1","title":"Contact No.1","width":90,"align":"left","sorttype":"string","hidden":false},
+            {"name":"LspNo1","index":"LspNo1","title":"Booking Agent1","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"LspNm1","index":"LspNm1","title":"Booking Agent1 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"LspInfo1","index":"LspInfo1","title":"Contact Info1","width":90,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Carrier2","index":"Carrier2","title":"Carrier2","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"CarrierNm2","index":"CarrierNm2","title":"Carrier2 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"ContactNo2","index":"ContactNo2","title":"ContactNo2","width":90,"align":"left","sorttype":"string","hidden":false},
+            {"name":"LspNo2","index":"LspNo2","title":"Booking Agent2","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"LspNm2","index":"LspNm2","title":"Booking Agent2 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"LspInfo2","index":"LspInfo2","title":"Contact Info2","width":90,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Carrier3","index":"Carrier3","title":"Carrier3","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"CarrierNm3","index":"CarrierNm3","title":"Carrier3 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"ContactNo3","index":"ContactNo3","title":"Contact No3","width":90,"align":"left","sorttype":"string","hidden":false},
+            {"name":"LspNo3","index":"LspNo3","title":"Booking Agent3","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"LspNm3","index":"LspNm3","title":"Booking Agent3 Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"LspInfo3","index":"LspInfo3","title":"Contact Info3","width":90,"align":"left","sorttype":"string","hidden":false},
+            {"name":"CcCd","index":"CcCd","title":"Nominated C/C","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"CcNm","index":"CcNm","title":"Nominated C/C Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"DtCd","index":"DtCd","title":"Inbound Trucker","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"DtNm","index":"DtNm","title":"Inbound Trucker Name","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Commodity","index":"Commodity","title":"Commodity","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"BillType","index":"BillType","title":"Bill Type","width":100,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Combine","index":"Combine","title":"Combine","width":61,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Lc","index":"Lc","title":"@Resources.Locale.L_BSTSetup_Lc","width":61,"align":"left","sorttype":"string","hidden":false},
+            {"name":"FclLcl","index":"FclLcl","title":"FCL/LCL","width":63,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Doc1","index":"Doc1","title":"Doc1","width":80,"align":"left","sorttype":"string","hidden":false},
+            {"name":"MailGroup1","index":"MailGroup1","title":"NMailGroup1","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Doc2","index":"Doc2","title":"Doc2","width":80,"align":"left","sorttype":"string","hidden":false},
+            {"name":"MailGroup2","index":"MailGroup2","title":"NMailGroup2","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Doc3","index":"Doc3","title":"Doc3","width":80,"align":"left","sorttype":"string","hidden":false},
+            {"name":"MailGroup3","index":"MailGroup3","title":"NMailGroup3","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Doc4","index":"Doc4","title":"Doc4","width":80,"align":"left","sorttype":"string","hidden":false},
+            {"name":"MailGroup4","index":"MailGroup4","title":"NMailGroup4","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"Doc5","index":"Doc5","title":"Doc5","width":80,"align":"left","sorttype":"string","hidden":false},
+            {"name":"MailGroup5","index":"MailGroup5","title":"NMailGroup5","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"ShippingMark","index":"ShippingMark","title":"ShippingMark","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"BlRemark1","index":"BlRemark1","title":"BL Remark1","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"BlRemark2","index":"BlRemark2","title":"BL Remark2","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"BlRemark3","index":"BlRemark3","title":"BL Remark3","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"BlRemark4","index":"BlRemark4","title":"BL Remark4","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"BlRemark5","index":"BlRemark5","title":"BL Remark5","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"BlRemark6","index":"BlRemark6","title":"BL Remark6","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"InvRemark1","index":"InvRemark1","title":"Invoice Remark1","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"InvRemark2","index":"InvRemark2","title":"Invoice Remark2","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"InvRemark3","index":"InvRemark3","title":"Invoice Remark3","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"InvRemark4","index":"InvRemark4","title":"Invoice Remark4","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"InvRemark5","index":"InvRemark5","title":"Invoice Remark5","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"InvRemark6","index":"InvRemark6","title":"Invoice oice Remark6","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"PkRemark1","index":"PkRemark1","title":"Packing Remark1","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"PkRemark2","index":"PkRemark2","title":"Packing Remark2","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"PkRemark3","index":"PkRemark3","title":"Packing Remark3","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"PkRemark4","index":"PkRemark4","title":"Packing Remark4","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"PkRemark5","index":"PkRemark5","title":"Packing Remark5","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"PkRemark6","index":"PkRemark6","title":"Packing Remark6","width":200,"align":"left","sorttype":"string","hidden":false},
+            {"name":"CreateBy","index":"CreateBy","title":"Create By","width":80,"align":"left","sorttype":"string","hidden":false},
+            {"name":"CreateDep","index":"CreateDep","title":"Create Dep","width":70,"align":"left","sorttype":"string","hidden":false},
+            {"name":"CreateExt","index":"CreateExt","title":"Create Ext","width":70,"align":"left","sorttype":"string","hidden":false},
+            { "name": "CreateDate", "index": "CreateDate", "title": "Create Date", "width": 120, "align": "left", "sorttype": "string", "formatter": "date", "formatoptions": { "srcformat": "ISO8601Long", "newformat": "Y-m-d H:i" }, "hidden": false },
+            {"name":"ModifyBy","index":"ModifyBy","title":"Modify By","width":80,"align":"left","sorttype":"string","hidden":false},
+            { "name": "ModifyDate", "index": "ModifyDate", "title": "Modify Date", "width": 120, "align": "left", "sorttype": "string", "formatter": "date", "formatoptions": { "srcformat": "ISO8601Long", "newformat": "Y-m-d H:i" }, "hidden": false },
+            {"name":"FlowDescp","index":"FlowDescp","title":"Flow Description","width":110,"align":"left","sorttype":"string","hidden":false},
+            {"name":"PriceTerm","index":"PriceTerm","title":"Price Term","width":65,"align":"left","sorttype":"string","hidden":false},
+            {"name":"PaymentTerm","index":"PaymentTerm","title":"Payment Term","width":65,"align":"left","sorttype":"string","hidden":false},
+            //{"name":"BlSpcReq","index":"BlSpcReq","title":"BlSpcReq","width":200,"align":"left","sorttype":"string","hidden":false},
+            //{"name":"PkDescp","index":"PkDescp","title":"PkDescp","width":80,"align":"left","sorttype":"string","hidden":false},
+            {"name":"FreightTerm","index":"FreightTerm","title":"Freight Term","width":65,"align":"left","sorttype":"string","hidden":false},
+            {"name":"DestNm","index":"DestNm","title":"Destination","width":130,"align":"left","sorttype":"string","hidden":false},
+            {"name":"PodNm","index":"PodNm","title":"POD","width":130,"align":"left","sorttype":"string","hidden":false},
+            //{"name":"InvSpec","index":"InvSpec","title":"InvSpec","width":200,"align":"left","sorttype":"string","hidden":false},
+            //{"name":"PkSpec","index":"PkSpec","title":"PkSpec","width":200,"align":"left","sorttype":"string","hidden":false},
+            //{"name":"Pod","index":"Pod","title":"NPod","width":65,"align":"left","sorttype":"string","hidden":false},
+            {"name":"PoHeader","index":"PoHeader","title":"PO Header","width":80,"align":"left","sorttype":"string","hidden":false},
+            {"name":"ModelHeader","index":"ModelHeader","title":"Model Header","width":80,"align":"left","sorttype":"string","hidden":false},
+            {"name":"PkgDescp","index":"PkgDescp","title":"Pkg Descp","width":61,"align":"left","sorttype":"string","hidden":false},
+            {"name":"PartHeader","index":"PartHeader","title":"Part Header","width":80,"align":"left","sorttype":"string","hidden":false}
+        ];
+        gop.AddUrl = { "url": rootPath + "System/BSTDataSetup", "title": "@Resources.Locale.L_BSTQuery_CustTranSet", "id": "BSTSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_BSTQuery_CustTran", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "SMPTY/SmsimQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        gop.btnGroup = [
+            {
+                id: "btn01",
+                name: "@Resources.Locale.L_BSTQuery_SynSAP",
+                func: function () {
+                        var confirmReload = window.confirm("@Resources.Locale.L_BSTQuery_ContSAP");
+                        if (!confirmReload) return;
+                        $.ajax({
+                            async: true,
+                            url: rootPath + "System/SynchronizationProfile",
+                            type: 'POST',
+                            "error": function (xmlHttpRequest, errMsg) {
+                                var resJson = $.parseJSON(errMsg)
+                                CommonFunc.Notify("", resJson.errMsg, 500, "warning");
+                            },
+                            success: function (data) {
+                                if (data.errMsg) {
+                                    alert(data.errMsg);
+                                    return false;
+                                }
+                                $("#SummarySearch").trigger("click");
+                            }
+                        });
+                }
+            },
+            {
+                id: "btn02",
+                name: "@Resources.Locale.L_BSTQuery_ImpSI",
+                func: function () {
+                    $("#uploadSmrvDailog").modal("show");
+                    resetFileInput($("#smrvUploadExcel"));
+                }
+            },
+        ];
+
+        initSearch(gop);
+
+        function dblClick(map) {
+            var UId = map.UId;
+            top.topManager.openPage({
+                href: rootPath + "System/BSTDataSetup/" + UId,
+                title: '@Resources.Locale.L_BSTQuery_CustTranSet',
+                id: 'BSTSetup',
+                search : 'uid=' + UId
+            });
+        }
+
+        $("#SMRV_UPLOAD_FROM").submit(function(){
+            var postData = new FormData($(this)[0]);
+            $.ajax({
+                url: rootPath + "GateManage/UploadSI",
+                type: 'POST',
+                data: postData,
+                async: true,
+                beforeSend: function(){
+                    CommonFunc.ToogleLoading(true);
+                    StatusBarArr.nowStatus("@Resources.Locale.L_BSTQuery_Uploading");
+                },
+                error: function (xmlHttpRequest, errMsg) {
+                    resetFileInput($("#smrvUploadExcel"));
+                    CommonFunc.Notify("", "error", 500, "warning");
+                    CommonFunc.ToogleLoading(false);
+                    StatusBarArr.nowStatus("");
+                },
+                success: function (data) {
+                    resetFileInput($("#smrvUploadExcel"));
+                    //alert(data)
+                    CommonFunc.ToogleLoading(false);
+                    StatusBarArr.nowStatus("");
+                    if (data.message != "") {
+                        //CommonFunc.Notify("", "汇入失败" + data.message, 1300, "warning");
+                        alert(data.message);
+                        return false;
+                    }
+                    CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpSuc", 500, "success");
+                    $("#uploadExcelFile").modal("hide");
+
+                    $("#SummarySearch").click();
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+
+            return false;
+        });
+    });
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->
+<div class="modal fade" id="uploadSmrvDailog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_BSTQuery_ImpExcel</h4>
+            </div>
+            <form name="EXCEL_UPLOAD_FROM" id="SMRV_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-7-60">
+                            <label for="StartRow" class="control-label">@Resources.Locale.L_BSTQuery_BeginRow</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="number" class="form-control input-sm" id="StartRow" name="StartRow" isNumber="true"  value="1"/>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_BeginRow" id="smrvUploadExcel" name="file"/>
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="uploadSmrvBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->

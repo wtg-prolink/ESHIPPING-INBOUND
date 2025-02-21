@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "PartyFilterSetup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #page-wrapper {
+        padding: 5px;
+    }
+</style>
+@Html.RazorJSInline("~/Scripts/System/PartyFilterSetup.js")
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="PartyFilterGrid" class="_tableGrid" style="width: 100%">
+                        <tr>
+                            <td />
+                        </tr>
+                    </table>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>

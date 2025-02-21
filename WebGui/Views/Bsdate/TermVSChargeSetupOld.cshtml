@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "TermVSChargeSetup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #page-wrapper {
+        padding: 5px;
+    }
+</style>
+@Html.RazorJSInline("~/Scripts/Bsdate/TermVSChargeSetupOld.js")
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="TermvschgGrid" class="_tableGrid" style="width: 100%">
+                        <tr>
+                            <td />
+                        </tr>
+                    </table>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>

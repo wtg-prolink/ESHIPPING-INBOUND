@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/CommonClassLibrary.model.TPV" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CommonClassLibrary.model.TPV" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="TPVInboundOrderRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AtaPort" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Carrier" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ContainerNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Destionation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EtaHub" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EtaPort" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EtaTerminal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EtdChina" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfItem" />
+      <xs:element minOccurs="0" name="SealNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShipmentId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Vessel" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TPVInboundOrderRequest" nillable="true" type="tns:TPVInboundOrderRequest" />
+  <xs:complexType name="ArrayOfItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Item" nillable="true" type="tns:Item" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfItem" nillable="true" type="tns:ArrayOfItem" />
+  <xs:complexType name="Item">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Model" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Qty" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Item" nillable="true" type="tns:Item" />
+  <xs:complexType name="TruckerInfomation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AtYardDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ContainerNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Driver" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EachCntrQty" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmptyReturnDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GateInDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GateOutDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HeavyPickupDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Mobile" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Mode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewEtaHub" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewTrailerNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OutputFormat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OutputImage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PodDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PortDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PortTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReceivedDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReserveNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sender" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShipDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShipmentId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TerminDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Warehouse" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TruckerInfomation" nillable="true" type="tns:TruckerInfomation" />
+</xs:schema>

@@ -1,0 +1,587 @@
+﻿@{
+    ViewBag.Title = "GateReserve";
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        gop.gridColModel = [
+            { name: 'UId', title: '@Resources.Locale.L_GateReserve_UId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'CargoType', title: '@Resources.Locale.L_DNApproveManage_CargoType', index: 'CargoType', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark:'A:@Resources.Locale.L_DNManage_Product;B:@Resources.Locale.L_DNManage_Mater;C:@Resources.Locale.L_ConfirmReserve_Script_29', editoptions: { value: 'A:@Resources.Locale.L_DNManage_Product;B:@Resources.Locale.L_DNManage_Mater;C:@Resources.Locale.L_ConfirmReserve_Script_29' } },
+            { name: 'UseDate', title: '@Resources.Locale.L_BaseLookup_PickupCdate', index: 'UseDate', width: 100, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'TranType', title: '@Resources.Locale.L_BaseLookup_TranType', index: 'TranType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'F:FCL;L:LCL;A:AIR;D:INLAND EXPRESS;E:EXPRESS;R:Railroad;T:TRUCK;' }},
+            { name: 'ShipmentId', title: 'Shipmment ID', index: 'ShipmentId', width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ReserveNo', title: '@Resources.Locale.L_GateReserve_ReveseNo', index: 'ReserveNo', width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BatNo', title: '@Resources.Locale.L_GateReserve_BatNo', index: 'BatNo', width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Status', title: '@Resources.Locale.L_GateReserve_Status', index: 'Status', width: 70, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: 'D:@Resources.Locale.L_DNManage_Called;R:@Resources.Locale.L_DNManage_Reserved;C:@Resources.Locale.L_DNManage_Confirmed;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;V:@Resources.Locale.L_BSCSDateQuery_Cancel;P:@Resources.Locale.L_UserQuery_SealCnt;O:@Resources.Locale.L_UserQuery_Out;E:@Resources.Locale.L_DNManage_TempOut;', editoptions: { value: 'D:@Resources.Locale.L_DNManage_Called;R:@Resources.Locale.L_DNManage_Reserved;C:@Resources.Locale.L_DNManage_Confirmed;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;V:@Resources.Locale.L_BSCSDateQuery_Cancel;P:@Resources.Locale.L_UserQuery_SealCnt;O:@Resources.Locale.L_UserQuery_Out;E:@Resources.Locale.L_DNManage_TempOut;' } },
+            { name: 'CallDate', title: '@Resources.Locale.L_GateReserveSetup_CallDate', index: 'CallDate', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DnNo', title: '@Resources.Locale.L_DNApproveManage_DnNo', index: 'DnNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ReserveDate', title: '@Resources.Locale.L_GateReserve_ReveseDate', index: 'ReserveDate', width: 80, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'ReserveFrom', title: '@Resources.Locale.L_GateStatus_ReserveFrom', index: 'ReserveFrom', width: 100, sorttype: 'string', editable: false, formatter: "select", editoptions: { value: '0:00\:00;1:01\:00;2:02\:00;3:03\:00;4:04\:00;5:05\:00;6:06\:00;7:07\:00;8:08\:00;9:09\:00;10:10\:00;11:11\:00;12:12\:00;13:13\:00;14:14\:00;15:15\:00;16:16\:00;17:17\:00;18:18\:00;19:19\:00;20:20\:00;21:21\:00;22:22\:00;23:23\:00' } },
+            { name: 'ReserveHour', title: '@Resources.Locale.L_GateReserveSetup_ReserveHour', index: 'ReserveHour', width: 80, align: 'right', sorttype: 'string', hidden: false },
+
+            { name: 'CutPortDate', title: '@Resources.Locale.L_BaseLookup_CutPortDate', index: 'CutPortDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" }, caption: '@Resources.Locale.L_BaseLookup_CutPortDate' },
+            { name: 'GateNo', title: '@Resources.Locale.L_GateReserve_GateNo', index: 'GateNo', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Carrier', title: '@Resources.Locale.L_DNApproveManage_CaCd', index: 'Carrier', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CarrierNm', title: 'Carrier Name', index: 'CarrierNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Trucker', title: '@Resources.Locale.L_GateReserve_Trucker', index: 'Trucker', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TruckNo', title: '@Resources.Locale.L_GateReserve_TruckNo', index: 'TruckNo', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntType', title: '@Resources.Locale.L_GateAnalysis_CntrType', index: 'CntType', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntNumber', title: '@Resources.Locale.L_BaseLookup_CntNumber', index: 'CntNumber', width: 70, align: 'right', formatter: 'integer', hidden: false },
+            { name: 'Dim', title: '@Resources.Locale.L_GateReserveSetup_Dim', index: 'Dim', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Driver', title: '@Resources.Locale.L_GateReserve_Driver', index: 'Driver', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Tel', title: '@Resources.Locale.L_GateReserve_Tel', index: 'Tel', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'MfNo', title: '@Resources.Locale.L_GateAnalysis_MfNo', index: 'MfNo', width: 70, align: 'left', sorttype: 'string', hidden: false, classes: "uppercase" },
+            { name: 'WsCd', title: '@Resources.Locale.L_GateReserve_WsCd', index: 'WsCd', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RefGate', title: '@Resources.Locale.L_GateReserveSetup_REFGate', index: 'RefGate', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntrNo', title: '@Resources.Locale.L_GateReserve_CntrNo', index: 'CntrNo', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'OrderBy', title: '@Resources.Locale.L_GateReserve_ReserveBy', index: 'OrderBy', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ReserveDate', title: '@Resources.Locale.L_GateReserve_ReserveDate', index: 'ReserveDate', width: 80, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'Cmp', title: '@Resources.Locale.L_IpPart_Cmp', index: 'Cmp', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateDep', title: '@Resources.Locale.L_GateReserveSetup_CreateDep', index: 'CreateDep', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateExt', title: '@Resources.Locale.L_GateReserveSetup_CreateExt', index: 'CreateExt', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ConfirmBy', title: '@Resources.Locale.L_GateReserve_ConfirmBy', index: 'ConfirmBy', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ConfirmDate', title: '@Resources.Locale.L_GateReserve_ConfirmDate', index: 'ConfirmDate', width: 80, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'SmcreateBy', title: '@Resources.Locale.L_GateReserve_SmcreateBy', index: 'SmcreateBy', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'EptIdate', title: '@Resources.Locale.L_GateAnalysis_EptIdate', index: 'EptIdate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'EptOdate', title: '@Resources.Locale.L_GateAnalysis_EptOdate', index: 'EptOdate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'Gw', title: '@Resources.Locale.L_BaseLookup_Gw', index: 'Gw', width: 70, align:'right', sorttype: 'float', editable: true,
+                formatter: 'number',
+                formatoptions: {
+                    decimalSeparator: ".",
+                    thousandsSeparator: ",",
+                    decimalPlaces: 3,
+                    defaultValue: '0.000'
+                }
+            },
+            { name: 'Cbm', title: '@Resources.Locale.L_DNManage_Volume', index: 'Cbm', width: 70, align:'right', sorttype: 'float', editable: true,
+                formatter: 'number',
+                formatoptions: {
+                    decimalSeparator: ".",
+                    thousandsSeparator: ",",
+                    decimalPlaces: 3,
+                    defaultValue: '0.000'
+                }
+            },
+            { name: 'Etd', title: 'ETD', index: 'Etd', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d" } },
+            { name: 'FcCd', title: '@Resources.Locale.L_DNApproveManage_FiCustCd', index: 'FcCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'NightMove', title: '@Resources.Locale.L_ContainerManage_NightCount', index: 'NightMove', width: 70, align: 'right', sorttype: 'float', hidden: false },
+            { name: 'MoveNumber', title: '@Resources.Locale.L_GateAnalysis_TotalMoveNumber', index: 'MoveNumber', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'FcNm', title: '@Resources.Locale.L_DNApproveManage_FiCustNm', index: 'FcNm', width: 100, align: 'left', sorttype: 'string', hidden: false }
+    ];
+
+    //gop.AddUrl = { "url": rootPath + "GateManage/GateReserveSetup", "title": "@Resources.Locale.L_GateReserve_GateReserveSetup", "id": "GateReserveSetup" };
+    gop.AddUrl = false;
+    gop.gridId = "containerInfoGrid";
+    gop.gridAttr = { caption: "@Resources.Locale.L_GateReserve_GateReserve", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition),sortname:"Status" };
+    //gop.gridSearchUrl = rootPath + "IPPOM/POMSetupInquiryData";
+    gop.gridSearchUrl = rootPath + "GateManage/GetGateData";
+    gop.searchColumns = getSelectColumn(gop.gridColModel);
+    //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.StatusAreaId = "StatusArea";
+    gop.BtnGroupId = "BtnGroupArea";
+    gop.multiselect = true;
+
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        dblClick(map);
+    }
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.loadCompleteFunc = function () {
+        var $grid = $("#containerInfoGrid");
+        if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+            $grid[0].p.sortname = "CreateDate";
+    }
+
+    gop.btnGroup = [
+        {
+            id: "btn03",
+            name: "@Resources.Locale.L_DNManage_ParRer",
+            func: function () {
+                var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+                var ids = "";
+                if(selRowId.length > 0)
+                {
+                    var UId = "";
+                    var Trucker = "", oTrucker = "";
+                    var BatNo = "";
+                    var Status = "";
+                    var MfNo = "", oMfNo="";
+                    for(var i=0; i<selRowId.length; i++)
+                    {
+                        UId = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'UId');
+                        Trucker = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'Trucker');
+                        BatNo = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'BatNo');
+                        Status = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'Status');
+                        MfNo = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'MfNo');
+                        if(i == 0)
+                        {
+                            ids += UId;
+                            oTrucker = Trucker;
+                            oMfNo = MfNo;
+                        }
+                        else
+                        {
+                            ids += ";;" + UId;
+                        }
+
+                        if(Trucker != oTrucker)
+                        {
+                            alert("@Resources.Locale.L_GateReserve_Script_30");
+                            return;
+                        }
+                        else
+                        {
+                            oTrucker = Trucker;
+                        }
+
+                        if(MfNo != oMfNo)
+                        {
+                            alert("@Resources.Locale.L_GateReserve_Script_31");
+                            return;
+                        }
+                        else
+                        {
+                            oMfNo = MfNo;
+                        }
+
+                        if(BatNo != "")
+                        {
+                            alert("@Resources.Locale.L_GateManageController_Controllers_154");
+                            return;
+                        }
+
+                        if(Status == "O")
+                        {
+                            alert ("@Resources.Locale.L_GateReserve_Script_32");
+                            return;
+                        }
+                    }
+
+                    UId = $("#containerInfoGrid").jqGrid('getCell', selRowId[0], 'UId');
+                    top.topManager.openPage({
+                        href: rootPath + "GateManage/GateReserveSetup/" + UId + "?ids=" + ids,
+                        title: '@Resources.Locale.L_GateReserve_GateReserveSetup',
+                        id: 'GateReserveSetup',
+                        reload:true
+                    });
+                }
+                else
+                {
+                    alert("@Resources.Locale.L_ActManage_Select");
+                    return;
+                }
+            }
+        },
+        {
+            id: "btn01",
+            name: "@Resources.Locale.L_GateReserve_Views_406",
+            func: function () {
+                var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+                if(selRowId.length > 0)
+                {
+                    var BatNo = "";
+                    for(var i=0; i<selRowId.length; i++)
+                    {
+                        BatNo = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'BatNo');
+                        if(BatNo != "")
+                        {
+                            alert("@Resources.Locale.L_GateReserve_Script_33");
+                            return;
+                        }
+                    }
+                    var MfNo = "", oMfNo = "";
+                    for(var i=0; i<selRowId.length; i++)
+                    {
+                        MfNo = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'MfNo');
+                        if(i == 0)
+                        {
+                            oMfNo = MfNo;
+                        }
+
+                        if(MfNo != oMfNo)
+                        {
+                            alert("@Resources.Locale.L_GateReserve_Script_31");
+                            return;
+                        }
+                        else
+                        {
+                            oMfNo = MfNo;
+                        }
+                    }
+                    $("#BatQueryDialog").modal("show");
+                }
+                else
+                {
+                    alert("@Resources.Locale.L_ActManage_Select");
+                    return;
+                }
+
+            }
+        },
+        {
+            id: "btn02",
+            name: "@Resources.Locale.L_GateReserve_Views_409",
+            func: function () {
+                var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+                var Status = "";
+                var ids="";
+                if(selRowId.length > 0)
+                {
+                    for(var i=0; i<selRowId.length; i++)
+                    {
+                        UId = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'UId');
+                        Status = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'Status');
+                        if(Status == "O" || Status == "E")
+                        {
+                            alert ("@Resources.Locale.L_GateReserve_Script_34");
+                            return;
+                        }
+
+                        if(i == 0)
+                        {
+                            ids += UId;
+                        }
+                        else
+                        {
+                            ids += ";;" + UId;
+                        }
+                    }
+                    CommonFunc.ToogleLoading(true);
+                    $.post(rootPath + 'GateManage/removeBatNo', {ids: ids}, function(data, textStatus, xhr) {
+                        if(data.message == "success")
+                        {
+                            CommonFunc.Notify("", "@Resources.Locale.L_DNManage_CanS", 500, "success");
+                            $("#SummarySearch").click();
+                        }
+                        else
+                        {
+                            CommonFunc.Notify("", data.message, 500, "warning");
+                        }
+                        CommonFunc.ToogleLoading(false);
+                        return;
+                    }).fail(function() {
+                        alert( "Error" );
+                        CommonFunc.ToogleLoading(false);
+                    });
+                }
+                else
+                {
+                    alert("@Resources.Locale.L_GateReserve_Script_35");
+                    return;
+                }
+            }
+        },
+        {
+            id: "btn04",
+            name: "@Resources.Locale.L_GateReserve_Views_415",
+            func: function () {
+                var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+                var Status = "";
+                var ids="";
+                if(selRowId.length > 0)
+                {
+                    for(var i=0; i<selRowId.length; i++)
+                    {
+                        UId = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'UId');
+                        Status = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'Status');
+                        if(Status == "O" || Status == "E" || Status == "I" || Status == "G" || Status == "P")
+                        {
+                            alert ("@Resources.Locale.L_GateReserve_Script_36");
+                            return;
+                        }
+
+                        if(i == 0)
+                        {
+                            ids += UId;
+                        }
+                        else
+                        {
+                            ids += ";;" + UId;
+                        }
+                    }
+                    CommonFunc.ToogleLoading(true);
+                    $.post(rootPath + 'GateManage/cancelReserve', {ids: ids}, function(data, textStatus, xhr) {
+                        if(data.message == "success")
+                        {
+                            CommonFunc.Notify("", "@Resources.Locale.L_DNManage_CancelS", 500, "success");
+                            $("#SummarySearch").click();
+                        }
+                        else
+                        {
+                            CommonFunc.Notify("", data.message, 500, "warning");
+                        }
+                        CommonFunc.ToogleLoading(false);
+                        return;
+                    }).fail(function() {
+                        alert( "Error" );
+                        CommonFunc.ToogleLoading(false);
+                    });
+                }
+                else
+                {
+                    alert("@Resources.Locale.L_GateReserve_Script_35");
+                    return;
+                }
+            }
+        }
+    ];
+
+    initSearch(gop);
+
+    function dblClick(map) {
+        var UId = map.UId;
+        top.topManager.openPage({
+            href: rootPath + "GateManage/GateReserveSetup/" + UId,
+            title: '@Resources.Locale.L_GateReserve_GateReserveSetup',
+            reload: true,
+            id: 'GateReserveSetup',
+            search : 'uid=' + UId
+        });
+    }
+
+    /*var options = {};
+    options.gridUrl = rootPath + "TPVCommon/GetSmrvDataForLookup";
+    options.registerBtn = $("#btn01");
+    options.param = "";
+    options.isMutiSel = true;
+    options.gridFunc = function (map) {
+        var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+        if(selRowId.length == 0)
+        {
+            alert("请至少选择一笔要合并的单号！");
+            return;
+        }
+    }
+    options.baseConditionFunc = function(){
+        var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+        var ids = "";
+        if(selRowId.length > 0)
+        {
+            var UId = "";
+            for(var i=0; i<selRowId.length; i++)
+            {
+                UId = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'UId');
+                if(i == 0)
+                {
+                    ids += UId;
+                }
+                else
+                {
+                    ids += ";" + UId;
+                }
+            }
+
+            return "UId=" + ids + "&sopt_UId=ni";
+            //return "";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    options.lookUpConfig = LookUpConfig.SmrvLookup;
+    initLookUp(options);*/
+    });
+
+    $(function(){
+        var $BatDailogGrid = $("#BatDailogGrid");
+        var colModel1 = [
+                { name: 'UId', title: 'U ID', index: 'UId', width: 120, align: 'left', sorttype: 'string', hidden: true },
+                { name: 'TranType', title: '@Resources.Locale.L_BaseLookup_TranType', index: 'TranType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'F:FCL;L:LCL;A:AIR;D:INLAND EXPRESS;E:EXPRESS;R:Railroad;T:TRUCK;' },stype: 'select', searchoptions:{ sopt:['eq'], value: ':ALL;F:FCL;L:LCL;A:AIR;D:INLAND EXPRESS;E:EXPRESS;R:Railroad;T:TRUCK;' }},
+                { name: 'ReserveNo', title: '@Resources.Locale.L_GateReserve_ReveseNo', index: 'ReserveNo', width: 120, align: 'left', sorttype: 'string', hidden: false,searchoptions:{sopt:['cn']} },
+                { name: 'BatNo', title: '@Resources.Locale.L_GateReserve_BatNo', index: 'BatNo', width: 120, align: 'left', sorttype: 'string', hidden: false, searchoptions:{sopt:['cn']} },
+                { name: 'Status', title: '@Resources.Locale.L_GateReserve_Status', index: 'Status', width: 120, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'D:@Resources.Locale.L_DNManage_Called;R:@Resources.Locale.L_DNManage_Reserved;C:@Resources.Locale.L_DNManage_Confirmed;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;V:@Resources.Locale.L_BSCSDateQuery_Cancel;P:@Resources.Locale.L_UserQuery_SealCnt;O:@Resources.Locale.L_UserQuery_Out;'},stype: 'select', searchoptions:{ sopt:['eq'], value: ':ALL;R:@Resources.Locale.L_DNManage_Reserved;C:@Resources.Locale.L_DNManage_Confirmed;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;' } },
+                { name: 'CallDate', title: '@Resources.Locale.L_GateReserveSetup_CallDate', index: 'CallDate', width: 120, align: 'left', sorttype: 'string', hidden: false,formatter: "date",formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d" },searchoptions:{sopt:['cn']} },
+                { name: 'UseDate', title: '@Resources.Locale.L_GateReserveSetup_UseDate', index: 'UseDate', width: 120, align: 'left', sorttype: 'string', hidden: false,formatter: "date",formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d" },searchoptions:{sopt:['cn']} },
+                { name: 'ShipmentId', title: '@Resources.Locale.L_DNApproveManage_ShipmentId', index: 'ShipmentId', width: 120, align: 'left', sorttype: 'string', hidden: false,searchoptions:{sopt:['cn']} },
+                { name: 'DnNo', title: '@Resources.Locale.L_DNApproveManage_DnNo', index: 'DnNo', width: 500, align: 'left', sorttype: 'string', hidden: false,searchoptions:{sopt:['cn']} },
+                { name: 'MfNo', title: '@Resources.Locale.L_GateAnalysis_MfNo', index: 'MfNo', width: 70, align: 'left', sorttype: 'string', hidden: false, classes: "uppercase" ,searchoptions:{sopt:['cn']}},
+                { name: 'WsCd', title: '@Resources.Locale.L_GateReserve_WsCd', index: 'WsCd', width: 80, align: 'left', sorttype: 'string', hidden: false,searchoptions:{sopt:['cn']} },
+                { name: 'GateNo', title: '@Resources.Locale.L_GateReserve_GateNo', index: 'GateNo', width: 80, align: 'left', sorttype: 'string', hidden: false,searchoptions:{sopt:['cn']} }
+
+        ];
+
+        new genGrid(
+            $BatDailogGrid,
+            {
+                datatype: "local",
+                loadonce:true,
+                colModel: colModel1,
+                caption: "@Resources.Locale.L_GateReserve_Script_37",
+                height: 300,
+                rows: 999999,
+                refresh: false,
+                cellEdit: false,//禁用grid编辑功能
+                pginput: false,
+                sortable: true,
+                pgbuttons: false,
+                exportexcel: false,
+                toppager:false,
+                sortname: "Status",
+                dblClickFunc: function(map){
+                    var ReserveNo = map.ReserveNo;
+                    if(confirm("@Resources.Locale.L_GateReserve_Views_421" + ReserveNo + "@Resources.Locale.L_GateReserve_Script_38"))
+                    {
+                        var mUId = map.UId;
+                        var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+                        var ids = "";
+                        if(selRowId.length > 0)
+                        {
+                            var UId = "";
+                            for(var i=0; i<selRowId.length; i++)
+                            {
+                                UId = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'UId');
+                                if(i == 0)
+                                {
+                                    ids += UId;
+                                }
+                                else
+                                {
+                                    ids += ";;" + UId;
+                                }
+                            }
+                        }
+                        CommonFunc.ToogleLoading(true);
+                        $.post( rootPath + 'GateManage/setBatNo', {UId: mUId, ids:ids}, function(data, textStatus, xhr) {
+                            if(data.message == "success")
+                            {
+                                CommonFunc.Notify("", "@Resources.Locale.L_DNManage_CombS", 500, "success");
+                            }
+                            else
+                            {
+                                CommonFunc.Notify("", data.message, 500, "warning");
+                            }
+                            CommonFunc.ToogleLoading(false);
+                            $("#BatQueryDialog").modal("hide");
+                            return;
+
+                        }).fail(function() {
+                            alert( "Error" );
+                            CommonFunc.ToogleLoading(false);
+                        });
+                    }
+                }
+            }
+        );
+
+        $("#BatDailogGrid").jqGrid('filterToolbar',  {stringResult: true, searchOnEnter: false});
+
+        $('#BatQueryDialog').on('show.bs.modal', function (e) {
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+            var ids = "";
+            if(selRowId.length > 0)
+            {
+                var UId = "";
+                for(var i=0; i<selRowId.length; i++)
+                {
+                    UId = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'UId');
+                    if(i == 0)
+                    {
+                        ids += UId;
+                    }
+                    else
+                    {
+                        ids += ";;" + UId;
+                    }
+                }
+
+                $.post(rootPath + 'GateManage/getSmrvForBat', {"ids": ids}, function(data, textStatus, xhr) {
+                    if(data.message == "success")
+                    {
+                        var gridData = $.parseJSON(data.returnData.Content);
+                        $BatDailogGrid.jqGrid("clearGridData");
+                        $BatDailogGrid.jqGrid("setGridParam", {
+                            datatype: 'local',
+                            data: gridData.rows
+                        }).trigger("reloadGrid");
+                    }
+                    else
+                    {
+                        CommonFunc.Notify("", data.message, 500, "warning");
+                        return;
+                    }
+                }, "JSON");
+            }
+        });
+
+        ajustamodal("#BatQueryDialog");
+
+        setTimeout(function () {
+
+            $("#SummarySearch").click();
+
+        }, 100);
+    });
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--合并選擇視窗-->
+<div class="modal fade" id="BatQueryDialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_Layout_MerSelc</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-60-60">
+                        <table id="BatDailogGrid"><tr><td /></tr></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--合并選擇視窗-->

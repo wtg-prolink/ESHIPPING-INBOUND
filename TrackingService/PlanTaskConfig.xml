@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<task-list>
+  <!--
+server:mail server地址
+id:连接mail server的帐号
+password:连接mail server的密码
+sender:发信人
+-->
+  <mail-connection server="spam.pllink.com" id="lsphub@pllink.com" password="Prolink0706" sender="TPV&lt;lsphub@pllink.com&gt;" />
+  <!--
+id:任务代码
+class:任务类名,必须实现Prolink.Task.IPlanTask
+params:创建任务类对象的参数
+gapRunMinute:任务执行间隔时间,单位分钟
+threadStepTimeOut:任务每个执行步骤的超时时间,单位秒。小于等于0不限制
+threadTimeOut:整个任务执行的超时时间,单位分。小于等于0不限制
+mailToOnError:任务执行过程中发生错误时,通知对象
+mailCcOnError:任务执行过程中发生错误时,通知cc对象
+-->
+  <!--
+id:任务代码
+class:任务类名,必须实现Prolink.Task.IPlanTask
+params:创建任务类对象的参数
+gapRunMinute:任务执行间隔时间,单位分钟
+threadStepTimeOut:任务每个执行步骤的超时时间,单位秒。小于等于0不限制
+threadTimeOut:整个任务执行的超时时间,单位分。小于等于0不限制
+mailToOnError:任务执行过程中发生错误时,通知对象
+mailCcOnError:任务执行过程中发生错误时,通知cc对象
+params有三個，第一個客戶代號，第二個Map Type，就是Buyer mapping中的Mapping Type；第三個固定。
+Mapping Type: EDI對EDI；XLS對Excel；CSV對CSV
+-->
+	<!--<task id="test" class="Business.Import.DNImport.Task,Business" gapRunMinute="0.5" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="buru@pllink.com"></task>
+  <task id="testEDI" class="Business.TPV.Import.TestEDI,Business.TPV" gapRunMinute="0.5" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="buru@pllink.com"></task>-->
+  <task id="SFISProductionLine" class="Business.TPV.SFIS.ProductionLineInfoImport,Business.TPV" gapRunMinute="0.5" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="buru@pllink.com"></task>
+  <!--<task id="SFISeriaNumber" class="Business.TPV.SFIS.SerialNumberInfoImport,Business.TPV" gapRunMinute="0.5" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="buru@pllink.com"></task>-->
+</task-list>

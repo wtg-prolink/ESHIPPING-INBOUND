@@ -1,0 +1,243 @@
+﻿@{
+    ViewBag.Title = "SMBDQuery";
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        gop.gridColModel = [
+            { "name": "UId", "title": "UId", "index": "UId", "width": 110, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "Status", "title": "@Resources.Locale.L_DNFlowManage_Status", "index": "Status", "width": 70, "align": "left", "sorttype": "string", "hidden": false, formatter: "select", editoptions: { value: 'D:@Resources.Locale.L_DNManage_NoBk;B:@Resources.Locale.L_BSTSetup_Book;V:@Resources.Locale.L_MenuBar_Audit' } },
+            { "name": "ShipmentId", "title": "@Resources.Locale.L_DNApproveManage_ShipmentId", "index": "ShipmentId", "width": 90, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "PickupWmsDate", "title": "@Resources.Locale.L_BaseLookup_PickupWmsDate", "index": "PickupWmsDate", "width": 100, "align": "left", "sorttype": "string", "formatter": "date", "formatoptions": { "srcformat": "ISO8601Long", "newformat": "Y-m-d" }, "hidden": false },
+            { "name": "DnNo", "title": "@Resources.Locale.L_DNApproveManage_DnNo", "index": "DnNo", "width": 90, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "TranType", "title": "@Resources.Locale.L_DNApproveManage_TrackWay", "index": "TranType", "width": 80, "align": "left", "sorttype": "string", "hidden": false, formatter: "select", editoptions: { value: "A:@Resources.Locale.L_DNManage_Specialcar;B:@Resources.Locale.L_DNManage_LTL1;C:@Resources.Locale.L_DNManage_SpeDel;D:@Resources.Locale.L_CityDataQuery_Air" } },
+            { "name": "TruckType", "title": "@Resources.Locale.L_BaseLookup_CarType", "index": "TruckType", "width": 100, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "CargoType", "title": "@Resources.Locale.L_DNApproveManage_CargoType", "index": "CargoType", "width": 80, "align": "left", "sorttype": "string", "hidden": false, formatter: "select", editoptions: { value: "A:@Resources.Locale.L_DNManage_Product;B:@Resources.Locale.L_DNManage_Mate;C:@Resources.Locale.L_SMBDQuery_Views_2_1" } },
+            { "name": "Qty", "title": "@Resources.Locale.L_BaseLookup_Qty", "index": "Qty", "width": 80, "align": "right", "sorttype": "float", "formatter": "number", "formatoptions": { "decimalSeparator": ".", "thousandsSeparator": ",", "decimalPlaces": 2, "defaultValue": "0.00" }, "hidden": false },
+            { "name": "Qtyu", "title": "@Resources.Locale.L_BaseLookup_Qtyu", "index": "Qtyu", "width": 65, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "Gw", "title": "@Resources.Locale.L_BaseLookup_Gw", "index": "Gw", "width": 80, "align": "right", "sorttype": "float", "formatter": "number", "formatoptions": { "decimalSeparator": ".", "thousandsSeparator": ",", "decimalPlaces": 2, "defaultValue": "0.00" }, "hidden": false },
+            { "name": "Gwu", "title": "@Resources.Locale.L_BaseLookup_Gwu", "index": "Gwu", "width": 65, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "Cbm", "title": "@Resources.Locale.L_BaseLookup_Cbm", "index": "Cbm", "width": 80, "align": "right", "sorttype": "float", "formatter": "number", "formatoptions": { "decimalSeparator": ".", "thousandsSeparator": ",", "decimalPlaces": 2, "defaultValue": "0.00" }, "hidden": false },
+            { "name": "Region", "title": "@Resources.Locale.L_BaseLookup_Region", "index": "Region", "width": 65, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "State", "title": "@Resources.Locale.L_BaseLookup_State", "index": "State", "width": 65, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "DeliveryPort", "title": "@Resources.Locale.L_DNApproveManage_Pod", "index": "DeliveryPort", "width": 80, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "DeliveryNm", "title": "@Resources.Locale.L_DNApproveManage_PodNm", "index": "DeliveryNm", "width": 150, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "CombineInfo", "title": "@Resources.Locale.L_BaseLookup_CombineInfo", "index": "CombineInfo", "width": 250, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "Goods", "title": "@Resources.Locale.L_BSTSetup_Commodity", "index": "Goods", "width": 250, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "Marks", "title": "@Resources.Locale.L_DNApproveManage_ShipMark", "index": "Marks", "width": 250, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "Instruction", "title": "@Resources.Locale.L_BaseLookup_Instruction", "index": "Instruction", "width": 250, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "PickupWms", "title": "@Resources.Locale.L_BaseLookup_PickupWms", "index": "PickupWms", "width": 80, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "PickupWmsNm", "title": "@Resources.Locale.L_BaseLookup_PickupWmsNm", "index": "PickupWmsNm", "width": 130, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "Nw", "title": "@Resources.Locale.L_BaseLookup_Nw", "index": "Nw", "width": 100, "align": "right", "sorttype": "float", "formatter": "number", "formatoptions": { "decimalSeparator": ".", "thousandsSeparator": ",", "decimalPlaces": 2, "defaultValue": "0.00" }, "hidden": true },
+            { "name": "ShprCd", "title": "@Resources.Locale.L_BSTSetup_ShprCd", "index": "ShprCd", "width": 80, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "ShprNm", "title": "@Resources.Locale.L_BSTSetup_ShprNm", "index": "ShprNm", "width": 130, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "CneeCd", "title": "@Resources.Locale.L_DNApproveManage_ShipTo", "index": "CneeCd", "width": 80, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "CneeNm", "title": "@Resources.Locale.L_DNApproveManage_ShipNm", "index": "CneeNm", "width": 130, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "NotifyCd", "title": "@Resources.Locale.L_EventSetup_NotifyTo", "index": "NotifyCd", "width": 80, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "NotifyNm", "title": "@Resources.Locale.L_EventSetup_NotifyNm", "index": "NotifyNm", "width": 130, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "PickupPort", "title": "@Resources.Locale.L_AirQuery_PolCd", "index": "PickupPort", "width": 80, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "PickupNm", "title": "@Resources.Locale.L_AirQuery_PolNm", "index": "PickupNm", "width": 130, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "CreateBy", "title": "@Resources.Locale.L_DNApproveManage_CreateBy", "index": "CreateBy", "width": 80, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "CreateDep", "title": "@Resources.Locale.L_GateReserveSetup_CreateDep", "index": "CreateDep", "width": 80, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "CreateExt", "title": "@Resources.Locale.L_GateReserveSetup_CreateExt", "index": "CreateExt", "width": 80, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "CreateDate", "title": "@Resources.Locale.L_DNApproveManage_CreateDate", "index": "CreateDate", "width": 120, "align": "left", "sorttype": "string", "formatter": "date", "formatoptions": { "srcformat": "ISO8601Long", "newformat": "Y-m-d H:i" }, "hidden": true },
+            { "name": "ModifyBy", "title": "@Resources.Locale.L_DNApproveManage_ModifyBy", "index": "ModifyBy", "width": 80, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "ModifyDate", "title": "@Resources.Locale.L_DNApproveManage_ModifyDate", "index": "ModifyDate", "width": 120, "align": "left", "sorttype": "string", "formatter": "date", "formatoptions": { "srcformat": "ISO8601Long", "newformat": "Y-m-d H:i" }, "hidden": true },
+            { "name": "GroupId", "title": "GroupId", "index": "GroupId", "width": 70, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "Stn", "title": "Stn", "index": "Stn", "width": 70, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "Dep", "title": "Dep", "index": "Dep", "width": 70, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "Cmp", "title": "Cmp", "index": "Cmp", "width": 70, "align": "left", "sorttype": "string", "hidden": true },
+            { "name": "ReleaseNo", "title": "@Resources.Locale.M_SYS_ReleaseNo", "index": "ReleaseNo", "width": 100, "align": "left", "sorttype": "string", "hidden": true }
+        ];
+        gop.AddUrl = { "url": rootPath + "DNManage/SMBDSetup", "title": "@Resources.Locale.L_DNManage_EntBatDel", "id": "SMBDSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_DNManage_BatList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "DNManage/SMBDQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+        gop.multiselect = true;
+
+
+        gop.statusDefaultId = "";
+        gop.statusField = "Status";
+        gop.baseCondition = " GROUP_ID='" + groupId + "'  AND CMP='" + cmp + "'";
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "UId";
+        }
+
+        gop.reportFunc = function (item, name) {
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+            var dnNo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'DnNo');
+            var shipment_id = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ShipmentId');
+            if (!shipment_id) {
+                CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                return;
+            }
+            //alert(item+name);
+            var params = {
+                currentCondition: "",
+                val: shipment_id,
+                uid: shipment_id,
+                dnno: dnNo,
+                field: 'SHIPMENT_ID',
+                rptdescp: name,
+                rptName: item,
+                formatType: 'xls',
+                exportType: 'PREVIEW',
+            };
+
+            showReport(params);
+        };
+
+        function showReport(params) {
+            $.ajax({
+                async: true,
+                url: rootPath + "Report/CreateNewReport",
+                type: 'POST',
+                data: params,
+                "complete": function (xmlHttpRequest, successMsg) {
+                    if (successMsg != "success") return null;
+                    var xx = xmlHttpRequest.responseText;
+                    window.open(xmlHttpRequest.responseText);
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                },
+                success: function (result) {
+
+                }
+            });
+        }
+
+        gop.reportItem = [
+            {
+                item: "SMRV02",
+                name: "@Resources.Locale.L_DNManage_Delve"
+            }
+        ];
+
+        gop.btnGroup = [
+            {
+                id: "btn01",
+                name: "DN",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+                    if (!uid) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    //top.topManager.openPage({
+                    //    href: rootPath + "ECPOM/ECPOMSetupView/" + uid,
+                    //    title: '运单明細',
+                    //    id: 'ECPOMSetupView',
+                    //    reload: true
+                    //});
+                }
+            },
+            {
+                id: "btn02",
+                name: "@Resources.Locale.L_MenuBar_EDoc",
+                func: function () {
+
+                }
+            }
+        ];
+
+
+        initSearch(gop);
+
+
+        function dblClick(map) {
+            var UId = map.UId;
+            top.topManager.openPage({
+                href: rootPath + "DNManage/SMBDSetup/" + UId,
+                title: '@Resources.Locale.L_DNManage_EntBatDel',
+                id: 'SMBDSetup',
+                search: 'uid=' + UId
+            });
+        }
+
+
+        function isEmpty(val) {
+            if (val === undefined || val === "" || val == null)
+                return true;
+            return false;
+        }
+
+        function getData(url, data, callBackFn) {
+            CommonFunc.ToogleLoading(true);
+            $.ajax({
+                async: true,
+                url: url,
+                type: 'POST',
+                data: data,
+                "complete": function (xmlHttpRequest, successMsg) {
+                    CommonFunc.ToogleLoading(false);
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                },
+                success: function (result) {
+                    console.log(result);
+                    var resJson = $.parseJSON(result);
+                    callBackFn(resJson);
+                }
+            });
+        }
+    });
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

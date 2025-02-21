@@ -1,0 +1,112 @@
+﻿@{
+	ViewBag.Title = "MailGroupQuery";
+}
+<script>
+    var _mailGroup = "@ViewBag.MailGroup";
+</script>
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/core/initSearch.js?20231026")"></script>
+<script type="text/javascript">
+$(document).ready(function ($) {
+
+    //init Search
+    var gop = {};
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 230;
+    gop.gridColModel = [
+        { name: 'UId', showname: 'ID', sorttype: 'string', hidden: true },
+        { name: 'GroupId', title: "GroupId", index: 'GroupId', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Cmp', title: "Company", index: 'Cmp', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        //{ name: 'Stn', title: "Stn", index: 'Stn', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        //{ name: 'Dep', title: "Dep", index: 'Dep', width: 60, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Name', title: "@Resources.Locale.L_MailGroupSetup_Name", index: 'Name', width: 80, align: 'left', sorttype: 'string', formatter: "select", editoptions: { value: " :ALL;" + _mailGroup }, hidden: false },
+        { name: 'MailId', title: "@Resources.Locale.L_MailGroupSetup_MailId", index: 'MailId', width: 300, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Remark', title: "@Resources.Locale.L_NRSSetup_Remark", index: 'Remark', width: 300, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'CreateBy', title: '@Resources.Locale.L_PartyDocSetup_CreateBy', index: 'CreateBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CreateDate', title: '@Resources.Locale.L_NoticeSetup_CreateDate', index: 'CreateDate', width: 100, align: 'left', sorttype: 'date', hidden: false, formatter: "date", formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" } },
+        { name: 'ModifyBy', title: '@Resources.Locale.L_PartyDocSetup_ModifyBy', index: 'ModifyBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ModifyDate', title: '@Resources.Locale.L_NoticeSetup_ModifyDate', index: 'ModifyDate', width: 100, align: 'left', sorttype: 'date', hidden: false, formatter: "date", formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" } }
+    ];
+
+    gop.AddUrl = { "url": rootPath + "TKBL/MailGroupSetup", "title": "Mail Group List", "id": "MailGroupSetup" };
+    gop.gridId = "MailGroupInfoGrid";
+    gop.gridAttr = { caption: "Mail Group", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    gop.gridSearchUrl = rootPath + "TKBL/MailGroupInquiry";
+    gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+    //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.StatusAreaId = "StatusArea";
+    gop.BtnGroupId = "BtnGroupArea";
+
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        dblClick(map);
+    }
+
+    gop.baseConditionFunc = function () {
+        return getCreateDateParams("CreateDate", gop);
+    }
+
+    gop.loadCompleteFunc = function () {
+        var $grid = $("#MailGroupInfoGrid");
+        if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+            $grid[0].p.sortname = "Cmp";
+    }
+    initSearch(gop);
+    function dblClick(map) {
+        var UId = map.UId;
+        top.topManager.openPage({
+            href: rootPath + "TKBL/MailGroupSetup?UId=" + UId,
+            title: 'Mail Group Setup',
+            id: 'MailGroupSetup',
+            search : 'UId=' + UId
+        });
+    }
+});
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+				</div>
+			</div>
+			<div class="panel panel-default" id="SearchStatus" style="display:none">
+				<div class="panel-body">
+
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g" id="BtnGroupArea">
+					</div>
+					<div class="pure-g" id="StatusArea">
+					</div>
+					<div class="form-group">
+						<div class="pure-g">
+							<div class="pure-u-sm-60-60">
+								<table id="MailGroupInfoGrid" class="_tableGrid" style="width: 100%">
+									<tr>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

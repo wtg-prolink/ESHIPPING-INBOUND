@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "TermVSChargeSetup";
+}
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+</script>
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/Bsdate/TermVSChargeSetup.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60  label-left">
+                            <label f​​or="Cmp" class="control-label required">Location</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" iskey="true" required />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="IoFlag" class="control-label">I/O Bound</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="IoFlag" name="IoFlag" fieldname="IoFlag">
+                                <option value="I">InBound</option>
+                                <option value="O">OutBound</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="FrtTerm" class="control-label">Freight Term</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="FrtTerm" name="FrtTerm" fieldname="FrtTerm">
+                                <option value="P">Prepaid</option>
+                                <option value="C">Collect</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60 label-left">
+                            <label for="IncotermCd" class="control-label">DLV TERM</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="IncotermCd" name="IncotermCd" fieldname="IncotermCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="IncotermCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="IncotermDescp" name="IncotermDescp" fieldname="IncotermDescp" />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PodCd" class="control-label">POD</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PodCd" name="PodCd" fieldname="PodCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PodCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PodName" name="PodName" fieldname="PodName" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60 label-left">
+                            <label for="NeedChg" class="control-label">Need Charge</label>
+                        </div>
+                        <div class="pure-u-sm-55-60 control-group" id="NeedChgArea">
+                        </div>
+                        <input type="hidden" dt="mt" id="NeedChg" name="NeedChg" fieldname="NeedChg" />
+                    </div>
+                    <div class="pure-g">
+
+                        <div class="pure-u-sm-5-60 label-left">
+                            <label for="CreateBy" class="control-label">@Resources.Locale.L_IpPart_CreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" fieldname="CreateBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" fieldname="CreateDate" readonly>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ModifyBy" class="control-label">@Resources.Locale.L_IpPart_ModifyBy</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" fieldname="ModifyBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" fieldname="ModifyDate" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" class="form-control input-sm" dt="mt" id="UId" name="UId" fieldname="UId" />

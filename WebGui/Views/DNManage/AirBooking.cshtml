@@ -1,0 +1,423 @@
+﻿@{
+    ViewBag.Title = "AirBooking";
+}
+
+
+<script type="text/javascript">
+    var select_servicemode = "@ViewBag.SelectServiceMode";
+    var select_cargotype = "@ViewBag.SelectCargoType";
+    var select_trackway = "@ViewBag.SelectTrackWay";
+    var select_cartype = "@ViewBag.SelectCarType";
+</script>
+@Html.RazorJSInline("~/Scripts/DnManage/BookingQueryColumn.js")
+@Html.RazorJSInclude("~/Scripts/DnManage/BaseBooking.js")
+
+<!--簽核退回視窗-->
+<div class="modal fade" id="BookingCancel" Sid="">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">@Resources.Locale.L_DNManage_CanBkConf</h4>
+      </div>
+      <div class="modal-body">
+            <div class="pure-g">
+                <div class="pure-u-sm-60-60">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">@Resources.Locale.L_DNManage_Descp</label>
+                        <textarea class="form-control" id="BackRemark" name="BackRemark" fieldname="BackRemark"></textarea>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseBookingWin" >Close</button>
+        <button type="button" class="btn btn-primary" onclick="BookingCancel()" id="BackConfirm">@Resources.Locale.L_Layout_Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--簽核退回視窗-->
+<!--解除提单合并視窗-->
+<div class="modal fade" id="SpellCombineSModel" Sid="">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">@Resources.Locale.L_DNManage_CanMer</h4>
+      </div>
+      <div class="modal-body">
+            <div class="pure-g">
+                <div class="pure-u-sm-60-60">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">@Resources.Locale.L_DNManage_PleSelc</label>
+                        <input type="hidden" id="hid_shipmentid" />
+                        <div id="DnCheckList">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseSpellWin" >Close</button>
+        <button type="button" class="btn btn-primary" onclick="ConfirmSpellSM()" id="SpellConfirm">@Resources.Locale.L_Layout_Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--解除提单合并視窗-->
+<div class="modal fade" id="LogisticsUploadWin" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_AirBooking_Script_Excel6</h4>
+            </div>
+            <form name="PARTY_EXCEL_UPLOAD_FROM" id="PARTY_EXCEL_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="PackingUploadExcel" name="file"/>
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                     <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+
+                             <a href="#" onclick="DownLoadLogisticExcel()" >@Resources.Locale.L_DNManage_ClickDl</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="modalUploadBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var _dm = new dm();
+    var _oldDeatiArray = [];
+    var _oldSerialArray = [];
+    $(document).ready(function ($) {
+        _baseInitChangePodWin();
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        gop.gridColModel = BookingQueryColumn
+        gop.AddUrl = { "url": rootPath + "DNManage/AirBookingSetup", "title": "@Resources.Locale.L_DNManage_AirBlEnt", "id": "AirBooking" };;
+        gop.gridId = "containerInfoGrid";
+        gop.multiselect = true;
+        gop.gridAttr = { caption: "@Resources.Locale.L_DNManage_AirBk", height:gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "DNManage/ShippingBookingQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        var _baseCondition = "1=1 AND TRAN_TYPE ='A'";
+        gop.baseCondition = _baseCondition;
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea"; 
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            //dblClick(map);
+            var uid = map.UId;
+            if (!uid) {
+                CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                return;
+            }
+            top.topManager.openPage({
+                href: rootPath + "DNManage/AirBookingSetup/" + uid,
+                title: '@Resources.Locale.L_DNManage_AirBlEnt',
+                id: 'AirBooking',
+                reload: true
+            });
+        }
+
+        gop.onSelectRowFunc = function (jsonMap) {
+            //顯示子表
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        gop.statusGroup = [
+            { "id": "", "label": "ALL" },
+            { "id": "A", "label": "@Resources.Locale.L_UserQuery_Unprocess_en" },
+            { "id": "B", "label": "@Resources.Locale.L_BSTSetup_Book" },
+            { "id": "C", "label": "@Resources.Locale.L_UserQuery_ComBA" },
+            { "id": "D", "label": "@Resources.Locale.L_UserQuery_Call" },
+            { "id": "I", "label": "@Resources.Locale.L_UserQuery_In" },
+            { "id": "P", "label": "@Resources.Locale.L_UserQuery_SealCnt" },
+            { "id": "O", "label": "@Resources.Locale.L_UserQuery_Out" },
+            //{ "id": "G", "label": "報關" },
+            { "id": "H", "label": "@Resources.Locale.L_UserQuery_Release" },
+            { "id": "V", "label": "@Resources.Locale.L_BSCSDateQuery_Cancel" },
+            { "id": "Z", "label": "@Resources.Locale.L_UserQuery_Return" },
+            { "id": "U", "label": "@Resources.Locale.L_AirBooking_Views_250" },
+            { "id": "Y", "label": "@Resources.Locale.L_AirBooking_Views_251" },
+            { "id": "F", "label": "Finished/ATD<3months" },
+            { "id": "R", "label": "Archived/ATD≥3months" }
+        ];
+        gop.statusField = "Status";
+        gop.statusDefaultId = "A";
+        gop.statusPreLoad = true;
+
+        gop.btnGroup = [
+        ];
+        gop.reportItem = [
+        {
+            item: "FCL01",
+            name: "Booking form"
+        }, {
+            item: "FCL02",
+            name: "Draft B/L"
+        }, {
+            item: "FCL03",
+            name: "@Resources.Locale.L_DNManage_BookingformChinese"
+        }
+        ];
+
+        var btn05 = {
+            id: "btn05",
+            name: "@Resources.Locale.L_DNManage_BkDetail",
+            func: function () {
+                var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+                if (!uid) {
+                    CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                    return;
+                }
+                top.topManager.openPage({
+                    href: rootPath + "DNManage/AirBookingSetup/" + uid,
+                    title: '@Resources.Locale.L_DNManage_AirBlEnt',
+                    id: 'AirBooking',
+                    reload: true
+                });
+            }
+        };
+        var btncombill = {
+            id: "ComBillSend",
+            name: "@Resources.Locale.L_DNManage_CombBLNoti",
+            func: function () {
+                var mygrid = $("#containerInfoGrid");
+                var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                var responseData = [];
+                var dnitems = "";
+                $.each(selRowId, function (index, val) {
+                    responseData.push(mygrid.getRowData(selRowId[index]));
+                });
+                if (responseData.length < 1) {
+                    CommonFunc.Notify("", "@Resources.Locale.L_AirBooking_Views_253", 500, "warning");
+                    return;
+                }
+                var shipments = "";
+                for (var i = 0; i < responseData.length; i++) {
+                    dnitems += responseData[i].UId + ",";
+                    if (shipments.length > 0)
+                        shipments += ",";
+                    shipments += responseData[i].ShipmentId;
+                }
+
+                var iscontinue = window.confirm("@Resources.Locale.L_DNManage_Whether2" + shipments + "@Resources.Locale.L_DNManage_MailNotify");
+                if (!iscontinue) {
+                    return;
+                }
+                CommonFunc.ToogleLoading(true);
+                $.ajax({
+                    async: true,
+                    url: rootPath + "BookingAction/NoticeCombineBill",
+                    type: 'POST',
+                    data: {
+                        "Uid": dnitems
+                    },
+                    "complete": function (xmlHttpRequest, successMsg) {
+                        CommonFunc.ToogleLoading(false);
+                    },
+                    "error": function (xmlHttpRequest, errMsg) {
+                        CommonFunc.ToogleLoading(false);
+                        var resJson = $.parseJSON(errMsg)
+                        CommonFunc.Notify("", resJson.message, 500, "warning");
+                    },
+                    success: function (result) {
+                        //var resJson = $.parseJSON(result)
+                        if (result.IsOk == "Y") {
+                            CommonFunc.Notify("", result.message, 500, "success");
+                        }
+                        else {
+                            alert(result.message);
+                        }
+                        $("#SummarySearch").trigger("click");
+                    }
+                });
+            }
+
+        };
+
+        $.each(BookingFirstMenu, function (index, val) {
+            gop.btnGroup.push(BookingFirstMenu[index]);
+        });
+
+        gop.btnGroup.push(btn05);
+        gop.btnGroup.push(btncombill);
+
+        $.each(BookingLastMenu, function (index, val) {
+            gop.btnGroup.push(BookingLastMenu[index]);
+        });
+
+        initSearch(gop);
+
+        $("#SummarySearch").bind("click", function () {
+            $(".status-box").removeClass("active");
+            $("#searchStatus_").addClass("active");
+        });
+
+        function reloadStatus() {
+            $.ajax({
+                async: true,
+                url: gop.gridSearchUrl,
+                type: 'POST',
+                data: {
+                    "resultType": "count",
+                    "statusField": gop.statusField,
+                    "basecondition": _baseCondition
+                },
+                "complete": function (xmlHttpRequest, successMsg) {
+
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                },
+                success: function (result) {
+                    console.log(result);
+                    var resJson = $.parseJSON(result)
+                    for (var i = 0 ; i < resJson.rows.length ; i++) {
+                        $("#statusCount_" + resJson.rows[i].PoStatus).html(resJson.rows[i].Count);
+                    }
+
+                }
+            });
+        }
+
+        //reloadStatus();
+        //initEdoc($("#btn07"), {});
+
+        //当开启取消合并Shipment窗口时
+        $('#SpellCombineSModel').on('show.bs.modal', function () {
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+            var CombineInfo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'CombineInfo');
+            if (!CombineInfo) {
+                CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                return;
+            }
+            var shipmentid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ShipmentId');
+            $("#hid_shipmentid").val(shipmentid);
+            var CombineInfolist = CombineInfo.split('，');
+            var spllhtml = "";
+            $.each(CombineInfolist, function (index, value) {
+                spllhtml += '<div><input type="checkbox" name="spellDn" value="' + value + '" />' + value + '</div>';
+            });
+            $("#DnCheckList").html(spllhtml);
+        });
+
+        //当开启取消合并提单窗口时
+       
+        RegisterSpellBill();
+        //_initCombineInv();
+  
+        var $ShipFeeDialogGrid = $("#ShipFeeDialogGrid");
+
+        new initGrid(
+            $ShipFeeDialogGrid,
+            {
+                data: [],
+                colModel: ShipFeeColModel,
+                beforeSelectRowFunc: function (rowid) {
+
+                }
+            },
+            {
+                
+                loadonce: true,
+                cellEdit: false,//禁用grid编辑功能
+                caption: "@Resources.Locale.L_QTManage_LspChgDetail",
+                height: 300,
+                refresh: true,
+                rows: 9999,
+                exportexcel: false,
+                pginput: false,
+                pgbuttons: false,
+                sortorder: "Asc",
+                sortname: "LspNo",
+                savelayout: true,
+                showcolumns: true,
+                footerrow: true,
+                dblClickFunc: function(map){
+                },
+                loadComplete: function (data) {
+
+                   var Qsum = $("#ShipFeeDialogGrid").jqGrid("getCol", "Qlamt", false, "sum");
+                   var Bsum = $("#ShipFeeDialogGrid").jqGrid("getCol", "Lamt", false, "sum");
+                   var Qamt = $("#ShipFeeDialogGrid").jqGrid("getCol", "Qamt", false, "sum");
+                   var Bamt = $("#ShipFeeDialogGrid").jqGrid("getCol", "Bamt", false, "sum");
+                   $("#ShipFeeDialogGrid").jqGrid("footerData", "set", { "Qcur": "Total:", "Qlamt": Qsum, "Lamt": Bsum, "Qamt": Qamt, "Bamt": Bamt });
+
+                }
+            }
+        );
+        CallLogisticsFunc();
+    });
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="SubGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

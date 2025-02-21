@@ -1,0 +1,183 @@
+﻿@{
+ViewBag.Title = "SMFSCSetupView";
+}
+<style>
+	.pod {display: none;}
+</style>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+@Html.RazorJSInline("~/Scripts/SMFSC/SMFSCSetup.js")
+<script type="text/javascript">
+	var _uid = "@ViewBag.Uid";
+	var CmpNm = "@ViewBag.CmpNm";
+	var schemas = "@ViewBag.schemas.Content";
+</script>
+<div id="wrapper">
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="IoType" class="control-label">I/O</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<select  class="form-control input-sm" dt="mt" id="IoType" name="IoType" fieldname="IoType" >
+								<option value="I">I:Inbound</option>
+								<option value="O">O:Outbound</option>
+							</select>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Cmp" class="control-label">Company</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="CmpNm" name="CmpNm" fieldname="CmpNm" readonly />
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="EffectDate" class="control-label">EffectDate</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="EffectDate" name="EffectDate" fieldname="EffectDate" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Cur" class="control-label required">@Resources.Locale.L_InvPkgSetup_Cur</label>
+						</div>
+						<div class="pure-u-sm-5-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Cur" name="Cur" fieldname="Cur" required/>
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="CurLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Carrier" class="control-label required">Carrier</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Carrier" name="Carrier" fieldname="Carrier"  required/>
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="CarrierLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="CarrierNm" name="CarrierNm" fieldname="CarrierNm" readonly />
+						</div>
+
+						<div class="pure-u-sm-5-60 label-right pol">
+							<label for="Farea" class="control-label">POL</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group pol">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Farea" name="Farea" fieldname="Farea"/>
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="FareaLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+
+						<div class="pure-u-sm-5-60 label-right pod">
+							<label for="Tarea" class="control-label">POD</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group pod">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Tarea" name="Tarea" fieldname="Tarea"/>
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="TareaLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Area" class="control-label required">To Area</label>
+						</div>
+						<div class="pure-u-sm-5-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Area" name="Area" fieldname="Area" required/>
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="AreaLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="AreaNm" name="AreaNm" fieldname="AreaNm" required/>
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Gp20" class="control-label">20 GP</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Gp20" name="Gp20" fieldname="Gp20" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Gp40" class="control-label">40 GP</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Gp40" name="Gp40" fieldname="Gp40" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Hq40" class="control-label">40 HQ</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Hq40" name="Hq40" fieldname="Hq40" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="OthRate" class="control-label">Other</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="OthRate" name="OthRate" fieldname="OthRate" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g" style="display: none">
+						<div class="pure-u-sm-60-60">
+							<table id="MainGrid" class="_tableGrid" style="width: 100%">
+								<tr></tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" />
+<!-- @Html.RazorJSInline("~/Scripts/SMFSC/SMFSCSetup.js") -->

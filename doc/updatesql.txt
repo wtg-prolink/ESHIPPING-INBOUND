@@ -1,0 +1,13 @@
+--问题单89153  OPEN DATA的LOG  add by fish 2014-12-8  
+CREATE TABLE [dbo].[IPORT_LOG](
+	[SESSION_ID] [nvarchar](36) NOT NULL,
+	[IP_ADD] [nvarchar](16) NULL,
+	[USER_ID] [nvarchar](10) NULL,
+	[LOGIN_TIME] [datetime] NULL,
+	[USE_FUNCTION] [nvarchar](50) NULL,
+ CONSTRAINT [PK_IPORT_LOG] PRIMARY KEY CLUSTERED 
+(
+	[SESSION_ID] ASC
+)
+) ON [PRIMARY];
+

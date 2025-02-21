@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "DestinationQuery";
+}
+
+<script type="text/javascript">
+$(document).ready(function ($) {
+
+    //init Search
+    var gop = {};
+    var numberTemplate = "2";
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 250;
+    gop.gridColModel = [
+        { name: 'PortCd', title: '@Resources.Locale.L_CitySetup_PortCd', index: 'PortCd', width: 120, sorttype: 'string', hidden: false },
+        { name: 'CntryCd', title: '@Resources.Locale.L_CitySetup_CntryCd', index: 'CntryCd', width: 120, init: true, sorttype: 'string', classes: "uppercase", hidden: false },
+        { name: 'PortNm', title: '@Resources.Locale.L_CitySetup_PortNm', index: 'PortNm', width: 200, sorttype: 'string', hidden: false },
+        { name: 'State', title: '@Resources.Locale.L_BsStateQuery_StateCd', index: 'State', width: 150, sorttype: 'string', hidden: false },
+        { name: 'Region', title: '@Resources.Locale.L_CitySetup_Region', index: 'Region', width: 150, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Factory', title: '@Resources.Locale.L_DNApproveManage_Plant', index: 'Factory', width: 120, sorttype: 'string', hidden: false },
+        { name: 'FactoryNm', title: '@Resources.Locale.L_DNApproveManage_PlantNm', index: 'FactoryNm', width: 150, sorttype: 'string', hidden: false },
+        { name: 'ShipTo', title: 'Ship to Party', index: 'ShipTo', width: 120, sorttype: 'string', hidden: false },
+        { name: 'ShipToNm', title: 'Ship to Name', index: 'ShipToNm', width: 150, sorttype: 'string', hidden: false },
+        { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 150, sorttype: 'string', hidden: false },
+        { name: 'Cmp', title: '@Resources.Locale.L_SMIDN_Cmp', index: 'Cmp', width: 80, align: 'right', sorrtype: 'string', hidden: false },
+        { name: 'CreateBy', title: _getLang("L_Bsdate_CreateBy", "创建人"), index: 'CreateBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'CreateDate', title: _getLang("L_Bsdate_CreateDate", "创建时间"), index: 'CreateDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" } },
+        { name: 'ModifyBy', title: _getLang("L_Bsdate_ModifyBy", "修改人"), index: 'ModifyBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'ModifyDate', title: _getLang("L_Bsdate_ModifyDate", "修改时间"), index: 'ModifyDate', width: 120, align: 'left', sorttype: 'string', hidden: false, formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" } }
+    ];
+    gop.AddUrl = { "url": rootPath + "System/DestinationSetup", "title": "@Resources.Locale.L_DestinationSetup_DestinationSetup", "id": "DestinationSetup" };
+    gop.gridId = "containerInfoGrid";
+    gop.gridAttr = { caption: "@Resources.Locale.L_TruckPortSetup_List", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    gop.gridSearchUrl = rootPath + "System/DestinationSetupInquiryData";
+    gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        dblClick(map);
+    }
+
+    gop.baseConditionFunc = function () {
+        return getCreateDateParams("CreateDate", gop);
+    }
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.loadCompleteFunc = function () {
+        var $grid = $("#containerInfoGrid");
+        if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+            $grid[0].p.sortname = "CntryCd";
+    }
+
+    initSearch(gop);
+
+    function dblClick(map) {
+        var PortCd = map.PortCd;
+        var CntryCd = map.CntryCd;
+        var Factory = map.Factory;
+        var ShipTo = map.ShipTo;
+        var Cmp = map.Cmp;
+        top.topManager.openPage({
+            href: rootPath + "System/DestinationSetup?PortCd=" + PortCd + "&CntryCd=" + CntryCd + "&Factory=" + Factory + "&ShipTo=" + ShipTo + "&Cmp=" + Cmp,
+            title: '@Resources.Locale.L_DestinationSetup_DestinationSetup',
+            id: 'DestinationSetup'
+        });
+    }
+
+});
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout" style=" a:">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

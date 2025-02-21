@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <ftp>   
+   <DNStatus server="172.16.31.17" port="21" user="SFIS" psw="SFIS" path=""
+ defaultMailCC="buru@pllink.com"
+ errMailTo="buru@pllink.com"
+ logPath="$APP_PATH\..\..\TransLog\SFIS\DNStatus\Log"
+ backupPath="$APP_PATH\..\..\TransLog\SFIS\DNStatus\Backup">
+    </DNStatus>
+    <SendOrderNO server="172.16.31.17" port="21" user="SFIS" psw="SFIS" path=""
+ defaultMailCC="buru@pllink.com"
+ errMailTo="buru@pllink.com"
+ logPath="$APP_PATH\..\..\TransLog\SFIS\SendOrderNO\Log"
+ backupPath="$APP_PATH\..\..\TransLog\SFIS\SendOrderNO\Backup">
+    </SendOrderNO>    
+    <ProductionLineInfoImport server="172.20.1.30" port="21" user="SFIS" psw="SFIS1123" path="FQ/ProductionLine/"
+ defaultMailCC="buru@pllink.com"
+ errMailTo="buru@pllink.com"
+ logPath="$APP_PATH\..\..\TransLog\SFIS\ProductionLineInfoImport\Log"
+ downloadPath="$APP_PATH\..\..\TransLog\SFIS\ProductionLineInfoImport\Download"
+ backupPath="$APP_PATH\..\..\TransLog\SFIS\ProductionLineInfoImport\Backup">
+    </ProductionLineInfoImport>
+    <SerialNumberInfoImport server="172.20.1.30" port="21" user="SFIS" psw="SFIS1123" path="FQ/SerialNumber/"
+ defaultMailCC="buru@pllink.com"
+ errMailTo="buru@pllink.com"
+ logPath="$APP_PATH\..\..\TransLog\SFIS\ProductionLineInfoImport\Log"
+ downloadPath="$APP_PATH\..\..\TransLog\SFIS\ProductionLineInfoImport\Download"
+ backupPath="$APP_PATH\..\..\TransLog\SFIS\ProductionLineInfoImport\Backup">
+    </SerialNumberInfoImport>
+  </ftp>
+</root>

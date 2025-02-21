@@ -1,0 +1,334 @@
+﻿@{
+    ViewBag.Title = "DTBookingConfirmQuery";
+}
+
+
+
+<script type="text/javascript">
+    var select_servicemode = "@ViewBag.SelectServiceMode";
+    var select_cargotype = "@ViewBag.SelectCargoType";
+    var select_trackway = "@ViewBag.SelectTrackWay";
+    var select_cartype = "@ViewBag.SelectCarType";
+</script>
+@Html.RazorJSInline("~/Scripts/DnManage/BookingQueryColumn.js")
+@Html.RazorJSInline("~/Scripts/DnManage/BaseBookingSetup.js")
+@Html.RazorJSInclude("~/Scripts/DnManage/BaseBooking.js")
+<script type="text/javascript">
+    var _dm = new dm();
+    var _oldDeatiArray = [];
+    var _oldSerialArray = [];
+    var _gop;
+    $(document).ready(function ($) {
+        CallChangeGwCbmFunc();
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        gop.gridColModel = BookingQueryColumn
+        gop.AddUrl = false;
+        gop.gridId = "containerInfoGrid";
+        gop.multiselect = true;
+        gop.gridAttr = { caption: "@Resources.Locale.L_DNManage_DmBk", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "DNManage/BookingConfirmQueryDataByDT";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        var _baseCondition = "TRAN_TYPE='T' AND CORDER IS NOT NULL AND CORDER !='N' ";
+        gop.baseCondition = _baseCondition;
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea"; 
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            //dblClick(map);
+            var uid = map.UId;
+            if (!uid) {
+                CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                return;
+            }
+            top.topManager.openPage({
+                href: rootPath + "DNManage/DTBookingConfirmSetup/" + uid,
+                title: '@Resources.Locale.L_DNManage_DmBkConf',
+                id: 'DTBookingConfirmSetup',
+                reload: true
+            });
+        }
+
+        gop.onSelectRowFunc = function (jsonMap) {
+            //顯示子表
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        gop.statusGroup = [
+            { "id": "S", "label": "@Resources.Locale.L_DNManage_NotBk" },
+            { "id": "C", "label": "@Resources.Locale.L_DNManage_YesBk" },
+            { "id": "P", "label": "@Resources.Locale.TLB_ChangePod" + "@Resources.Locale.L_SYS_APPLY" },
+            { "id": "Q", "label": "@Resources.Locale.TLB_ChangePod" + "@Resources.Locale.L_ActCheckSetup_Views_41" },
+            { "id": "F", "label": "Finished/ATD<3months" },
+            { "id": "R", "label": "Archived/ATD≥3months" }
+        ];
+        gop.statusField = "Corder";
+        gop.statusDefaultId = "S";
+        gop.statusPreLoad = true;
+
+        gop.btnGroup = [
+            {
+                id: "btn01",
+                name: "@Resources.Locale.L_DNManage_ImBkData",
+                func: function () {
+                    var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                    var responseData = [];
+                    $.each(selRowId, function (index, val) {
+                        responseData.push(mygrid.getRowData(selRowId[index]));
+                    });
+                    if (responseData.length < 1) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_DNManage_PleSelcData", 500, "warning");
+                        return;
+                    }
+
+                    var uid = responseData[0].UId;
+
+                    top.topManager.openPage({
+                        href: rootPath + "DNManage/DTBookingConfirmSetup/" + uid,
+                        title: '@Resources.Locale.L_DNManage_DmBkConf',
+                        id: 'DTBookingConfirmSetup',
+                        reload: true
+                    });
+                }
+            },
+            {
+                id: "btn02",
+                name: "Excel",
+                func: function () {
+                    //$("#ForecastExcelWindow").modal("show");
+                    $("#BookingConfirmUploadWin").modal("show");
+                }
+            },
+            {
+                id: "DownloadExcel",
+                name: "@Resources.Locale.L_AirConfirmQuery_Views_259",
+                func: function () {
+                    if (typeof mygrid == "undefined") {
+                        CommonFunc.Notify("", "@Resources.Locale.L_DNManage_PleSelcData", 500, "warning");
+                        return;
+                    }
+                    doDownloadExcel(mygrid, "T", "E");
+                }
+            },
+            {
+                id: "BatchGWAndCBM",
+                name: "@Resources.Locale.L_AirConfirmQuery_Views_261",
+                func: function () {
+                    $("#BatchGwCbmUploadWin").modal("show");
+                }
+            }
+        ];
+
+        initSearch(gop);
+        _gop = gop;
+        $("#SummarySearch").bind("click", function () {
+            $(".status-box").removeClass("active");
+            $("#searchStatus_").addClass("active");
+        });
+
+        function reloadStatus() {
+            $.ajax({
+                async: true,
+                url: gop.gridSearchUrl,
+                type: 'POST',
+                data: {
+                    "resultType": "count",
+                    "statusField": gop.statusField,
+                    "basecondition": _baseCondition
+                },
+                "complete": function (xmlHttpRequest, successMsg) {
+
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                },
+                success: function (result) {
+                    console.log(result);
+                    var resJson = $.parseJSON(result)
+                    for (var i = 0 ; i < resJson.rows.length ; i++) {
+                        $("#statusCount_" + resJson.rows[i].PoStatus).html(resJson.rows[i].Count);
+                    }
+
+                }
+            });
+        }
+
+        //reloadStatus();
+        Callfunction("TK");
+    });
+    function DownLoadExcel() {
+        window.open(rootPath + "DNManage/DownLoadXls?TranType=TK");
+    }
+    function DownLoadGwCbmExcel() {
+        var gop = _gop;
+        params = loadCondition(gop.searchFormId);
+        var vir_params = loadVIRCondition(gop.searchFormId);
+        if (typeof gop.SearchFilter !== 'undefined') {
+            params = params + gop.SearchFilter;
+        }
+
+        var baseCondition = gop.baseCondition;
+        if (typeof gop.baseConditionFunc != "undefined") {
+            var filterStr = gop.baseConditionFunc()
+            if (filterStr.indexOf("&sopt_") > -1) {
+                params += filterStr;
+            } else {
+                baseCondition += filterStr;
+            }
+        }
+        if (typeof gop.statusGroup != "undefined" && gop.statusGroup.length > 0) {
+            //alert("111");
+            //params.push({ "resultType": "count", "statusField": gop.statusField });
+            $(".statusCount").each(function (k, v) {
+                $(v).html("0");
+            });
+            console.log(params);
+            $.ajax({
+                async: true,
+                url: rootPath + "DNManage/QuaryXls",
+                type: 'POST',
+                data: {
+                    'conditions': params,//jQuery.serialize()已经是进行URL编码过的。
+                    'baseCondition': baseCondition,
+                    "statusField": gop.statusField,
+                    'virConditions': vir_params,
+                    'trantype': 'T'
+                },
+                "complete": function (xmlHttpRequest, successMsg) {
+
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                },
+                success: function (result) {
+                    if (result != null && result.IsOk=="Y") {
+                        window.open(rootPath + "DNManage/DownLoadXls?FileType=GwCbm&filename=" + result.file);
+                    }
+                    else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+        
+        //window.open(rootPath + "DNManage/DownLoadXls?FileType=GwCbm");
+    }
+</script>
+
+<!--Excel汇入视窗-->
+<div class="modal fade" id="BookingConfirmUploadWin" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_DNManage_DmBkConfExcel</h4>
+            </div>
+            <form name="PACKING_EXCEL_UPLOAD_FROM" id="PACKING_EXCEL_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="PackingUploadExcel" name="file"/>
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                             <a href="#" onclick="DownLoadExcel()" >@Resources.Locale.L_DNManage_ClickDl</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="modalUploadBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->
+<!--批量导入汇入视窗口-->
+<div class="modal fade" id="BatchGwCbmUploadWin" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_AirConfirmQuery_Views_262</h4>
+            </div>
+            <form name="GWCBM_EXCEL_UPLOAD_FROM" id="GWCBM_EXCEL_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="GwCbmUploadExcel" name="file"/>
+                            <input type="hidden" id="uploadKeyId1" />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                             <a href="#" onclick="DownLoadGwCbmExcel()" >@Resources.Locale.L_AirConfirmQuery_Script_10</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="GwCbmUploadBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="GwCbmModalClose">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--批量导入汇入视窗口-->
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                    <div class="pure-g" id="SearchArea">
+
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="SubGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

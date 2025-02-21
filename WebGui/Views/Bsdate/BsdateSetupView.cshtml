@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "BsdateSetupView";
+}
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Bsdate/BsdateSetupView.js?20240815")"></script>
+<div id="wrapper">
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="DDay" class="control-label">@Resources.Locale.L_Bsdate_DDay</label><!--Shipment ID-->
+						</div>
+						<div class="pure-u-sm-10-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="DDay" name="DDay" fieldname="DDay"  />
+							<p class="help-block tooltips"></p>
+						</div>
+                        <div class="pure-u-sm-5-60 label-right">
+							<label for="CntryCd" class="control-label">@Resources.Locale.L_BaseLookup_Country</label><!--Shipment ID-->
+						</div>
+						<div class="pure-u-sm-5-60">
+							 <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="CntryCd" name="CntryCd" fieldname="CntryCd"/>
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="CntryCdLookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Remark" class="control-label">@Resources.Locale.L_Bsdate_Remark</label><!--Remark-->
+						</div>
+						<div class="pure-u-sm-55-60">
+							 <textarea class="form-control" dt="mt" id="Remark" name="Remark" fieldname="Remark"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<input type="hidden" class="form-control input-sm" dt="mt" id="UId" name="UId" fieldname="UId" />

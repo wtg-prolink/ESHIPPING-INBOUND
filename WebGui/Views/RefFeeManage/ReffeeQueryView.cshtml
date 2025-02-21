@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "ReffeeQueryView";
+}
+
+
+
+<script type="text/javascript">
+$(document).ready(function ($) {
+
+    //init Search
+    var gop = {};
+    var numberTemplate = "2";
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 250;
+    gop.AddUrl = { "url": rootPath + "ReffeeManage/ReffeeSetupView", "title": "@Resources.Locale.L_ReffeeManage_ReffeeSetupView", "id": "ReffeeSetupView" };
+    gop.gridId = "containerInfoGrid";
+    gop.gridAttr = { caption: "@Resources.Locale.L_ReffeeManage_ReffeeList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    gop.gridSearchUrl = rootPath + "ReffeeManage/QueryData";
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        dblClick(map);
+    }
+
+    gop.baseConditionFunc = function () {
+        return getCreateDateParams("CreateDate", gop);
+    }
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.loadCompleteFunc = function () {
+
+    }
+
+    var colModelSetting = [
+    	
+    ];
+
+    genColModel("ECREFFEE", "U_ID", "L_ReffeeManage", colModelSetting).done(function (result) {
+
+        gop.gridColModel = result;
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        initSearch(gop);
+    });
+
+
+    function dblClick(map) {
+        var UId = map.UId;
+        top.topManager.openPage({
+            href: rootPath + "ReffeeManage/ReffeeSetupView/" + UId,
+            title: '@Resources.Locale.L_ReffeeManage_ReffeeSetupView',
+            id: 'ReffeeSetupView',
+            reload: true
+        });
+    }
+
+});
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

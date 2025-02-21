@@ -1,0 +1,709 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <连接 Ref="2" type="Stimulsoft.Report.Dictionary.StiXmlDatabase" isKey="true">
+        <Alias>连接</Alias>
+        <Name>连接</Name>
+        <PathData>E:\HEVEN\sound\V3_CORE\ReportGetter\rpt\template\8.28\Schemas.xml</PathData>
+        <PathSchema />
+      </连接>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <IPPOM Ref="3" type="DataTableSource" isKey="true">
+        <Alias>IPPOM</Alias>
+        <Columns isList="true" count="185">
+          <value>U_ID,System.Guid</value>
+          <value>PO_NO,System.String</value>
+          <value>PO_DATE,System.DateTime</value>
+          <value>GROUP_ID,System.String</value>
+          <value>CMP,System.String</value>
+          <value>STN,System.String</value>
+          <value>DEP,System.String</value>
+          <value>BU,System.String</value>
+          <value>LU,System.String</value>
+          <value>PO_STATUS,System.String</value>
+          <value>CT_NO,System.String</value>
+          <value>CT_DATE,System.DateTime</value>
+          <value>SUPPLIER_CD,System.String</value>
+          <value>SUPPLIER_NM,System.String</value>
+          <value>CUST_CD,System.String</value>
+          <value>CUST_NM,System.String</value>
+          <value>GOODS_CD,System.String</value>
+          <value>GOODS_NM,System.String</value>
+          <value>CNTRY_CD,System.String</value>
+          <value>CNTRY_NM,System.String</value>
+          <value>TERM,System.String</value>
+          <value>TERM_LOC,System.String</value>
+          <value>MAF_NO,System.String</value>
+          <value>SALES_NO,System.String</value>
+          <value>SALES_NM,System.String</value>
+          <value>CUR,System.String</value>
+          <value>POL,System.String</value>
+          <value>POL_DESCP,System.String</value>
+          <value>POD,System.String</value>
+          <value>POD_DESCP,System.String</value>
+          <value>NW,System.Decimal</value>
+          <value>NWU,System.String</value>
+          <value>GW,System.Decimal</value>
+          <value>CONTACT_QTY,System.Int32</value>
+          <value>CONTACT_QTYU,System.String</value>
+          <value>IP_DATE,System.DateTime</value>
+          <value>IP_ADATE,System.DateTime</value>
+          <value>BL_NO,System.String</value>
+          <value>VESSEL,System.String</value>
+          <value>VOY,System.String</value>
+          <value>DBL_DATE,System.DateTime</value>
+          <value>ETD,System.DateTime</value>
+          <value>ETA,System.DateTime</value>
+          <value>CETA,System.DateTime</value>
+          <value>CPOD,System.String</value>
+          <value>CPOD_DESCP,System.String</value>
+          <value>ATA,System.DateTime</value>
+          <value>DOC_DATE,System.DateTime</value>
+          <value>ADOC_DATE,System.DateTime</value>
+          <value>WS_CD,System.String</value>
+          <value>WS_NM,System.String</value>
+          <value>WI_DATE,System.DateTime</value>
+          <value>BLNW,System.Decimal</value>
+          <value>FNW,System.Decimal</value>
+          <value>FREE_DAY,System.Decimal</value>
+          <value>CHECK_PRICE,System.String</value>
+          <value>CHECK_DATE,System.DateTime</value>
+          <value>AP_DATE,System.DateTime</value>
+          <value>SAMPLE_FLAG,System.String</value>
+          <value>SAMPLE_DATE,System.DateTime</value>
+          <value>HYGIENE_NO,System.String</value>
+          <value>PRODUCT_DATE,System.String</value>
+          <value>DECL_NO,System.String</value>
+          <value>DECL_DATE,System.DateTime</value>
+          <value>RLS_DATE,System.DateTime</value>
+          <value>CHK_DATE,System.DateTime</value>
+          <value>OTAX_DATE,System.DateTime</value>
+          <value>PTAX_DATE,System.DateTime</value>
+          <value>ACHG_DATE,System.DateTime</value>
+          <value>CHK_CGO,System.String</value>
+          <value>CGO_DATE,System.DateTime</value>
+          <value>CGO_RLS,System.DateTime</value>
+          <value>SEL_CHK,System.String</value>
+          <value>OQTY,System.Int32</value>
+          <value>WQTY,System.Int32</value>
+          <value>BQTY,System.Int32</value>
+          <value>BAMT,System.Decimal</value>
+          <value>BNW,System.Decimal</value>
+          <value>BK_NO,System.String</value>
+          <value>BK_DATE,System.DateTime</value>
+          <value>SQTY,System.Int32</value>
+          <value>PO_AMT,System.Decimal</value>
+          <value>EX_RATE,System.Decimal</value>
+          <value>LOCAL_CUR,System.String</value>
+          <value>PCOST,System.Decimal</value>
+          <value>TCOST,System.Decimal</value>
+          <value>VCOST,System.Decimal</value>
+          <value>OCOST,System.Decimal</value>
+          <value>TTL_COST,System.Decimal</value>
+          <value>TTL_REVENUR,System.Decimal</value>
+          <value>PROFIT_AMT,System.Decimal</value>
+          <value>SC_FB,System.String</value>
+          <value>SC_DESCP,System.String</value>
+          <value>LOG_FB,System.String</value>
+          <value>LOG_DESCP,System.String</value>
+          <value>IQTY,System.Decimal</value>
+          <value>LCOST,System.Decimal</value>
+          <value>LQTY,System.Decimal</value>
+          <value>UQTY,System.Decimal</value>
+          <value>BMONEY,System.String</value>
+          <value>WS_NO,System.String</value>
+          <value>CONTACT_CD,System.String</value>
+          <value>CONTACT_NM,System.String</value>
+          <value>BUYER_CD,System.String</value>
+          <value>BUYER_NM,System.String</value>
+          <value>SUPPLY_ADDR,System.String</value>
+          <value>SUPPLY_ATTN,System.String</value>
+          <value>SUPPLY_TEL,System.String</value>
+          <value>CREATE_BY,System.String</value>
+          <value>CREATE_DATE,System.DateTime</value>
+          <value>MODIFY_BY,System.String</value>
+          <value>MODIFY_DATE,System.DateTime</value>
+          <value>REMARK,System.String</value>
+          <value>ASSAY_DESCP,System.String</value>
+          <value>BCOPY,System.Decimal</value>
+          <value>SCOPY,System.Decimal</value>
+          <value>MCOPY,System.Decimal</value>
+          <value>ACOPY,System.Decimal</value>
+          <value>WCOPY,System.Decimal</value>
+          <value>OCOPY,System.Decimal</value>
+          <value>SAMPLE_BAT,System.Decimal</value>
+          <value>SAMPLE_NUM,System.Decimal</value>
+          <value>SAMPLE_TYPE,System.String</value>
+          <value>SAMPLE_REMARK,System.String</value>
+          <value>CHECK_TYPE,System.String</value>
+          <value>CHECK_RMK,System.String</value>
+          <value>CIQ_CHECK,System.String</value>
+          <value>QTY_CHECK,System.String</value>
+          <value>QU_CHECK,System.String</value>
+          <value>WT_CHECK,System.String</value>
+          <value>CARGO_FINAL,System.String</value>
+          <value>FINAL_DAY,System.Decimal</value>
+          <value>PDBL_DATE,System.DateTime</value>
+          <value>TARGET_CD,System.String</value>
+          <value>TARGET_NM,System.String</value>
+          <value>HCT_NO,System.String</value>
+          <value>SCT_NO,System.String</value>
+          <value>PORT_CD,System.String</value>
+          <value>PORT_NM,System.String</value>
+          <value>AGENT_CD,System.String</value>
+          <value>AGENT_NM,System.String</value>
+          <value>BOUND,System.String</value>
+          <value>BOUND_DATE,System.DateTime</value>
+          <value>LC_NO,System.String</value>
+          <value>LC_DATE,System.DateTime</value>
+          <value>SAMPLE_FDATE,System.DateTime</value>
+          <value>BOUND_FLAG,System.String</value>
+          <value>TT_TYPE,System.String</value>
+          <value>UCOST,System.Decimal</value>
+          <value>CUST_RMK,System.String</value>
+          <value>PRICE_DATES,System.DateTime</value>
+          <value>POINT_DATE,System.String</value>
+          <value>LC_CD,System.String</value>
+          <value>LC_NM,System.String</value>
+          <value>CUSRELEASE_DATE,System.DateTime</value>
+          <value>BEX_RATE,System.Decimal</value>
+          <value>BFLAG,System.String</value>
+          <value>QTY_UNIT,System.String</value>
+          <value>ORDER_CD,System.String</value>
+          <value>ORDER_NM,System.String</value>
+          <value>RECEIVING_CD,System.String</value>
+          <value>RECEIVING_NM,System.String</value>
+          <value>CNT_TYPE,System.String</value>
+          <value>CNT_GW,System.Decimal</value>
+          <value>BC_TYPE,System.String</value>
+          <value>BON_FLAG,System.String</value>
+          <value>LABOR_PS,System.Decimal</value>
+          <value>LAMT_ADD,System.Decimal</value>
+          <value>LAMT,System.Decimal</value>
+          <value>LIBOR_DATE,System.DateTime</value>
+          <value>DECL_AMT,System.Decimal</value>
+          <value>DECL_CNO,System.String</value>
+          <value>PRICE_DATEE,System.DateTime</value>
+          <value>BL_SDATE,System.DateTime</value>
+          <value>DEST_DATE,System.DateTime</value>
+          <value>BON_RLS,System.String</value>
+          <value>INPART_NO,System.String</value>
+          <value>BAIL_DATE,System.DateTime</value>
+          <value>LC_NUM,System.Decimal</value>
+          <value>SUM_TAX,System.Decimal</value>
+          <value>CTN_NUM,System.Int32</value>
+          <value>CNT_TYPES,System.String</value>
+          <value>SUM_INW,System.Decimal</value>
+          <value>AIRLINE_CD,System.String</value>
+          <value>AIRLINE_NM,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>IPPOM</Name>
+        <NameInSource>连接.Table1</NameInSource>
+      </IPPOM>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="3">
+        <PageHeaderBand1 Ref="5" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,27.7,2</ClientRectangle>
+          <Components isList="true" count="12">
+            <Text1 Ref="6" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.4,0,4.6,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,16,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>冷链/日化月报</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text3 Ref="7" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1.2,3.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>149fe2b2e35948cd8e0d9143e30c3f84</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>委托方</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text4 Ref="8" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.8,1.2,2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>96a8a4f70c0844dfbd76ea78967a4dc1</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>供应商合同号</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text6 Ref="9" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8,1.2,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>e18cf00842dd46b69bf3279dc1987e29</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>箱量</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text7 Ref="10" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.8,1.2,2.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>a632486c11bd4c8b9023b6f6212e3a32</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>提单号</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text8 Ref="11" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.8,1.2,2.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>aa8450e64f2a40fb90eb8dc0f598a2a9</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>起运港</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text9 Ref="12" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16,1.2,2.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>c48e6067e1674993be740290695bf065</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>目的港</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text10 Ref="13" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18.4,1.2,2.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>ff7a849d89334ad780e5d5a9b3b08bb0</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>实际到达</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text11 Ref="14" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>24.4,1.2,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>38c1b56d4c344db8b6eb2b50a2a330b1</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>税金（取关税+增值税金额）</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text24 Ref="15" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.8,1.2,2.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>abab26c6da4947aeaad88db5ec75a658</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>箱型（RH）</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text24>
+            <Text5 Ref="16" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>20.6,1.2,3.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>a3a45381c0ab45b18340d9bb83653956</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>船公司</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text28 Ref="17" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12,1.2,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>c52ebfde20d3446e8426d751ac95a407</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>实际重量</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text28>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </PageHeaderBand1>
+        <GroupHeaderBand1 Ref="18" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,3.2,27.7,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>GroupHeaderBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </GroupHeaderBand1>
+        <DataBand1 Ref="19" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,4,27.7,0.8</ClientRectangle>
+          <Components isList="true" count="11">
+            <Text14 Ref="20" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,3.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>ec7a3ffa6ecd48f89f0fe87869773b3d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{IPPOM.CUST_NM}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text15 Ref="21" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.8,0,2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>28768b273823461e983e8a8b6d703752</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{IPPOM.SCT_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text17 Ref="22" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8,0,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>e66bb94241d741ba8abcb7b79ac6bb4a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{IPPOM.CTN_NUM}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text18 Ref="23" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.8,0,2.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>f143625676d4445eab56cf7bab5560ee</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{IPPOM.BL_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <Text19 Ref="24" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.8,0,2.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>eb6e6924218747e3a798de486ed4010a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{IPPOM.POL}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="25" type="DateFormat" isKey="true" />
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text21 Ref="26" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18.4,0,2.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>27db029294be40d58f08854f10e87d94</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{IPPOM.ETA}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="27" type="DateFormat" isKey="true" />
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text22 Ref="28" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>24.4,0,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>42e40686ed5f4e768cc1a219bea016ec</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{IPPOM.SUM_TAX}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+            <Text25 Ref="29" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.8,0,2.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>f5700a932ece49cd93dec016df855a78</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{IPPOM.CNT_TYPES}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text25>
+            <Text16 Ref="30" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>20.6,0,3.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>48d81713ef464ad7815c10fe0e4a3151</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{IPPOM.AIRLINE_CD}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text29 Ref="31" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12,0,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>203827f13dc9448bbd410eac819cc97a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{IIF(IPPOM.BU=="C",IPPOM.SUM_INW,IPPOM.NW)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text29>
+            <Text20 Ref="32" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16,0,2.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,9,Bold</Font>
+              <Guid>ffa83339f99b4d3aa1d976d22d3e6a07</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{IPPOM.POD}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="33" type="DateFormat" isKey="true" />
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>IPPOM</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>c5413897267648cea17d3e2012b1da4d</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>21</PageHeight>
+      <PageWidth>29.7</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="34" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="35" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>8/28/2015 4:50:12 PM</ReportChanged>
+  <ReportCreated>5/29/2015 3:42:04 PM</ReportCreated>
+  <ReportFile>E:\HEVEN\sound\V3_CORE\ReportGetter\rpt\template\POM07.mrt</ReportFile>
+  <ReportGuid>01e814eb9df2488c875045d881d34e36</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2012.1.1300</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+        #endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

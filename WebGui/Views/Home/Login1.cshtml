@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Examples</title>
+      <meta name="description" content="">
+      <meta name="keywords" content="">
+      <link href="@Url.Content("~/Scripts/Core/bui/css/bootstrap.min.css")" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/Core/bui/css/jquery-ui.css")" />
+      <link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/Core/bui/css/login.css")" />
+
+      <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/lib/jquery-1.11.1.min.js")"></script>
+      <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/lib/bootstrap.min.js")"></script>
+      <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/lib/jquery-ui.min.j")"></script>
+    </head>
+    <body>
+      <div class="container">
+        <div class="row" id="pwd-container">
+          <div class="col-md-4"></div>          
+          <div class="col-md-4">
+            <section class="login-form">
+              <form method="post" action="">
+                <img src="./assets/images/logo.png" class="img-responsive" alt="" />
+                <!--<h2 style="text-align:center;">Prolink</h2>00>-->
+                <input type="text" name="user" placeholder="Account" class="form-control input-lg" value="" required/>
+                <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
+                <input type="text" name="company" placeholder="Company" class="form-control input-lg" placeholder="Account" value="" required/>
+                
+                <div class="pwstrength_viewport_progress"></div>
+                
+                
+                <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
+                <div>
+                  <a href="#">Change password</a>
+                </div>
+                
+              </form>
+              
+              <div class="form-links">
+                <p style="color:#fff;">Copyright © 2015 Prolink Solutions All Rights Reserved.</p>
+              </div>
+            </section>  
+            </div>
+            
+            <div class="col-md-4"></div>
+        </div>    
+      </div>
+    </body>
+</html>

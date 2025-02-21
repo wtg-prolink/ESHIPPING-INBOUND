@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="big5"?>
+<!--
+-->
+<group> 
+  <programe programeId="" detail-field="DN_NO,CUST_NO,DEBIT_TO" order="desc,asc,asc" caption="帳單輸入">
+    <field-list>
+      <field fieldName="DN_DATE" languageId="XXXX" caption="帳單號碼" />
+      <field fieldName="CUST_NO" languageId="XXXX" caption="客戶代碼" />
+      <field fieldName="DEBIT_TO" languageId="XXX" caption="帳單客戶" />
+      <field fieldName="DN_TYPE" languageId="" caption="帳單種類" />
+      <field fieldName="DC_TYPE" languageId="" caption="應收應付" />
+      <field fieldName="DN_NO" languageId="" caption="帳單號碼" />
+    </field-list>
+    <group fieldName="DN_DATE" order="desc">
+      <group fieldName="DN_TYPE" order="asc">
+        <group fieldName="DC_TYPE" />
+      </group>
+      <group fieldName="CUST_NO" />
+    </group>
+    <report-list>
+      <report id="RPT00001" languageId="" reportUrl="" caption="" />
+      <report id="RPT00002" languageId="" reportUrl="" caption="" />
+      <report id="RPT00003" languageId="" reportUrl="" caption="" />
+    </report-list>
+    <link-list>
+      <link url="" languageId="" caption="" />
+      <link url="" languageId="" caption="" />
+    </link-list>
+  </programe>
+</group>

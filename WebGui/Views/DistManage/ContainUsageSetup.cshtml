@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "ContainUsageSetup";
+}
+
+<script type="text/javascript">
+    var schemas = "@ViewBag.schemas.Content";
+    var _uid = "@ViewBag.UId";
+</script>
+@Html.RazorJSInline("~/Scripts/DistManage/ContainUsageSetup.js")
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Year" class="control-label">@Resources.Locale.L_ContainUsage_Year</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                            <input dt="mt" class="form-control input-sm" id="Year" name="Year" fieldname="Year" number  minnum="2014"/>
+                        </div>
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="Month" class="control-label">@Resources.Locale.L_ContainUsage_Month</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                            <input dt="mt" class="form-control input-sm" id="Month" name="Month" fieldname="Month" number maxnum="12" minnum="1"/>
+                        </div>
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="Week" class="control-label">@Resources.Locale.L_ContainUsage_Week</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                            <input dt="mt" class="form-control input-sm" id="Week" name="Week" fieldname="Week" number maxnum="60" minnum="0"/>
+                        </div>
+                        <div class="pure-u-sm-4-60 label-right">
+                            <label for="Region" class="control-label">@Resources.Locale.L_CitySetup_Region</label>
+                        </div>
+                        <div class="pure-u-sm-6-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Region" name="Region" fieldname="Region"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="RegionLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-4-60 label-right">
+                            <label for="Carrier" class="control-label">@Resources.Locale.L_ContainUsage_Carrier</label>
+                        </div>
+                        <div class="pure-u-sm-6-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Carrier" name="Carrier" fieldname="Carrier"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CarrierLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-6-60 label-right">
+                            <label for="MaxFeu" class="control-label">@Resources.Locale.L_ContainUsage_MAXFEU</label>
+                        </div>
+                        <div class="pure-u-sm-11-60">
+                            <input type="text" dt="mt" class="form-control input-sm lastInput" id="MaxFeu" name="MaxFeu" fieldname="MaxFeu" />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60 ">
+                            <label for="U_ID" class="control-label">@Resources.Locale.L_IpPart_Cmp</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                            <input type="text" dt="mt" class="form-control input-sm" readonly="readonly"  fieldname="Cmp"/>
+                        </div>
+                        <div class="pure-u-sm-8-60 label-right">
+                            <label for="CreateBy" class="control-label">@Resources.Locale.L_IpPart_CreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" fieldname="CreateBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" fieldname="CreateDate" readonly>
+                        </div>
+                         <div class="pure-u-sm-9-60"></div>
+                        <div class="pure-u-sm-6-60 label-right">
+                            <label for="ModifyBy" class="control-label">@Resources.Locale.L_IpPart_ModifyBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" fieldname="ModifyBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" fieldname="ModifyDate" readonly />
+                        </div>
+                    </div>
+                    <input type="hidden" dt="mt"  isKey="true" id="UId" name="UId" fieldname="UId" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

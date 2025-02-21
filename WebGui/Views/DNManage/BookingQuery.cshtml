@@ -1,0 +1,1174 @@
+﻿@{
+    ViewBag.Title = "BookingQuery";
+}
+
+
+<script type="text/javascript">
+    var select_servicemode = "@ViewBag.SelectServiceMode";
+    var select_cargotype = "@ViewBag.SelectCargoType";
+    var select_trackway = "@ViewBag.SelectTrackWay";
+    var select_cartype = "@ViewBag.SelectCarType";
+</script>
+@Html.RazorJSInline("~/Scripts/DnManage/BookingQueryColumn.js")
+@Html.RazorJSInclude("~/Scripts/DnManage/BaseBooking.js")
+
+<!--簽核退回視窗-->
+<div class="modal fade" id="BookingCancel" Sid="">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">@Resources.Locale.L_DNManage_CanBkConf</h4>
+      </div>
+      <div class="modal-body">
+            <div class="pure-g">
+                <div class="pure-u-sm-60-60">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">@Resources.Locale.L_DNManage_Descp</label>
+                        <textarea class="form-control" id="BackRemark" name="BackRemark" fieldname="BackRemark"></textarea>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseBookingWin" >Close</button>
+        <button type="button" class="btn btn-primary" onclick="BookingCancel()" id="BackConfirm">@Resources.Locale.L_Layout_Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--簽核退回視窗-->
+<!--解除提单合并視窗-->
+<div class="modal fade" id="SpellCombineSM" Sid="">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">@Resources.Locale.L_DNManage_LiftCombBL</h4>
+      </div>
+      <div class="modal-body">
+            <div class="pure-g">
+                <div class="pure-u-sm-60-60">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">@Resources.Locale.L_DNManage_PleSelc</label>
+                        <input type="hidden" id="hid_shipmentid" />
+                        <div id="DnCheckList">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseSpellWin" >Close</button>
+        <button type="button" class="btn btn-primary" onclick="ConfirmSpellSM()" id="SpellConfirm">@Resources.Locale.L_Layout_Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--解除提单合并視窗-->
+
+<script type="text/javascript">
+    var _dm = new dm();
+    var _oldDeatiArray = [];
+    var _oldSerialArray = [];
+    $(document).ready(function ($) {
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        gop.gridColModel = BookingQueryColumn
+        gop.AddUrl = false;
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_DNManage_BkList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition), sortname: "TranType" };
+        gop.gridSearchUrl = rootPath + "DNManage/ShippingBookingQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        var _baseCondition = "";
+        gop.baseCondition = _baseCondition;
+        gop.multiselect = true;
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            //dblClick(map);
+            var uid = map.UId;
+            var trantype = map.TranType;
+            var _url = "";
+            var _id = "";
+            var _title = "";
+            if (!uid) {
+                CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                return;
+            }
+
+            if (trantype == "A") {
+                _url = "DNManage/AirBookingSetup/";
+                _id = "AirBookingSetup";
+                _title = "@Resources.Locale.L_DNManage_AirBlEnt";
+            }
+            if (trantype == "D") {
+                _url = "DNManage/DEBookingSetup/";
+                _id = "DEBookingSetup";
+                _title = "@Resources.Locale.L_DNManage_DmEpBk";
+            }
+            if (trantype == "T") {
+                _url = "DNManage/DTBookingSetup/";
+                _id = "DTBookingSetup";
+                _title = "@Resources.Locale.L_DNManage_DmBk";
+            }
+            if (trantype == "F") {
+                _url = "DNManage/FCLBooking/";
+                _id = "FCLBooking";
+                _title = "@Resources.Locale.L_DNManage_FCLBk";
+            }
+            if (trantype == "E") {
+                _url = "DNManage/IEBookingSetup/";
+                _id = "IEBookingSetup";
+                _title = "@Resources.Locale.L_DNManage_InterEpBk";
+            }
+            if (trantype == "L") {
+                _url = "DNManage/LCLBooking/";
+                _id = "LCLBooking";
+                _title = "@Resources.Locale.L_DNManage_LCLBk";
+            }
+            if (trantype == "R") {
+                _url = "DNManage/RailwayBookingSetup/";
+                _id = "RailwayBookingSetup";
+                _title = "@Resources.Locale.L_DNManage_RailBk";
+            }
+            top.topManager.openPage({
+                href: rootPath + _url + uid,
+                title: _title,
+                id: _id,
+                reload: true
+            });
+        }
+
+        gop.onSelectRowFunc = function (jsonMap) {
+            //顯示子表
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+
+
+        gop.statusGroup = [
+            { "id": "", "label": "ALL" },
+            { "id": "A", "label": "@Resources.Locale.L_UserQuery_Unprocess_en" },
+            { "id": "B", "label": "@Resources.Locale.L_BSTSetup_Book" },
+            { "id": "C", "label": "@Resources.Locale.L_UserQuery_ComBA" },
+            { "id": "D", "label": "@Resources.Locale.L_UserQuery_Call" },
+            { "id": "I", "label": "@Resources.Locale.L_UserQuery_In" },
+            { "id": "P", "label": "@Resources.Locale.L_UserQuery_SealCnt" },
+            { "id": "O", "label": "@Resources.Locale.L_UserQuery_Out" },
+            //{ "id": "G", "label": "報關" },
+            { "id": "H", "label": "@Resources.Locale.L_UserQuery_Release" },
+            { "id": "V", "label": "@Resources.Locale.L_BSCSDateQuery_Cancel" },
+            { "id": "Z", "label": "@Resources.Locale.L_UserQuery_Return" },
+            { "id": "U", "label": "@Resources.Locale.L_DNManage_NtConfBL" },
+            { "id": "Y", "label": "@Resources.Locale.L_DNManage_ConfBL" },
+            { "id": "F", "label": "Finished/ATD<3months" },
+            { "id": "R", "label": "Archived/ATD≥3months" }
+        ]
+
+        gop.statusField = "Status";
+        gop.statusDefaultId = "A";
+        gop.statusPreLoad = true;
+
+        gop.btnGroup = [
+            {
+                id: "btn05",
+                name: "@Resources.Locale.L_DNManage_BkDetail",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+                    var trantype = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'TranType');
+                    var _url = "";
+                    var _id = "";
+                    var _title = "";
+                    if (!uid) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    if (trantype == "A") {
+                        _url = "DNManage/AirBookingSetup/";
+                        _id = "AirBookingSetup";
+                        _title = "@Resources.Locale.L_DNManage_AirBlEnt";
+                    }
+                    if (trantype == "D") {
+                        _url = "DNManage/DEBookingSetup/";
+                        _id = "DEBookingSetup";
+                        _title = "@Resources.Locale.L_DNManage_DmEpBk";
+                    }
+                    if (trantype == "T") {
+                        _url = "DNManage/DTBookingSetup/";
+                        _id = "DTBookingSetup";
+                        _title = "@Resources.Locale.L_DNManage_DmBk";
+                    }
+                    if (trantype == "F") {
+                        _url = "DNManage/FCLBooking/";
+                        _id = "FCLBooking";
+                        _title = "@Resources.Locale.L_DNManage_FCLBk";
+                    }
+                    if (trantype == "E") {
+                        _url = "DNManage/IEBookingSetup/";
+                        _id = "IEBookingSetup";
+                        _title = "@Resources.Locale.L_DNManage_InterEpBk";
+                    }
+                    if (trantype == "L") {
+                        _url = "DNManage/LCLBooking/";
+                        _id = "LCLBooking";
+                        _title = "@Resources.Locale.L_DNManage_LCLBk";
+                    }
+                    if (trantype == "R") {
+                        _url = "DNManage/RailwayBookingSetup/";
+                        _id = "RailwayBookingSetup";
+                        _title = "@Resources.Locale.L_DNManage_RailBk";
+                    }
+                    top.topManager.openPage({
+                        href: rootPath + _url + uid,
+                        title: _title,
+                        id: _id,
+                        reload: true
+                    });
+                }
+            },
+            {
+                id: "ShipFee",
+                name: "@Resources.Locale.L_ActManage_LspChg",
+                func: function () {
+                    var id = $("#containerInfoGrid").jqGrid('getGridParam', "selrow");
+                    var map = $("#containerInfoGrid").jqGrid('getRowData', id);
+                    var UId;
+                    if (map) UId = map.UId;
+
+                    if (isEmpty(UId)) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return false;
+                    }
+
+                    getData(rootPath + "QTManage/CostDetail", { uid: UId, shipmentId: map.ShipmentId }, function (result) {
+                        $("#ShipFeeDialogGrid").jqGrid("clearGridData");
+                        $("#ShipFeeDialogGrid").jqGrid("setGridParam", {
+                            datatype: 'local',
+                            sortorder: "asc",
+                            sortname: "LspNo",
+                            data: result,
+                        }).trigger("reloadGrid");
+
+                        $('#costDetail').modal('show'); //顯示彈出視窗
+                        ajustamodal("#costDetail");
+                    });
+                }
+            },
+            {
+                id: "CalCulCost",
+                name: "@Resources.Locale.L_Layout_AutoAmount",
+                func: function () {
+                    var mygrid = $("#containerInfoGrid");
+                    var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                    var responseData = [];
+                    var uids = "";
+                    $.each(selRowId, function (index, val) {
+                        responseData.push(mygrid.getRowData(selRowId[index]));
+                    });
+                    if (responseData.length < 1) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    for (var i = 0; i < responseData.length; i++) {
+                        uids += responseData[i].UId + ";";
+                    }
+                    CommonFunc.ToogleLoading(true);
+                    $.ajax({
+                        async: true,
+                        url: rootPath + "QTManage/CreateBill",
+                        type: 'POST',
+                        data: {
+                            "uid": uids,
+                            shipmentId: uids
+                        },
+                        "complete": function (xmlHttpRequest, successMsg) {
+                            CommonFunc.ToogleLoading(false);
+                        },
+                        "error": function (xmlHttpRequest, errMsg) {
+                            CommonFunc.ToogleLoading(false);
+                            var resJson = $.parseJSON(errMsg)
+                            CommonFunc.Notify("", resJson.message, 500, "warning");
+                        },
+                        success: function (result) {
+                            CommonFunc.ToogleLoading(false);
+                            //var resJson = $.parseJSON(result)
+                            CommonFunc.Notify("", result.message, 500, "success");
+                            //$("#SummarySearch").trigger("click");
+                        }
+                    });
+                }
+            },
+            {
+                id: "btn06",
+                name: "DN",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var shipmentid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ShipmentId');
+                    if (!shipmentid) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+
+                    top.topManager.openPage({
+                        href: rootPath + "DNManage/ShipmentDN/" + shipmentid,
+                        title: 'ShipmentDN',
+                        id: 'ShipmentDN'
+                    });
+                }
+            },
+            {
+                id: "btn08",
+                name: "@Resources.Locale.L_BookingQuery_Views_266",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+                    var shipmentid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ShipmentId');
+                    if (!uid) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    initErrMsg($("#btn08"), { 'GROUP_ID': groupId, 'CMP': cmp, 'STN': stn, 'UId': uid, 'JobNo': shipmentid }, true, $("#containerInfoGrid"));
+                }
+            },
+            {
+                id: "btn09",
+                name: "@Resources.Locale.L_BookingQuery_Views_267",
+                func: function () {
+                    CheckCargoDetailed();
+                }
+            },
+            {
+                id: "Inv",
+                name: "Invoice",
+                func: function () {
+                    var selarrrowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var ShipmentId = getGridVal($("#containerInfoGrid"), selarrrowId, "ShipmentId", null);
+
+                    if (!ShipmentId) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    top.topManager.openPage({
+                        href: rootPath + "DNManage/InvPkgQuery?ShipmentId=" + ShipmentId,
+                        title: 'Invoice/Packing',
+                        id: 'DN011',
+                        search: 'ShipmentId=' + ShipmentId
+                    });
+                }
+            },
+            {
+                id: "pmsCombineInv",
+                name: "@Resources.Locale.L_DNManage_CombIv",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var ShipmentId = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ShipmentId');
+                    if (ShipmentId == "" || ShipmentId == null) {
+                        alert("@Resources.Locale.L_TKBLQuery_Select");
+                        return;
+                    }
+                    $("#CombineInvDialog").modal("show");
+                }
+            },
+            {
+                id: "SendToFTP",
+                name: "@Resources.Locale.L_DNManage_IsExport",
+                func: function () { }
+            },
+            {
+                id: "ComBillSend",
+                name: "@Resources.Locale.L_DNManage_CombBLNoti",
+                func: function () {
+                    var mygrid = $("#containerInfoGrid");
+                    var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                    var responseData = [];
+                    var dnitems = "";
+                    $.each(selRowId, function (index, val) {
+                        responseData.push(mygrid.getRowData(selRowId[index]));
+                    });
+                    if (responseData.length < 1) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_AirBooking_Views_253", 500, "warning");
+                        return;
+                    }
+                    var shipments = "";
+                    for (var i = 0; i < responseData.length; i++) {
+                        dnitems += responseData[i].UId + ",";
+                        if (shipments.length > 0)
+                            shipments += ",";
+                        shipments += responseData[i].ShipmentId;
+                    }
+
+                    var iscontinue = window.confirm("@Resources.Locale.L_DNManage_Whether2" + shipments + "@Resources.Locale.L_DNManage_MailNotify");
+                    if (!iscontinue) {
+                        return;
+                    }
+                    CommonFunc.ToogleLoading(true);
+                    $.ajax({
+                        async: true,
+                        url: rootPath + "BookingAction/NoticeCombineBill",
+                        type: 'POST',
+                        data: {
+                            "Uid": dnitems
+                        },
+                        "complete": function (xmlHttpRequest, successMsg) {
+                            CommonFunc.ToogleLoading(false);
+                        },
+                        "error": function (xmlHttpRequest, errMsg) {
+                            CommonFunc.ToogleLoading(false);
+                            var resJson = $.parseJSON(errMsg)
+                            CommonFunc.Notify("", resJson.message, 500, "warning");
+                        },
+                        success: function (result) {
+                            //var resJson = $.parseJSON(result)
+                            if (result.IsOk == "Y") {
+                                CommonFunc.Notify("", result.message, 500, "success");
+                            }
+                            else {
+                                alert(result.message);
+                            }
+                            $("#SummarySearch").trigger("click");
+                        }
+                    });
+                }
+
+            },
+            {
+                id: "ASDQReport",
+                name: "@Resources.Locale.L_BookingQuery_Script_11",
+                func: function () {
+                    CheckAsdReport("Q");
+                    return;
+                }
+            },
+            {
+                id: "ASDReport",
+                name: "@Resources.Locale.L_BookingQuery_Script_12",
+                func: function () {
+                    CheckAsdReport("B");
+                    return;
+                }
+            }, {
+                id: "BtnToInbound",
+                name: "Send to Inbound",
+                func: function () {
+                    ChangeToInbound();
+                    return;
+                }
+            }
+        ];
+        gop.baseConditionFunc = function () {
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+            var shipmentId = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ShipmentId');
+            if (shipmentId != "") {
+                return "&sopt_ShipmentId=eq&ShipmentId=" + shipmentId;
+            } else {
+                return "";
+            }
+        }
+
+
+        initSearch(gop);
+
+        //EDOC Type lookup
+        EdocTypeOptions = {};
+        EdocTypeOptions.gridUrl = rootPath + "TPVCommon/GetBscodeDataForLookupPri";
+        EdocTypeOptions.registerBtn = $("#SendToFTP");
+        EdocTypeOptions.isMutiSel = true;
+        EdocTypeOptions.focusItem = $("#SendToFTP");
+        //mutil select add a columnID help mapping selected data
+        EdocTypeOptions.columnID = "Cd";
+        EdocTypeOptions.param = "&sopt_GroupId=eq&GroupId=" + groupId;
+        EdocTypeOptions.param = "";
+        EdocTypeOptions.baseCondition = " GROUP_ID='" + groupId + "' AND CMP='" + cmp + "' AND CD_TYPE='EDT'";
+        EdocTypeOptions.responseMethod = function (type) {
+            /*var str = "";
+            $.each(data, function (index, val) {
+                str = str + data[index].Cd + ";";
+            });
+            $("#Tcmp").val(str);*/
+            var typeStr = "";
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+            var ShipmentId = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ShipmentId');
+            if (ShipmentId == "" || ShipmentId == null) {
+                alert("@Resources.Locale.L_TKBLQuery_Select");
+                return;
+            }
+
+            $(type).each(function (index) {
+                typeStr += type[index].Cd + ";";
+            });
+            var selRowIds = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow') + "";
+            var jobNo = "";
+            var keyData = "";
+            var fileNo = "";
+            var combineNo = "";
+            var UId = "";
+            var combineId = "";
+            var shipmentId = "";
+            selRowIds = selRowIds.split(",");
+            for (var i = 0; i < selRowIds.length; i++) {
+                UId = $("#containerInfoGrid").jqGrid('getCell', selRowIds[i], 'UId');
+                shipmentId = $("#containerInfoGrid").jqGrid('getCell', selRowIds[i], 'ShipmentId');
+                combineId = $("#containerInfoGrid").jqGrid('getCell', selRowIds[i], 'CombineInfo');
+                jobNo += UId + ",";
+                combineNo += combineId + ",";
+                fileNo += shipmentId + "," + combineId + ",";
+                keyData += shipmentId + ",";
+            }
+
+
+            CommonFunc.ToogleLoading(true);
+            $.ajax({
+                async: true,
+                url: rootPath + "DNManage/GetDNData",
+                type: 'POST',
+                data: { DnNo: combineNo, loading: true },
+                dataType: "json",
+                "complete": function (xmlHttpRequest, successMsg) {
+                    CommonFunc.ToogleLoading(false);
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                    CommonFunc.ToogleLoading(false);
+                    var resJson = $.parseJSON(errMsg)
+                    CommonFunc.Notify("", resJson.message, 500, "warning");
+                },
+                success: function (data) {
+                    //alert(data);
+                    $(data.dn).each(function (index) {
+                        jobNo += data.dn[index].UId + ",";
+                    });
+                    //alert(jobNo);
+                    $.ajax({
+                        async: true,
+                        url: rootPath + "EDOC/DoDownLoadFileToDir",
+                        type: 'POST',
+                        data: {
+                            JOBNO: jobNo,
+                            FILENO: fileNo,
+                            GROUP_ID: groupId,
+                            CMP: cmp,
+                            STN: stn,
+                            TYPE: typeStr
+                        },
+                        "complete": function (xmlHttpRequest, successMsg) {
+                            CommonFunc.ToogleLoading(false);
+                        },
+                        "error": function (xmlHttpRequest, errMsg) {
+                            CommonFunc.ToogleLoading(false);
+                            var resJson = $.parseJSON(errMsg)
+                            CommonFunc.Notify("", resJson.message, 500, "warning");
+                        },
+                        success: function (result) {
+                            $.ajax({
+                                async: true,
+                                url: rootPath + "DNManage/UpdateExportTag",
+                                type: 'POST',
+                                data: {
+                                    JOBNO: keyData,
+                                    GROUP_ID: groupId,
+                                    CMP: cmp,
+                                    STN: stn
+                                },
+                                "complete": function (xmlHttpRequest, successMsg) {
+                                    CommonFunc.ToogleLoading(false);
+                                },
+                                "error": function (xmlHttpRequest, errMsg) {
+                                    CommonFunc.ToogleLoading(false);
+                                    var resJson = $.parseJSON(errMsg)
+                                    CommonFunc.Notify("", resJson.message, 500, "warning");
+                                },
+                                success: function (result) {
+                                    CommonFunc.ToogleLoading(false);
+
+                                    CommonFunc.Notify("", "@Resources.Locale.L_BookingQuery_Script_13", 500, "success");
+
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        EdocTypeOptions.lookUpConfig = LookUpConfig.EdocTypeLookup;
+        initLookUp(EdocTypeOptions);
+
+        $("#SummarySearch").bind("click", function () {
+            $(".status-box").removeClass("active");
+            $("#searchStatus_").addClass("active");
+        });
+        function reloadStatus() {
+            $.ajax({
+                async: true,
+                url: gop.gridSearchUrl,
+                type: 'POST',
+                data: {
+                    "resultType": "count",
+                    "statusField": gop.statusField,
+                    "basecondition": _baseCondition
+                },
+                "complete": function (xmlHttpRequest, successMsg) {
+
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                },
+                success: function (result) {
+                    console.log(result);
+                    var resJson = $.parseJSON(result)
+                    for (var i = 0 ; i < resJson.rows.length ; i++) {
+                        $("#statusCount_" + resJson.rows[i].PoStatus).html(resJson.rows[i].Count);
+                    }
+
+                }
+            });
+        }
+        //reloadStatus();
+        var $CombineInvDialog = $("#CombineInvDialog");
+        var colModel1 = [
+                { name: 'DnNo', title: 'DN NO', index: 'DnNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'ShipmentId', title: 'Shipment ID', index: 'ShipmentId', width: 130, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'DnType', title: 'DN Type', index: 'DnType', width: 85, align: 'left', sorttype: 'string', hidden: false }
+        ];
+
+        new genGrid(
+            $("#CombineInvGrid"),
+            {
+                datatype: "local",
+                loadonce: true,
+                colModel: colModel1,
+                caption: "Combine DN List",
+                height: 300,
+                rows: 999999,
+                refresh: false,
+                cellEdit: false,//禁用grid编辑功能
+                pginput: false,
+                sortable: true,
+                pgbuttons: false,
+                exportexcel: false,
+                toppager: false,
+                multiselect: false,
+                sortname: "DnNo"
+            }
+        );
+        $("#CombineInvDialog").on("show.bs.modal", function () {
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+            var UId = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+            $.post(rootPath + 'Invoice/getCombinDn', { "UId": UId }, function (data, textStatus, xhr) {
+                if (data.message == "success") {
+                    var gridData = $.parseJSON(data.returnData.Content);
+                    $("#CombineInvGrid").jqGrid("clearGridData");
+                    $("#CombineInvGrid").jqGrid("setGridParam", {
+                        datatype: 'local',
+                        data: gridData.rows
+                    }).trigger("reloadGrid");
+                }
+                else {
+                    CommonFunc.Notify("", data.message, 500, "warning");
+                    return;
+                }
+            }, "JSON");
+        });
+
+        $("#CombineInvBtn").click(function () {
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+            var ShipmentId = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ShipmentId');
+            var sm_id = ShipmentId;
+            var c_com = $("#c_com").val();
+            var c_io = $("#c_io").val();
+            var ids = "";
+            var api_url = "";
+            var chk_url = "";
+            if (c_io == "I") {
+                api_url = rootPath + "Invoice/CombineInvI";
+                chk_url = rootPath + "Invoice/chkCombineI";
+                if (c_com == "") {
+                    alert("@Resources.Locale.L_BaseBookingSetup_Script_116");
+                    return;
+                }
+            }
+            else {
+                api_url = rootPath + "Invoice/CombineInvO";
+                chk_url = rootPath + "Invoice/chkCombineO";
+            }
+
+            $.post(chk_url, { sm_id: sm_id, c_com: c_com }, function (data, textStatus, xhr) {
+                if (data.msg == "Y") {
+                    if (confirm("@Resources.Locale.L_DNManage_CombinedBefore")) {
+                        $.ajax({
+                            async: true,
+                            url: api_url,
+                            type: 'POST',
+                            data: { sm_id: sm_id, c_com: c_com, cover: "Y" },
+                            beforeSend: function (xmlHttpRequest, successMsg) {
+                                CommonFunc.ToogleLoading(true);
+                            },
+                            error: function (xmlHttpRequest, errMsg) {
+                                CommonFunc.Notify("", "@Resources.Locale.L_DNManage_combError", 1000, "warning");
+                                CommonFunc.ToogleLoading(false);
+                            },
+                            success: function (result) {
+                                if (result.msg == "success") {
+                                    CommonFunc.Notify("", "@Resources.Locale.L_DNManage_CombS", 1000, "success");
+                                    //alert(rootPath + "DNManage/InvPkgQuery?ShipmentId=" + sm_id);
+                                    top.topManager.openPage({
+                                        href: rootPath + "DNManage/InvPkgQuery?ShipmentId=" + sm_id,
+                                        title: 'Invoice/Packing',
+                                        id: 'DN011',
+                                        search: "ShipmentId=" + sm_id,
+                                        reload: true
+                                    });
+                                }
+                                else {
+                                    CommonFunc.Notify("", result.msg, 1000, "warning");
+                                }
+                                CommonFunc.ToogleLoading(false);
+                            }
+                        });
+                    }
+                }
+                else {
+                    $.ajax({
+                        async: true,
+                        url: api_url,
+                        type: 'POST',
+                        data: { sm_id: sm_id, c_com: c_com },
+                        beforeSend: function (xmlHttpRequest, successMsg) {
+                            CommonFunc.ToogleLoading(true);
+                        },
+                        error: function (xmlHttpRequest, errMsg) {
+                            CommonFunc.Notify("", "@Resources.Locale.L_DNManage_combError", 1000, "warning");
+                            CommonFunc.ToogleLoading(false);
+                        },
+                        success: function (result) {
+                            if (result.msg == "success") {
+                                CommonFunc.Notify("", "@Resources.Locale.L_DNManage_CombS", 1000, "success");
+                                //alert(rootPath + "DNManage/InvPkgQuery?ShipmentId=" + sm_id);
+                                top.topManager.openPage({
+                                    href: rootPath + "DNManage/InvPkgQuery?ShipmentId=" + sm_id,
+                                    title: 'Invoice/Packing',
+                                    id: 'DN011',
+                                    search: "ShipmentId=" + sm_id,
+                                    reload: true
+                                });
+                            }
+                            else {
+                                CommonFunc.Notify("", result.msg, 1000, "warning");
+                            }
+                            CommonFunc.ToogleLoading(false);
+                        }
+                    });
+                }
+            }, "JSON");
+        });
+
+        $("#CancelCombineInvBtn").click(function (event) {
+            var UId = $("#UId").val();
+            var ShipmentId = $("#ShipmentId").val();
+            var c_com = $("#c_com").val();
+            var c_io = $("#c_io").val();
+            var api_url = "";
+
+            if (c_io == "I") {
+                api_url = rootPath + "Invoice/CancelCombineInvI";
+                if (c_com == "") {
+                    alert("@Resources.Locale.L_BaseBookingSetup_Script_116");
+                    return;
+                }
+            }
+            else {
+                api_url = rootPath + "Invoice/CancelCombineInvO";
+            }
+
+            if (UId == "" || UId == null) {
+                CommonFunc.Notify("", "@Resources.Locale.L_DNManage_MayNotSave", 500, "warning");
+                return;
+            }
+            else {
+                if (confirm("@Resources.Locale.L_DNManage_SureCancelComb")) {
+                    $.post(api_url, { ShipmentId: ShipmentId, c_com: c_com }, function (data, textStatus, xhr) {
+                        if (data.msg == "success") {
+                            CommonFunc.Notify("", "@Resources.Locale.L_Layout_CanlMer", 1000, "success");
+                        }
+                        else {
+                            CommonFunc.Notify("", data.msg, 1000, "warning");
+                        }
+                    }, "JSON");
+                }
+            }
+        });
+
+        var $ShipFeeDialogGrid = $("#ShipFeeDialogGrid");
+        var ShipFeeGridHeight = $("#costDetail").height() - 350;
+        if (ShipFeeGridHeight < 100) {
+            ShipFeeGridHeight = 100;
+        }
+        new initGrid(
+            $ShipFeeDialogGrid,
+            {
+                data: [],
+                colModel: ShipFeeColModel,
+                beforeSelectRowFunc: function (rowid) {
+
+                }
+            },
+            {
+
+                loadonce: true,
+                cellEdit: false,//禁用grid编辑功能
+                caption: "@Resources.Locale.L_QTManage_LspChgDetail",
+                height: ShipFeeGridHeight,
+                refresh: true,
+                rows: 9999,
+                exportexcel: false,
+                pginput: false,
+                pgbuttons: false,
+                sortorder: "Asc",
+                sortname: "LspNo",
+                savelayout: true,
+                showcolumns: true,
+                footerrow: true,
+                dblClickFunc: function (map) {
+                },
+                loadComplete: function (data) {
+
+                    var Qsum = $("#ShipFeeDialogGrid").jqGrid("getCol", "Qlamt", false, "sum");
+                    var Bsum = $("#ShipFeeDialogGrid").jqGrid("getCol", "Lamt", false, "sum");
+                    var Qamt = $("#ShipFeeDialogGrid").jqGrid("getCol", "Qamt", false, "sum");
+                    var Bamt = $("#ShipFeeDialogGrid").jqGrid("getCol", "Bamt", false, "sum");
+                    $("#ShipFeeDialogGrid").jqGrid("footerData", "set", { "Qcur": "Total:", "Qlamt": Qsum, "Lamt": Bsum, "Qamt": Qamt, "Bamt": Bamt });
+
+                }
+            }
+        );
+    });
+
+    function ChangeToInbound() {
+        var mygrid = $("#containerInfoGrid");
+        var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+        var responseData = [];
+        var dnitems = "";
+        $.each(selRowId, function (index, val) {
+            responseData.push(mygrid.getRowData(selRowId[index]));
+        });
+        if (responseData.length < 1) {
+            CommonFunc.Notify("", "@Resources.Locale.L_BaseBooking_Scripts_127", 500, "warning");
+        return;
+    }
+    var shipments = "";
+    for (var i = 0; i < responseData.length; i++) {
+        var status = responseData[i].Status;
+        var IscombineBl = responseData[i].IscombineBl;
+        if (IscombineBl != "C" && IscombineBl != "Y") {
+            if (!(status == "F" || status == "R" || status == "O" || status == "H")) {
+                CommonFunc.Notify("", responseData[i].ShipmentId + ":" + "@Resources.Locale.L_BookingQuery_View_tip", 500, "warning");
+                return;
+            }
+        }
+        dnitems += responseData[i].UId + ",";
+        if (shipments.length > 0)
+            shipments += ",";
+        shipments += responseData[i].ShipmentId;
+    }
+
+    var iscontinue = window.confirm("@Resources.Locale.L_DNManage_Is1" + shipments + " Send to Inbound?");
+    if (!iscontinue) {
+        return;
+    }
+    CommonFunc.ToogleLoading(true);
+    $.ajax({
+        async: true,
+        url: rootPath + "BookingAction/O2IAction",
+        type: 'POST',
+        data: {
+            "ShipmentId": shipments
+        },
+        "complete": function (xmlHttpRequest, successMsg) {
+            CommonFunc.ToogleLoading(false);
+        },
+        "error": function (xmlHttpRequest, errMsg) {
+            CommonFunc.ToogleLoading(false);
+            var resJson = $.parseJSON(errMsg)
+            CommonFunc.Notify("", resJson.message, 500, "warning");
+        },
+        success: function (result) {
+            if (result.msg == "success") {
+                CommonFunc.Notify("", result.msg, 500, "success");
+            }
+            else {
+                alert(result.msg);
+            }
+            $("#SummarySearch").trigger("click");
+        }
+    });
+}
+
+
+    function ASDReportDownload(uid) {
+        window.open(rootPath + "BookingAction/ASDReportGetFile?UId=" + uid);
+    }
+    function ASDReportRemove() {
+    }
+
+
+    function ASDReportSender() {
+        var year = $("#Year").val();
+        var month = $("#Month").val();
+        var asdtype = $("#asdtype").val();
+        if (year == "" || year == null || month == "" || month == null) {
+            alert("@Resources.Locale.L_BookingQuery_Script_50");
+            $("#Year").focus();
+            return;
+        }
+        var iscontinue = window.confirm("@Resources.Locale.L_BookingQuery_Views_283" + year + "@Resources.Locale.L_BookingQuery_Views_284" + month + "@Resources.Locale.L_BookingQuery_Script_15");
+        if (!iscontinue) {
+            return;
+        }
+        CommonFunc.ToogleLoading(true);
+        $.ajax({
+            async: true,
+            url: rootPath + "BookingAction/ASDReportHandler",
+            type: 'POST',
+            data: {
+                "Year": year,
+                "Month": month,
+                "AsdType": asdtype
+            },
+            "complete": function (xmlHttpRequest, successMsg) {
+                CommonFunc.ToogleLoading(false);
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+                CommonFunc.ToogleLoading(false);
+                var resJson = $.parseJSON(errMsg)
+                CommonFunc.Notify("", resJson.message, 500, "warning");
+            },
+            success: function (result) {
+                //var resJson = $.parseJSON(result)
+                CommonFunc.ToogleLoading(false);
+                if (result.IsOk == "Y") {
+                    alert(result.message);
+                    $("#ASDReportDetail").modal("hide");
+                    //var exclefile = result.message;
+                    //window.open(rootPath + "BookingAction/ASDReportGetFile?xlsFile=" + exclefile);
+                }
+                else {
+                    alert(result.message);
+                }
+            }
+        });
+    }
+
+    function CheckAsdReport(asdtype) {
+
+        if ($("#ASDReportDetail").length <= 0) {
+            $("body").append(_showASDReportModal);
+        }
+        $("#asdtype").val(asdtype);
+
+        if ($("#ASDReportDetailTemplate").length <= 0) {
+            $("body").append(_showASDReportTemplate);
+        }
+
+        var $_grid = $("#containerInfoGrid");
+        var $_templeat = $("#ASDReportDetailTemplate");
+        var $_DetailTable = $("#ASDReportDetailTemplate");
+        var $_Detail = $('#ASDReportDetail');
+        var selRowId = $_grid.jqGrid('getGridParam', 'selrow');
+
+        $.ajax({
+            async: true,
+            url: rootPath + "BookingAction/GetASDFiles",
+            type: 'POST',
+            data: {
+                "Type": asdtype
+            },
+            "complete": function (xmlHttpRequest, successMsg) {
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+            },
+            success: function (result) {
+                console.log(result);
+                var resJson = $.parseJSON(result)
+                var source = $_templeat.html();
+                var data = {
+                    rowData: [
+                        { "SeqNo": 1, "ResultStauts": "@Resources.Locale.L_GateReserve_Status", "FileNames": "@Resources.Locale.L_PartyDocSetup_DocDescp", "CreateBy": "Tim", "CreateDate": "2015-10-30 16:00", "Remark": "xxx" }
+                    ]
+                };
+                //data = resJson;
+                var newResJson = [];
+                $.each(resJson, function (index, val) {
+
+
+                    var resJsonItem = val;
+                    if (resJsonItem.ResultStauts == "0") {
+                        resJsonItem.ResultStauts = '@Resources.Locale.L_ActManage_No';
+                    } else if (resJsonItem.ResultStauts == "1") {
+                        resJsonItem.ResultStauts = '@Resources.Locale.L_BookingQuery_Views_288';
+                    }
+                    if (resJsonItem.Filepath != null & resJsonItem.Filepath != "") {
+                        //resJsonItem.Down = '<button type="button" class="btn btn-primary" onclick="ASDReportDownload(' + resJsonItem.Filepath + ')" id="SpellConfirm">down</button>';
+                        resJsonItem.Down = 'Down';
+                    }
+                    newResJson.push(resJsonItem);
+                });
+                var data = { rowData: newResJson, maxNum: 1 };
+                var template = Handlebars.compile(source);
+                var html = template(data);
+                $("#ASDReportDetailTable").html(html);
+
+                $('#ASDReportDetail').modal('show'); //顯示彈出視窗
+                $("#Year").val("");
+                $("#Month").val("");
+                ajustamodal("#ASDReportDetail");
+            }
+        });
+    };
+
+
+    var _showASDReportModal = '<div class="modal fade" id="ASDReportDetail" Sid="">\
+  <div class="modal-dialog modal-lg">\
+    <div class="modal-content">\
+      <div class="modal-header">\
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+        <h4 class="modal-title">@Resources.Locale.L_DNManage_ASDDetail</h4>\
+      </div>\
+      <div class="modal-body" id="ApproveContent">\
+        <table class="table table-bordered table-hover" id="ASDReportDetailTable">\
+        </table>\
+      </div>\
+      <div class="modal-footer">\
+        <div>\
+        Year:<select class="" dt="mt" id="Year" name="Year" maxlength="10" style="width:100px" ><option value=""></option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option></select>\
+        Month:<select class="" dt="mt" id="Month" name="Month" maxlength="2"  style="width:100px"><option value=""></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>\
+        <option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>\
+         <button type="button" class="btn btn-primary" onclick="ASDReportSender()" id="SpellConfirm">@Resources.Locale.L_BookingQuery_Views_290</button>\
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="ModalClose">Close</button>\
+        </div>\
+      </div>\
+    </div>\
+  </div>\
+</div>';
+
+    var _showASDReportTemplate = '<script id="ASDReportDetailTemplate" type="text/x-handlebars-template">\
+    <thead>\
+        <tr class="info">\
+            <td>@Resources.Locale.L_DNDetailVeiw_OrderBy</td>\
+            <td>@Resources.Locale.L_GateReserve_Status</td>\
+            <td>@Resources.Locale.L_BookingQuery_Views_284</td>\
+            <td>@Resources.Locale.L_ActManage_Month</td>\
+            <td>@Resources.Locale.L_PartyDocSetup_DocDescp</td>\
+            <td>@Resources.Locale.L_DNApproveManage_CreateDate</td>\
+            <td>@Resources.Locale.L_DNManage_Download</td>\
+        </tr>\
+    </thead>\
+    <tbody>\
+        {{#each rowData}}\
+            <tr>\
+                <td>{{this.SeqNo}}</td>\
+                <td>{{this.ResultStatus}}</td>\
+                <td>{{this.Year}}</td>\
+                <td>{{this.Month}}</td>\
+                <td>{{this.FileNames}}</td>\
+                <td>{{this.CreateDate}}</td>\
+                {{#if this.Down }}\
+                    <td><button type="button" class="btn btn-primary" onclick="ASDReportDownload(\'{{this.UId}}\')" id="SpellConfirm">{{this.Down}}</button></td>\
+                {{else}}\
+                    <td>\
+                {{/if}}\
+            </tr>\
+{{/each}}\
+</tbody><\/script>';
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="SubGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="asdtype" name="asdtype" />
+        </div>
+    </div>
+</div>
+
+<script id="costTemplate" type="text/x-handlebars-template">
+    <thead>
+        <tr class="info">
+            <td>@Resources.Locale.L_BaseLookup_LspNm</td>
+            <td>@Resources.Locale.L_SMCHGSetup_ChgCd</td>
+            <td>@Resources.Locale.L_SMCHGSetup_ChgDescp</td>
+            <td>@Resources.Locale.L_IpPart_Crncy</td>
+            <td>@Resources.Locale.L_DNApproveManage_UnitPrice</td>
+            <td>@Resources.Locale.L_ActSetup_ChgUnit</td>
+            <td>@Resources.Locale.L_BaseLookup_Qty</td>
+            <td>@Resources.Locale.L_ActSetup_Qamt</td>
+            <td>@Resources.Locale.L_ActSetup_Tax</td>
+            <td>@Resources.Locale.L_ActSetup_VatNo</td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each rowData}}
+        <tr>
+            <td>{{this.LspNm}}</td>
+            <td>{{this.ChgCd}}</td>
+            <td>{{this.ChgDescp}}</td>
+            <td>{{this.Cur}}</td>
+            <td>{{this.UnitPrice}}</td>
+            <td>{{this.ChgUnit}}</td>
+            <td>{{this.Qty}}</td>
+            <td>{{this.Qamt}}</td>
+            <td>{{this.Bamt}}</td>
+            <td>{{this.Tax}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</script>

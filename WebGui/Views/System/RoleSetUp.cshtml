@@ -1,0 +1,94 @@
+﻿@{
+	ViewBag.Title = "RoleSetUp";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/System/RoleSetUp.js?20240815")"></script>
+
+
+<style>
+	#page-wrapper {
+		padding: 5px;
+	}
+</style>
+
+<div id="wrapper">
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g">
+						<div class="pure-u-1 pure-u-md-2-24">
+							<label f​​or="Fid">@Resources.Locale.L_RoleSetUp_FID</label>
+						</div>
+						<div class="pure-u-1 pure-u-md-4-24">
+							<input type="text" class="form-control input-sm" dt="mt" id="Fid" fieldname="Fid" name="Fid" isKey="true" />
+						</div>
+						<div class="pure-u-1 pure-u-md-2-24 label-right">
+							<label f​​or="FDESCP">@Resources.Locale.L_RoleSetUp_FDESCP:</label>
+						</div>
+						<div class="pure-u-1 pure-u-md-4-24">
+							<input type="text" class="form-control input-sm" dt="mt" id="Fdescp" fieldname="Fdescp" name="FDESCP" />
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-1 pure-u-sm-2-24">
+							<label f​​or="U_NAME">@Resources.Locale.L_RoleSetUp_U_NAME:</label>
+						</div>
+						<div class="pure-u-1 pure-u-sm-4-24">
+							<div class='input-group'>
+								<input type="text" class="form-control input-sm" dt="mt" id="GroupId" fieldname="GroupId" isKey="true" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="groupIdLookup">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+						</div>
+						<div class="pure-u-1 pure-u-sm-2-24 label-right">
+							<label f​​or="CMP">@Resources.Locale.L_RoleSetUp_CMP:</label>
+						</div>
+						<div class="pure-u-1 pure-u-sm-4-24">
+							<div class='input-group'>
+								<input type="text" class="form-control input-sm" dt="mt" id="Cmp" fieldname="Cmp" isKey="true" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+						</div>
+						<!-- <div class="pure-u-1 pure-u-sm-2-24 label-right">
+						<label f​​or="STN">@Resources.Locale.L_RoleSetUp_STN:</label>
+						</div>
+						<div class="pure-u-1 pure-u-sm-4-24">
+							<input type="text" class="form-control input-sm" dt="mt" id="Stn" fieldname="Stn" />
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="RoleLogDetail" sid="">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title"> @Resources.Locale.TLB_RoleLog</h4>
+			</div>
+			<div class="modal-body" id="ItemContent">
+
+				<div class="pure-g">
+					<div class="pure-u-sm-60-60">
+						<table id="RoleLogDialogGrid"><tr><td><td /></tr></table>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn" data-dismiss="modal" id="ModalClose">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<input id="rootPath" type="hidden" value="@Url.Content("~")" />

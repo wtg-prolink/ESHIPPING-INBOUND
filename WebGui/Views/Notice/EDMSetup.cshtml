@@ -1,0 +1,294 @@
+﻿@{
+    ViewBag.Title = "NoticeSetup";
+
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/core/initSearch.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/ckeditor/ckeditor.js")"></script>
+@Html.RazorJSInline("~/Scripts/Notice/initEdm.js")
+<style type="text/css">
+    .pure-u-1 {
+        margin-right: 10px;
+    }
+    ul {
+        list-style: none; /* Remove list bullets */
+        padding: 0;
+        margin: 0;
+    }
+</style>
+<script type="text/javascript">
+
+
+</script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        InitSubFormField(true);
+        var schemas = "@ViewBag.schemas.Content";
+        schemas = JSON.parse(decodeHtml(schemas));
+        CommonFunc.initField(schemas);
+        $("input, textarea").not("[type=submit]").jqBootstrapValidation();
+        //var uId = "@ViewBag.uId"
+        var params = "";
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 270;
+        gop.gridColModel = [
+       { name: 'UId', title: 'UId', index: 'UId', width: 70, sorttype: 'string', hidden: false },
+       { name: 'TpltType', title: 'TpltType', index: 'TpltType', width: 70, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'TpltName', title: 'TpltName', index: 'TpltName', width: 70, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'TpltSort', title: 'TpltSort', index: 'TpltSort', width: 120, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'TpltContent', title: 'TpltContent', index: 'TpltContent', width: 70, align: 'right', sorttype: 'Integer', hidden: false },
+       { name: 'GroupId', title: '@Resources.Locale.L_RoleSetUp_U_NAME', index: 'GroupId', width: 50, align: 'left', hidden: false },
+       { name: 'Cmp', title: '@Resources.Locale.L_NRSDataQuery_Cmp', index: 'Cmp', width: 50, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'Stn', title: '@Resources.Locale.L_RoleSetUp_STN', index: 'Stn', width: 50, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'CreateDate', title: '@Resources.Locale.L_NoticeSetup_CreateDate', index: 'CreateDate', width: 120, align: 'left', hidden: true },
+        { name: 'CreateBy', title: '@Resources.Locale.L_NRSSetup_CreateBy', index: 'CreateBy', width: 70, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'ModifyDate', title: '@Resources.Locale.L_NoticeSetup_ModifyDate', index: 'ModifyDate', width: 120, align: 'left', hidden: true },
+        { name: 'ModifyBy', title: '@Resources.Locale.L_PartyDocSetup_ModifyBy', index: 'ModifyBy', width: 70, align: 'left', sorttype: 'string', hidden: false }
+];
+        gop.AddUrl = '@Url.Content("~/zh-TW/Notice/EDMSetup")';
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "EDM Setup", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "Notice/EDMSetupInquiryData";
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+
+            dblClick(map);
+        }
+        gop.onSelectRowFunc = function (jsonMap) {
+            document.forms["subForm"].reset();
+            $("#subForm").setFormByJson(jsonMap);
+            var sort = "";
+            var tempContent = $("#TpltContent").val();
+            if (jsonMap.TpltSort != "") { 
+                sort = jsonMap.TpltSort.split(";");
+                var dataCount = 0;
+                $.ajax({
+                    async: true,
+                    url: rootPath + "/NOTICE/GetTPLTDetail",
+                    type: 'POST',
+                    data: {
+                        "uIds": jsonMap.TpltSort, autoReturnData: true
+                    },
+                    dataType: "json",
+                    success: function (result) {
+                        $("#sortable").children().remove();
+                        $.each(sort, function (index, value) {
+                            if (value === "content") {
+                                $("#sortable").append(' <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" style="float: left;"></span>@Resources.Locale.L_EDMSetup_Views_462<textarea class="form-control" id="TpltContent" dt="mt" name="TpltContent" fieldname="TpltContent"></textarea></li>');
+                                CKEDITOR.replace('TpltContent');
+                                $('textarea[fieldname=TpltContent]').text(tempContent);
+                                CKEDITOR.instances.TpltContent.on('change', function () {
+                                    CKEDITOR.instances.TpltContent.updateElement()
+                                    $('textarea[fieldname=TpltContent]').text(tempContent);
+                                });
+
+                            } else {
+                                $.each($.parseJSON(result.data.Content).rows, function (idx, val) {
+                                    if (val.UId == value) {
+                                        $("#sortable").append('<li class="ui-state-default" id="' + value + '"><span class="ui-icon ui-icon-arrowthick-2-n-s " style="float: left;"></span>' + val.TpltName + '<br / ><div style="background-color: white;">' + val.TpltContent + '</div></li>');
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+            $('#SearchArea1').collapse('hide');
+            $('#AddArea').collapse('show');
+
+            $("#NOTICEADD").prop("disabled", false);
+            $("#NOTICEEDIT").prop("disabled", false);
+            $("#NOTICECOPY").prop("disabled", false);
+            $("#NOTICEDEL").prop("disabled", false);
+            $("#NOTICECANCEL").prop("disabled", true);
+            $("#NOTICESAVES").prop("disabled", true);
+            if (jsonMap.Status == "C") {
+                $("#NOTICEADD").prop("disabled", true);
+                $("#NOTICEEDIT").prop("disabled", true);
+                $("#NOTICECOPY").prop("disabled", true);
+                $("#NOTICEDEL").prop("disabled", true);
+                $("#NOTICECANCEL").prop("disabled", true);
+                $("#NOTICESAVES").prop("disabled", true);
+            }
+            InitSubFormField(true);
+        }
+
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+
+        initSearch(gop);
+
+        $("#SummaryInput").hide();
+        //$("#SearchArea").hide();
+        //$("#SummaryAddData").show();
+        $('#AddArea').on('show.bs.collapse', function () {
+            $('html, body').animate({
+                scrollTop: $("#AaddPanel").offset().top
+            }, 500);
+        });
+    });
+
+    function dblClick(map) {
+        //window.location.href = "BTMSetup?BatNo=" + map.BatNo;
+
+    }
+
+
+
+</script>
+<div id="wrapper" class="False">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default" id="approval1">
+                <div class="panel-heading" role="tab" id="headintwo">
+                    <h4 class="panel-title" style="font-weight: 700;">
+                        <a data-toggle="collapse" data-parent="#approval1" href="#SearchArea1" aria-expanded="true" aria-controls="SearchArea1">
+                            <span class="glyphicon glyphicon-search"></span>@Resources.Locale.L_NoticeSetup_SearchA
+                        </a>
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in" id="SearchArea1">
+                    <div class="panel-body">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea"></div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                        <tr></tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form id="subForm" name="subForm">
+                <div class="panel panel-default" id="AaddPanel">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title" style="font-weight: 700;">
+                            <a data-toggle="collapse" href="#AddArea" aria-expanded="false" aria-controls="AddArea">@Resources.Locale.L_NoticeSetup_EditA</a>
+                        </h4>
+                    </div>
+                    <div class="collapse" id="AddArea">
+                        <div class="panel-body">
+                            <div class="pure-g">
+                                <div class="pure-u-1">
+                                    <ul class="list-inline">
+                                        <li>
+                                            <button type="button" class="btn btn-sm btn-primary" id="NOTICEADD">@Resources.Locale.L_MenuBar_Add</button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="btn btn-sm btn-warning" id="NOTICEEDIT" disabled>@Resources.Locale.L_MenuBar_Edit</button>
+                                        </li>
+                    
+                                        <li>
+                                            <button type="button" class="btn btn-sm btn-danger" id="NOTICECANCEL" disabled>@Resources.Locale.L_MenuBar_Cancel</button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="btn btn-sm btn-success" id="NOTICESAVES" disabled>@Resources.Locale.L_MenuBar_Save</button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="btn btn-sm btn-danger" id="NOTICEDEL" disabled>@Resources.Locale.L_MenuBar_Delete</button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="btn btn-sm btn-danger" id="INSERTEDM" disabled>@Resources.Locale.L_EDMSetup_Views_469</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="pure-g">
+                                <div class="pure-u-sm-2-30">
+                                    <label for="Id" class="control-label">@Resources.Locale.L_BaseLookup_TpltName</label>
+                                </div>
+                                <div class="pure-u-sm-5-30 control-group">
+                                    <div>
+                                        <input type="text" class="form-control input-sm firstInput" dt="mt" id="TpltName" fieldname="TpltName" name="TpltName" iskey="true" />
+                                        <input type="hidden" id="UId" dt="mt" fieldname="UId" iskey="true" name="UId" value="111" />
+                                        <input type="hidden" id="TpltSort" dt="mt" fieldname="TpltSort" name="TpltSort"  />
+                                        <input type="hidden" id="GroupId" dt="mt" fieldname="GroupId" name="GroupId" />
+                                    </div>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+
+                                <div class="pure-u-sm-2-30 label-right">
+                                    <label class="control-label">@Resources.Locale.L_BaseLookup_TpltType</label>
+                                </div>
+                                <div class="pure-u-sm-3-30">
+                                    <select class="form-control input-sm" dt="mt" name="TpltType" fieldname="TpltType" id="TpltType">
+                                        <option value="0" selected>MESSAGE</option>
+                                        <option value="1">MAIL</option>
+                                        <option value="2">BOTH</option>
+                                    </select>
+                                </div>
+      
+                            </div>
+                            <div class="pure-g">
+                                <div class="pure-u-sm-2-30">
+                                    <label for="DayNum" class="control-label">@Resources.Locale.L_EDMSetup_Views_472</label>
+                                </div>
+                                <div class="pure-u-sm-28-30 control-group">
+                                    <ul id="sortable">
+                                        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s" style="float: left;"></span>@Resources.Locale.L_EDMSetup_Views_462<textarea class="form-control" id="TpltContent" dt="mt" name="TpltContent" fieldname="TpltContent"></textarea></li>
+     
+                                    </ul>
+                                </div>
+                            </div>
+                                <div class="pure-g">
+                                    <div class="pure-u-sm-2-30">
+                                        <label class="control-label">@Resources.Locale.L_NRSDataQuery_Cmp</label>
+                                    </div>
+                                    <div class="pure-u-sm-2-30">
+                                        <input type="text" id="Cmp" class="form-control input-sm" dt="mt" name="Cmp" fieldname="Cmp" readonly />
+                                    </div>
+                                    <div class="pure-u-sm-2-30 label-right">
+                                        <label class="control-label">@Resources.Locale.L_RoleSetUp_STN</label>
+                                    </div>
+                                    <div class="pure-u-sm-2-30">
+                                        <input type="text" id="Stn" class="form-control input-sm" dt="mt" name="Stn" fieldname="Stn" readonly />
+                                    </div>
+                                    <div class="pure-u-sm-3-30 label-right">
+                                        <label for="CreateBy" class="control-label">@Resources.Locale.L_PartyDocSetup_CreateBy</label>
+                                    </div>
+                                    <div class="pure-u-sm-4-30">
+                                        <input type="text" id="CreateBy" class="form-control input-sm" dt="mt" name="CreateBy" fieldname="CreateBy" readonly />
+                                    </div>
+                                    <div class="pure-u-sm-4-30">
+                                        <input type="text" id="CreateDate" class="form-control input-sm" dt="mt" name="CreateDate" fieldname="CreateDate" readonly />
+                                    </div>
+                                    <div class="pure-u-sm-2-30 label-right">
+                                        <label for="ModifyBy" class="control-label">@Resources.Locale.L_PartyDocSetup_ModifyBy</label>
+                                    </div>
+                                    <div class="pure-u-sm-4-30">
+                                        <input type="text" id="ModifyBy" class="form-control input-sm" dt="mt" name="ModifyBy" fieldname="ModifyBy" readonly />
+                                    </div>
+                                    <div class="pure-u-sm-5-30">
+                                        <input type="text" id="ModifyDate" class="form-control input-sm" dt="mt" name="ModifyDate" fieldname="ModifyDate" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    CKEDITOR.replace('TpltContent');
+    CKEDITOR.instances.TpltContent.on('change', function () {
+        CKEDITOR.instances.TpltContent.updateElement()
+        $('textarea[fieldname=TpltContent]').text(CKEDITOR.instances.TpltContent.getData());
+    });
+
+    $("#sortable").sortable();
+    $("#sortable").disableSelection();
+    //CKEDITOR.instances['BullContent'].setReadOnly(false);
+
+</script>
+
+<input id="rootPath" type="hidden" value="@Url.Content("~")" />

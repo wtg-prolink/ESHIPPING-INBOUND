@@ -1,0 +1,318 @@
+﻿@{
+    ViewBag.Title = "SMFSCQueryView";
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap.file-input.js")"></script>
+
+@Html.RazorJSInline("~/Scripts/BaseColModel.js")
+<script type="text/javascript">
+$(document).ready(function ($) {
+    $('#smrvUploadExcel').bootstrapFileInput();
+    //init Search
+    var Carrier = "", Area = "";
+    var gop = {};
+    var numberTemplate = "2";
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 230;
+    gop.gridColModel = QueryConfig.SMFSC;
+    gop.AddUrl = { "url": rootPath + "SMFSC/SMFSCSetupView", "title": "@Resources.Locale.L_QTSetup_IpTHC", "id": "SMFSCSetupView" };
+    gop.gridId = "containerInfoGrid";
+    gop.gridAttr = { caption: "@Resources.Locale.L_QTSetup_THCList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    gop.gridSearchUrl = rootPath + "SMFSC/SMFSCQuery";
+    gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+    //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.StatusAreaId = "StatusArea";
+    gop.BtnGroupId = "BtnGroupArea";
+
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        dblClick(map);
+    }
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.loadCompleteFunc = function () {
+        var $grid = $("#containerInfoGrid");
+        if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+            $grid[0].p.sortname = "UId";
+    }
+
+    gop.btnGroup = [
+        {
+            id: "btn01",
+            name: "Excel Download",
+            func: function () {
+                var url = rootPath + "SMFSC/downloadSampleExcel";
+                var colModel1 = [
+                                //{ name: 'Cmp', title: '@Resources.Locale.L_BSLCPOL_Cmp', index: 'Cmp', width: 70, align: 'left', sorttype: 'string', classes: "uppercase", hidden: false, caption: 'Company' },
+                                //{ name: 'CmpNm', title: 'Company Name', index: 'CmpNm', width: 70, align: 'left', sorttype: 'string', classes: "uppercase", hidden: false, caption: 'Company Name' },
+                                { name: 'Carrier', title: 'Carrier', index: 'Carrier', width: 120, align: 'left', sorttype: 'string', hidden: false, caption: 'Carrier' },
+                                //{ name: 'CarrierNm', title: 'Carrier Name', index: 'CarrierNm', width: 120, align: 'left', sorttype: 'string', hidden: false, caption: 'Carrier Name' },
+                                { name: 'Farea', title: '@Resources.Locale.L_LogisticsRuleSetup_Pol', index: 'Farea', width: 70, align: 'left', sorttype: 'string', hidden: false, caption: '@Resources.Locale.L_LogisticsRuleSetup_Pol' },
+                                { name: 'Area', title: 'Region', index: 'Area', width: 70, align: 'left', sorttype: 'string', hidden: false, caption: 'Region' },
+                                { name: 'AreaNm', title: '@Resources.Locale.L_SMCHGSetup_RegionDescp', index: 'AreaNm', width: 70, align: 'left', sorttype: 'string', hidden: false, caption: '@Resources.Locale.L_SMCHGSetup_RegionDescp' },
+                                { name: 'EffectDate', title: 'Effect Date', index: 'EffectDate', width: 120, align: 'left', sorttype: 'string', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, caption:'Effect Date' },
+
+                                { name: 'Gp20', title: '20 GP', index: 'Gp20', width: 120, align:'right', sorttype: 'float', caption:'20 GP',
+                                    formatter: 'number',
+                                    formatoptions: {
+                                        decimalSeparator: ".",
+                                        thousandsSeparator: ",",
+                                        decimalPlaces: 2,
+                                        defaultValue: '0.00'
+                                    }
+                                },
+                                { name: 'Gp40', title: '40 GP', index: 'Gp40', width: 120, align:'right', sorttype: 'float', caption: '40 GP',
+                                    formatter: 'number',
+                                    formatoptions: {
+                                        decimalSeparator: ".",
+                                        thousandsSeparator: ",",
+                                        decimalPlaces: 2,
+                                        defaultValue: '0.00'
+                                    }
+                                },
+                                { name: 'Hq40', title: '40 HQ', index: 'Hq40', width: 120, align:'right', sorttype: 'float', caption: '40 HQ',
+                                    formatter: 'number',
+                                    formatoptions: {
+                                        decimalSeparator: ".",
+                                        thousandsSeparator: ",",
+                                        decimalPlaces: 2,
+                                        defaultValue: '0.00'
+                                    }
+                                }
+
+                            ];
+                var conditions = "";
+                var baseCondition = "";
+                var caption = "@Resources.Locale.L_QTSetup_FuelExcel";
+                postAndRedirect(url, { "ColumnList": JSON.stringify(colModel1).replace(new RegExp('"', "gm"), "'"), "conditions": conditions, "baseCondition": baseCondition, "resultType": "excel", "ReportTitle": caption,"excelName":cmp + "-USER" });
+            }
+        },
+        {
+            id: "btn02",
+            name: "@Resources.Locale.L_QTSetup_IpExcel",
+            func: function () {
+                $("#uploadSmrvDailog").modal("show");
+            }
+        },
+        {
+            id: "btn03",
+            name: "To Area",
+            func: function () {
+                var selRowId =  $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                Carrier = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'Carrier');
+                Area = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'Area');
+                if(Carrier == null || Carrier == "")
+                {
+                    alert("@Resources.Locale.L_TKBLQuery_Select");
+                    return false;
+                }
+                $("#PortGridDailog").modal("show");
+            }
+        }
+        // {
+        //     id: "btn04",
+        //     name: "From Area",
+        //     func: function () {
+        //         var selRowId =  $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+        //         Carrier = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'Carrier');
+        //         Area = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'Farea');
+        //         if(Carrier == null || Carrier == "")
+        //         {
+        //             alert("@Resources.Locale.L_TKBLQuery_Select");
+        //             return false;
+        //         }
+        //         $("#PortGridDailog").modal("show");
+        //     }
+        // }
+    ];
+
+
+    initSearch(gop);
+
+    function dblClick(map) {
+        var UId = map.UId;
+        top.topManager.openPage({
+            href: rootPath + "SMFSC/SMFSCSetupView/" + UId,
+            title: '@Resources.Locale.L_QTSetup_IpTHC',
+            id: 'SMFSCSetupView',
+            search : 'uid=' + UId
+        });
+    }
+
+    $("#SMFSC_UPLOAD_FROM").submit(function(){
+        var postData = new FormData($(this)[0]);
+        $.ajax({
+            url: rootPath + "SMFSC/UploadSmfsc",
+            type: 'POST',
+            data: postData,
+            async: true,
+            beforeSend: function(){
+                CommonFunc.ToogleLoading(true);
+                StatusBarArr.nowStatus("@Resources.Locale.L_BSTQuery_Uploading");
+            },
+            success: function (data) {
+                //alert(data)
+                CommonFunc.ToogleLoading(false);
+                StatusBarArr.nowStatus("");
+                if (data.message != "success") {
+                    //CommonFunc.Notify("", "汇入失败" + data.message, 1300, "warning");
+                    alert(data.message);
+                    CommonFunc.ToogleLoading(false);
+                    return false;
+                }
+                CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpSuc", 500, "success");
+                $("#uploadSmrvDailog").modal("hide");
+                $("#SummarySearch").click();
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+
+        return false;
+    });
+
+    var $PortGrid = $("#PortGrid");
+    var colModel1 = [
+            { name: 'Port', title: 'Port', index: 'Port', sorttype: 'string', width: 150, hidden: false, editable: false },
+            { name: 'PortDescp', title: 'Port Description', index: 'PortDescp', sorttype: 'string', width: 200, hidden: false, editable: false }
+        ];
+
+    new genGrid(
+        $PortGrid,
+        {
+            datatype: "local",
+            loadonce:true,
+            colModel: colModel1,
+            caption: "List",
+            height: 300,
+            rows: 999999,
+            refresh: false,
+            cellEdit: false,//禁用grid编辑功能
+            pginput: false,
+            sortable: true,
+            pgbuttons: false,
+            exportexcel: false,
+            toppager:false
+        }
+    );
+
+    $('#PortGridDailog').on('show.bs.modal', function (e) {
+        $.post(rootPath + 'BSCAA/GetDetail', {"Carrier": Carrier, "Area": Area}, function(data, textStatus, xhr) {
+            $("#PortGrid").jqGrid("clearGridData");
+            $("#PortGrid").jqGrid("setGridParam", {
+                datatype: 'local',
+                data: data["sub"]
+            }).trigger("reloadGrid");
+        }, "JSON");
+    });
+});
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Excel汇入视窗-->
+<div class="modal fade" id="uploadSmrvDailog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_QTSetup_IpExcel</h4>
+            </div>
+            <form name="EXCEL_UPLOAD_FROM" id="SMFSC_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-7-60">
+                            <label for="StartRow" class="control-label">@Resources.Locale.L_BSTQuery_BeginRow</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="number" class="form-control input-sm" id="StartRow" name="StartRow" isNumber="true"  value="1"/>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="smrvUploadExcel" name="file"/>
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="uploadSMFSCBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->
+
+<!--Excel汇入视窗-->
+<div class="modal fade" id="PortGridDailog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_QTSetup_PortList</h4>
+            </div>
+            <form name="EXCEL_UPLOAD_FROM" id="BSCAA_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <table id="PortGrid" class="_tableGrid" style="width: 100%">
+                                <tr></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->

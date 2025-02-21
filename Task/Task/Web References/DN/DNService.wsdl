@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://ws.wct.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="DNService" targetNamespace="http://ws.wct.com/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="https://wct-dev.dyndns.ws:58080/DNService?xsd=1" namespace="http://ws.wct.com/" />
+    </xsd:schema>
+  </types>
+  <message name="ack">
+    <part name="parameters" element="tns:ack" />
+  </message>
+  <message name="ackResponse">
+    <part name="parameters" element="tns:ackResponse" />
+  </message>
+  <message name="Exception">
+    <part name="fault" element="tns:Exception" />
+  </message>
+  <message name="get">
+    <part name="parameters" element="tns:get" />
+  </message>
+  <message name="getResponse">
+    <part name="parameters" element="tns:getResponse" />
+  </message>
+  <message name="set">
+    <part name="parameters" element="tns:set" />
+  </message>
+  <message name="setResponse">
+    <part name="parameters" element="tns:setResponse" />
+  </message>
+  <portType name="DNService">
+    <operation name="ack">
+      <input wsam:Action="http://ws.wct.com/DNService/ackRequest" message="tns:ack" />
+      <output wsam:Action="http://ws.wct.com/DNService/ackResponse" message="tns:ackResponse" />
+      <fault wsam:Action="http://ws.wct.com/DNService/ack/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="get">
+      <input wsam:Action="http://ws.wct.com/DNService/getRequest" message="tns:get" />
+      <output wsam:Action="http://ws.wct.com/DNService/getResponse" message="tns:getResponse" />
+      <fault wsam:Action="http://ws.wct.com/DNService/get/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+    <operation name="set">
+      <input wsam:Action="http://ws.wct.com/DNService/setRequest" message="tns:set" />
+      <output wsam:Action="http://ws.wct.com/DNService/setResponse" message="tns:setResponse" />
+      <fault wsam:Action="http://ws.wct.com/DNService/set/Fault/Exception" name="Exception" message="tns:Exception" />
+    </operation>
+  </portType>
+  <binding name="DNServicePortBinding" type="tns:DNService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="ack">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="get">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+    <operation name="set">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="DNService">
+    <port name="DNServicePort" binding="tns:DNServicePortBinding">
+      <soap:address location="https://wct-dev.dyndns.ws:58080/DNService" />
+    </port>
+  </service>
+</definitions>

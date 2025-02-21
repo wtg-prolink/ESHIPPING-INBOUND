@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  設置需要自定義列功能的表及表中的哪些字段可以自己定義
+  每個畫面上的table對應一個table結點
+
+  column中的屬性:
+  id:字段名稱
+  alian:對齊方式
+  width:列寬
+  html:是否是html類型
+  caption:列的顯示標簽
+-->
+<config>
+  <AMS>
+    <column id="CNTRY_CODE" align="left" width="70" html="N" caption="國別" />
+    <column id="SHIPPER" align="left" width="150" html="N" caption="出貨人" />
+    <column id="TOTAL_WEIGHT" align="right" width="80" html="N" caption="總重量" />
+	  <column id="WEIGHT_UNIT" align="left" width="100" html="N" caption="重量單位" />
+	  <column id="MEASURE" align="right" width="80" html="N" caption="測量數值" />
+	  <column id="MEASURE_UNIT" align="left" width="100" html="N" caption="測量單位" />
+	  <column id="QTY" align="left" width="80" html="N" caption="數量" />
+	  <column id="IMO_NO" align="left" width="120" html="N" caption="IMO號碼" />
+	  <column id="CNTRY_ORI" align="left" width="200" html="N" caption="原始港國家" />
+	  <column id="ARRIVAL_PORT" align="left" width="200" html="N" caption="目的港" />
+	  <column id="FINIAL_DEST" align="left" width="200" html="N" caption="最終目的地" />
+    <column id="ARRIVAL_DATE" align="left" width="120" html="N" caption="抵港日期" DisplayFormat="YYYY/MM/DD HH:MM" StoreFormat="YYYYMMDDHHMM" />
+	  <column id="CONT_NO" align="left" width="100" html="N" caption="貨櫃號" />
+	  <column id="CONT_PIECE_COUNT" align="left" width="80" html="N" caption="容器件數" />
+	  <column id="COMMODITY" align="left" width="200" html="N" caption="備註" />
+	  <column id="CLEAR_DISTRICT" align="left" width="150" html="N" caption="結帳地點" />
+  </AMS>
+  <IPQ050>
+    <column id="POL" align="left" width="150" html="N" caption="POL" />
+    <column id="SHPR_NM" align="left" width="200" html="N" caption="Shipment" />
+    <column id="CONT_NO" align="left" width="300" html="N" caption="CONT#" />
+    <column id="PKG" align="right" width="80" html="N" caption="PKG" />
+    <column id="CBM" align="right" width="80" html="N" caption="CBM" />
+    <column id="GW" align="right" width="80" html="N" caption="GW" />
+  </IPQ050>
+  <IPVOYM>
+    <column id="CARR_CODE" align="left" width="150" html="N" caption="Vessel Owner" />
+    <column id="VESSEL_NAME" align="left" width="200" html="N" caption="Vessel Name" />
+    <column id="VOYAGE" align="left" width="300" html="N" caption="Voyage" />
+    <column id="Port" align="left" width="300" html="Y" caption="Port Name" />
+    <column id="Detail" align="left" width="300" html="Y" caption="Detail" />
+    <column id="ARR" align="left" width="80" html="Y" caption="ARR" DisplayFormat="MM/DD" StoreFormat="MMDD" />
+    <column id="DEP" align="left" width="80" html="Y" caption="DEP" DisplayFormat="MM/DD" StoreFormat="MMDD" />
+  </IPVOYM>
+  <IP_GOVDATA_1>
+    <column id="IP_YEAR" align="left" width="80" html="N" caption="年度" />
+    <column id="IP_MONTH" align="left" width="60" html="N" caption="月份" />
+    <column id="EX_ALL" align="right" width="100" html="N" caption="出口總值" />
+    <column id="EX_TOTAL" align="right" width="100" html="N" caption="出口" />
+    <column id="RE_EX_TOTAL" align="right" width="100" html="N" caption="復出口" />
+    <column id="IM_ALL" align="right" width="100" html="N" caption="進口總值" />
+    <column id="IM_TOTAL" align="right" width="100" html="N" caption="進口" />
+    <column id="RE_IM_TOTAL" align="right" width="100" html="N" caption="復進口" />
+    <column id="EI_OVER" align="right" width="100" html="N" caption="出入超" />
+  </IP_GOVDATA_1>
+  <IP_GOVDATA_2>
+    <column id="IP_YEAR" align="left" width="80" html="N" caption="年度" />
+    <column id="IP_MONTH" align="left" width="60" html="N" caption="月份" />
+    <column id="IP_PORT" align="left" width="120" html="N" caption="港口" />
+    <column id="IP_TOTAL" align="right" width="100" html="N" caption="總計" />
+    <column id="IP_VESSEL" align="right" width="100" html="N" caption="艘次" />
+    <column id="IP_TOTAL_TUN" align="right" width="100" html="N" caption="總噸位" />
+  </IP_GOVDATA_2>
+  <IP_GOVDATA_3>
+    <column id="IP_YEAR" align="left" width="80" html="N" caption="年度" />
+    <column id="IP_MONTH" align="left" width="60" html="N" caption="月份" />
+    <column id="IM_TOTAL_USD" align="left" width="100" html="N" caption="進口總計(USD)" />
+    <column id="IM_TOTAL_NTD" align="right" width="100" html="N" caption="進口總計(NTD)" />
+    <column id="PR_DB_USD" align="right" width="100" html="N" caption="資本設備(USD)" />
+    <column id="PR_DB_NTD" align="right" width="100" html="N" caption="資本設備(NTD)" />
+    <column id="FR_RE_USD" align="right" width="100" html="N" caption="農工原料(USD)" />
+    <column id="FR_RE_NTD" align="right" width="100" html="N" caption="農工原料(NTD)" />
+    <column id="CONSUM_USD" align="right" width="100" html="N" caption="消費品(USD)" />
+    <column id="CONSUM_NTD" align="right" width="100" html="N" caption="消費品(NTD)" />
+    <column id="OTH_USD" align="right" width="100" html="N" caption="其他(USD)" />
+    <column id="OTH_NTD" align="right" width="100" html="N" caption="其他(NTD)" />
+  </IP_GOVDATA_3>
+
+  <IP_GOVDATA_4>
+    <column id="IP_YEAR" align="left" width="80" html="N" caption="年度" />
+    <column id="IP_MONTH" align="left" width="60" html="N" caption="月份" />
+    <column id="EX_TOTAL_USD" align="left" width="100" html="N" caption="出口總計(USD)" />
+    <column id="EX_TOTAL_NTD" align="right" width="100" html="N" caption="出口總計(NTD)" />
+    <column id="FRPD_USD" align="right" width="100" html="N" caption="農產品(USD)" />
+    <column id="FRPD_NTD" align="right" width="100" html="N" caption="農產品(NTD)" />
+    <column id="FRRW_USD" align="right" width="100" html="N" caption="農產加工品(USD)" />
+    <column id="FRRW_NTD" align="right" width="100" html="N" caption="農產加工品(NTD)" />
+    <column id="FTPD_USD" align="right" width="120" html="N" caption="工業產品小計(USD)" />
+    <column id="FTPD_NTD" align="right" width="120" html="N" caption="工業產品小計(NTD)" />
+    <column id="HFPD_USD" align="right" width="120" html="N" caption="重化工業產品(USD)" />
+    <column id="HFPD_NTD" align="right" width="120" html="N" caption="重化工業產品(NTD))" />
+  </IP_GOVDATA_4>
+  <IP_GOVDATA_5>
+    <column id="IP_YEAR" align="left" width="80" html="N" caption="年度" />
+    <column id="TYPE" align="left" width="60" html="N" caption="類別" />
+    <column id="TOTAL" align="right" width="100" html="N" caption="Total" />
+    <column id="GOODS_BOP" align="right" width="100" html="N" caption="Goods BOP" />
+    <column id="SERVICES" align="right" width="100" html="N" caption="Services" />
+  </IP_GOVDATA_5>
+  <IP_GOVDATA_6>
+    <column id="IP_YEAR" align="left" width="80" html="N" caption="年度" />
+    <column id="TYPE" align="left" width="60" html="N" caption="類別" />
+    <column id="BOP_BASIS" align="right" width="100" html="N" caption="BOP Basis" />
+    <column id="CENSUS_BASIS" align="right" width="100" html="N" caption="Census Basis" />
+  </IP_GOVDATA_6>
+  <IP_GOVDATA_0>
+    <column id="SHPR_NAME" align="left" width="120" html="N" caption="Shipper Name" />
+    <column id="SHPR_ADDR1" align="left" width="300" html="N" caption="Shipper Address1" />
+    <column id="SHPR_ADDR2" align="left" width="300" html="N" caption="Shipper Address2" />
+    <column id="SHPR_ADDR3" align="left" width="300" html="N" caption="Shipper Address3" />
+    <column id="CNEE_NAME" align="left" width="120" html="N" caption="Consignee Name" />
+    <column id="CNEE_ADDR1" align="left" width="300" html="N" caption="Consignee Address1" />
+    <column id="CNEE_ADDR2" align="left" width="300" html="N" caption="Consignee Address2" />
+    <column id="CNEE_ADDR3" align="left" width="300" html="N" caption="Consignee Address3" />
+    <column id="NOTIFY_NAME" align="left" width="120" html="N" caption="Notify Party Name" />
+    <column id="NOTIFY_ADDR1" align="left" width="200" html="N" caption="Notify Party Address1" />
+    <column id="NOTIFY_ADDR2" align="left" width="200" html="N" caption="Notify Party Address2" />
+    <column id="NOTIFY_ADDR3" align="left" width="200" html="N" caption="Notify Party Address3" />
+    <column id="ALSO_NOTIFY_NAME" align="left" width="120" html="N" caption="Also Notify Party Name" />
+    <column id="ALSO_NOTIFY_ADDR1" align="left" width="200" html="N" caption="Also Notify Party Address1" />
+    <column id="ALSO_NOTIFY_ADDR2" align="left" width="200" html="N" caption="Also Notify Party Address2" />
+    <column id="ALSO_NOTIFY_ADDR3" align="left" width="200" html="N" caption="Also Notify Party Address3" />
+    <column id="WEIGHT" align="right" width="60" html="N" caption="Weight" />
+    <column id="WEI_UNIT" align="left" width="50" html="N" caption="Weight Unit" />
+    <column id="MEASURE" align="right" width="60" html="N" caption="Measure" />
+    <column id="MEA_UNIT" align="left" width="50" html="N" caption="Measure Unit" />
+    <column id="QTY" align="right" width="60" html="N" caption="Quantity" />
+    <column id="QTY_TYPE" align="left" width="50" html="N" caption="Quantity Type" />
+    
+    <column id="CARR_NAME" align="left" width="100" html="N" caption="Carrier Name" />
+    <column id="SCAC_CODE" align="left" width="100" html="N" caption="SCAC" />
+    
+    <column id="VESSEL_NAME" align="left" width="120" html="N" caption="Vessel Name" />
+    <column id="VOYAGE" align="left" width="100" html="N" caption="Voyage Number" />
+    <column id="BILL_LADING" align="left" width="200" html="N" caption="Bill of Lading Number" />
+    <column id="IMO_NO" align="left" width="100" html="N" caption="IMO Number" />
+    <column id="ORI_CTRY" align="left" width="100" html="N" caption="Country of Origin" />
+    <column id="ORI_REG" align="left" width="100" html="N" caption="Region of Origin" />
+    <column id="ARR_PORT" align="left" width="100" html="N" caption="Port of Arrival" />
+    <column id="DEP_PORT" align="left" width="100" html="N" caption="Port of Departure" />
+    <column id="FINAL_DEST" align="left" width="100" html="N" caption="Final Destination" />
+    <column id="ARR_DATE" align="left" width="100" html="N" caption="Arrival Date" />
+    <column id="CON_NO" align="left" width="100" html="N" caption="Container Number" />
+    <column id="CON_PIECE" align="right" width="60" html="N" caption="Container Piece Count" />
+    <column id="COMMODITY" align="left" width="400" html="N" caption="Commodity" />
+    <column id="CON_NO_MARK" align="left" width="200" html="N" caption="Marks Container Number" />
+    <column id="DESCP_MARK" align="left" width="400" html="N" caption="Marks Description" />
+    <column id="CLEAR_DIS" align="left" width="120" html="N" caption="Clearing District" />
+    <column id="PLACE_RECEIPT" align="left" width="120" html="N" caption="Place of Receipt" />
+  </IP_GOVDATA_0>
+</config>

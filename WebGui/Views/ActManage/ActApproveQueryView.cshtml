@@ -1,0 +1,951 @@
+﻿@{
+    ViewBag.Title = "ActApproveQueryView";
+}
+<!--簽核退回視窗-->
+<div class="modal fade" id="ApproveBack" Sid="">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">@Resources.Locale.L_ActManage_RC</h4>
+      </div>
+      <div class="modal-body">
+            <div class="pure-g">
+                <div class="pure-u-sm-60-60">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">@Resources.Locale.L_ActManage_RDescp</label>
+                        <textarea class="form-control" id="BackRemark" name="BackRemark" fieldname="BackRemark"></textarea>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseBackWin" >Close</button>
+        <button type="button" class="btn btn-primary" onclick="BackApprove()" id="BackConfirm">@Resources.Locale.L_BSCSDateQuery_Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--簽核退回視窗-->
+
+@Html.RazorJSInclude("~/Scripts/ActManage/Approve.js")
+<style>
+	.SubAmtLessThen0 {
+		background: #FFA500 !important;
+	}
+
+	.SubAmtGreaterthan0 {
+		background: #FF9D9D !important;
+	}
+</style>
+
+<script type="text/javascript">
+     var select_approvetype = "@ViewBag.SelectApproveType";
+     var defaulttype = "@ViewBag.DefaultApproveType";
+    var select_approve = "@ViewBag.SelectApprove";
+    var default_approve = "@ViewBag.DefaultApprove";
+    var select_role = "@ViewBag.SelectRole";
+    var default_role = "@ViewBag.DefaultRole";
+    var upri_role = "@ViewBag.Upri";
+    var approveroles = "@ViewBag.ApproveRole";
+    var _approveroles, select_approves;
+    var tranType = "@ViewBag.TranType";
+    var tranTypeCondition = "";
+    var tvMntSelect="@ViewBag.tvMntSelect";
+    if (tranType !== "" && tranType != null && tranType != undefined)
+        tranTypeCondition = " AND TRAN_TYPE='" + tranType + "'";
+    function escape2Html(str) {
+        var arrEntities = { 'lt': '<', 'gt': '>', 'nbsp': ' ', 'amp': '&', 'quot': '"' };
+        return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (all, t) {
+            return arrEntities[t];
+        });
+    }
+    var IsAdmin = false;
+    $(document).ready(function ($) {
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 330;
+        gop.gridColModel = [
+            { name: 'UId', title: 'UId', index: 'UId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'ApproveTo', title: '@Resources.Locale.L_DNApproveManage_ApproveTo', index: 'ApproveTo', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_role, defaultValue: default_role } },
+            { name: 'ApproveType', title: '@Resources.Locale.L_DNApproveManage_ApproveType', index: 'ApproveType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: escape2Html(select_approvetype), defaultValue: defaulttype } },
+            { name: 'Status', title: '@Resources.Locale.L_ActManage_Status', index: 'Status', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:@Resources.Locale.L_ActManage_Copy;B:@Resources.Locale.L_ActManage_NoMatch;G:@Resources.Locale.L_ActManage_Match;C:@Resources.Locale.L_ActManage_Refuse;D:@Resources.Locale.L_Pass;E:@Resources.Locale.L_ActManage_Invoice;F:@Resources.Locale.L_ActManage_bePay;V:@Resources.Locale.L_MenuBar_discard;R:@Resources.Locale.L_ActQuery_reject' } },
+            /*{ name: 'ApproveType', title: '', index: 'ApproveType', width: 120, align: 'left', sorttype: 'string', hidden: true },*/
+            { name: 'StatementNo', title: '@Resources.Locale.L_ActQuery_StatementNo', index: 'StatementNo', width: 120, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'DebitNo', title: '@Resources.Locale.L_ActQuery_DebitNo', index: 'DebitNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TpvDebitNo', title: '@Resources.Locale.L_ActQuery_TpvDebitNo', index: 'TpvDebitNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DebitDate', title: '@Resources.Locale.L_ActQuery_DebitDate', index: 'DebitDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PayDate', title: 'Payment Due Date', index: 'PayDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ShipmentId', title: '@Resources.Locale.L_DNApproveManage_ShipmentId', index: 'ShipmentId', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspNo', title: '@Resources.Locale.L_DRule_LspNo', index: 'LspNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspNm', title: '@Resources.Locale.L_DRule_LspNm', index: 'LspNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Cmp', title: '@Resources.Locale.L_IQTManage_Cmp', index: 'Cmp', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BillTo', title: '@Resources.Locale.L_ActManage_BillTo', index: 'BillTo', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BillToName', title: '@Resources.Locale.L_ActManage_BillToName', index: 'BillToName', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Pol', title: '@Resources.Locale.L_AirQuery_PolCd', index: 'Pol', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PolNm', title: '@Resources.Locale.L_AirQuery_PolNm', index: 'PolNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Pod', title: '@Resources.Locale.L_AirQuery_PodCd', index: 'Pod', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PodNm', title: '@Resources.Locale.L_DNApproveManage_PodNm', index: 'PodNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Cur', title: '@Resources.Locale.L_ActQuery_Cur', index: 'Cur', width: 60, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Amt', title: '@Resources.Locale.L_DNDetailVeiw_Value', index: 'Amt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: false },
+			{ name: 'Qamt', title: '@Resources.Locale.L_ActCheck_Views_10', index: 'Qamt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: false },
+			{ name: 'SubAmt', title: '@Resources.Locale.L_ActCheck_Views_12', index: 'SubAmt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: false },
+            { name: 'Remark', title: '@Resources.Locale.L_SMCHGSetup_ChgType', index: 'Remark', width: 200, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RemarkS', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'RemarkS', width: 200, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LstInvDescp', title: 'LST INV. Description', index: 'LstInvDescp', width: 200, align: 'left', sorttype: 'string', hidden: false },
+
+{ name: 'BlNo', title: '@Resources.Locale.L_ActSetup_BlNo', index: 'BlNo', width: 120, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'VatNo', title: '@Resources.Locale.L_ActSetup_VatNo', index: 'VatNo', width: 120, align: 'left', sorttype: 'string', hidden: true },
+			{ name: 'Qty', title: '@Resources.Locale.L_ShipmentID_Qty', index: 'Qty', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: true },
+            { name: 'Qtyu', title: '@Resources.Locale.L_ShipmentID_Qty', index: 'Qtyu', width: 80, align: 'left', sorttype: 'string', hidden: true },
+			{ name: 'Gw', title: '@Resources.Locale.L_BaseLookup_Gw', index: 'Gw', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 3, defaultValue: '0.000' }, hidden: true },
+			{ name: 'Cw', title: '@Resources.Locale.L_ActSetup_Cw', index: 'Cw', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 3, defaultValue: '0.000' }, hidden: true },			{ name: 'Cbm', title: 'CBM', index: 'Cbm', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: true },
+			{ name: 'ExRate', title: '@Resources.Locale.L_ActSetup_ExRate', index: 'ExRate', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, hidden: true },
+			{ name: 'Lamt', title: '@Resources.Locale.L_ActManage_Lamt', index: 'Lamt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: true },
+            { name: 'CheckDescp', title: '@Resources.Locale.L_ActSetup_CheckDescp', index: 'CheckDescp', width: 200, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'CreateBy', title: '@Resources.Locale.L_DNApproveManage_CreateBy', index: 'CreateBy', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'CreateDate', title: '@Resources.Locale.L_DNApproveManage_CreateDate', index: 'CreateDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'ApplyDate', title: '@Resources.Locale.L_ActManage_ApplyDate', index: 'ApplyDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'VerifyBy', title: '@Resources.Locale.L_ActManage_VerifyBy', index: 'VerifyBy', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'VerifyDate', title: '@Resources.Locale.L_ActManage_VerifyDate', index: 'VerifyDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'PrintDate', title: '@Resources.Locale.L_ActManage_PrintDate', index: 'PrintDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'ApproveUser', title: 'Next Approve User', index: 'ApproveUser', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'PaidDate', title: '@Resources.Locale.L_ActQuery_PayDate', index: 'PaidDate', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ShipmentInfo', title: 'Shipment Info.', index: 'ShipmentInfo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntrInfo', title: 'Container Info.', index: 'CntrInfo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'InvoiceInfos', title: 'Invoice Info.', index: 'InvoiceInfos', sorttype: 'string', width: 200, hidden: false, editable: false },
+            { name: 'ApplyBy', title: 'Charge Confirmed by', index: 'ApplyBy', sorttype: 'string', width: 200, hidden: false, editable: false },
+            { name: 'Stn', title: '@Resources.Locale.L_SMORD_Cmp', index: 'Stn', width: 80, align: 'left', sorttype: 'string', hidden: true },
+			{ name: 'ContractNo', title: '@Resources.Locale.L_ActCheckSetup_ContractNo', index: 'ContractNo', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'ReimburseNo', title: '@Resources.Locale.L_ActCheckSetup_ReimburseNo', index: 'ReimburseNo', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'PayStartDate', title: '@Resources.Locale.L_Act_PayStartDate', index: 'PayStartDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ActPayDate', title: '@Resources.Locale.L_Act_ActPayDate', index: 'ActPayDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PayTerm', title: '@Resources.Locale.L_Act_PayTerms', index: 'PayTerm', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PayTermNm', title: '@Resources.Locale.L_Act_PayTermsNm', index: 'PayTermNm', width: 150, align: 'left', sorttype: 'string', hidden: false }
+        ];
+        gop.AddUrl = false;
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_ActManage_IvAudit", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "ActManage/GetActAppproveData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        gop.multiselect = true;
+        gop.multiboxonly = true;
+        gop.baseCondition = " STATUS IN('D','F') " + tranTypeCondition;
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+        SetTVMNTSelect(tvMntSelect);
+
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "CreateDate";
+            var col = $grid.jqGrid('getRowData');
+            $.each(col, function (index) {
+                //console.log(colname);
+                //var subamt = CommonFunc.formatFloat(colname, 2);
+                var qamt = parseFloat(this.Qamt);
+                var amt = parseFloat(this.Amt);
+                var subamt = amt - qamt;
+                if (subamt > 0) {
+                    $grid.jqGrid('setRowData', index + 1, false, 'SubAmtGreaterthan0');
+                }
+                if (subamt < 0) {
+                    $grid.jqGrid('setRowData', index + 1, false, 'SubAmtLessThen0');
+                }
+            });
+        }
+
+        var status_group = select_role.split(';');
+        var _statusgroup = [];
+        $.each(status_group, function (index, val) {
+            var _val = val.split(':');
+            var _object = {};
+            if (index == 0) {
+                var _all = {};
+                _all.id = '';
+                _all.label = 'All';
+                _statusgroup.push(_all);
+            }
+            if (_val.length >= 2) {
+                _object.id = _val[0];
+                _object.label = _val[1];
+            }
+            if (upri_role == "G"||upri_role == "C") {
+                _statusgroup.push(_object);
+            }
+            else {
+                _approveroles = approveroles.split(';');
+                var ispush = false;
+                for (var i = 0; i < _approveroles.length; i++) {
+                    if (_approveroles[i] == _object.id) {
+                        ispush = true;
+                    }
+                }
+                if (ispush) {
+                    _statusgroup.push(_object);
+                }
+            }
+
+        });
+        var _finish = {};
+        _finish.id = 'Finish';
+        _finish.label = 'Finish';
+        if (upri_role != "G") {
+            _statusgroup.push(_finish);
+        }
+
+        console.log(_statusgroup);
+
+        gop.statusGroup = _statusgroup;
+        gop.statusField = "ApproveTo";
+
+        _approveroles = approveroles.split(';');
+
+        gop.btnGroup = [{
+            id: "btn02",
+            name: "@Resources.Locale.L_ActManage_Pass",
+            func: function () {
+                var mygrid = $("#containerInfoGrid");
+                var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                var responseData = [];
+                var debitno = [];
+                var uid = [];
+                $.each(selRowId, function (index, val) {
+                    responseData.push(mygrid.getRowData(selRowId[index]));
+                });
+                if (responseData.length <= 0) {
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActManage_Select1Data", 500, "warning");
+                    return;
+                }
+                var approveToHasA = false;
+                var tcmp = "";
+                for (var i = 0; i < responseData.length; i++) {
+                    var approveto = responseData[i].ApproveTo;
+
+
+                    if ("A" == approveto) {
+                        approveToHasA = true;
+                        tcmp = tcmp == "" ? responseData[i].Cmp : tcmp;
+                        if (tcmp != responseData[i].Cmp && tcmp != "") {
+                            CommonFunc.Notify("", "@Resources.Locale.L_ActManage_ApproveCmpNeq", 500, "warning");
+                            return;
+                        }
+                    }
+                }
+                $('#TVMNTSelectLabel').css('display', 'none');
+                if (approveToHasA) {
+                    var url = rootPath + "ActManage/GetTVMNTSelectValue"
+                    var data = { "Cmp": tcmp, "loading": true };
+                    ajaxHttp(url, data, SetTVMNTSelect );
+                    $('#TVMNTSelectLabel').css('display', 'block');
+                }
+                $('#Approve').modal('show');
+            }
+        },
+            {
+                id: "btn09",
+                name: "@Resources.Locale.L_ActManage_Back",
+                func: function () {
+                    $("#BackRemark").val("");
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+
+                    if (!uid) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+
+                    $("#ApproveBack").modal("show");
+                }
+            },
+@*            {
+                id: "btn03",
+                name: "@Resources.Locale.L_ActManage_PrintIv",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+                    var dnno = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'DnNo');
+                    if (!uid) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    var DebitNo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'TpvDebitNo');
+                    //var shipments = $("#ShipmentId").val();
+                    if (!DebitNo) {
+                        alert("@Resources.Locale.L_ActManage_Thedatadidnotrequest");
+                        return;
+                    }
+                    var params = {
+                        //currentCondition: "",
+                        //val: dnNo,
+                        debitno: DebitNo,
+                        rptdescp: "@Resources.Locale.L_ActManage_requestbill",
+                        rptName: "RFB01",
+                        formatType: 'xls',
+                        exportType: 'PREVIEW',
+                    };
+                    showReport(params);
+                }
+            },*@
+            {
+                id: "btn04",
+                name: "@Resources.Locale.L_ActManage_requestbillEn",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+                    var dnno = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'DnNo');
+                    if (!uid) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    var DebitNo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'TpvDebitNo');
+                    //var shipments = $("#ShipmentId").val();
+                    if (!DebitNo) {
+                        alert("@Resources.Locale.L_ActManage_Thedatadidnotrequest");
+                        return;
+                    }
+                    var params = {
+                        //currentCondition: "",
+                        //val: dnNo,
+                        debitno: DebitNo,
+                        rptdescp: "@Resources.Locale.L_ActManage_requestbill",
+                        rptName: "RFB03",
+                        formatType: 'xls',
+                        exportType: 'PREVIEW',
+                    };
+                    showReport(params);
+                }
+            },
+            {
+                id: "btn06",
+                name: "SAP",
+                func: function () {
+
+                }
+            },
+            {
+                id: "btn08",
+                name: "@Resources.Locale.L_ActManage_AnM",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+                    var dnno = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'DnNo');
+                    if (!uid) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    initErrMsg($("#btn08"), { 'GROUP_ID': groupId, 'CMP': cmp, 'STN': stn, 'UId': uid, 'JobNo': dnno }, true, $("#containerInfoGrid"));
+
+                }
+            },
+            {
+                id: "btn05",
+                name: "@Resources.Locale.L_ActManage_ApDetail",
+                func: function () {
+                    CheckDetailed();
+                }
+            },
+            {
+                id: "SendToFTP",
+                name: "@Resources.Locale.L_DNManage_IsExport",
+                func: function () { }
+            }, {
+                id: "MBEdoc",
+                name: "EDOC",
+                func: function () {
+                    EdocSet("btnEdoc", true, null);
+                    //$("#btnEdoc").trigger("click");
+                }
+            }
+            , {
+                id: "btnLSTINVDescp",
+                name: "@Resources.Locale.TLB_UpdateINVDescp",
+                func: function () {
+                    var mygrid = $("#containerInfoGrid");
+                    var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                    var responseData = [];
+                    $.each(selRowId, function (index, val) {
+                        responseData.push(mygrid.getRowData(selRowId[index]));
+                    });
+                    if (responseData.length < 1) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_DNManage_PleSelcData", 500, "warning");
+                        return;
+                    }
+                    $("#InvDescpWin").modal("show");
+                }
+            },
+            {
+				id: "btnFSSP",
+                name: "@Resources.Locale.TLB_TransferFSSP",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+					var UId = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+
+					if (!UId) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    top.topManager.openPage({
+                        href: rootPath + "ActManage/TransferFSSPSetup/" + UId,
+                        title: '@Resources.Locale.L_TransferFSSPSetup',
+                        id: 'TransferFSSPSetup',
+                        search: 'uid=' + UId
+                    });
+                }
+            }
+
+        ];
+
+        //gop.statusDefaultId = "A";
+        for (var i = 0; i < roles.length; i++) {
+            if (roles[i] == 'SDADMIN') {
+                IsAdmin = true;
+            }
+        }
+
+        $("#btnInvDescp").on("click", function () {
+            var mygrid = $("#containerInfoGrid");
+            var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+            var responseData = [];
+            var uids = "";
+            var shipmentids = "";
+            $.each(selRowId, function (index, val) {
+                responseData.push(mygrid.getRowData(selRowId[index]));
+            });
+            if (responseData.length < 1) {
+                CommonFunc.Notify("", "@Resources.Locale.L_DNManage_PleSelcData", 500, "warning");
+                return;
+            }
+
+            var LstInvDescp = $("#LstInvDescp").val();
+
+            for (var i = 0; i < responseData.length; i++) {
+                uids += responseData[i].UId + ",";
+                shipmentids += responseData[i].ShipmentId + ",";
+            }
+            var data = { "Uids": uids, "LstInvDescp": LstInvDescp };
+
+            $.ajax({
+                async: true,
+                url: rootPath + "ActManage/UpdateLstInvDescpInfo",
+                type: 'POST',
+                data: data,
+                "complete": function (xmlHttpRequest, successMsg) {
+                    CommonFunc.ToogleLoading(false);
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                    CommonFunc.ToogleLoading(false);
+                    var resJson = $.parseJSON(errMsg)
+                    CommonFunc.Notify("", resJson.message, 500, "warning");
+                },
+                success: function (result) {
+                    //var resJson = $.parseJSON(result)
+                    if (result.message == "success") {
+                        CommonFunc.Notify("", result.message, 500, "success");
+                    }
+                    else {
+                        alert(result.message);
+                    }
+                    $("#InvDescpWin").modal("hide");
+                }
+            });
+
+        });
+
+        initSearch(gop);
+
+        select_approves = select_approve.split(';');
+        $(".status-box").each(function (index, el) {
+            $(this).bind("click", function () {
+                var _id = $(this).attr("id");
+                var _idstatus = _id.replace("searchStatus_", "");
+                for (var i = 0; i < select_approves.length; i++) {
+                    if (IsAdmin) {
+                        $("#btn02").parent().show();
+                        $("#btn09").parent().show();
+                        break;
+                    }
+                    if (select_approves[i] == _idstatus) {
+                        $("#btn02").parent().show();
+                        $("#btn09").parent().show();
+                        break;
+                    }
+                    else {
+                        $("#btn02").parent().hide();
+                        $("#btn09").parent().hide();
+                    }
+                }
+                $(".status-box").removeClass("active");
+                $("#searchStatus_").addClass("active");
+            });
+        });
+
+        //reloadStatus();
+
+        function dblClick(map) {
+            var UId = map.UId;
+
+            top.topManager.openPage({
+                href: rootPath + "ActManage/ActCheckSetup/" + UId + "?approve=Y",
+                title: '@Resources.Locale.L_ActManage_EntBl',
+                id: 'ActCheckSetup',
+                search: 'uid=' + UId,
+                reload: true
+            });
+        }
+        initBathSendToFTP();
+    });
+    var callBackFunc = function (jobno, partytypes) { alert("asdf");};
+    function reloadStatus() {
+        $.ajax({
+            async: true,
+            url: rootPath + "ActManage/GetActAppproveData",
+            type: 'POST',
+            data: {
+                "resultType": "count",
+                "statusField": "ApproveTo",
+                "baseCondition": " STATUS IN('D','F') " + tranTypeCondition
+            },
+            "complete": function (xmlHttpRequest, successMsg) {
+
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+            },
+            success: function (result) {
+                var resJson = $.parseJSON(result);
+                $(".statusCount").each(function (index, el) {
+                    $(this).html(0);
+                });
+                for (var i = 0 ; i < resJson.rows.length ; i++) {
+                    $("#statusCount_" + resJson.rows[i].PoStatus).html(resJson.rows[i].Count);
+                };
+
+
+                /*$(".status-box").removeClass("active");
+                if(_approveroles.length > 0)
+                {
+                    if (IsAdmin) {
+                        $("#searchStatus_").trigger("click");
+                    }
+                    else {
+                        $("#searchStatus_" + _approveroles[_approveroles.length - 1]).trigger("click");
+                    }
+                }
+                else
+                {
+                    $("#searchStatus_").trigger("click");
+                }*/
+                $("#SummarySearch").click();
+            }
+        });
+    }
+    function EdocSet(id, notice, callBackFunc) {
+        if (notice === null) {
+            notice = true;
+        }
+        var $_docstn = $("#" + id);
+        var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+        var _cmp = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'Cmp');
+        var shipmentUid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+
+        if (!shipmentUid) {
+            if (notice) {
+                CommonFunc.Notify("", _getLang("L_ChgApproveManage_Views_183", "请先选择一笔记录"), 500, "warning");
+            }
+            return;
+        }
+
+        if (shipmentUid != "") {
+            var multiEdocData = [];
+            initEdoc($_docstn, { jobNo: shipmentUid, 'GROUP_ID': groupId, 'CMP': _cmp, 'STN': "*" }, multiEdocData, callBackFunc);
+            if (notice) {
+                $_docstn.trigger("click");
+            }
+        }
+    }
+
+    function ajaxHttp(url, data, successFn, completeFn, errorFn) {
+        var loading = data.loading;
+        if (loading == true) {
+            CommonFunc.ToogleLoading(true);
+        }
+        $.ajax({
+            async: false,
+            url: url,
+            type: 'POST',
+            data: data,
+            dataType: "json",
+            "complete": function (xmlHttpRequest, successMsg) {
+                if (loading == true) {
+                    CommonFunc.ToogleLoading(false);
+                }
+                if (completeFn) completeFn(xmlHttpRequest, successMsg);
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+                CommonFunc.Notify("", errMsg, 500, "danger");
+                if (errorFn) errorFn();
+            },
+            success: function (result) {
+                if (successFn) successFn(result.message);
+            }
+        });
+    }
+
+
+    function BackApprove() {
+        var backremark = $("#BackRemark").val();
+        if (backremark == "") {
+            CommonFunc.Notify("", "@Resources.Locale.L_ActManage_EnterReason", 500, "warning");
+            return;
+        }
+        var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+        var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+        var debitno = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'DebitNo');
+        var ApproveType = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ApproveType');
+        var approveTo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ApproveTo');
+
+        if (!uid) {
+            CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+            return;
+        }
+        $.ajax({
+            async: true,
+            url: rootPath + "ActManage/ApproveBackBill",
+            type: 'POST',
+            data: {
+                "UId": uid,
+                "DebitNo": debitno,
+                "ApproveType": ApproveType,
+                "ApproveTo": approveTo,
+                "BackRemark": backremark
+            },
+            "complete": function (xmlHttpRequest, successMsg) {
+
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+                var resJson = $.parseJSON(errMsg)
+                CommonFunc.Notify("", resJson.message, 500, "warning");
+                $("#CloseBackWin").trigger("click");
+            },
+            success: function (result) {
+                //var resJson = $.parseJSON(result)
+                CommonFunc.Notify("", result.message, 500, "warning");
+                $("#CloseBackWin").trigger("click");
+                //$("#SummarySearch").trigger("click");
+                reloadStatus();
+            }
+        });
+    }
+
+    function Approve() {
+        var ApproveRemark = $("#ApproveRemark").val();
+        var mygrid = $("#containerInfoGrid");
+        var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+        var responseData = [];
+        var debitno = [];
+        var uid = [];
+        $.each(selRowId, function (index, val) {
+            responseData.push(mygrid.getRowData(selRowId[index]));
+        });
+        if (responseData.length <= 0) {
+            CommonFunc.Notify("", "@Resources.Locale.L_ActManage_Select1Data", 500, "warning");
+            return;
+        }
+        for (var i = 0; i < responseData.length; i++) {
+            debitno.push(responseData[i].DebitNo);
+            uid.push(responseData[i].UId);
+        }
+
+        if (!uid) {
+            CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+            return;
+        }
+        @*var iscontinue = window.confirm("@Resources.Locale.L_ActManage_is" + debitno.toString() + "@Resources.Locale.L_ActManage_implement");
+        if (!iscontinue) {
+            return;
+        }*@
+        var tvMntType = $("#TvMnt").val();
+        CommonFunc.ToogleLoading(true);
+        $.ajax({
+            async: true,
+            url: rootPath + "ActManage/ApproveBill",
+            type: 'POST',
+            data: {
+                "UId": uid.toString(),
+                "DebitNo": debitno.toString(),
+                "TvMnt": tvMntType.toString(),
+                "ApproveRemark":ApproveRemark
+            },
+            "complete": function (xmlHttpRequest, successMsg) {
+                CommonFunc.ToogleLoading(false);
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+                CommonFunc.ToogleLoading(false);
+                var resJson = $.parseJSON(errMsg)
+                CommonFunc.Notify("", resJson.message, 500, "warning");
+            },
+            success: function (result) {
+                //var resJson = $.parseJSON(result)
+                if (result.IsOk == "N") {
+                    CommonFunc.Notify("", result.message, 500, "warning");
+                }
+                if (result.IsOk == "Y") {
+                    CommonFunc.Notify("", result.message, 500, "success");
+                    reloadStatus();
+                }
+                $('#Approve').modal('hide');
+            }
+        });
+    }
+    function showReport(params) {
+        $.ajax({
+            async: true,
+            url: rootPath + "Report/CreateNewReport",
+            type: 'POST',
+            data: params,
+            "complete": function (xmlHttpRequest, successMsg) {
+                if (successMsg != "success") return null;
+                var xx = xmlHttpRequest.responseText;
+                window.open(xmlHttpRequest.responseText);
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+            },
+            success: function (result) {
+
+            }
+        });
+    }
+
+    function initBathSendToFTP() {
+
+        var lang = {
+            IsOk: "Send successfully, please wait 10 minutes to view FTP ",
+            BeforSend: "@Resources.Locale.L_BSTQuery_Uploading",
+            failed: "Uploading is failed",
+            title: "@Resources.Locale.L_BSTQuery_ImpExcel",
+                file: "@Resources.Locale.L_BSTQuery_SelectFile",
+            submitbtn: "@Resources.Locale.L_BSTQuery_Upload",
+            NoData: "@Resources.Locale.L_BaseBooking_Scripts_127"
+        };
+
+        EdocTypeOptions = {};
+        EdocTypeOptions.gridUrl = rootPath + "TPVCommon/GetBscodeDataForLookupPri";
+        EdocTypeOptions.registerBtn = $("#SendToFTP");
+        EdocTypeOptions.isMutiSel = true;
+        EdocTypeOptions.focusItem = $("#SendToFTP");
+        //mutil select add a columnID help mapping selected data
+        EdocTypeOptions.columnID = "Cd";
+        EdocTypeOptions.param = "&sopt_GroupId=eq&GroupId=" + groupId;
+        EdocTypeOptions.param = "";
+        EdocTypeOptions.baseCondition = " GROUP_ID='" + groupId + "' AND (CMP='" + cmp + "' OR CMP='*') AND CD_TYPE='EDT'";
+        EdocTypeOptions.responseMethod = function (type) {
+            var typeStr = "";
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+            var ShipmentId = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+            if (ShipmentId == "" || ShipmentId == null) {
+                alert(lang.NoData);
+                return;
+            }
+
+            $(type).each(function (index) {
+                typeStr += type[index].Cd + ";";
+            });
+            var selRowIds = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow') + "";
+            var jobNo = "";
+            var keyData = "";
+            var fileNo = "";
+            var UId = "";
+            var company = "";
+            selRowIds = selRowIds.split(",");
+            for (var i = 0; i < selRowIds.length; i++) {
+                UId = $("#containerInfoGrid").jqGrid('getCell', selRowIds[i], 'UId');
+                keyData += UId + ",";
+            }
+
+
+            CommonFunc.ToogleLoading(true);
+            $.ajax({
+                async: true,
+                url: rootPath + "ActManage/GetExportData",
+                type: 'POST',
+                data: { uid: keyData, loading: true },
+                dataType: "json",
+                "complete": function (xmlHttpRequest, successMsg) {
+                    CommonFunc.ToogleLoading(false);
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                    CommonFunc.ToogleLoading(false);
+                    var resJson = $.parseJSON(errMsg)
+                    CommonFunc.Notify("", resJson.message, 500, "warning");
+                },
+                success: function (data) {
+                    //alert(data);
+                    $(data.dn).each(function (index) {
+                        jobNo += data.dn[index].UId + ",";
+                        fileNo += data.dn[index].DebitNo + ",";
+                        company += data.dn[index].Cmp + ",";
+                    });
+                    //alert(jobNo);
+                    $.ajax({
+                        async: true,
+                        url: rootPath + "EDOC/DoDownLoadFileToDir",
+                        type: 'POST',
+                        data: {
+                            JOBNO: jobNo,
+                            FILENO: fileNo,
+                            GROUP_ID: groupId,
+                            CMP: company,
+                            TYPE: typeStr,
+                            Inbound: "Y"
+                        },
+                        "complete": function (xmlHttpRequest, successMsg) {
+                            CommonFunc.ToogleLoading(false);
+                        },
+                        "error": function (xmlHttpRequest, errMsg) {
+                            CommonFunc.ToogleLoading(false);
+                            var resJson = $.parseJSON(errMsg)
+                            CommonFunc.Notify("", resJson.message, 500, "warning");
+                        },
+                        success: function (result) {
+                            CommonFunc.ToogleLoading(false);
+                            CommonFunc.Notify("",lang.IsOk, 500, "success");
+                        }
+                    });
+                }
+            });
+        }
+        EdocTypeOptions.lookUpConfig = LookUpConfig.EdocTypeLookup;
+        initLookUp(EdocTypeOptions);
+    }
+
+    function SetTVMNTSelect(value) {
+        var tvMntTypes = value.split(';');
+        $("#TvMnt").empty();
+        $.each(tvMntTypes, function (idx, value) {
+            $("#TvMnt").append("<option value=\"" + value + "\">" + value + "</option>");
+        });
+    }
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myEdocBtn" role="dialog">
+    <button type="button" class="btn btn-sm btn-primary pms-btn" id="btnEdoc"></button>
+</div>
+
+<div class="modal fade" id="InvDescpWin" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add Remark</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-7-60">
+                        <label for="LstInvDescp" class="control-label">@Resources.Locale.L_BSCSSetup_Remark</label>
+                    </div>
+                    <div class="pure-u-sm-53-60">
+                        <textarea class="form-control" id="LstInvDescp" name="LstInvDescp" fieldname='LstInvDescp' rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-info" id="btnInvDescp">@Resources.Locale.L_Layout_Confirm</button>
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">@Resources.Locale.L_BSCSDateQuery_Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Approve" Sid="">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_SYS_APPROVE</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g" id="TVMNTSelectLabel">
+                    <div class="pure-u-sm-6-60">
+                        <label for="TvMnt" class="control-label">Please Select Approve Type</label>
+                    </div>
+                    <div class="pure-u-sm-6-60 control-group">
+                        <select class="form-control input-sm" name="TvMnt" id="TvMnt">
+                        </select>
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-60-60">
+                        <div class="form-group">
+                            <label for="ApproveRemark">@Resources.Locale.L_ActDeatilManage_Views_70</label>
+                            <textarea class="form-control" id="ApproveRemark" name="ApproveRemark" fieldname="ApproveRemark"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseApproveWin">Close</button>
+                <button type="button" class="btn btn-primary" onclick="Approve()" id="ApproveConfirm">@Resources.Locale.L_BSCSDateQuery_Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "CityDataQuery";
+}
+
+<script type="text/javascript">
+$(document).ready(function ($) {
+
+    //init Search
+    var gop = {};
+    var numberTemplate = "2";
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 250;
+    gop.gridColModel = [
+        { name: 'GroupId', showname: 'GroupId', sorttype: 'string', hidden: true, },
+        { name: 'Cmp', showname: 'Cmp', sorttype: 'string', hidden: true, },
+        { name: 'Stn', showname: 'Stn', sorttype: 'string', hidden: true, },
+        { name: 'Dep', showname: 'Dep', sorttype: 'string', hidden: true, },
+        { name: 'AsType', title: '@Resources.Locale.L_IpPart_PartType', index: 'AsType', width: 90, init: true, sorttype: 'string', formatter: "select", edittype: 'select', editoptions: { value: 'A:@Resources.Locale.L_CityDataQuery_Air;S:@Resources.Locale.L_CityDataQuery_Ship;T:@Resources.Locale.L_CityDataQuery_Truck;B:@Resources.Locale.L_CityDataQuery_ALl', defaultValue: '0' } },
+        { name: 'PortCd', title: '@Resources.Locale.L_CitySetup_PortCd', index: 'PortCd', width: 90, sorttype: 'string', classes: "uppercase" },
+        { name: 'PortNm', title: '@Resources.Locale.L_CitySetup_PortNm', index: 'PortNm', width: 170, sorttype: 'string' },
+        { name: 'CntryCd', title: '@Resources.Locale.L_CitySetup_CntryCd', index: 'CntryCd', width: 90, init: true, sorttype: 'string', classes: "uppercase" },
+        { name: 'CntryNm', title: '@Resources.Locale.L_IpPart_Cntry', index: 'CntryNm', width: 170, sorttype: 'string' },
+        { name: 'Gm', title: '@Resources.Locale.L_CitySetup_Gm', index: 'Gm', width: 90, align: 'left', sorttype: 'string' },
+        { name: 'Region', title: '@Resources.Locale.L_CitySetup_Region', index: 'Region', width: 90, align: 'left', sorttype: 'string' },
+        { name: 'Ns', title: '@Resources.Locale.L_CitySetup_Ns', index: 'Ns', width: 90, align: 'right', formatter: 'number', formatoptions: { decimalPlaces: 6 } },
+        { name: 'Ew', title: '@Resources.Locale.L_CitySetup_Ew', index: 'Ew', width: 90, align: 'right', formatter: 'number', formatoptions: { decimalPlaces: 6 } },
+        { name: 'MappingCode', title: '@Resources.Locale.L_CitySetup_AMSCode', index: 'MappingCode', width: 100, sorttype: 'string' },
+        { name: 'CreateBy', title: _getLang("L_Bsdate_CreateBy", "创建人"), index: 'CreateBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'CreateDate', title: _getLang("L_Bsdate_CreateDate", "创建时间"), index: 'CreateDate', width: 120, align: 'left', hidden: false, formatter: "date", formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" } },
+        { name: 'ModifyBy', title: _getLang("L_Bsdate_ModifyBy", "修改人"), index: 'ModifyBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'ModifyDate', title: _getLang("L_Bsdate_ModifyDate", "修改时间"), index: 'ModifyDate', width: 120, align: 'left', hidden: false, formatter: "date", formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" } }
+    ];
+    gop.AddUrl = { "url": rootPath + "System/CitySetup", "title": "@Resources.Locale.L_CitySetup_CitySetup", "id": "CitySetup1" };
+    gop.gridId = "containerInfoGrid";
+    gop.gridAttr = { caption: "@Resources.Locale.L_CitySetup_CityList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    //gop.gridSearchUrl = rootPath + "IPPOM/POMSetupInquiryData";
+    gop.gridSearchUrl = rootPath + "System/CityPortInquiryData";
+    gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        dblClick(map);
+    }
+
+    gop.baseConditionFunc = function () {
+        return getCreateDateParams("CreateDate", gop);
+    }
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.loadCompleteFunc = function () {
+        var $grid = $("#containerInfoGrid");
+        if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+            $grid[0].p.sortname = "CreateDate";
+    }
+
+    initSearch(gop);
+
+    function dblClick(map) {
+        var PortCd = map.PortCd;
+        var CntryCd = map.CntryCd;
+        top.topManager.openPage({
+            href: rootPath + "System/CitySetup?PortCd=" + PortCd + "&CntryCd=" + CntryCd,
+            title: '@Resources.Locale.L_CitySetup_CitySetup',
+            id: 'CitySetup1'
+        });
+    }
+
+});
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

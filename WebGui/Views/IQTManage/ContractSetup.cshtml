@@ -1,0 +1,447 @@
+﻿@{
+    ViewBag.Title = "ContractSetup";
+}
+
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var Schemas = "@ViewBag.Schemas.Content";
+    var select_tranmode = "@ViewBag.SelectTranMode";
+    var CmpNm = '@ViewBag.CmpNm';
+    var approveroles = "@ViewBag.SelectRole";
+</script>
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+@Html.RazorJSInline("~/Scripts/QTManage/ContractSetup.js")
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" isKey="true" />
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="JobNo" class="control-label">@Resources.Locale.L_ContractSetup_JobNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="JobNo" name="JobNo" fieldname="JobNo" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="RfqNo" class="control-label">@Resources.Locale.L_ContractSetup_RfqNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="RfqNo" name="RfqNo" fieldname="RfqNo" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="RfqNoLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ApproveTo" class="control-label">@Resources.Locale.L_DNApproveManage_ApproveTo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="ApproveTo" name="ApproveTo" fieldname="ApproveTo" readonly></select>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="CtNo" class="control-label">@Resources.Locale.L_ContractSetup_CtNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CtNo" name="CtNo" fieldname="CtNo" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Region" class="control-label">@Resources.Locale.L_ContractSetup_Region</label>
+                        </div>
+                        <div class="pure-u-sm-4-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Region" name="Region" fieldname="Region" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="RegionLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-2-60 label-right">
+                            <label for="Cnty" class="control-label">@Resources.Locale.L_ContractSetup_Cnty</label>
+                        </div>
+                        <div class="pure-u-sm-4-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cnty" name="Cnty" fieldname="Cnty" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CntyLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Status" class="control-label">@Resources.Locale.L_ContractSetup_Status</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="Status" name="Status" fieldname="Status">
+                                <option value="N">N:@Resources.Locale.L_ContractQuery_Views_477</option>
+                                <option value="Y">Y:@Resources.Locale.L_ContractQuery_Views_478</option>
+                                <option value="A">A:@Resources.Locale.L_QTSetup_StatusPass</option>
+                                <option value="V">V:@Resources.Locale.L_MenuBar_Audit</option>
+                                <option value="E">E:@Resources.Locale.L_BSCSSetup_Expire</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="CtDate" class="control-label">@Resources.Locale.L_ContractSetup_CtDate</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CtDate" name="CtDate" fieldname="CtDate" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="EffectTo" class="control-label">@Resources.Locale.L_ContractSetup_EffectTo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="EffectTo" name="EffectTo" fieldname="EffectTo" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Exten" class="control-label">@Resources.Locale.L_ContractSetup_Exten</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="Exten" name="Exten" fieldname="Exten" onchange="ExtenChange(this.value)">
+                                <option selected></option>
+                                <option value="Y">Y:@Resources.Locale.L_BookingQuery_Views_288</option>
+                                <option value="N">N:@Resources.Locale.L_ActManage_No</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right ExtenDate" style="display:none">
+                            <label for="ExtenDate" class="control-label">@Resources.Locale.L_ContractSetup_ExtenDate</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 ExtenDate" style="display:none">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ExtenDate" name="ExtenDate" fieldname="ExtenDate" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="LspNo" class="control-label">@Resources.Locale.L_ContractSetup_LspNo</label>
+                            </div>
+                            <div class="pure-u-sm-8-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="LspNo" name="LspNo" fieldname="LspNo" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="LspNoLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-17-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="LspNm" name="LspNm" fieldname="LspNm" readonly />
+                            </div>
+
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="LspCt" class="control-label">@Resources.Locale.L_ContractSetup_LspCt</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="LspCt" name="LspCt" fieldname="LspCt" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="LspPic" class="control-label">@Resources.Locale.L_ContractSetup_LspPic</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="LspPic" name="LspPic" fieldname="LspPic" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="Location" class="control-label">@Resources.Locale.L_ContractSetup_Location</label>
+                            </div>
+                            <div class="pure-u-sm-8-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="Location" name="Location" fieldname="Location" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="LocationLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-17-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="LocName" name="LocName" fieldname="LocName" readonly />
+                            </div>
+
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="QuotNo" class="control-label">@Resources.Locale.L_ContractSetup_QuotNo</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="QuotNo" name="QuotNo" fieldname="QuotNo" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="LocPic" class="control-label">@Resources.Locale.L_ContractSetup_LocPic</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="LocPic" name="LocPic" fieldname="LocPic" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="Copy" class="control-label">@Resources.Locale.L_ContractSetup_Copy</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Copy" name="Copy" fieldname="Copy" maxlength="2" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+
+                            <div class="pure-u-sm-3-60"></div>
+
+                            <div class="pure-u-sm-7-60 label-right">
+                                <label for="Emttoport" class="control-label">@Resources.Locale.L_ContractSetup_Emttoport</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Emttoport" name="Emttoport" fieldname="Emttoport" maxlength="3" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-1-60">
+                                <label for="SampleName" class="control-label">@Resources.Locale.L_UserQueryO_Day</label>
+                            </div>
+
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="Porttoatd" class="control-label">@Resources.Locale.L_ContractSetup_Porttoatd</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Porttoatd" name="Porttoatd" fieldname="Porttoatd" maxlength="3" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-1-60">
+                                <label for="SampleName" class="control-label">@Resources.Locale.L_UserQueryO_Day</label>
+                            </div>
+
+
+
+                            <div class="pure-u-sm-9-60 label-right">
+                                <label for="Emttoatd" class="control-label">@Resources.Locale.L_ContractSetup_Emttoatd</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Emttoatd" name="Emttoatd" fieldname="Emttoatd" maxlength="3" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-1-60">
+                                <label for="SampleName" class="control-label">@Resources.Locale.L_UserQueryO_Day</label>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="Remark" class="control-label">@Resources.Locale.L_ContractSetup_Remark</label>
+                            </div>
+                            <div class="pure-u-sm-25-60 control-group">
+                                <textarea class="form-control" dt="mt" id="Remark" name="Remark" fieldname="Remark"></textarea>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60  label-right">
+                                <label for="RefuseReason" class="control-label">@Resources.Locale.L_ActCheck_Views_21</label>
+                            </div>
+                            <div class="pure-u-sm-25-60 control-group">
+                                <textarea class="form-control" dt="mt" id="RefuseReason" name="RefuseReason" fieldname="RefuseReason"></textarea>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label class="control-label">@Resources.Locale.L_RoleSetUp_CMP</label>
+                            </div>
+                            <div class="pure-u-sm-4-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" readonly />
+                            </div>
+                            <div class="pure-u-sm-3-60 label-right">
+                                <label class="control-label">@Resources.Locale.L_GateReserveSetup_CreateDep</label>
+                            </div>
+                            <div class="pure-u-sm-4-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CreateDep" name="CreateDep" fieldname="CreateDep" readonly />
+                            </div>
+                            <div class="pure-u-sm-3-60 label-right">
+                                <label class="control-label">@Resources.Locale.L_GateReserveSetup_CreateExt</label>
+                            </div>
+                            <div class="pure-u-sm-4-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CreateExt" name="CreateExt" fieldname="CreateExt" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="CreateBy" class="control-label">@Resources.Locale.L_IpPart_CreateBy</label>
+                            </div>
+                            <div class="pure-u-sm-7-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" fieldname="CreateBy" readonly />
+                            </div>
+                            <div class="pure-u-sm-7-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" fieldname="CreateDate" readonly>
+                            </div>
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="ModifyBy" class="control-label">@Resources.Locale.L_IpPart_ModifyBy</label>
+                            </div>
+                            <div class="pure-u-sm-7-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" fieldname="ModifyBy" readonly />
+                            </div>
+                            <div class="pure-u-sm-7-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" fieldname="ModifyDate" readonly />
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ApproveBack" Sid="">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">@Resources.Locale.L_ActManage_RC</h4>
+      </div>
+      <div class="modal-body">
+            <div class="pure-g">
+                <div class="pure-u-sm-60-60">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">@Resources.Locale.L_ContractSetup_Script_48</label>
+                        <textarea class="form-control" id="BackRemark" name="BackRemark" fieldname="BackRemark"></textarea>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseBackWin" >Close</button>
+        <button type="button" class="btn btn-primary" onclick="BackContApprove()" id="BackConfirm">@Resources.Locale.L_Layout_Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(function () {
+        var colModel = {
+            caption: "@Resources.Locale.L_RQQuery_InquiryList",
+            sortname: "RfqNo",
+            sortorder: "asc",
+            refresh: false,
+            columns: [
+                { name: 'UId', title: 'ID', showname: 'UId', sorttype: 'string', hidden: true, viewable: false },
+                { name: 'Status', title: '@Resources.Locale.L_RQQuery_Status', index: 'Status', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:@Resources.Locale.L_RQQuery_AplInquiry;B:@Resources.Locale.L_ContractSetup_Views_500;C:@Resources.Locale.L_RQQuery_End;D:@Resources.Locale.L_SMIPM_EndingBy;V:@Resources.Locale.L_MenuBar_Audit' } },
+                { name: 'Period', title: '@Resources.Locale.L_RQQuery_Period', index: 'Period', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'R:RFQ;B:BID' } },
+                { name: 'RfqNo', title: '@Resources.Locale.L_RQQuery_RfqNo', index: 'RfqNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'RfqFrom', title: '@Resources.Locale.L_RQQuery_RfqFrom', index: 'RfqFrom', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'RfqTo', title: '@Resources.Locale.L_RQQuery_RfqTo', index: 'RfqTo', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'RfqDate', title: '@Resources.Locale.L_RQQuery_RfqDate', index: 'RfqDate', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'EffectFrom', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'EffectTo', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'TranMode', title: '@Resources.Locale.L_RQQuery_TranMode', index: 'TranMode', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_tranmode } },
+                { name: 'Rlocation', title: '@Resources.Locale.L_RQQuery_Rlocation', index: 'Rlocation', width: 90, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'RlocationNm', title: '@Resources.Locale.L_MailGroupSetup_Name', index: 'RlocationNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'FreightTerm', title: '@Resources.Locale.L_RQQuery_FreightTerm', index: 'FreightTerm', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'P:P.Prepaid;C:C.Collect;O:O.Other' } },
+                { name: 'Incoterm', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'Incoterm', width: 80, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'LoadingFrom', title: 'Loading From', index: 'LoadingFrom', width: 90, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'LoadingTo', title: 'Loading To', index: 'LoadingTo', width: 90, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', width: 60, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'PolCd', title: '@Resources.Locale.L_BaseLookup_PolCd', index: 'PolCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'PolNm', title: '@Resources.Locale.L_BaseLookup_PolCd', index: 'PolNm', width: 90, align: 'left', sorttype: 'string', hidden: true },
+                { name: 'PodCd', title: '@Resources.Locale.L_BaseLookup_PodCd', index: 'PodCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'PodNm', title: '@Resources.Locale.L_BaseLookup_PodCd', index: 'PodNm', width: 90, align: 'left', sorttype: 'string', hidden: true },
+                { name: 'Cnt20', title: '@Resources.Locale.L_DNDetailVeiw_Cnt20', index: 'Cnt20', width: 90, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+                { name: 'Cnt40', title: '@Resources.Locale.L_DNDetailVeiw_Cnt40', index: 'Cnt40', width: 90, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+                { name: 'Cnt40hq', title: '@Resources.Locale.L_DNDetailVeiw_Cnt40hq', index: 'Cnt40hq', width: 90, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+                { name: 'Gw', title: '@Resources.Locale.L_BaseLookup_Gw', index: 'Gw', width: 90, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+                { name: 'Gwu', title: 'GWU', index: 'Gwu', width: 50, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'Cbm', title: '@Resources.Locale.L_ForecastQueryData_Cbm', index: 'Cbm', width: 90, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+                { name: 'PltNum', title: '@Resources.Locale.L_BaseLookup_PltNum', index: 'PltNum', width: 90, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+                { name: 'Dim', title: '@Resources.Locale.L_DNApproveManage_Cbm', index: 'Dim', width: 90, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'PickupAddr', title: '@Resources.Locale.L_RQQuery_PickupAddr', index: 'PickupAddr', width: 90, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'DlvAddr', title: '@Resources.Locale.L_RQQuery_DlvAddr', index: 'DlvAddr', width: 90, align: 'left', sorttype: 'string', hidden: false },
+
+                { name: 'CreateBy', title: '@Resources.Locale.L_DNApproveManage_CreateBy', index: 'CreateBy', width: 80, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'CreateExt', title: '@Resources.Locale.L_GateReserveSetup_CreateExt', index: 'CreateExt', width: 100, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'Remark', title: '@Resources.Locale.L_IpPart_Remark', index: 'Remark', width: 500, align: 'left', sorttype: 'string', hidden: false }
+            ]
+        }
+
+
+        $("#RfqNoLookup").v3Lookup({
+            url: rootPath + "RQManage/RQManageQueryData",
+            gridFunc: function (map) {
+                var RfqNo = map.RfqNo;
+                var Period = map.Period;
+                var Status = map.Status;
+                RfqNoChange(RfqNo, Period, Status);
+            },
+            lookUpConfig: colModel,
+            baseConditionFunc: function () { return " STATUS='D' AND PERIOD='B'"; },
+            responseMethod: function () { return ""; }
+        });
+        $("#RfqNo").v3AutoComplete_new({
+            params: "dt=rqm&STATUS=D&PERIOD=B&RFQ_NO%",
+            keyinNum: "1",
+            returnValue: "RFQ_NO=showValue,STATUS,RFQ_NO,PERIOD",
+            callBack: function (event, ui) {
+                var map = ui.item.returnValue;
+                var RfqNo = map.RFQ_NO;
+                var Period = map.PERIOD;
+                var Status = map.STATUS;
+                RfqNoChange(RfqNo, Period, Status);
+                return false;
+            },
+            dymcFunc: function () {
+                return "";
+            },
+            clearFunc: function () {
+                $("#RfqNo").val("");
+            },
+            closeFunc: function (data) {
+                for (var i = 0 ; i < data.length; i++) {
+                    var map = data[0].returnValue;
+                    if ($("#RfqNo").val() == map.RFQ_NO) {
+                        var RfqNo = map.RFQ_NO;
+                        var Period = map.PERIOD;
+                        var Status = map.STATUS;
+                        RfqNoChange(RfqNo, Period, Status);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        function RfqNoChange(RfqNo, Period, Status) {
+            if (addhand) {
+                if (Period != "B" || Status != "D") {
+                    alert("@Resources.Locale.L_ContractSetup_tip3");
+                    return false;
+                }
+            }
+            $("#RfqNo").val(RfqNo);
+        }
+    });
+</script>

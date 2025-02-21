@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "LogisticsRule";
+}
+
+
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <script type="text/javascript">
+                        $(document).ready(function ($) {
+
+                            //init Search
+                            var gop = {};
+                            var numberTemplate = "2";
+                            var docHeight = $(document).height();
+                            gridHeight = docHeight - 290;
+                            gop.gridColModel = [
+	                            { name: 'UId', showname: '@Resources.Locale.L_LogisticsRule_UId', sorttype: 'string', hidden: true, viewable: false },
+	                            { name: 'TranMode', title: '@Resources.Locale.L_PartyDocSetup_TranMode', index: 'TranMode', width: 70, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'Cmp', title: '@Resources.Locale.L_RoleSetUp_CMP', index: 'Cmp', width: 100, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'Term', title: 'Freight Term', index: 'Term', width: 90, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'C:Collect;P:Prepaid;O:Other;' } },
+	                            { name: 'Shipper', title: '@Resources.Locale.L_LogisticsRule_Shipper', index: 'Shipper', width: 150, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'Pol', title: '@Resources.Locale.L_LogisticsRule_Pol', index: 'Pol', width: 80, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'Region', title: '@Resources.Locale.L_CitySetup_Region', index: 'Region', width: 70, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'Pod', title: '@Resources.Locale.L_LogisticsRule_Pod', index: 'Pod', width: 80, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'Customer', title: '@Resources.Locale.L_LogisticsRule_Customer', index: 'Customer', width: 150, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'Rules', title: '@Resources.Locale.L_LogisticsRule_Rule', index: 'Rules', width: 40, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: "B:Allocation;C:@Resources.Locale.L_DNManage_Assign", defaultValue: 'C' } },
+                                { name: 'PartyType', title: '@Resources.Locale.L_PartyDocSetup_PartyType', index: 'PartyType', width: 80, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'LspNo', title: '@Resources.Locale.L_LogisticsRule_LspNo', index: 'LspNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'LspNm', title: '@Resources.Locale.L_LogisticsRule_LsmNm', index: 'LspNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 300, align: 'left', sorttype: 'string', hidden: true }
+                            ];
+                            gop.AddUrl = {"url": rootPath + "DistManage/LogisticsRuleSetup", "title": "@Resources.Locale.L_LogisticsRule_LogisticsRuleSetup", "id": "LogisticsRuleSetup"};
+                            gop.gridId = "containerInfoGrid";
+                            gop.gridAttr = { caption: "@Resources.Locale.L_LogisticsRule_LogisticsRuleSetup", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+                            gop.gridSearchUrl = rootPath + "DistManage/LogisticsRuleInquiryData";
+                            gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+                            
+                            gop.gridFunc = function (map) {
+                                //用于回调函数，例如赋值操作等
+                                dblClick(map);
+                            }
+
+                            gop.searchFormId = "ConditionArea";
+                            gop.searchDivId = "SearchArea";
+
+                            initSearch(gop);
+
+                            function dblClick(map) {
+                            	var UId = map.UId;
+                                top.topManager.openPage({
+                                    href: rootPath + "DistManage/LogisticsRuleSetup?UId=" + UId,
+                                    title: '@Resources.Locale.L_LogisticsRule_LogisticsRuleSetup',
+                                    id: 'LogisticsRuleSetup',
+                                    search : 'UId=' + UId
+                                });
+                            }
+
+                        });
+
+                    </script>
+                    <form class="pure-g" id="ConditionArea">
+
+                    </form>
+                    <div class="pure-g" id="SearchArea">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="SearchStatus" style="display:none">
+                <div class="panel-body">
+                    
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

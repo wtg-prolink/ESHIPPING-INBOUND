@@ -1,0 +1,471 @@
+﻿@{
+    ViewBag.Title = "ActQuery";
+}
+
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap.file-input.js")"></script>
+<script type="text/javascript">
+    var select_role = "@ViewBag.SelectRole";
+    var default_role = "@ViewBag.DefaultRole";
+
+    $(document).ready(function ($) {
+        var select_tranmode = "@ViewBag.SelectTranMode";
+        $('#chgUploadExcel').bootstrapFileInput();
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 330;
+        gop.gridColModel = [
+            { name: 'UId', title: 'UId', index:'UId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'ApproveTo', title: '@Resources.Locale.L_DNApproveManage_ApproveTo', index: 'ApproveTo', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_role, defaultValue: default_role } },
+            { name: 'TranType', title: '@Resources.Locale.L_ActQuery_Views_140', index: 'TranType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_tranmode } },
+            { name: 'Status', title: '@Resources.Locale.L_ActManage_Status', index: 'Status', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:@Resources.Locale.L_ActCheck_Views_1;B:@Resources.Locale.L_ActCheck_Views_2;G:@Resources.Locale.L_ActCheck_Views_3;C:@Resources.Locale.L_ActCheck_Views_4;D:@Resources.Locale.L_ActCheck_Views_5;E:@Resources.Locale.L_ActCheck_Views_6;F:@Resources.Locale.L_ActManage_bePay;V:@Resources.Locale.L_ActCheck_Views_8;R:@Resources.Locale.L_ActQuery_reject' } },
+            { name: 'StatementNo', title: '@Resources.Locale.L_ActQuery_StatementNo', index: 'StatementNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DebitNo', title: '@Resources.Locale.L_ActCheckQueryView_Views_30', index: 'DebitNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TpvDebitNo', title: '@Resources.Locale.L_ActQuery_TpvDebitNo', index: 'TpvDebitNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DebitDate', title: '@Resources.Locale.L_ActQuery_DebitDate', index: 'DebitDate', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ShipmentId', title: '@Resources.Locale.L_DNApproveManage_ShipmentId', index: 'ShipmentId', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CombineInfo1', title: '@Resources.Locale.L_DNApproveManage_CombineInfo', index: 'CombineInfo1', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspNo', title: '@Resources.Locale.L_DRule_LspNo', index: 'LspNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspNm', title: '@Resources.Locale.L_DRule_LspNm', index: 'LspNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            //{ name: 'Cmp', title: '@Resources.Locale.L_RoleSetUp_CMP', index: 'Cmp', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BillTo', title: '@Resources.Locale.L_ActCheck_Views_9', index: 'BillTo', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BillToName', title: '@Resources.Locale.L_ActManage_BillToName', index: 'BillToName', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Pol', title: '@Resources.Locale.L_AirQuery_PolCd', index: 'Pol', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PolNm', title: '@Resources.Locale.L_AirQuery_PolNm', index: 'PolNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Pod', title: '@Resources.Locale.L_AirQuery_PodCd', index: 'Pod', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PodNm', title: '@Resources.Locale.L_DNApproveManage_PodNm', index: 'PodNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Cur', title: '@Resources.Locale.L_ActQuery_Cur', index: 'Cur', width: 60, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Qamt', title: '@Resources.Locale.L_ActCheck_Views_10', index: 'Qamt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: false },
+            { name: 'Amt', title: '@Resources.Locale.L_ActManage_Amt', index: 'Amt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: false },
+            { name: 'SubAmt', title: '@Resources.Locale.L_ActCheck_Views_12', index: 'SubAmt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: false },
+            { name: 'Remark', title: '@Resources.Locale.L_SMCHGSetup_ChgType', index: 'Remark', width: 200, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RemarkS', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 200, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BlNo', title: '@Resources.Locale.L_ActCheck_Views_13', index: 'BlNo', width: 120, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'VatNo', title: 'VAT NO', index: 'VatNo', width: 120, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'Qty', title: '@Resources.Locale.L_ActCheck_Views_15', index: 'Qty', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: true },
+            { name: 'Qtyu', title: '@Resources.Locale.L_ActCheck_Views_16', index: 'Qtyu', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'Gw', title: '@Resources.Locale.L_ActCheck_Views_17', index: 'Gw', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 3, defaultValue: '0.000' }, hidden: true },
+            { name: 'Cw', title: '@Resources.Locale.L_ActCheck_Views_18', index: 'Cw', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 3, defaultValue: '0.000' }, hidden: true },
+            { name: 'Cbm', title: 'CBM', index: 'Cbm', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.000' }, hidden: true },
+            { name: 'ExRate', title: '@Resources.Locale.L_ActCheck_Views_19', index: 'ExRate', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, hidden: true },
+            { name: 'Lamt', title: '@Resources.Locale.L_ActCheck_Views_20', index: 'Lamt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: true },
+            { name: 'CheckDescp', title: '@Resources.Locale.L_ActCheck_Views_21', index: 'CheckDescp', width: 200, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'CreateBy', title: '@Resources.Locale.L_DNApproveManage_CreateBy', index: 'CreateBy', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'CreateDate', title: '@Resources.Locale.L_DNApproveManage_CreateDate', index: 'CreateDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'ApplyDate', title: '@Resources.Locale.L_ActCheck_Views_22', index: 'ApplyDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'VerifyBy', title: '@Resources.Locale.L_ActCheck_Views_23', index: 'VerifyBy', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'VerifyDate', title: '@Resources.Locale.L_ActCheck_Views_24', index: 'VerifyDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            //{ name: 'PrintDate', title: '@Resources.Locale.L_ActCheck_Views_25', index: 'PrintDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true } ,
+            { name: 'PayDate', title: 'Payment Due Date', index: 'PayDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'BlWin', title: '@Resources.Locale.L_BaseLookup_BlWin', index: 'BlWin', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ShipmentInfo', title: 'Shipment Info.', index: 'ShipmentInfo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntrInfo', title: 'Container Info.', index: 'CntrInfo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PaidDate', title: '@Resources.Locale.L_ActCheck_Views_25', index: 'PaidDate', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'InvoiceInfo', title: 'Invoice Info.', index: 'InvoiceInfo', sorttype: 'string', width: 200, hidden: false, editable: false },
+            { name: 'InvPayCheck', title: '@Resources.Locale.L_ActManage_InvPayCheck', index: 'InvPayCheck', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'Y:@Resources.Locale.L_SYS_SUCCESS;N:@Resources.Locale.L_SYS_FAIL' } },
+            { name: 'PayStartDate', title: '@Resources.Locale.L_Act_PayStartDate', index: 'PayStartDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ActPayDate', title: '@Resources.Locale.L_Act_ActPayDate', index: 'ActPayDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PayTerm', title: '@Resources.Locale.L_Act_PayTerms', index: 'PayTerm', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PayTermNm', title: '@Resources.Locale.L_Act_PayTermsNm', index: 'PayTermNm', width: 150, align: 'left', sorttype: 'string', hidden: false }
+        ];
+        gop.AddUrl = { "url": rootPath + "ActManage/ActSetup", "title": "@Resources.Locale.L_ActManage_BlSetuo", "id": "ActSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "Statement List", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "ActManage/GetActQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        gop.multiselect = true;
+        gop.multiboxonly = true;
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "CreateDate";
+        }
+
+        gop.statusGroup = [
+            { "id": "A", "label": "@Resources.Locale.L_ActCheck_Views_1" },
+            { "id": "B", "label": "@Resources.Locale.L_ActCheck_Views_2" },
+            { "id": "G", "label": "@Resources.Locale.L_ActCheck_Views_3"},
+            { "id": "D", "label": "@Resources.Locale.L_ActCheck_Views_5"},
+            { "id": "C", "label": "@Resources.Locale.L_ActCheck_Views_4" },
+            //{ "id": "V", "label": "作废" },
+            { "id": "E", "label": "@Resources.Locale.L_ActCheck_Views_6"},
+            { "id": "F", "label": "@Resources.Locale.L_ActManage_bePay" },
+            { "id": "R", "label": "@Resources.Locale.L_ActQuery_reject" },
+            { "id": "", "label": "@Resources.Locale.L_ActManage_Views_135"}
+        ];
+
+        gop.btnGroup = [
+            {
+                id: "btn02",
+                name: "Statement",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+                    var ids = "";
+                    if(selRowId.length == 0)
+                    {
+                        alert("@Resources.Locale.L_ActManage_Select");
+                        return;
+                    }
+                    $("#StatementDialog").modal("show");
+                }
+            },
+            {
+                id: "btn03",
+                name: "Un-Statement",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+                    var ids = "";
+                    var UId = "";
+                    if(selRowId.length == 0)
+                    {
+                        alert("@Resources.Locale.L_ActManage_Select");
+                        return;
+                    }
+                    for(var i=0; i<selRowId.length; i++)
+                    {
+                        UId = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'UId');
+                        if(i == 0)
+                        {
+                            ids += UId;
+                        }
+                        else
+                        {
+                            ids += ";;" + UId;
+                        }
+
+                    }
+
+                    if(confirm("@Resources.Locale.L_ActQuery_Views_141"))
+                    {
+                        $.ajax({
+                            url: rootPath + 'ActManage/unStatement',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {"ids": ids},
+                            beforeSend: function(){
+                                StatusBarArr.nowStatus("@Resources.Locale.L_ActManage_Views_137");
+                                CommonFunc.ToogleLoading(true);
+                            },
+                            success: function(result){
+                                if(result.message == "success")
+                                {
+                                    CommonFunc.Notify("", "@Resources.Locale.L_ActManage_Views_138", 1000, "success");
+                                }
+                                else
+                                {
+                                    //CommonFunc.Notify("", result.message, 1000, "warning");
+                                    alert(result.message);
+                                }
+
+                                StatusBarArr.nowStatus("");
+                                CommonFunc.ToogleLoading(false);
+                                $("#SummarySearch").click();
+                                $("#StatementDialog").modal("hide");
+                            },
+                            error: function(){
+                                CommonFunc.Notify("", "@Resources.Locale.L_ActQuery_Views_142", 1000, "danger");
+                                CommonFunc.ToogleLoading(false);
+                            }
+                        });
+                    }
+                }
+            }
+            @*/*{
+                id: "btn04",
+                name: "@Resources.Locale.L_ActQuery_Views_143",
+        func: function () {
+            location.href = '@Url.Content("~")' + "FileUploads/BillSample.xls";
+        }
+    },
+    {
+        id: "btn05",
+        name: "@Resources.Locale.L_ActQuery_Views_144",
+        func: function () {
+            $("#chgUploadDialog").modal("show");
+        }
+    }*/*@
+    ];
+    gop.statusField = "Status";
+    initSearch(gop);
+
+    function dblClick(map) {
+        var UId = map.UId;
+        top.topManager.openPage({
+            href: rootPath + "ActManage/ActSetup/" + UId,
+            title: '@Resources.Locale.L_ActManage_BlSetuo',
+            id: 'ActSetup',
+            search : 'uid=' + UId,
+            reload: true
+        });
+    }
+
+
+    $("#doStatementBtn").click(function(event) {
+        var StatementNo = $("#StatementDialog input#StatementNo").val();
+        var Month = $("#StatementDialog select#Month").val();
+        var VatNo = $("#StatementDialog input#VatNo").val();
+        var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+        var ids = "";
+        var UId = "";
+        if(StatementNo == "")
+        {
+            alert("@Resources.Locale.L_ActQuery_Views_147");
+            return;
+        }
+        for(var i=0; i<selRowId.length; i++)
+        {
+            UId = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'UId');
+            if(i == 0)
+            {
+                ids += UId;
+            }
+            else
+            {
+                ids += ";;" + UId;
+            }
+
+        }
+        $.ajax({
+            url: rootPath + 'ActManage/doStatement',
+            type: 'POST',
+            dataType: 'json',
+            data: {"ids": ids, "StatementNo": StatementNo, "Month": Month, "VatNo": VatNo},
+            beforeSend: function(){
+                StatusBarArr.nowStatus("@Resources.Locale.L_ActManage_Views_137");
+                CommonFunc.ToogleLoading(true);
+            },
+            success: function(result){
+                if(result.message == "success")
+                {
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActManage_Views_138", 1000, "success");
+                }
+                else
+                {
+                    //CommonFunc.Notify("", result.message, 1000, "warning");
+                    alert(result.message);
+                }
+
+                StatusBarArr.nowStatus("");
+                CommonFunc.ToogleLoading(false);
+                $("#SummarySearch").click();
+                $("#StatementDialog").modal("hide");
+            },
+            error: function(){
+                CommonFunc.Notify("", "@Resources.Locale.L_ActQuery_Views_142", 1000, "danger");
+                CommonFunc.ToogleLoading(false);
+            }
+        });
+    });
+
+    $("#CHG_EXCEL_UPLOAD_FROM").submit(function(){
+        var postData = new FormData($(this)[0]);
+        CommonFunc.ToogleLoading(true);
+        $.ajax({
+            url: rootPath + "ActManage/UploadChg",
+            type: 'POST',
+            data: postData,
+            async: false,
+            beforeSend: function(){
+                CommonFunc.ToogleLoading(true);
+            },
+            error: function(){
+                CommonFunc.ToogleLoading(false);
+                CommonFunc.Notify("", "Error", 1300, "warning");
+            },
+            success: function (data) {
+                //alert(data)
+                CommonFunc.ToogleLoading(false);
+                if (data.message != "success") {
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActDeatilManage_Views_116" + data.message, 1300, "warning");
+                    return false;
+                }
+
+                if(data.excelMsg == "")
+                {
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActDeatilManage_Views_117", 500, "success");
+                }
+                else
+                {
+                    CommonFunc.Notify("", data.excelMsg, 500, "warning");
+                }
+
+                $("#chgUploadDialog").modal("hide");
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+
+        return false;
+    });
+    });
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Statement window-->
+<div class="modal fade" id="StatementDialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Enter Statement</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-20-60">
+                        <label for="StatementNo" class="control-label">Statement NO.</label>
+                    </div>
+                    <div class="pure-u-sm-40-60 control-group">
+                        <input type="text" class="form-control input-sm" id="StatementNo" name="StatementNo" />
+                        <p class="help-block tooltips"></p>
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-20-60">
+                        <label for="Month" class="control-label">@Resources.Locale.L_ActManage_Month</label>
+                    </div>
+                    <div class="pure-u-sm-40-60 control-group">
+                        <select class="form-control input-sm" name="Month" id="Month">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-20-60">
+                        <label for="VatNo" class="control-label">@Resources.Locale.L_ActCheck_Views_14</label>
+                    </div>
+                    <div class="pure-u-sm-40-60 control-group">
+                        <input type="text" class="form-control input-sm" id="VatNo" name="VatNo"/>
+                        <p class="help-block tooltips"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-sm btn-info" id="doStatementBtn">@Resources.Locale.L_ActCheckSetup_Views_41</button>
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">@Resources.Locale.L_ActDeatilManage_Views_86</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Statement window-->
+
+
+<!--Excel汇入视窗-->
+<div class="modal fade" id="chgUploadDialog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_BSTQuery_ImpExcel</h4>
+            </div>
+            <form name="FEE_EXCEL_UPLOAD_FROM" id="CHG_EXCEL_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-7-60">
+                            <label for="StartRow" class="control-label">@Resources.Locale.L_BSTQuery_BeginRow</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="number" class="form-control input-sm" id="StartRow" name="StartRow" isNumber="true" value="0"/>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-7-60">
+                            <label for="autoChk" class="control-label">@Resources.Locale.L_ActDeatilManage_Views_127</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" id="autoChk" name="autoChk">
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_ActDeatilManage_Views_128" id="chgUploadExcel" name="file"/>
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="chgUploadBtn">@Resources.Locale.L_ActDeatilManage_Views_129</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->

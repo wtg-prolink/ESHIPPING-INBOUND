@@ -1,0 +1,283 @@
+﻿@{
+    ViewBag.Title = "BSCSDataQuery";
+}
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function ($) {
+
+    //init Search
+    var gop = {};
+    var numberTemplate = "2";
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 230;
+    gop.gridColModel = [
+        { name: 'UId', showname: 'ID', sorttype: 'string', hidden: true },
+	    { name: 'PartyNo', title: '@Resources.Locale.L_BSCSSetup_Cmp', index: 'PartyNo', width: 100, align: 'left', sorttype: 'string', classes: "uppercase", hidden: false },
+        { name: 'PartyType', title: '@Resources.Locale.L_BSCSDataQuery_PartyType', index: 'PartyType', width: 70, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Status', title: '@Resources.Locale.L_GateReserve_Status', index: 'Status', width: 70, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Abbr', title: '@Resources.Locale.L_BSCSDataQuery_Abbr', index: 'Abbr', width: 120, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'HeadOffice', title: '@Resources.Locale.L_BSCSSetup_HdqCmp', index: 'HeadOffice', width: 120, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PartyName', title: 'Party Name1', index: 'PartyName', width: 150, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PartAddr1', title: '@Resources.Locale.L_BSCSDataQuery_PartAddr1', index: 'PartAddr1', width: 200, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PartAddr2', title: '@Resources.Locale.L_BSCSDataQuery_PartAddr2', index: 'PartAddr2', width: 200, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PartAddr3', title: '@Resources.Locale.L_BSCSDataQuery_PartAddr3', index: 'PartAddr3', width: 200, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PartAddr4', title: '@Resources.Locale.L_BSCSDataQuery_PartAddr4', index: 'PartAddr4', width: 200, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PartAddr5', title: '@Resources.Locale.L_BSCSDataQuery_PartAddr5', index: 'PartAddr5', width: 200, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Cnty', title: '@Resources.Locale.L_BSCSDataQuery_Cnty', index: 'Cnty', width: 150, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'CntyNm', title: '@Resources.Locale.L_BSCSDataQuery_CntyNm', index: 'CntyNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'City', title: '@Resources.Locale.L_BSCSSetup_City', index: 'City', width: 150, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'CityNm', title: '@Resources.Locale.L_CitySetup_PortNm', index: 'CityNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'State', title: '@Resources.Locale.L_CitySetup_State', index: 'State', width: 150, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Zip', title: '@Resources.Locale.L_BSCSDataQuery_Zip', index: 'Zip', width: 150, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PartyAttn', title: '@Resources.Locale.L_BSCSDataQuery_PartyAttn', index: 'PartyAttn', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PartyTel', title: '@Resources.Locale.L_BSCSSetup_CmpTel', index: 'PartyTel', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PartyMail', title: '@Resources.Locale.L_BSCSDataQuery_PartyMail', index: 'PartyMail', width: 200, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'TaxNo', title: '@Resources.Locale.L_BSCSDataQuery_TaxNo', index: 'TaxNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'BillTo', title: '@Resources.Locale.L_BSCSDataQuery_BillTo', index: 'BillTo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 200, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'DueDay', title: '@Resources.Locale.L_BSCSDataQuery_DueDay', index: 'DueDay', width: 90, align: 'right', sorttype: 'number', hidden: false },
+		{ name: 'Cmp', title: 'Location', index: 'Cmp', width: 100, align: 'left', sorttype: 'string', classes: "uppercase", hidden: false },
+		{ name: 'Dep', title: '@Resources.Locale.L_UserSetUp_Dep', index: 'Dep', width: 100, align: 'left', sorttype: 'string', classes: "uppercase", hidden: false },
+        { name: 'IsOutbound', title: 'Login System', index: 'IsOutbound', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'O:Outbound;I:Inbound;A:All;:' } },
+        { name: 'SourceCode', title: 'SAP ID', index: 'SourceCode', width: 200, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'CreateBy', title: _getLang("L_Bsdate_CreateBy", "创建人"), index: 'CreateBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'CreateDate', title: _getLang("L_Bsdate_CreateDate", "创建时间"), index: 'CreateDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" } },
+        { name: 'ModifyBy', title: _getLang("L_Bsdate_ModifyBy", "修改人"), index: 'ModifyBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'ModifyDate', title: _getLang("L_Bsdate_ModifyDate", "修改时间"), index: 'ModifyDate', width: 120, align: 'left', sorttype: 'string', hidden: false, formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" } }
+    ];
+    gop.AddUrl = { "url": rootPath + "System/BSCSSetup", "title": "@Resources.Locale.L_BSCSDataQuery_title", "id": "BSCSSetup" };
+    gop.gridId = "containerInfoGrid";
+    gop.gridAttr = { caption: "@Resources.Locale.L_BSCSDataQuery_caption", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    gop.gridSearchUrl = rootPath + "System/BSCSQuery";
+    gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+    //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.StatusAreaId = "StatusArea";
+    gop.BtnGroupId = "BtnGroupArea";
+
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        dblClick(map);
+    }
+
+    gop.baseConditionFunc = function () {
+        return getCreateDateParams("CreateDate", gop);
+    }
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.loadCompleteFunc = function () {
+        var $grid = $("#containerInfoGrid");
+        if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+            $grid[0].p.sortname = "UId";
+    }
+
+    gop.btnGroup = [
+            {
+                id: "btn01",
+                name: "Get Party",
+                func: function () {
+                  $("#getPartyDialog").modal("show");
+                }
+            }, {
+                id: "btn02",
+                name: "Get Party Filter",
+                func: function () {
+                    top.topManager.openPage({
+                        href: rootPath + "System/PartyFilterSetup",
+                        title: 'PartyFilter Setup',
+                        id: 'PartyFilterSetup'
+                    });
+                }
+        }, {
+            id: "btn03",
+            name: "Create Customer",
+            func: function () {
+                $("#CustomerUploadWin").modal("show");
+            }
+        }
+
+        ];
+
+    initSearch(gop);
+
+    function dblClick(map) {
+        var UId = map.UId;
+        top.topManager.openPage({
+            href: rootPath + "System/BSCSSetup?UId=" + UId,
+            title: '@Resources.Locale.L_BSCSDataQuery_title',
+            id: 'BSCSSetup',
+            reload: true,
+            search : 'uid=' + UId
+        });
+    }
+
+    $("#getPartyBtn").click(function(event) {
+        var PartyNo = $("#PartyNo").val();
+
+        if(PartyNo == "")
+        {
+            alert("@Resources.Locale.L_BSCSSetup_PleaseEnt Party NO");
+            return;
+        }
+        else
+        {
+            $.post(rootPath + "System/GetPartner", { PartyNo: PartyNo }, function (data, textStatus, xhr) {
+                if (data.scceed) {
+                    CommonFunc.Notify("", data.msg, 500, "success");
+                    $("#getPartyDialog").modal("hide");
+                }
+                else {
+                    CommonFunc.Notify("", data.msg, 500, "warning");
+                }
+            },"JSON");
+        }
+
+    });
+
+    $("#CUSTOMER_EXCEL_UPLOAD_FROM").submit(function () {
+        var postData = new FormData($(this)[0]);
+        $.ajax({
+            url: rootPath + "System/UploadCustomer",
+            type: 'POST',
+            data: postData,
+            async: false,
+            beforeSend: function () {
+                CommonFunc.ToogleLoading(true);
+            },
+            success: function (data) {
+                resetFileInput($("#CustomerUploadExcel"));
+                $(".file-input-name").html("");
+                CommonFunc.ToogleLoading(false);
+                if (data.message != "success") {
+                    CommonFunc.Notify("", _getLang("L_ActDeatilManage_Views_116", "汇入失败") + data.message, 1300, "warning");
+                    return false;
+                }
+                CommonFunc.Notify("", _getLang("L_BSTQuery_ImpSuc", "汇入成功"), 500, "success");
+                $("#CustomerUploadWin").modal("hide");
+                $("#SummarySearch").trigger("click");
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+
+        return false;
+    });
+});
+    function resetFileInput(file) {
+        file.after(file.clone().val(""));
+        file.remove();
+    }
+    function DownLoadCustomerExcel() {
+        window.open(rootPath + "DNManage/DownLoadXls?TranType=CustomerProfile");
+    }
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Get Party視窗-->
+<div class="modal fade" id="getPartyDialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Get Party</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-20-60">
+                        <label for="PartyNo" class="control-label">Party No</label>
+                    </div>
+                    <div class="pure-u-sm-33-60 control-group">
+                        <input type="text" class="form-control input-sm" id="PartyNo" name="PartyNo" />
+                        <p class="help-block tooltips"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-sm btn-info" id="getPartyBtn">@Resources.Locale.L_BSCSDateQuery_Confirm</button>
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">@Resources.Locale.L_BSCSDateQuery_Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Get Party視窗-->
+<!--Excel汇入视窗-->
+<div class="modal fade" id="CustomerUploadWin" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_BSTQuery_ImpExcel</h4>
+            </div>
+            <form name="CUSTOMER_EXCEL_UPLOAD_FROM" id="CUSTOMER_EXCEL_UPLOAD_FROM" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="CustomerUploadExcel" name="file" />
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <a href="#" onclick="DownLoadCustomerExcel()">@Resources.Locale.L_DNManage_ClickDl (Customer Profile_V1_20240728)</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="modalUploadBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <Entity>
+    <Prolink.EHU.Model.Po table="EOPOM" key="PO_NO,CMP,STN" logic.key="{PO_NO,CMP,STN}" notNull="PO_NO">
+    </Prolink.EHU.Model.Po>
+    <Prolink.EHU.Model.Part table="BCMPOD" key="PO_NO,ITEM_NO,CMP,STN" logic.key="{PO_NO,ITEM_NO,CMP,STN}" notNull="PO_NO,ITEM_NO">
+    </Prolink.EHU.Model.Part>
+  </Entity>
+
+  <Relationship>
+    <Prolink.EHU.Model.Po-Prolink.EHU.Model.Part>
+       <relation parent="PO_NO" child="PO_NO"/>
+	   <relation parent="CMP" child="CMP"/>
+	   <relation parent="STN" child="STN"/>
+       <child.order field="ITEM_NO" asc="true" />
+    </Prolink.EHU.Model.Po-Prolink.EHU.Model.Part>
+  </Relationship>
+</root>

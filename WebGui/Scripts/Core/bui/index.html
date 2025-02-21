@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>管理系統</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href="assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+	<div class="header">
+		<div class="dl-title">
+			<a href="http://www.builive.com" title="文档库地址" target="_blank"><!-- 仅仅为了提供文档的快速入口，项目中请删除链接 -->
+				<span class="lp-title-port">前端</span><span class="dl-title-text">Demo框架</span>
+			</a>
+		</div>
+		<div class="dl-log">欢迎您，<span class="dl-log-user">***@pllink.com</span><a href="###" title="退出系统" class="dl-log-quit">[退出]</a><a href="http://http://www.builive.com/" title="文档库" class="dl-log-quit">文档库</a>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="dl-main-nav">
+			<div class="dl-inform"><div class="dl-inform-title">贴心小秘书<s class="dl-inform-icon dl-up"></s></div></div>
+			<ul id="J_Nav"  class="nav-list ks-clear">
+				<li class="nav-item dl-selected"><div class="nav-item-inner nav-home">首页</div></li>
+			</ul>
+		</div>
+		<ul id="J_NavContent" class="dl-tab-conten"></ul>
+	</div>
+
+	<div class="footer-bar"></div>
+	<script type="text/javascript" src="assets/js/lib/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="./assets/js/bui.js"></script>
+	<script type="text/javascript" src="./assets/js/config.js"></script>
+
+	<script>
+		var navData, config = Array;
+		
+		BUI.use('common/main',function(){
+			$.ajax({
+				url: 'http://218.66.59.12:8035/v3/zh-CN/Common/Menu',
+				type: 'POST',
+				dataType: "json",
+				crossDomain: true
+			})
+			.done(function(data) {
+				data[0].menu[0].items[0].href = "form/input.html";
+				data[0].menu[0].items[1].href = "form/user_add.html";
+				data[0].menu[0].items[2].href = "form/permision.html";
+				data[0].menu[0].items[3].href = "form/user_add_three.html";
+				data[0].homePage = "USER";
+				console.log(data)
+				new PageUtil.MainPage({
+					modulesConfig : data
+				});
+			})
+			.fail(function(xhr, status, error) {
+	  			alert(error);
+			});
+		});
+
+
+	</script>
+	</body>
+</html>

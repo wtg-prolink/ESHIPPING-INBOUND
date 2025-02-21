@@ -1,0 +1,1039 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title</title>
+	<script type="text/javascript">
+        var getCookie = function (Name) {
+            var search = Name + "=";
+            var ck = this.top.document.cookie || document.cookie;
+            if (ck.length > 0) {
+                offset = ck.indexOf(search);
+                if (offset != -1) {
+                    offset += search.length;
+                    end = ck.indexOf(";", offset);
+                    if (end == -1) {
+                        end = ck.length;
+                    }
+                    return unescape(ck.substring(offset, end));
+                } else {
+                    return ("");
+                }
+            } else {
+                return ("");
+            }
+        };
+        var css = getCookie('themeindex');
+        if (css === '' || css === undefined)
+            css = "ext-all.css";
+        //var url = "@Url.Content("~")" + "ExtJS/resources/css/" + css;
+        //document.write('<link href="' + url + '" rel="stylesheet" type="text/css"/>');
+
+        var SearchReportData = parent.SearchReportData;
+        var DetailReportData = parent.DetailReportData;
+	</script>
+	<meta name="viewport" content="width=device-width,maximum-scale=1.0,initial-scale=1.0,user-scalable=0" />
+	<link href="@Url.Content("~/Scripts/css/lib/bootstrap.css")" rel="stylesheet">
+	<!--<link href="@Url.Content("~/Scripts/Core/bui/css/jquery-ui.css")" rel="stylesheet">-->
+	<link href="@Url.Content("~/Scripts/css/ui_theme/jquery-ui.min.css?20231108")" rel="stylesheet">
+	<link href="@Url.Content("~/Scripts/css/ui_theme/jquery-ui.theme.min.css")" rel="stylesheet">
+	<!-- <link href="@Url.Content("~/Scripts/css/custom-theme/jquery-ui-1.10.0.custom.css")" rel="stylesheet"> -->
+
+	<link href="@Url.Content("~/Scripts/css/lib/ui.jqgrid.css")" rel="stylesheet">
+	<link href="@Url.Content("~/Scripts/css/lib/ui.multiselect.css")" rel="stylesheet">
+	<link href="@Url.Content("~/Scripts/css/lib/fileinput.css")" rel="stylesheet">
+	<link href="@Url.Content("~/Scripts/css/lib/animate.min.css")" rel="stylesheet">
+	<!-- <link href="@Url.Content("~/Scripts/css/lib/bootstrap-datetimepicker.min.css")" rel="stylesheet"> -->
+	<link href="@Url.Content("~/Scripts/css/lib/grids-responsive.css")" rel="stylesheet">
+	<link href="@Url.Content("~/Scripts/css/lib/jquery-ui-timepicker-addon.css")" rel="stylesheet">
+	<link href="@Url.Content("~/Scripts/css/common.css?20200309")" rel="stylesheet">
+	<!--<link href="@Url.Content("~/Scripts/css/lib/font-awesome.min.css")" rel="stylesheet">-->
+	<!--<script src="@Url.Content("~/Bootstrap/js/jquery.js")" type="text/javascript"></script>-->
+	<script type="text/javascript" src="@Url.Content("~/Scripts/lib/jquery-1.11.1.min.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/lib/jquery-ui.min.js?20231108")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/lib/date.format.js")"></script>
+
+
+	<!--<script src="@Url.Content("~/Bootstrap/js/jquery-ui.min.js")" type="text/javascript"></script>-->
+	<script src="@Url.Content("~/Scripts/lib/i18n/grid.locale-en.js")" type="text/javascript"></script>
+	<!--<script src="@Url.Content("~/Bootstrap/js/ui.multiselect.js")" type="text/javascript"></script>-->
+	<script src="@Url.Content("~/Scripts/Core/bui/js/ui.multiselect.js?20231016")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/lib/jquery.jqGrid.js?20231117")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/Core/bui/js/jquery.contextmenu.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/lib/jqGridTool.js?2023082401")" type="text/javascript"></script>
+	<script src="~/Scripts/lang.js?20241106"></script>
+	<script src="@Url.Content("~/Scripts/Core/initGrid.js?20240726")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/Core/initEdoc.js?20230803")" type="text/javascript"></script>
+	@*    @Html.RazorJSInclude("~/Scripts/Core/initEdoc.js")*@
+	<script src="@Url.Content("~/Scripts/Core/initEapproved.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/Core/initErrMsg.js")" type="text/javascript"></script>
+
+	<script src="@Url.Content("~/Scripts/Core/jqGridExportToExcel.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/lib/highstock.js")" type="text/javascript"></script>
+
+	<script src="@Url.Content("~/Scripts/lib/highcharts-more.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/lib/exporting.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/Core/initChart.js")" type="text/javascript"></script>
+
+	<script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/footer.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap.js")"></script>
+	<!--<script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap.js")"></script>-->
+	<script type="text/javascript" src="@Url.Content("~/Scripts/lib/fileinput.js?20210810")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/lib/clipboard.min.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap-notify.min.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/lib/jquery.hotkeys.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/lib/handlebars.js")"></script>
+
+	<script src="@Url.Content("~/Scripts/lib/jquery.base64.js")" type="text/javascript"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/common.js?20240509")"></script>
+	<script src="@Url.Content("~/Scripts/Core/initLookup.js?20201209")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/lib/moment.js")" type="text/javascript"></script>
+	<!--<script src="@Url.Content("~/Scripts/lib/bootstrap-datetimepicker.js")" type="text/javascript"></script>-->
+	<script type="text/javascript" src="@Url.Content("~/Scripts/lib/jquery-ui-timepicker-addon.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/lib/jquery-ui-sliderAccess.js")"></script>
+
+	@*    <script src="@Url.Content("~/Scripts/BaseLookup.js?201605251")" type="text/javascript"></script>*@
+	<script src="@Url.Content("~/Scripts/lib/jqBootstrapValidation.js")" type="text/javascript"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/core/initSearch.js?20231215")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap-select.js")"></script>
+	<link rel="stylesheet" href="@Url.Content("~/Scripts/css/lib/bootstrap-select.css")" type="text/css" />
+
+
+	<script type="text/javascript">
+    var lang = 'zh-TW/';
+    var BaseUrl = '@Url.Content("~/")';
+    if (document.location && document.location.pathname && document.location.pathname.toLowerCase) {
+        var hostpath = document.location.pathname.toLowerCase();
+        if (hostpath.indexOf('/zh-tw/') > -1)
+            lang = 'zh-TW/';
+        else if (hostpath.indexOf('/zh-cn/') > -1)
+            lang = 'zh-CN/';
+        else if (hostpath.indexOf('/en-us/') > -1)
+            lang = 'en-US/';
+        else if (hostpath.indexOf('/ru-ru/') > -1)
+            lang = 'ru-RU/';
+    }
+
+    //alert('d.cookie:\t' + document.cookie + '\n\n' + 'd.cookie.length:\t' + document.cookie.length);
+    var LookUpConfig = parent.LookUpConfig;
+    var rootPath = "@Url.Content("~")" + lang;
+    var groupId = getCookie("plv3.passport.groupid");
+
+    if (groupId == "" || groupId == null) {
+        alert("@Resources.Locale.M_SYS_LOGINTIMEOUT");
+        window.top.location.href = rootPath;
+    }
+    var cmp = getCookie("plv3.passport.companyid"),
+    stn = getCookie("plv3.passport.station"),
+    dep = getCookie("plv3.passport.dep"),
+    bu = getCookie("plv3.passport.bu"),
+    basecmp = getCookie("plv3.passport.basecompanyid"),
+    basestn = getCookie("plv3.passport.basestation"),
+    roles = $.parseJSON(getCookie("plv3.passport.roles")),
+    ext = getCookie("plv3.passport.ext"),
+    IoFlag = getCookie("plv3.passport.ioflag"),
+    userId = getCookie("plv3.passport.user");
+    var btnPMS = null;
+    var approveGroup = null;
+    //alert($("#nowStatusVal").text());
+
+    //Prolink.App.init({ rootPath: rootPath, defaultAssembly: "TrackingHubMvc", user: { id: "@ViewBag.UserId", isAdmin: '@ViewBag.IsAdmin', cmp: '@ViewBag.CompanyId', group: '@ViewBag.GroupId' } });
+
+    $(function () {
+        //物流费用所需事件
+        $("#ShipFeeQueryView").click(function (event) {
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+            var ShipmentId = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ShipmentId');
+            if (!ShipmentId) {
+                CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                return;
+            }
+            top.topManager.openPage({
+                href: rootPath + "QtManage/ShipFeeQueryView?ShipmentId=" + ShipmentId,
+                title: '@Resources.Locale.L_ActManage_LspChg',
+                id: 'ShipFeeQueryView',
+                reload: true
+            });
+        });
+
+        $("#autoCountBtn").click(function (event) {
+            var id = $("#containerInfoGrid").jqGrid('getGridParam', "selrow");
+            var map = $("#containerInfoGrid").jqGrid('getRowData', id);
+            var UId;
+            if (map) UId = map.UId;
+
+            if (isEmpty(UId)) {
+                CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                return false;
+            }
+
+            CommonFunc.ToogleLoading(true);
+            $.ajax({
+                async: true,
+                url: rootPath + "SMSMI/CalculateFee",
+                type: 'POST',
+                data: {
+                    "uid": UId,
+                    shipmentId: map.ShipmentId
+                },
+                "complete": function (xmlHttpRequest, successMsg) {
+                    CommonFunc.ToogleLoading(false);
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                    CommonFunc.ToogleLoading(false);
+                    var resJson = $.parseJSON(errMsg)
+                    CommonFunc.Notify("", resJson.message, 500, "warning");
+                },
+                success: function (result) {
+                    CommonFunc.ToogleLoading(false);
+
+                    //var resJson = $.parseJSON(result)
+                    getData(rootPath + "IQTManage/CostDetail", { uid: UId, shipmentId: map.ShipmentId }, function (result) {
+                        $("#ShipFeeDialogGrid").jqGrid("clearGridData");
+                        $("#ShipFeeDialogGrid").jqGrid("setGridParam", {
+                            datatype: 'local',
+                            sortorder: "asc",
+                            sortname: "LspNo",
+                            data: result,
+                        }).trigger("reloadGrid");
+                    });
+                    CommonFunc.Notify("", result.message, 500, "success");
+                    var emptyMessage = "";
+                    var newArr = [];
+                    $.each(result.empMsg, function (index, val) {
+                        if (newArr.indexOf(val) < 0) {
+                            emptyMessage += val + "\r\n";
+                            newArr.push(val)
+                        }
+                    });
+                    if (emptyMessage != "")
+                        alert(emptyMessage);
+                    //$("#SummarySearch").trigger("click");
+                }
+            });
+        });
+    });
+
+
+	</script>
+	<style type="text/css">
+		html, body { /*margin-bottom:50px; */
+		}
+
+		.filter_text {
+			width: 70px;
+			display: inline-block;
+		}
+
+		.searchDiv {
+			border-style: double;
+			padding: 10px 10px 10px 10px;
+			margin-bottom: 20px;
+			font-size: 14px;
+		}
+
+		.ui-jqgrid tr.jqgrow td {
+			white-space: nowrap; /* CSS3 */
+			white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+			white-space: -pre-wrap; /* Opera 4-6 */
+			white-space: -o-pre-wrap; /* Opera 7 */
+			white-space: -ms-pre;
+			overflow: hidden;
+			height: auto;
+			vertical-align: middle;
+			padding-top: 3px;
+			padding-bottom: 3px;
+			font-size: 12px;
+		}
+
+		.normal-white-space {
+			white-space: normal !important; /* CSS3 */
+			white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+			white-space: -pre-wrap !important; /* Opera 4-6 */
+			white-space: -o-pre-wrap !important; /* Opera 7 */
+		}
+
+		.edit-cell ui-state-highlight {
+			background: yellow !important;
+		}
+
+		.clear-margin {
+			margin: 0 !important;
+			padding-right: 0 !important;
+			padding-left: 0 !important;
+		}
+
+		.jqGrid {
+			margin-left: 12px;
+			margin-right: 12px;
+		}
+
+		.ui-pg-input {
+			height: 17px;
+		}
+
+		[data-notify="progressbar"] {
+			margin-bottom: 0px;
+			position: absolute;
+			bottom: 0px;
+			left: 0px;
+			width: 100%;
+			height: 5px;
+		}
+
+		tr.success, tr.warning {
+			color: #bbb;
+		}
+
+		.table tbody tr.primary {
+			background-color: #428bca !important;
+			color: #fff;
+			font-weight: 700;
+		}
+		/* .jqgfirstrow{
+			display:none;
+		} */
+
+		.ui-dialog {
+			z-index: 9999999 !important
+		}
+
+		.light-ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+			.light-ul > li {
+				display: inline-block;
+				margin-right: 2px;
+				padding: 0;
+			}
+
+		.circle-default {
+			width: 13px;
+			height: 13px;
+			-webkit-border-radius: 25px;
+			-moz-border-radius: 25px;
+			border-radius: 25px;
+			background: #6f6f6f;
+		}
+
+		.circle-green {
+			width: 13px;
+			height: 13px;
+			-webkit-border-radius: 25px;
+			-moz-border-radius: 25px;
+			border-radius: 25px;
+			background: #5cb85c;
+		}
+
+		.ui-autocomplete {
+			z-index: 999999 !important;
+		}
+
+		.ui-datepicker-week-end {
+			color: red;
+		}
+
+			.ui-datepicker-week-end a {
+				color: red !important;
+			}
+	</style>
+
+</head>
+
+<body>
+	<div class="overlay" id="MainOverlay" style="display:none">
+		<div class="spinner">
+			<div class="dot1"></div>
+			<div class="dot2"></div>
+		</div>
+	</div>
+	<script id="ConditionSearchTemplate_" type="text/x-handlebars-template">
+
+		<div class="pure-u-lg-9-24" style="margin-bottom: 3px;" itemid="{{ItemID}}" tempid="temp_{{ItemID}}">
+			<div class="pure-u-sm-5-24 label-right">
+				<label class="control-label">{{label}}</label>
+			</div>
+			<div class="pure-u-sm-5-24">
+				<select sletype="sopt" class="form-control input-sm" itemid="{{ItemID}}" name="sopt_{{fieldName}}" id="sopt_{{fieldName}}">
+					{{#each sopt}}
+					{{#ifCond dV this.showsopt}}
+					<option value="{{this.sopt}}" selected="selected">{{this.showsopt}}</option>
+					{{else}}
+					<option value="{{this.sopt}}">{{this.showsopt}}</option>
+					{{/ifCond}}
+					{{/each}}
+
+				</select>
+			</div>
+			<div class="pure-u-sm-13-24 tmp" itemid="{{ItemID}}" style="width: 55.5%">
+				<div class="input-group">
+					<input type="text" class="form-control input-sm" sorttype="{{sortType}}" oname="{{fieldName}}" name="{{fieldName}}" id="sel_{{fieldName}}" itemid="{{ItemID}}" value="{{dV}}">
+					<input type="hidden" class="form-control input-sm" name="dt_{{fieldName}}" id="dt_{{fieldName}}" itemid="{{ItemID}}" value="{{dT}}">
+					<span class="input-group-btn">
+						<button class="btn btn-sm btn-danger RemoveSearch" type="button" itemid="{{ItemID}}">
+							sorttype
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+	</script>
+
+	<script id="ConditionSearchTemplate" type="text/x-handlebars-template">
+
+		<div class="box2" itemid="{{ItemID}}" tempid="temp_{{ItemID}}">
+			<div class="pure-u-sm-13-60 label-right">
+				<label class="control-label">{{label}}</label>
+			</div>
+			<div class="pure-u-sm-10-60">
+				<select sletype="sopt" class="form-control input-sm" itemid="{{ItemID}}" name="sopt_{{fieldName}}" id="sopt_{{fieldName}}">
+					{{#each sopt}}
+					{{#ifCond dV this.showsopt}}
+					<option value="{{this.sopt}}" selected="selected">{{this.showsopt}}</option>
+					{{else}}
+					{{#ifCond dfsopt this.sopt}}
+					<option value="{{this.sopt}}" selected="selected">{{this.showsopt}}</option>
+					{{else}}
+					<option value="{{this.sopt}}">{{this.showsopt}}</option>
+					{{/ifCond}}
+					{{/ifCond}}
+					{{/each}}
+
+				</select>
+			</div>
+			<div class="pure-u-sm-31-60 tmp" itemid="{{ItemID}}">
+				<div class="input-group">
+					<input type="text" class="form-control input-sm" sorttype="{{sortType}}" oname="{{fieldName}}" name="{{fieldName}}" id="sel_{{fieldName}}" itemid="{{ItemID}}" value="{{dV}}">
+					<input type="hidden" class="form-control input-sm" name="dt_{{fieldName}}" id="dt_{{fieldName}}" itemid="{{ItemID}}" value="{{dT}}">
+					<span class="input-group-btn">
+						<button class="btn btn-sm btn-danger RemoveSearch" type="button" itemid="{{ItemID}}">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</span>
+				</div>
+			</div>
+			{{#if remark}}
+			<div style="text-align:center;color:red">
+				<label class="control-label">{{remark}}</label>
+			</div>
+			{{/if}}
+		</div>
+	</script>
+
+	<script id="ConditionLookupTemplate" type="text/x-handlebars-template">
+
+		<div class="pure-g" itemid="{{ItemID}}" tempid="temp_{{ItemID}}">
+			<div class="pure-u-sm-8-60">
+				<label class="control-label">{{label}}</label>
+			</div>
+			<div class="pure-u-sm-8-60">
+				<select sletype="sopt" class="form-control input-sm" itemid="{{ItemID}}" name="sopt_{{fieldName}}" id="sopt_{{fieldName}}">
+					{{#each sopt}}
+					{{#ifCond dV this.showsopt}}
+					<option value="{{this.sopt}}" selected="selected">{{this.showsopt}}</option>
+					{{else}}
+					<option value="{{this.sopt}}">{{this.showsopt}}</option>
+					{{/ifCond}}
+					{{/each}}
+
+				</select>
+			</div>
+			<div class="pure-u-sm-25-60 tmp" itemid="{{ItemID}}">
+				<div class="input-group">
+					<input type="text" class="form-control input-sm" sorttype="{{sortType}}" oname="{{fieldName}}" name="{{fieldName}}" id="sel_{{fieldName}}" itemid="{{ItemID}}" value="{{dV}}">
+					<input type="hidden" class="form-control input-sm" name="dt_{{fieldName}}" id="dt_{{fieldName}}" itemid="{{ItemID}}" value="{{dT}}">
+					<span class="input-group-btn">
+						<button class="btn btn-sm btn-danger RemoveSearch" type="button" itemid="{{ItemID}}">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</script>
+
+
+	<script id="ConditionSelectTemplate" type="text/x-handlebars-template">
+
+		<div class="box2" itemid="{{ItemID}}" tempid="temp_{{ItemID}}">
+			<div class="pure-u-sm-13-60 label-right">
+				<label class="control-label">{{label}}</label>
+			</div>
+			<div class="pure-u-sm-15-60 tmp" itemid="{{ItemID}}">
+				<div class="input-group">
+					<select class="form-control input-sm" sorttype="{{sortType}}" oname="{{fieldName}}" name="{{fieldName}}" id="sel_{{fieldName}}" itemid="{{ItemID}}">
+						{{#each selectoptions}}
+
+						{{#ifCond this.dV this.val}}
+						<option value="{{this.val}}" selected="selected">{{this.text}}</option>
+						{{else}}
+						<option value="{{this.val}}">{{this.text}}</option>
+						{{/ifCond}}
+						{{/each}}
+
+					</select>
+
+					<input type="hidden" itemid="{{ItemID}}" name="sopt_{{fieldName}}" id="sopt_{{fieldName}}" value="eq" />
+					<input type="hidden" class="form-control input-sm" name="dt_{{fieldName}}" id="dt_{{fieldName}}" itemid="{{ItemID}}" value="{{dT}}">
+					<span class="input-group-btn">
+						<button class="btn btn-sm btn-danger RemoveSearch" type="button" itemid="{{ItemID}}">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+	</script>
+
+	<script id="ConditionMultiSelectTemplate" type="text/x-handlebars-template">
+
+		<div class="box2" itemid="{{ItemID}}" tempid="temp_{{ItemID}}">
+			<div class="pure-u-sm-13-60 label-right">
+				<label class="control-label">{{label}}</label>
+			</div>
+			<div class="pure-u-sm-15-60 tmp" itemid="{{ItemID}}">
+				<div class="input-group">
+					<select class="form-control input-sm selectpicker" sorttype="{{sortType}}" id="multi_sel_{{fieldName}}" multiple>
+						{{#each selectoptions}}
+
+						{{#ifCond this.dV this.val}}
+						<option value="{{this.val}}" selected="selected">{{this.text}}</option>
+						{{else}}
+						<option value="{{this.val}}">{{this.text}}</option>
+						{{/ifCond}}
+						{{/each}}
+
+					</select>
+					<input type="hidden" itemid="{{ItemID}}" oname="{{fieldName}}" name="{{fieldName}}" id="sel_{{fieldName}}" itemid="{{ItemID}}" multi_sel />
+					<input type="hidden" itemid="{{ItemID}}" name="sopt_{{fieldName}}" id="sopt_{{fieldName}}" value="in" />
+					<input type="hidden" class="form-control input-sm" name="dt_{{fieldName}}" id="dt_{{fieldName}}" itemid="{{ItemID}}" value="{{dT}}">
+					<span class="input-group-btn">
+						<button class="btn btn-sm btn-danger RemoveSearch" type="button" itemid="{{ItemID}}">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+	</script>
+
+	<script id="CommonTemplate" type="text/x-handlebars-template">
+		<div class="pure-u-sm-5-24" itemid="{{ItemID}}" style="width: 55.5%">
+			<div class="input-group">
+				<input type="text" class="form-control input-sm" sorttype="{{sortType}}" oname="{{fieldName}}" name="{{fieldName}}" id="sel_{{fieldName}}" itemid="{{ItemID}}" value="{{DefVal}}">
+				<span class="input-group-btn">
+					<button class="btn btn-sm btn-danger RemoveSearch" type="button" itemid="{{ItemID}}">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+			</div>
+		</div>
+	</script>
+	<script id="BetweenTemplate" type="text/x-handlebars-template">
+		<div class="pure-u-sm-12-60 tmp" itemid="{{ItemID}}">
+			<input type="text" class="form-control input-sm" sorttype="{{sortType}}" oname="{{fieldName}}" name="{{fieldName}}$S" id="sel_{{fieldName}}S" itemid="{{ItemID}}" value="{{dV}}">
+		</div>
+		<div class="pure-u-sm-3-60 tmp" itemid="{{ItemID}}" style="padding:5px 3px;">To</div>
+		<div class="pure-u-sm-15-60 tmp" itemid="{{ItemID}}">
+			<div class="input-group">
+				<input type="text" class="form-control input-sm" sorttype="{{sortType}}" oname="{{fieldName}}" name="{{fieldName}}$E" id="sel_{{fieldName}}E" itemid="{{ItemID}}" value="{{dV}}">
+				<span class="input-group-btn">
+					<button class="btn btn-sm btn-danger RemoveSearch" type="button" itemid="{{ItemID}}">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+			</div>
+		</div>
+	</script>
+	<script id="SearchTemplate" type="text/x-handlebars-template">
+		<div class="box1">
+			<div class="pure-u-sm-6-60 label-right">
+				<label class="control-label">@Resources.Locale.L_SYS_SEARCHITEM</label>
+			</div>
+			<div class="pure-u-sm-21-60">
+				<select class="form-control input-sm" id="addFilterSel_{{myId}}"></select>
+			</div>
+			<div class="pure-u-sm-2-60"></div>
+			<div class="pure-u-sm-28-60">
+				<div class="btn-group btn-group-sm" role="group">
+					<ul class="list-inline" id="SummaryBtnList">
+						<li><button class="btn btn-sm btn-info" id="SummarySearch">@Resources.Locale.L_SYS_SEARCH</button></li>
+						<li><button class="btn btn-sm btn-warning" id="SummaryInput" href="{{AddUrl}}">@Resources.Locale.L_SYS_INPUT</button></li>
+						<li><button class="btn btn-sm btn-primary" id="SummaryAdd">@Resources.Locale.L_SYS_ADDFILTER</button></li>
+						<li><button class="btn btn-sm btn-success" id="SummarySave">@Resources.Locale.L_SYS_SAVEFILTER</button></li>
+						<li><button class="btn btn-sm btn-danger" id="SummaryReset">@Resources.Locale.L_SYS_RESETFILTER</button></li>
+						<!--
+						<li><button class="btn btn-sm btn-success" id="SummarySave">保存</button></li>
+						<li><button class="btn btn-sm btn-danger" id="SummaryClear">清除</button></li>
+						 -->
+						<li>
+							<div class="dropdown">
+								<button class="btn btn-sm btn-success" id="SummaryPrintReport" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">@Resources.Locale.L_SYS_PRINTREPORT<span class="caret"></span></button>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="ReportList">
+									{{#each ReportItem}}
+									<li item="{{this.item}}"><a href="#">{{this.name}}</a></li>
+									{{/each}}
+								</ul>
+							</div>
+						</li>
+						<li>
+							<button class="btn btn-sm btn-default" data-toggle="modal" data-target="ChartDialog" id="SummaryShowChart" style="display:none">@Resources.Locale.L_SYS_CHARTREPORT</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</script>
+	<script id="SearchBtnGroupTemplate" type="text/x-handlebars-template">
+		<div class="pure-g">
+			<div class="pure-u-sm-60-60">
+				<ul class="list-unstyled list-inline">
+					{{#each btnArr }}
+					<li>
+						<button class="btn btn-sm btn-primary pms-btn" id="{{this.id}}">{{this.name}}</button>
+					</li>
+					{{/each}}
+				</ul>
+			</div>
+		</div>
+	</script>
+	<script id="SearchStatusGroupTemplate" type="text/x-handlebars-template">
+		<div class="panel panel-default SearchStatus" id="SearchStatus_{{ID}}">
+			<div class="panel-body">
+
+			</div>
+		</div>
+	</script>
+	<script id="EapproveTemplate" type="text/x-handlebars-template">
+		<div class="modal fade" id="approveDialog_{{initID}}">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">E-Approved</h4>
+					</div>
+					<div class="modal-body">
+						<table class="table table-striped" id="approveTable_{{initID}}">
+							<thead>
+								<tr>
+									<th>@Resources.Locale.L_SYS_APPROVESTEP</th>
+									<th>@Resources.Locale.L_SYS_APPROVEUNIT</th>
+									<th>@Resources.Locale.L_SYS_GROUP</th>
+									<th>@Resources.Locale.L_SYS_APPLYER</th>
+									<th>@Resources.Locale.L_SYS_DATE</th>
+									<th>@Resources.Locale.L_SYS_STATUS</th>
+									<th>@Resources.Locale.L_SYS_EVENT</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="approveClose">@Resources.Locale.L_SYS_CLOSE</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+	<script id="ErrMsgTemplate" type="text/x-handlebars-template">
+		<div class="modal fade" id="ErrMsgDialog_{{initID}}">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" id="CloseBtnImg" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">@Resources.Locale.L_Layout_Adnormal<span id="ErrorJobNo">{{initJobNo}}</span></h4>
+					</div>
+					<div class="modal-body">
+						<ul class="list-inline">
+							<li><button class="btn btn-sm btn-primary" id="ErrMsgAdd">@Resources.Locale.L_SYS_ADD</button></li>
+							<li><button class="btn btn-sm btn-success" id="ErrMsgSave">@Resources.Locale.L_SYS_SAVE</button></li>
+						</ul>
+						<table class="table table-striped" id="ErrMsgTable_{{initID}}">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>@Resources.Locale.L_SYS_ResTarget </th>
+									<th>@Resources.Locale.L_SYS_ABDType </th>
+									<th>@Resources.Locale.L_SYS_ABDCause </th>
+									<th>@Resources.Locale.L_SYS_ABDDesc </th>
+									<th>@Resources.Locale.L_SYS_Writter </th>
+									<th>@Resources.Locale.L_SYS_WriteDate </th>
+									<th>@Resources.Locale.L_SYS_Resolver </th>
+									<th>@Resources.Locale.L_SYS_ResolveDate </th>
+									<th>@Resources.Locale.L_SYS_Resolve </th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="CloseBtn" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+
+	<!--Excel汇入视窗-->
+	<div class="modal fade" id="uploadExcelFile" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">@Resources.Locale.L_BSTQuery_ImpExcel</h4>
+				</div>
+				<form name="EXCEL_UPLOAD_FROM" id="EXCEL_UPLOAD_FROM" method="post" enctype="multipart/form-data">
+					<div class="modal-body">
+						<div class="pure-g">
+							<div class="pure-u-sm-60-60">
+								<input type="file" title="@Resources.Locale.L_BSTQuery_BeginRow" id="uploadExcel" name="file" />
+								<input type="hidden" id="uploadKeyId" />
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-sm btn-info" id="modalUploadBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+						<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--Excel汇入视窗-->
+	<!--SI選擇視窗-->
+	<div class="modal fade" id="SiQueryDialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">@Resources.Locale.L_Layout_SISelect</h4>
+				</div>
+				<div class="modal-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-60-60">
+							<table id="SiDailogGrid" class="pure-u-sm-60-60"><tr><td /></tr></table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--SI選擇視窗-->
+	<!--合并選擇視窗-->
+	<div class="modal fade" id="CombineInvDialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">@Resources.Locale.L_Layout_MerSelc</h4>
+				</div>
+				<div class="modal-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60 ">
+							<label for="C_Com" class="control-label">Company:</label>
+						</div>
+						<div class="pure-u-sm-5-60 control-group">
+							<select name="c_io" id="c_io">
+								<option value="O">Outbound</option>
+								<option value="I">Inbound</option>
+							</select>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="c_com" class="control-label">Company:</label>
+						</div>
+						<div class="pure-u-sm-5-60 control-group">
+							<input type="text" class="form-control input-sm" id="c_com" name="c_com" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-60-60">
+							<ul class="list-inline">
+								<li><button type="button" class="btn btn-sm btn-primary" id="CombineInvBtn">@Resources.Locale.L_Layout_ConMer</button></li>
+								<li><button type="button" class="btn btn-sm btn-primary" id="CancelCombineInvBtn">@Resources.Locale.L_Layout_CanlMer</button></li>
+							</ul>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-60-60">
+							<table id="CombineInvGrid" class="pure-u-sm-60-60"><tr><td /></tr></table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--合并選擇視窗-->
+	<!--费流费用Dailog-->
+	<div class="modal fade" id="costDetail" Sid="">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">@Resources.Locale.L_Layout_FeeDetail</h4>
+				</div>
+				<div class="modal-body" id="costContent">
+					<div class="pure-g">
+						<div class="pure-u-sm-60-60">
+							<ul class="list-inline">
+								<li><button class="btn btn-sm btn-primary" id="autoCountBtn">@Resources.Locale.L_Layout_AutoAmount</button></li>
+								<li><button class="btn btn-sm btn-primary" id="ShipFeeQueryView">@Resources.Locale.L_Layout_FeeView</button></li>
+							</ul>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-60-60">
+							<table id="ShipFeeDialogGrid"><tr><td><td /></tr></table>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="ModalClose">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--费流费用Dailog-->
+
+	<div class="modal fade" id="ChartDialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body" style="over">
+					<div class="pure-g">
+						<div class="pure-u-sm-12-30" style="margin: 0 auto;">
+							<div class="panel panel-default" id="ChartConArea">
+								<div class="panel-body">
+									<form class="form-horizontal" id="chartForm">
+										<div class="form-group">
+											<label for="chartType" class="col-sm-2 control-label">@Resources.Locale.L_Layout_Graph：</label>
+											<div class="col-sm-7">
+												<select class="input-sm form-control" id="chartType" name="chartType"></select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="chartTarget" class="col-sm-2 control-label">@Resources.Locale.L_Layout_Target：</label>
+											<div class="col-sm-7">
+												<select class="input-sm form-control" id="chartTarget" name="chartTarget"></select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="chartDataSource" class="col-sm-2 control-label">@Resources.Locale.L_Layout_Source：</label>
+											<div class="col-sm-7">
+												<select class="input-sm form-control" id="chartDataSource" name="chartDataSource"></select>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="panel-footer" style="text-align: right;">
+									<button type="button" class="btn btn-sm btn-primary" id="ChartOk">@Resources.Locale.L_Layout_Confirm</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="pure-g" id="ChartArea">
+						<div class="pure-u-sm-30-30">
+							<div id="MyChart" style="width: 100%"></div>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" id="ChartOpt">@Resources.Locale.L_Layout_Menu</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Locale.L_Layout_Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<input type="hidden" id="msgTipVal" />
+	<input type="hidden" id="colMsgVal" />
+	<input type="hidden" id="nowStatusVal" />
+	@if (ViewBag.MenuBar == null || ViewBag.MenuBar)
+	{
+		@Html.Partial("_MenuBar");
+	}
+
+	@RenderBody()
+
+	<script type="text/javascript">
+    var pmsList = "@ViewBag.pmsList";
+    var approveGroup = "@ViewBag.approveGroup";
+
+        $(document).ready(function(){
+            var listBar = [];
+            if(typeof DetailReportData !== "undefined")
+            {
+                if(DetailReportData.length > 0)
+                {
+                    if(pmsList != "")
+                    {
+                        var thisViewId = pmsList.split("|");
+                        $.each(DetailReportData, function(i, v){
+
+                            if(thisViewId[0] == DetailReportData[i]["ViewId"])
+                            {
+                                var obj = {};
+                                obj["menuId"]           = DetailReportData[i]["RptId"];
+                                obj["menuName"]       = DetailReportData[i]["RptNm"];
+                                var RptCondition = DetailReportData[i]["RptCondition"];
+                                var RptWay = DetailReportData[i]["RptWay"];
+                                var RptType = DetailReportData[i]["RptType"];
+                                var RptParameter = DetailReportData[i]["RptParameter"];
+                                var rptName = DetailReportData[i]["RptNm"];
+                                var itemId = DetailReportData[i]["RptId"];
+                                obj["menuFunc"]  = function(){
+
+
+                                    if(RptCondition != "")
+                                    {
+                                        var c = RptCondition.match(/(\{[A-z]{0,30}\})/g);
+                                        var rBasecondition = "";
+                                        for(var i=0; i<c.length; i++)
+                                        {
+                                            var fieldName = c[i].replace("{","").replace("}", "");
+                                            var val = $("#" + fieldName).val();
+                                            if(typeof val == "undefined")
+                                            {
+                                                val = "";
+                                            }
+
+                                            val = "'" + val + "'";
+                                            RptCondition = RptCondition.replace(c[i], val);
+                                        }
+                                    }
+
+                                    var params = {};
+                                    if(RptType == "PREVIEW")
+                                    {
+                                        params = {
+                                            rptdescp: rptName,
+                                            rptName: itemId,
+                                            formatType: 'xls',
+                                            exportType: RptType,
+                                            'baseCondition': RptCondition
+                                        };
+                                    }
+                                    else
+                                    {
+                                        params = {
+                                            rptdescp: rptName,
+                                            rptName: itemId,
+                                            formatType: RptType,
+                                            'baseCondition': RptCondition
+                                        };
+                                    }
+                                    var pmts = [];
+                                    if(RptParameter != "")
+                                    {
+                                        pmts = RptParameter.split(",");
+                                    }
+
+                                    for(var j=0; j<pmts.length; j++)
+                                    {
+                                        var val = $("#" + pmts[j]).val();
+                                        if(typeof val == "undefined")
+                                        {
+                                            val = "";
+                                        }
+                                        var obj = {};
+                                        obj[pmts[j]] = val;
+                                        $.extend(params, obj);
+                                    }
+                                    console.log(params);
+                                    obj["params"] = params;
+                                    /*obj["menuFunc"] = function(){
+                                        MenuShowReport(params);
+                                    }*/
+                                };
+                                obj["menuCss"] = "glyphicon glyphicon-list-alt";
+
+                                listBar.push(obj);
+                            }
+                        });
+
+                         if($("#MBPreview").length > 0)
+                         {
+                            var newMenu = "";
+                            $.each(listBar, function (key, value) {
+                                if (pmsList != "") {
+                                    if (pmsList.indexOf(listBar[key].menuId) == -1) {
+
+                                    } else {
+                                        newMenu += ' <li><button class="btn btn-link btn-list" id="' + listBar[key].menuId + '">\
+                                                <span class="' + listBar[key].menuCss + '" aria-hidden="true"> </span> ' + listBar[key].menuName + '\
+                                            </button></li>';
+                                    }
+                                } else {
+                                    newMenu += ' <li><button class="btn btn-link btn-list" id="' + listBar[key].menuId + '">\
+                                                <span class="' + listBar[key].menuCss + '" aria-hidden="true"> </span> ' + listBar[key].menuName + '\
+                                            </button></li>';
+                                }
+                            });
+                            $("#MBPreview").siblings("ul").append(newMenu);
+
+                            $.each(listBar, function (key, value) {
+
+                                $("#" + listBar[key].menuId).on("click", function () {
+                                    MenuShowReport(listBar[key].params);
+                                });
+                            });
+                         }
+                         else
+                         {
+                             if (typeof MenuBarFuncArr != "undefined")
+                                MenuBarFuncArr.AddDDLMenu("MBPreview", " glyphicon glyphicon-print", "@Resources.Locale.L_ActManage_Preview", function () { }, null, listBar);
+                         }
+
+                    }
+                }
+            }
+
+            function MenuShowReport(params) {
+                $.ajax({
+                    async: true,
+                    url: rootPath + "Report/CreateNewReport",
+                    type: 'POST',
+                    data: params,
+                    "complete": function (xmlHttpRequest, successMsg) {
+                        if (successMsg != "success") return null;
+                        var xx = xmlHttpRequest.responseText;
+                        window.open(xmlHttpRequest.responseText);
+                    },
+                    "error": function (xmlHttpRequest, errMsg) {
+                    },
+                    success: function (result) {
+
+                    }
+                });
+            }
+        });
+
+        $(window).resize(function (event) {
+            GriddynamicHeight($("#containerInfoGrid"));
+        });
+    function GriddynamicHeight(gridid) {
+        var docHeight = $(window).height();
+        //var addAreaHeight = $(".condition-layout").height();
+        var gridHeight = docHeight - 300;
+        if (gridHeight > 400) {
+            gridHeight = docHeight - 260;
+        }
+        else {
+            gridHeight = 200;
+        }
+        gridid.parents('div.ui-jqgrid-bdiv').css("height", gridHeight + "px");
+    }
+	</script>
+
+</body>
+</html>

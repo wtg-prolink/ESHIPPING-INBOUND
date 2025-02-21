@@ -1,0 +1,540 @@
+﻿@{
+    ViewBag.Title = "BSCSSetup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #page-wrapper {
+        padding: 5px;
+    }
+</style>
+<script type="text/javascript">
+    var schemas = "@ViewBag.schemas.Content";
+    var _UId = "@ViewBag.UId";
+</script>
+<script type="text/javascript">
+
+</script>
+@Html.RazorJSInline("~/Scripts/BSCSSetup/BSCSSetup.js");
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PartyNo" class="control-label">@Resources.Locale.L_BSCSSetup_PartyNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="hidden" id="UId" dt="mt" fieldname="UId" iskey="true" />
+                            <input onblur="this.value = this.value.toUpperCase();" type="text" class="form-control input-sm" dt="mt" id="PartyNo" name="PartyNo" fieldname="PartyNo" readonly="readonly" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PartyType" class="control-label">@Resources.Locale.L_BSCSDataQuery_PartyType</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PartyType" name="PartyType" fieldname="PartyType" readonly="readonly" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PartyTypeLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Abbr" class="control-label">@Resources.Locale.L_BSCSDataQuery_Abbr</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Abbr" name="Abbr" fieldname="Abbr" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Status" class="control-label">@Resources.Locale.L_GateReserve_Status</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="Status" name="Status" fieldname="Status">
+                                <option value="U">U:@Resources.Locale.L_BSCSSetup_Use</option>
+                                <option value="V">V:@Resources.Locale.L_BSCSSetup_Discard</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PartyName" class="control-label">Party Name1</label>
+                        </div>
+                        <div class="pure-u-sm-25-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PartyName" name="PartyName" fieldname="PartyName" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PartyName2" class="control-label">Party Name2</label>
+                        </div>
+                        <div class="pure-u-sm-25-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PartyName2" name="PartyName2" fieldname="PartyName2" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PartyName3" class="control-label">Party Name3</label>
+                        </div>
+                        <div class="pure-u-sm-25-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PartyName3" name="PartyName3" fieldname="PartyName3" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PartyName4" class="control-label">Party Name4</label>
+                        </div>
+                        <div class="pure-u-sm-25-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PartyName4" name="PartyName4" fieldname="PartyName4" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="HeadOffice" class="control-label">@Resources.Locale.L_BSCSSetup_HdqCmp</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="HeadOffice" name="HeadOffice" fieldname="HeadOffice" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="HeadOfficeLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="BillTo" class="control-label">@Resources.Locale.L_BSCSDataQuery_BillTo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="BillTo" name="BillTo" fieldname="BillTo" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="BillToLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="TaxNo" class="control-label">@Resources.Locale.L_BSCSDataQuery_TaxNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="TaxNo" name="TaxNo" fieldname="TaxNo" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="DueDay" class="control-label">@Resources.Locale.L_BSCSDataQuery_DueDay</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="DueDay" name="DueDay" fieldname="DueDay" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PartAddr1" class="control-label">@Resources.Locale.L_BSCSDataQuery_PartAddr1</label>
+                        </div>
+                        <div class="pure-u-sm-25-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PartAddr1" name="PartAddr1" fieldname="PartAddr1" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PartyAttn" class="control-label">@Resources.Locale.L_BSCSDataQuery_PartyAttn</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PartyAttn" name="PartyAttn" fieldname="PartyAttn" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PartyFax" class="control-label">@Resources.Locale.L_BSCSSetup_CmpFax</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PartyFax" name="PartyFax" fieldname="PartyFax" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PartAddr2" class="control-label">@Resources.Locale.L_BSCSDataQuery_PartAddr2</label>
+                        </div>
+                        <div class="pure-u-sm-25-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PartAddr2" name="PartAddr2" fieldname="PartAddr2" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PartyTel" class="control-label">@Resources.Locale.L_BSCSSetup_CmpTel</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PartyTel" name="PartyTel" fieldname="PartyTel" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Zip" class="control-label">@Resources.Locale.L_BSCSDataQuery_Zip</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Zip" name="Zip" fieldname="Zip" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PartAddr3" class="control-label">@Resources.Locale.L_BSCSDataQuery_PartAddr3</label>
+                        </div>
+                        <div class="pure-u-sm-25-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PartAddr3" name="PartAddr3" fieldname="PartAddr3" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="MobileTel" class="control-label">*@Resources.Locale.L_BSCSDataQuery_MobileTel</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="MobileTel" name="MobileTel" fieldname="MobileTel" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PartyMail" class="control-label">@Resources.Locale.L_BSCSDataQuery_PartyMail</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PartyMail" name="PartyMail" fieldname="PartyMail" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PartAddr4" class="control-label">@Resources.Locale.L_BSCSDataQuery_PartAddr4</label>
+                        </div>
+                        <div class="pure-u-sm-25-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PartAddr4" name="PartAddr4" fieldname="PartAddr4" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Cnty" class="control-label">@Resources.Locale.L_BSCSDataQuery_Cnty</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cnty" name="Cnty" fieldname="Cnty" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CntyLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CntyNm" name="CntyNm" fieldname="CntyNm" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="City" class="control-label">@Resources.Locale.L_BSCSSetup_City</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="City" name="City" fieldname="City" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CityLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CityNm" name="CityNm" fieldname="CityNm" readonly />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PartAddr5" class="control-label">@Resources.Locale.L_BSCSDataQuery_PartAddr5</label>
+                        </div>
+                        <div class="pure-u-sm-25-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PartAddr5" name="PartAddr5" fieldname="PartAddr5" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="State" class="control-label">@Resources.Locale.L_CitySetup_State</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="State" name="State" fieldname="State" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="StateLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Gln" name="Gln" fieldname="Gln" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Krs" class="control-label">*@Resources.Locale.L_Krs</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Krs" name="Krs" fieldname="Krs" />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="EdiCustNm" class="control-label">EDI Customer Name</label>
+                        </div>
+                        <div class="pure-u-sm-25-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="EdiCustNm" name="EdiCustNm" fieldname="EdiCustNm" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Contract" class="control-label">@Resources.Locale.L_BSCSDataQuery_Contract</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="Contract" name="Contract" fieldname="Contract">
+                                <option value=""></option>
+                                <option value="S">@Resources.Locale.L_Contract_Shipper</option>
+                                <option value="F">@Resources.Locale.L_Contract_Forwarder</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="TradingPartner" class="control-label">@Resources.Locale.L_BSCSDataQuery_TradingPartner</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="TradingPartner" name="TradingPartner" fieldname="TradingPartner" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Ident" class="control-label">Identity</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <select class="form-control input-sm" dt="mt" id="Ident" name="Ident" fieldname="Ident">
+                                <option value=""></option>
+                                <option value="EI">IRS#</option>
+                                <option value="34">SSN</option>
+                                <option value="CW">CBP#</option>
+                                <option value="PN">Passport#</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-20-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ImRecord" name="ImRecord" fieldname="ImRecord" placeholder="IMPORTER OF RECORD" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="IsDfl" class="control-label">@Resources.Locale.L_IsDfl</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 label-right">
+                            <select class="form-control input-sm" dt="mt" id="IsDfl" name="IsDfl" fieldname="IsDfl">
+                                <option value="N">No</option>
+                                <option value="Y">Yes</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Filter" class="control-label">Filter</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 label-right">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Filter" name="Filter" fieldname="Filter" readonly />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PayTerm" class="control-label">@Resources.Locale.L_BSCSSetup_PayTerm</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PayTerm" name="PayTerm" fieldname="PayTerm" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="BondType" class="control-label">BondType</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 label-right">
+                            <select class="form-control input-sm" dt="mt" id="BondType" name="BondType" fieldname="BondType">
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="BondAct" class="control-label">BondAct</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 label-right">
+                            <select class="form-control input-sm" dt="mt" id="BondAct" name="BondAct" fieldname="BondAct">
+                                <option value="01">Importer or Broker</option>
+                                <option value="02">Custodian Of Bonded Merchandise</option>
+                                <option value="03">International Carrier</option>
+                                <option value="04">Foreign Trade Zone Operator</option>
+                                <option value="16">ISF Bond</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PayMethod" class="control-label">@Resources.Locale.L_ActCheckSetup_Views_32</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PayMethod" name="PayMethod" fieldname="PayMethod" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60 ">
+                            <label class="control-label">Login System</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="IsOutbound" name="IsOutbound" fieldname="IsOutbound">
+                                <option value=""></option>
+                                <option value="O">O:Outbound</option>
+                                <option value="I">I:Inbound</option>
+                                <option value="A">A:All</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="SourceCode" class="control-label">SAP ID</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="SourceCode" name="SourceCode" fieldname="SourceCode" />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PickupPoint" class="control-label">@Resources.Locale.L_PickupPoint</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 label-right">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PickupPoint" name="PickupPoint" fieldname="PickupPoint" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PickupPointLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PickupName" name="PickupName" fieldname="PickupName" />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Cmp" class="control-label">@Resources.Locale.L_RoleSetUp_CMP</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" readonly />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Dep" class="control-label">@Resources.Locale.L_UserSetUp_Dep</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Dep" name="Dep" fieldname="Dep" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-6-60 label-right">
+                            <label for="CreateBy" class="control-label">@Resources.Locale.L_NRSSetup_CreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" fieldname="CreateBy" readonly>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" fieldname="CreateDate" readonly>
+                        </div>
+                        <div class="pure-u-sm-6-60 label-right">
+                            <label for="ModifyBy" class="control-label">@Resources.Locale.L_NRSSetup_ModifyBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" fieldname="ModifyBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" fieldname="ModifyDate" readonly />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label class="control-label">@Resources.Locale.L_BSCSSetup_UploadStamp</label>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <form enctype="multipart/form-data" method="post" name="fileinfo">
+                                <input type="file" inputType="file" id="Pic" name="Pic" />
+                            </form>
+                        </div>
+                        <div class="pure-u-sm-6-60 label-right">
+                            <label for="Remark" class="control-label">@Resources.Locale.L_BSCSSetup_Remark</label>
+                        </div>
+                        <div class="pure-u-sm-33-60 control-group">
+                            <textarea rows="3" width="100%" type="text" class="form-control" dt="mt" id="Remark" name="Remark" fieldname="Remark" rows="5"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+
+                        <div class="pure-u-sm-5-60">
+                            <label class="control-label">@Resources.Locale.L_BSCSSetup_Stamp</label>
+                        </div>
+                        <div class="pure-u-sm-25-60">
+                            <p id="picInfo"></p>
+                            <p>
+                                <button class="btn btn-sm btn-default" id="delPic">@Resources.Locale.L_BSCSSetup_DelStamp</button>
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="pure-g">
+                        <label style="color:red">@Resources.Locale.L_BSCSSetup_SAPUpdate</label>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#SMPTYC" aria-controls="SMPTYC" role="tab" data-toggle="tab">@Resources.Locale.L_BSCSSetup_ContractFile</a></li>
+                        <li role="presentation"><a href="#SMPTYS" aria-controls="SMPTYS" role="tab" data-toggle="tab">@Resources.Locale.L_BSCSSetup_SuspendFile</a></li>
+                        <li role="presentation"><a href="#SMPTYD" aria-controls="SMPTYD" role="tab" data-toggle="tab">@Resources.Locale.L_BSCSSetup_DeliveryFile</a></li>
+                        <li role="presentation"><a href="#TKCSTS" aria-controls="TKCSTS" role="tab" data-toggle="tab">@Resources.Locale.L_BSCSSetup_StsSet</a></li>
+                        <li role="presentation"><a href="#SMBKINFO" aria-controls="SMBKINFO" role="tab" data-toggle="tab">@Resources.Locale.L_BSCSSetup_BankInfo</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="SMPTYC">
+                            <table id="SMPTYCGrid" class="_tableGrid" style="width: 100%">
+                                <tr>
+                                </tr>
+                            </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="SMPTYS">
+                            <table id="SMPTYSGrid" class="_tableGrid" style="width: 100%">
+                                <tr>
+                                </tr>
+                            </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="SMPTYD">
+                            <table id="SMPTYDGrid" class="_tableGrid" style="width: 100%">
+                                <tr>
+                                </tr>
+                            </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="TKCSTS">
+                            <table id="TKCSTSGrid" class="_tableGrid" style="width: 100%">
+                                <tr></tr>
+                            </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="SMBKINFO">
+                            <table id="SMBKINFOGrid" class="_tableGrid" style="width: 100%">
+                                <tr></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

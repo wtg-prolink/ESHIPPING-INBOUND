@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "EDILogQueryView";
+}
+
+@Html.RazorJSInline("~/Scripts/BaseColModel.js")
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        gop.gridColModel = QueryConfig.EDILOG;
+        gop.AddUrl = false;
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "EDI LOG LIST", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "BSPG/EdiLogQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("EventDate", gop);
+        }
+
+        initSearch(gop);
+        ajustamodal("#EdiModal");
+        function dblClick(map) {
+            var DataFolder = map.DataFolder;
+            var selectid = map.UId;
+            if (DataFolder != "") {
+                var url = /(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})*(\/[a-zA-Z0-9\&%_\./-~-]*)?/;
+                if (!url.test(DataFolder)) {
+                    selectid = DataFolder;
+                }
+            }
+            $.ajax({
+                async: true,
+                url: rootPath + "BSPG/EdiLogDetail",
+                type: 'POST',
+                data: { id: selectid },
+                "error": function (xmlHttpRequest, errMsg) {
+                    alert(errMsg);
+                },
+                "complete": function (xmlHttpRequest, successMsg) {
+                    CommonFunc.ToogleLoading(false);
+                },
+                success: function (data) {
+                    if (data.content != "") {
+                        $('#EdiModal .modal-title').html("档案详情");
+                        $('#EdiModal .modal-body textarea').html(data.content);
+                        $('#EdiModal').modal('show');
+                    }
+                    else {
+                        alert("no data");
+                    }
+                }
+            });
+        }
+
+    });
+
+</script>
+<div class="modal fade" id="EdiModal" Sid="">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body" style="overflow: scroll;">
+                @*<p>&hellip;</p>*@
+                <textarea style="width:100%;height:90%"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4C0BB241-A99A-4F01-B0F7-BFAB4CF05C03}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TrackingEDI</RootNamespace>
+    <AssemblyName>TrackingEDI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DynamicWebServices, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\DynamicWebServices.dll</HintPath>
+    </Reference>
+    <Reference Include="EDOCApi">
+      <HintPath>..\lib\EDOCApi.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\lib\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\lib\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="Prolink.Tool_2008">
+      <HintPath>..\lib\V3Kernel\Prolink.Tool_2008.dll</HintPath>
+    </Reference>
+    <Reference Include="Prolink.V6.Core_2008">
+      <HintPath>..\lib\V3Kernel\Prolink.V6.Core_2008.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ASDReportLogic.cs" />
+    <Compile Include="Budget\UploadBudget.cs" />
+    <Compile Include="Business\BaseParser.cs" />
+    <Compile Include="Business\BookingParser.cs" />
+    <Compile Include="Business\BookingStatusManager.cs" />
+    <Compile Include="Business\CostStatistics.cs" />
+    <Compile Include="Business\DBLogHelp.cs" />
+    <Compile Include="Business\DownExcelInterface.cs" />
+    <Compile Include="Business\ForecastParser.cs" />
+    <Compile Include="Business\GetDueDate.cs" />
+    <Compile Include="Business\GetFreeTime.cs" />
+    <Compile Include="Business\RdnParser.cs" />
+    <Compile Include="Business\DateTimeUtils.cs" />
+    <Compile Include="Business\DocSender.cs" />
+    <Compile Include="Business\EdocHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\EvenManager.cs" />
+    <Compile Include="Business\ExcelHelper.cs" />
+    <Compile Include="Business\ExcelParser.cs" />
+    <Compile Include="Business\InboundUploadExcelManager.cs" />
+    <Compile Include="Business\MailManager.cs" />
+    <Compile Include="Business\Parser.cs" />
+    <Compile Include="Business\QuotParser.cs" />
+    <Compile Include="Business\RouteNotify.cs" />
+    <Compile Include="Business\SCMInfoToExcel.cs" />
+    <Compile Include="Business\SplitSmbidHelper.cs" />
+    <Compile Include="Business\TimeZoneHelper.cs" />
+    <Compile Include="Business\TransferBooking.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Business\UpdateSmsmiEta.cs" />
+    <Compile Include="CommonManager.cs" />
+    <Compile Include="InboundBusiness\ASNManager.cs" />
+    <Compile Include="InboundBusiness\BookingConfirm.cs" />
+    <Compile Include="InboundBusiness\IBTraceStatus.cs" />
+    <Compile Include="InboundBusiness\InboundASDReportHelper.cs" />
+    <Compile Include="InboundBusiness\InboundHelper.cs" />
+    <Compile Include="InboundBusiness\InboundTransfer.cs" />
+    <Compile Include="InboundBusiness\ReserveHelper.cs" />
+    <Compile Include="InboundBusiness\SMSMIHelper.cs" />
+    <Compile Include="Mail\DefaultMailParse.cs" />
+    <Compile Include="Mail\IMailSender.cs" />
+    <Compile Include="Mail\IMailTemplateParse.cs" />
+    <Compile Include="Mail\MailSender.cs" />
+    <Compile Include="Mail\MailTemplate.cs" />
+    <Compile Include="Manager.cs" />
+    <Compile Include="Model\Status.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\TransferOperation\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Serviceface\ItraceServiceface.cs" />
+    <Compile Include="Serviceface\Serviceface.cs" />
+    <Compile Include="TimeZoneHelper.cs" />
+    <Compile Include="Utils\Database.cs" />
+    <Compile Include="Business\EvenFactory.cs" />
+    <Compile Include="Business\EvenNotify.cs" />
+    <Compile Include="Utils\DayHelper.cs" />
+    <Compile Include="Utils\MD5Hashing.cs" />
+    <Compile Include="Business\TraceStatus.cs" />
+    <Compile Include="Business\XmlParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\TraceStatusHelper.cs" />
+    <Compile Include="Web References\ItraceWebReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\TraceEDIService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="libs\DynamicWebServices.dll" />
+    <Content Include="libs\DynamicWebServices.pdb" />
+    <None Include="Service References\TransferOperation\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\TransferOperation\configuration.svcinfo" />
+    <None Include="Service References\TransferOperation\configuration91.svcinfo" />
+    <None Include="Service References\TransferOperation\InboundTPVService.disco" />
+    <None Include="Service References\TransferOperation\InboundTPVService.wsdl" />
+    <None Include="Service References\TransferOperation\InboundTPVService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TransferOperation\InboundTPVService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TransferOperation\InboundTPVService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TransferOperation\InboundTPVService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TransferOperation\TrackingEDI.TransferOperation.Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Web References\TraceEDIService\EDIService.disco" />
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ItraceWebReference\EDI.disco" />
+    <None Include="Web References\ItraceWebReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\TraceEDIService\EDIService.wsdl" />
+    <None Include="Web References\TraceEDIService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://218.17.234.214/TRACKING/Webservice/EDIService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\TraceEDIService\</RelPath>
+      <UpdateFromURL>http://218.17.234.214/TRACKING/Webservice/EDIService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>TrackingEDI_TraceEDIService_EDIService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://edihub.myifreight.com/src/webgui/webservice/EDI.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ItraceWebReference\</RelPath>
+      <UpdateFromURL>http://edihub.myifreight.com/src/webgui/webservice/EDI.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>TrackingEDI_ItraceWebReference_EDI</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ItraceWebReference\EDI.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\TransferOperation\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

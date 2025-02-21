@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0FC95493-21C4-4685-948E-7127A8DC6D19}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>doc</RootNamespace>
+    <AssemblyName>doc</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="updatesql.txt" />
+    <Content Include="xml-store\class\class.xml" />
+    <Content Include="xml-store\column\default.xml" />
+    <Content Include="xml-store\db\Company.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml-store\db\ConnectionPool.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml-store\edi\AVAIB_SAP_RFC.xml" />
+    <Content Include="xml-store\edi\ftp\InboundProcess.xml" />
+    <Content Include="xml-store\edi\ftp\Declaration.xml" />
+    <Content Include="xml-store\edi\ftp\SFIS.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml-store\edi\ftp\DHL.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml-store\edi\MN_SAP_RFC.xml" />
+    <Content Include="xml-store\edi\SAP_RFC.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml-store\edi\Security.xml" />
+    <Content Include="xml-store\edi\SysColumns.xml" />
+    <Content Include="xml-store\email\Email.xml" />
+    <Content Include="xml-store\ftp\FtpConfig.xml" />
+    <Content Include="xml-store\functionmanage\function.xml" />
+    <Content Include="xml-store\group\GROUP.xml" />
+    <Content Include="xml-store\js\js.xml" />
+    <Content Include="xml-store\js\XmlTNT.xml" />
+    <Content Include="xml-store\language\BIG5_LANG.xml" />
+    <Content Include="xml-store\language\ENG_LANG.xml" />
+    <Content Include="xml-store\language\GB_LANG.xml" />
+    <Content Include="xml-store\logo\LogoImgSrc.xml" />
+    <Content Include="xml-store\log\LogSet.xml" />
+    <Content Include="xml-store\menu\BIG5_MENU.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml-store\menu\ENG_MENU.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml-store\menu\GB_MENU.xml">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml-store\menu\PL_BIG5_MENU - 副本.xml" />
+    <Content Include="xml-store\menu\RU_MENU.xml" />
+    <Content Include="xml-store\menu\SD_BIG5_MENU - 副本.xml" />
+    <Content Include="xml-store\menu\SD_GB_MENU.xml" />
+    <Content Include="xml-store\permission\PMS_OBJ.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml-store\persistence\Company.xml" />
+    <Content Include="xml-store\persistence\ConnectionPool.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml-store\persistence\Entity.xml" />
+    <Content Include="xml-store\querycolumns\default.xml" />
+    <Content Include="xml-store\report\AEAWB_PRINT_RPT.xml" />
+    <Content Include="xml-store\report\aeawb_report_sql\sql.xml" />
+    <Content Include="xml-store\report\BIG5_RPT.xml" />
+    <Content Include="xml-store\report\ClearCMPRpt-bak.xml" />
+    <Content Include="xml-store\report\ClearCMPRpt.xml" />
+    <Content Include="xml-store\report\ClearCMPRpt2.xml" />
+    <Content Include="xml-store\report\GB_RPT.xml" />
+    <Content Include="xml-store\report\RptObject.xml" />
+    <Content Include="xml-store\template\awb_export.htm" />
+    <Content Include="xml-store\template\AWB_LINEX.htm" />
+    <Content Include="xml-store\template\AWB_LINEX_SHA.htm" />
+    <Content Include="xml-store\template\AWB_RPX.htm" />
+    <Content Include="xml-store\template\AWB_TNT.htm" />
+    <Content Include="xml-store\template\CabinRpt.htm" />
+    <Content Include="xml-store\template\ceRpt01.htm" />
+    <Content Include="xml-store\template\cnlRpt1.htm" />
+    <Content Include="xml-store\template\cnlRpt10.htm" />
+    <Content Include="xml-store\template\cnlRpt11.htm" />
+    <Content Include="xml-store\template\cnlRpt12.htm" />
+    <Content Include="xml-store\template\cnlRpt13.htm" />
+    <Content Include="xml-store\template\cnlRpt14.htm" />
+    <Content Include="xml-store\template\cnlRpt3.htm" />
+    <Content Include="xml-store\template\cnlRpt4.htm" />
+    <Content Include="xml-store\template\cnlRpt5.htm" />
+    <Content Include="xml-store\template\cnlRpt6.htm" />
+    <Content Include="xml-store\template\cnlRpt7.htm" />
+    <Content Include="xml-store\template\cnlRpt8.htm" />
+    <Content Include="xml-store\template\cnlRpt9.htm" />
+    <Content Include="xml-store\template\cnlRptCC.htm" />
+    <Content Include="xml-store\template\daily_rep.htm" />
+    <Content Include="xml-store\template\EL_CabinRpt.htm" />
+    <Content Include="xml-store\template\EL_RPT1.htm" />
+    <Content Include="xml-store\template\EL_RPT2.htm" />
+    <Content Include="xml-store\template\image001.jpg" />
+    <Content Include="xml-store\template\image002.jpg" />
+    <Content Include="xml-store\template\readme.txt" />
+    <Content Include="xml-store\template\TC_AWB_RPT.htm" />
+    <Content Include="xml-store\template\TC_cnlRpt1.htm" />
+    <Content Include="xml-store\template\TC_cnlRpt2.htm" />
+    <Content Include="xml-store\template\WK_CabinRpt_GOLD.htm" />
+    <Content Include="xml-store\template\WK_CabinRpt_HK.htm" />
+    <Content Include="xml-store\template\WK_cnlRpt5.htm" />
+    <Content Include="xml-store\template\WK_cnlRpt6.htm" />
+    <Content Include="xml-store\template\WK_cnlRpt7.htm" />
+    <Content Include="xml-store\template\WK_cnlRpt_charge.htm" />
+    <Content Include="xml-store\template\WK_cnlRpt_CNEE.htm" />
+    <Content Include="xml-store\template\WK_cnlRpt_DN.htm" />
+    <Content Include="xml-store\template\WK_cnlRpt_Invoices.htm" />
+    <Content Include="xml-store\template\WK_cnlRpt_month.htm" />
+    <Content Include="xml-store\template\WK_dailyRpt.htm" />
+    <Content Include="xml-store\ui\UI.xml" />
+    <Content Include="xml-store\template\wgtlvl\Offer.xml" />
+    <Content Include="xml-store\xslttemplate\deliveryExcel.xslt" />
+    <Content Include="xml-store\xslttemplate\deliveryHtml.xslt" />
+    <Content Include="xml-store\xslttemplate\PickupExcel.xslt" />
+    <Content Include="xml-store\xslttemplate\PickupHtml.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="xml-store\template\cnlRpt13.mht" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,694 @@
+﻿@{
+    ViewBag.Title = "CustomsNoticeConfirmQuery";
+}
+
+<script type="text/javascript">
+    var select_servicemode = "@ViewBag.SelectServiceMode";
+    var select_cargotype = "@ViewBag.SelectCargoType";
+    var select_trackway = "@ViewBag.SelectTrackWay";
+    var select_cartype = "@ViewBag.SelectCarType";
+</script>
+@Html.RazorJSInline("~/Scripts/DnManage/BookingQueryColumn.js")
+<script type="text/javascript" src="@Url.Content("~/Scripts/BaseLookup.js")"></script>
+@Html.RazorJSInline("~/Scripts/DnManage/BaseBookingSetup.js")
+@Html.RazorJSInclude("~/Scripts/DnManage/BaseBooking.js")
+<script type="text/javascript">
+    var _dm = new dm();
+    var _oldDeatiArray = [];
+    var _oldSerialArray = [];
+    $(document).ready(function ($) {
+
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 330;
+        var BookingQueryColumn1 = [
+		{ name: 'CMasterNo', title: '@Resources.Locale.L_BookingQueryColumn_Scripts_181', index: 'CMasterNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CHouseNo', title: '@Resources.Locale.L_BookingQueryColumn_Scripts_182', index: 'CHouseNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'UId', title: 'ID', sorttype: 'string', hidden: true, viewable: false },
+		{ name: 'Weekly', title: '@Resources.Locale.L_ContainUsage_Week', index: 'Weekly', width: 60, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Month', title: '@Resources.Locale.L_ContainUsage_Month', index: 'Month', width: 60, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Year', title: '@Resources.Locale.L_ContainUsage_Year', index: 'Year', width: 60, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'GroupId', title: '@Resources.Locale.L_BSCSSetup_GroupId', index: 'GroupId', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Cmp', title: '@Resources.Locale.L_RoleSetUp_CMP', index: 'Cmp', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Stn', title: '@Resources.Locale.L_IpPart_Cmp', index: 'Stn', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Dep', title: '@Resources.Locale.L_GateReserveSetup_CreateDep', index: 'Dep', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ShipmentId', title: '@Resources.Locale.L_DNApproveManage_ShipmentId', index: 'ShipmentId', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'DnNo', title: '@Resources.Locale.L_DNApproveManage_DnNo', index: 'DnNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CombineInfo', title: '@Resources.Locale.L_BaseLookup_CombineInfo', index: 'CombineInfo', width: 250, align: 'left', sorttype: 'string', formatter: actFormatter, hidden: false, classes: "normal-white-space" },
+		{ name: 'ShipmentInfo', title: '@Resources.Locale.L_BaseLookup_ShipmentInfo', index: 'ShipmentInfo', width: 250, align: 'left', sorttype: 'string', hidden: false, classes: "normal-white-space" },
+		{ name: 'CentDecl', title: '@Resources.Locale.L_DNApproveManage_CentDecl', index: 'CentDecl', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Status', title: '@Resources.Locale.L_GateReserve_Status', index: 'Status', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: '@Resources.Locale.L_BookingQueryColumn_Script_118', editoptions: { value: '@Resources.Locale.L_BookingQueryColumn_Script_118'+";F:Finished;R:Archived" } },
+		{ name: 'BlCheck', title: '@Resources.Locale.L_BaseLookup_BlCheck', index: 'BlCheck', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Carrier', title: '@Resources.Locale.L_BaseLookup_Carrier', index: 'Carrier', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CarrierNm', title: '@Resources.Locale.L_BaseLookup_CarrierNm', index: 'CarrierNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ScacCd', title: '@Resources.Locale.L_DNManage_SCAC', index: 'ScacCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'SvcContact', title: '@Resources.Locale.L_BaseLookup_SvcContact', index: 'SvcContact', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'BlWin', title: '@Resources.Locale.L_BaseLookup_BlWin', index: 'BlWin', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'SalesWin', title: '@Resources.Locale.L_BaseLookup_SalesWin', index: 'SalesWin', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'BrgType', title: '@Resources.Locale.L_BaseLookup_BrgType', index: 'BrgType', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'SignBack', title: '@Resources.Locale.L_BaseLookup_SignBack', index: 'SignBack', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IncotermCd', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'IncotermCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IncotermDescp', title: '@Resources.Locale.L_DNApproveManage_IncotermDescp', index: 'IncotermDescp', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'LoadingFrom', title: '@Resources.Locale.L_DNApprove_LoadingFrom', index: 'LoadingFrom', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_servicemode } },
+		{ name: 'LoadingTo', title: '@Resources.Locale.L_DNApprove_LoadingTo', index: 'LoadingTo', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_servicemode } },
+		{ name: 'FrtTerm', title: '@Resources.Locale.L_BSTSetup_FreightTerm', index: 'FrtTerm', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'P:Prepaid;C:Collect;O:Other' } },
+		{ name: 'Goods', title: '@Resources.Locale.L_BaseLookup_Goods', index: 'Goods', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Marks', title: '@Resources.Locale.L_DNApproveManage_ShipMark', index: 'Marks', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Instruction', title: '@Resources.Locale.L_BaseLookup_Instruction', index: 'Instruction', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'BookingInfo', title: '@Resources.Locale.L_BaseLookup_BookingInfo', index: 'BookingInfo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Dimension', title: '@Resources.Locale.L_BaseLookup_Dimension', index: 'Dimension', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'HouseNo', title: '@Resources.Locale.L_IEBookingSetup_HouseNo', index: 'HouseNo', width: 100, align: 'left', sorttype: 'string', hidden: false },//'House BL/快递面单号'
+		{ name: 'MasterNo', title: '@Resources.Locale.L_BaseLookup_MasterNo', index: 'MasterNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'SoNo', title: '@Resources.Locale.L_BaseBooking_SoNo', index: 'SoNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'RefNo', title: '@Resources.Locale.L_BaseLookup_RefNo', index: 'RefNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'BlType', title: '@Resources.Locale.L_BaseLookup_BlType', index: 'BlType', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'H:House No;M:Master No;S:Sub;D:Direct' } },
+		{ name: 'BlDate', title: '@Resources.Locale.L_BaseLookup_BlDate', index: 'BlDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'ClsDate', title: '@Resources.Locale.L_BaseLookup_ClsDate', index: 'ClsDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Etd', title: '@Resources.Locale.L_BaseLookup_Etd', index: 'Etd', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Eta', title: '@Resources.Locale.L_BaseLookup_Eta', index: 'Eta', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'PickupWms', title: '@Resources.Locale.L_BaseLookup_PickupWms', index: 'PickupWms', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PickupWmsNm', title: '@Resources.Locale.L_BaseLookup_PickupWmsNm', index: 'PickupWmsNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PickupWmsDate', title: '@Resources.Locale.L_BaseLookup_PickupWmsDate', index: 'PickupWmsDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'RcvDate', title: '@Resources.Locale.L_BaseLookup_RcvDate', index: 'RcvDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'DlvDocDate', title: '@Resources.Locale.L_BaseLookup_DlvDocDate', index: 'DlvDocDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'RlsCntrDate', title: '@Resources.Locale.L_BaseLookup_RlsCntrDate', index: 'RlsCntrDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'RcvDocDate', title: '@Resources.Locale.L_BaseLookup_RcvDocDate', index: 'RcvDocDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'CutPortDate', title: '@Resources.Locale.L_BaseLookup_CutPortDate', index: 'CutPortDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'PortDate', title: '@Resources.Locale.L_BaseLookup_PortDate', index: 'PortDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'CustomsDate', title: '@Resources.Locale.L_BaseLookup_CustomsDate', index: 'CustomsDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'PortRlsDate', title: '@Resources.Locale.L_BaseLookup_PortRlsDate', index: 'PortRlsDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Vessel1', title: '@Resources.Locale.L_BaseLookup_Vessel' + '1', index: 'Vessel1', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Voyage1', title: '@Resources.Locale.L_BaseLookup_Voyage' + '1', index: 'Voyage1', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Etd1', title: '@Resources.Locale.L_BaseLookup_Etd' + '1', index: 'Etd1', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Eta1', title: '@Resources.Locale.L_BaseLookup_Eta' + '1', index: 'Eta1', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Vessel2', title: '@Resources.Locale.L_BaseLookup_Vessel' + '2', index: 'Vessel2', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Voyage2', title: '@Resources.Locale.L_BaseLookup_Voyage' + '2', index: 'Voyage2', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Etd2', title: '@Resources.Locale.L_BaseLookup_Etd' + '2', index: 'Etd2', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Eta2', title: '@Resources.Locale.L_BaseLookup_Eta' + '2', index: 'Eta2', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Vessel3', title: '@Resources.Locale.L_BaseLookup_Vessel' + '3', index: 'Vessel3', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Voyage3', title: '@Resources.Locale.L_BaseLookup_Voyage' + '3', index: 'Voyage3', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Etd3', title: '@Resources.Locale.L_BaseLookup_Etd' + '3', index: 'Etd3', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Eta3', title: '@Resources.Locale.L_BaseLookup_Eta' + '3', index: 'Eta3', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Vessel4', title: '@Resources.Locale.L_BaseLookup_Vessel' + '4', index: 'Vessel4', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Voyage4', title: '@Resources.Locale.L_BaseLookup_Voyage' + '4', index: 'Voyage4', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Etd4', title: '@Resources.Locale.L_BaseLookup_Etd' + '4', index: 'Etd4', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Eta4', title: '@Resources.Locale.L_BaseLookup_Eta' + '4', index: 'Eta4', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'PorCd', title: '@Resources.Locale.L_BaseLookup_PorCd', index: 'PorCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PorName', title: '@Resources.Locale.L_BaseLookup_PorName', index: 'PorName', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PolCd', title: '@Resources.Locale.L_BaseLookup_PolCd', index: 'PolCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PolName', title: '@Resources.Locale.L_BaseLookup_PolName', index: 'PolName', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ViaCd', title: '@Resources.Locale.L_BaseLookup_ViaCd', index: 'ViaCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ViaName', title: '@Resources.Locale.L_BaseLookup_ViaName', index: 'ViaName', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PodCd', title: '@Resources.Locale.L_BaseLookup_PodCd', index: 'PodCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PodName', title: '@Resources.Locale.L_BaseLookup_PodName', index: 'PodName', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'DestCd', title: '@Resources.Locale.L_BaseLookup_DestCd', index: 'DestCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'DestName', title: '@Resources.Locale.L_BaseLookup_DestName', index: 'DestName', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Qty', title: '@Resources.Locale.L_BaseLookup_Qty', index: 'Qty', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Qtyu', title: '@Resources.Locale.L_BaseLookup_Qtyu', index: 'Qtyu', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Nw', title: '@Resources.Locale.L_BaseLookup_Nw', index: 'Nw', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Gw', title: '@Resources.Locale.L_BaseLookup_Gw', index: 'Gw', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Gwu', title: '@Resources.Locale.L_BaseLookup_Gwu', index: 'Gwu', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Cbm', title: '@Resources.Locale.L_BaseLookup_Cbm', index: 'Cbm', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'PltNum', title: '@Resources.Locale.L_BaseLookup_PltNum', index: 'PltNum', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Cnt20', title: '@Resources.Locale.L_DNDetailVeiw_Cnt20', index: 'Cnt20', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Cnt40', title: '@Resources.Locale.L_DNDetailVeiw_Cnt40', index: 'Cnt40', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Cnt40hq', title: '@Resources.Locale.L_DNDetailVeiw_Cnt40hq', index: 'Cnt40hq', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'CntType', title: '@Resources.Locale.L_BaseLookup_CntType', index: 'CntType', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CntNumber', title: '@Resources.Locale.L_BaseLookup_CntNumber', index: 'CntNumber', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'FreightAmt', title: '@Resources.Locale.L_BaseLookup_FreightAmt', index: 'FreightAmt', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'InsuranceAmt', title: '@Resources.Locale.L_BaseLookup_InsuranceAmt', index: 'InsuranceAmt', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Opickup', title: '@Resources.Locale.L_BaseLookup_Opickup', index: 'Opickup', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Odelivery', title: '@Resources.Locale.L_BaseLookup_Odelivery', index: 'Odelivery', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ExportNo', title: '@Resources.Locale.L_DNApproveManage_ExportNo', index: 'ExportNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'EdeclNo', title: '@Resources.Locale.L_DNApproveManage_EdeclNo', index: 'EdeclNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ApproveNo', title: '@Resources.Locale.L_DNApproveManage_ApprovalNo', index: 'ApproveNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Oexporter', title: '@Resources.Locale.L_BaseLookup_Oexporter', index: 'Oexporter', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'OexporterNm', title: '@Resources.Locale.L_BaseLookup_OexporterNm', index: 'OexporterNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'OexporterAddr', title: '@Resources.Locale.L_BaseLookup_OexporterAddr', index: 'OexporterAddr', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Oimporter', title: '@Resources.Locale.L_BaseLookup_Oimporter', index: 'Oimporter', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'OimporterNm', title: '@Resources.Locale.L_BaseLookup_OimporterNm', index: 'OimporterNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'OimporterAddr', title: '@Resources.Locale.L_BaseLookup_OimporterAddr', index: 'OimporterAddr', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'DeclDate', title: '@Resources.Locale.L_BaseLookup_DeclDate', index: 'DeclDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'DeclRlsDate', title: '@Resources.Locale.L_BaseLookup_DeclRlsDate', index: 'DeclRlsDate', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'BrokerInstr', title: '@Resources.Locale.L_BaseLookup_BrokerInstr', index: 'BrokerInstr', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'BrokerInfo', title: '@Resources.Locale.L_BaseLookup_BrokerInfo', index: 'BrokerInfo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		//{ name: 'TranType', title: '@Resources.Locale.L_BaseLookup_TranType', index: 'TranType', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'F:FCL;L:LCL;A:AIR;D:INLAND EXPRESS;E:EXPRESS;R:Railroad;T:TRUCK;' } },
+		{ name: 'TranType', title: '@Resources.Locale.L_BaseLookup_TranType', index: 'TranType', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: 'Using Code:F=FCL;L=LCL;A=AIR;D=INLAND EXPRESS;E=EXPRESS;R=Railroad;T=TRUCK; EX:F;L;D', editoptions: { value: 'F:FCL;L:LCL;A:AIR;D:INLAND EXPRESS;E:EXPRESS;R:Railroad;T:TRUCK;' } },
+		{ name: 'CargoType', title: '@Resources.Locale.L_DNApproveManage_CargoType', index: 'CargoType', width: 100, align: 'left', formatter: "select",remark:select_cargotype, editoptions: { value: select_cargotype } },
+		{ name: 'PickupPort', title: '@Resources.Locale.L_BaseLookup_PickupPort', index: 'PickupPort', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Region', title: '@Resources.Locale.L_BaseLookup_Region', index: 'Region', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'State', title: '@Resources.Locale.L_BaseLookup_State', index: 'State', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'DeliveryPort', title: '@Resources.Locale.L_BaseLookup_DeliveryPort', index: 'DeliveryPort', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'TrackWay', title: '@Resources.Locale.L_DNApproveManage_TrackWay', index: 'TrackWay', width: 100, align: 'left', formatter: "select", editoptions: { value: select_trackway } },
+		{ name: 'Driver', title: '@Resources.Locale.L_GateReserve_Driver', index: 'Driver', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'DriverTel', title: '@Resources.Locale.L_BSCSSetup_CmpTel', index: 'DriverTel', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'TruckNo', title: '@Resources.Locale.L_GateReserve_TruckNo', index: 'TruckNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'LspNo', title: '@Resources.Locale.L_BaseLookup_LspNo', index: 'LspNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'LspNm', title: '@Resources.Locale.L_BaseLookup_LspNm', index: 'LspNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ExportCur', title: '@Resources.Locale.L_BaseLookup_ExportCur', index: 'ExportCur', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'OfCost', title: '@Resources.Locale.L_DNApproveManage_Cost', index: 'OfCost', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'OtCost', title: '@Resources.Locale.L_BaseLookup_OtCost', index: 'OtCost', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CreateBy', title: '@Resources.Locale.L_DNApproveManage_CreateBy', index: 'CreateBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CreateDep', title: '@Resources.Locale.L_GateReserveSetup_CreateDep', index: 'CreateDep', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CreateExt', title: '@Resources.Locale.L_GateReserveSetup_CreateExt', index: 'CreateExt', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CreateDate', title: '@Resources.Locale.L_DNApproveManage_CreateDate', index: 'CreateDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Ipickup', title: '@Resources.Locale.L_BaseLookup_Ipickup', index: 'Ipickup', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Idelivery', title: '@Resources.Locale.L_BaseLookup_Idelivery', index: 'Idelivery', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ImportNo', title: '@Resources.Locale.L_BaseLookup_ImportNo', index: 'ImportNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CcNo', title: '@Resources.Locale.L_BaseLookup_CcNo', index: 'CcNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IapproveNo', title: '@Resources.Locale.L_DNApproveManage_ApprovalNo', index: 'IapproveNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Iexporter', title: '@Resources.Locale.L_BaseLookup_Iexporter', index: 'Iexporter', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IexporterNm', title: '@Resources.Locale.L_BaseLookup_IexporterNm', index: 'IexporterNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IexporterAddr', title: '@Resources.Locale.L_BaseLookup_IexporterAddr', index: 'IexporterAddr', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Iimporter', title: '@Resources.Locale.L_BaseLookup_Iimporter', index: 'Iimporter', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IimporterNm', title: '@Resources.Locale.L_BaseLookup_IimporterNm', index: 'IimporterNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IimporterAddr', title: '@Resources.Locale.L_BaseLookup_IimporterAddr', index: 'IimporterAddr', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CcDate', title: '@Resources.Locale.L_BaseLookup_CcDate', index: 'CcDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'CcRlsDate', title: '@Resources.Locale.L_BaseLookup_CcRlsDate', index: 'CcRlsDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'CcInstr', title: '@Resources.Locale.L_BaseLookup_CcInstr', index: 'CcInstr', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CcInfo', title: '@Resources.Locale.L_BaseLookup_CcInfo', index: 'CcInfo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ImportCur', title: '@Resources.Locale.L_BaseLookup_ImportCur', index: 'ImportCur', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IfCost', title: '@Resources.Locale.L_BaseLookup_IfCost', index: 'IfCost', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ItCost', title: '@Resources.Locale.L_BaseLookup_ItCost', index: 'ItCost', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IcreateBy', title: '@Resources.Locale.L_BaseLookup_IcreateBy', index: 'IcreateBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IcreateDep', title: '@Resources.Locale.L_BaseLookup_IcreateDep', index: 'IcreateDep', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IcreateExt', title: '@Resources.Locale.L_BaseLookup_IcreateExt', index: 'IcreateExt', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IcreateDate', title: '@Resources.Locale.L_BaseLookup_IcreateDate', index: 'IcreateDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Atd', title: '@Resources.Locale.L_BaseLookup_Atd', index: 'Atd', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Ata', title: '@Resources.Locale.L_BaseLookup_Ata', index: 'Ata', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ModifyBy', title: '@Resources.Locale.L_DNApproveManage_ModifyBy', index: 'ModifyBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ModifyDate', title: '@Resources.Locale.L_DNApproveManage_ModifyDate', index: 'ModifyDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'PporCd', title: '@Resources.Locale.L_BaseLookup_PporCd', index: 'PporCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PporName', title: '@Resources.Locale.L_BaseLookup_PporName', index: 'PporName', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PpolCd', title: '@Resources.Locale.L_BaseLookup_PpolCd', index: 'PpolCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PpolName', title: '@Resources.Locale.L_BaseLookup_PpolName', index: 'PpolName', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PpodCd', title: '@Resources.Locale.L_BaseLookup_PpodCd', index: 'PpodCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PpodName', title: '@Resources.Locale.L_BaseLookup_PpodName', index: 'PpodName', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PdestCd', title: '@Resources.Locale.L_BaseLookup_PdestCd', index: 'PdestCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PdestName', title: '@Resources.Locale.L_BaseLookup_PdestName', index: 'PdestName', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Pcnt20', title: '@Resources.Locale.L_BaseLookup_Pcnt20', index: 'Pcnt20', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Pcnt40', title: '@Resources.Locale.L_BaseLookup_Pcnt40', index: 'Pcnt40', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Pcnt40hq', title: '@Resources.Locale.L_BaseLookup_Pcnt40hq', index: 'Pcnt40hq', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'PcntType', title: '@Resources.Locale.L_BaseLookup_PcntType', index: 'PcntType', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PcntNumber', title: '@Resources.Locale.L_BaseLookup_PcntNumber', index: 'PcntNumber', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'PickupCdate', title: '@Resources.Locale.L_BaseLookup_PickupCdate', index: 'PickupCdate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'ReturnCdate', title: '@Resources.Locale.L_BaseLookup_ReturnCdate', index: 'ReturnCdate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'CntrDescp', title: '@Resources.Locale.L_BaseLookup_CntrDescp', index: 'CntrDescp', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'DnEtd', title: '@Resources.Locale.L_BaseLookup_DnEtd', index: 'DnEtd', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'ReceiveDate', title: '@Resources.Locale.L_BaseLookup_ReceiveDate', index: 'ReceiveDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'Gvalue', title: '@Resources.Locale.L_BaseLookup_Gvalue', index: 'Gvalue', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Inspect', title: '@Resources.Locale.L_BaseLookup_Inspect', index: 'Inspect', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'DeepProcess', title: '@Resources.Locale.L_DNApproveManage_DeepProcess', index: 'DeepProcess', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'BandType', title: '@Resources.Locale.L_DNApproveManage_BandType', index: 'BandType', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PltNo', title: '@Resources.Locale.L_BaseLookup_PltNo', index: 'PltNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Ett', title: '@Resources.Locale.L_BaseLookup_Ett', index: 'Ett', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Att', title: '@Resources.Locale.L_BaseLookup_Att', index: 'Att', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Dtt', title: '@Resources.Locale.L_BaseLookup_Dtt', index: 'Dtt', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Aqty', title: '@Resources.Locale.L_BaseLookup_Aqty', index: 'Aqty', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Dqty', title: '@Resources.Locale.L_BaseLookup_Dqty', index: 'Dqty', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Fqty', title: '@Resources.Locale.L_BaseLookup_Fqty', index: 'Fqty', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Fdqty', title: '@Resources.Locale.L_BaseLookup_Fdqty', index: 'Fdqty', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Ndqty', title: '@Resources.Locale.L_BaseLookup_Ndqty', index: 'Ndqty', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'Separate', title: '@Resources.Locale.L_BaseLookup_Separate', index: 'Separate', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CarType', title: '@Resources.Locale.L_BaseLookup_CarType', index: 'CarType', width: 100, align: 'left', sorttype: 'string', formatter: "select", editoptions: { value: select_cartype } },
+		{ name: 'Port', title: '@Resources.Locale.L_BaseLookup_Port', index: 'Port', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PortNm', title: '@Resources.Locale.L_BaseLookup_PortNm', index: 'PortNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'AgCd', title: 'SoldTo Code', index: 'AgCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'AgNm', title: 'SoldTo Name', index: 'AgNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'WeCd', title: '@Resources.Locale.L_DNApproveManage_ShipTo', index: 'WeCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'WeNm', title: '@Resources.Locale.L_DNApproveManage_ShipNm', index: 'WeNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ZeCd', title: '@Resources.Locale.L_DNApproveManage_SalesCustCd', index: 'ZeCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ZeNm', title: '@Resources.Locale.L_DNApproveManage_SalesCustNm', index: 'ZeNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'FcCd', title: '@Resources.Locale.L_DNApproveManage_FiCustCd', index: 'FcCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'FcNm', title: '@Resources.Locale.L_DNApproveManage_FiCustNm', index: 'FcNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ReCd', title: 'Bill To Code', index: 'ReCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ReNm', title: 'Bill To Name', index: 'ReNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'RoCd', title: 'Order Receiver Code', index: 'RoCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'RoNm', title: 'Order Receiver Name', index: 'RoNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CombinShipment', title: '@Resources.Locale.L_BaseLookup_CombineShipmentID', index: 'CombinShipment', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Corder', title: '@Resources.Locale.L_BaseLookup_Corder', index: 'Corder', width: 100, align: 'left', formatter: "select", remark: '@Resources.Locale.L_BookingQueryColumn_Script_119', editoptions: { value: '@Resources.Locale.L_BookingQueryColumn_Script_119'+";F:Finished;R:Archived" } },
+		{ name: 'Border', title: '@Resources.Locale.L_BaseLookup_Border', index: 'Border', width: 100, align: 'left', formatter: "select", editoptions: { value: '@Resources.Locale.L_BookingQueryColumn_Script_120' } },
+		{ name: 'Torder', title: '@Resources.Locale.L_BaseLookup_Torder', index: 'Torder', width: 100, align: 'left', formatter: "select", editoptions: { value: '@Resources.Locale.L_BookingQueryColumn_Script_121' } },
+		{ name: 'CutBlDate', title: '@Resources.Locale.L_BaseLookup_CutBlDate', index: 'CutBlDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'DraftBlWin', title: '@Resources.Locale.L_BaseLookup_DraftBlWin', index: 'DraftBlWin', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'BlnotifyDate', title: '@Resources.Locale.L_BaseLookup_BlnotifyD', index: 'BlnotifyDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'BrCd', title: '@Resources.Locale.L_BaseLookup_BrCd', index: 'BrCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CrCd', title: '@Resources.Locale.L_BaseLookup_CrCd', index: 'CrCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CrNm', title: '@Resources.Locale.L_BaseLookup_CrNm', index: 'CrNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'BrNm', title: '@Resources.Locale.L_BaseLookup_BrNm', index: 'BrNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ProductDate', title: '@Resources.Locale.L_DNApproveManage_ProduceDate', index: 'ProductDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'TradeTerm', title: '@Resources.Locale.L_DNApproveManage_DlvTerm', index: 'TradeTerm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'TransacteMode', title: '@Resources.Locale.L_DNApproveManage_TSMode', index: 'TransacteMode', width: 100, align: 'left', formatter: "select", editoptions: { value: '@Resources.Locale.L_BookingQueryColumn_Script_122' } },
+		{ name: 'PkgNum', title: '@Resources.Locale.L_BaseLookup_TotalPakage', index: 'PkgNum', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PkgUnit', title: '@Resources.Locale.L_BaseLookup_TTLUnit', index: 'PkgUnit', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'PkgUnitDesc', title: '@Resources.Locale.L_GroupRelation_TTLcomDesc', index: 'PkgUnitDesc', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'SendBookDate', title: '@Resources.Locale.L_Base_SendBookDate', index: 'SendBookDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'InternalBkDate', title: '@Resources.Locale.L_Base_InternalBkDate', index: 'InternalBkDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'SendBrokerDate', title: '@Resources.Locale.L_Base_SendBrokerDate', index: 'SendBrokerDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'IsExport', title: '@Resources.Locale.L_DNManage_IsExport', index: 'IsExport', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Iorder', title: '@Resources.Locale.L_DNManage_Iorder', index: 'Iorder', width: 100, align: 'left', formatter: "select", editoptions: { value: '@Resources.Locale.L_BookingQueryColumn_Script_123' } },
+		{ name: 'Cw', title: '@Resources.Locale.L_ActSetup_Cw', index: 'Cw', width: 100, align: 'right', sorttype: 'string', hidden: false },
+		{ name: 'CostCenter', title: '@Resources.Locale.L_SMCHGSetup_ChgLevel', index: 'CostCenter', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Sorder', title: '@Resources.Locale.L_BookingQueryColumn_Scripts_171', index: 'Sorder', width: 100, align: 'left', formatter: "select", editoptions: { value: '@Resources.Locale.L_BookingQueryColumn_Script_124' } },
+		{ name: 'Sdate', title: '@Resources.Locale.L_BookingQueryColumn_Scripts_173', index: 'Sdate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'BandCd', title: '@Resources.Locale.L_BookingQueryColumn_Scripts_174', index: 'BandCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'BandDescp', title: '@Resources.Locale.L_BookingQueryColumn_Scripts_175', index: 'BandDescp', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IscombineBl', title: '@Resources.Locale.L_BookingQueryColumn_Scripts_176', index: 'IscombineBl', width: 100, align: 'left', formatter: "select", editoptions: { value: '@Resources.Locale.L_BookingQueryColumn_Script_125' } },
+		{ name: 'CostCenterdescp', title: '@Resources.Locale.L_CostCenterdescp', index: 'CostCenterdescp', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'LspCost', title: 'LspCost', index: 'LspCost', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'IsfWin', title: '@Resources.Locale.L_BookingQueryColumn_Scripts_180', index: 'IsfWin', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'ReleaseNo', title: '@Resources.Locale.M_SYS_ReleaseNo', index: 'ReleaseNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'DnNoRef', title: '@Resources.Locale.L_DNFlowManage_DnNoRef', index: 'DnNoRef', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'Tcbm', title: '@Resources.Locale.L_ActModle_Scripts_37', index: 'Tcbm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		{ name: 'CombineOther', title: '@Resources.Locale.L_CombineOther', index: 'CombineOther', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'Y:Yes;N:No;' } },
+		{ name: 'SendFrtDate', title: '@Resources.Locale.L_Base_SendFrtDate', index: 'SendBrokerDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+		{ name: 'IsfSendDate', title: '@Resources.Locale.M_SYS_ISFSendDate', index: 'IsfSendDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+        { name: 'RvTruckSealno', title: '@Resources.Locale.L_GateReserve_TruckSealno', index: 'RvTruckSealno', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'RvTruckCntrno', title: '@Resources.Locale.L_SmrvSetup_Views_451', index: 'RvTruckCntrno', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'RvSealNo1', title: '@Resources.Locale.L_Api_Controllers_108', index: 'RvSealNo1', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'RvCntrNo', title: '@Resources.Locale.L_SMIPM_CntNo', index: 'RvCntrNo', width: 100, align: 'left', sorttype: 'string', hidden: false }];
+        
+        gop.gridColModel = BookingQueryColumn1;
+        gop.AddUrl = false;
+        gop.gridId = "containerInfoGrid";
+        gop.multiselect = true;
+        gop.gridAttr = { caption: "@Resources.Locale.L_DNManage_DeclaConf", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "DNManage/BookingBrokerConfirmQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea"; 
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            //dblClick(map);
+            var uid = map.UId;
+            if (!uid) {
+                CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                return;
+            }
+            top.topManager.openPage({
+                href: rootPath + "DNManage/CustomsNoticeConfirmSetup/" + uid,
+                title: '@Resources.Locale.L_DNManage_DeclaConf',
+                id: 'CustomsNoticeConfirmSetup',
+                reload: true
+            });
+        }
+
+        gop.onSelectRowFunc = function (jsonMap) {
+            //顯示子表
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        gop.statusGroup = [
+            { "id": "M", "label": "@Resources.Locale.L_DNManage_NotDeclaNot" },
+            { "id": "S", "label": "@Resources.Locale.L_DNManage_NotiDecla" }, 
+            { "id": "C", "label": "@Resources.Locale.L_DNManage_DeclaConf" },
+            { "id": "H", "label": "@Resources.Locale.L_UserQuery_Release" }
+        ];
+        gop.statusField = "Border";
+        gop.statusDefaultId = "S";
+
+        gop.btnGroup = [{
+                id: "btn01",
+                name: "@Resources.Locale.L_DNManage_EnterDeclaData",
+                func: function () {
+                    var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                    var responseData = [];
+                    $.each(selRowId, function (index, val) {
+                        responseData.push(mygrid.getRowData(selRowId[index]));
+                    });
+                    if (responseData.length < 1) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_DNManage_PleSelcData", 500, "warning");
+                        return;
+                    }
+
+                    var uid = responseData[0].UId;
+
+                    top.topManager.openPage({
+                        href: rootPath + "DNManage/CustomsNoticeConfirmSetup/" + uid,
+                        title: '@Resources.Locale.L_DNManage_DeclaConf',
+                        id: 'CustomsNoticeConfirmSetup',
+                        reload: true
+                    });
+                }
+            },
+            {
+                id: "btn02",
+                name: "Excel",
+                func: function () {
+                    //$("#ForecastExcelWindow").modal("show");
+                    $("#BookingConfirmUploadWin").modal("show");
+                }
+            },
+            {
+                id: "MBContainer",
+                name: "@Resources.Locale.L_CustomsNoticeConfirmQuery_Views_302",
+                func: function () {
+                    $('#TKBLCNDetail').modal('show'); //顯示彈出視窗
+                }
+            },
+        {
+            id: "SendToFTP",
+            name: "@Resources.Locale.L_DNManage_IsExport",
+            func: function () { }
+        },
+            {
+                id: "DownloadExcel",
+                name: "@Resources.Locale.L_AirConfirmQuery_Views_259",
+                func: function () {
+                    if (typeof mygrid == "undefined") {
+                        CommonFunc.Notify("", "@Resources.Locale.L_DNManage_PleSelcData", 500, "warning");
+                        return;
+                    }
+                    doDownloadExcel(mygrid, "", "B");
+                }
+            }
+        ];
+
+        initSearch(gop);
+
+        //EDOC Type lookup
+        EdocTypeOptions = {};
+        EdocTypeOptions.gridUrl = rootPath + "TPVCommon/GetBscodeDataForLookupPri";
+        EdocTypeOptions.registerBtn = $("#SendToFTP");
+        EdocTypeOptions.isMutiSel = true;
+        EdocTypeOptions.focusItem = $("#SendToFTP");
+        //mutil select add a columnID help mapping selected data
+        EdocTypeOptions.columnID = "Cd";
+        EdocTypeOptions.param = "&sopt_GroupId=eq&GroupId=" + groupId;
+        EdocTypeOptions.param = "";
+        EdocTypeOptions.baseCondition = " GROUP_ID='" + groupId + "' AND CMP='" + cmp + "' AND CD_TYPE='EDT'";
+        EdocTypeOptions.responseMethod = function (type) {
+            /*var str = "";
+            $.each(data, function (index, val) {
+                str = str + data[index].Cd + ";";
+            });
+            $("#Tcmp").val(str);*/
+            var typeStr = "";
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+            var ShipmentId = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ShipmentId');
+            if (ShipmentId == "" || ShipmentId == null) {
+                alert("@Resources.Locale.L_TKBLQuery_Select");
+                return;
+            }
+
+            $(type).each(function (index) {
+                typeStr += type[index].Cd + ";";
+            });
+            var selRowIds = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow') + "";
+            var jobNo = "";
+            var keyData = "";
+            var fileNo = "";
+            var combineNo = "";
+            var UId = "";
+            var combineId = "";
+            var shipmentId = "";
+            selRowIds = selRowIds.split(",");
+            for (var i = 0; i < selRowIds.length; i++) {
+                UId = $("#containerInfoGrid").jqGrid('getCell', selRowIds[i], 'UId');
+                shipmentId = $("#containerInfoGrid").jqGrid('getCell', selRowIds[i], 'ShipmentId');
+                combineId = $("#containerInfoGrid").jqGrid('getCell', selRowIds[i], 'CombineInfo');
+                jobNo += UId + ",";
+                combineNo += combineId + ",";
+                fileNo += shipmentId + "," + combineId + ",";
+                keyData += shipmentId + ",";
+            }
+
+
+            CommonFunc.ToogleLoading(true);
+            $.ajax({
+                async: true,
+                url: rootPath + "DNManage/GetDNData",
+                type: 'POST',
+                data: { DnNo: combineNo, loading: true },
+                dataType: "json",
+                "complete": function (xmlHttpRequest, successMsg) {
+                    CommonFunc.ToogleLoading(false);
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                    CommonFunc.ToogleLoading(false);
+                    var resJson = $.parseJSON(errMsg)
+                    CommonFunc.Notify("", resJson.message, 500, "warning");
+                },
+                success: function (data) {
+                    //alert(data);
+                    $(data.dn).each(function (index) {
+                        jobNo += data.dn[index].UId + ",";
+                    });
+                    //alert(jobNo);
+                    $.ajax({
+                        async: true,
+                        url: rootPath + "EDOC/DoDownLoadFileToDir",
+                        type: 'POST',
+                        data: {
+                            JOBNO: jobNo,
+                            FILENO: fileNo,
+                            GROUP_ID: groupId,
+                            CMP: cmp,
+                            STN: stn,
+                            TYPE: typeStr
+                        },
+                        "complete": function (xmlHttpRequest, successMsg) {
+                            CommonFunc.ToogleLoading(false);
+                        },
+                        "error": function (xmlHttpRequest, errMsg) {
+                            CommonFunc.ToogleLoading(false);
+                            var resJson = $.parseJSON(errMsg)
+                            CommonFunc.Notify("", resJson.message, 500, "warning");
+                        },
+                        success: function (result) {
+                            $.ajax({
+                                async: true,
+                                url: rootPath + "DNManage/UpdateExportTag",
+                                type: 'POST',
+                                data: {
+                                    JOBNO: keyData,
+                                    GROUP_ID: groupId,
+                                    CMP: cmp,
+                                    STN: stn
+                                },
+                                "complete": function (xmlHttpRequest, successMsg) {
+                                    CommonFunc.ToogleLoading(false);
+                                },
+                                "error": function (xmlHttpRequest, errMsg) {
+                                    CommonFunc.ToogleLoading(false);
+                                    var resJson = $.parseJSON(errMsg)
+                                    CommonFunc.Notify("", resJson.message, 500, "warning");
+                                },
+                                success: function (result) {
+                                    CommonFunc.ToogleLoading(false);
+
+                                    CommonFunc.Notify("", "@Resources.Locale.L_BookingQuery_Script_13", 500, "success");
+
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        EdocTypeOptions.lookUpConfig = LookUpConfig.EdocTypeLookup;
+        initLookUp(EdocTypeOptions);
+
+        $("#SummarySearch").bind("click", function () {
+            $(".status-box").removeClass("active");
+            $("#searchStatus_").addClass("active");
+        });
+
+        function reloadStatus() {
+            $.ajax({
+                async: true,
+                url: gop.gridSearchUrl,
+                type: 'POST',
+                data: {
+                    "resultType": "count",
+                    "statusField": gop.statusField
+                },
+                "complete": function (xmlHttpRequest, successMsg) {
+
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                },
+                success: function (result) {
+                    console.log(result);
+                    var resJson = $.parseJSON(result)
+                    for (var i = 0 ; i < resJson.rows.length ; i++) {
+                        $("#statusCount_" + resJson.rows[i].PoStatus).html(resJson.rows[i].Count);
+                    }
+
+                }
+            });
+        }
+
+        //reloadStatus();
+        Callfunction("DECL");
+
+        $('#TKBLCNDetail').on('show.bs.modal', function () {
+            var id = $("#containerInfoGrid").jqGrid('getGridParam', "selrow");
+            var map = $("#containerInfoGrid").jqGrid('getRowData', id);
+
+            var ShipmentId;
+            if (map) ShipmentId = map.ShipmentId;
+
+            if (isEmpty(ShipmentId)) {
+                CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                return false;
+            }
+
+            /*透過ajax抓取row data資料回來，丢到样版产生画面*/
+            getData(rootPath + "BookingAction/GetContainerInfo", { ShipmentId: ShipmentId }, function (result) {
+                var source = $("#TKBLCNTemplate").html();
+                var data = { rowData: result };
+                var cols = ["__seq", "CntrNo", "SealNo1", "SealNo2", "CntrType", "LoadingFrom", "LoadingTo", "Qty", "Gw", "Cbm"];
+                var template = Handlebars.compile(source);
+                var html = template(data);
+                $("#CNTable").html(html);
+            });
+        });
+    });
+    function DownLoadExcel() {
+        window.open(rootPath + "DNManage/DownLoadXls?TranType=DECL");
+    }
+</script>
+
+<div class="modal fade" id="TKBLCNDetail" Sid="">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">@Resources.Locale.L_TKBLQuery_CntrDetInf</h4>
+      </div>
+      <div class="modal-body" id="TKBLCNContent">
+        <table class="table table-bordered table-hover" id="CNTable">
+            
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="ModalClose">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Excel汇入视窗-->
+<div class="modal fade" id="BookingConfirmUploadWin" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_DNManage_IpDeclaCinf</h4>
+            </div>
+            <form name="PACKING_EXCEL_UPLOAD_FROM" id="PACKING_EXCEL_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="PackingUploadExcel" name="file"/>
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                             <a href="#" onclick="DownLoadExcel()" >@Resources.Locale.L_DNManage_ClickDl</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="modalUploadBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->
+
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="SubGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="TKBLCNTemplate" type="text/x-handlebars-template">
+    <thead>
+        <tr class="info">
+            <td>SEQ NO</td>
+            <td>Container No</td>
+            <td>Seal No1</td>
+            <td>Seal No2</td>
+            <td>Type</td>
+            <td>Loading From</td>
+            <td>Loading To</td>
+            <td>Qty</td>
+            <td>GW</td>
+            <td>CBM</td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each rowData}}
+            <tr>
+                <td>{{this.__seq}}</td>
+                <td>{{this.CntrNo}}</td>
+                <td>{{this.SealNo1}}</td>
+                <td>{{this.SealNo2}}</td>
+                <td>{{this.CntrType}}</td>
+                <td>{{this.LoadingFrom}}</td>
+                <td>{{this.LoadingTo}}</td>
+                <td>{{this.Qty}}</td>
+                <td>{{this.Gw}}</td>
+                <td>{{this.Cbm}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</script>

@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "ContainUtili";
+}
+
+
+<script type="text/javascript">
+                        $(document).ready(function ($) {
+
+                            //init Search    UId,OdType,Year,Month,Week,Cmp,Region,Pod,No1,No2,No3,No4,No5
+                            var gop = {};
+                            var numberTemplate = "2";
+                            var docHeight = $(document).height();
+                            gridHeight = docHeight - 230;
+                            gop.gridColModel = [
+	                            { name: 'UId', showname: '@Resources.Locale.L_ContainUtili_UId', sorttype: 'string', hidden: true, viewable: false },
+	                            { name: 'OdType', title: '@Resources.Locale.L_ContainUtili_OdType', index: 'OdType', width: 70, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'D:@Resources.Locale.L_DNManage_IntSa;O:@Resources.Locale.L_DNManage_EtSa' } },
+	                            { name: 'Year', title: '@Resources.Locale.L_ContainUsage_Year', index: 'Year', width: 80, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'Month', title: '@Resources.Locale.L_ContainUsage_Month', index: 'Month', width: 80, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'Week', title: '@Resources.Locale.L_ContainUsage_Week', index: 'Week', width: 80, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'Cmp', title: '@Resources.Locale.L_RouteSetup_Cmp', index: 'Cmp', width: 150, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'Region', title: '@Resources.Locale.L_CitySetup_Region', index: 'Region', width: 150, align: 'left', sorttype: 'string', hidden: false },
+                                { name: 'Pol', title: '@Resources.Locale.L_ForecastQueryData_PolName', index: 'Pol', width: 100, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'Pod', title: '@Resources.Locale.L_ContainUtili_POD', index: 'Pod', width: 100, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'No1', title: '@Resources.Locale.L_ContainUtili_No1', index: 'No1', width: 50, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'No2', title: '@Resources.Locale.L_ContainUtili_No2', index: 'No2', width: 50, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'No3', title: '@Resources.Locale.L_ContainUtili_No3', index: 'No3', width: 50, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'No4', title: '@Resources.Locale.L_ContainUtili_No4', index: 'No4', width: 50, align: 'left', sorttype: 'string', hidden: false },
+	                            { name: 'No5', title: '@Resources.Locale.L_ContainUtili_No5', index: 'No5', width: 50, align: 'left', sorttype: 'string', hidden: false }
+                            ];
+                            gop.AddUrl = {"url": rootPath + "DistManage/ContainUtiliSetup", "title": "@Resources.Locale.L_ContainUtili_ContainUtiliSetup", "id": "ContainUtiliSetup"};
+                            gop.gridId = "containerInfoGrid";
+                            gop.gridAttr = { caption: "@Resources.Locale.L_ContainUsage_ContainUtili", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+                            gop.gridSearchUrl = rootPath + "DistManage/ContainUtiliInquiryData";
+                            gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+                            
+                            gop.gridFunc = function (map) {
+                                //用于回调函数，例如赋值操作等
+                                dblClick(map);
+                            }
+
+                            gop.searchFormId = "ConditionArea";
+                            gop.searchDivId = "SearchArea";
+
+                            initSearch(gop);
+
+                            function dblClick(map) {
+                            	var UId = map.UId;
+                                top.topManager.openPage({
+                                    href: rootPath + "DistManage/ContainUtiliSetup?UId="+UId,
+                                    title: '@Resources.Locale.L_ContainUtili_ContainUtiliSetup',
+                                    id: 'ContainUtiliSetupUp',
+                                    search : 'UId=' + UId
+                                });
+                            }
+
+                        });
+
+                    </script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="SearchStatus" style="display:none">
+                <div class="panel-body">
+                    
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

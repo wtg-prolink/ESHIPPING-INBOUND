@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+从name插入到fieldname，从订舱转到tracking
+-->
+<table name="TKBL">
+  <column name="U_ID"  fieldname="U_ID" dataType="string" defalutValue=""  key="true">
+  </column>
+  <column name="GROUP_ID"  fieldname="GROUP_ID" dataType="string" defalutValue="">
+  </column>
+  <column name="CMP" fieldname="CMP" dataType="string" defalutValue="">
+  </column>
+  <column name="STN" fieldname="STN"  dataType="string"  defalutValue="">
+  </column>
+  <column name="DEP" fieldname="DEP" dataType="string"  defalutValue="">
+  </column>
+  <column name="SHIPMENT_ID" fieldname="SHIPMENT_ID" dataType="string" defalutValue="">
+  </column>
+  <column name="CARRIER" fieldname="CARRIER_CD" dataType="string" defalutValue="">
+  </column>
+  <column name="CARRIER_NM" fieldname="CARRIER_NM" dataType="string" defalutValue="">
+  </column>
+  <column name="INCOTERM_CD"  fieldname="INCOTERM" dataType="string" defalutValue="">
+  </column>
+  <column name="INCOTERM_DESCP"  fieldname="INCOTERM_DESCP" dataType="string" defalutValue="">
+  </column>
+  <column name="FRT_TERM"  fieldname="FRT_PC" dataType="string" defalutValue="">
+  </column>
+  <column name="SERVICE_MODE"  fieldname="LOADING_FROM" dataType="string" defalutValue="">
+  </column>
+  <column name="GOODS" fieldname="GOODS" dataType="string" defalutValue="">
+  </column>
+  <column name="MARKS"  fieldname="MARKS" dataType="string" defalutValue="">
+  </column>
+  <column name="HOUSE_NO"  fieldname="HOUSE_NO" dataType="string" defalutValue="">
+  </column>
+  <column name="MASTER_NO"  fieldname="MASTER_NO" dataType="string" defalutValue="">
+  </column>
+  <column name="SO_NO"  fieldname="SO_NO" dataType="string" defalutValue="">
+  </column>
+  <column name="COMBINE_INFO"  fieldname="REF_NO" dataType="string" defalutValue="">
+  </column>
+  <column name="BL_TYPE" fieldname="BL_TYPE" dataType="string" defalutValue="">
+  </column>
+  <column name="BL_DATE" fieldname="BL_DATE" dataType="Date" defalutValue="">
+  </column>
+  <column name="CLS_DATE" fieldname="CLS_DATE" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETD"  fieldname="ETD" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETA"  fieldname="ETA" dataType="Date" defalutValue="">
+  </column>
+  
+  <column name="VESSEL1"  fieldname="VESSEL1" dataType="string" defalutValue="">
+  </column>
+  <column name="VOYAGE1" fieldname="VOYAGE1" dataType="string" defalutValue="">
+  </column>
+  <column name="VESSEL2"  fieldname="VESSEL2" dataType="string" defalutValue="">
+  </column>
+  <column name="VOYAGE2" fieldname="VOYAGE2" dataType="string" defalutValue="">
+  </column>
+  <column name="VESSEL3"  fieldname="VESSEL3" dataType="string" defalutValue="">
+  </column>
+  <column name="VOYAGE3" fieldname="VOYAGE3" dataType="string" defalutValue="">
+  </column>
+  <column name="VESSEL4"  fieldname="VESSEL4" dataType="string" defalutValue="">
+  </column>
+  <column name="VOYAGE4" fieldname="VOYAGE4" dataType="string" defalutValue="">
+  </column>
+  <column name="VESSEL5"  fieldname="VESSEL5" dataType="string" defalutValue="">
+  </column>
+  <column name="VOYAGE5" fieldname="VOYAGE5" dataType="string" defalutValue="">
+  </column>
+  <column name="VESSEL6"  fieldname="VESSEL6" dataType="string" defalutValue="">
+  </column>
+  <column name="VOYAGE6" fieldname="VOYAGE6" dataType="string" defalutValue="">
+  </column>
+  <column name="VESSEL7"  fieldname="VESSEL7" dataType="string" defalutValue="">
+  </column>
+  <column name="VOYAGE7" fieldname="VOYAGE7" dataType="string" defalutValue="">
+  </column>
+  <column name="SCAC_CD" fieldname="SCAC_CD" dataType="string" defalutValue="">
+  </column>
+  <column name="ETD1"  fieldname="ETD1" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETA1" fieldname="ETA1" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETD2"  fieldname="ETD2" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETA2" fieldname="ETA2" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETD3"  fieldname="ETD3" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETA3" fieldname="ETA3" dataType="Date" defalutValue="">
+  </column>
+  <column name="POL5"  fieldname="POL5" dataType="string" defalutValue="">
+  </column>
+  <column name="POD5"  fieldname="POD5" dataType="string" defalutValue="">
+  </column>
+  <column name="POL6"  fieldname="POL5" dataType="string" defalutValue="">
+  </column>
+  <column name="POD6"  fieldname="POD5" dataType="string" defalutValue="">
+  </column>
+  <column name="POL7"  fieldname="POL5" dataType="string" defalutValue="">
+  </column>
+  <column name="POD7"  fieldname="POD5" dataType="string" defalutValue="">
+  </column>
+  <column name="POL_CD"  fieldname="POL_CD" dataType="string" defalutValue="">
+  </column>
+  <column name="POL_CD"  fieldname="POL_CD" dataType="string" defalutValue="">
+  </column>
+  <column name="ETD5"  fieldname="ETD5" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETA5"  fieldname="ETA5" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETD6"  fieldname="ETD6" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETA6"  fieldname="ETA6" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETD7"  fieldname="ETD7" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETA7"  fieldname="ETA7" dataType="Date" defalutValue="">
+  </column>
+  
+  <column name="ATD5"  fieldname="ATD5" dataType="Date" defalutValue="">
+  </column>
+  <column name="ATA5"  fieldname="ATA5" dataType="Date" defalutValue="">
+  </column>
+  <column name="ATD6"  fieldname="ATD6" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETA7"  fieldname="ETA7" dataType="Date" defalutValue="">
+  </column>
+  <column name="ATD7"  fieldname="ATD5" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETA7"  fieldname="ETA7" dataType="Date" defalutValue="">
+  </column>
+  <!--<column name="ETD4"  fieldname="ETD4" dataType="Date" defalutValue="">
+  </column>
+  <column name="ETA4" fieldname="ETA4" dataType="Date" defalutValue="">
+  </column>-->
+  <!--<column name="POR_CD"  fieldname="POR_CD" dataType="string" defalutValue="">
+  </column>
+  <column name="POR_CNTY"  fieldname="POR_CNTY" dataType="string" defalutValue="">
+  </column>-->
+  <column name="POR_NAME"  fieldname="POR_NAME" dataType="string" defalutValue="">
+  </column>
+  <!--<column name="POL_CD"  fieldname="POL_CD" dataType="string" defalutValue="">
+  </column>
+  <column name="POL_CNTY"  fieldname="POL_CNTY" dataType="string" defalutValue="">
+  </column>-->
+  <column name="POL_NAME"  fieldname="POL_NAME" dataType="string" defalutValue="">
+  </column>
+  <column name="VIA_CD"  fieldname="VIA_CD" dataType="string" defalutValue="">
+  </column>
+  <!--<column name="VIA_CNTY"  fieldname="VIA_CNTY" dataType="string" defalutValue="">
+  </column>-->
+  <column name="VIA_NAME"  fieldname="VIA_NAME" dataType="string" defalutValue="">
+  </column>
+  <!--<column name="POD_CD"  fieldname="POD_CD" dataType="string" defalutValue="">
+  </column>
+  <column name="POD_CNTY"  fieldname="POD_CNTY" dataType="string" defalutValue="">
+  </column>-->
+  <column name="POD_NAME"  fieldname="POD_NAME" dataType="string" defalutValue="">
+  </column>
+  <!--<column name="DEST_CD"  fieldname="DEST_CD" dataType="string" defalutValue="">
+  </column>
+  <column name="DEST_CNTY"  fieldname="DEST_CNTY" dataType="string" defalutValue="">
+  </column>-->
+  <column name="DEST_NAME"  fieldname="DEST_NAME" dataType="string" defalutValue="">
+  </column>
+  <column name="QTY"  fieldname="QTY" dataType="int" defalutValue="">
+  </column>
+  <column name="QTYU"  fieldname="QTYU" dataType="string" defalutValue="">
+  </column>
+  <!--<column name="NW"  fieldname="NW" dataType="string" defalutValue="">
+  </column>-->
+  <column name="GW"  fieldname="GW" dataType="string" defalutValue="">
+  </column>
+  <column name="GWU"  fieldname="GWU" dataType="string" defalutValue="">
+  </column>
+  <column name="CBM"  fieldname="CBM" dataType="string" defalutValue="">
+  </column>
+  <!--<column name="PLT_NUM"  fieldname="PLT_NUM" dataType="string" defalutValue="">
+  </column>-->
+  <column name="CNT20"  fieldname="CNT20" dataType="string" defalutValue="">
+  </column>
+  <column name="CNT40"  fieldname="CNT40" dataType="string" defalutValue="">
+  </column>
+  <column name="CNT40HQ"  fieldname="CNT40HQ" dataType="string" defalutValue="">
+  </column>
+  <column name="CNT_TYPE"  fieldname="CNT_TYPE" dataType="string" defalutValue="">
+  </column>
+  <column name="CNT_NUMBER"  fieldname="CNT_NUMBER" dataType="string" defalutValue="">
+  </column>
+  <column name="CUR"  fieldname="CUR" dataType="string" defalutValue="">
+  </column>
+  <column name="TRAN_TYPE"  fieldname="TRAN_TYPE" dataType="string" defalutValue="">
+  </column>
+  <column name="PICKUP_PORT"  fieldname="PICKUP_PORT" dataType="string" defalutValue="">
+  </column>
+  <column name="DELIVERY_PORT"  fieldname="DELIVERY_PORT" dataType="string" defalutValue="">
+  </column>
+  <column name="TRUCK_TYPE"  fieldname="TRUCK_TYPE" dataType="string" defalutValue="">
+  </column>
+  <column name="DRIVER"  fieldname="DRIVER" dataType="string" defalutValue="">
+  </column>
+  <column name="DRIVER_TEL"  fieldname="DRIVER_TEL" dataType="string" defalutValue="">
+  </column>
+  <column name="TRUCK_NO"  fieldname="TRUCK_NO" dataType="string" defalutValue="">
+  </column>
+  <column name="LSP_NO"  fieldname="LSP_NO" dataType="string" defalutValue="">
+  </column>
+  <column name="LSP_NM"  fieldname="LSP_NM" dataType="string" defalutValue="">
+  </column>
+  <column name="REMARK"  fieldname="REMARK" dataType="string" defalutValue="">
+  </column>
+  <column name="RELEASE_NO"  fieldname="RELEASE_NO" dataType="string" defalutValue="">
+  </column>
+  <column name="C_MASTER_NO"  fieldname="MASTER_NO" dataType="string" defalutValue="">
+  </column>
+  <column name="PKG_UNIT_DESC"  fieldname="CWU" dataType="string" defalutValue="">
+  </column>
+  <column name="PKG_UNIT"  fieldname="PKGU" dataType="string" defalutValue="">
+  </column>
+  <column name="PKG_NUM"  fieldname="PKG" dataType="string" defalutValue="">
+  </column>
+  <column name="GOODS"  fieldname="COMMODITY" dataType="string" defalutValue="">
+  </column>
+  <column name="NW"  fieldname="VW" dataType="string" defalutValue="">
+  </column>
+  <column name="LOADING_FROM"  fieldname="LOADING_FROM" dataType="string" defalutValue="">
+  </column>
+  <column name="LOADING_TO"  fieldname="LOADING_TO" dataType="string" defalutValue="">
+  </column>
+</table>

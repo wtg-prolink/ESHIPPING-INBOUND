@@ -1,0 +1,600 @@
+﻿@{
+	ViewBag.Title = "UserSetUp";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/Scripts/lib/bootstrap-multiselect.js")" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+    var schemas = "@ViewBag.schemas.Content";
+    var UId = "@ViewBag.UId";
+    var GroupId = "@ViewBag.GroupId";
+    var Cmp = "@ViewBag.Cmp";
+    var Stn = "@ViewBag.Stn";
+    var IoFlag = "I";
+    var CmpPriData = @Html.Raw(Json.Encode(@ViewBag.CmpPriData));
+    var PlantPriData = @Html.Raw(Json.Encode(@ViewBag.PlantPriData));
+    var TranTypeData = @Html.Raw(Json.Encode(@ViewBag.TranTypeData));
+    TranTypeData= TranTypeData.Data.result;
+    var DeCmpPriData = CmpPriData.Data.result;
+    PlantPriData = PlantPriData.Data.result;
+    var useRole = "@ViewBag.useRole";
+    var userRole = "@ViewBag.userRole";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/System/UserSetUp.js?20250110")"></script>
+
+<style>
+	#page-wrapper {
+		padding: 5px;
+	}
+
+	.radio-inline + .radio-inline, .checkbox-inline + .checkbox-inline {
+		margin-left: 20px !important
+	}
+</style>
+
+<div id="wrapper">
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label f​​or="U_ID" class="control-label required">@Resources.Locale.L_UserSetUp_U_ID</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<input type="text" id="userId" dt="mt" class="form-control input-sm" fieldname="UId" name="UId" iskey="true" required>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label f​​or="U_NAME" class="control-label">@Resources.Locale.L_UserSetUp_U_NAME</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="UName" fieldname="UName" name="UName" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="UPhone" class="control-label">@Resources.Locale.L_UserSetUp_UPhone</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="UPhone" name="UPhone" fieldname="UPhone" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="UExt" class="control-label">@Resources.Locale.L_GateReserveSetup_CreateExt</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="UExt" name="UExt" fieldname="UExt" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="UEmail" class="control-label">@Resources.Locale.L_UserSetUp_UEmail</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input autocomplete="new-password" type="text" class="form-control input-sm" dt="mt" id="UEmail" name="UEmail" fieldname="UEmail" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label f​​or="U_PASSWORD" class="control-label required" id="upw">@Resources.Locale.L_UserSetUp_U_PASSWORD</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<input type="password" autocomplete="new-password" class="form-control input-sm" dt="mt" id="UPassword" name="UPassword" fieldname="UPassword" required>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="ModiPwDate" class="control-label">@Resources.Locale.L_UserSetUp_ModiPwDate</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="ModiPwDate" name="ModiPwDate" fieldname="ModiPwDate" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="UpdatePriDate" class="control-label">@Resources.Locale.L_UserSetUp_NextDate</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="UpdatePriDate" name="UpdatePriDate" fieldname="UpdatePriDate" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label class="control-label">@Resources.Locale.L_UserQuery_UStatus</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<input type="radio" id="UStatusYes" name="UStatus" value="0">@Resources.Locale.L_UserSetUp_Enable
+							<input type="radio" id="UStatusNo" name="UStatus" value="1">@Resources.Locale.L_UserSetUp_Disable
+							<input type="radio" id="UStatusLeave" name="UStatus" value="2">@Resources.Locale.L_UserSetUp_Leave
+							<input type="hidden" id="UStatus" dt="mt" fieldname="UStatus" iskey="true" />
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="UManager" class="control-label">@Resources.Locale.L_UserSetUp_UManager</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="UManager" name="UManager" fieldname="UManager" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="UManagerLookup">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="UWechat" class="control-label">@Resources.Locale.L_UserQuery_UWechat</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="UWechat" name="UWechat" fieldname="UWechat" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="UQq" class="control-label">@Resources.Locale.L_UserQuery_UQq</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="UQq" name="UQq" fieldname="UQq" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label class="control-label">@Resources.Locale.L_NoticeSetup_NoticeType</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="checkbox" id="MailFlagCheckBox" name="MailFlag" value="Y"> E-mail
+							<input type="checkbox" id="MsgFlagCheckBox" name="MsgFlag" value="Y"> Message
+							<input type="hidden" id="MailFlag" dt="mt" fieldname="MailFlag" />
+							<input type="hidden" id="MsgFlag" dt="mt" fieldname="MsgFlag" />
+							<!-- <input type="checkbox" id="WechatFlag" value="Y"> Wechat
+							<input type="checkbox" id="QqFlag" value="Y"> QQ -->
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="UPri" class="control-label">@Resources.Locale.L_UserSetUp_UPri</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<select class="form-control input-sm" dt="mt" id="UPri" name="UPri" fieldname="UPri">
+								<option value="G">@Resources.Locale.L_UserSetUp_GroupId</option>
+								<option value="C">Location</option>
+								<option value="D">@Resources.Locale.L_UserSetUp_Dep</option>
+								<option value="U">@Resources.Locale.L_UserSetUp_Personal</option>
+							</select>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="UQq" class="control-label">@Resources.Locale.L_UserSetUp_SapId</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="SapId" name="SapId" fieldname="SapId" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="CardNo" class="control-label required">@Resources.Locale.L_UserSetUp_CardNo</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="CardNo" name="CardNo" fieldname="CardNo" required />
+							<p class="help-block tooltips"></p>
+						</div>
+
+					</div>
+
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="CmpSel" class="control-label">@Resources.Locale.L_UserSetUp_TranType</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group" id="TranTypeArea">
+
+
+						</div>
+						<input type="hidden" dt="mt" id="TranType" name="TranType" fieldname="TranType" />
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Rc" class="control-label">@Resources.Locale.L_UserSetUp_CostData</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<select class="form-control input-sm" dt="mt" id="Rc" name="Rc" fieldname="Rc">
+								<option value=""></option>
+								<option value="B">@Resources.Locale.L_UserSetUp_All</option>
+								<option value="R">@Resources.Locale.L_UserSetUp_Income</option>
+								<option value="C">@Resources.Locale.L_UserSetUp_Cost</option>
+							</select>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Tcmp" class="control-label">@Resources.Locale.L_UserSetUp_DNCom</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Tcmp" name="Tcmp" fieldname="Tcmp" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="TcmpLookup">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="PlantPri" class="control-label">@Resources.Locale.L_DNApproveManage_Plant</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="PlantPri" name="PlantPri" fieldname="PlantPri" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="PlantPriLookup">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="CmpSel" class="control-label">@Resources.Locale.L_UserSetUp_CmpSel</label>
+						</div>
+						<div class="pure-u-sm-55-60 control-group" id="CmpPriArea">
+						</div>
+						<input type="hidden" dt="mt" id="CmpPri" name="CmpPri" fieldname="CmpPri" />
+					</div>
+
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="QtmPri" class="control-label">Viewed other site bills</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="QtmPri" name="QtmPri" fieldname="QtmPri" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="QtmPriLookup">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="ViewSubBg" class="control-label">View Sub-BG</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="ViewSubBg" name="ViewSubBg" fieldname="ViewSubBg" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="ViewSubBgLookup">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="ItSd" class="control-label">ITSD#</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="ItSd" name="ItSd" fieldname="ItSd" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+
+
+
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Remark" class="control-label">@Resources.Locale.L_BSCSSetup_Remark</label>
+						</div>
+						<div class="pure-u-sm-55-60">
+							<textarea class="form-control" dt="mt" id="Remark" name="Remark" fieldname='Remark' rows="2"></textarea>
+						</div>
+					</div>
+					<!--
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="CmpSel" class="control-label">工厂代码</label>
+						</div>
+						<div class="pure-u-sm-55-60 control-group" id="PlantPriArea">
+
+
+						</div>
+						<input type="hidden" dt="mt" id="PlantPri" name="PlantPri" fieldname="PlantPri" />
+					</div>
+					-->
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Whs" class="control-label">@Resources.Locale.L_UserSetUp_Whs</label>
+						</div>
+						<div class="pure-u-sm-55-60">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Whs" name="Whs" fieldname="Whs" readonly="readonly" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="WarehouseLookup">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="GroupId" class="control-label">@Resources.Locale.L_UserSetUp_GroupId:</label>
+                        </div>
+                        <div class="pure-u-sm-6-60">
+                            <!-- <select class="form-control input-sm" dt="mt" id="GroupId" name="GroupId" fieldname="GroupId">
+        </select> -->
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="GroupId" name="GroupId" fieldname="GroupId" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="GroupIdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-4-60 label-right">
+                            <label f​​or="Cmp" class="control-label required">@Resources.Locale.L_UserSetUp_Cmp</label>
+                        </div>
+                        <div class="pure-u-sm-6-60">
+                            <!-- <select class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp">
+        </select> -->
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" iskey="true" required />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <!-- <div class="pure-u-sm-4-60 label-right">
+        <label f​​or="Stn" class="control-label">@Resources.Locale.L_UserSetUp_Stn</label>
+    </div>
+    <div class="pure-u-sm-4-60">
+        <select class="form-control input-sm" dt="mt" id="Stn" name="Stn" fieldname="Stn">
+        </select>
+    </div> -->
+                        <div class="pure-u-sm-4-60 label-right">
+                            <label f​​or="Dep" class="control-label">@Resources.Locale.L_UserSetUp_Dep</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                            <!-- <select class="form-control input-sm" dt="mt" id="Dep" name="Dep" fieldname="Dep">
+        </select> -->
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Dep" name="Dep" fieldname="Dep" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="DepLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <!-- <div class="pure-u-sm-2-60 label-right">
+        <label f​​or="Dep">部门</label>
+    </div>
+    <div class="pure-u-sm-3-30">
+        <input type="text" id="Dep" dt="mt" class="form-control input-sm" fieldname="Dep" />
+        <div class='input-group'>
+            <input type="text" id="Dep" dt="mt" class="form-control input-sm" fieldname="Dep" />
+            <span class="input-group-btn">
+                <button class="btn btn-sm btn-default" type="button" id="DepLookup">
+                <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="pure-u-sm-2-30 label-right">
+        <label f​​or="Bu">业别</label>
+    </div>
+    <div class="pure-u-sm-3-30">
+        <input type="text" id="Bu" dt="mt" class="form-control input-sm" fieldname="Bu" />
+        <div class='input-group'>
+            <input type="text" id="Bu" dt="mt" class="form-control input-sm" fieldname="Bu" />
+            <span class="input-group-btn">
+                <button class="btn btn-sm btn-default" type="button" id="BuLookup">
+                <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+    </div> -->
+                        <input type="hidden" dt="mt" id="IoFlag" name="IoFlag" fieldname="IoFlag" />
+                        <input type="hidden" dt="mt" id="Stn" name="Stn" fieldname="Stn" />
+                        <div class="pure-u-sm-6-60  label-right">
+                            <label class="control-label">@Resources.Locale.L_UserSetup_IE</label>
+                        </div>
+                        <div class="pure-u-sm-3-60">
+                            <input type="checkbox" id="IEY" name="IE" value="Y">
+                            <input type="hidden" id="IE" dt="mt" fieldname="IE" />
+                        </div>
+                        <div class="pure-u-sm-4-60  label-right">
+                            <label class="control-label">Key User</label>
+                        </div>
+                        <div class="pure-u-sm-3-60">
+                            <input type="checkbox" id="KeyUserY" name="KeyUser" value="Y">
+                            <input type="hidden" id="KeyUser" dt="mt" fieldname="KeyUser" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Lang" class="control-label">@Resources.Locale.TLB_LANG</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <select class="form-control input-sm" dt="mt" id="Lang" name="Lang" fieldname="Lang">
+                                <option value="zh-CN">@Resources.Locale.L_Login_Views_461</option>
+                                <option value="zh-TW">@Resources.Locale.L_Login_Views_462</option>
+                                <option value="en-US">English</option>
+                                <option value="ru-RU">Russia</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-4-60  label-right">
+                            <label class="control-label">@Resources.Locale.L_DefaultCmp</label>
+                        </div>
+                        <div class="pure-u-sm-1-60">
+                            <input type="checkbox" id="DefaultSiteY" name="DefaultSite" value="Y">
+                            <input type="hidden" id="DefaultSite" dt="mt" fieldname="DefaultSite" />
+                        </div>
+                    </div>
+
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="IpLocker" class="control-label">IP/Host</label>
+						</div>
+						<div class="pure-u-sm-55-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="IpLocker" fieldname="IpLocker" />
+						</div>
+					</div>
+
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="CreateBy" class="control-label">@Resources.Locale.L_IpPart_CreateBy</label>
+						</div>
+						<div class="pure-u-sm-7-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="CreateBy" fieldname="CreateBy" readonly />
+						</div>
+						<div class="pure-u-sm-7-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="CreateDate" fieldname="CreateDate" readonly>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="ModifyBy" class="control-label">@Resources.Locale.L_IpPart_ModifyBy</label>
+						</div>
+						<div class="pure-u-sm-7-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" fieldname="ModifyBy" readonly />
+						</div>
+						<div class="pure-u-sm-7-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" fieldname="ModifyDate" readonly />
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-60-60">
+							<table id="UserWhGrid" class="_tableGrid" style="width: 100%">
+								<tr></tr>
+							</table>
+						</div>
+					</div>
+
+					<div class="pure-g">
+						<div class="pure-u-sm-30-30">
+							<table id="SubGrid" class="_tableGrid" style="width: 100%">
+								<tr>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="RoleModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Role Assignment<label class="modal-title" id="showinfo" style="color:red;margin-left: 22px;"><b>Only the Location of the login user can be assigned roles！</b></label></h4>
+			</div>
+			<div class="modal-body">
+				<div class="pure-g">
+					<div class="pure-u-sm-11-60 tree" id="modalbody"></div>
+					<div class="pure-u-sm-23-60 tree" id="modalDetail"><lable style="font-size:24px"> @Resources.Locale.L_UserSetup_rolePermission </lable></div>
+					<div class="pure-u-sm-1-60"></div>
+					<div class="pure-u-sm-23-60 tree " id="myModalDetail"><lable style="font-size:24px"> @Resources.Locale.L_UserSetup_userPermission </lable></div>
+				</div>
+				@*<button class="btn btn-sm btn-info" id="SetSameAddr">As above</button>
+					<table class="table"></table>*@
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-md btn-info" id="AddRoleBtn">Confirm</button>
+				<button type="button" class="btn btn-md btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="ItSdModal" data-backdrop="static">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">ITSD #</h4>
+            </div>
+			<div class="modal-body">
+				<div class="pure-g">
+					<div class="pure-u-sm-5-60 label-right">
+						<label class="control-label">ITSD#</label>
+					</div>
+					<div class="pure-u-sm-10-60 control-group">
+						<input type="text" class="form-control input-sm" id="ItSdM" />
+						<p class="help-block tooltips"></p>
+					</div>
+				</div>
+			</div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-md btn-info" id="AddItSdBtn">Confirm</button>
+                <button type="button" class="btn btn-md btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+            </div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="RoleLogDetail" sid="">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title"> @Resources.Locale.TLB_RoleLog</h4>
+			</div>
+			<div class="modal-body" id="ItemContent">
+
+				<div class="pure-g">
+					<div class="pure-u-sm-60-60">
+						<table id="RoleLogDialogGrid"><tr><td><td /></tr></table>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn" data-dismiss="modal" id="ModalClose">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="PermissionCopyModal" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">ITSD #</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label class="control-label">ITSD#</label>
+                    </div>
+                    <div class="pure-u-sm-10-60 control-group">
+                        <input type="text" class="form-control input-sm" id="CopyItSd" />
+                        <p class="help-block tooltips"></p>
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label class="control-label">@Resources.Locale.L_UserSetUp_CopyAccount</label>
+                    </div>
+                    <div class="pure-u-sm-10-60 control-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" id="CopyAccount" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="CopyAccountLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="pure-u-sm-5-60">
+                        <input type="text" class="form-control input-sm" id="CopyCmp" readonly="readonly" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-md btn-info" id="CopyAccountBtn">Confirm</button>
+                <button type="button" class="btn btn-md btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="rootPath" type="hidden" value="@Url.Content("~")" />

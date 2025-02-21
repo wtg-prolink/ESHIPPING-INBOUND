@@ -1,0 +1,236 @@
+﻿@{
+    ViewBag.Title = "QuotApproveQuery";
+}
+
+@Html.RazorJSInclude("~/Scripts/ActManage/Approve.js")
+@Html.RazorJSInclude("~/Scripts/QTManage/QuotApproveQuery.js")
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        var select_approve = "@ViewBag.SelectApprove";
+        var default_approve = "@ViewBag.DefaultApprove";
+        var select_role = "@ViewBag.SelectRole";
+        var default_role = "@ViewBag.DefaultRole";
+        var upri_role = "@ViewBag.Upri";
+        var approveroles = "@ViewBag.ApproveRole";
+        var select_tranmode = "@ViewBag.SelectTranMode";
+        var _approveroles; var IsAdmin = false;
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = getSiteHeight();
+        gridHeight = docHeight - 310;
+        gop.gridColModel = [
+            { name: 'UId', showname: 'UId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'TranMode', title: '@Resources.Locale.L_QTQuery_QuoteType', index: 'QuotType', showname: 'TranMode', width: 80, sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_tranmode } },
+            { name: 'ApproveTo', title: '@Resources.Locale.L_DNApproveManage_ApproveTo', index: 'ApproveTo', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_role, defaultValue: default_role } },
+            { name: 'QuotType', title: '@Resources.Locale.L_QuotApproveQuery_Status', index: 'QuotType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:@Resources.Locale.L_InvCheck_Views_214;Q:@Resources.Locale.L_QTSetup_Quote;P:@Resources.Locale.L_QTSetup_Prepare;V:@Resources.Locale.L_MenuBar_Audit;R:@Resources.Locale.L_ActCheck_Views_4' } },
+            //{ name: 'ApproveNm', title: '@Resources.Locale.L_DNApproveManage_ApproveTo', init: true, index: 'ApproveNm', sorttype: 'string', width: 100, hidden: false, editable: true, formatter: "select", editoptions: { value: 'F:F.FCL;A:A.Air;L:L.LCL;R:R.RailWay;D:D.Inland Express;T:T.Truck;E:E.Express' }, edittype: 'select' },
+            { name: 'QuotNo', title: '@Resources.Locale.L_QTQuery_QuotNo', index: 'QuotNo', width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'QuotDate', title: '@Resources.Locale.L_QTQuery_QuotDate', index: 'QuotDate', editable: false, formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Rlocation', title: '@Resources.Locale.L_RQQuery_Rlocation', index: 'Rlocation', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RlocationNm', title: '@Resources.Locale.L_RQQuery_Rlocation' + "@Resources.Locale.L_BaseLookup_Nm", index: 'RlocationNm', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspCd', title: '@Resources.Locale.L_AirSetup_LspCd', index: 'LspCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspNm', title: '@Resources.Locale.L_AirSetup_LspCd' + "@Resources.Locale.L_BaseLookup_Nm", index: 'LspNm', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CustCd', title: 'Customer', index: 'CustCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CustNm', title: 'Customer Name', index: 'CustNm', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PolCd', title: 'POL', index: 'PolCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PolNm', title: 'POL Name', index: 'PolNm', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Cur', title: 'Cur', index: 'Cur', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'EffectFrom', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', width: 120, align: 'left', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'EffectTo', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', width: 120, align: 'left', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateBy', init: true, title: "@Resources.Locale.L_DNApproveManage_CreateBy", index: 'CreateBy', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'QuotRmk', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'QuotRmk', width: 300, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ApproveBy', title: '@Resources.Locale.L_ActSetup_VerifyBy', index: 'ApproveBy', width: 300, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ApproveDate', title: '@Resources.Locale.L_IQTManage_ApproveDate', index: 'ApproveDate', width: 300, align: 'left', sorttype: 'string', hidden: false }
+
+        ];
+        gop.AddUrl = false;
+        //gop.AddUrl = { "url": rootPath + "QTManage/QuotLocalSetup", "title": "@Resources.Locale.L_QTManage_LcChg", "id": "QuotLocalSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_QTQuery_QuoteApprovequiry", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "QTManage/QTCheckQueryData";
+        gop.multiselect = true;
+        gop.multiboxonly = true;
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+        //gop.baseCondition = "1=1 AND (TRAN_MODE = 'C' OR TRAN_MODE='B' OR TRAN_MODE='X') AND QUOT_TYPE ='Q'";
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "CreateDate";
+        }
+
+        var status_group = select_role.split(';');
+        var _statusgroup = [];
+        $.each(status_group, function (index, val) {
+            var _val = val.split(':');
+            var _object = {};
+            if (index == 0) {
+                var _all = {};
+                _all.id = '';
+                _all.label = 'All';
+                _statusgroup.push(_all);
+            }
+            if (_val.length >= 2) {
+                _object.id = _val[0];
+                _object.label = _val[1];
+            }
+            if (upri_role == "G") {
+                _statusgroup.push(_object);
+            }
+            else {
+                _approveroles = approveroles.split(';');
+                var ispush = false;
+                for (var i = 0; i < _approveroles.length; i++) {
+                    if (_approveroles[i] == _object.id) {
+                        ispush = true;
+                    }
+                }
+                if (ispush) {
+                    _statusgroup.push(_object);
+                }
+            }
+
+        });
+        var _finish = {};
+        _finish.id = 'Finish';
+        _finish.label = 'Finish';
+        if (upri_role != "G") {
+            _statusgroup.push(_finish);
+        }
+
+        console.log(_statusgroup);
+
+        gop.statusGroup = _statusgroup;
+
+        gop.statusField = "ApproveTo";
+        gop.statusDefaultId = "Q";
+        btnGroup(gop);
+        initSearch(gop);
+        $("#SummarySearch").bind("click", function () {
+            $(".status-box").removeClass("active");
+            $("#searchStatus_").addClass("active");
+        });
+
+        function dblClick(map) {
+            var UId = map.UId;
+            var tranmode = map.TranMode;
+            var title = "";
+            var _url = "";
+            switch (tranmode) {
+                case "X": _url = "QuotLocalSetup"; title = '@Resources.Locale.L_QTManage_LcChg'; break;
+                case "B": _url = "QuotBrokerSetup"; title = '@Resources.Locale.L_QTSetup_EntDclarFee'; break;
+                case "C": _url = "QuotTrailerSetup"; title = '@Resources.Locale.L_ActManage_EntTC'; break;
+                case "O": _url = "FCLChgSetup"; title = '@Resources.Locale.L_FCLChgQuery_Views_2_4'; break;
+            }
+            if (_url == "") return false;
+            top.topManager.openPage({
+                href: rootPath + "QTManage/" + _url + "?UId=" + UId+"&isa=Y",
+                title: title + '@Resources.Locale.L_QTManage_LcChg',
+                id: _url,
+                search: 'uid=' + UId
+            });
+        }
+        select_approves = select_approve.split(';');
+        $(".status-box").each(function (index, el) {
+            $(this).bind("click", function () {
+                var _id = $(this).attr("id");
+                var _idstatus = _id.replace("searchStatus_", "");
+                for (var i = 0; i < select_approves.length; i++) {
+                    if (IsAdmin) {
+                        $("#btn02").parent().show();
+                        $("#btn09").parent().show();
+                        break;
+                    }
+                    if (select_approves[i] == _idstatus) {
+                        $("#btn02").parent().show();
+                        $("#btn09").parent().show();
+                        break;
+                    }
+                    else {
+                        $("#btn02").parent().hide();
+                        $("#btn09").parent().hide();
+                    }
+                }
+                $(".status-box").removeClass("active");
+                $("#searchStatus_").addClass("active");
+            });
+        });
+    });
+
+</script>
+<!--簽核退回視窗-->
+<div class="modal fade" id="ApproveBack" sid="">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_ActManage_RC</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-60-60">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">@Resources.Locale.L_ActManage_RDescp</label>
+                            <textarea class="form-control" id="BackRemark" name="BackRemark" fieldname="BackRemark"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseBackWin">Close</button>
+                <button type="button" class="btn btn-primary" onclick="BackApprove()" id="BackConfirm">@Resources.Locale.L_BSCSDateQuery_Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

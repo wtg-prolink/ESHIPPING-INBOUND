@@ -1,0 +1,618 @@
+﻿@{
+    ViewBag.Title = "SMDNDSetup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript">
+    var _dm = new dm();
+    var _oldDeatiArray = {};
+    var _changeDatArray = [];
+    var mainKeyValue = {};
+    var groupId = getCookie("plv3.passport.groupid");
+    var gridSetting = {}; 
+    var _ufid = "@ViewBag.Uid";
+    var _dnno = "@ViewBag.DnNo";
+    var schemas =  "@ViewBag.schemas.Content";
+    jQuery(document).ready(function ($) {
+        schemas = JSON.parse(decodeHtml(schemas));
+        CommonFunc.initField(schemas);
+        var $Maingrid = $("#MainGrid");
+        var editable = false;
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 250;
+        var colModel = [
+                 { name: 'UId', title: 'UId', index: 'UId', width: 100, sorttype: 'string', editable: true, hidden: true },
+                 { name: 'UFid', title: 'UFid', index: 'UFid', width: 100, sorttype: 'string', editable: true, hidden: true },
+                 { name: 'DnNo', title: 'DN NO', index: 'DnNo', width: 150, sorttype: 'string', editable: true },
+                 { name: 'ShipmentId', title: 'Shipment ID', index: 'ShipmentId', width: 150, sorttype: 'string', editable: true },
+                 { name: 'Status', title: '@Resources.Locale.L_GateReserve_Status', index: 'Status', width: 70, sorttype: 'string', editable: true, formatter: "select", edittype: 'select', editoptions: { value: "A:@Resources.Locale.L_DNManage_CallCar;B:@Resources.Locale.L_DNManage_Finish", dataInit: function (elem) { $(elem).addClass('form-control input-sm'); } } },
+                    {
+                        name: 'CallDate', title: '@Resources.Locale.L_DNManage_CallCarDate', index: 'CallDate', width: 150, editable: true, sorttype: 'date', formatter: 'date', formatoptions: { newformat: 'Y-m-d' },
+                        editoptions: myEditDateInit,
+                        formatter: 'date',
+                        formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" }
+                    },
+                 { name: 'TruckNo', title: '@Resources.Locale.L_GateReserve_Trucker', index: 'TruckNo', editoptions: gridLookup(getpartyop("TruckNm")), edittype: 'custom', sorttype: 'string', width: 150, hidden: false, editable: true },
+                 { name: 'TruckNm', title: '@Resources.Locale.L_BaseLookup_Nm', index: 'TruckNm', width: 200, sorttype: 'string', editable: false },
+                 //{ name: 'Driver', title: '司机', index: 'Driver', width: 200, sorttype: 'string', editable: true },
+                 //{ name: 'Tel', title: '电话', index: 'Tel', width: 200, sorttype: 'string', editable: true },
+                 { name: 'WhsCd', title: '@Resources.Locale.L_DNFlowManage_WhsCd', index: 'WhsCd', editoptions: gridLookup(getwhop()), edittype: 'custom', sorttype: 'string', width: 100, hidden: false, editable: true },
+                 { name: 'WhsNm', title: '@Resources.Locale.L_DNFlowManage_WhsNm', index: 'WhsNm', width: 200, sorttype: 'string', editable: false },
+                 { name: 'Qty', title: '@Resources.Locale.L_BaseLookup_Qty', index: 'Qty', align: 'right', width: 100, sorttype: 'string', editable: true },
+                 { name: 'Aqty', title: '@Resources.Locale.L_DNFlowManage_Aqty', index: 'Aqty', align: 'right', width: 100, sorttype: 'string', editable: false },
+                 //{ name: 'WmsBy', title: '仓库确认', index: 'WmsBy', width: 200, sorttype: 'string', editable: true },
+                 { name: 'WmsDate', title: '@Resources.Locale.L_DNManage_WhDate', index: 'WmsDate', width: 150, sorttype: 'string', editable: true },
+                 //{ name: 'SecBy', title: '警卫确认', index: 'SecBy', width: 200, sorttype: 'string', editable: true },
+                 { name: 'SecDate', title: '@Resources.Locale.L_DNManage_SeuDate', index: 'SecDate', width: 150, sorttype: 'string', editable: true },
+                 { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 200, sorttype: 'string', editable: true }
+        ];
+
+        
+        function getpartyop(name) {
+            var _name = name;
+            var city_op = getLookupOp("MainGrid",
+                {
+                    url: rootPath + LookUpConfig.PartyNoUrl,
+                    config: LookUpConfig.PartyNoLookup,
+                    returnFn: function (returnObj, $grid) {
+                        var selRowId = $grid.jqGrid('getGridParam', 'selrow');
+                        setGridVal($grid, selRowId, 'TruckNm', returnObj.PartyName, null);
+                        return returnObj.PartyNo;
+                    }
+                }, {
+                    baseConditionFunc: function () {
+                        return "PARTY_TYPE like '%;CR;%'";
+                    }
+                }, LookUpConfig.GetPartyNoAuto(groupId, $Maingrid,
+                function ($grid, rd, elem, rowid) {
+                    var selRowId = rowid;
+                    setGridVal($grid, selRowId, 'TruckNm', rd.PARTY_NAME, null);
+                }));
+            city_op.param = "";
+            return city_op;
+        }
+
+        function getwhop() {
+            var wh_op = getLookupOp("MainGrid",
+                {
+                    url: rootPath + LookUpConfig.WhUrl,
+                    config: LookUpConfig.WhLookup,
+                    returnFn: function (returnObj, $grid) {
+                        var selRowId = $grid.jqGrid('getGridParam', 'selrow');
+                        setGridVal($grid, selRowId, 'WhsNm', returnObj.CdDescp, null);
+                        return returnObj.Cd;
+                    }
+                }, LookUpConfig.GetCodeTypeAuto(groupId, "WH", $Maingrid, function ($grid, rd, elem, rowid) {
+                    //$("#PartyType").val(rd.CD);
+                    var selRowId = rowid;
+                    setGridVal($grid, selRowId, 'WhsNm', rd.CD_DESCP, null);
+                    $(elem).val(rd.CD);
+                }));
+            return wh_op;
+        }
+
+        function _endGrid($grid) {//结束grid的编辑状态
+            var selRowId = $grid.jqGrid('getGridParam', 'selrow');
+            $grid.jqGrid('saveRow', selRowId, false, 'clientArray');
+            $grid.jqGrid('getGridParam', "endEdit")();
+        }
+
+        
+        _dm.addDs("MainGrid", [], ["UId"], $Maingrid[0]);
+        new genGrid(
+            $Maingrid,
+            {
+                data: [],
+                /*loadonce: true,
+                colModel: colModel,
+                datatype: "json",
+                url: rootPath + "DNManage/PartialQuery/" + _ufid,
+                cellEdit: false,//禁用grid编辑功能
+                caption: "分批出货建档",
+                height: 250,
+                rownumWidth: 50,
+                refresh: true,
+                rows: 9999,
+                exportexcel: false,
+                pginput: false,
+                pgbuttons: false,
+                ds: _dm.getDs("MainGrid"),
+                sortorder: "asc",
+                sortname: "CallDate",
+                delKey: "UId",*/
+                loadonce: true,
+                datatype: "json",
+                url: rootPath + "DNManage/PartialQuery/" + _ufid,
+                colModel: colModel,
+                height: 250,
+                isModel:true,
+                caption: '@Resources.Locale.L_SMDNDSetup_Views_391',
+                refresh: true,
+                cellEdit: false,//禁用grid编辑功能
+                exportexcel: false,
+                footerrow: false,
+                beforeSelectRowFunc: function (rowid) {
+                    //main key 修改時不允與修改
+                    if (rowid != null && rowid.indexOf("jqg") >= 0) {
+                        $("#MainGrid").setColProp('Status', { editable: true });
+                    } else {
+                        $("#MainGrid").setColProp('Status', { editable: false });
+                    }
+                },
+                onAddRowFunc: function (rowid) {
+                    $("#MainGrid").setColProp('DnNo', { editable: false });
+                    $("#MainGrid").jqGrid('setCell', rowid, "DnNo", _dnno);
+                    $("#MainGrid").jqGrid('setCell', rowid, "UFid", _ufid);
+                },
+                beforeAddRowFunc: function (rowid) {
+                    //add row 時要可以編輯main key
+                    $("#MainGrid").setColProp('Status', { editable: true });
+                },
+                afterSaveCellFunc: function (rowid, name, val, iRow, iCol) {
+                    var Bamt = $('#MainGrid').jqGrid("getCol", "Qty", false, "sum");
+                    $("#MainGrid").jqGrid('setCell', rowid, "Aqty", Bamt);
+                    //$("#BoAmt").val(Bamt);
+                },
+                onSelectRowFunc: function (map) {
+                    var UId = map.UId;
+                    var ShipmentId = map.ShipmentId;
+
+                    initLoadData(UId);
+
+                    CommonFunc.ToogleLoading(true);
+                    $.post(rootPath + 'GateManage/GetSmRvByShipmentId', {"ShipmentId": ShipmentId}, function(data, textStatus, xhr) {
+                        CommonFunc.ToogleLoading(false);
+                        $("#SubGrid").jqGrid("clearGridData");
+                        console.log(data);
+                        $("#SubGrid").jqGrid("setGridParam", {
+                            datatype: 'local',
+                            sortorder: "asc",
+                            sortname: "ReserveNo",
+                            data: data.rows,
+                        }).trigger("reloadGrid");
+                    }, "JSON");
+                }
+            }
+        );
+
+        MenuBarFuncArr.MBAdd = function () {
+            console.log(_dnno);
+            $("#DnNo").val(_dnno);
+            $("#UFid").val(_ufid);
+            $("#Status").val("A");
+            $("#UId").removeAttr('required');
+        }
+
+        MenuBarFuncArr.MBCancel = function () {
+            MenuBarFuncArr.Enabled(["MBEdit"]);
+            location.reload();
+            //gridEditableCtrl({ editable: false, gridId: "MainGrid" });
+            editable = false;
+        }
+
+        MenuBarFuncArr.MBCopy = function () {
+            $("#UId").removeAttr('required');
+        }
+
+        MenuBarFuncArr.MBEdit = function () {
+            //gridEditableCtrl({ editable: true, gridId: "MainGrid" });
+            //editable = true;
+        }
+
+        MenuBarFuncArr.MBDel = function (dtd) {
+            var selRowId = $("#MainGrid").jqGrid('getGridParam', 'selrow');
+            var Status = $("#MainGrid").jqGrid('getCell', selRowId, 'Status');
+            if(Status == "B")
+            {
+                alert("@Resources.Locale.L_DNManage_CannorDelt");
+                return;
+            }
+            var changeData = getChangeValue();
+            $.ajax({
+                async: true,
+                url: rootPath + "DNManage/PartialUpdate",
+                type: 'POST',
+                data: { "changedData": encodeURIComponent(JSON.stringify(changeData)),"DnUid":_ufid, autoReturnData: true,"UId":$("#UId").val() },
+                dataType: "json",
+                "complete": function (xmlHttpRequest, successMsg) {
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                    alert(errMsg);
+                    CommonFunc.Notify("", errMsg, 500, "danger");
+                    MenuBarFuncArr.SaveResult = false;
+                    dtd.resolve();
+                },
+                success: function (result) {
+                    console.log(result.message);
+                    if (result.message !== "success") {
+                        CommonFunc.Notify("", result.message, 500, "warning");
+                        MenuBarFuncArr.SaveResult = false;
+                        dtd.resolve();
+                        return;
+                    }
+
+                    setdisabled(true);
+                    setToolBtnDisabled(true);
+                    CommonFunc.Notify("", "@Resources.Locale.L_MailFormatSetup_SaveS", 500, "success");
+                    MenuBarFuncArr.SaveResult = true;
+                    //gridEditableCtrl({ editable: false, gridId: "MainGrid" });
+                    //editable = false;
+                    //$("#MainGrid").trigger("reloadGrid");
+                    $("#MainGrid").jqGrid("clearGridData");
+                    $("#MainGrid").jqGrid("setGridParam", {
+                        datatype: 'local',
+                        sortorder: "asc",
+                        sortname: "CallDate",
+                        data: result.smdndData
+                    }).trigger("reloadGrid");
+                    MenuBarFuncArr.Enabled(["MBOrderCar"]);
+                    dtd.resolve();
+                    //location.reload();
+                }
+            });
+            return dtd.promise();
+        }
+
+        MenuBarFuncArr.MBSave = function (dtd) {
+            _endGrid($("#MainGrid"));
+            editable = false;
+            var Bamt = $('#MainGrid').jqGrid("getCol", "Qty", false, "sum");
+            //alert(Bamt);
+            //var containerArray = $('#MainGrid').jqGrid('getGridParam', "arrangeGrid")();
+            //var changeData = {};
+            //changeData["mt"] = containerArray;
+            var changeData = getChangeValue();
+            $.ajax({
+                async: true,
+                url: rootPath + "DNManage/PartialUpdate",
+                type: 'POST',
+                data: { "changedData": encodeURIComponent(JSON.stringify(changeData)),"sumqty":Bamt,"DnUid":_ufid, autoReturnData: true, "UId":$("#UId").val() },
+                dataType: "json",
+                "complete": function (xmlHttpRequest, successMsg) {
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                    alert(errMsg);
+                    CommonFunc.Notify("", errMsg, 500, "danger");
+                    MenuBarFuncArr.SaveResult = false;
+                    dtd.resolve();
+                },
+                success: function (result) {
+                    console.log(result.message);
+                    if (result.message !== "success") {
+                        CommonFunc.Notify("", result.message, 500, "warning");
+                        MenuBarFuncArr.SaveResult = false;
+                        dtd.resolve();
+                        return;
+                    }
+
+                    setdisabled(true);
+                    setToolBtnDisabled(true);
+                    CommonFunc.Notify("", "@Resources.Locale.L_MailFormatSetup_SaveS", 500, "success");
+                    MenuBarFuncArr.SaveResult = true;
+                    //gridEditableCtrl({ editable: false, gridId: "MainGrid" });
+                    //editable = false;
+                    //$("#MainGrid").trigger("reloadGrid");
+                    $("#MainGrid").jqGrid("clearGridData");
+                    $("#MainGrid").jqGrid("setGridParam", {
+                        datatype: 'local',
+                        sortorder: "asc",
+                        sortname: "CallDate",
+                        data: result.smdndData
+                    }).trigger("reloadGrid");
+                    MenuBarFuncArr.Enabled(["MBOrderCar"]);
+                    dtd.resolve();
+                    //location.reload();
+                }
+            });
+            return dtd.promise();
+        }
+
+        MenuBarFuncArr.AddMenu("MBOrderCar", "glyphicon glyphicon-time", "@Resources.Locale.L_DNManage_CallCar", function(){
+            var selRowId = $("#MainGrid").jqGrid('getGridParam', 'selrow');
+            var UId = $("#MainGrid").jqGrid('getCell', selRowId, 'UId');
+            var UFid = $("#MainGrid").jqGrid('getCell', selRowId, 'UFid');
+            var Status = $("#MainGrid").jqGrid('getCell', selRowId, 'Status');
+            if(Status == "B")
+            {
+                alert("@Resources.Locale.L_DNManage_HasCallCAr");
+                return;
+            }
+
+            if(UId == "" || UId == null)
+            {
+                alert("@Resources.Locale.L_TKBLQuery_Select");
+                return;
+            }
+            else
+            {
+
+                $.ajax({
+                    async: true,
+                    url: rootPath + "GateManage/smdndOrderCar",
+                    type: 'POST',
+                    data: {"UId": UId, "UFid": UFid},
+                    dataType: "json",
+                    beforeSend: function(){
+                        CommonFunc.ToogleLoading(true);
+                    },
+                    "error": function (xmlHttpRequest, errMsg) {
+                        CommonFunc.Notify("", errMsg, 1000, "danger");
+                    },
+                    success: function (result) {
+                        CommonFunc.ToogleLoading(false);
+                        if(result.message == "success")
+                        {
+                            CommonFunc.Notify("", "@Resources.Locale.L_DNManage_ReserS", 1000, "success");
+                            $("#Status").val("B");
+
+                            $("#MainGrid").jqGrid("setGridParam", {
+                                datatype: 'local',
+                                sortorder: "asc",
+                                sortname: "CallDate",
+                                data: result.smdndData
+                            }).trigger("reloadGrid");
+                        }
+                        else
+                        {
+                            CommonFunc.Notify("", result.message, 1000, "warning");
+                        }
+                    }
+                });
+            }
+        });
+
+       
+        initMenuBar(MenuBarFuncArr);
+
+        MenuBarFuncArr.DelMenu(["MBSearch", "MBApply", "MBEdoc", "MBApprove", "MBInvalid", "MBErrMsg"]);
+        MenuBarFuncArr.Disabled(["MBSave"]);
+        MenuBarFuncArr.Enabled(["MBEdit"]);
+
+        var colModel1 = [
+            { name: 'UId', title: 'ID', index: 'UId', width: 150, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'ReserveNo', title: '@Resources.Locale.L_GateAnalysis_ReserveNo', index: 'ReserveNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DnNo', title: '@Resources.Locale.L_DNApproveManage_DnNo', index: 'DnNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'UseDate', title: '@Resources.Locale.L_BaseLookup_PickupCdate', index: 'UseDate', width: 130, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'CallDate', title: '@Resources.Locale.L_GateReserveSetup_CallDate', index: 'CallDate', width: 130, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'Trucker', title: '@Resources.Locale.L_GateReserve_Trucker', index: 'Trucker', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TruckNo', title: '@Resources.Locale.L_GateReserve_TruckNo', index: 'TruckNo', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Driver', title: '@Resources.Locale.L_GateReserve_Driver', index: 'Driver', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Tel', title: '@Resources.Locale.L_GateReserve_Tel', index: 'Tel', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TruckCntrno', title: '@Resources.Locale.L_GateReserve_TruckCntrno', index: 'TruckCntrno', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TruckSealno', title: '@Resources.Locale.L_GateReserve_TruckSealno', index: 'TruckSealno', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntrNo', title: '@Resources.Locale.L_GateReserve_CntrNo', index: 'CntrNo', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: '@Resources.Locale.L_SMDNDSetup_Script_27' } },
+            { name: 'WsCd', title: '@Resources.Locale.L_GateReserve_WsCd', index: 'WsCd', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'GateNo', title: '@Resources.Locale.L_GateAnalysis_GateNo', index: 'GateNo', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CutportDate', title: '@Resources.Locale.L_BaseLookup_CutPortDate', index: 'CutportDate', width: 130, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'PickDate', title: '@Resources.Locale.L_BaseLookup_PickupCdate', index: 'PickDate', width: 130, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'InDate', title: '@Resources.Locale.L_ContainerManage_InBy', index: 'InDate', width: 130, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'SealDate', title: '@Resources.Locale.L_ContainerManage_SealDate', index: 'SealDate', width: 130, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'SealNo1', title: '@Resources.Locale.L_GateReserveSetup_SealNo 1', index: 'SealNo1', width: 100, align: 'left', sorttype: 'string', hidden: false },//
+            { name: 'SealNo2', title: '@Resources.Locale.L_GateReserveSetup_SealNo 2', index: 'SealNo2', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'OutDate', title: '@Resources.Locale.L_ContainerManage_OutBy', index: 'OutDate', width: 130, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'Yard', title: '@Resources.Locale.L_ContainerManage_Yard', index: 'Yard', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'InyardDate', title: '@Resources.Locale.L_GateAnalysis_InyardDate', index: 'InyardDate', width: 130, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'OutyardDate', title: '@Resources.Locale.L_GateAnalysis_OutyardDate', index: 'OutyardDate', width: 130, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'AportDate', title: '@Resources.Locale.L_ContainerManage_AportDate', index: 'AportDate', width: 130, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } },
+            { name: 'Atd', title: '@Resources.Locale.L_BaseLookup_Atd', index: 'Atd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Carrier', title: '@Resources.Locale.L_ForecastQueryData_Carrier', index: 'Carrier', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'MoveNumber', title: '@Resources.Locale.L_GateAnalysis_MoveNumber', index: 'MoveNumber', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SCode', title: '@Resources.Locale.L_ContainerManage_SCode', index: 'SCode', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Status', title: '@Resources.Locale.L_ContainerManage_Status', index: 'Status', width: 100, align: 'left', sorttype: 'string', hidden: false }
+        ];
+        $SubGrid = $("#SubGrid");
+        new genGrid(
+            $SubGrid,
+            {
+                datatype: "local",
+                data: [],
+                loadonce: true,
+                colModel: colModel1,
+                caption: '@Resources.Locale.L_DNManage_CallInfo',
+                height: "AUTO",
+                refresh: true,
+                cellEdit: false,//禁用grid编辑功能
+                exportexcel: false,
+                footerrow: false
+            }
+        );
+
+        //Shipper放大鏡
+        setSmptyData("TruckNoLookup", "TruckNo", "TruckNm", "CR");
+
+        setBscData("WhsCdLookup", "WhsCd", "WhsNm", "WH");
+    });
+
+    function setSmptyData(lookUp, Cd, Nm, pType)
+    {
+        //SMPTY放大鏡
+        options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetSmptyDataForLookup";
+        options.registerBtn = $("#"+lookUp);
+        options.focusItem = $("#" + Cd);
+        options.param = "";
+        options.baseCondition = " PARTY_TYPE LIKE '%"+pType+"%'";
+        options.isMutiSel = true;
+        options.gridFunc = function (map) {
+            $("#" + Cd).val(map.PartyNo);
+
+            if(Nm != "")
+                $("#" + Nm).val(map.PartyName);
+        }
+
+        options.lookUpConfig = LookUpConfig.SmptyLookup;
+        initLookUp(options);
+
+        CommonFunc.oAutoComplete("#"+Cd, 1, "", "dt=smpty&GROUP_ID=" + groupId + "&PARTY_TYPE~"+pType+"&PARTY_NO=", "PARTY_NO+PARTY_NAME=showValue,PARTY_NO,PARTY_NAME", function (event, ui) {
+            $(this).val(ui.item.returnValue.PARTY_NO);
+
+            if(Nm != "")
+                $("#" + Nm).val(ui.item.returnValue.PARTY_NAME);
+            return false;
+        });
+    }
+
+    function setBscData(lookUp, Cd, Nm, pType)
+    {
+        //SMPTY放大鏡
+        options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetBscodeDataForLookup";
+        options.registerBtn = $("#"+lookUp);
+        options.focusItem = $("#" + Cd);
+        options.baseCondition = " GROUP_ID='"+groupId+"' AND CMP='"+cmp+"' AND CD_TYPE='"+pType+"'";
+        options.isMutiSel = true;
+        options.gridFunc = function (map) {
+            $("#" + Cd).val(map.Cd);
+
+            if(Nm != "")
+                $("#" + Nm).val(map.CdDescp);
+        }
+
+        options.lookUpConfig = LookUpConfig.BSCodeLookup;
+        initLookUp(options);
+
+        CommonFunc.oAutoComplete("#"+Cd, 1, "", "dt=bsc&GROUP_ID=" + groupId + "&CD_TYPE~"+pType+"&CD=", "CD=showValue,CD,CD_DESCP", function (event, ui) {
+            $(this).val(ui.item.returnValue.CD);
+
+            if(Nm != "")
+                $("#" + Nm).val(ui.item.returnValue.CD_DESCP);
+
+            return false;
+        });
+    }
+
+    function initLoadData(Uid)
+    {
+        if (!Uid)
+            return;
+        $.ajax({
+            async: true,
+            url: rootPath + "DNManage/GetSmdndDetail",
+            type: 'POST',
+            data: {
+                UId: Uid
+            },
+            dataType: "json",
+            beforeSend: function () {
+                CommonFunc.ToogleLoading(true);
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+            },
+            success: function (result) {
+                var maindata = jQuery.parseJSON(result.mainTable.Content);
+                setFieldValue(maindata.rows);
+
+                setdisabled(true);
+                setToolBtnDisabled(true);
+                MenuBarFuncArr.Disabled(["MBSave", "MBCancel"]);
+                MenuBarFuncArr.Enabled(["MBDel", "MBEdit", "MBCopy", "MBEdoc", "MBApprove", "MBCHM", "MBPomc", "MBPrint", "MBMoney"]);
+                
+                CommonFunc.ToogleLoading(false);
+            }
+        });
+    }
+</script>
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="DnNo" class="control-label">DN NO</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="DnNo" name="DnNo" fieldname="DnNo" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Status" class="control-label">@Resources.Locale.L_GateReserve_Status</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="Status" name="Status" fieldname="Status">
+                                <option value="A">@Resources.Locale.L_DNManage_CallCar</option>
+                                <option value="B">@Resources.Locale.L_DNManage_Finish</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="CallDate" class="control-label">@Resources.Locale.L_DNManage_UseDate</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CallDate" name="CallDate" fieldname="CallDate" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Qty" class="control-label">@Resources.Locale.L_BaseLookup_Qty</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Qty" name="Qty" fieldname="Qty" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="TruckNo" class="control-label">@Resources.Locale.L_GateReserve_Trucker</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TruckNo" name="TruckNo" fieldname="TruckNo" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="TruckNoLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="TruckNm" name="TruckNm" fieldname="TruckNm" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="WhsCd" class="control-label">@Resources.Locale.L_DNFlowManage_WhsCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="WhsCd" name="WhsCd" fieldname="WhsCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="WhsCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="WhsNm" name="WhsNm" fieldname="WhsNm" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <div class="pure-g">
+                                <div class="pure-u-sm-60-60">
+                                    <table id="MainGrid" class="_tableGrid" style="width: 100%">
+                                        <tr>                                        
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="pure-g">
+                                <div class="pure-u-sm-60-60">
+                                    <table id="SubGrid" class="_tableGrid" style="width: 100%">
+                                        <tr></tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UFid" name="UFid" fieldname="UFid" />
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" isKey="true" />

@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "AddBulletin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+    var EdocUrl = "@ViewBag.EdocUrl";
+    var baseCmp= "@ViewBag.Cmp";
+</script>
+@*<script type="text/javascript" src="@Url.Content("~/Scripts/lib/ckeditor/ckeditor.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/moment.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap-datetimepicker.js")"></script>*@
+
+<script src="~/Scripts/lib/utf8-net/ueditor.config.js?20180518"></script>
+<script src="~/Scripts/lib/utf8-net/ueditor.all.js?20180518"></script>
+<script src="~/Scripts/lib/utf8-net/lang/zh-cn/zh-cn.js"></script>
+<style>
+    body{background-color: #eaeaea;}
+    #wrapper {margin-top: 50px;}
+    #page-wrapper {padding: 5px;}
+    .row{margin-left: 0px; margin-right: 0px;}
+</style>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="pure-u-sm-5-60">
+                                <label for="U_ID" class="control-label">@Resources.Locale.L_AddBulletin_UID:</label>
+                            </div>
+                            <div class="pure-u-sm-25-60 control-group">
+                                <input type="text" class="form-control input-sm" id="BullTitle" dt="mt" name="BullTitle" fieldname="BullTitle">
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="pure-u-sm-5-60">
+                                <label for="U_NAME" class="control-label">@Resources.Locale.L_AddBulletin_UNAME:</label>
+                            </div>
+                            <div class="pure-u-sm-25-60">
+                                <div class="pure-u-sm-24-60">
+                                    <input type="text" dt="mt" class="form-control input-sm" id="BullDate" name="BullDate" fieldname="BullDate" />
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                                <div class="pure-u-sm-11-60 label-right">
+                                    <label for="BullType" class="control-label">@Resources.Locale.L_AddBulletin_BullType:</label>
+                                </div>
+                                <div class="pure-u-sm-24-60" style="float:right">
+                                    <select class="form-control input-sm" id="BullType" dt="mt" name="BullType" fieldname="BullType">
+                                        <option value="1">@Resources.Locale.L_Bulletin_Group</option>
+                                        <option value="2">@Resources.Locale.L_Bulletin_Factory</option>
+                                        <option value="3">@Resources.Locale.L_Bulletin_Dep</option>
+                                        <option value="4">@Resources.Locale.L_Bulletin_LSP</option>
+                                        <option value="5">@Resources.Locale.L_Bulletin_Vendor</option>
+                                    </select>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="pure-u-sm-5-60">
+                                <label f​​or="Cmp" class="control-label">@Resources.Locale.L_UserSetUp_Cmp</label>
+                            </div>
+                            <div class="pure-u-sm-25-60">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" readonly />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="pure-u-sm-5-60">
+                                <label f​​or="Dep" class="control-label">@Resources.Locale.L_UserSetUp_Dep</label>
+                            </div>
+                            <div class="pure-u-sm-25-60">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="Dep" name="Dep" fieldname="Dep" readonly />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="DepLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="row" style="height:500PX;">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="GROUP_ID">@Resources.Locale.L_AddBulletin_GroupID:</label>
+                                    <textarea id="BullContent" dt="mt" name="BullContent" fieldname="BullContent" style="height:500px;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="rootPath" type="hidden" value="@Url.Content("~")" />
+<input type="hidden" dt="mt"  isKey="true" id="UId" name="UId" fieldname="UId" />
+<script type="text/javascript">
+
+    var ue = UE.getEditor('BullContent', {
+        toolbars: [
+            ['fullscreen', 'source', '|', 'undo', 'redo', '|',
+        'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+        'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+        'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+        'directionalityltr', 'directionalityrtl', 'indent', '|',
+        'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
+        'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+        'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertframe', 'insertcode', 'pagebreak', 'template', 'background', '|',
+        'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+        'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
+        , 'searchreplace', 'help', 'drafts']
+        ],
+        allHtmlEnabled: false,//提交到后台的数据是否包含整个html字符串  
+        autoHeightEnabled: false,
+        autoFloatEnabled: true,
+        allowDivTransToP: false,//阻止div标签自动转换为p标签 
+        //readonly:true//界面不可编辑
+    });
+    $("#sortable").sortable();
+    $("#sortable").disableSelection();
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Dashboard/AddBulletin.js?20240815")"></script>
+<script src="@Url.Content("~/Scripts/Core/initAttach.js?20220615")" type="text/javascript"></script>

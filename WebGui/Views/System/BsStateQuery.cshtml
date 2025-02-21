@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "BsStateQuery";
+}
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        //init Search
+
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 220;
+        gop.gridColModel = [
+        	{ name: 'UId', title: 'UId', index: 'UId', align: 'left', width: 80, sorttype: 'string', hidden: true},
+        	{ name: 'CntryCd', title: '@Resources.Locale.L_CitySetup_CntryCd', index: 'CntryCd', align: 'left', width: 70, sorttype: 'string' },
+        	{ name: 'CntryNm', title: '@Resources.Locale.L_CntySetup_CntryNm', index: 'CntryNm', align: 'left', width: 150, sorttype: 'string' },
+        	{ name: 'StateCd', title: '@Resources.Locale.L_BsStateQuery_StateCd', index: 'StateCd', width: 70, sorttype: 'string' },
+        	{ name: 'StateNm', title: '@Resources.Locale.L_BsStateQuery_StateNm', index: 'StateNm', width: 150, sorttype: 'string' },
+        	{ name: 'RegionCd', title: '@Resources.Locale.L_BsStateQuery_RegionCd', index: 'RegionCd', sorttype: 'string', width: 70, hidden: false },
+            { name: 'RegionNm', title: '@Resources.Locale.L_BsStateQuery_RegionNm', index: 'RegionNm', sorttype: 'string', width: 70, hidden: false },
+            { name: 'CreateBy', title: _getLang("L_Bsdate_CreateBy", "创建人"), index: 'CreateBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateDate', title: _getLang("L_Bsdate_CreateDate", "创建时间"), index: 'CreateDate', width: 120, align: 'left', hidden: false, formatter: "date", formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" } },
+            { name: 'ModifyBy', title: _getLang("L_Bsdate_ModifyBy", "修改人"), index: 'ModifyBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ModifyDate', title: _getLang("L_Bsdate_ModifyDate", "修改时间"), index: 'ModifyDate', width: 120, align: 'left', hidden: false, formatter: "date", formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" } }
+        ];
+        gop.AddUrl = { "url": rootPath + "System/BsStateSetup", "title": "@Resources.Locale.L_BsStateQuery_EntState", "id": "BsStateSetup" };;
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_BsStateQuery_StateList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "SYSTEM/GetStateDataForSummary";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        gop.gridAttr.sortname = "StateCd";
+        gop.gridAttr.sortable = true;
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea"; 
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        initSearch(gop);
+
+        function dblClick(map) {
+        	var UId = map.UId;
+        	console.log(rootPath + "System/BsStateSetup/" + UId);
+        	top.topManager.openPage({
+        	    href: rootPath + "System/BsStateSetup/" + UId,
+        	    title: '@Resources.Locale.L_BsStateQuery_EntState',
+        	    id: 'BsStateSetup'
+        	});
+        }
+    });
+
+</script>
+
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,939 @@
+﻿@{
+    ViewBag.Title = "InvPkgSetup";
+}
+<style type="text/css">
+    label {
+        font-size: 12px !important;
+    }
+</style>
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var tir = parseFloat("@ViewBag.tir");
+    var schemas = "@ViewBag.schemas.Content";
+    var optionlist = "@ViewBag.selects";
+</script>
+<div id="wrapper" inputdep="B">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title" style="font-weight: 700;">
+                        <a data-toggle="collapse" href="#AddArea" aria-expanded="false" aria-controls="AddArea">@Resources.Locale.L_DNManage_IvMainF</a>
+                    </h4>
+                </div>
+                <div class="collapse in" id="AddArea">
+                    <div class="panel-body">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="InvoiceType" class="control-label">@Resources.Locale.L_InvPkgQuery_InvoiceType</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <select class="form-control input-sm" dt="mt" id="InvoiceType" name="InvoiceType" fieldname="InvoiceType">
+                                    <option value="O">Outbound</option>
+                                    <option value="I">Inbound</option>
+                                    <option value="T">Third</option>
+                                    <option value="A">Other</option>
+                                </select>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="DnNo" class="control-label">@Resources.Locale.L_DNApproveManage_DnNo</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="DnNo" name="DnNo" fieldname="DnNo" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="DnNoLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="InvNo" class="control-label">@Resources.Locale.L_DNApproveManage_InvNo</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="InvNo" name="InvNo" fieldname="InvNo" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="InvDate" class="control-label">@Resources.Locale.L_InvPkgSetup_InvDate</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="InvDate" name="InvDate" fieldname="InvDate" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60 label-right">
+                                <p style="border-bottom: 2px solid #8E8E8E"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="ShprCd" class="control-label">@Resources.Locale.L_BSTSetup_ShprCd</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="ShprCd" name="ShprCd" fieldname="ShprCd" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="ShprCdLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShprNm" name="ShprNm" fieldname="ShprNm" ref="ShprCd" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="ShprAddr" class="control-label">@Resources.Locale.L_InvPkgSetup_ShprAddr</label>
+                            </div>
+                            <div class="pure-u-sm-25-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShprAddr" name="ShprAddr" fieldname="ShprAddr" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="ShprAttn" class="control-label">Shipper @Resources.Locale.L_BSCSSetup_CmpAttn</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShprAttn" name="ShprAttn" fieldname="ShprAttn" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="ShprTel" class="control-label">@Resources.Locale.L_BSCSSetup_CmpTel</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShprTel" name="ShprTel" fieldname="ShprTel" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="ShprFax" class="control-label">@Resources.Locale.L_BSCSSetup_CmpFax</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShprFax" name="ShprFax" fieldname="ShprFax" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="ShipTo" class="control-label">Ship to</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="ShipTo" name="ShipTo" fieldname="ShipTo" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="ShipToLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShipNm" name="ShipNm" fieldname="ShipNm" ref="ShipTo" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="ShipAddr" class="control-label">Address</label>
+                            </div>
+                            <div class="pure-u-sm-25-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShipAddr" name="ShipAddr" fieldname="ShipAddr" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="ShipAttn" class="control-label">Ship @Resources.Locale.L_BSCSSetup_CmpAttn</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShipAttn" name="ShipAttn" fieldname="ShipAttn" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="ShipTel" class="control-label">@Resources.Locale.L_BSCSSetup_CmpTel</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShipTel" name="ShipTel" fieldname="ShipTel" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="ShipFax" class="control-label">@Resources.Locale.L_BSCSSetup_CmpFax</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShipFax" name="ShipFax" fieldname="ShipFax" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="BillTo" class="control-label">@Resources.Locale.L_BSCSDataQuery_BillTo</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="BillTo" name="BillTo" fieldname="BillTo" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="BillToLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="BillNm" name="BillNm" fieldname="BillNm" ref="BillCd" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="BillAddr" class="control-label">Addreass</label>
+                            </div>
+                            <div class="pure-u-sm-25-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="BillAddr" name="BillAddr" fieldname="BillAddr" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="BillAttn" class="control-label">Bill @Resources.Locale.L_BSCSSetup_CmpAttn</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="BillAttn" name="BillAttn" fieldname="BillAttn" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="BillTel" class="control-label">@Resources.Locale.L_BSCSSetup_CmpTel</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="BillTel" name="BillTel" fieldname="BillTel" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="BillFax" class="control-label">@Resources.Locale.L_BSCSSetup_CmpFax</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="BillFax" name="BillFax" fieldname="BillFax" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="CneeCd" class="control-label">@Resources.Locale.L_BSTSetup_CneeCd</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="CneeCd" name="CneeCd" fieldname="CneeCd" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="CneeCdLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CneeNm" name="CneeNm" fieldname="CneeNm" ref="CneeCd" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="CneeAddr" class="control-label">Address</label>
+                            </div>
+                            <div class="pure-u-sm-25-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CneeAddr" name="CneeAddr" fieldname="CneeAddr" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="CneeAttn" class="control-label">Cnee @Resources.Locale.L_BSCSSetup_CmpAttn</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CneeAttn" name="CneeAttn" fieldname="CneeAttn" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="CneeTel" class="control-label">@Resources.Locale.L_BSCSSetup_CmpTel</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CneeTel" name="CneeTel" fieldname="CneeTel" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="CneeFax" class="control-label">@Resources.Locale.L_BSCSSetup_CmpFax</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CneeFax" name="CneeFax" fieldname="CneeFax" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="CustCd" class="control-label">Custmer</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="CustCd" name="CustCd" fieldname="CustCd" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="CustCdLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CustNm" name="CustNm" fieldname="CustNm" ref="CustCd" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="CustAddr" class="control-label">Address</label>
+                            </div>
+                            <div class="pure-u-sm-25-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CustAddr" name="CustAddr" fieldname="CustAddr" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="CustAttn" class="control-label">Custmer @Resources.Locale.L_BSCSSetup_CmpAttn</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CustAttn" name="CustAttn" fieldname="CustAttn" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="CustTel" class="control-label">@Resources.Locale.L_BSCSSetup_CmpTel</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CustTel" name="CustTel" fieldname="CustTel" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="CustFax" class="control-label">@Resources.Locale.L_BSCSSetup_CmpFax</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CustFax" name="CustFax" fieldname="CustFax" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="NotifyNo" class="control-label">@Resources.Locale.L_DNApproveManage_NotifyNo</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="NotifyNo" name="NotifyNo" fieldname="NotifyNo" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="NotifyNoLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="NotifyNm" name="NotifyNm" fieldname="NotifyNm" ref="NotifyNo" readonly />
+                            </div>
+
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="TransacteMode" class="control-label">Supplier invoice No.</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="SupplierInvNo" name="SupplierInvNo" fieldname="SupplierInvNo" ref="SupplierInvNo" readonly />
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60 label-right">
+                                <p style="border-bottom: 2px solid #8E8E8E"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="ShipmentId" class="control-label">@Resources.Locale.L_DNApproveManage_ShipmentId</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShipmentId" name="ShipmentId" fieldname="ShipmentId" />
+                                <!-- <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="ShipmentId" name="ShipmentId" fieldname="ShipmentId" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="SampleNameLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div> -->
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="TransacteMode" class="control-label">@Resources.Locale.L_DNApproveManage_TSMode</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <select class="form-control input-sm" dt="mt" id="TransacteMode" name="TransacteMode" fieldname="TransacteMode">
+                                    <option value=""></option>
+                                    <option value="A">@Resources.Locale.L_DNApproveManage_TSModeA</option>
+                                    <option value="B">@Resources.Locale.L_DNApproveManage_TSModeB</option>
+                                    <option value="C">@Resources.Locale.L_DNApproveManage_TSModeC</option>
+                                    <option value="O">@Resources.Locale.L_DNApproveManage_TSModeO</option>
+                                </select>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="CombineInfo" class="control-label">DN Info.</label>
+                            </div>
+                            <div class="pure-u-sm-25-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CombineInfo" name="CombineInfo" fieldname="CombineInfo" readonly="readonly" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="PackingNo" class="control-label">@Resources.Locale.L_DNApproveManage_PackingNo</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PackingNo" name="PackingNo" fieldname="PackingNo" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="VatNo" class="control-label">@Resources.Locale.L_DNApproveManage_VatNo</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="VatNo" name="VatNo" fieldname="VatNo" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="SoNo" class="control-label">@Resources.Locale.L_BaseLookup_SoNo</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="SoNo" name="SoNo" fieldname="SoNo" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="RefNo" class="control-label">@Resources.Locale.L_InvPkgSetup_RefNo</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="RefNo" name="RefNo" fieldname="RefNo" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="Etd" class="control-label">ETD</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Etd" name="Etd" fieldname="Etd" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="Eta" class="control-label">@Resources.Locale.L_BaseLookup_Eta</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Eta" name="Eta" fieldname="Eta" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="Atd" class="control-label">@Resources.Locale.L_BaseLookup_Atd</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Atd" name="Atd" fieldname="Atd" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="Ata" class="control-label">@Resources.Locale.L_BaseLookup_Ata</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Ata" name="Ata" fieldname="Ata" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="TradeTerm" class="control-label">@Resources.Locale.L_PartyDocSetup_Term</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="TradeTerm" name="TradeTerm" fieldname="TradeTerm" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="TradeTermLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TradetermDescp" name="TradetermDescp" fieldname="TradetermDescp" ref="TradeTerm" />
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="CntryOrn" class="control-label">@Resources.Locale.L_InvPkgSetup_CntryOrn</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="CntryOrn" name="CntryOrn" fieldname="CntryOrn" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="CntryOrnLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CntryDescp" name="CntryDescp" fieldname="CntryDescp" ref="CntryOrn" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="PackingFrom" class="control-label">Packing @Resources.Locale.L_DNManage_Source</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <select class="form-control input-sm" dt="mt" id="PackingFrom" name="PackingFrom" fieldname="PackingFrom" readonly>
+                                    <option value="">@Resources.Locale.L_DNManage_Product</option>
+                                    <option value="P">@Resources.Locale.L_DNManage_Mater</option>
+                                    <option value="L">LNT</option>
+                                    <option value="C">@Resources.Locale.L_DNManage_Combine</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="Incoterm" class="control-label">@Resources.Locale.L_DNApproveManage_Incoterm</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="Incoterm" name="Incoterm" fieldname="Incoterm" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="IncotermLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="IncotermDescp" name="IncotermDescp" fieldname="IncotermDescp" ref="Incoterm" />
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="BlNo" class="control-label">@Resources.Locale.L_InvPkgSetup_BlNo</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="BlNo" name="BlNo" fieldname="BlNo" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="DlvWay" class="control-label">@Resources.Locale.L_InvPkgSetup_DlvWay</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="DlvWay" name="DlvWay" fieldname="DlvWay" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="FromCd" class="control-label">@Resources.Locale.L_InvPkgSetup_FromCd</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="FromCd" name="FromCd" fieldname="FromCd" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="FromCdLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="FromDescp" name="FromDescp" fieldname="FromDescp" ref="FromCd" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="Vessel" class="control-label">@Resources.Locale.L_InvPkgSetup_Vessel</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="hidden" class="form-control input-sm" dt="mt" id="Vessel" name="Vessel" fieldname="Vessel" />
+                                <input type="text" class="form-control input-sm" dt="mt" id="VesselNm" name="VesselNm" fieldname="VesselNm" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="ShippingDate" class="control-label">@Resources.Locale.L_InvPkgSetup_ShippingDate</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShippingDate" name="ShippingDate" fieldname="ShippingDate" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="ToCd" class="control-label">@Resources.Locale.L_InvPkgSetup_ToCd</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="ToCd" name="ToCd" fieldname="ToCd" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="ToCdLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ToDescp" name="ToDescp" fieldname="ToDescp" ref="ToCd" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="TtlPqty" class="control-label">Packing Qty</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TtlPqty" name="TtlPqty" fieldname="TtlPqty" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="TtlQty" class="control-label">Invoice Qty</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TtlQty" name="TtlQty" fieldname="TtlQty" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="Qtyu" name="Qtyu" fieldname="Qtyu" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="QtyuLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60 ">
+                                <label for="Cur" class="control-label">@Resources.Locale.L_InvPkgSetup_Cur</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="Cur" name="Cur" fieldname="Cur" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="CurLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-8-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TtlValue" name="TtlValue" fieldname="TtlValue" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="FreightFee" class="control-label">@Resources.Locale.L_InvPkgSetup_FreightFee</label>
+                            </div>
+                            <div class="pure-u-sm-7-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="FreightFee" name="FreightFee" fieldname="FreightFee" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="IssueFee" class="control-label">@Resources.Locale.L_InvPkgSetup_IssueFee</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="IssueFee" name="IssueFee" fieldname="IssueFee" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="FobValue" class="control-label">FOB value</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="FobValue" name="FobValue" fieldname="FobValue" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="TtlPlt" class="control-label">@Resources.Locale.L_InvPkgSetup_TtlPlt</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TtlPlt" name="TtlPlt" fieldname="TtlPlt" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="Pltu" name="Pltu" fieldname="Pltu" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="PltuLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-15-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PkgUnitDesc" name="PkgUnitDesc" fieldname="PkgUnitDesc" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="TtlNw" class="control-label">Total NW</label>
+                            </div>
+                            <div class="pure-u-sm-4-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TtlNw" name="TtlNw" fieldname="TtlNw" />
+
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="Nwu" name="Nwu" fieldname="Nwu" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="NwuLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="TtlGw" class="control-label">Total GW</label>
+                            </div>
+                            <div class="pure-u-sm-4-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TtlGw" name="TtlGw" fieldname="TtlGw" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="TtlCbm" class="control-label">Total CBM</label>
+                            </div>
+                            <div class="pure-u-sm-4-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TtlCbm" name="TtlCbm" fieldname="TtlCbm" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-10-60">
+                                <div class="form-group">
+                                    <label for="Marks">@Resources.Locale.L_BSTSetup_ShippingMark</label>
+                                    <textarea class="form-control" dt="mt" id="Marks" name="Marks" fieldname="Marks" rows="5"></textarea>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-13-60 control-group">
+                                <div class="form-group">
+                                    <label for="CmdtyCd">@Resources.Locale.L_BSTSetup_Commodity</label>
+                                    <textarea class="form-control" dt="mt" id="CmdtyCd" name="CmdtyCd" fieldname="CmdtyCd" rows="5"></textarea>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-13-60 control-group">
+                                <div class="form-group">
+                                    <label for="Lgoods">@Resources.Locale.L_BSTSetup_LCommodity</label>
+                                    <textarea class="form-control" dt="mt" id="Lgoods" name="Lgoods" fieldname="Lgoods" rows="5"></textarea>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-24-60 control-group">
+                                <div class="form-group">
+                                    <label for="BankMsg">@Resources.Locale.L_DNDetail_Memo</label>
+                                    <textarea class="form-control" dt="mt" id="BankMsg" name="BankMsg" fieldname="BankMsg" rows="5"></textarea>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-30-60">
+                                <div class="form-group">
+                                    <label for="InvoiceRmk">Invoice Remark</label>
+                                    <textarea class="form-control" dt="mt" id="InvoiceRmk" name="InvoiceRmk" fieldname="InvoiceRmk" rows="3"></textarea>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-30-60">
+                                <div class="form-group">
+                                    <label for="PackingRmk">Packing Remark</label>
+                                    <textarea class="form-control" dt="mt" id="PackingRmk" name="PackingRmk" fieldname="PackingRmk" rows="3"></textarea>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-30-60">
+                                <div class="form-group">
+                                    <label for="InvIntru">@Resources.Locale.L_BSTSetup_InvIns</label>
+                                    <textarea class="form-control" dt="mt" id="InvIntru" name="InvIntru" fieldname="InvIntru"></textarea>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-30-60">
+                                <div class="form-group">
+                                    <label for="PkgIntru">@Resources.Locale.L_BSTSetup_PacIns</label>
+                                    <textarea class="form-control lastInput" dt="mt" id="PkgIntru" name="PkgIntru" fieldname="PkgIntru"></textarea>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-3-60">
+                                <label class="control-label">Location</label>
+                            </div>
+                            <div class="pure-u-sm-4-60">
+                                <input type="text" id="Cmp" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" readonly />
+                            </div>
+                            <div class="pure-u-sm-3-60 label-right">
+                                <label class="control-label">@Resources.Locale.L_GateReserveSetup_CreateExt</label>
+                            </div>
+                            <div class="pure-u-sm-4-60">
+                                <input type="text" id="Stn" class="form-control input-sm" dt="CreateExt" id="CreateExt" name="CreateExt" fieldname="CreateExt" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="CreateBy" class="control-label">@Resources.Locale.L_DNApproveManage_CreateBy</label>
+                            </div>
+                            <div class="pure-u-sm-5-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" name="CreateBy" fieldname="CreateBy" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" name="CreateDate" fieldname="CreateDate" readonly>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="ModifyBy" class="control-label">@Resources.Locale.L_IpPart_ModifyBy</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" name="ModifyBy" fieldname="ModifyBy" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" name="ModifyDate" fieldname="ModifyDate" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="UploadBy" class="control-label">Upload By</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="UploadBy" name="UploadBy" fieldname="UploadBy" readonly />
+                            </div>
+                            @*<div class="pure-u-sm-5-60">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="UploadDate" name="UploadDate" fieldname="UploadDate" readonly />
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <ul class="nav nav-tabs" role="tablist" id="myTab">
+                        <li role="presentation" class="active"><a href="#Invd" id="INVD" aria-controls="home" role="tab" data-toggle="tab">Invoice @Resources.Locale.L_DNManage_Detail</a></li>
+                        <li role="presentation"><a href="#Pkgd" aria-controls="profile" id="PKGD" role="tab" data-toggle="tab">Packing @Resources.Locale.L_DNManage_Detail</a></li>
+                        <li role="presentation"><a href="#Inpo" aria-controls="profile" id="INPO" role="tab" data-toggle="tab">@Resources.Locale.L_INPO_Detail</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="Invd">
+                            <div class="pure-g">
+                                <div class="pure-u-sm-60-60">
+                                    <table id="SubGrid1" class="_tableGrid" style="width: 100%">
+                                        <tr></tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="Pkgd">
+                            <div class="pure-g">
+                                <div class="pure-u-sm-60-60">
+                                    <ul class="list-inline">
+                                        <li><button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#packingUploadWindow" id="uploadPackingBtn" disabled>@Resources.Locale.L_DNManage_IpPack</button></li>
+                                        <li><button class="btn btn-sm btn-primary" id="transfer2Inv">@Resources.Locale.L_DNManage_EnterIv</button></li>
+                                        <li><button class="btn btn-sm btn-primary" id="copyFirstDn2Pkg">@Resources.Locale.L_DNManage_Copy</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="pure-g">
+                                <div class="pure-u-sm-60-60">
+                                    <table id="SubGrid2" class="_tableGrid" style="width: 100%">
+                                        <tr></tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="Inpo"> 
+                            <div class="pure-g">
+                                <div class="pure-u-sm-60-60">
+                                    <table id="SubGrid3" class="_tableGrid" style="width: 100%">
+                                        <tr></tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UId" fieldname="UId" iskey="true" />
+<input type="hidden" dt="mt" id="CombineFlag" fieldname="CombineFlag" />
+<input type="hidden" dt="mt" id="BatchFlagi" fieldname="BatchFlagi" />
+<input type="hidden" dt="mt" id="BatchFlagp" fieldname="BatchFlagp" />
+<input type="hidden" dt="mt" id="BatchFlagc" fieldname="BatchFlagc" />
+<input type="hidden" id="DnUid" />
+
+<!--Excel汇入视窗-->
+<div class="modal fade" id="packingUploadWindow" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">s
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_BSTQuery_ImpExcel</h4>
+            </div>
+            <form name="PACKING_EXCEL_UPLOAD_FROM" id="PACKING_EXCEL_UPLOAD_FROM" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-7-60">
+                            <label for="StartRow" class="control-label">@Resources.Locale.L_BSTQuery_BeginRow</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="number" class="form-control input-sm" id="StartRow" name="StartRow" isnumber="true" value="4" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <!-- <div class="pure-g">
+                        <div class="pure-u-sm-7-60">
+                            <label for="ImportStyle" class="control-label">匯入範本</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" id="ImportStyle" name="ImportStyle" >
+                                <option value="1">Style1</option>
+                                <option value="2">Style2</option>
+                                <option value="3">Style3</option>
+                            </select>
+                        </div>
+                    </div> -->
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="PackingUploadExcel" name="file" />
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="modalUploadBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap.file-input.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/DNManage/InvPkgSetup.js?20241025")"></script>

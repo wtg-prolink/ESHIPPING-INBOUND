@@ -1,0 +1,221 @@
+﻿@{
+    ViewBag.Title = "QueryView";
+}
+
+<script type="text/javascript">
+var CntTypeSel = "@ViewBag.CntTypeSel";
+var BscodeSel = "@ViewBag.BscodeSel";
+$(document).ready(function ($) {
+
+    //init Search
+    var gop = {};
+    var numberTemplate = "2";
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 250;
+    gop.AddUrl = { "url": rootPath + "QtiManage/SetupView", "title": "@Resources.Locale.L_SMQTI_SetupView", "id": "SetupView" };
+    gop.gridId = "containerInfoGrid";
+    gop.gridAttr = { caption: "@Resources.Locale.L_SMQTI_List", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    gop.gridSearchUrl = rootPath + "QtiManage/QueryData";
+    gop.multiselect = true;
+    gop.multiboxonly = true;
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        //dblClick(map);
+    }
+
+    gop.baseConditionFunc = function () {
+        return getCreateDateParams("CreateDate", gop);
+    }
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.BtnGroupId = "BtnGroupArea";
+    gop.loadCompleteFunc = function () {
+
+    }
+
+    gop.btnGroup = [
+       {
+           id: "UploadWin",
+           name: "Upload",
+           func: function () {
+               $("#PortFreeUploadWin").modal("show");
+               resetFileInput($("#PackingUploadExcel"));
+           }
+        },
+        {
+            id: "MBEdit",
+            name: "Modify",
+            func: function () {
+                var mygrid = $("#containerInfoGrid");
+                var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                var responseData = [];
+                $.each(selRowId, function (index, val) {
+                    responseData.push(mygrid.getRowData(selRowId[index]));
+                });
+                if (responseData.length <= 0) {
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActManage_Select1Data", 500, "warning");
+                    return;
+                }
+                var tranType = responseData[0].TranType;
+                var cmp = responseData[0].Cmp;
+                var podCd = responseData[0].PodCd;
+                var uids = "";
+                for (var i = 0; i < responseData.length; i++) {
+                    var uid = responseData[i].UId;
+                    if (tranType != responseData[i].TranType || cmp != responseData[i].Cmp || podCd != responseData[i].PodCd) {
+                        CommonFunc.Notify("", "Please select the same port of discharge", 500, "warning");
+                        return;
+                    }
+                    if (uids.length > 0)
+                        uids += ";";
+                    uids += uid;
+                }
+                top.topManager.openPage({
+                    href: rootPath + "QtiManage/SetupView?UId=" + uids,
+                    title: '@Resources.Locale.L_SMQTI_SetupView',
+                    id: 'SetupView'
+                });
+            }
+        }
+    ];
+
+    var colModelSetting = [
+        { name: 'IType', editable: true, hidden: false, width: 150, formatter: "select", editoptions: { value: 'DSTF:Storage;DDEM:Demurrage;DDET:Detention;BOTH:DEM\/DET;USAGE:Usage' } },
+        { name: 'EmptyReturn', hidden: false, width: 150, formatter: "select", editoptions: { value: BscodeSel }, },
+        { name: 'TranType', hidden: false, width: 150, formatter: "select", editoptions: { value: 'A:AIR;F:FCL;R:Railway' }, },
+        { name: 'CalType', editable: true, hidden: false, width: 170, formatter: "select", editoptions: { value: 'C:summation;F:constant' }, edittype: 'select' },
+        { name: 'CalDate', editable: true, hidden: false, width: 100, formatter: "select", editoptions: { value: 'D:ATD;A:ATA' }, edittype: 'select' },
+        { name: 'ChgDayType', formatter: "select", width: 150, editoptions: { value: 'C:Calendar Day;W:Working Day' } },
+    ];
+
+    genColModel("SMQTI", "U_ID", "L_SMQTI", colModelSetting).done(function (result) {
+
+        gop.gridColModel = result;
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        initSearch(gop);
+    });
+
+
+    function dblClick(map) {
+        var UId = map.Cmp;
+        var PodCd = map.PodCd;
+        var TerminalCd = map.TerminalCd;
+        var TranType = map.TranType;
+        top.topManager.openPage({
+            href: rootPath + "QtiManage/SetupView?Cmp=" + UId + "&PodCd=" + PodCd + "&TerminalCd=" + TerminalCd + "&TranType=" + TranType,
+            title: '@Resources.Locale.L_SMQTI_SetupView',
+            id: 'SetupView'
+        });
+    }
+
+    $("#PORTFREE_EXCEL_UPLOAD_FROM").submit(function () {
+        //var UId = $("#UId").val();
+        //$(this).find("input[type='hidden']").remove();
+        //$(this).append('<input type="hidden" name="UId" value="' + UId + '" />');
+        //$(this).append('<input type="hidden" name="ConfirmType" value="' + trantype + '" />');
+        var postData = new FormData($(this)[0]);
+
+        $.ajax({
+            url: rootPath + "QtiManage/UploadPortFree",
+            type: 'POST',
+            data: postData,
+            async: false,
+            beforeSend: function () {
+                CommonFunc.ToogleLoading(true);
+            },
+            success: function (data) {
+                //alert(data)
+                resetFileInput($("#PackingUploadExcel"));
+                CommonFunc.ToogleLoading(false);
+                if (data.message != "success") {
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActDeatilManage_Views_116" + data.message, 1300, "warning");
+                    return false;
+                }
+                CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpSuc", 500, "success");
+                $("#PortFreeUploadWin").modal("hide");
+                $("#SummarySearch").trigger("click");
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+
+        return false;
+    });
+});
+
+    function DownLoadExcel() {
+        window.open(rootPath + "QtiManage/DownLoadXls");
+    }
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+					</div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="PortFreeUploadWin" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Upload Port Free</h4>
+            </div>
+            <form name="PORTFREE_EXCEL_UPLOAD_FROM" id="PORTFREE_EXCEL_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="PackingUploadExcel" name="file"/>
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                     <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <a href="#" onclick="DownLoadExcel()">@Resources.Locale.L_DNManage_ClickDl (PortFreeDate_Upload_Format_V2_20241124)</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="modalUploadBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

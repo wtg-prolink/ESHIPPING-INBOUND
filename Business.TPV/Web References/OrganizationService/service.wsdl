@@ -1,0 +1,2998 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ws.tpvaoc.com/orgws" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ws.tpvaoc.com/orgws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ws.tpvaoc.com/orgws">
+      <s:element name="GetOrgBaseByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgBaseByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgBaseByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgManByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgManByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgManByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgPManByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgPManByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgPManByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgManByIDList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OrgidList" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgManByIDListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgManByIDListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgPManByIDList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OrgidList" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgPManByIDListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgPManByIDListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgEmpByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgEmpByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgEmpByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgEmpByID_OT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OTFlag" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgEmpByID_OTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgEmpByID_OTResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgEmpByFilter_OT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Manid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="WorkRule" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Keyword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OTFlag" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="opeUserID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgEmpByFilter_OTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgEmpByFilter_OTResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManTopOrg">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Manid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManTopOrgResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManTopOrgResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgPManTopOrg">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgPManTopOrgResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgPManTopOrgResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgPByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgPByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgPByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgSByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgSByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgSByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgASByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgASByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgASByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgASMByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgASMByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgASMByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpBaseByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Empyno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpBaseByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpBaseByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpSingleManByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Empyno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpSingleManByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpSingleManByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPOrgManByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Empyno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPOrgManByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpPOrgManByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPOrgManByAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AD" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPOrgManByADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpPOrgManByADResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPOrgManByMail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Mailaddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPOrgManByMailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpPOrgManByMailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPManByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Empyno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPManByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpPManByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPManByAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AD" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPManByADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpPManByADResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPManByMail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Mailaddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPManByMailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpPManByMailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpBaseByAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AD" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpBaseByADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpBaseByADResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpBaseByMail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Mailaddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpBaseByMailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpBaseByMailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPZBaseByAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AD" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPZBaseByADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpPZBaseByADResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPZBaseByMail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Mailaddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpPZBaseByMailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpPZBaseByMailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Empyno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpOrgByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgByAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AD" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgByADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpOrgByADResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgByMail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Mailaddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgByMailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpOrgByMailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgManByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Empyno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgManByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpOrgManByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgManByAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AD" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgManByADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpOrgManByADResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgManByMail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Mailaddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgManByMailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpOrgManByMailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManOrgByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Empyno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManOrgByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManOrgByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManOrgAddSubByEmpyno">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Empyno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManOrgAddSubByEmpynoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManOrgAddSubByEmpynoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManOrgAddSubByEmpynoList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EmpynoList" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManOrgAddSubByEmpynoListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManOrgAddSubByEmpynoListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAgentManOrgAddSub">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Empyno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AgentManList" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAgentManOrgAddSubResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAgentManOrgAddSubResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManOrgByAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AD" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManOrgByADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManOrgByADResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManOrgByMail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Mailaddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManOrgByMailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManOrgByMailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManonergMByAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AD" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManonergMByADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManonergMByADResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManonergMByMail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Mailaddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManonergMByMailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManonergMByMailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllOrgByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Empyno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllOrgByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManAllOrgByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllOrgMByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Empyno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllOrgMByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManAllOrgMByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllSubordByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Empyno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllSubordByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManAllSubordByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllOrgByAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AD" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllOrgByADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManAllOrgByADResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllOrgByMail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Mailaddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllOrgByMailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManAllOrgByMailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllOrgMByAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AD" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllOrgMByADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManAllOrgMByADResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllOrgMByMail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Mailaddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManAllOrgMByMailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManAllOrgMByMailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgOutManBySite">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Site" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgOutManBySiteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgOutManBySiteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteGMBySite">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Site" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiteGMBySiteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSiteGMBySiteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgPathByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgPathByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgPathByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDetailBySiteCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SiteCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDetailBySiteCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDetailBySiteCodeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadOrgBaseBySiteCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SiteCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadOrgBaseBySiteCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadOrgBaseBySiteCodeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadOrgLinkBySiteCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SiteCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadOrgLinkBySiteCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadOrgLinkBySiteCodeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadOrgManBySiteCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SiteCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadOrgManBySiteCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadOrgManBySiteCodeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadEmpBaseBySiteCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SiteCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadEmpBaseBySiteCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadEmpBaseBySiteCodeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadEmpBaseBySiteCodeForPLM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SiteCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadEmpBaseBySiteCodeForPLMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadEmpBaseBySiteCodeForPLMResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgMan">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Empyno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpOrgManResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpOrgManResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpAllOrgByAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Orgid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmpAllOrgByADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmpAllOrgByADResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="Res" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetOrgBaseByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgBaseByID" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgBaseByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgBaseByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgManByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgManByID" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgManByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgManByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgPManByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgPManByID" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgPManByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgPManByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgManByIDListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgManByIDList" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgManByIDListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgManByIDListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgPManByIDListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgPManByIDList" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgPManByIDListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgPManByIDListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgEmpByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgEmpByID" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgEmpByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgEmpByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgEmpByID_OTSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgEmpByID_OT" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgEmpByID_OTSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgEmpByID_OTResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgEmpByFilter_OTSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgEmpByFilter_OT" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgEmpByFilter_OTSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgEmpByFilter_OTResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManTopOrgSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManTopOrg" />
+  </wsdl:message>
+  <wsdl:message name="GetManTopOrgSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManTopOrgResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgPManTopOrgSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgPManTopOrg" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgPManTopOrgSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgPManTopOrgResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgPByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgPByID" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgPByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgPByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgSByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgSByID" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgSByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgSByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgASByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgASByID" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgASByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgASByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgASMByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgASMByID" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgASMByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgASMByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpBaseByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpBaseByID" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpBaseByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpBaseByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpSingleManByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpSingleManByID" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpSingleManByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpSingleManByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPOrgManByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpPOrgManByID" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPOrgManByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpPOrgManByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPOrgManByADSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpPOrgManByAD" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPOrgManByADSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpPOrgManByADResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPOrgManByMailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpPOrgManByMail" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPOrgManByMailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpPOrgManByMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPManByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpPManByID" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPManByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpPManByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPManByADSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpPManByAD" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPManByADSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpPManByADResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPManByMailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpPManByMail" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPManByMailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpPManByMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpBaseByADSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpBaseByAD" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpBaseByADSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpBaseByADResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpBaseByMailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpBaseByMail" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpBaseByMailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpBaseByMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPZBaseByADSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpPZBaseByAD" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPZBaseByADSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpPZBaseByADResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPZBaseByMailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpPZBaseByMail" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpPZBaseByMailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpPZBaseByMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgByID" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgByADSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgByAD" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgByADSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgByADResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgByMailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgByMail" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgByMailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgByMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgManByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgManByID" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgManByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgManByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgManByADSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgManByAD" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgManByADSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgManByADResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgManByMailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgManByMail" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgManByMailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgManByMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManOrgByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManOrgByID" />
+  </wsdl:message>
+  <wsdl:message name="GetManOrgByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManOrgByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManOrgAddSubByEmpynoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManOrgAddSubByEmpyno" />
+  </wsdl:message>
+  <wsdl:message name="GetManOrgAddSubByEmpynoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManOrgAddSubByEmpynoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManOrgAddSubByEmpynoListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManOrgAddSubByEmpynoList" />
+  </wsdl:message>
+  <wsdl:message name="GetManOrgAddSubByEmpynoListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManOrgAddSubByEmpynoListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAgentManOrgAddSubSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAgentManOrgAddSub" />
+  </wsdl:message>
+  <wsdl:message name="GetAgentManOrgAddSubSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAgentManOrgAddSubResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManOrgByADSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManOrgByAD" />
+  </wsdl:message>
+  <wsdl:message name="GetManOrgByADSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManOrgByADResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManOrgByMailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManOrgByMail" />
+  </wsdl:message>
+  <wsdl:message name="GetManOrgByMailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManOrgByMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManonergMByADSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManonergMByAD" />
+  </wsdl:message>
+  <wsdl:message name="GetManonergMByADSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManonergMByADResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManonergMByMailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManonergMByMail" />
+  </wsdl:message>
+  <wsdl:message name="GetManonergMByMailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManonergMByMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllOrgByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManAllOrgByID" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllOrgByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManAllOrgByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllOrgMByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManAllOrgMByID" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllOrgMByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManAllOrgMByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllSubordByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManAllSubordByID" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllSubordByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManAllSubordByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllOrgByADSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManAllOrgByAD" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllOrgByADSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManAllOrgByADResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllOrgByMailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManAllOrgByMail" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllOrgByMailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManAllOrgByMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllOrgMByADSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManAllOrgMByAD" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllOrgMByADSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManAllOrgMByADResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllOrgMByMailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManAllOrgMByMail" />
+  </wsdl:message>
+  <wsdl:message name="GetManAllOrgMByMailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManAllOrgMByMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgOutManBySiteSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgOutManBySite" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgOutManBySiteSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgOutManBySiteResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteGMBySiteSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSiteGMBySite" />
+  </wsdl:message>
+  <wsdl:message name="GetSiteGMBySiteSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSiteGMBySiteResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgPathByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgPathByID" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgPathByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgPathByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDetailBySiteCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDetailBySiteCode" />
+  </wsdl:message>
+  <wsdl:message name="GetDetailBySiteCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDetailBySiteCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadOrgBaseBySiteCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadOrgBaseBySiteCode" />
+  </wsdl:message>
+  <wsdl:message name="LoadOrgBaseBySiteCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadOrgBaseBySiteCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadOrgLinkBySiteCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadOrgLinkBySiteCode" />
+  </wsdl:message>
+  <wsdl:message name="LoadOrgLinkBySiteCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadOrgLinkBySiteCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadOrgManBySiteCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadOrgManBySiteCode" />
+  </wsdl:message>
+  <wsdl:message name="LoadOrgManBySiteCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadOrgManBySiteCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadEmpBaseBySiteCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadEmpBaseBySiteCode" />
+  </wsdl:message>
+  <wsdl:message name="LoadEmpBaseBySiteCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadEmpBaseBySiteCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadEmpBaseBySiteCodeForPLMSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadEmpBaseBySiteCodeForPLM" />
+  </wsdl:message>
+  <wsdl:message name="LoadEmpBaseBySiteCodeForPLMSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadEmpBaseBySiteCodeForPLMResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgManSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgMan" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpOrgManSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpOrgManResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpAllOrgByADSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmpAllOrgByAD" />
+  </wsdl:message>
+  <wsdl:message name="GetEmpAllOrgByADSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmpAllOrgByADResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="GetOrgBaseByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入组织代码，回传组织基本信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgBaseByIDSoapIn" />
+      <wsdl:output message="tns:GetOrgBaseByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgManByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入组织代码，回传组织主管信息（可能有多笔）。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgManByIDSoapIn" />
+      <wsdl:output message="tns:GetOrgManByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPManByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入组织代码，回传上级组织及主管信息（可能有多笔）。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgPManByIDSoapIn" />
+      <wsdl:output message="tns:GetOrgPManByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgManByIDList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入多个组织代码（,逗号分隔，一次最多传入20个组织代码），回传组织主管信息（可能有多笔）。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgManByIDListSoapIn" />
+      <wsdl:output message="tns:GetOrgManByIDListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPManByIDList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入多个组织代码（,逗号分隔，一次最多传入20个组织代码），回传上级组织及主管信息（可能有多笔）。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgPManByIDListSoapIn" />
+      <wsdl:output message="tns:GetOrgPManByIDListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgEmpByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入组织代码，回传组织人员信息（可能有多笔）。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgEmpByIDSoapIn" />
+      <wsdl:output message="tns:GetOrgEmpByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgEmpByID_OT">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入组织代码，回传组织人员信息（可能有多笔） 加班专用，CanOT： 1 仅可加班员工，2 全部员工。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgEmpByID_OTSoapIn" />
+      <wsdl:output message="tns:GetOrgEmpByID_OTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgEmpByFilter_OT">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入组织代码等条件，回传组织人员信息（可能有多笔） 加班专用，Manid：主管卡号；opeUserID：填表人卡号；WorkRule：班别；Keyword：卡号/姓名/mail；CanOT： 1 仅可加班员工，2 全部员工。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgEmpByFilter_OTSoapIn" />
+      <wsdl:output message="tns:GetOrgEmpByFilter_OTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManTopOrg">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入组织代码和主管卡号，回传该主管在此组织的最上层直接直接管辖组织代码。</wsdl:documentation>
+      <wsdl:input message="tns:GetManTopOrgSoapIn" />
+      <wsdl:output message="tns:GetManTopOrgSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPManTopOrg">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入组织代码，回传该组织的上级部门主管的Top管辖组织信息和主管信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgPManTopOrgSoapIn" />
+      <wsdl:output message="tns:GetOrgPManTopOrgSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入组织代码，回传直接上级组织信息（可能有多笔）。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgPByIDSoapIn" />
+      <wsdl:output message="tns:GetOrgPByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgSByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入组织代码，回传直接下级组织信息（可能有多笔）。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgSByIDSoapIn" />
+      <wsdl:output message="tns:GetOrgSByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgASByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入组织代码，回传所有下级组织信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgASByIDSoapIn" />
+      <wsdl:output message="tns:GetOrgASByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgASMByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入组织代码，回传所有下级组织信息（含主管）。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgASMByIDSoapIn" />
+      <wsdl:output message="tns:GetOrgASMByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpBaseByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员卡号，回传人员基本信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpBaseByIDSoapIn" />
+      <wsdl:output message="tns:GetEmpBaseByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpSingleManByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员卡号，回传单实线主管。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpSingleManByIDSoapIn" />
+      <wsdl:output message="tns:GetEmpSingleManByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPOrgManByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员卡号，回传人员主管部门信息：若此人不是主管，则回传其所在部门主管信息，若此人是主管，则还将回传其所管辖部门的上级部门主管信息（不含自身主管部门信息）。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpPOrgManByIDSoapIn" />
+      <wsdl:output message="tns:GetEmpPOrgManByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPOrgManByAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员AD，回传人员主管部门信息：若此人不是主管，则回传其所在部门主管信息，若此人是主管，则还将回传其所管辖部门的上级部门主管信息（不含自身主管部门信息）。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpPOrgManByADSoapIn" />
+      <wsdl:output message="tns:GetEmpPOrgManByADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPOrgManByMail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员Mail，回传人员主管部门信息：若此人不是主管，则回传其所在部门主管信息，若此人是主管，则还将回传其所管辖部门的上级部门主管信息（不含自身主管部门信息）。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpPOrgManByMailSoapIn" />
+      <wsdl:output message="tns:GetEmpPOrgManByMailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPManByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员卡号，回传人员直接主管信息：若此人有兼管其他部门，则还将回传其所管辖部门的上级部门主管信息（若有多个主管，则只返回一笔，若实现组织主管与虚线组织主管是同一个人则只返回一笔实现主管）。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpPManByIDSoapIn" />
+      <wsdl:output message="tns:GetEmpPManByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPManByAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员AD，回传人员直接主管信息：若此人有兼管其他部门，则还将回传其所管辖部门的上级部门主管信息（若有多个主管，则只返回一笔，若实现组织主管与虚线组织主管是同一个人则只返回一笔实现主管）。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpPManByADSoapIn" />
+      <wsdl:output message="tns:GetEmpPManByADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPManByMail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员Mail，回传人员直接主管信息：若此人有兼管其他部门，则还将回传其所管辖部门的上级部门主管信息（若有多个主管，则只返回一笔，若实现组织主管与虚线组织主管是同一个人则只返回一笔实现主管）。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpPManByMailSoapIn" />
+      <wsdl:output message="tns:GetEmpPManByMailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpBaseByAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员AD，回传人员基本信息（可能有多笔）。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpBaseByADSoapIn" />
+      <wsdl:output message="tns:GetEmpBaseByADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpBaseByMail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员Mail，回传人员基本信息（可能有多笔）。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpBaseByMailSoapIn" />
+      <wsdl:output message="tns:GetEmpBaseByMailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPZBaseByAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员AD，回传人员在派驻地的基本信息，即群组为B。（若无派驻地信息，则回传所在Site信息）。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpPZBaseByADSoapIn" />
+      <wsdl:output message="tns:GetEmpPZBaseByADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPZBaseByMail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员Mail，回传人员在派驻地的基本信息，即群组为B。（若无派驻地信息，则回传所在Site信息）。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpPZBaseByMailSoapIn" />
+      <wsdl:output message="tns:GetEmpPZBaseByMailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员卡号，回传人员所属组织基本信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpOrgByIDSoapIn" />
+      <wsdl:output message="tns:GetEmpOrgByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgByAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员AD，回传人员所属组织基本信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpOrgByADSoapIn" />
+      <wsdl:output message="tns:GetEmpOrgByADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgByMail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员Mail，回传人员所属组织基本信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpOrgByMailSoapIn" />
+      <wsdl:output message="tns:GetEmpOrgByMailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgManByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员卡号，回传人员所在部门主管基本信息（有可能是自己）。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpOrgManByIDSoapIn" />
+      <wsdl:output message="tns:GetEmpOrgManByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgManByAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员AD，回传人员所在部门主管基本信息（有可能是自己）。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpOrgManByADSoapIn" />
+      <wsdl:output message="tns:GetEmpOrgManByADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgManByMail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员Mail，回传人员所在部门主管基本信息（有可能是自己）。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpOrgManByMailSoapIn" />
+      <wsdl:output message="tns:GetEmpOrgManByMailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入主管卡号，回传直接管辖的部门信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetManOrgByIDSoapIn" />
+      <wsdl:output message="tns:GetManOrgByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgAddSubByEmpyno">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入主管卡号，回传直接管辖的部门信息 + 下一级部门信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetManOrgAddSubByEmpynoSoapIn" />
+      <wsdl:output message="tns:GetManOrgAddSubByEmpynoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgAddSubByEmpynoList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入多个主管卡号（,逗号分隔），回传直接管辖的部门信息 + 下一级部门信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetManOrgAddSubByEmpynoListSoapIn" />
+      <wsdl:output message="tns:GetManOrgAddSubByEmpynoListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentManOrgAddSub">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入员工卡号和其代理的多个主管卡号（,逗号分隔），回传代理主管直接管辖的部门信息 + 下一级部门信息，排除本人管辖的部门。</wsdl:documentation>
+      <wsdl:input message="tns:GetAgentManOrgAddSubSoapIn" />
+      <wsdl:output message="tns:GetAgentManOrgAddSubSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgByAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入主管AD，回传直接管辖的部门信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetManOrgByADSoapIn" />
+      <wsdl:output message="tns:GetManOrgByADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgByMail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入主管Mail，回传直接管辖的部门信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetManOrgByMailSoapIn" />
+      <wsdl:output message="tns:GetManOrgByMailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManonergMByAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入主管AD，回传管辖的ONE部门信息</wsdl:documentation>
+      <wsdl:input message="tns:GetManonergMByADSoapIn" />
+      <wsdl:output message="tns:GetManonergMByADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManonergMByMail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入主管Mail，回传管辖的下级部门及主管信息</wsdl:documentation>
+      <wsdl:input message="tns:GetManonergMByMailSoapIn" />
+      <wsdl:output message="tns:GetManonergMByMailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入主管卡号，回传管辖的所有部门信息，含无限下下级部门。</wsdl:documentation>
+      <wsdl:input message="tns:GetManAllOrgByIDSoapIn" />
+      <wsdl:output message="tns:GetManAllOrgByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgMByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入主管卡号，回传管辖的所有部门（含主管信息），含无限下下级部门。</wsdl:documentation>
+      <wsdl:input message="tns:GetManAllOrgMByIDSoapIn" />
+      <wsdl:output message="tns:GetManAllOrgMByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllSubordByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入主管卡号，回传所有下属信息，含无限下下级。</wsdl:documentation>
+      <wsdl:input message="tns:GetManAllSubordByIDSoapIn" />
+      <wsdl:output message="tns:GetManAllSubordByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgByAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入主管AD，回传管辖的所有部门信息，含无限下下级部门。</wsdl:documentation>
+      <wsdl:input message="tns:GetManAllOrgByADSoapIn" />
+      <wsdl:output message="tns:GetManAllOrgByADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgByMail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入主管Mail，回传管辖的所有部门信息，含无限下下级部门。</wsdl:documentation>
+      <wsdl:input message="tns:GetManAllOrgByMailSoapIn" />
+      <wsdl:output message="tns:GetManAllOrgByMailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgMByAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入主管AD，回传管辖的所有部门（含主管信息），含无限下下级部门。</wsdl:documentation>
+      <wsdl:input message="tns:GetManAllOrgMByADSoapIn" />
+      <wsdl:output message="tns:GetManAllOrgMByADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgMByMail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入主管Mail，回传管辖的所有部门（含主管信息），含无限下下级部门。</wsdl:documentation>
+      <wsdl:input message="tns:GetManAllOrgMByMailSoapIn" />
+      <wsdl:output message="tns:GetManAllOrgMByMailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgOutManBySite">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入Site，回传该Site所有线外设置的主管信息，若Site传空值则回传所有Site线外设置的主管（Site：FQ,XM,TP,WH,SZ,BJ...）。</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgOutManBySiteSoapIn" />
+      <wsdl:output message="tns:GetOrgOutManBySiteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteGMBySite">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入Site，回传该Site GM信息，若Site传空值则回传所有Site GM（搜寻逻辑为组织短名='Site GM',Site：FQ,XM,TP,WH,SZ,BJ...）。</wsdl:documentation>
+      <wsdl:input message="tns:GetSiteGMBySiteSoapIn" />
+      <wsdl:output message="tns:GetSiteGMBySiteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPathByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入组织代码，回传该组织上级信息</wsdl:documentation>
+      <wsdl:input message="tns:GetOrgPathByIDSoapIn" />
+      <wsdl:output message="tns:GetOrgPathByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDetailBySiteCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入Site编码前两码传出Site详细信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetDetailBySiteCodeSoapIn" />
+      <wsdl:output message="tns:GetDetailBySiteCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadOrgBaseBySiteCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入Site编码（组织编号前两码）获取Site组织基本信息，含虚拟组织。SiteCode传空值将获取所有组织基本信息。</wsdl:documentation>
+      <wsdl:input message="tns:LoadOrgBaseBySiteCodeSoapIn" />
+      <wsdl:output message="tns:LoadOrgBaseBySiteCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadOrgLinkBySiteCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入Site编码（组织编号前两码）获取Site组织关联信息。SiteCode传空值将获取所有组织关联信息。</wsdl:documentation>
+      <wsdl:input message="tns:LoadOrgLinkBySiteCodeSoapIn" />
+      <wsdl:output message="tns:LoadOrgLinkBySiteCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadOrgManBySiteCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入Site编码（组织编号前两码）获取Site组织主管信息。SiteCode传空值将获取所有组织主管信息。</wsdl:documentation>
+      <wsdl:input message="tns:LoadOrgManBySiteCodeSoapIn" />
+      <wsdl:output message="tns:LoadOrgManBySiteCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadEmpBaseBySiteCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入Site编码（组织编号前两码）获取Site员工信息。SiteCode传空值将获取所有员工信息。</wsdl:documentation>
+      <wsdl:input message="tns:LoadEmpBaseBySiteCodeSoapIn" />
+      <wsdl:output message="tns:LoadEmpBaseBySiteCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadEmpBaseBySiteCodeForPLM">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">[for PLM]传入Site编码（组织编号前两码，多个以英文逗号,分隔）获取该Site全部员工信息。SiteCode传空值将获取集团所有员工信息。</wsdl:documentation>
+      <wsdl:input message="tns:LoadEmpBaseBySiteCodeForPLMSoapIn" />
+      <wsdl:output message="tns:LoadEmpBaseBySiteCodeForPLMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgMan">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入部门和卡号，回传员工在该部门的主管，不能是自己，若是自己则返回空。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpOrgManSoapIn" />
+      <wsdl:output message="tns:GetEmpOrgManSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpAllOrgByAD">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">传入人员AD和部门代码，回传员工所在与管辖的部门与直属主管信息。</wsdl:documentation>
+      <wsdl:input message="tns:GetEmpAllOrgByADSoapIn" />
+      <wsdl:output message="tns:GetEmpAllOrgByADSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ServiceHttpGet" />
+  <wsdl:portType name="ServiceHttpPost" />
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOrgBaseByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgBaseByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgManByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgManByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPManByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgPManByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgManByIDList">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgManByIDList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPManByIDList">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgPManByIDList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgEmpByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgEmpByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgEmpByID_OT">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgEmpByID_OT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgEmpByFilter_OT">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgEmpByFilter_OT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManTopOrg">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManTopOrg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPManTopOrg">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgPManTopOrg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgPByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgSByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgSByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgASByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgASByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgASMByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgASMByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpBaseByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpBaseByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpSingleManByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpSingleManByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPOrgManByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPOrgManByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPOrgManByAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPOrgManByAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPOrgManByMail">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPOrgManByMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPManByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPManByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPManByAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPManByAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPManByMail">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPManByMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpBaseByAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpBaseByAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpBaseByMail">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpBaseByMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPZBaseByAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPZBaseByAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPZBaseByMail">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPZBaseByMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgByAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgByAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgByMail">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgByMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgManByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgManByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgManByAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgManByAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgManByMail">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgManByMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManOrgByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgAddSubByEmpyno">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManOrgAddSubByEmpyno" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgAddSubByEmpynoList">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManOrgAddSubByEmpynoList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentManOrgAddSub">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetAgentManOrgAddSub" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgByAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManOrgByAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgByMail">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManOrgByMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManonergMByAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManonergMByAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManonergMByMail">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManonergMByMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllOrgByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgMByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllOrgMByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllSubordByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllSubordByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgByAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllOrgByAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgByMail">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllOrgByMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgMByAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllOrgMByAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgMByMail">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllOrgMByMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgOutManBySite">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgOutManBySite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteGMBySite">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetSiteGMBySite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPathByID">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgPathByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDetailBySiteCode">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetDetailBySiteCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadOrgBaseBySiteCode">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/LoadOrgBaseBySiteCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadOrgLinkBySiteCode">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/LoadOrgLinkBySiteCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadOrgManBySiteCode">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/LoadOrgManBySiteCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadEmpBaseBySiteCode">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/LoadEmpBaseBySiteCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadEmpBaseBySiteCodeForPLM">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/LoadEmpBaseBySiteCodeForPLM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgMan">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgMan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpAllOrgByAD">
+      <soap:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpAllOrgByAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOrgBaseByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgBaseByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgManByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgManByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPManByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgPManByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgManByIDList">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgManByIDList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPManByIDList">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgPManByIDList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgEmpByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgEmpByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgEmpByID_OT">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgEmpByID_OT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgEmpByFilter_OT">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgEmpByFilter_OT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManTopOrg">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManTopOrg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPManTopOrg">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgPManTopOrg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgPByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgSByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgSByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgASByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgASByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgASMByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgASMByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpBaseByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpBaseByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpSingleManByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpSingleManByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPOrgManByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPOrgManByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPOrgManByAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPOrgManByAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPOrgManByMail">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPOrgManByMail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPManByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPManByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPManByAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPManByAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPManByMail">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPManByMail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpBaseByAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpBaseByAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpBaseByMail">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpBaseByMail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPZBaseByAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPZBaseByAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpPZBaseByMail">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpPZBaseByMail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgByAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgByAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgByMail">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgByMail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgManByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgManByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgManByAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgManByAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgManByMail">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgManByMail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManOrgByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgAddSubByEmpyno">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManOrgAddSubByEmpyno" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgAddSubByEmpynoList">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManOrgAddSubByEmpynoList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentManOrgAddSub">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetAgentManOrgAddSub" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgByAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManOrgByAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManOrgByMail">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManOrgByMail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManonergMByAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManonergMByAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManonergMByMail">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManonergMByMail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllOrgByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgMByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllOrgMByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllSubordByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllSubordByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgByAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllOrgByAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgByMail">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllOrgByMail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgMByAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllOrgMByAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManAllOrgMByMail">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetManAllOrgMByMail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgOutManBySite">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgOutManBySite" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteGMBySite">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetSiteGMBySite" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgPathByID">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetOrgPathByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDetailBySiteCode">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetDetailBySiteCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadOrgBaseBySiteCode">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/LoadOrgBaseBySiteCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadOrgLinkBySiteCode">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/LoadOrgLinkBySiteCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadOrgManBySiteCode">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/LoadOrgManBySiteCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadEmpBaseBySiteCode">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/LoadEmpBaseBySiteCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadEmpBaseBySiteCodeForPLM">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/LoadEmpBaseBySiteCodeForPLM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpOrgMan">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpOrgMan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpAllOrgByAD">
+      <soap12:operation soapAction="http://ws.tpvaoc.com/orgws/GetEmpAllOrgByAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceHttpGet" type="tns:ServiceHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="ServiceHttpPost" type="tns:ServiceHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="https://ws.tpv-tech.com/orgws/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="https://ws.tpv-tech.com/orgws/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceHttpGet" binding="tns:ServiceHttpGet">
+      <http:address location="https://ws.tpv-tech.com/orgws/Service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceHttpPost" binding="tns:ServiceHttpPost">
+      <http:address location="https://ws.tpv-tech.com/orgws/Service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

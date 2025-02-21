@@ -1,0 +1,128 @@
+﻿@{
+ViewBag.Title = "DistSetupView";
+}
+<script type="text/javascript">
+	var _uid = "@ViewBag.Uid";
+	var schemas = "@ViewBag.schemas.Content";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/BsdistManage/DistSetupView.js?20240815")"></script>
+<div id="wrapper">
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Ltype" class="control-label">@Resources.Locale.L_DistManage_Ltype</label><!--Ltype-->
+						</div>
+						<div class="pure-u-sm-10-60">
+							<select dt="mt" name="Ltype" id="Ltype" fieldname="Ltype" class="form-control input-sm">
+								<option value="P">P:Port</option>
+								<option value="T">T:Truck</option>
+								<option value="D">D:Dest</option>
+							</select>
+						</div>
+						
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="CntryCd" class="control-label">@Resources.Locale.L_DistManage_CntryCd</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="CntryCd" name="CntryCd" fieldname="CntryCd"/>
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="CntryCdLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60 control-group">
+							<input type="text" class=" form-control input-sm" dt="mt" id="CntryNm" name="CntryNm" fieldname="CntryNm" readonly="readonly" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="StateCd" class="control-label">@Resources.Locale.L_DistManage_StateCd</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="StateCd" name="StateCd" fieldname="StateCd"/>
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="StateCdLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60 control-group">
+							<input type="text" class=" form-control input-sm" dt="mt" id="StateNm" name="StateNm" fieldname="StateNm" readonly="readonly"/>
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="CityCd" class="control-label">@Resources.Locale.L_DistManage_CityCd</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="CityCd" name="CityCd" fieldname="CityCd"/>
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="CityCdLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60 control-group">
+							<input type="text" class=" form-control input-sm" dt="mt" id="CityNm" name="CityNm" fieldname="CityNm" readonly="readonly"/>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="DistCd" class="control-label">@Resources.Locale.L_DistManage_DistCd</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class=" form-control input-sm" dt="mt" id="DistCd" name="DistCd" fieldname="DistCd" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="DistNm" class="control-label">@Resources.Locale.L_DistManage_DistNm</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class=" form-control input-sm" dt="mt" id="DistNm" name="DistNm" fieldname="DistNm" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="ZipF" class="control-label">@Resources.Locale.L_DistManage_ZipF</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class=" form-control input-sm" dt="mt" id="ZipF" name="ZipF" fieldname="ZipF" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="ZipE" class="control-label">@Resources.Locale.L_DistManage_ZipE</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class=" form-control input-sm" dt="mt" id="ZipE" name="ZipE" fieldname="ZipE" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="PickFee" class="control-label">@Resources.Locale.L_DistManage_PickFee</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class=" form-control input-sm" dt="mt" id="PickFee" name="PickFee" fieldname="PickFee" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" isKey="ture" />

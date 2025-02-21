@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "RQQuery";
+}
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        var actFormatter = function (cellvalue, options, rawObject) {
+            var val = 0;
+            if (cellvalue == null || cellvalue === undefined || cellvalue == 0)
+                val = "";
+            else
+                val = cellvalue;
+            if (1 === cellvalue)
+                return '<div style="color: green;font-weight: bold;background-color: greenyellow;">' + val + '</div>';
+            return val;
+        };
+        var select_tranmode = "@ViewBag.SelectTranMode";
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 300;
+        gop.gridColModel = [
+            { name: 'UId', title: 'ID', showname: 'UId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'Status', title: '@Resources.Locale.L_RQQuery_Status', index: 'Status', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:@Resources.Locale.L_RQQuery_AplInquiry;B:@Resources.Locale.L_RQQuery_Inquiring;C:@Resources.Locale.L_RQQuery_End;D:@Resources.Locale.L_RQQuery_Closed;V:@Resources.Locale.L_MenuBar_Audit;T:@Resources.Locale.L_RQSetup_Termination' } },
+            { name: 'Period', title: '@Resources.Locale.L_RQQuery_Period', index: 'Period', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'R:RFQ;B:BID' } },
+            { name: 'RfqNo', title: '@Resources.Locale.L_RQQuery_RfqNo', index: 'RfqNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RfqFrom', title: '@Resources.Locale.L_RQQuery_RfqFrom', index: 'RfqFrom', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RfqTo', title: '@Resources.Locale.L_RQQuery_RfqTo', index: 'RfqTo', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RfqDate', title: '@Resources.Locale.L_RQQuery_RfqDate', index: 'RfqDate', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'EffectFrom', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'EffectTo', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TranMode', title: '@Resources.Locale.L_RQQuery_TranMode', index: 'TranMode', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_tranmode } },
+            //{ name: 'TranMode', title: '運輸別', index: 'TranMode', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:空运;F:海运整柜;S:国内快递;E:国际快递;L:海运散货;D:国内运输' } },
+            { name: 'Rlocation', title: '@Resources.Locale.L_RQQuery_Rlocation', index: 'Rlocation', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RlocationNm', title: '@Resources.Locale.L_MailGroupSetup_Name', index: 'RlocationNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'FreightTerm', title: '@Resources.Locale.L_RQQuery_FreightTerm', index: 'FreightTerm', width: 100, align: 'left', sorttype: 'string', hidden: false, remark: 'P:P.Prepaid;C:C.Collect;O:O.Other' },
+            { name: 'Incoterm', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'Incoterm', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            //{ name: 'ServiceMode', title: '@Resources.Locale.L_RQQuery_ServiceMode', index: 'ServiceMode', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LoadingFrom', title: 'Loading From', index: 'LoadingFrom', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LoadingTo', title: 'Loading To', index: 'LoadingTo', width: 90, align: 'left', sorttype: 'string', hidden: false },
+
+            { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', width: 60, align: 'left', sorttype: 'string', hidden: false },
+
+            { name: 'PolCd', title: '@Resources.Locale.L_BaseLookup_PolCd', index: 'PolCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PolNm', title: '@Resources.Locale.L_BaseLookup_PolName', index: 'PolNm', width: 90, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'PodCd', title: '@Resources.Locale.L_BaseLookup_DestCd', index: 'PodCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PodNm', title: '@Resources.Locale.L_BaseLookup_DestName', index: 'PodNm', width: 90, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'Cnt20', title: '@Resources.Locale.L_DNDetailVeiw_Cnt20', index: 'Cnt20', width: 90, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+            { name: 'Cnt40', title: '@Resources.Locale.L_DNDetailVeiw_Cnt40', index: 'Cnt40', width: 90, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+            { name: 'Cnt40hq', title: '@Resources.Locale.L_DNDetailVeiw_Cnt40hq', index: 'Cnt40hq', width: 90, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+            { name: 'Gw', title: '@Resources.Locale.L_BaseLookup_Gw', index: 'Gw', width: 90, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+            { name: 'Gwu', title: 'GWU', index: 'Gwu', width: 50, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Cbm', title: '@Resources.Locale.L_ForecastQueryData_Cbm', index: 'Cbm', width: 90, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+            { name: 'PltNum', title: '@Resources.Locale.L_BaseLookup_PltNum', index: 'PltNum', width: 90, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+            { name: 'Dim', title: '@Resources.Locale.L_DNApproveManage_Cbm', index: 'Dim', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PickupAddr', title: '@Resources.Locale.L_RQQuery_PickupAddr', index: 'PickupAddr', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DlvAddr', title: '@Resources.Locale.L_RQQuery_DlvAddr', index: 'DlvAddr', width: 90, align: 'left', sorttype: 'string', hidden: false },
+
+            { name: 'CreateBy', title: '@Resources.Locale.L_DNApproveManage_CreateBy', index: 'CreateBy', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateExt', title: '@Resources.Locale.L_GateReserveSetup_CreateExt', index: 'CreateExt', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Remark', title: '@Resources.Locale.L_IpPart_Remark', index: 'Remark', width: 500, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'ContractType', title: '@Resources.Locale.L_RQQuery_ContactType', index: 'ContractType', width: 300, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: _getLang("L_ContactTypeDescp", "C:合约价;I:舱保内加价;W:舱保外加价") } },
+            { name: 'OutInDesc', title: '@Resources.Locale.L_RQQuery_OutIn', index: 'OutInDesc', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			//{ name: 'BusinessGroup', title: 'BG', index: 'BusinessGroup', width: 300, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: "All:@Resources.Locale.L_UserSetUp_All;ODM:ODM;OBM:OBM" } }
+        ];
+        gop.AddUrl = { "url": rootPath + "RQManage/RQSetup", "title": "@Resources.Locale.L_RQQuery_EntInquiry", "id": "RQSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_RQQuery_InquiryList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "RQManage/RQManageQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "CreateDate";
+        }
+
+        gop.statusGroup = [
+            { "id": "", "label": "@Resources.Locale.L_UserSetUp_All" },
+            { "id": "A", "label": "@Resources.Locale.L_RQQuery_AplInquiry" },
+            { "id": "B", "label": "@Resources.Locale.L_RQQuery_Inquiring" },
+            { "id": "C", "label": "@Resources.Locale.L_RQQuery_End" },
+            { "id": "D", "label": "@Resources.Locale.L_RQQuery_Closed" },
+            { "id": "V", "label": "@Resources.Locale.L_MenuBar_Audit" },
+            { "id": "T", "label": "@Resources.Locale.L_RQSetup_Termination" }
+        ];
+
+        gop.statusField = "Status";
+        gop.statusDefaultId = "A";
+
+        initSearch(gop);
+        $("#SummarySearch").bind("click", function () {
+            $(".status-box").removeClass("active");
+            $("#searchStatus_").addClass("active");
+        });
+
+        function dblClick(map) {
+            var UId = map.UId;
+            top.topManager.openPage({
+                href: rootPath + "RQManage/RQSetup/" + UId,
+                title: '@Resources.Locale.L_RQQuery_EntInquiry',
+                id: 'RQSetup',
+                search: 'uid=' + UId
+            });
+        }
+    });
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

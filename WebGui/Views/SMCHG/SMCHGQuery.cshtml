@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "SMCHGQuery";
+}
+
+
+<script type="text/javascript">
+    var select_tranmode = "@ViewBag.SelectTranMode";
+    $(document).ready(function ($) {
+
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        select_tranmode += ";O:ALL;";
+        gop.gridColModel = [
+            { name: 'UId', showname: 'ID', sorttype: 'string', hidden: true },
+            { name: 'Cmp', title: 'Location', index: 'Cmp', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TranMode', title: '@Resources.Locale.L_PartyDocSetup_TranMode ', index: 'TranMode', width: 100, align: 'left', sorttype: 'string', hidden: false,formatter: "select", editoptions: { value: select_tranmode } },
+            { name: 'IoType', title: '@Resources.Locale.L_SMCHGSetup_IoType', index: 'IoType', width: 90, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions:{value:"I:@Resources.Locale.L_BSEXACCT_Im;O:@Resources.Locale.L_BSEXACCT_Ex"} },
+            { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ChgDescp', title: '@Resources.Locale.L_SMCHGSetup_ChgDescp', index: 'ChgDescp', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ChgEdescp', title: '@Resources.Locale.L_SMCHGSetup_ChgEDescp', index: 'ChgDescp', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'VatFlag', title: '@Resources.Locale.L_SMCHGSetup_VatFlag', index: 'VatFlag', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'VatRate', title: '@Resources.Locale.L_SMCHGSetup_VatRate', index: 'VatRate', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Repay', title: '@Resources.Locale.L_SMCHGSetup_ChgRepay', index: 'Repay', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ChgType', title: '@Resources.Locale.L_SMCHGSetup_ChgType', index: 'ChgType', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ChgLevel', title: '@Resources.Locale.L_SMCHGSetup_ChgLevel', index: 'ChgLevel', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SapAc', title: '@Resources.Locale.L_SMCHGSetup_SapAc', index: 'SapAc', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateBy', title: '@Resources.Locale.L_IQTManage_CreateBy', index: 'CreateBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateDate', title: '@Resources.Locale.L_IQTManage_CreateDate', index: 'CreateDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'ModifyBy', title: '@Resources.Locale.L_IQTManage_ModifyBy', index: 'ModifyBy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ModifyDate', title: '@Resources.Locale.L_IQTManage_ModifyDate', index: 'ModifyDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] }
+
+        ];
+        gop.AddUrl = { "url": rootPath + "SMCHG/SMCHGSetup", "title": "@Resources.Locale.L_SMCHGSetup_EntChgType", "id": "SMCHGSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_SMCHGSetup_ChgList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "SMCHG/SMCHGQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        initSearch(gop);
+
+        function dblClick(map) {
+            var UId = map.UId;
+            top.topManager.openPage({
+                href: rootPath + "SMCHG/SMCHGSetup/" + UId,
+                title: '@Resources.Locale.L_SMCHGSetup_EntChgType',
+                id: 'SMCHGSetup',
+                search : 'uid=' + UId
+            });
+        }
+
+
+
+    });
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

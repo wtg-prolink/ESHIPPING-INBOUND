@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <ftp>
+    <ASNDetail server="172.20.32.49" port="21" user="SSA_shippingftp" psw="S9admin!" path="SAP_IB_ASN_TEST" SearchDir="Y" FtpBackupFlag="Y"
+                FtpBackupPath="SAP_IB_ASN_TEST\log"
+defaultMailCC="Will.Wan@wisetechglobal.com"
+errMailTo="Will.Wan@wisetechglobal.com"
+logPath="$APP_PATH\..\..\TransLog\ASNDeatail\Edoc\Log"
+backupPath="$APP_PATH\..\..\TransLog\ASNDeatail\Edoc\Backup"
+downloadPath="$APP_PATH\..\..\TransLog\ASNDeatail\Edoc\Download">
+    </ASNDetail>
+    <GRDetail server="10.10.10.49" port="21" user="SSA_shippingftp" psw="S9admin!" path="SAP_IB_GR_TEST" SearchDir="Y"
+              FtpBackupFlag="Y"
+               FtpBackupPath="SAP_IB_GR_TEST\log"
+ defaultMailCC="Will.Wan@wisetechglobal.com"
+ errMailTo="Will.Wan@wisetechglobal.com"
+ logPath="$APP_PATH\..\..\TransLog\GRDeatail\Edoc\Log"
+ backupPath="$APP_PATH\..\..\TransLog\GRDeatail\Edoc\Backup"
+downloadPath="$APP_PATH\..\..\TransLog\GRDeatail\Edoc\Download">
+    </GRDetail>
+  </ftp>
+</root>

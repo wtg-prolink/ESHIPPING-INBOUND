@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+  <PL caption="博连报表，博连默认可以查看所有公司的所有报表">
+    <cabin caption="仓单">
+      <report url="ReportTemplate.aspx?template=cnlRpt1.htm" caption="九如"/>
+      <report url="ReportTemplate.aspx?template=cnlRpt1.htm" caption="九如cc"/>
+      <report url="ReportTemplate.aspx?template=cnlRpt3.htm" caption="派送报表"/>
+      <report url="ReportTemplate.aspx?template=cnlRpt4.htm" caption="清关报表"/>
+      <report url="ReportTemplate.aspx?template=ceRpt01.htm" caption="中国速递清关报表"/>
+      <report url="ReportTemplate.aspx?template=cnlRpt5.htm" caption="大陆出货明细表"/>
+      <report url="ReportTemplate.aspx?template=cnlRpt6.htm" caption="大陆cc到付总表"/>
+      <report url="ReportTemplate.aspx?template=cnlRpt7.htm" caption="常安清关假单"/>
+      <report url="ReportTemplate.aspx?template=cnlRpt8.htm" caption="大亨上海清关假单"/>
+      <report url="ReportTemplate.aspx?template=cnlRpt9.htm" caption="大亨厦门清关假单"/>
+      <report url="ReportTemplate.aspx?template=cnlRpt10.htm" caption="联合报关澳航明细(大亨清关)PML-CAN-大亨清关"/>
+      <report url="ReportTemplate.aspx?template=cnlRpt11.htm" caption="联合报关澳航明细(九龙清关)"/>
+      <report url="ReportTemplate.aspx?template=cnlRpt12.htm" caption="远达通国际物流有限公司（广州）PML-CAN-九龙报关"/>
+      <report url="ReportTemplate.aspx?template=cnlRpt13.htm" caption="广州远达大陆出口台湾派件明细表"/>
+      <report url="ReportTemplate.aspx?template=cnlRpt14.htm" caption="远达国际物流公司(深 圳)" class="Prolink.EHU.WebGui.xlsSqlParser_14"/>
+      <report url="ReportTemplate.aspx?template=EL_RPT1.htm" caption="台湾出口货物报关明细表(CARGO MANIFEST)" class="Prolink.EHU.WebGui.xlsSqlParser_EL_RPT1"/>
+      <report url="ReportTemplate.aspx?template=EL_CabinRpt.htm" caption="进仓明细表" class="Prolink.EHU.WebGui.xlsSqlParser_EL_CabinRpt"/>
+      <report url="CnlReport.aspx?out=xls" caption="上海专用仓单"/>
+      <report url="ReportTemplate.aspx?template=WK_CabinRpt_HK.htm" caption="HK仓单" class="Prolink.EHU.WebGui.xlsSqlParser_WK"/>
+      <report url="ReportTemplate.aspx?template=WK_CabinRpt_GOLD.htm" caption="GOLD仓单" class="Prolink.EHU.WebGui.xlsSqlParser_WK"/>
+      <report url="ReportTemplate.aspx?template=WK_cnlRpt5.htm" caption="出货明细表" class="Prolink.EHU.WebGui.xlsSqlParser_WK"/>
+      <report url="ReportTemplate.aspx?template=WK_cnlRpt6.htm" caption="同行并货清单" class="Prolink.EHU.WebGui.xlsSqlParser_WK"/>
+      <report url="ReportTemplate.aspx?template=daily_rep.htm" caption="派件明细表" class="Prolink.EHU.WebGui.xlsSqlParser_DY"/>
+    </cabin>
+    <aeawb caption="提单">
+      <report url="AWBReportTemplate.aspx?template=AWB_LINEX_SHA.htm" caption="LINEX(上海专用提单)"/>
+      <report url="AWBReportTemplate.aspx?template=AWB_LINEX.htm" caption="LINEX"/>
+      <report url="AWBReportTemplate.aspx?template=AWB_TNT.htm" caption="TNT"/>
+      <report url="AWBReportTemplate.aspx?template=AWB_RPX.htm" caption="RPX"/>
+    </aeawb>
+  </PL>
+
+  <CE caption="中国速递报表">
+    <cabin caption="仓单">
+      <report url="ReportTemplate.aspx?template=ceRpt01.htm" caption="中国速递报关明细表" type="old"/>
+    </cabin>
+    <prn001 caption="叫件数据打印">
+      <report url="Export_Pickup" caption="出口取件统计表(by台湾3PL)" type="rpt"/>
+      <report url="Export_Offer" caption="出口派件统计表(大陆3PL)" type="rpt"/>
+    </prn001>
+    <prn002 caption="货量统计资料打印">
+      <report url="Emp_Per" caption="业务员业绩统计表" type="rpt"/>
+      <report url="EmpRank" caption="业务员排名统计" type="rpt"/>
+      <report url="Custom_Consign" caption="客户托运明细表" type="rpt"/>
+      <report url="AWB.SHIPMENT" caption="理货中心出货明细表" type="rpt"/>
+    </prn002>
+    <prn003 caption="进口货量统计资料打印">
+      <report url="Import_Offer" caption="进口派件明细表(by台湾3PL)" type="rpt"/>
+    </prn003>
+  </CE>
+
+  <BX caption="晋越报表">
+    <!-- rptName参数  1.url表示url和rptName 2.type="old"(用旧的方法导出报表)type="rpt"(用水晶报表导出报表) -->
+    <cabin caption="仓单">
+      <report url="AWB.JRZH" caption="九如珠海报表明细表" type="rpt" />
+      <report url="AWB.JYHK" caption="九邑海快货物报关明细表" type="rpt" />
+      <report caption="九邑马尾小贸海运报表" url="AWB.JYMW" type="rpt" />
+
+      <report caption="上海九如直飞(晚机)明细表" url="AWB.SHJR" type="rpt"/>
+      <report caption="空海厦门转上海明细表" url="AWB.KH" type="rpt" />
+      <report caption="厦门震力海运明细表" url="AWB.XMZL" type="rpt"/>
+    </cabin>
+
+    <prn001 caption="叫件">
+      <report url="pickreport" caption="客户叫件报表" type="rpt" />
+    </prn001>
+    <prn002 caption="提单">
+      <report url="awbreport" caption="提单报表" type="rpt" />
+      <report url="dawbreport" caption="目的站提单明细表" type="rpt" />
+      <report url="AWB_Stats" caption="提单统计表" type="rpt" />
+      <report url="OFF_CUSTOM" caption="两个月无提单客户" type="rpt" />
+    </prn002>
+  </BX>
+  <BH caption="晋越香港报表">
+    <!-- rptName参数  1.url表示url和rptName 2.type="old"(用旧的方法导出报表)type="rpt"(用水晶报表导出报表) -->
+    <cabin caption="仓单">
+      <report url="AWB.JRZH" caption="九如珠海报表明细表" type="rpt" />
+      <report url="AWB.JYHK" caption="九邑海快货物报关明细表" type="rpt" />
+      <report caption="九邑马尾小贸海运报表" url="AWB.JYMW" type="rpt" />
+
+      <report caption="上海九如直飞(晚机)明细表" url="AWB.SHJR" type="rpt"/>
+      <report caption="空海厦门转上海明细表" url="AWB.KH" type="rpt" />
+      <report caption="厦门震力海运明细表" url="AWB.XMZL" type="rpt"/>
+      <!--report caption="标签打印" url="AWB.LABEL"/-->
+    </cabin>
+
+    <prn001 caption="叫件">
+      <report url="pickreport" caption="客户叫件报表" type="rpt" />
+    </prn001>
+    <prn002 caption="提单">
+      <report url="awbreport" caption="小包裹清关报表" type="rpt" />
+      <report url="dawbreport" caption="目的站提单明细表" type="rpt" />
+      <report url="AWB_Stats" caption="提单统计表" type="rpt" />
+      <report url="AWB_REPORT2" caption="小条形码清单" type="rpt" />
+      <report url="AWB_CHECK_PP" caption="互对表-PP" type="rpt" />
+      <report url="AWB_CHECK_CC" caption="互对表-CC" type="rpt" />
+      <report url="AWB_CHECK_TT" caption="互对表-TT" type="rpt" />
+      <report url="AWB_CUSTOM" caption="上传CUSTOM报表" type="rpt" />
+    </prn002>
+  </BH>
+
+  <JY caption="加扬报表">
+    <!-- rptName参数  1.url表示url和rptName 2.type="old"(用旧的方法导出报表)type="rpt"(用水晶报表导出报表) -->
+    <cabin caption="仓单">
+      <report url="AWB.JRZH" caption="九如珠海报表明细表" type="rpt" />
+      <report url="AWB.JYHK" caption="九邑海快货物报关明细表" type="rpt" />
+      <report caption="九邑马尾小贸海运报表" url="AWB.JYMW" type="rpt" />
+
+      <report caption="上海九如直飞(晚机)明细表" url="AWB.SHJR" type="rpt"/>
+      <report caption="空海厦门转上海明细表" url="AWB.KH" type="rpt" />
+      <report caption="厦门震力海运明细表" url="AWB.XMZL" type="rpt"/>
+    </cabin>
+
+    <prn001 caption="叫件">
+      <report url="pickreport" caption="客户叫件报表" type="rpt" />
+    </prn001>
+    <prn002 caption="提单">
+      <report url="awbreport" caption="提单报表" type="rpt" />
+      <report url="dawbreport" caption="目的站提单明细表" type="rpt" />
+      <report url="AWB_Stats" caption="提单统计表" type="rpt" />
+      <report url="OFF_CUSTOM" caption="两个月无提单客户" type="rpt" />
+      <report url="JINMEN_TPE" caption="金门to台北" type="mrt" />
+      <report url="JINMEN_TPE_BD" caption="台北to金门(板单)" type="mrt" />
+      <report url="TPE_JINMEN" caption="台北to金门" type="mrt" />
+      <report url="DARONG" caption="大荣" type="mrt" />
+      <report url="RITONG" caption="日通" type="mrt" />
+      <report url="XINDA" caption="鑫达" type="mrt" />
+      <report url="TPE_JINMEN_BD" caption="金门to台北(板单)" type="mrt" />
+      <report url="HPZL" caption="货品资料" type="mrt" />
+    </prn002>
+  </JY>
+
+  <WD caption="唯递报表">
+    <!-- rptName参数  1.url表示url和rptName 2.type="old"(用旧的方法导出报表)type="rpt"(用水晶报表导出报表) -->
+    <cabin caption="仓单">
+      <report url="AWB.JRZH" caption="九如珠海报表明细表" type="rpt" />
+      <report url="AWB.JYHK" caption="九邑海快货物报关明细表" type="rpt" />
+      <report caption="九邑马尾小贸海运报表" url="AWB.JYMW" type="rpt" />
+
+      <report caption="上海九如直飞(晚机)明细表" url="AWB.SHJR" type="rpt"/>
+      <report caption="空海厦门转上海明细表" url="AWB.KH" type="rpt" />
+      <report caption="厦门震力海运明细表" url="AWB.XMZL" type="rpt"/>
+    </cabin>
+
+    <prn001 caption="叫件">
+      <report url="pickreport" caption="客户叫件报表" type="rpt" />
+    </prn001>
+    <prn002 caption="提单">
+      <report url="awbreport" caption="提单报表" type="rpt" />
+      <report url="dawbreport" caption="目的站提单明细表" type="rpt" />
+      <report url="AWB_Stats" caption="提单统计表" type="rpt" />
+      <report url="OFF_CUSTOM" caption="两个月无提单客户" type="rpt" />
+      <report url="WDQGBB" caption="唯递清关公司报表" type="mrt" />
+      <report url="HPZL" caption="货品资料" type="mrt" />
+    </prn002>
+  </WD>
+</config>

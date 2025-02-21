@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <!--
+  設置連接池配置文件位置及默認的連接池類型、名字
+  -->
+  <pool type="Sql" name="IPORT" dbType="Sql2005" path="$APP_PATH\..\doc\xml-store\db\ConnectionPool.xml" />
+  
+  <!--
+  設置系統屬性
+  beans:配置編程xml路徑 
+  language:
+  menU:
+  permission:
+  programe:
+  logEnable:是否啟動日志功能
+  -->
+  <property name="beans" value="$APP_PATH\Config\beans.xml" />
+  <property name="language" value="$APP_PATH\..\doc\xml-store\language" />
+  <property name="menu" value="$APP_PATH\..\doc\xml-store\menu\" />
+  <property name="permission" value="$APP_PATH\..\doc\xml-store\permission\PMS_OBJ.xml" />
+  <property name="programe" value="$APP_PATH\..\doc\xml-store\group\GROUP.xml" />  
+  <property name="logEnable" value="true" />
+  <property name="logSet" value="$APP_PATH\..\doc\xml-store\log\LogSet.xml" />
+  <property name="querycolumn" value="$APP_PATH\..\doc\xml-store\querycolumns\" />
+  <property name="column" value="$APP_PATH\..\doc\xml-store\column\" />
+  <property name="jsFiles" value="ActiveX.js,Body.js,BtnTextInput.js,BtnTextInputEditor.js,CheckData.js,ControlUtils.js,DataSource.js,Input.js,InputEditor.js,Label.js,Lookup.js,Math.js,Select.js,Table.js,Utils.js,WebUtils.js,Window.js,SelectEditor.js,Panel.js,net\CheckData.js,net\Lookup.js,po\InquiryData.js,v6\Common.js,TextAreaEditor.js,Calendar.js,TabControl.js,OracleFormula.js,BoilerHub\ColorBoard.js" /> 
+  <property name="jsPath" value="$APP_PATH\js" />
+  <property name="RptTemplate" value="$APP_PATH\..\ReportGetter\rpt\template" />
+  <property name="RptTaskPath" value="$APP_PATH\..\ReportGetter\rpt\temp" />
+  <property name=".mrt" type="report" value="Prolink.WebStimulReport.StimulReportManager,Prolink.WebStimulReport" />
+  <property name="mail-server" value="$APP_PATH\Config\mail\mail-server.xml" />
+  <property name="apply-tomail" value="fish@pllink.com;coco@pllink.com;danny@pllink.com;" />
+  <property name="PoMapping" value="$APP_PATH\Config\exchange\fillPOSet.xml" />
+  <property name="ContainerMapping" value="$APP_PATH\Config\exchange\fillContainerSet.xml" />
+  <property name="AirMapping" value="$APP_PATH\Config\exchange\fillAirCargoBillSet.xml" />
+  <property name="OceanMapping" value="$APP_PATH\Config\exchange\fillOceanCargoBillSet.xml" />
+  <property name="StatusMapping" value="$APP_PATH\Config\exchange\fillSTATUSSet.xml" />
+  <property name="StatusMapping" value="$APP_PATH\Config\exchange\fillSTATUSSet.xml" />
+  <property name="itracePath" value="$APP_PATH\Config\itrace\itrace.xml" />
+  <property name="BookingMapping" value="$APP_PATH\Config\exchange\BookingToTracking.xml" />
+  <property name="BookingPartyMapping" value="$APP_PATH\Config\exchange\BookingParty.xml" />
+  <property name="BookingContainerMapping" value="$APP_PATH\Config\exchange\BookingContainer.xml" />
+  <property name="QuotMapping" value="$APP_PATH\Config\exchange\Quot.xml" />
+  <property name="DNToBookingMapping" value="$APP_PATH\Config\exchange\DNToBookifng.xml" />
+  <property name="DnPartyMapping" value="$APP_PATH\Config\exchange\DnParty.xml" />
+  <property name="SMDNDToBookingMapping" value="$APP_PATH\Config\exchange\SMDNDToBooking.xml" />
+  <property name="AIRBSMapping" value="$APP_PATH\Config\excel\AIRBSMapping.xml" />
+  <property name="DECLSTSMapping" value="$APP_PATH\Config\excel\DECLSTSMapping.xml" />
+  <property name="EXPBSMapping" value="$APP_PATH\Config\excel\EXPBSMapping.xml" />
+  <property name="FCLBSMapping" value="$APP_PATH\Config\excel\FCLBSMapping.xml" />
+  <property name="LCLBSMapping" value="$APP_PATH\Config\excel\LCLBSMapping.xml" />
+  <property name="TRACKSTSMapping" value="$APP_PATH\Config\excel\TRACKSTSMapping.xml" />
+  <property name="TRKBSMapping" value="$APP_PATH\Config\excel\TRKBSMapping.xml" />
+  <property name="RailWayMapping" value="$APP_PATH\Config\excel\RailWayMapping.xml" />
+  <property name="LNTConfirmMapping" value="$APP_PATH\Config\excel\LNTConfirmMapping.xml" />
+  <property name="ASDReportMapping" value="$APP_PATH\Config\excel\ASDReportMapping.xml" />
+  <property name="ASDReportSMDNPMapping" value="$APP_PATH\Config\excel\ASDReportSMDNPMapping.xml" />
+<property name="InboundASDReportMapping" value="$APP_PATH\Config\excel\InboundASDReportMapping.xml" />
+  <property name="InboundASDReportSMDNPMapping" value="$APP_PATH\Config\excel\InboundASDReportSMDNPMapping.xml" />
+  <property name="LogisticsMapping" value="$APP_PATH\Config\excel\LogisticsMapping.xml" />
+  <property name="ChangePodMapping" value="$APP_PATH\Config\excel\BathChCodPODMapping.xml" />
+  <property name="BatchDNInfoMapping" value="$APP_PATH\Config\excel\BatchDNInfoMapping.xml" />
+  <property name="GwAndCbmMapping" value="$APP_PATH\Config\excel\GwAndCbmMapping.xml" />
+  <property name="QuotA" value="$APP_PATH\Config\excel\QuotA.xml" />
+  <property name="QuotD" value="$APP_PATH\Config\excel\QuotD.xml" />
+  <property name="QuotE" value="$APP_PATH\Config\excel\QuotE.xml" />
+  <property name="QuotF" value="$APP_PATH\Config\excel\QuotF.xml" />
+  <property name="QuotL" value="$APP_PATH\Config\excel\QuotL.xml" />
+  <property name="QuotT" value="$APP_PATH\Config\excel\QuotT.xml" />
+  <property name="QuotFC" value="$APP_PATH\Config\excel\QuotFC.xml" />
+  <property name="ImportBill" value="$APP_PATH\Config\excel\Bill.xml" />
+  <property name="ForecastMapping" value="$APP_PATH\Config\excel\ForecastMapping.xml" />
+  <property name="TKBatchStatusMapping" value="$APP_PATH\Config\excel\TKBatchStatusMapping.xml" />
+  <property name="InboundSCMInfoMapping" value="$APP_PATH\Config\excel\InboundSCMInfoMapping.xml" />
+  <property name="IbSCMModelInfoMapping" value="$APP_PATH\Config\excel\IbSCMModelInfoMapping.xml" />
+  <property name="InboundPortFreeMapping" value="$APP_PATH\Config\excel\InboundPortFreeMapping.xml" />
+  <property name="InboundCreateAppointMapping" value="$APP_PATH\Config\excel\InboundCreateAppointMapping.xml" />
+  <property name="EmptyDateSMRCNTRMapping" value="$APP_PATH\Config\excel\EmptyDateMapping.xml" />
+  <property name="TruckInfoSMRVMapping" value="$APP_PATH\Config\excel\TruckInfoMapping.xml" />
+  <property name="TCCBrokerInfoMapping" value="$APP_PATH\Config\excel\TCCBrokerInfoMapping.xml" />
+  <property name="InboundSMRDNMapping" value="$APP_PATH\Config\exchange\SmidnTosmrdn.xml" />
+<property name="SMSMIToSMORDMapping" value="$APP_PATH\Config\exchange\SMSMIToSMORDMapping.xml" />
+  <property name="SmicntrToSmrcntrMapping" value="$APP_PATH\Config\exchange\SmicntrToSmrcntrMapping.xml" />
+<property name="InboundSMSMIMapping" value="$APP_PATH\Config\exchange\InboundSMSMIMapping.xml" />
+	<property name="ChargeInfoMapping" value="$APP_PATH\Config\excel\ChargeInfoMapping.xml" />
+  <property name="VizioDataInfoMapping" value="$APP_PATH\Config\excel\VizioDataInfoMapping.xml" />
+  <property name="IDNPLMapping" value="$APP_PATH\Config\exchange\IDNPLMapping.xml" />
+  <property name="TransloadMapping" value="$APP_PATH\Config\excel\TransloadMapping.xml" />
+  <property name="SmordForecastMapping" value="$APP_PATH\Config\excel\SmordForecastMapping.xml" />
+  <property name="EmptyReturnMapping" value="$APP_PATH\Config\excel\EmptyReturnMapping.xml" />
+	<property name="CSmapping" value="$APP_PATH\Config\exchange\CSmapping.xml" />
+	<property name="OtherQuotE" value="$APP_PATH\Config\excel\OtherQuotE.xml" />
+	<property name="SmicuftMapping" value="$APP_PATH\Config\excel\SmicuftMapping.xml" />
+  <property name="BillManageUrl" value="https://eshipping-ts.tpv-tech.com/zh-CN/Home/Index" />
+  <property name="ApproveH5Url" value="https://eshipping-ts.tpv-tech.com/mobile/#/todoDetail" />
+  <!--<property name="TermBillCostMapping" value="$APP_PATH\Config\excel\TermBillCost.xlsx" />-->
+  <property name="BillLog" value="$APP_PATH\bill_log" />
+  <!--TPV警卫app-->
+  <property name="app_v" value="3.0.1" />
+  <property name="app_url" value="https://eshipping-ts.tpv-tech.com/doc2/inboundapp/IBQ-GATE.apk" />
+  <!--<property name="app_url" value="https://eshipping-edoc.tpv-tech.com/doc2/inboundapp/gate-inbound.apk" /> 正式机-->
+  <!--TPV仓库管理app-->
+  <property name="app_v1" value="2.0.1" />
+  <property name="app_url1" value="https://eshipping-ts.tpv-tech.com/doc2/inboundapp/IBQ-WH.apk" />
+  <!--<property name="app_url1" value="https://eshipping-edoc.tpv-tech.com/doc2/inboundapp/warehouse-inbound.apk" />正式机-->
+</config>

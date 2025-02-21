@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+功能说明：
+根据用户传过来的xml串与该配置档中的节点进行解析后，获取与节点相对应的数据库字段名，然后将表名、字段名、字段值对应后写入数据库，至于转出的操作也是一样的。
+==================================================
+配置说明：
+name:表名或从用户传过来的xml数据的节点名
+fieldname：与该栏位对应的数据库中的字段
+dataType:该栏位的数据类型，如果为CustomDate表示自定义的日期(InOrOutApp类处理的需要)
+defalutValue:在数据库中设置的默认值,有些情况下，如果数据库中没有设置默认值，那在这边也可以提供一个默认值
+★★★length:在数据库中定义的字段的字节长度，注意，这边只有string型字段才会设置长度，这边的长度是指字节(精确到字节是为了出现避免溢出错误),另外要注意的sql server这边以n开头的数据类型，在数据库定义那边表示可存储多少个字符(每个字符占用两个字节，如nvarchar(2),表示4个字节),另外要注意的是如果不判断字节长度是否溢出，那可不用配置该项
+key:表示修改时用到的键值(值为true)
+UpdateFlag:该属性在2012-11-06的需求修改后,在程序那边已没有调用,原先是表示更新时的条件:O表示当前这笔数据是出口时才可更新、I表示当前这笔数据是进口时才可更新、如果某个栏位既是出口的，又是进口的，则UpdateFlag的值设置为I,O即可，如果没有设置该属性，则表示不更新
+isDestination:用来标识该节点是否是Destination Information中的节点,更新时(进口数据如果已经存在，则只覆盖Destination Information这些栏位,但
+出口如果数据已经存在，则全部覆盖,至于主键部分，在程序中有另外再做处理),
+★★★注：POD_ETA与DEST_ETA这两个栏位除外，它们在页面中虽然没有布局在Destination Information那边，但也跟Destination Information一样的处理
+★★★注：isOriginal="Y" 表示是xml裡面的Original Information数据
+-->
+<table name="TKBL">
+  <column name="LotNo"  fieldname="SHIPMENT_ID" dataType="string" defalutValue="" UpdateFlag="I,O">
+  </column>
+  <column name="MasterNo" fieldname="MASTER_NO" dataType="string" defalutValue="" length="40" UpdateFlag="I,O">
+  </column>
+  <column name="HouseNo" fieldname="HOUSE_NO" dataType="string"  defalutValue="" length="60" key="true"  UpdateFlag="I,O">
+  </column>
+  <column name="GROUP_ID" fieldname="GROUP_ID" dataType="string"  defalutValue="" length="20"  UpdateFlag="I,O">
+  </column>
+  <column name="Type" fieldname="TRAN_TYPE" dataType="string" defalutValue="" length="2" UpdateFlag="I,O">
+  </column>
+  <column name="AWBType" fieldname="BL_TYPE" dataType="string" defalutValue="" length="2" UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <column name="AWBDate" fieldname="BL_DATE" dataType="Date" defalutValue="" UpdateFlag="I,O">
+  </column>
+  <column name="SoNo" fieldname="SO_NO" dataType="string" defalutValue="" length="400" UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <column name="FEEDER_VESSEL" fieldname="VESSEL1" dataType="string" defalutValue="" length="60" UpdateFlag="I,O">
+  </column>
+  <column name="FEEDER_VOYAGE" fieldname="VOYAGE1" dataType="string" defalutValue="" length="32" UpdateFlag="I,O">
+  </column>
+  <column name="Vessel" fieldname="VESSEL2" dataType="string" defalutValue="" length="60" UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <column name="Voyage" fieldname="VOYAGE2" dataType="string" defalutValue="" length="60" UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <column name="ClosingDate" fieldname="CLS_DATE" dataType="Date" defalutValue="" UpdateFlag="I,O">
+  </column>
+  <column name="ArrivalDate" fieldname="ETA" dataType="Date" defalutValue="" UpdateFlag="I,O">
+  </column>
+  <column name="ETD" fieldname="ETD" dataType="Date" defalutValue="" UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <column name="PKG" fieldname="QTY" dataType="int" defalutValue="" UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <column name="GW"  fieldname="GW" dataType="FLOAT" defalutValue=""  UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <column name="VW"  fieldname="CBM" dataType="FLOAT" defalutValue="" UpdateFlag="I,O">
+  </column>
+  <column name="CBM"  fieldname="CBM" dataType="FLOAT" defalutValue="" UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <column name="FreightType" fieldname="FRT_PC" dataType="string" defalutValue="" length="4" UpdateFlag="I,O">
+  </column>
+  <column name="Othertype" fieldname="OTH_PC" dataType="string" defalutValue="" length="4" UpdateFlag="I,O">
+  </column>
+  <column name="Goods"  fieldname="GOODS" dataType="string" defalutValue="" length="4000" UpdateFlag="I,O">
+  </column>
+  <column name="Marks"  fieldname="MARKS" dataType="string" defalutValue="" length="2000" UpdateFlag="I,O">
+  </column>
+  <column name="F_MPOL"  fieldname="MPOL" dataType="string" defalutValue="" length="2" UpdateFlag="I,O">
+  </column>
+  <column name="Commodity"  fieldname="COMMODITY" dataType="string" defalutValue="" length="100" UpdateFlag="I,O">
+  </column>
+  <!--turner新添加的配置  Samson修改-->
+  <column name="ETA_DATE" fieldname="ETA" dataType="Date" defalutValue="" UpdateFlag="I,O">
+  </column>
+  <column name="POLCountry"  fieldname="POL_CNTY" dataType="string" defalutValue="" length="4" UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <column name="POLCity"  fieldname="POL_CD" dataType="string" defalutValue="" length="6" UpdateFlag="I,O" isOriginal="Y" >
+  </column>
+  <column name="POLDESCP"  fieldname="POL_NAME" dataType="string" defalutValue="" length="200" UpdateFlag="I,O" isOriginal="Y" >
+  </column>
+  <column name="PORCountry"  fieldname="POR_CNTY" dataType="string" defalutValue="" length="4" UpdateFlag="I,O">
+  </column>
+  <column name="PORCity"  fieldname="POR_CD" dataType="string" defalutValue="" length="6" UpdateFlag="I,O">
+  </column>
+  <column name="PORDESCP"  fieldname="POR_NAME" dataType="string" defalutValue="" length="200" UpdateFlag="I,O">
+  </column>
+  <!--modify by turner 2013-09-13 问题单：77431 经与tony讨论后，PODCity、PODCountry、PODDESCP、DLVCity、DLVCountry、DLVName 这6个节点的isOriginal属性去掉-->
+  <column name="PODCountry"  fieldname="POD_CNTY" dataType="string" defalutValue="" length="4" UpdateFlag="I,O">
+  </column>
+  <!--modify by turner 2013-09-13 问题单：77431 经与tony讨论后，PODCity、PODCountry、PODDESCP、DLVCity、DLVCountry、DLVName 这6个节点的isOriginal属性去掉-->
+  <column name="PODCity"  fieldname="POD_CD" dataType="string" defalutValue="" length="6" UpdateFlag="I,O">
+  </column>
+  <!--modify by turner 2013-09-13 问题单：77431 经与tony讨论后，PODCity、PODCountry、PODDESCP、DLVCity、DLVCountry、DLVName 这6个节点的isOriginal属性去掉-->
+  <column name="PODDESCP"  fieldname="POD_NAME" dataType="string" defalutValue="" length="400" UpdateFlag="I,O">
+  </column>
+  <!--modify by turner 2013-09-13 问题单：77431 经与tony讨论后，PODCity、PODCountry、PODDESCP、DLVCity、DLVCountry、DLVName 这6个节点的isOriginal属性去掉-->
+  <column name="DLVCountry"  fieldname="DEST_CNTY" dataType="string" defalutValue="" length="4" UpdateFlag="I,O">
+  </column>
+  <!--modify by turner 2013-09-13 问题单：77431 经与tony讨论后，PODCity、PODCountry、PODDESCP、DLVCity、DLVCountry、DLVName 这6个节点的isOriginal属性去掉-->
+  <column name="DLVCity"  fieldname="DEST_CD" dataType="string" defalutValue="" length="6" UpdateFlag="I,O">
+  </column>
+  <!--modify by turner 2013-09-13 问题单：77431 经与tony讨论后，PODCity、PODCountry、PODDESCP、DLVCity、DLVCountry、DLVName 这6个节点的isOriginal属性去掉-->
+  <column name="DLVName"  fieldname="DEST_NAME" dataType="string" defalutValue="" length="400" UpdateFlag="I,O">
+  </column>
+  <column name="Isf_No" fieldname="ISF_NO" dataType="string"  defalutValue="" length="400"   UpdateFlag="O" isDestination="Y">
+  </column>
+  <column name="REF_NO"  fieldname="REF_NO" dataType="string" defalutValue="" length="40" UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <column name="RouteCity" fieldname="VIA_CD" dataType="string" defalutValue=""  length="6" UpdateFlag="I,O">
+  </column>
+  <column name="RouteCountry" fieldname="VIA_CNTY" dataType="string" defalutValue=""  length="4" UpdateFlag="I,O">
+  </column>
+  <column name="RoureName" fieldname="VIA_NAME" dataType="string" defalutValue=""  length="60" UpdateFlag="I,O">
+  </column>
+  <!--Danny新添加的配置 Samson修改-->
+  <column name="PKGUnit"  fieldname="QTYU" dataType="string" defalutValue="" length="6" UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <column name="GWUnit"  fieldname="GWU" dataType="string" defalutValue="" length="6" UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <column name="Currency"  fieldname="CUR" dataType="string" defalutValue="" length="6" UpdateFlag="I,O">
+  </column>
+  <!--Samson新添加配置-->
+  <column name="LoadFrom"  fieldname="LOADING_FROM" dataType="string" defalutValue="" length="40" UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <column name="LoadTo"  fieldname="LOADING_TO" dataType="string" defalutValue="" length="40" UpdateFlag="I,O" isOriginal="Y">
+  </column>
+  <!--modify by fish 2015-04-7 问题单:92113  需求：danny 請協助修改Tracking相關功能：請協助於TKBL澳張表新增TRACE_FLAG這個欄位用來記錄,iFreight傳過來的欄位的值。請協助在程式裡面註記一下T表示iport以及iTrace兩者都抓取。P代表緊抓取iport-->
+  <column name="ITRACE"  fieldname="TRACE_FLAG" dataType="string" defalutValue="" length="" UpdateFlag="I,O">
+  </column>
+  <column name="Carrier"  fieldname="CARRIER_CD" dataType="string" defalutValue="" UpdateFlag="I,O">
+  </column>
+  <column name="Carrier_Name"  fieldname="CARRIER_NM" dataType="string" defalutValue="" UpdateFlag="I,O">
+  </column>
+  <column name="GROUP_ID"  fieldname="GROUP_ID" dataType="string" defalutValue="" UpdateFlag="I,O">
+  </column>
+  <column name="CMP"  fieldname="CMP" dataType="string" defalutValue="" UpdateFlag="I,O">
+  </column>
+  <column name="STN"  fieldname="STN" dataType="string" defalutValue="" UpdateFlag="I,O">
+  </column>
+  <column name="SERVICE_TYPE"  fieldname="INCOTERM" dataType="string" defalutValue="" length="30" UpdateFlag="I" isDestination="Y">
+  </column>
+</table>

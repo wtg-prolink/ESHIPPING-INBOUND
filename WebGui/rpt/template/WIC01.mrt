@@ -1,0 +1,909 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <连接 Ref="2" type="Stimulsoft.Report.Dictionary.StiXmlDatabase" isKey="true">
+        <Alias>连接</Alias>
+        <Name>连接</Name>
+        <PathData>C:\Users\Andy\Desktop\2015.7.21\Schemas.xml</PathData>
+        <PathSchema />
+      </连接>
+    </Databases>
+    <DataSources isList="true" count="3">
+      <IPWIC Ref="3" type="DataTableSource" isKey="true">
+        <Alias>IPWIC</Alias>
+        <Columns isList="true" count="49">
+          <value>U_ID,System.Guid</value>
+          <value>GROUP_ID,System.String</value>
+          <value>CMP,System.String</value>
+          <value>STN,System.String</value>
+          <value>DEP,System.String</value>
+          <value>BU,System.String</value>
+          <value>TTYPE,System.String</value>
+          <value>WI_NO,System.String</value>
+          <value>WI_DATE,System.DateTime</value>
+          <value>CT_NO,System.String</value>
+          <value>BL_NO,System.String</value>
+          <value>GOODS,System.String</value>
+          <value>GOODS_DESCP,System.String</value>
+          <value>CNTRY,System.String</value>
+          <value>CNTRY_NM,System.String</value>
+          <value>WS_CD,System.String</value>
+          <value>WS_NM,System.String</value>
+          <value>STOR_CD,System.String</value>
+          <value>HYGIENE_NO,System.String</value>
+          <value>PRODUCT_DATE,System.String</value>
+          <value>ATA,System.DateTime</value>
+          <value>QTY,System.Decimal</value>
+          <value>QTYU,System.String</value>
+          <value>FREE_DAY,System.Decimal</value>
+          <value>SAMPLE_FLAG,System.String</value>
+          <value>NW,System.Decimal</value>
+          <value>GW,System.Decimal</value>
+          <value>CNT_NUM,System.Decimal</value>
+          <value>CNT_TYPE,System.String</value>
+          <value>STATUS,System.String</value>
+          <value>REMARK,System.String</value>
+          <value>APPLY_BY,System.String</value>
+          <value>APPLY_DATE,System.DateTime</value>
+          <value>APPROVE_BY,System.String</value>
+          <value>APPROVE_DATE,System.DateTime</value>
+          <value>CREATE_BY,System.String</value>
+          <value>CREATE_DATE,System.DateTime</value>
+          <value>MODIFY_BY,System.String</value>
+          <value>MODIFY_DATE,System.DateTime</value>
+          <value>PO_NO,System.String</value>
+          <value>NWU,System.String</value>
+          <value>GWU,System.String</value>
+          <value>AGENT_CD,System.String</value>
+          <value>PWI_DATE,System.DateTime</value>
+          <value>CUST_CD,System.String</value>
+          <value>BUYER_CD,System.String</value>
+          <value>EX_RATE,System.Decimal</value>
+          <value>WS_NO,System.String</value>
+          <value>SCT_NO,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>IPWIC</Name>
+        <NameInSource>连接.IPWIC</NameInSource>
+      </IPWIC>
+      <IPPOM Ref="4" type="DataTableSource" isKey="true">
+        <Alias>IPPOM</Alias>
+        <Columns isList="true" count="147">
+          <value>U_ID,System.Guid</value>
+          <value>PO_NO,System.String</value>
+          <value>PO_DATE,System.DateTime</value>
+          <value>GROUP_ID,System.String</value>
+          <value>CMP,System.String</value>
+          <value>STN,System.String</value>
+          <value>DEP,System.String</value>
+          <value>BU,System.String</value>
+          <value>LU,System.String</value>
+          <value>PO_STATUS,System.String</value>
+          <value>CT_NO,System.String</value>
+          <value>CT_DATE,System.DateTime</value>
+          <value>SUPPLIER_CD,System.String</value>
+          <value>SUPPLIER_NM,System.String</value>
+          <value>CUST_CD,System.String</value>
+          <value>CUST_NM,System.String</value>
+          <value>GOODS_CD,System.String</value>
+          <value>GOODS_NM,System.String</value>
+          <value>CNTRY_CD,System.String</value>
+          <value>CNTRY_NM,System.String</value>
+          <value>TERM,System.String</value>
+          <value>TERM_LOC,System.String</value>
+          <value>MAF_NO,System.String</value>
+          <value>SALES_NO,System.String</value>
+          <value>SALES_NM,System.String</value>
+          <value>CUR,System.String</value>
+          <value>POL,System.String</value>
+          <value>POL_DESCP,System.String</value>
+          <value>POD,System.String</value>
+          <value>POD_DESCP,System.String</value>
+          <value>NW,System.Decimal</value>
+          <value>NWU,System.String</value>
+          <value>GW,System.Decimal</value>
+          <value>CONTACT_QTY,System.Int32</value>
+          <value>CONTACT_QTYU,System.String</value>
+          <value>IP_DATE,System.DateTime</value>
+          <value>IP_ADATE,System.DateTime</value>
+          <value>BL_NO,System.String</value>
+          <value>VESSEL,System.String</value>
+          <value>VOY,System.String</value>
+          <value>DBL_DATE,System.DateTime</value>
+          <value>ETD,System.DateTime</value>
+          <value>ETA,System.DateTime</value>
+          <value>CETA,System.DateTime</value>
+          <value>CPOD,System.String</value>
+          <value>CPOD_DESCP,System.String</value>
+          <value>ATA,System.DateTime</value>
+          <value>DOC_DATE,System.DateTime</value>
+          <value>ADOC_DATE,System.DateTime</value>
+          <value>WS_CD,System.String</value>
+          <value>WS_NM,System.String</value>
+          <value>WI_DATE,System.DateTime</value>
+          <value>BLNW,System.Decimal</value>
+          <value>FNW,System.Decimal</value>
+          <value>FREE_DAY,System.Decimal</value>
+          <value>CHECK_PRICE,System.String</value>
+          <value>CHECK_DATE,System.DateTime</value>
+          <value>AP_DATE,System.DateTime</value>
+          <value>SAMPLE_FLAG,System.String</value>
+          <value>SAMPLE_DATE,System.DateTime</value>
+          <value>HYGIENE_NO,System.String</value>
+          <value>PRODUCT_DATE,System.String</value>
+          <value>DECL_NO,System.String</value>
+          <value>DECL_DATE,System.DateTime</value>
+          <value>RLS_DATE,System.DateTime</value>
+          <value>CHK_DATE,System.DateTime</value>
+          <value>OTAX_DATE,System.DateTime</value>
+          <value>PTAX_DATE,System.DateTime</value>
+          <value>ACHG_DATE,System.DateTime</value>
+          <value>CHK_CGO,System.String</value>
+          <value>CGO_DATE,System.DateTime</value>
+          <value>CGO_RLS,System.DateTime</value>
+          <value>SEL_CHK,System.String</value>
+          <value>OQTY,System.Int32</value>
+          <value>WQTY,System.Int32</value>
+          <value>BQTY,System.Int32</value>
+          <value>BAMT,System.Decimal</value>
+          <value>BNW,System.Decimal</value>
+          <value>BK_NO,System.String</value>
+          <value>BK_DATE,System.DateTime</value>
+          <value>SQTY,System.Int32</value>
+          <value>PO_AMT,System.Decimal</value>
+          <value>EX_RATE,System.Decimal</value>
+          <value>LOCAL_CUR,System.String</value>
+          <value>PCOST,System.Decimal</value>
+          <value>TCOST,System.Decimal</value>
+          <value>VCOST,System.Decimal</value>
+          <value>OCOST,System.Decimal</value>
+          <value>TTL_COST,System.Decimal</value>
+          <value>TTL_REVENUR,System.Decimal</value>
+          <value>PROFIT_AMT,System.Decimal</value>
+          <value>SC_FB,System.String</value>
+          <value>SC_DESCP,System.String</value>
+          <value>LOG_FB,System.String</value>
+          <value>LOG_DESCP,System.String</value>
+          <value>IQTY,System.Decimal</value>
+          <value>LCOST,System.Decimal</value>
+          <value>UQTY,System.Decimal</value>
+          <value>BMONEY,System.String</value>
+          <value>WS_NO,System.String</value>
+          <value>CONTACT_CD,System.String</value>
+          <value>CONTACT_NM,System.String</value>
+          <value>BUYER_CD,System.String</value>
+          <value>BUYER_NM,System.String</value>
+          <value>SUPPLY_ADDR,System.String</value>
+          <value>SUPPLY_ATTN,System.String</value>
+          <value>SUPPLY_TEL,System.String</value>
+          <value>CREATE_BY,System.String</value>
+          <value>CREATE_DATE,System.DateTime</value>
+          <value>MODIFY_BY,System.String</value>
+          <value>MODIFY_DATE,System.DateTime</value>
+          <value>REMARK,System.String</value>
+          <value>ASSAY_DESCP,System.String</value>
+          <value>BCOPY,System.Decimal</value>
+          <value>SCOPY,System.Decimal</value>
+          <value>MCOPY,System.Decimal</value>
+          <value>ACOPY,System.Decimal</value>
+          <value>WCOPY,System.Decimal</value>
+          <value>OCOPY,System.Decimal</value>
+          <value>SAMPLE_BAT,System.Decimal</value>
+          <value>SAMPLE_NUM,System.Decimal</value>
+          <value>SAMPLE_TYPE,System.String</value>
+          <value>SAMPLE_REMARK,System.String</value>
+          <value>CHECK_TYPE,System.String</value>
+          <value>CHECK_RMK,System.String</value>
+          <value>CIQ_CHECK,System.String</value>
+          <value>QTY_CHECK,System.String</value>
+          <value>QU_CHECK,System.String</value>
+          <value>WT_CHECK,System.String</value>
+          <value>CARGO_FINAL,System.String</value>
+          <value>FINAL_DAY,System.Decimal</value>
+          <value>PDBL_DATE,System.DateTime</value>
+          <value>TARGET_CD,System.String</value>
+          <value>TARGET_NM,System.String</value>
+          <value>HCT_NO,System.String</value>
+          <value>SCT_NO,System.String</value>
+          <value>PORT_CD,System.String</value>
+          <value>PORT_NM,System.String</value>
+          <value>AGENT_CD,System.String</value>
+          <value>AGENT_NM,System.String</value>
+          <value>BOUND,System.String</value>
+          <value>BOUND_DATE,System.DateTime</value>
+          <value>LC_NO,System.String</value>
+          <value>LC_DATE,System.DateTime</value>
+          <value>SAMPLE_FDATE,System.DateTime</value>
+          <value>BOUND_FLAG,System.String</value>
+          <value>TT_TYPE,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>IPPOM</Name>
+        <NameInSource>连接.IPPOM</NameInSource>
+      </IPPOM>
+      <IPPOD Ref="5" type="DataTableSource" isKey="true">
+        <Alias>IPPOD</Alias>
+        <Columns isList="true" count="90">
+          <value>U_ID,System.Guid</value>
+          <value>U_FID,System.Guid</value>
+          <value>CUST_CD,System.String</value>
+          <value>SEQ_NO,System.Decimal</value>
+          <value>CT_NO,System.String</value>
+          <value>GROUP_ID,System.String</value>
+          <value>CMP,System.String</value>
+          <value>STN,System.String</value>
+          <value>DEP,System.String</value>
+          <value>BU,System.String</value>
+          <value>PART_NO,System.String</value>
+          <value>DESCP,System.String</value>
+          <value>CNT_NO,System.String</value>
+          <value>GOODS_CD,System.String</value>
+          <value>GOODS_DESCP,System.String</value>
+          <value>QTY,System.Decimal</value>
+          <value>QTYU,System.String</value>
+          <value>UNIT_PRICE,System.Decimal</value>
+          <value>PRICEU,System.String</value>
+          <value>AMT,System.Decimal</value>
+          <value>IAMT,System.Decimal</value>
+          <value>NW,System.Decimal</value>
+          <value>GW,System.Decimal</value>
+          <value>GWU,System.String</value>
+          <value>TAX_RATE,System.Decimal</value>
+          <value>TAX_UNIT,System.String</value>
+          <value>TAX_AMT,System.Decimal</value>
+          <value>VAT_AMT,System.Decimal</value>
+          <value>IQTY,System.Decimal</value>
+          <value>INW,System.Decimal</value>
+          <value>IGW,System.Decimal</value>
+          <value>OQTY,System.Decimal</value>
+          <value>ONW,System.Decimal</value>
+          <value>OGW,System.Decimal</value>
+          <value>WQTY,System.Decimal</value>
+          <value>BQTY,System.Decimal</value>
+          <value>BUNIT_PRICE,System.Decimal</value>
+          <value>BAMT,System.Decimal</value>
+          <value>BNW,System.Decimal</value>
+          <value>PREMARK,System.String</value>
+          <value>SCRNCY,System.String</value>
+          <value>SUNIT_PRICE,System.Decimal</value>
+          <value>STAMT,System.Decimal</value>
+          <value>SAMT,System.Decimal</value>
+          <value>SWAMT,System.Decimal</value>
+          <value>AGUI_NO,System.String</value>
+          <value>HS_CODE,System.String</value>
+          <value>PO_NO,System.String</value>
+          <value>PO_DATE,System.DateTime</value>
+          <value>SQTY,System.Decimal</value>
+          <value>LAMT,System.Decimal</value>
+          <value>FACTOR,System.Decimal</value>
+          <value>ASSAY,System.Decimal</value>
+          <value>ASSAYU,System.String</value>
+          <value>BASSAY,System.Decimal</value>
+          <value>BASSAYU,System.String</value>
+          <value>MASSAY,System.Decimal</value>
+          <value>DASSAY,System.Decimal</value>
+          <value>SUPPLIER_CD,System.String</value>
+          <value>CNTRY_CD,System.String</value>
+          <value>MAF_NO,System.String</value>
+          <value>SUPPLIER,System.String</value>
+          <value>PART_TYPE,System.String</value>
+          <value>PART_OTH,System.String</value>
+          <value>PART_CD,System.String</value>
+          <value>PART_PKG,System.String</value>
+          <value>CDESCP,System.String</value>
+          <value>GQTY,System.Decimal</value>
+          <value>GOQTY,System.Decimal</value>
+          <value>GNW,System.Decimal</value>
+          <value>GGW,System.Decimal</value>
+          <value>NWU,System.String</value>
+          <value>WS_CD,System.String</value>
+          <value>WS_NM,System.String</value>
+          <value>SUPPLIER_NM,System.String</value>
+          <value>LCOST,System.Decimal</value>
+          <value>TTL_COST,System.Decimal</value>
+          <value>WS_NO,System.String</value>
+          <value>SAMPLE_FLAG,System.String</value>
+          <value>UNW,System.Decimal</value>
+          <value>UGW,System.Decimal</value>
+          <value>ETA,System.DateTime</value>
+          <value>HCT_NO,System.String</value>
+          <value>BUYER_CD,System.String</value>
+          <value>CNT_TYPE,System.String</value>
+          <value>PO_STATUS,System.String</value>
+          <value>AGENT_CD,System.String</value>
+          <value>SCT_NO,System.String</value>
+          <value>BOUND_DATE,System.DateTime</value>
+          <value>FASSAY,System.Decimal</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>IPPOD</Name>
+        <NameInSource>连接.IPPOD</NameInSource>
+      </IPPOD>
+    </DataSources>
+    <Relations isList="true" count="1">
+      <名称 Ref="6" type="DataRelation" isKey="true">
+        <Alias>名称</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>PO_NO</value>
+        </ChildColumns>
+        <ChildSource isRef="3" />
+        <Dictionary isRef="1" />
+        <Name>名称</Name>
+        <NameInSource>关系</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>PO_NO</value>
+        </ParentColumns>
+        <ParentSource isRef="4" />
+      </名称>
+    </Relations>
+    <Report isRef="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="2">
+    <Page1 Ref="7" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="11">
+        <PageHeaderBand1 Ref="8" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,3.6</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text1 Ref="9" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.4,0.4,6.4,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,24,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>入库单</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+        </PageHeaderBand1>
+        <PageFooterBand1 Ref="10" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,26.9,19,0.8</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>PageFooterBand1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+        </PageFooterBand1>
+        <Text6 Ref="11" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.4,8.6,18.6,0.8</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>宋体,14,Bold</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text6</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Text>备注：  {IPWIC.REMARK}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text6>
+        <Text7 Ref="12" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0.4,10.4,2.6,0.8</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>宋体,14</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text7</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Text>以上货物在</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+        </Text7>
+        <Text8 Ref="13" type="Text" isKey="true">
+          <Brush>EmptyBrush</Brush>
+          <ClientRectangle>0.4,11.8,18.6,0.8</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>宋体,14</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text8</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Text>入库时需注意以下事项：按照货物的品名，厂号，货号入库。</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text8>
+        <Text9 Ref="14" type="Text" isKey="true">
+          <Brush>EmptyBrush</Brush>
+          <ClientRectangle>0.4,15.2,3.8,0.8</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>宋体,14</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text9</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Text>仓库名称签章：</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text9>
+        <Text10 Ref="15" type="Text" isKey="true">
+          <Brush>EmptyBrush</Brush>
+          <ClientRectangle>10.8,15.2,2.6,0.8</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>宋体,14</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text10</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Text>舜德签章：</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text10>
+        <Text11 Ref="16" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>12,18.2,4.8,0.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>宋体,14</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text11</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Text>{Today}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextFormat Ref="17" type="DateFormat" isKey="true">
+            <StringFormat>D</StringFormat>
+          </TextFormat>
+          <Type>Expression</Type>
+        </Text11>
+        <Text12 Ref="18" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>6.8,10.4,1.6,0.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>宋体,14</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text12</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Text>入库。</Text>
+          <TextBrush>Black</TextBrush>
+        </Text12>
+        <Text13 Ref="19" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>3,10.4,3.8,0.6</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Font>宋体,14</Font>
+          <Guid>a8c6ed3e4595417fa7e64e54de97f079</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text13</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Text>{IPWIC.WI_DATE}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextFormat Ref="20" type="DateFormat" isKey="true">
+            <StringFormat>D</StringFormat>
+          </TextFormat>
+          <Type>DataColumn</Type>
+        </Text13>
+        <DataBand1 Ref="21" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,4.8,19,2</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text2 Ref="22" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="7" />
+              <Parent isRef="21" />
+              <Text>合同号：</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text3 Ref="23" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.4,0,4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="7" />
+              <Parent isRef="21" />
+              <Text>{IPWIC.SCT_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text3>
+            <SubReport1 Ref="24" type="SubReport" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1.2,19,0.6</ClientRectangle>
+              <Components isList="true" count="0" />
+              <Name>SubReport1</Name>
+              <Page isRef="7" />
+              <Parent isRef="21" />
+              <SubReportPageGuid>927ac6b8fe58451e8547fd49c9dc0585</SubReportPageGuid>
+            </SubReport1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>IPWIC</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>b74b7ba5db4247a78ddccb9cf2088815</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="25" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <Image>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zAVy7LKCG05h5MNRMMsgkkc4uJC2srWtW6ZjqTCKX8RW8soKO7BajtA157zRD0J8wrJjsJWx+LdRaN2vbs8+ZUmm3ZBTW6fzWKMseLts9WkP3XD7q38BgZ8LWuyWZmySTguO3bkrH39y+ZG8cb2/iBCDnuDr5qQ2TjrEbIy87hwVlwunXULUl23KJrUg5u8ltYXEfRTZRxBwe7dSqCguiyMusLZxsrY5Ws58fcKXoabtS5Bt/L2GzSN5taOgUjVwza2bnyPFuZG8OylkEBn8DYyNiG1TmbFPF0JWzPjrF3BuqXpmOmI3LwOW6luii8xjbN8BsE5iG2x59UFW0lQe7NTGZ4l9VOzXjor7uo3DYiPEVPDYeJ7ubneakkEfmMRBmKhhmHMc2u8iq03AaiogQVb7XQ9ieyuo96IIGTC3bOCdTs2Wuncd+NSFWi6DDtol4LhGWcS3k25oILG6e9Vxc9KxIJGy78x2UTHgs/QgdRp24/VXb7AjoCrmiCv4jT01DCT0pJmull3PEPevrDYKXG4WajJKHukJIcO26nk+KCLwWKfiKb4XyCQueXbhaeP0/NS1DYyTp2uZLvswDmFYNiiDznYZK8jG9XNICi8BiJMRWkjmkDy9xPJTGybIPgRsaxzWNa3fyGygcRpx9CxddNMJI7O/sjsrCiCnMwGbxXixYy3GK0jieFw6brfwGn7GMrWhYma+WfckjsrF8EQRGBxEmIjnbJKJPEfxDbstaLTsrNSy5N0zTFICODurAiCoO0/lsVbnlxFljYpjuWOHRbGDwtjDy3MhkLDXumb7XD2Vn59l8TRNnhfE8btcNig5/iYctO6zPi3R+A6Q/rOZUpjs1kqmbbjMnwP427tLB0XtFpWek+RtK26OJ534d+i3sVp6OjO61PIZ7J5cTuewQaeQ07bhvuvYecQyP5vaehK28RXzgseLkrLHR7fcaFOoghIMJJFqCbJGUFkn8HkvK5gJbOo62SbKAyLq3uVPpty2QQeocFLmZKjo5RGIX8R37pmdPtycEJZJ4dmHbhkCnE57IKrXpao8Zkcl2PwmHm7bm4Lfz2Fly0dUNlDTE8OcT3U4sINHKUHX8VJUY8Nc5uwcVoVNPmPTP0VNIHO5+0FOoeqCuYXEZjFvZA+5G+mw8m7c1ZFhZQEREBERAREQEREBERA2REQNk2REHyY2O6tBXwa0J6sHyXqinco8YeQrRDowfJfQjY3oAF9om5R4x+MbLKIodGyIiAiIgJsiICbboiD4MUburAf7L5NaE9Ym/JeqKdo1DzEEQ6Rt+S+w1regAWUUbToREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERB//9k=</Image>
+        <ImageTransparency>54</ImageTransparency>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+    <subReport_1 Ref="26" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <GroupHeaderBand1 Ref="27" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,0.6</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text14 Ref="28" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,1,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,14</Font>
+              <Guid>83e10eeb7bb04fa3a02fdca7fad41ff0</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="26" />
+              <Parent isRef="27" />
+              <Text>序号</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text15 Ref="29" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1,0,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,14</Font>
+              <Guid>59003b794eac450a8d520dab73a4e59b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="26" />
+              <Parent isRef="27" />
+              <Text>货号</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text16 Ref="30" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4,0,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,14</Font>
+              <Guid>1914274365994ffaadaca86408ec1c0b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="26" />
+              <Parent isRef="27" />
+              <Text>箱号</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text17 Ref="31" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7,0,4.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,14</Font>
+              <Guid>66671f71a6b844bdaeda7b07bfd968a6</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="26" />
+              <Parent isRef="27" />
+              <Text>品名</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text18 Ref="32" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.2,0,2.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,14</Font>
+              <Guid>a40cafcc20074f63a749cfbdd79ee9e1</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="26" />
+              <Parent isRef="27" />
+              <Text>件数</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <Text19 Ref="33" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.4,0,3.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,14</Font>
+              <Guid>d8369e172f86450e9743c255d9d97358</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="26" />
+              <Parent isRef="27" />
+              <Text>重量</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text26 Ref="34" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.6,0,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,14</Font>
+              <Guid>e48f2972b4894740a25b2e5cfe89628c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="26" />
+              <Parent isRef="27" />
+              <Text>厂号</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text26>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>cb7047e9e480491e9324d0410420debe</Guid>
+          <Name>GroupHeaderBand1</Name>
+          <Page isRef="26" />
+          <Parent isRef="26" />
+        </GroupHeaderBand1>
+        <DataBand3 Ref="35" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,1.8,19,0.6</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text20 Ref="36" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,1,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,11</Font>
+              <Guid>36a95804184e4fbdbb339ce0a91348fd</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="26" />
+              <Parent isRef="35" />
+              <Text>{Line}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+            <Text21 Ref="37" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1,0,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,11</Font>
+              <Guid>483f56a9dad14da5a6233aa55cb40381</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="26" />
+              <Parent isRef="35" />
+              <Text>{IPPOD.PART_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text22 Ref="38" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4,0,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,11</Font>
+              <Guid>b3b013a122f1456aa1328257cd4d217d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="26" />
+              <Parent isRef="35" />
+              <Text>{IPPOD.CNT_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+            <Text23 Ref="39" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7,0,4.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,11</Font>
+              <Guid>80b06b7f72a34fcc8bc822ae89d2ef6b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="26" />
+              <Parent isRef="35" />
+              <Text>{IPPOD.CDESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+            <Text24 Ref="40" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.2,0,2.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,11</Font>
+              <Guid>d24a187a925a4d8d8bab0a2327836384</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="26" />
+              <Parent isRef="35" />
+              <Text>{IPPOD.QTY}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="41" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text24>
+            <Text25 Ref="42" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.4,0,3.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,11</Font>
+              <Guid>4d26fd07e3dd476b88ecdd21506b027f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="26" />
+              <Parent isRef="35" />
+              <Text>{IPPOD.NW}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text25>
+            <Text27 Ref="43" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.6,0,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,11</Font>
+              <Guid>0fd72ae4dd984a4bbaa4c738d34227e0</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="26" />
+              <Parent isRef="35" />
+              <Text>{IPPOD.MAF_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="44" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>IPPOD</DataSourceName>
+          <FilterOn>False</FilterOn>
+          <Filters isList="true" count="1">
+            <value>_x007B_IPPOD.PO_NO_x003D__x003D_IPWIC.PO_NO_x007D_</value>
+          </Filters>
+          <Guid>34ae868e6097462284b9c6b8dfe71b4d</Guid>
+          <Name>DataBand3</Name>
+          <Page isRef="26" />
+          <Parent isRef="26" />
+          <Sort isList="true" count="0" />
+        </DataBand3>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>927ac6b8fe58451e8547fd49c9dc0585</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>subReport_1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="45" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </subReport_1>
+  </Pages>
+  <PrinterSettings Ref="46" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>7/24/2015 5:51:54 PM</ReportChanged>
+  <ReportCreated>5/20/2015 2:38:51 PM</ReportCreated>
+  <ReportFile>E:\HEVEN\sound\V3_CORE\WebGui\rpt\template\WIC01.mrt</ReportFile>
+  <ReportGuid>b40ff72adc6343c082190b96d9ea76eb</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2012.1.1300</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+        #endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

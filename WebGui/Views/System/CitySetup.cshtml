@@ -1,0 +1,181 @@
+﻿@{
+    ViewBag.Title = "CityPort";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #page-wrapper {
+        padding: 5px;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        var schemas = "@ViewBag.schemas.Content";
+        schemas = JSON.parse(decodeHtml(schemas));
+        CommonFunc.initField(schemas);
+        //CommonFunc.initField(schemas);
+        $("input, textarea").not("[type=submit]").jqBootstrapValidation();
+    });
+</script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var PortCd = "@ViewBag.PortCd";
+        var CntryCd = "@ViewBag.CntryCd";
+        initLoadData(PortCd, CntryCd);
+    });
+</script>
+@Html.RazorJSInline("~/Scripts/CitySetup/CitySetup.js")
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div id="MainArea">
+                <div class="panel panel-default">
+                    <div class="panel-body" style="padding: 5px 2px;">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="PortCd" class="control-label">@Resources.Locale.L_CitySetup_PortCd</label>
+                            </div>
+                            <div class="pure-u-sm-3-30">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <div class="controls">
+                                            <input type="text" id="PortCd" class="form-control input-sm" dt="mt" name="PortCd" fieldname="PortCd" style="text-transform:uppercase"  />
+                                            <p class="help-block tooltips"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="PortCd" class="control-label">@Resources.Locale.L_CitySetup_PortNm</label>
+                            </div>
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" id="PortNm" dt="mt" class="form-control input-sm" fieldname="PortNm">
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="AsType" class="control-label">@Resources.Locale.L_CitySetup_AsType</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <select type="text" id="AsType" dt="mt" class="form-control input-sm" fieldname="AsType">
+                                    <option value="A">@Resources.Locale.L_CityDataQuery_Air</option>
+                                    <option value="S">@Resources.Locale.L_CityDataQuery_Ship</option>
+                                    <option value="T">@Resources.Locale.L_CityDataQuery_Truck</option>
+                                    <option value="B">@Resources.Locale.L_CityDataQuery_ALl</option>
+                                </select>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="Gm" class="control-label">@Resources.Locale.L_CitySetup_Gm</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" id="Gm" dt="mt" onblur="check()" class="form-control input-sm" fieldname="Gm">
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="CntryCd" class="control-label">@Resources.Locale.L_CitySetup_CntryCd</label>
+                            </div>
+                            <div class="pure-u-sm-5-30">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <div class="controls">
+                                            <div class="input-group">
+                                                <input type="text" id="CntryCd" class="form-control input-sm" dt="mt" name="CntryCd" fieldname="CntryCd" />
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-sm btn-default" type="button" id="CntryCdLookup">
+                                                        <span class="glyphicon glyphicon-search"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" id="CntryNm" dt="mt" class="form-control input-sm" name="CntryNm" fieldname="CntryNm" readonly="readonly">
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="Ns" class="control-label">@Resources.Locale.L_CitySetup_Ns</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" id="Ns" dt="mt" class="form-control input-sm" fieldname="Ns">
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="Ew" class="control-label">@Resources.Locale.L_CitySetup_Ew</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" id="Ew" dt="mt" class="form-control input-sm" fieldname="Ew">
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="State" class="control-label">@Resources.Locale.L_CitySetup_State</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <div class="controls">
+                                            <div class="input-group">
+                                                <input type="text" id="State" dt="mt" class="form-control input-sm" fieldname="State">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-sm btn-default" type="button" id="StateLookup">
+                                                        <span class="glyphicon glyphicon-search"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="Region" class="control-label">@Resources.Locale.L_CitySetup_Region</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <div class="input-group">
+                                    <input type="text" id="Region" dt="mt" class="form-control input-sm" fieldname="Region">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="RegionLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                             <div class="pure-u-sm-5-60 label-right">
+                                <label for="MappingCode" class="control-label">@Resources.Locale.L_CitySetup_AMSCode</label>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" id="MappingCode" dt="mt" class="form-control input-sm" fieldname="MappingCode">
+                            </div>
+                         </div>
+                        <div class="pure-g">
+                                <div class="pure-u-sm-5-60">
+                                    <label for="Cmp" class="control-label">@Resources.Locale.L_NRSSetup_U_ID</label>
+                                </div>
+                                <div class="pure-u-sm-5-60">
+                                    <input type="text" dt="mt" class="form-control input-sm" id="Cmp" fieldname="Cmp" readonly />
+                                </div>
+                                <div class="pure-u-sm-6-60 label-right">
+                                    <label for="CreateBy" class="control-label">@Resources.Locale.L_NRSSetup_CreateBy</label>
+                                </div>
+                                <div class="pure-u-sm-7-60">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" fieldname="CreateBy" readonly />
+                                </div>
+                                <div class="pure-u-sm-7-60">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" fieldname="CreateDate" readonly>
+                                </div>
+                                <div class="pure-u-sm-10-60"></div>
+                                <div class="pure-u-sm-6-60 label-right">
+                                    <label for="ModifyBy" class="control-label">@Resources.Locale.L_NRSSetup_ModifyBy</label>
+                                </div>
+                                <div class="pure-u-sm-7-60 control-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" fieldname="ModifyBy" readonly />
+                                </div>
+                                <div class="pure-u-sm-7-60">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" fieldname="ModifyDate" readonly />
+                                </div>
+                            </div>
+                   </div>
+                </div>
+            </div>           
+        </div>
+    </div>
+</div>

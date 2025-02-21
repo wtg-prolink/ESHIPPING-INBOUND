@@ -1,0 +1,388 @@
+﻿@{
+    ViewBag.Title = "ConfirmReserveSetup";
+}
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+    var page = "C";
+</script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+
+                        <div class="pure-u-sm-5-60">
+                            <label for="ReserveNo" class="control-label">@Resources.Locale.L_GateReserve_ReveseNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="ReserveNo" name="ReserveNo" fieldname="ReserveNo" isKey="true"  readonly />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="CallDate" class="control-label">@Resources.Locale.L_GateReserveSetup_CallDate</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="CallDate" name="CallDate" fieldname="CallDate" readonly />                            
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="UseDate" class="control-label">@Resources.Locale.L_GateReserveSetup_UseDate</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="UseDate" name="UseDate" fieldname="UseDate" readonly />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Status" class="control-label">@Resources.Locale.L_GateReserve_Status</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="Status" name="Status" fieldname="Status" readonly>
+                                <option value="D">D:@Resources.Locale.L_DNManage_Called</option>
+                                <option value="R">R:@Resources.Locale.L_DNManage_Reserved</option>
+                                <option value="C">C:@Resources.Locale.L_DNManage_Confirmed</option>
+                                <option value="I">I:@Resources.Locale.L_UserQuery_In</option>
+                                <option value="G">G:@Resources.Locale.L_DNManage_Gated</option>
+                                <option value="P">P:@Resources.Locale.L_UserQuery_SealCnt</option>
+                                <option value="O">O:@Resources.Locale.L_UserQuery_Out</option>
+                                <option value="V">V:@Resources.Locale.L_BSCSDateQuery_Cancel</option>
+                                <option value="E">E:@Resources.Locale.L_DNManage_TempOut</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="ProductLine" class="control-label">@Resources.Locale.L_GateReserveSetup_ProLine</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="ProductLine" name="ProductLine" fieldname="ProductLine" readonly />
+                        </div>
+
+                        @*<div class="pure-u-sm-5-60 label-right">
+                            <label for="Cmp" class="control-label">公司</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp"></select>
+                        </div>*@
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="TempWscd" class="control-label required">@Resources.Locale.L_GateReserve_WsCd</label>
+                        </div>                        
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TempWscd" name="TempWscd" fieldname="TempWscd" required/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="WsCdLookup1" >
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <!-- <div class="pure-u-sm-5-60 label-right">
+                            <label for="REFGate" class="control-label">@Resources.Locale.L_GateReserveSetup_REFGate</label>
+                        </div>
+                        <div class="pure-u-sm-25-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="REFGate" name="REFGate" fieldname="REFGate" readonly />
+                        </div> -->
+                    </div>
+
+                    <div class="pure-g">
+
+                        <div class="pure-u-sm-5-60">
+                            <label for="Trucker" class="control-label">@Resources.Locale.L_GateReserve_Trucker</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Trucker" name="Trucker" fieldname="Trucker" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="TruckerLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="TruckerNm" name="TruckerNm" fieldname="TruckerNm" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="BatNo" class="control-label">@Resources.Locale.L_GateReserve_BatNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="BatNo" name="BatNo" fieldname="BatNo" readonly />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="TruckNo" class="control-label">@Resources.Locale.L_GateReserve_TruckNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="TruckNo" name="TruckNo" fieldname="TruckNo" readonly/>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Driver" class="control-label">@Resources.Locale.L_GateReserve_Driver</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Driver" name="Driver" fieldname="Driver" readonly/>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="DriverId" class="control-label">@Resources.Locale.L_GateReserve_DriverId</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="DriverId" name="DriverId" fieldname="DriverId" ref="Driver" readonly/>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Tel" class="control-label">@Resources.Locale.L_GateReserve_Tel</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="Tel" name="Tel" fieldname="Tel" readonly/>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="LtruckNo" class="control-label">@Resources.Locale.L_GateReserve_LtruckNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="LtruckNo" name="LtruckNo" fieldname="LtruckNo" readonly/>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Ldriver" class="control-label">@Resources.Locale.L_GateReserve_Driver</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Ldriver" name="Ldriver" fieldname="Ldriver" readonly/>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="LdriverId" class="control-label">@Resources.Locale.L_GateReserve_DriverId</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="LdriverId" name="LdriverId" fieldname="LdriverId" ref="Ldriver" readonly/>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Ltel" class="control-label">@Resources.Locale.L_GateReserve_Tel</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="Ltel" name="Ltel" fieldname="Ltel" ref="Ldriver" readonly/>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="TempRdate" class="control-label">@Resources.Locale.L_GateReserve_ReserveDate</label>
+                        </div>
+                        <div class="pure-u-sm-6-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="TempRdate" name="TempRdate" fieldname="TempRdate" required/>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                            <select class="form-control input-sm" dt="mt" id="TempRfrom" name="TempRfrom" fieldname="TempRfrom" required>
+                                <option value="0">00:00</option>
+                                <option value="1">01:00</option>
+                                <option value="2">02:00</option>
+                                <option value="3">03:00</option>
+                                <option value="4">04:00</option>
+                                <option value="5">05:00</option>
+                                <option value="6">06:00</option>
+                                <option value="7">07:00</option>
+                                <option value="8">08:00</option>
+                                <option value="9">09:00</option>
+                                <option value="10">10:00</option>
+                                <option value="11">11:00</option>
+                                <option value="12">12:00</option>
+                                <option value="13">13:00</option>
+                                <option value="14">14:00</option>
+                                <option value="15">15:00</option>
+                                <option value="16">16:00</option>
+                                <option value="17">17:00</option>
+                                <option value="18">18:00</option>
+                                <option value="19">19:00</option>
+                                <option value="20">20:00</option>
+                                <option value="21">21:00</option>
+                                <option value="22">22:00</option>
+                                <option value="23">23:00</option>
+                            </select>
+                        </div>
+
+                        <!-- <div class="pure-u-sm-5-60 label-right">
+                            <label for="ReserveTdate" class="control-label">到  </label>
+                        </div>
+                        <div class="pure-u-sm-6-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="ReserveTdate" name="ReserveTdate" fieldname="ReserveTdate" />
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                            <select class="form-control input-sm" dt="mt" id="ReserveTo" name="ReserveTo" fieldname="ReserveTo">
+                                <option value="0">00:00</option>
+                                <option value="1">01:00</option>
+                                <option value="2">02:00</option>
+                                <option value="3">03:00</option>
+                                <option value="4">04:00</option>
+                                <option value="5">05:00</option>
+                                <option value="6">06:00</option>
+                                <option value="7">07:00</option>
+                                <option value="8">08:00</option>
+                                <option value="9">09:00</option>
+                                <option value="10">10:00</option>
+                                <option value="11">11:00</option>
+                                <option value="12">12:00</option>
+                                <option value="13">13:00</option>
+                                <option value="14">14:00</option>
+                                <option value="15">15:00</option>
+                                <option value="16">16:00</option>
+                                <option value="17">17:00</option>
+                                <option value="18">18:00</option>
+                                <option value="19">19:00</option>
+                                <option value="20">20:00</option>
+                                <option value="21">21:00</option>
+                                <option value="22">22:00</option>
+                                <option value="23">23:00</option>
+                            </select>
+                        </div> -->
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="TempRh" class="control-label">@Resources.Locale.L_GateReserveSetup_ReserveHour</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="TempRh" name="TempRh" fieldname="TempRh" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="TruckCntrno" class="control-label">@Resources.Locale.L_GateReserve_TruckCntrno</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="TruckCntrno" name="TruckCntrno" fieldname="TruckCntrno" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="TruckSealno" class="control-label">@Resources.Locale.L_GateReserve_TruckSealno</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="TruckSealno" name="TruckSealno" fieldname="TruckSealno" />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+
+                        <div class="pure-u-sm-5-60">
+                            <label for="TempGateno" class="control-label required">@Resources.Locale.L_GateReserve_GateNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TempGateno" name="TempGateno" fieldname="TempGateno" required/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="TempGatenoLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="DnNo" class="control-label">@Resources.Locale.L_DNApproveManage_DnNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="DnNo" name="DnNo" fieldname="DnNo" readonly />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Remark" class="control-label">@Resources.Locale.L_GateReserveSetup_Msg</label>
+                        </div>
+                        <div class="pure-u-sm-25-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="Remark" name="Remark" fieldname="Remark" readonly />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="CreateCmp" class="control-label">@Resources.Locale.L_IpPart_Cmp</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="CreateCmp" name="CreateCmp" fieldname="CreateCmp" readonly />
+                        </div>
+                        <div class="pure-u-sm-6-60 label-right">
+                            <label for="CreateDep" class="control-label">@Resources.Locale.L_GateReserveSetup_CreateDep</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="CreateDep" name="CreateDep" fieldname="CreateDep" readonly />
+                        </div>
+                        <div class="pure-u-sm-4-60 label-right">
+                            <label for="CreateExt" class="control-label">@Resources.Locale.L_GateReserveSetup_CreateExt</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="CreateExt" name="CreateExt" fieldname="CreateExt" readonly />
+                        </div>
+
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="CreateBy" class="control-label">@Resources.Locale.L_GateReserveSetup_CreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" name="CreateBy" fieldname="CreateBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" name="CreateDate" fieldname="CreateDate" readonly />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="OrderBy" class="control-label">@Resources.Locale.L_GateReserve_ReserveBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="OrderBy" name="OrderBy" fieldname="OrderBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="OrderDate" name="OrderDate" fieldname="OrderDate" readonly />
+                        </div>
+
+                        <div class="pure-u-sm-11-60"></div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ConfirmBy" class="control-label">@Resources.Locale.L_GateReserve_ConfirmBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ConfirmBy" name="ConfirmBy" fieldname="ConfirmBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ConfirmDate" name="ConfirmDate" fieldname="ConfirmDate" readonly />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="SmcreateBy" class="control-label">@Resources.Locale.L_GateReserve_SmcreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="SmcreateBy" name="SmcreateBy" fieldname="SmcreateBy" readonly />
+                        </div>
+                    </div>
+                    <input type="hidden" dt="mt"  isKey="true" id="UId" name="UId" fieldname="UId" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.RazorJSInline("~/Scripts/GateManage/GateReserveSetup.js")

@@ -1,0 +1,243 @@
+﻿@{
+	ViewBag.Title = "@Resources.Locale.L_QuotTrailerQuery_Views_2_7";
+}
+
+<script type="text/javascript">
+	$(document).ready(function ($) {
+		var select_tranmode = "@ViewBag.SelectTranMode";
+		//init Search
+		var gop = {};
+		var numberTemplate = "2";
+		var docHeight = getSiteHeight();
+		gridHeight = docHeight - 310;
+		gop.gridColModel = [
+			{ name: 'UId', showname: 'UId', sorttype: 'string', hidden: true, viewable: false },
+			{ name: 'QuotType', title: '@Resources.Locale.L_RQQuery_Status', index: 'QuotType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'I:Enquiry;A:@Resources.Locale.L_InvCheck_Views_214;Q:@Resources.Locale.L_QTSetup_Quote;P:@Resources.Locale.L_QTSetup_Prepare;B:@Resources.Locale.L_RQSetup_Bidder;V:@Resources.Locale.L_MenuBar_Audit;F:@Resources.Locale.L_RQSetup_Bidder;R:@Resources.Locale.L_ActCheck_Views_4' } },
+			{ name: 'TranType', title: 'TranType', init: true, index: 'TranType', sorttype: 'string', width: 100, hidden: false, editable: true, formatter: "select", editoptions: { value: 'F:F.FCL;A:A.Air;L:L.LCL;R:R.RailWay;D:D.Inland Express;T:T.Truck;E:E.Express' }, edittype: 'select' },
+			{ name: 'QuotNo', title: '@Resources.Locale.L_QTQuery_QuotNo', index: 'QuotNo', width: 130, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'QuotDateL', title: '@Resources.Locale.L_QTQuery_QuotDate', index: 'QuotDateL', editable: false, formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Rlocation', title: '@Resources.Locale.L_RQQuery_Rlocation', index: 'Rlocation', width: 90, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'RlocationNm', title: '@Resources.Locale.L_RQQuery_Rlocation'+"@Resources.Locale.L_BaseLookup_Nm", index: 'RlocationNm', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SharedTo', title: 'Shared To', index: 'SharedTo', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SharedNm', title: 'Shared To Name', index: 'SharedNm', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspCd', title: '@Resources.Locale.L_AirSetup_LspCd', index: 'LspCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'LspNm', title: '@Resources.Locale.L_AirSetup_LspCd' + "@Resources.Locale.L_BaseLookup_Nm", index: 'LspNm', width: 120, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'EffectFrom', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', width: 120, align: 'left', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'EffectTo', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', width: 120, align: 'left', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'CreateBy', init: true, title: "@Resources.Locale.L_DNApproveManage_CreateBy", index: 'CreateBy', width: 120, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'QuotRmk', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'QuotRmk', width: 300, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'CreateDate', title: '@Resources.Locale.L_DNApproveManage_CreateDate', index: 'CreateDate', editable: false, formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false }
+		];
+		gop.AddUrl = { "url": rootPath + "IQTManage/QuotTrailerSetup", "title": "@Resources.Locale.L_ActManage_EntTC", "id": "QuotTrailerSetup" };
+		gop.gridId = "containerInfoGrid";
+		gop.gridAttr = { caption: "@Resources.Locale.L_ActManage_TQuoList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+		gop.gridSearchUrl = rootPath + "IQTManage/QTTrailerQueryData";
+		gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+		//SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+		gop.searchFormId = "ConditionArea";
+		gop.searchDivId = "SearchArea";
+		gop.StatusAreaId = "StatusArea";
+		gop.BtnGroupId = "BtnGroupArea";
+
+
+		gop.gridFunc = function (map) {
+			//用于回调函数，例如赋值操作等
+			dblClick(map);
+		}
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+		gop.searchFormId = "ConditionArea";
+		gop.searchDivId = "SearchArea";
+		gop.loadCompleteFunc = function () {
+			var $grid = $("#containerInfoGrid");
+			if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+				$grid[0].p.sortname = "CreateDate";
+		}
+
+		gop.statusGroup = [
+			{ "id": "", "label": "@Resources.Locale.L_UserSetUp_All" },
+			{ "id": "P", "label": "@Resources.Locale.L_QTSetup_Prepare" },
+            { "id": "I", "label": "Enquiry" },
+			{ "id": "Q", "label": "@Resources.Locale.L_QTSetup_Quote" },
+			{ "id": "A", "label": "@Resources.Locale.L_InvCheck_Views_214" },
+            { "id": "V", "label": "@Resources.Locale.L_MenuBar_Audit" },
+            { "id": "R", "label": "@Resources.Locale.L_ActCheck_Views_4" }
+		];
+
+		gop.btnGroup = [
+			{
+			    id: "MBbtn01",
+				name: "@Resources.Locale.L_QuotTrailerADD",
+				func: function () {
+					$("#AddDialog").modal('show');
+				}
+			}
+		]
+
+		gop.statusField = "QuotType";
+		gop.statusDefaultId = "Q";
+		initSearch(gop);
+
+		$("#SummarySearch").bind("click", function () {
+			$(".status-box").removeClass("active");
+			$("#searchStatus_").addClass("active");
+		});
+
+		function dblClick(map) {
+			var UId = map.UId;
+			var tranmode = map.TranMode;
+			var title = "";
+			var _url = "QuotTrailerSetup";
+
+			top.topManager.openPage({
+				href: rootPath + "IQTManage/" + _url + "?UId=" + UId,
+				title: title + '@Resources.Locale.L_ActManage_EntTC',
+				id: _url,
+				search: 'uid=' + UId,
+				reload: true
+			});
+		}
+
+		$("#LspCdLookup").v3Lookup({
+		    url: rootPath + "Common/GetPartyNoData",
+		    gridFunc: function(map){
+		        $("#LspCd").val(map.PartyNo);
+		    },
+		    baseConditionFunc: function () {
+		        var CMP = $("#LspCd").val();
+		        var ioflag = getCookie("plv3.passport.ioflag");
+		        if (ioflag == "O")
+		        {
+		            return " PARTY_NO = '" + CMP + "'";
+		        }
+		        else
+		        {
+		            return " 1=1";
+		        }
+		    },
+		    lookUpConfig: LookUpConfig.PartyNoLookup
+		});
+
+		$("#LspCd").v3AutoComplete({
+		    params:"dt=smpty&GROUP_ID=" + groupId + "&PARTY_NO%",
+		    returnValue: "PARTY_NO&PARTY_NAME=showValue,STATE,ZIP,PARTY_NO,PARTY_NAME,PARTY_NAME2,PARTY_NAME3,PARTY_NAME4,PARTY_MAIL,PART_ADDR1,PART_ADDR2,PART_ADDR3,PART_ADDR4,PART_ADDR5,PARTY_FAX,PARTY_ATTN,PARTY_TEL,PARTY_TYPE,CNTY,CNTY_NM,CITY,CITY_NM,TAX_NO",
+		    callBack: function(event, ui){
+		        $("#LspCd").val(ui.item.returnValue.PARTY_NO);
+		        return false;
+		    },
+		    clearFunc: function(){
+		    }
+		});
+
+		$("#ConfirmBtn").click(function(){
+			var Location = $("#Location").val();
+			var LspCd = $("#LspCd").val();
+			if(Location == "" || LspCd == "")
+			{
+				alert("請輸入您要的Location與物流業者");
+				return;
+			}
+			top.topManager.openPage({
+				href: rootPath + "IQTManage/QuotTrailerSetup?Location=" + Location + "&LspCd=" + LspCd,
+				title:'@Resources.Locale.L_ActManage_EntTC',
+			    id: "QuotTrailerSetup",
+			    reload: true
+			});
+		});
+
+		if(IoFlag == "O")
+		{
+			$("#LspCd").val(cmp);
+		}
+	});
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g" id="BtnGroupArea">
+
+					</div>
+					<div class="pure-g" id="StatusArea">
+
+					</div>
+					<div class="form-group">
+						<div class="pure-g">
+							<div class="pure-u-sm-60-60">
+								<table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+									<tr></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--新增視窗-->
+<div class="modal fade" id="AddDialog">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Choose Location and Truck Company</h4>
+			</div>
+			<div class="modal-body">
+				<div class="pure-g">
+					<div class="pure-u-sm-15-60">
+						<label for="Location" class="control-label">Location</label>
+					</div>
+					<div class="pure-u-sm-20-60 control-group">
+						<select class="form-control input-sm" name="Location" id="Location">
+							@Html.Raw(ViewBag.LocationSel)
+						</select>
+					</div>
+				</div>
+				<div class="pure-g">
+					<div class="pure-u-sm-15-60">
+						<label for="LspCd" class="control-label">Party</label>
+					</div>
+					<div class="pure-u-sm-20-60 control-group">
+						<div class="input-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="LspCd" name="LspCd" fieldname="LspCd" />
+							<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="LspCdLookup">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-sm btn-info" id="ConfirmBtn">@Resources.Locale.L_Layout_Confirm</button>
+				<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">@Resources.Locale.L_BSCSDateQuery_Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--新增視窗-->

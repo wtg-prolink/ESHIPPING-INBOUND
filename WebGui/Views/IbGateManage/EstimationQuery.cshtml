@@ -1,0 +1,400 @@
+﻿@{
+    ViewBag.Title = "EstimationQuery";
+} 
+<style>
+    .exc_Red {
+        background: #FF0000 !important;
+    }
+
+    .exc_Yel {
+        background: #FFC000 !important;
+    }
+
+    .exc_Gre {
+        background: #92D050 !important;
+    }
+</style>
+<script type="text/javascript">
+    var BidUid = "@ViewBag.BidUid";
+
+$(document).ready(function ($) {
+    console.log("BidUid" + BidUid);
+
+
+    function setDate(id) {
+        $("#" + id).wrap('<div class="input-group">').datepicker({
+            showOn: "button",
+            changeYear: true,
+            dateFormat: "yy/mm/dd",
+            beforeShow: function () {
+                setTimeout(function () {
+                    $('.ui-datepicker').css('z-index', 99999999999999);
+                }, 0);
+            },
+            onClose: function (text, inst) {
+                $(this).focus();
+            }
+        }).next("button").button({ icons: { primary: "ui-icon-calendar" }, label: "Select a date", text: false })
+            .addClass("btn btn-sm btn-info").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+            .wrap('<span class="input-group-btn">')
+            .find('.ui-button-text')
+            .css({
+                'visibility': 'hidden',
+                'display': 'inline'
+            });
+    }
+    setDate("PickupCdate");
+    setDate("EmptyTime");
+
+    //init Search
+    var gop = {};
+    var numberTemplate = "2";
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 230;
+    gop.gridColModel = [
+        { name: 'NewUid', title: 'New Uid', index: 'NewUid', width: 120, align: 'left', sorttype: 'string', hidden: true },
+        { name: 'ShipmentId', title: 'Shipment ID', index: 'ShipmentId', width: 120, align: 'left', sorttype: 'string', hidden: false },
+        {
+            name: 'Eta', title: 'ETA', index: 'Eta', sorttype: 'string', width: 110, hidden: false, editable: false,
+            formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false,
+            editoptions: myEditDateInit,
+            formatter: 'date',
+            formatoptions: {
+                srcformat: 'ISO8601Long',
+                newformat: 'Y-m-d',
+                defaultValue: ""
+            }
+        },
+        {
+            name: 'DeliveryDate', title: 'Delivery Date', index: 'DeliveryDate', sorttype: 'string', width: 110, hidden: false, editable: false,
+            formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false,
+            editoptions: myEditDateInit,
+            formatter: 'date',
+            formatoptions: {
+                srcformat: 'ISO8601Long',
+                newformat: 'Y-m-d',
+                defaultValue: ""
+            }
+        },
+        { name: 'CntrNo', title: 'Cntr No', index: 'CntrNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'CntrType', title: 'Cntr Type', index: 'CntrType', width: 120, align: 'left', sorttype: 'string', hidden: false },
+        {
+            name: 'EmpPickDate', title: 'Empty Pick Up Date', index: 'EmpPickDate', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false,
+            editoptions: myEditDateInit,
+            formatter: 'date',
+            formatoptions: {
+                srcformat: 'ISO8601Long',
+                newformat: 'Y-m-d',
+                defaultValue: ""
+            }
+        },
+        {
+            name: 'DischargeDate', title: 'Discharge Date', index: 'DischargeDate', sorttype: 'string',formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false,
+            editoptions: myEditDateInit,
+            formatter: 'date',
+            formatoptions: {
+                srcformat: 'ISO8601Long',
+                newformat: 'Y-m-d',
+                defaultValue: ""
+            }
+        },
+        {
+            name: 'PickupCdate', title: '@Resources.Locale.L_BaseLookup_PickupCdate', index: 'PickupCdate', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false, align: "left",
+            editoptions: myEditDateInit,
+            formatter: 'date',
+			formatoptions: {
+			    srcformat: 'ISO8601Long',
+			    newformat: 'Y-m-d'
+			}
+        },
+        {
+            name: 'EmptyTime', title: 'Empty Return Time', index: 'EmptyTime', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false, align: "left",
+			formatter: 'date',
+			formatoptions: {
+			    srcformat: 'ISO8601Long',
+			    newformat: 'Y-m-d'
+			}
+        },
+        {
+            name: 'StorageDueDate', title: 'End of STO Free Time', index: 'StorageDueDate', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false, align: "left", width: 200,
+            formatter: 'date',
+            formatoptions: {
+                srcformat: 'ISO8601Long',
+                newformat: 'Y-m-d'
+            }
+        },
+        {
+            name: 'DemurrageDueDate', title: 'End of DEM Free Time', index: 'DemurrageDueDate', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false, align: "left", width: 200,
+            formatter: 'date',
+            formatoptions: {
+                srcformat: 'ISO8601Long',
+                newformat: 'Y-m-d'
+            }
+        },
+        {
+            name: 'DetentionDueDate', title: 'End of DET Free Time', index: 'DetentionDueDate', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false, align: "left", width: 200,
+            formatter: 'date',
+            formatoptions: {
+                srcformat: 'ISO8601Long',
+                newformat: 'Y-m-d'
+            }
+        },
+        { name: 'StoExceedTime', title: 'STO Exceeded Time (Estimation)', index: 'StoExceedTime', width: 120, align: 'right', formatter: 'number', sorttype: 'string', hidden: false, formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 0, defaultValue: '' } },
+        { name: 'DemExceedTime', title: 'DEM Exceeded Time (Estimation)', index: 'DemExceedTime', width: 120, align: 'right', formatter: 'number', sorttype: 'string', hidden: false, formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 0, defaultValue: '' } },
+        { name: 'DetExceedTime', title: 'DET Exceeded Time (Estimation)', index: 'DetExceedTime', width: 120, align: 'right', formatter: 'number', sorttype: 'string', hidden: false, formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 0, defaultValue: '' } },
+        {
+            name: 'StoEstFrom', title: 'STO EST. From (Date)', index: 'StoEstFrom', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false, align: "left", width: 200,
+            formatter: 'date',
+            formatoptions: {
+                srcformat: 'ISO8601Long',
+                newformat: 'Y-m-d'
+            }
+        },
+        {
+            name: 'StoEstTo', title: 'STO EST. To (Date)', index: 'StoEstTo', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false, align: "left", width: 200,
+            formatter: 'date',
+            formatoptions: {
+                srcformat: 'ISO8601Long',
+                newformat: 'Y-m-d'
+            }
+        },
+        { name: 'StoCurForecast', title: 'STO EST. CUR', index: 'StoCurForecast', width: 120, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'StoAmtForecast', title: 'STO EST. Cost', index: 'StoAmtForecast', width: 120, align: 'right', formatter: 'number', sorttype: 'string', hidden: false, formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '' } },
+        {
+            name: 'DemEstFrom', title: 'DEM EST. From (Date)', index: 'DemEstFrom', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false, align: "left", width: 200,
+            formatter: 'date',
+            formatoptions: {
+                srcformat: 'ISO8601Long',
+                newformat: 'Y-m-d'
+            }
+        },
+        {
+            name: 'DemEstTo', title: 'DEM EST. To (Date)', index: 'DemEstTo', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false, align: "left",
+            formatter: 'date',
+            formatoptions: {
+                srcformat: 'ISO8601Long',
+                newformat: 'Y-m-d'
+            }
+        },
+        { name: 'DemCurForecast', title: 'DEM EST. CUR', index: 'DemCurForecast', width: 120, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'DemAmtForecast', title: 'DEM EST. Cost', index: 'DemAmtForecast', width: 120, align: 'right', formatter: 'number', sorttype: 'string', hidden: false, formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '' } },
+        {
+            name: 'DetEstFrom', title: 'DET EST. From (Date)', index: 'DetEstFrom', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false, align: "left",
+            formatter: 'date',
+            formatoptions: {
+                srcformat: 'ISO8601Long',
+                newformat: 'Y-m-d'
+            }
+        },
+        {
+            name: 'DetEstTo', title: 'DET EST. To (Date)', index: 'DetEstTo', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false, align: "left",
+            formatter: 'date',
+            formatoptions: {
+                srcformat: 'ISO8601Long',
+                newformat: 'Y-m-d'
+            }
+        }, 
+        { name: 'DetCurForecast', title: 'DET EST. CUR', index: 'DetCurForecast', width: 120, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'DetAmtForecast', title: 'DET EST. Cost', index: 'DetAmtForecast', width: 120, align: 'right', formatter: 'number', sorttype: 'string', hidden: false, formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '' } }
+    ];
+    var searchUrl = "IbGateManage/EstimationQueryData";
+    var con = " BID_UID = '" + BidUid + "'";
+
+    gop.AddUrl = false;
+    gop.gridId = "containerInfoGrid";
+    gop.gridAttr = { caption: "Estimation", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    gop.gridSearchUrl = rootPath + searchUrl;
+    gop.searchColumns = getSelectColumn(gop.gridColModel);
+    gop.baseCondition = con;
+
+
+    gop.multiselect = true;
+    gop.multiboxonly = true;
+
+    gop.StatusAreaId = "StatusArea";
+    gop.BtnGroupId = "BtnGroupArea";
+
+
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        //dblClick(map);
+    }
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+
+    gop.loadCompleteFunc = function () {
+        var $grid = $("#containerInfoGrid");
+        var col = $grid.jqGrid('getRowData');
+        $.each(col, function (index) {
+            //var tranType = this.TranType;
+            //if (tranType != "F" && tranType != "R")
+            //    return true;
+            if (this.StoExceedTime != "") {
+                var stoExcTime = parseFloat(this.StoExceedTime);
+                if (stoExcTime > 0) {
+                    $grid.jqGrid('setCell', index + 1, 'StoExceedTime', this.StoExceedTime, 'exc_Red');
+                } else if (stoExcTime <= -4) {
+                    $grid.jqGrid('setCell', index + 1, 'StoExceedTime', this.StoExceedTime, 'exc_Gre');
+                } else
+                    $grid.jqGrid('setCell', index + 1, 'StoExceedTime', this.StoExceedTime, 'exc_Yel');
+            }
+            if (this.DemExceedTime != "") {
+                var demExcTime = parseFloat(this.DemExceedTime);
+                if (demExcTime > 0) {
+                    $grid.jqGrid('setCell', index + 1, 'DemExceedTime', this.DemExceedTime, 'exc_Red');
+                } else if (demExcTime <= -4) {
+                    $grid.jqGrid('setCell', index + 1, 'DemExceedTime', this.DemExceedTime, 'exc_Gre');
+                } else
+                    $grid.jqGrid('setCell', index + 1, 'DemExceedTime', this.DemExceedTime, 'exc_Yel');
+            }
+            if (this.DetExceedTime != "") {
+                var detExcTime = parseFloat(this.DetExceedTime);
+                if (detExcTime > 0) {
+                    $grid.jqGrid('setCell', index + 1, 'DetExceedTime', this.DetExceedTime, 'exc_Red');
+                } else if (detExcTime <= -4) {
+                    $grid.jqGrid('setCell', index + 1, 'DetExceedTime', this.DetExceedTime, 'exc_Gre');
+                } else
+                    $grid.jqGrid('setCell', index + 1, 'DetExceedTime', this.DetExceedTime, 'exc_Yel');
+            }
+        });
+    }
+
+    gop.btnGroup = [];
+
+    initSearch(gop);
+
+
+    myfunction();
+
+
+    $("#btn_Confirm").click(function () {
+        var pickUpCdate = $("#PickupCdate").val();
+        var emptyTime = $("#EmptyTime").val();
+
+        if (isEmpty(pickUpCdate) && isEmpty(emptyTime))
+        {
+            CommonFunc.Notify("", "Please input Pick Up Estimation or Empty Return Estimation!", 500, "warning");
+			return;
+        }
+
+        var mygrid = $("#containerInfoGrid");
+        var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+        var responseData = [];
+		$.each(selRowId, function (index, val) {
+			responseData.push(mygrid.getRowData(selRowId[index]));
+		});
+		if (responseData.length < 1) {
+			CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+			return;
+		}
+        var keys = "";
+        for (var i = 0; i < responseData.length; i++) {
+            keys += responseData[i].NewUid + ",";
+        }
+
+        $.ajax({
+            async: true,
+            url: rootPath + "IbGateManage/UpdateEstimation",
+            type: 'POST',
+            data: { "keys": keys, "pickUpCdate": pickUpCdate, "emptyTime": emptyTime },
+            "complete": function (xmlHttpRequest, successMsg) {
+                CommonFunc.ToogleLoading(false);
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+                CommonFunc.ToogleLoading(false);
+                var resJson = $.parseJSON(errMsg)
+                CommonFunc.Notify("", resJson.message, 500, "warning");
+            },
+            success: function (result) {
+                if (result.message == "success") {
+                    CommonFunc.Notify("", "Success", 1000, "success");
+                    $("#SummarySearch").trigger("click");
+                } else {
+                    CommonFunc.Notify("", result.message, 500, "warning");
+                }
+            }
+        });
+
+    })
+
+    function myfunction() {
+        $.ajax({
+            async: true,
+            url: rootPath + searchUrl,
+            type: 'POST',
+            data: { "condition": con },
+            "error": function (xmlHttpRequest, errMsg) {
+                CommonFunc.ToogleLoading(false);
+                var resJson = $.parseJSON(errMsg)
+                CommonFunc.Notify("", resJson.message, 500, "warning");
+            },
+            success: function (result) {
+               $("#SummarySearch").trigger("click");
+            }
+        });
+    }
+});
+
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-10-60 label-right">
+                            <label for="PickupCdate" class="control-label">Pick Up Estimation</label>
+                        </div>
+                        <div class="pure-u-sm-6-60 control-group">
+                            <input type="text" class="form-control input-sm" id="PickupCdate" name="PickupCdate" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-10-60 label-right">
+                            <label for="EmptyTime" class="control-label">Empty Return Estimation</label>
+                        </div>
+                        <div class="pure-u-sm-6-60">
+                            <input type="text" class="form-control input-sm" id="EmptyTime" name="EmptyTime" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-1-60"></div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <button class="btn btn-sm btn-primary pms-btn" id="btn_Confirm">Confirm</button>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

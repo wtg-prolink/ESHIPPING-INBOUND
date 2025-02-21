@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "AutoNoSetupView";
+}
+<script>
+	var _RuleCode = "@ViewBag.RuleCode";
+	var _Cmp = "@ViewBag.Cmp";
+	var _Stn = "@ViewBag.Stn";
+	var schemas = "@ViewBag.schemas.Content";
+	var  jslang = [];
+	 jslang["L_AutoNoManage_CostList"] = "Rule Code Item";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/AutoNoManage/AutoNoSetupView.js?20240815")"></script>
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+			<div class="pure-u-sm-5-60">
+			    <label for="RuleCode" class="control-label">@Resources.Locale.L_AutoNoManage_RuleCode</label>
+			</div>
+			<div class="pure-u-sm-10-60 control-group">
+			    <input type="text" class=" form-control input-sm" dt="mt" id="RuleCode" name="RuleCode" fieldname="RuleCode" isKey="true" />
+			    <p class="help-block tooltips"></p>
+			</div>
+			<div class="pure-u-sm-5-60 label-right">
+			    <label for="RuleName" class="control-label">@Resources.Locale.L_AutoNoManage_RuleName</label>
+			</div>
+			<div class="pure-u-sm-10-60 control-group">
+			    <input type="text" class=" form-control input-sm" dt="mt" id="RuleName" name="RuleName" fieldname="RuleName"/>
+			    <p class="help-block tooltips"></p>
+			</div>
+			<div class="pure-u-sm-5-60 label-right">
+			    <label for="Cmp" class="control-label required">@Resources.Locale.L_AutoNoManage_Cmp</label>
+			</div>
+			<div class="pure-u-sm-10-60 control-group">
+			    <div class="input-group">
+	                	        <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" isKey="true" required/>
+	                	        <span class="input-group-btn">
+	                	            <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+	                	                <span class="glyphicon glyphicon-search"></span>
+	                	            </button>
+	                	        </span>
+	                	    </div>
+			    <p class="help-block tooltips"></p>
+			</div>
+			@* <div class="pure-u-sm-5-60 label-right">
+			    <label for="Stn" class="control-label">@Resources.Locale.L_AutoNoManage_Stn</label>
+			</div>
+			<div class="pure-u-sm-10-60 control-group">
+			    <div class="input-group">
+	                	        <input type="text" class="form-control input-sm" dt="mt" id="Stn" name="Stn" fieldname="Stn" isKey="true"/>
+	                	        <span class="input-group-btn">
+	                	            <button class="btn btn-sm btn-default" type="button" id="StnLookup">
+	                	                <span class="glyphicon glyphicon-search"></span>
+	                	            </button>
+	                	        </span>
+	                	    </div>
+			    <p class="help-block tooltips"></p>
+			</div> *@
+                    </div>
+                    <div class="pure-g">
+			<div class="pure-u-sm-5-60">
+			    <label for="EffectDate111" class="control-label">@Resources.Locale.L_AutoNoManage_EffectDate</label>
+			</div>
+			<div class="pure-u-sm-10-60 control-group">
+			    <input type="text" class=" form-control input-sm" dt="mt" id="EffectDate" name="EffectDate" fieldname="EffectDate"/>
+			    <p class="help-block tooltips"></p>
+			</div>
+                    </div>
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-60-60 control-group">
+	                    	<table id="MainGrid" class="_tableGrid" style="width: 100%">
+	                    	    <tr></tr>
+	                    	</table>
+                    	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

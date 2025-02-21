@@ -1,0 +1,485 @@
+﻿@{
+    ViewBag.Title = "ActApproveHighQueryView";
+}
+<!--簽核退回視窗-->
+<div class="modal fade" id="ApproveBack" Sid="">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_ActManage_RC</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-60-60">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">@Resources.Locale.L_ActManage_RDescp</label>
+                            <textarea class="form-control" id="BackRemark" name="BackRemark" fieldname="BackRemark"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseBackWin">Close</button>
+                <button type="button" class="btn btn-primary" onclick="BackApprove()" id="BackConfirm">@Resources.Locale.L_BSCSDateQuery_Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--簽核退回視窗-->
+
+@Html.RazorJSInclude("~/Scripts/ActManage/Approve.js")
+<style>
+	.SubAmtLessThen0 {
+		background: #FFA500 !important;
+	}
+
+	.SubAmtGreaterthan0 {
+		background: #FF9D9D !important;
+	}
+</style>
+<script type="text/javascript">
+    var select_approve = "@ViewBag.SelectApprove";
+    var default_approve = "@ViewBag.DefaultApprove";
+    var select_role = "@ViewBag.SelectRole";
+    var default_role = "@ViewBag.DefaultRole";
+    var upri_role = "@ViewBag.Upri";
+    var approveroles = "@ViewBag.ApproveRole";
+    var _approveroles, select_approves;
+    var tranType = "@ViewBag.TranType";
+    var tranTypeCondition = "";
+    if (tranType !== "" && tranType != null && tranType != undefined)
+        tranTypeCondition = " AND TRAN_TYPE='" + tranType + "'";
+
+    var IsAdmin = false;
+    $(document).ready(function ($) {
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 330;
+        gop.gridColModel = [
+            { name: 'UId', title: 'UId', index: 'UId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'Approved', title: '@Resources.Locale.L_ActManage_Status', index: 'Status', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:@Resources.Locale.L_Approved;B:@Resources.Locale.L_RQManage_Controllers_454' } },
+            { name: 'ApproveTo', title: '@Resources.Locale.L_DNApproveManage_ApproveTo', index: 'ApproveTo', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_role, defaultValue: default_role } },
+            { name: 'Status', title: '@Resources.Locale.L_ActManage_Status', index: 'Status', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:@Resources.Locale.L_ActManage_Copy;B:@Resources.Locale.L_ActManage_NoMatch;G:@Resources.Locale.L_ActManage_Match;C:@Resources.Locale.L_ActManage_Refuse;D:@Resources.Locale.L_Pass;E:@Resources.Locale.L_ActManage_Invoice;F:@Resources.Locale.L_ActManage_bePay;V:@Resources.Locale.L_MenuBar_discard;R:@Resources.Locale.L_ActQuery_reject' } },
+            /*{ name: 'ApproveType', title: '', index: 'ApproveType', width: 120, align: 'left', sorttype: 'string', hidden: true },*/
+            { name: 'StatementNo', title: '@Resources.Locale.L_ActQuery_StatementNo', index: 'StatementNo', width: 120, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'DebitNo', title: '@Resources.Locale.L_ActQuery_DebitNo', index: 'DebitNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TpvDebitNo', title: '@Resources.Locale.L_ActQuery_TpvDebitNo', index: 'TpvDebitNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DebitDate', title: '@Resources.Locale.L_ActQuery_DebitDate', index: 'DebitDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PayDate', title: '@Resources.Locale.L_ActQuery_PayDate', index: 'PayDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ShipmentId', title: '@Resources.Locale.L_DNApproveManage_ShipmentId', index: 'ShipmentId', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspNo', title: '@Resources.Locale.L_DRule_LspNo', index: 'LspNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspNm', title: '@Resources.Locale.L_DRule_LspNm', index: 'LspNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Cmp', title: '@Resources.Locale.L_RoleSetUp_CMP', index: 'Cmp', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BillTo', title: '@Resources.Locale.L_ActManage_BillTo', index: 'BillTo', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Pol', title: '@Resources.Locale.L_AirQuery_PolCd', index: 'Pol', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PolNm', title: '@Resources.Locale.L_AirQuery_PolNm', index: 'PolNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Pod', title: '@Resources.Locale.L_AirQuery_PodCd', index: 'Pod', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PodNm', title: '@Resources.Locale.L_DNApproveManage_PodNm', index: 'PodNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Cur', title: '@Resources.Locale.L_ActQuery_Cur', index: 'Cur', width: 60, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Amt', title: '@Resources.Locale.L_ActManage_PayAmt', index: 'Amt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+			{ name: 'Qamt', title: '@Resources.Locale.L_ActManage_Amt', index: 'Qamt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+			{ name: 'SubAmt', title: '@Resources.Locale.L_ActManage_SubAmt', index: 'SubAmt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+             { name: 'Remark', title: '@Resources.Locale.L_SMCHGSetup_ChgType', index: 'Remark', width: 200, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RemarkS', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'RemarkS', width: 200, align: 'left', sorttype: 'string', hidden: false },
+{ name: 'BlNo', title: '@Resources.Locale.L_ActSetup_BlNo', index: 'BlNo', width: 120, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'VatNo', title: '@Resources.Locale.L_ActSetup_VatNo', index: 'VatNo', width: 120, align: 'left', sorttype: 'string', hidden: true },
+			{ name: 'Qty', title: '@Resources.Locale.L_ShipmentID_Qty', index: 'Qty', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: true },
+            { name: 'Qtyu', title: '@Resources.Locale.L_ShipmentID_Qty', index: 'Qtyu', width: 80, align: 'left', sorttype: 'string', hidden: true },
+			{ name: 'Gw', title: '@Resources.Locale.L_BaseLookup_Gw', index: 'Gw', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 3, defaultValue: '0.000' }, hidden: true },
+			{ name: 'Cw', title: '@Resources.Locale.L_ActSetup_Cw', index: 'Cw', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 3, defaultValue: '0.000' }, hidden: true },			{ name: 'Cbm', title: 'CBM', index: 'Cbm', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: true },
+			{ name: 'ExRate', title: '@Resources.Locale.L_ActSetup_ExRate', index: 'ExRate', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, hidden: true },
+			{ name: 'Lamt', title: '@Resources.Locale.L_ActManage_Lamt', index: 'Lamt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: true },
+            { name: 'CheckDescp', title: '@Resources.Locale.L_ActSetup_CheckDescp', index: 'CheckDescp', width: 200, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'CreateBy', title: '@Resources.Locale.L_DNApproveManage_CreateBy', index: 'CreateBy', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'CreateDate', title: '@Resources.Locale.L_DNApproveManage_CreateDate', index: 'CreateDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'ApplyDate', title: '@Resources.Locale.L_ActManage_ApplyDate', index: 'ApplyDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'VerifyBy', title: '@Resources.Locale.L_ActManage_VerifyBy', index: 'VerifyBy', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'VerifyDate', title: '@Resources.Locale.L_ActManage_VerifyDate', index: 'VerifyDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'PrintDate', title: '@Resources.Locale.L_ActManage_PrintDate', index: 'PrintDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true }
+        ];
+        gop.AddUrl = false;
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_ActManage_IvAudit", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "ActManage/GetHighActApproveDataNew";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        gop.multiselect = true;
+        gop.multiboxonly = true;
+        gop.baseCondition = " STATUS='D'" + tranTypeCondition;
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "CreateDate";
+            var col = $grid.jqGrid('getRowData');
+            $.each(col, function (index) {
+                //console.log(colname);
+                //var subamt = CommonFunc.formatFloat(colname, 2);
+                var qamt = parseFloat(this.Qamt);
+                var amt = parseFloat(this.Amt);
+                var subamt = amt - qamt;
+                if (subamt > 0) {
+                    $grid.jqGrid('setRowData', index + 1, false, 'SubAmtGreaterthan0');
+                }
+                if (subamt < 0) {
+                    $grid.jqGrid('setRowData', index + 1, false, 'SubAmtLessThen0');
+                }
+            });
+        }
+
+         gop.statusGroup = [
+             { "id": "", "label": "ALL" },
+             { "id": "A", "label": "@Resources.Locale.L_Approved" },
+             { "id": "B", "label": "@Resources.Locale.L_RQManage_Controllers_454" },
+        ];
+        gop.statusField = "Approved";
+        gop.statusDefaultId = "A";
+         gop.statusPreLoad = true;
+
+        _approveroles = approveroles.split(';');
+
+        gop.btnGroup = [{
+	            id: "btn01",
+	            name: "@Resources.Locale.L_ActManage_Pendingaudit",
+	            func: function () {
+
+	            }
+	        },            {
+                id: "btn02",
+                name: "@Resources.Locale.L_ActManage_Pass",
+                func: function () {
+                    var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                    var responseData = [];
+                    var debitno = [];
+                    var uid = [];
+                    $.each(selRowId, function (index, val) {
+                        responseData.push(mygrid.getRowData(selRowId[index]));
+                    });
+                    if (responseData.length <= 0) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_ActManage_Select1Data", 500, "warning");
+                        return;
+                    }
+                    for (var i = 0; i < responseData.length; i++) {
+                        debitno.push(responseData[i].DebitNo);
+                        uid.push(responseData[i].UId);
+                    }
+
+                    if (!uid) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    var iscontinue = window.confirm("@Resources.Locale.L_ActManage_is" + debitno.toString() + "@Resources.Locale.L_ActManage_implement");
+                    if (!iscontinue) {
+                        return;
+                    }
+                    CommonFunc.ToogleLoading(true);
+                    $.ajax({
+                        async: true,
+                        url: rootPath + "ActManage/ApproveBill",
+                        type: 'POST',
+                        data: {
+                            "UId": uid.toString(),
+                            "DebitNo": debitno.toString()
+                        },
+                        "complete": function (xmlHttpRequest, successMsg) {
+                            CommonFunc.ToogleLoading(false);
+                        },
+                        "error": function (xmlHttpRequest, errMsg) {
+                            CommonFunc.ToogleLoading(false);
+                            var resJson = $.parseJSON(errMsg)
+                            CommonFunc.Notify("", resJson.message, 500, "warning");
+                        },
+                        success: function (result) {
+                            //var resJson = $.parseJSON(result)
+                            if (result.message == "success") {
+
+                            }
+                            CommonFunc.Notify("", result.message, 500, "success");
+                            $("#SummarySearch").trigger("click");
+                        }
+                    });
+
+                }
+            },
+            {
+                id: "btn09",
+                name: "@Resources.Locale.L_ActManage_Reject",
+                func: function () {
+                    $("#BackRemark").val("");
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+
+                    if (!uid) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+
+                    $("#ApproveBack").modal("show");
+                }
+            },
+            {
+                id: "RFB01",
+                name: "@Resources.Locale.L_ActManage_PrintIv",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+                    var dnno = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'DnNo');
+                    if (!uid) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    var DebitNo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'TpvDebitNo');
+                    //var shipments = $("#ShipmentId").val();
+                    if (!DebitNo) {
+                        alert("@Resources.Locale.L_ActManage_Thedatadidnotrequest");
+                        return;
+                    }
+                    var params = {
+                        //currentCondition: "",
+                        //val: dnNo,
+                        debitno: DebitNo,
+                        rptdescp: "@Resources.Locale.L_ActManage_requestbill",
+                        rptName: "RFB01",
+                        formatType: 'xls',
+                        exportType: 'PREVIEW',
+                    };
+                    showReport(params);
+                }
+            },
+@*            {
+                id: "btn04",
+                name: "@Resources.Locale.L_ActManage_requestbillEn",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+                    var dnno = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'DnNo');
+                    if (!uid) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    var DebitNo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'TpvDebitNo');
+                    //var shipments = $("#ShipmentId").val();
+                    if (!DebitNo) {
+                        alert("@Resources.Locale.L_ActManage_Thedatadidnotrequest");
+                        return;
+                    }
+                    var params = {
+                        //currentCondition: "",
+                        //val: dnNo,
+                        debitno: DebitNo,
+                        rptdescp: "@Resources.Locale.L_ActManage_requestbill",
+                        rptName: "RFB03",
+                        formatType: 'xls',
+                        exportType: 'PREVIEW',
+                    };
+                    showReport(params);
+                }
+            },*@
+            {
+                id: "btn06",
+                name: "SAP",
+                func: function () {
+
+                }
+            },
+            {
+                id: "btn08",
+                name: "@Resources.Locale.L_ActManage_AnM",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+                    var dnno = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'DnNo');
+                    if (!uid) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    initErrMsg($("#btn08"), { 'GROUP_ID': groupId, 'CMP': cmp, 'STN': stn, 'UId': uid, 'JobNo': dnno }, true);
+
+                }
+            },
+            {
+                id: "btn05",
+                name: "@Resources.Locale.L_ActManage_ApDetail",
+                func: function () {
+                    CheckDetailed();
+                }
+            }
+
+        ];
+
+        //gop.statusDefaultId = "A";
+        if (roles != undefined && roles != null) {
+            for (var i = 0; i < roles.length; i++) {
+                if (roles[i] == 'SDADMIN') {
+                    IsAdmin = true;
+                }
+            }
+        }
+        initSearch(gop);
+         $("#SummarySearch").bind("click", function () {
+            $(".status-box").removeClass("active");
+            $("#searchStatus_").addClass("active");
+        });
+
+        select_approves = select_approve.split(';');
+        $(".status-box").each(function (index, el) {
+            $(this).bind("click", function () {
+                var _id = $(this).attr("id");
+                var _idstatus = _id.replace("searchStatus_", "");
+                for (var i = 0; i < select_approves.length; i++) {
+                    if (IsAdmin) {
+                        $("#btn02").parent().show();
+                        $("#btn09").parent().show();
+                        break;
+                    }
+                    if (select_approves[i] == _idstatus) {
+                        $("#btn02").parent().show();
+                        $("#btn09").parent().show();
+                        break;
+                    }
+                    else {
+                        $("#btn02").parent().hide();
+                        $("#btn09").parent().hide();
+                    }
+                }
+                $(".status-box").removeClass("active");
+                $("#searchStatus_").addClass("active");
+            });
+        });
+
+        function dblClick(map) {
+            var UId = map.UId;
+
+            top.topManager.openPage({
+                href: rootPath + "ActManage/ActCheckSetup/" + UId + "?approve=Y&tranType=" + tranType,
+                title: '@Resources.Locale.L_ActManage_EntBl',
+                id: 'ActCheckSetup',
+                search: 'uid=' + UId
+            });
+        }
+    });
+
+    function BackApprove() {
+        var backremark = $("#BackRemark").val();
+        if (backremark == "") {
+            CommonFunc.Notify("", "@Resources.Locale.L_ActManage_EnterReason", 500, "warning");
+            return;
+        }
+        var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+        var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+        var debitno = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'DebitNo');
+        var ApproveType = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ApproveType');
+        var approveTo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ApproveTo');
+
+        if (!uid) {
+            CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+            return;
+        }
+        $.ajax({
+            async: true,
+            url: rootPath + "ActManage/ApproveBackBill",
+            type: 'POST',
+            data: {
+                "UId": uid,
+                "DebitNo": debitno,
+                "ApproveType": ApproveType,
+                "ApproveTo": approveTo,
+                "BackRemark": backremark
+            },
+            "complete": function (xmlHttpRequest, successMsg) {
+
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+                var resJson = $.parseJSON(errMsg)
+                CommonFunc.Notify("", resJson.message, 500, "warning");
+                $("#CloseBackWin").trigger("click");
+            },
+            success: function (result) {
+                //var resJson = $.parseJSON(result)
+                CommonFunc.Notify("", result.message, 500, "warning");
+                $("#CloseBackWin").trigger("click");
+                $("#SummarySearch").trigger("click");
+            }
+        });
+    }
+    function showReport(params) {
+        $.ajax({
+            async: true,
+            url: rootPath + "Report/CreateNewReport",
+            type: 'POST',
+            data: params,
+            "complete": function (xmlHttpRequest, successMsg) {
+                if (successMsg != "success") return null;
+                var xx = xmlHttpRequest.responseText;
+                window.open(xmlHttpRequest.responseText);
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+            },
+            success: function (result) {
+
+            }
+        });
+    }
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

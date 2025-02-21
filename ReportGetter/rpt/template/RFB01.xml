@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Table name="SMBIM"  sql="SELECT A.*,
+       (SELECT TOP(1) BANK_NM FROM SMPTY WHERE PARTY_NO = A.LSP_NO) BANK_NM,
+       (SELECT TOP(1) BANK_ACCOUNT FROM SMPTY WHERE PARTY_NO = A.LSP_NO) BANK_ACCOUNT,
+       (SELECT TOP 1 CD_DESCP
+          FROM BSCODE
+         where CD_TYPE IN ('TDLT')
+           and GROUP_ID = A.GROUP_ID
+           AND CMP = A.CMP
+           AND CD = A.BILL_TO) TITLE_NAME,
+           (SELECT TOP 1 AP_CD
+          FROM BSCODE
+         where CD_TYPE IN ('TDLT')
+           and GROUP_ID = A.GROUP_ID
+           AND CMP = A.CMP
+           AND CD = A.BILL_TO) AP_CD,
+       (SELECT TOP 1 CD_DESCP
+          FROM BSCODE
+         where CD_TYPE = 'DTT'
+           AND CD = A.DEBIT_TYPE
+           AND CMP = A.CMP) CD_DESCP
+  FROM SMBIM A
+ WHERE A.TPV_DEBIT_NO =':=debitno'">	
+	</Table>
+  <Table name="SMBID" sql="SELECT B.* FROM SMBIM A ,SMBID B  WHERE B.U_FID=A.U_ID AND  A.TPV_DEBIT_NO=':=debitno'">
+	</Table>
+
+<Table name="APPROVE_RECORD" sql="SELECT APPROVE_RECORD.*,
+       (SELECT TOP 1 SYS_ACCT.U_NAME
+          FROM SYS_ACCT
+         WHERE SYS_ACCT.U_ID = APPROVE_BY) ID_NAME,
+       ISNULL((SELECT TOP 1 APPROVE_NAME
+                FROM APPROVE_FLOW_M
+               WHERE APPROVE_FLOW_M.APPROVE_CODE =
+                     APPROVE_RECORD.APPROVE_CODE),
+              APPROVE_RECORD.APPROVE_CODE) AS APPROVE_CODENAME
+  FROM APPROVE_RECORD, SMBIM B
+ WHERE APPROVE_RECORD.REF_NO=CAST(B.U_ID as NVARCHAR(50))
+   AND B.TPV_DEBIT_NO=':=debitno' ORDER BY VOID_LOOP DESC, APPROVE_CODE DESC, CAST(APPROVE_LEVEL AS INT) ASC ">
+	</Table>
+</root>
+
+

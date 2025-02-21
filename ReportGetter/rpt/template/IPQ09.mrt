@@ -1,0 +1,3696 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <连接 Ref="2" type="Stimulsoft.Report.Dictionary.StiXmlDatabase" isKey="true">
+        <Alias>连接</Alias>
+        <Name>连接</Name>
+        <PathData>C:\Users\maker\Desktop\新增报表调整\新增报表调整\IPQ09\Data.xml</PathData>
+        <PathSchema>C:\Users\maker\Desktop\新增报表调整\新增报表调整\IPQ09\Schemas.xml</PathSchema>
+      </连接>
+    </Databases>
+    <DataSources isList="true" count="4">
+      <SMINM Ref="3" type="DataTableSource" isKey="true">
+        <Alias>SMINM</Alias>
+        <Columns isList="true" count="102">
+          <value>U_ID,System.Guid</value>
+          <value>GROUP_ID,System.String</value>
+          <value>CMP,System.String</value>
+          <value>INVOICE_TYPE,System.String</value>
+          <value>INV_DATE,System.DateTime</value>
+          <value>SHIPMENT_ID,System.String</value>
+          <value>DN_NO,System.String</value>
+          <value>INV_NO,System.String</value>
+          <value>PACKING_NO,System.String</value>
+          <value>PO_NO,System.String</value>
+          <value>SO_NO,System.String</value>
+          <value>VAT_NO,System.String</value>
+          <value>REF_NO,System.String</value>
+          <value>ETD,System.DateTime</value>
+          <value>ETA,System.DateTime</value>
+          <value>VESSEL,System.String</value>
+          <value>SHIPPING_DATE,System.DateTime</value>
+          <value>BL_NO,System.String</value>
+          <value>DLV_WAY,System.String</value>
+          <value>SHPR_CD,System.String</value>
+          <value>SHPR_NM,System.String</value>
+          <value>SHPR_ADDR,System.String</value>
+          <value>BILL_TO,System.String</value>
+          <value>BILL_NM,System.String</value>
+          <value>SHIP_TO,System.String</value>
+          <value>SHIP_NM,System.String</value>
+          <value>CNEE_CD,System.String</value>
+          <value>CNEE_NM,System.String</value>
+          <value>NOTIFY_NO,System.String</value>
+          <value>NOTIFY_NM,System.String</value>
+          <value>CMDTY_CD,System.String</value>
+          <value>CMDTY_DESCP,System.String</value>
+          <value>TRADE_TERM,System.String</value>
+          <value>TRADETERM_DESCP,System.String</value>
+          <value>INCOTERM,System.String</value>
+          <value>INCOTERM_DESCP,System.String</value>
+          <value>FROM_CD,System.String</value>
+          <value>FROM_DESCP,System.String</value>
+          <value>TO_CD,System.String</value>
+          <value>TO_DESCP,System.String</value>
+          <value>CNTRY_ORN,System.String</value>
+          <value>CNTRY_DESCP,System.String</value>
+          <value>CUR,System.String</value>
+          <value>TTL_VALUE,System.Decimal</value>
+          <value>TTL_PLT,System.Decimal</value>
+          <value>PLTU,System.String</value>
+          <value>TTL_QTY,System.Decimal</value>
+          <value>QTYU,System.String</value>
+          <value>TTL_NW,System.Decimal</value>
+          <value>NWU,System.String</value>
+          <value>TTL_GW,System.Decimal</value>
+          <value>TTL_CBM,System.Decimal</value>
+          <value>CBMU,System.String</value>
+          <value>MARKS,System.String</value>
+          <value>INVOICE_RMK,System.String</value>
+          <value>PACKING_RMK,System.String</value>
+          <value>INV_INTRU,System.String</value>
+          <value>PKG_INTRU,System.String</value>
+          <value>COST,System.Decimal</value>
+          <value>CREATE_BY,System.String</value>
+          <value>CREATE_DATE,System.DateTime</value>
+          <value>CREATE_EXT,System.String</value>
+          <value>MODIFY_BY,System.String</value>
+          <value>MODIFY_DATE,System.DateTime</value>
+          <value>FREIGHT_FEE,System.Decimal</value>
+          <value>ISSUE_FEE,System.Decimal</value>
+          <value>COMBINE_INFO,System.String</value>
+          <value>VESSEL_NM,System.String</value>
+          <value>BANK_MSG,System.String</value>
+          <value>FOB_VALUE,System.Decimal</value>
+          <value>LGOODS,System.String</value>
+          <value>TRANSACTE_MODE,System.String</value>
+          <value>PKG_UNIT_DESC,System.String</value>
+          <value>COMBINE_FLAG,System.String</value>
+          <value>TTL_PQTY,System.Decimal</value>
+          <value>PACKING_FROM,System.String</value>
+          <value>FORDER,System.String</value>
+          <value>BILL_ADDR,System.String</value>
+          <value>CNEE_ADDR,System.String</value>
+          <value>SHPR_TEL,System.String</value>
+          <value>SHPR_ATTN,System.String</value>
+          <value>SHPR_FAX,System.String</value>
+          <value>BILL_TEL,System.String</value>
+          <value>BILL_ATTN,System.String</value>
+          <value>BILL_FAX,System.String</value>
+          <value>CNEE_TEL,System.String</value>
+          <value>CNEE_ATTN,System.String</value>
+          <value>CNEE_FAX,System.String</value>
+          <value>SHIP_TEL,System.String</value>
+          <value>SHIP_ATTN,System.String</value>
+          <value>SHIP_FAX,System.String</value>
+          <value>SHIP_ADDR,System.String</value>
+          <value>CUST_CD,System.String</value>
+          <value>CUST_NM,System.String</value>
+          <value>CUST_ADDR,System.String</value>
+          <value>CUST_TEL,System.String</value>
+          <value>CUST_ATTN,System.String</value>
+          <value>CUST_FAX,System.String</value>
+          <value>SEND_FRT,System.String</value>
+          <value>INV_COMBINE_FLAG,System.String</value>
+          <value>PIC,System.String</value>
+          <value>TTL_PLT_DESCP,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>SMINM</Name>
+        <NameInSource>连接.SMINM</NameInSource>
+      </SMINM>
+      <SMINP Ref="4" type="DataTableSource" isKey="true">
+        <Alias>SMINP</Alias>
+        <Columns isList="true" count="46">
+          <value>U_ID,System.Guid</value>
+          <value>U_FID,System.Guid</value>
+          <value>INVOICE_TYPE,System.String</value>
+          <value>SHIPMENT_ID,System.String</value>
+          <value>DN_NO,System.String</value>
+          <value>INV_NO,System.String</value>
+          <value>SEQ_NO,System.Decimal</value>
+          <value>CASE_NO,System.String</value>
+          <value>CASE_NUM,System.Decimal</value>
+          <value>QTY,System.Decimal</value>
+          <value>QTYU,System.String</value>
+          <value>TTL_QTY,System.Decimal</value>
+          <value>GOODS_DESCP,System.String</value>
+          <value>OPART_NO,System.String</value>
+          <value>NW,System.Decimal</value>
+          <value>TTL_NW,System.Decimal</value>
+          <value>GW,System.Decimal</value>
+          <value>TTL_GW,System.Decimal</value>
+          <value>CBM,System.Decimal</value>
+          <value>TTL_CBM,System.Decimal</value>
+          <value>DIMENSION,System.String</value>
+          <value>REMARK,System.String</value>
+          <value>IPART_NO,System.String</value>
+          <value>CNTR_NO,System.String</value>
+          <value>PO_NO,System.String</value>
+          <value>PART_NO,System.String</value>
+          <value>UNIT_PRICE,System.Decimal</value>
+          <value>AMT,System.Decimal</value>
+          <value>VEN_CD,System.String</value>
+          <value>VEN_NM,System.String</value>
+          <value>VEN_ADDR,System.String</value>
+          <value>PLA_NO,System.String</value>
+          <value>PLA_SIZE,System.String</value>
+          <value>NWU,System.String</value>
+          <value>GWU,System.String</value>
+          <value>CBMU,System.String</value>
+          <value>NCM_NO,System.String</value>
+          <value>PROD_DESCP,System.String</value>
+          <value>SHIPPING_MARK,System.String</value>
+          <value>PLACE,System.String</value>
+          <value>SMODEL,System.String</value>
+          <value>PART_NUM,System.String</value>
+          <value>MODEL,System.String</value>
+          <value>IHS_CODE,System.String</value>
+          <value>CNTRY_ORN,System.String</value>
+          <value>SAFETY_MODEL,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>SMINP</Name>
+        <NameInSource>连接.SMINP</NameInSource>
+      </SMINP>
+      <SMDN Ref="5" type="DataTableSource" isKey="true">
+        <Alias>SMDN</Alias>
+        <Columns isList="true" count="184">
+          <value>U_ID,System.Guid</value>
+          <value>ETD,System.DateTime</value>
+          <value>SAP_ID,System.String</value>
+          <value>WEEKLY,System.Decimal</value>
+          <value>MONTH,System.Decimal</value>
+          <value>YEAR,System.Decimal</value>
+          <value>GROUP_ID,System.String</value>
+          <value>CMP,System.String</value>
+          <value>STN,System.String</value>
+          <value>DEP,System.String</value>
+          <value>BU,System.String</value>
+          <value>DN_NO,System.String</value>
+          <value>ORIGIN_NO,System.String</value>
+          <value>SAP_NO,System.String</value>
+          <value>REF_NO,System.String</value>
+          <value>TRAN_MODE,System.String</value>
+          <value>TRAN_DESCP,System.String</value>
+          <value>APPROVE_TO,System.String</value>
+          <value>APPROVE_BACK,System.String</value>
+          <value>COMBINE_INFO,System.String</value>
+          <value>COMBINE_BY,System.String</value>
+          <value>COMBINE_DATE,System.DateTime</value>
+          <value>SHIPMENT_ID,System.String</value>
+          <value>DN_TYPE,System.String</value>
+          <value>CARGO_TYPE,System.String</value>
+          <value>CUR,System.String</value>
+          <value>AMOUNT1,System.Decimal</value>
+          <value>INCOTERM,System.String</value>
+          <value>INCOTERM_DESCP,System.String</value>
+          <value>PAY_TERM_CD,System.String</value>
+          <value>PAY_DESCP,System.String</value>
+          <value>CHANNEL_CD,System.String</value>
+          <value>CHANNEL,System.String</value>
+          <value>DIVISION_CD,System.String</value>
+          <value>DIVISION_DESCP,System.String</value>
+          <value>SC_CODE,System.String</value>
+          <value>SC_DESCP,System.String</value>
+          <value>INV_NO,System.String</value>
+          <value>PACKING_NO,System.String</value>
+          <value>VAT_NO,System.String</value>
+          <value>EXPORT_NO,System.String</value>
+          <value>EDECL_NO,System.String</value>
+          <value>APPROVE_NO,System.String</value>
+          <value>POL,System.String</value>
+          <value>POL_NM,System.String</value>
+          <value>POD,System.String</value>
+          <value>POD_NM,System.String</value>
+          <value>STATE,System.String</value>
+          <value>REGION,System.String</value>
+          <value>REGION_NM,System.String</value>
+          <value>SHIP_TO,System.String</value>
+          <value>SHIP_NM,System.String</value>
+          <value>CNEE3_CD,System.String</value>
+          <value>CNEE3_NM,System.String</value>
+          <value>FI_CUST_CD,System.String</value>
+          <value>FI_CUST_NM,System.String</value>
+          <value>SALES_CUST_CD,System.String</value>
+          <value>SALES_CUST_NM,System.String</value>
+          <value>EX_CD,System.String</value>
+          <value>EX_NAME,System.String</value>
+          <value>REVEIVE_DATE,System.DateTime</value>
+          <value>CNTR_QTY,System.Decimal</value>
+          <value>FEU,System.Decimal</value>
+          <value>SERVICE_MODE,System.String</value>
+          <value>SERVICE_LOADING,System.String</value>
+          <value>QTY,System.Int32</value>
+          <value>QTYU,System.String</value>
+          <value>GW,System.Decimal</value>
+          <value>GWU,System.String</value>
+          <value>NW,System.Decimal</value>
+          <value>CBM,System.Decimal</value>
+          <value>FREIGHT_TERM,System.String</value>
+          <value>COST,System.Decimal</value>
+          <value>CREATE_BY,System.String</value>
+          <value>CREATE_DEP,System.String</value>
+          <value>CREATE_EXT,System.String</value>
+          <value>CREATE_DATE,System.DateTime</value>
+          <value>MODIFY_BY,System.String</value>
+          <value>MODIFY_DATE,System.DateTime</value>
+          <value>SPEC_PROCID,System.Int32</value>
+          <value>SPEC_DESCP,System.String</value>
+          <value>SHIP_MARK,System.String</value>
+          <value>ACT_SHIP_DATE,System.DateTime</value>
+          <value>ACT_POST_DATE,System.DateTime</value>
+          <value>DN_NO_REF,System.String</value>
+          <value>DN_NO_CMP,System.String</value>
+          <value>DN_NO_CMP_REF,System.String</value>
+          <value>PORT_DEST,System.String</value>
+          <value>PLANT,System.String</value>
+          <value>BAND_TYPE,System.String</value>
+          <value>TRACK_WAY,System.String</value>
+          <value>CENT_DECL,System.String</value>
+          <value>DEEP_PROCESS,System.String</value>
+          <value>PLANT_NM,System.String</value>
+          <value>SEAL_QTY,System.Decimal</value>
+          <value>BOOKING_AGENT,System.String</value>
+          <value>BOOKING_NM,System.String</value>
+          <value>PORTE_CD,System.String</value>
+          <value>PORTE_DESCP,System.String</value>
+          <value>ORDER_REASON,System.String</value>
+          <value>UNICODE,System.String</value>
+          <value>ASD_NO,System.String</value>
+          <value>PORT_DESCP,System.String</value>
+          <value>APPROVE_TYPE,System.String</value>
+          <value>CNTR_NO,System.String</value>
+          <value>TRAN_TYPE,System.String</value>
+          <value>TRAN_TYPE_DESCP,System.String</value>
+          <value>CNT20,System.Decimal</value>
+          <value>CNT40,System.Decimal</value>
+          <value>CNT40HQ,System.Decimal</value>
+          <value>CNT_TYPE,System.String</value>
+          <value>CNT_NUMBER,System.Decimal</value>
+          <value>PORT_POL,System.String</value>
+          <value>PORT_POLNM,System.String</value>
+          <value>STATUS,System.String</value>
+          <value>POST_FLAG,System.String</value>
+          <value>OBU,System.String</value>
+          <value>OSOLD_TO,System.String</value>
+          <value>OUT_DATE,System.DateTime</value>
+          <value>ATRAN_TYPE,System.String</value>
+          <value>LOADING_FROM,System.String</value>
+          <value>LOADING_TO,System.String</value>
+          <value>PROFILE_CD,System.String</value>
+          <value>AG_CD,System.String</value>
+          <value>AG_NM,System.String</value>
+          <value>WE_CD,System.String</value>
+          <value>WE_NM,System.String</value>
+          <value>ZE_CD,System.String</value>
+          <value>ZE_NM,System.String</value>
+          <value>FC_CD,System.String</value>
+          <value>FC_NM,System.String</value>
+          <value>RE_CD,System.String</value>
+          <value>RE_NM,System.String</value>
+          <value>RO_CD,System.String</value>
+          <value>RO_NM,System.String</value>
+          <value>GOODS,System.String</value>
+          <value>AC_REMARK,System.String</value>
+          <value>PAYTERM_CD,System.String</value>
+          <value>PAYTERM_NM,System.String</value>
+          <value>CAR_TYPE,System.String</value>
+          <value>PKG_NUM,System.Decimal</value>
+          <value>PKG_UNIT,System.String</value>
+          <value>PKG_UNIT_DESC,System.String</value>
+          <value>PRODUCT_DATE,System.DateTime</value>
+          <value>APPROVE_USER,System.String</value>
+          <value>SH_CD,System.String</value>
+          <value>SH_NM,System.String</value>
+          <value>CS_CD,System.String</value>
+          <value>CS_NM,System.String</value>
+          <value>NT_CD,System.String</value>
+          <value>NT_NM,System.String</value>
+          <value>TRANSACTE_MODE,System.String</value>
+          <value>MEMO,System.String</value>
+          <value>COST_CENTER,System.String</value>
+          <value>LGOODS,System.String</value>
+          <value>BAND_DESCP,System.String</value>
+          <value>TRADE_TERM,System.String</value>
+          <value>TRADETERM_DESCP,System.String</value>
+          <value>BAND_CD,System.String</value>
+          <value>DN_RMARK,System.String</value>
+          <value>SEND_SFIS_FLAG,System.String</value>
+          <value>OT_COST,System.Decimal</value>
+          <value>FREIGHT_AMT,System.Decimal</value>
+          <value>FOB_VALUE,System.Decimal</value>
+          <value>ISSUE_FEE,System.Decimal</value>
+          <value>TRUCK_COST,System.Decimal</value>
+          <value>LSP_COST,System.Decimal</value>
+          <value>OCMP,System.String</value>
+          <value>DECL_DATE,System.DateTime</value>
+          <value>DECL_RLS_DATE,System.DateTime</value>
+          <value>COMBINE_OTHER,System.String</value>
+          <value>HORN,System.String</value>
+          <value>BATTERY,System.String</value>
+          <value>TCBM,System.Decimal</value>
+          <value>EDOC,System.String</value>
+          <value>TELEX_RLS,System.String</value>
+          <value>BL_LEVEL,System.String</value>
+          <value>ASK_TIM,System.DateTime</value>
+          <value>RLS_DATE,System.DateTime</value>
+          <value>DRemark,System.String</value>
+          <value>VIA,System.String</value>
+          <value>BRG_TYPE,System.String</value>
+          <value>NEXT_NUM,System.Decimal</value>
+          <value>COST_CENTERDESCP,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>SMDN</Name>
+        <NameInSource>连接.SMDN</NameInSource>
+      </SMDN>
+      <SMRV Ref="6" type="DataTableSource" isKey="true">
+        <Alias>SMRV</Alias>
+        <Columns isList="true" count="4">
+          <value>CNTR_NO,System.String</value>
+          <value>SEAL_NO1,System.String</value>
+          <value>CNTY_TYPE,System.String</value>
+          <value>DN_NO,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>SMRV</Name>
+        <NameInSource>连接.SMRV</NameInSource>
+      </SMRV>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="2">
+      <value>,CODE1,CODE1,System.String,AAAAAAA,False,False</value>
+      <value>,CODE2,CODE2,CXM2001,System.String,CXM2001,False,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="2">
+    <Page1 Ref="7" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="6">
+        <PageFooterBand1 Ref="8" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <CanShrink>True</CanShrink>
+          <ClientRectangle>0,24.5,19,3.2</ClientRectangle>
+          <Components isList="true" count="2">
+            <Image1 Ref="9" type="Image" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>13.5,0.2,5,2.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Guid>7b7663d8a4094e259adb610a9c95f6b3</Guid>
+              <ImageData>{loadImg(SMINM.PIC)}</ImageData>
+              <Name>Image1</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Stretch>True</Stretch>
+            </Image1>
+            <Text56 Ref="10" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.6,2.4,6.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>2037cac66a354d48a4995fa90a71f4ac</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text56</Name>
+              <Page isRef="7" />
+              <Parent isRef="8" />
+              <Text>Print Date :{Format("{0:yyyy/MM/dd}", Today)} {Format("{0:HH:mm:ss}", Time)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text56>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>9a106a9ab5034976856c16776e822f2f</Guid>
+          <Name>PageFooterBand1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+        </PageFooterBand1>
+        <GroupHeaderBand1 Ref="11" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,9.8</ClientRectangle>
+          <Components isList="true" count="93">
+            <Text1 Ref="12" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,0,19,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,20</Font>
+              <Guid>6a48fccf2858432d8e468b8742155529</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.SHPR_NM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text1>
+            <Text2 Ref="13" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,0.6,19,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,13</Font>
+              <Guid>22c6f5f883034abb9427510570dbf1d6</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.SHPR_ADDR}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text2>
+            <Text3 Ref="14" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,1,19,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,16</Font>
+              <Guid>c294709a94fb4f7c94c29cc5f7917874</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>PACKING LIST</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text3>
+            <Text4 Ref="15" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,1.8,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>64f82b3cfcac4b208f7811da55538e7a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Bill TO</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text4>
+            <Text16 Ref="16" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,1.8,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>93a285ad4ee1499183e404049ca9debb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.BILL_NM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text16>
+            <Text40 Ref="17" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.4,1.8,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>39bd1c655b8241959b45d06027046f8e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text40</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Invoice Date</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text40>
+            <Text41 Ref="18" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.4,2.2,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>cb79fe8ad4144728baf267d135d92f85</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text41</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Invoice NO</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text41>
+            <Text84 Ref="19" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,1.8,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>d2f80d8cf780420b94e9131bffd5cf88</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text84</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text84>
+            <Text70 Ref="20" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15,1.8,0.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>ac268e76a4f8459795ce97b1daf86f36</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text70</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text70>
+            <Text107 Ref="21" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15,2.2,0.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>892151cc3a05448abf42d5deb9d4379d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text107</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text107>
+            <Text98 Ref="22" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,2.6,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>2b9ce52961714b2cb7063e8dfeca3194</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text98</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text98>
+            <Text18 Ref="23" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,2.6,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>7f3df4ef209540a5bf4caf3e0e021952</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.BILL_ATTN}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text18>
+            <Text5 Ref="24" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,3,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>361180fbec7b41b5be53371b6e48e0df</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text8 Ref="25" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,3,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>9cffb7aeefd54bf7bbfa45b7cdf0115e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.BILL_TEL}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text8>
+            <Text10 Ref="26" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15,2.6,0.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>acc6507cd0a345e99c38d2977b64d82d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text11 Ref="27" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15.2,2.6,3.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>0b7c1f4b6fec4091849747979c1971d6</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.BILL_FAX}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text11>
+            <Text12 Ref="28" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,3.4,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>b474bdfb5fef498d990b2fda1c906af7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Ship To</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text12>
+            <Text44 Ref="29" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.4,3.4,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>4a335ca8a5814749a0c375236accfe54</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text44</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Reference</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text44>
+            <Text32 Ref="30" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15.2,3.4,3.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>f953b5c0deaa49efb68cbad180337847</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text32</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.REF_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text32>
+            <Text45 Ref="31" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.4,3.8,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>2894a70d730c4e1487686df8ea110680</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text45</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>ETD</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text45>
+            <Text13 Ref="32" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,3.4,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>641e89af739d4669b68c2a80005c34d7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text110 Ref="33" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15,3.4,0.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>d6affee77fd34619aadc57b38d42c670</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text110</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text110>
+            <Text111 Ref="34" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15,3.8,0.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>af3603cfcd89459e8ecbf4ea5e8a78fb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text111</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text111>
+            <Text14 Ref="35" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,3.4,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>3e219538cc8a45168c92eb00fda1af73</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.SHIP_NM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text14>
+            <Text52 Ref="36" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,3.8,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>f39d49bada284f818f3cf431d8c1bf52</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text52</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.SHIP_ADDR}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text52>
+            <Text15 Ref="37" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,4.2,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>19ef3c2c436344d28cbd3d77001899f7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>ATTN</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text15>
+            <Text17 Ref="38" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,4.2,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>b8f10afa796a4407acd145144b2c2d99</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text19 Ref="39" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,4.2,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>707e596991484eda8895b659f25feb78</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.SHIP_ATTN}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text19>
+            <Text20 Ref="40" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,4.6,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>1faf73558c23456a97e177a8a5299411</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>TEL#</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text20>
+            <Text21 Ref="41" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,4.6,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>2fdc64342b144bc79e6e099cdb89e2a5</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text22 Ref="42" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,4.6,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>58a3fab18cfe45d8aa7c657b5fd19387</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.SHIP_TEL}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text22>
+            <Text23 Ref="43" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.4,4.2,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>083e26f768984fd9916217367cd7f377</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>FAX#</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text23>
+            <Text24 Ref="44" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15,4.2,0.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>af505adac2604c13ad5f1e3473b97b25</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text24>
+            <Text25 Ref="45" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15.2,4.2,3.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>d1327b4ea6ae467692e9fef96ea9e8f8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.SHIP_FAX}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text25>
+            <Text26 Ref="46" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,5,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>05dbb5207ac04730b40900c241ea8c8b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Consignee</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text26>
+            <Text27 Ref="47" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,5,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>84bdcc00e7934513ac8bddd904cb6657</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.CNEE_NM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text27>
+            <Text99 Ref="48" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,5,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>37844721ba114845baf908a48fb7e52d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text99</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text99>
+            <Text46 Ref="49" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.4,5,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>2e18d7f6f6d245b8a434ace61aa2c703</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text46</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>ETA</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text46>
+            <Text34 Ref="50" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15.2,5,3.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>8a2ece96bddf476f9b5e67b76e1b35cb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text34</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{Format("{0:yyyy/MM/dd}" , SMINM.ETA)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text34>
+            <Text30 Ref="51" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,5.4,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>d5ee5dce56184de0a379779edab6904a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.CNEE_ADDR}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text30>
+            <Text35 Ref="52" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,5.8,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>0de5833408c243029250a46e563dcb48</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text35</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text35>
+            <Text36 Ref="53" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,5.8,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>81541b4148fc48a7b7dcc1c7a7a0cfad</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text36</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.CNEE_ATTN}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text36>
+            <Text38 Ref="54" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,6.2,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>3f8ef5be44334df281df38410f32d0b4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text38</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text38>
+            <Text39 Ref="55" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,6.2,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>8e8c4ad2522d457398c93890b1b521bd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text39</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.CNEE_TEL}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text39>
+            <Text43 Ref="56" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,6.6,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>a510d2be28ed49f181fc5596d3e67196</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text43</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text43>
+            <Text47 Ref="57" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,6.6,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>cde0bd5aad1b4d61923d7b3d72959478</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text47</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.CNEE_FAX}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text47>
+            <Text48 Ref="58" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15.2,6.6,3.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>58a9bb66127d4b989389e9fa404ed179</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text48</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.DLV_WAY}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text48>
+            <Text49 Ref="59" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,7,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>5a5b2c18a3744c4686e66f672a7a24eb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text49</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Notify Party</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text49>
+            <Text50 Ref="60" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,7,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>6994b8306b124a75a17bf18a6768d24e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text50</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.NOTIFY_NM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text50>
+            <Text51 Ref="61" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,7.4,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>055d0b430e5e456fabd221e06e95bfc9</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text51</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Commodity</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text51>
+            <Text53 Ref="62" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,7.4,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>4e84e1e9b8674fc0aa2fb76bd6d0a6a2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text53</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.CMDTY_CD}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text53>
+            <Text54 Ref="63" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,7.8,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>27951136a721454d82bf2653d3e064e0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text54</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Payment Term</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text54>
+            <Text58 Ref="64" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.4,5.4,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>b772c2e52d5a4738b230c38c30da1980</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text58</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Vessel Name</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text58>
+            <Text59 Ref="65" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15.2,5.4,3.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>94d337c557834a5a8e11df5f35d839c2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text59</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.VESSEL_NM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text59>
+            <Text60 Ref="66" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,8.6,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>d33dd21dc7c64e3789ad47444760663f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text60</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>From</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text60>
+            <Text61 Ref="67" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,8.6,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>3c77c452f2324a8f8d759c53ed9ebdb0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text61</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.FROM_DESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text61>
+            <Text62 Ref="68" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,9,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>a0782d6999154565a04076194442b042</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text62</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>To</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text62>
+            <Text63 Ref="69" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,9,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>0a1c0ae141ba47ef8cea898a2a68c036</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text63</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.TO_DESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text63>
+            <Text64 Ref="70" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15.2,6.2,3.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>5ad80953e51c467cab0fedbd5e21947a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text64</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.BL_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text64>
+            <Text65 Ref="71" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,9.4,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>25881db2904145e5a81b5f92e61e5425</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text65</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Country of Origin</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text65>
+            <Text67 Ref="72" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,9.4,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>01a8bad6059b47b3b5f69be6ca03a097</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text67</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.CNTRY_DESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text67>
+            <Text100 Ref="73" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,7,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>8ac90b824d2f475bb0056aea982297bf</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text100</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text100>
+            <Text101 Ref="74" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,7.4,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>ede886d15eb5478cb68b219b55190b1e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text101</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text101>
+            <Text102 Ref="75" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,7.8,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>caa2e10015a94f59bd650bc8d8100dd5</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text102</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text102>
+            <Text103 Ref="76" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,8.2,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>626b20be2955425ab6d6af4bfbd9911f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text103</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text103>
+            <Text104 Ref="77" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,9,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>1ef79f3e7b944f58b45db58e47509608</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text104</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text104>
+            <Text106 Ref="78" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,9.4,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>3ef95691aa1b434981c2ce03566331fd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text106</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text106>
+            <Text113 Ref="79" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15,5.4,0.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>ec2ef0324e28408b8f4bf1c50ae38b34</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text113</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text113>
+            <Text114 Ref="80" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15,5.8,0.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>93c03b23219046edbf76be2cd9a87a15</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text114</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text114>
+            <Text115 Ref="81" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15,6.2,0.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>bf7bb391afdf44b09e6fe496540130a4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text115</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text115>
+            <Text116 Ref="82" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15,6.6,0.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>4ddced251662442c87d780885f5a7843</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text116</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text116>
+            <Text124 Ref="83" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.6,8.6,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>83de0688b6d34f0487adc06d60c1f982</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text124</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text124>
+            <Text68 Ref="84" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15.2,5.8,3.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>9f8d6f921a8f48078a7675f1b3d757d7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text68</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{Format("{0:yyyy/MM/dd}" , SMINM.ETD)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text68>
+            <Text125 Ref="85" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15.2,7,3.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>7ae786107c774fa0836c0e05da9f591a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text125</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{ToUpperCase(SMINM.CUR)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text125>
+            <Text126 Ref="86" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.4,7,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>9644c3230cca43a58e0ea404c24611ae</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text126</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Curreny</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text126>
+            <Text127 Ref="87" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15,7,0.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>a7def95517224f2c84fc6b4b6658702b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text127</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text127>
+            <Text55 Ref="88" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.4,6.2,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>7818d448a4c54bb5b17111892b3f8e43</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text55</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>B/L NO</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text55>
+            <Text69 Ref="89" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.4,5.8,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>5dc8436a8dc84ce8bd6e264f41de22d3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text69</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Shipping Date</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text69>
+            <Text71 Ref="90" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.4,6.6,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>bb53d06075af4eafa33cb669b9e47ec5</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text71</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>Delivery Way</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text71>
+            <Text72 Ref="91" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,7.8,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>a724dfaa3a6646d3824f9f4115127fa7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text72</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{GetPayDescp()}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text72>
+            <Text29 Ref="92" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.2,1.8,3.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{Format("{0:yyyy/MM/dd}" ,SMINM.INV_DATE)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text29>
+            <Text28 Ref="93" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.2,2.2,3.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.INV_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text28>
+            <Text73 Ref="94" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.2,3.8,3.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text73</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{Format("{0:yyyy/MM/dd}" , SMINM.ETD)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text73>
+            <Text57 Ref="95" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,8.2,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>123890ff8ca049319b5692c7b1b422b7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text57</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.INCOTERM}  {SMINM.INCOTERM_DESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text57>
+            <Text33 Ref="96" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,8.2,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>DLV Term</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text33>
+            <Text6 Ref="97" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,2.6,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>243cb15e8ef040c0a345ad568f257d92</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>ATTN</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text6>
+            <Text7 Ref="98" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,3,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>7bee5410ef1144a4a07773271f396a43</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>TEL#</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text7>
+            <Text9 Ref="99" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.4,2.6,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>8003e2f15117496eb1c4da7152afd887</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>FAX#</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text9>
+            <Text31 Ref="100" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,5.8,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>d6a5b190941a44a38dfaac188d7f6167</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text31</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>ATTN</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text31>
+            <Text37 Ref="101" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,6.2,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>bcf14d5b4c314f5a86f1567eb049b1da</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text37</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>TEL#</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text37>
+            <Text42 Ref="102" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,6.6,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>eba15e0cc2b248f49c464b392d00dcf7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text42</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>FAX#</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text42>
+            <Text154 Ref="103" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,2.2,9.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>44dfcf793cbd407588191c910e91a15a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text154</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>{SMINM.BILL_ADDR}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text154>
+            <Text66 Ref="104" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15,5,0.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>b15964f56abd4b68ab654a7c190f10c7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text66</Name>
+              <Page isRef="7" />
+              <Parent isRef="11" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text66>
+          </Components>
+          <Condition>{SMINM.SHIPMENT_ID}</Condition>
+          <Conditions isList="true" count="0" />
+          <Guid>1f98d90c591243868bd49d4910101333</Guid>
+          <Name>GroupHeaderBand1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+        </GroupHeaderBand1>
+        <GroupHeaderBand2 Ref="105" type="GroupHeaderBand" isKey="true">
+          <Border>Top, Bottom;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,11,19,0.8</ClientRectangle>
+          <Components isList="true" count="12">
+            <Text96 Ref="106" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,0,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>9bfa591275c84c1daa44c4ccd0d83032</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text96</Name>
+              <Page isRef="7" />
+              <Parent isRef="105" />
+              <Text>CASE NO.</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text96>
+            <Text97 Ref="107" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>11.5,0,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>2fcd8a042ea24623bc2a15a26b97af2d</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text97</Name>
+              <Page isRef="7" />
+              <Parent isRef="105" />
+              <Text>QTY</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text97>
+            <Text105 Ref="108" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>1.8,0,2.9,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>a3216732686a43058ec972a05f597738</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text105</Name>
+              <Page isRef="7" />
+              <Parent isRef="105" />
+              <Text>DESCRIPTION</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text105>
+            <Text108 Ref="109" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>4.7,0,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>53bdef6c9814414fa03ad8b0b9873c84</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text108</Name>
+              <Page isRef="7" />
+              <Parent isRef="105" />
+              <Text>MODEL</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text108>
+            <Text109 Ref="110" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>9.7,0,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>c9fe5117a91e4443be0506d6be158f53</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text109</Name>
+              <Page isRef="7" />
+              <Parent isRef="105" />
+              <Text>HTS NO</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text109>
+            <Text112 Ref="111" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>13.3,0,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>42fa0b5a957c4f7aba9737941897e0de</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text112</Name>
+              <Page isRef="7" />
+              <Parent isRef="105" />
+              <Text>Net WT.</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text112>
+            <Text117 Ref="112" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>15.3,0,1.9,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>649c30bec0864539999e50546f375aea</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text117</Name>
+              <Page isRef="7" />
+              <Parent isRef="105" />
+              <Text>Gross WT.</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text117>
+            <Text118 Ref="113" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>17.2,0,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>8a87c354c0cc4d98a360cc408ff5899a</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text118</Name>
+              <Page isRef="7" />
+              <Parent isRef="105" />
+              <Text>Cube</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text118>
+            <Text119 Ref="114" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>13.3,0.4,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>23a5c10a53264833b2b1ab79005ad91c</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text119</Name>
+              <Page isRef="7" />
+              <Parent isRef="105" />
+              <Text>(KGS)</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text119>
+            <Text120 Ref="115" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>15.3,0.4,1.9,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>e6facf0718e84c94b389e910f71bfb04</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text120</Name>
+              <Page isRef="7" />
+              <Parent isRef="105" />
+              <Text>(KGS)</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text120>
+            <Text121 Ref="116" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>17.2,0.4,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>50fa3b87bfa946bd997ef66884edbfd0</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text121</Name>
+              <Page isRef="7" />
+              <Parent isRef="105" />
+              <Text>(CBM)</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text121>
+            <Text122 Ref="117" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>6.5,0,3.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>b5c5b62c1b884ca4b0b8e22900c44b27</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text122</Name>
+              <Page isRef="7" />
+              <Parent isRef="105" />
+              <Text>Part NO</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text122>
+          </Components>
+          <Condition>{SMINP.U_FID}</Condition>
+          <Conditions isList="true" count="0" />
+          <Guid>f1476fae8c9345c6b99158602978f907</Guid>
+          <KeepGroupTogether>True</KeepGroupTogether>
+          <Name>GroupHeaderBand2</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <PrintOnAllPages>True</PrintOnAllPages>
+        </GroupHeaderBand2>
+        <DataBand1 Ref="118" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,12.6,19,0.8</ClientRectangle>
+          <Components isList="true" count="14">
+            <Text129 Ref="119" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,0,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>21ad48d20dd34450aeada3773bbf34d0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text129</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <Text>{IIF(SMINP.CASE_NO=="", SMINP.PLA_NO,SMINP.CASE_NO)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text129>
+            <Text131 Ref="120" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>1.8,0,2.9,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>8046005fdf034292bc2f76f8f4dd6f2f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text131</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <Text>{BackStr(SMINP.GOODS_DESCP,SMINP.DN_NO,SMINM.SO_NO,SMINP.PO_NO)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text131>
+            <Text132 Ref="121" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>4.7,0,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>6935ae9cfad743baadd48d96fc72f39f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text132</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <Text>{SMINP.OPART_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text132>
+            <Text133 Ref="122" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>6.5,0,3.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>b558f6fd5ca14ccfa47a692f0b1c27e6</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text133</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <Text>{SMINP.PART_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text133>
+            <Text138 Ref="123" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>13.3,0.4,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>9bfa72e7561041ceb9c4824faba829c2</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text138</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <Text>{IIF(SMINP.QTY!=0 &amp;&amp; SMINP.QTY!=SMINP.TTL_QTY,IIF(SMINP.TTL_NW==0,"",Format("{0:N3}", SMINP.TTL_NW)),"")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text138>
+            <Text139 Ref="124" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>15.3,0.4,1.9,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>c36bed4573bc41e7aa57b9ef7e474832</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text139</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <Text>{IIF(SMINP.QTY!=0 &amp;&amp; SMINP.QTY!=SMINP.TTL_QTY,IIF(SMINP.TTL_GW==0,"",Format("{0:N3}", SMINP.TTL_GW)),"")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text139>
+            <Text140 Ref="125" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>17.2,0.4,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>2207fd00c04d40aea98f16bad63acbac</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text140</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <Text>{IIF(SMINP.QTY!=0 &amp;&amp; SMINP.QTY!=SMINP.TTL_QTY,IIF(SMINP.TTL_CBM==0,"",Format("{0:N4}", SMINP.TTL_CBM)),"")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text140>
+            <Text141 Ref="126" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>11.5,0.4,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>da00b420e0c048fab438f0502d572a5e</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text141</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <Text>{IIF(SMINP.QTY!=0 &amp;&amp; SMINP.QTY!=SMINP.TTL_QTY,IIF(SMINP.TTL_QTY==0,"",SMINP.TTL_QTY),"")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text141>
+            <Text128 Ref="127" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.3,0,1.9,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>b767d181da694811bb1ae54202459139</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text128</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <Text>{IIF(SMINP.QTY!=0 &amp;&amp; SMINP.QTY!=SMINP.TTL_QTY,IIF(SMINP.GW==0," ",("@ "+Format("{0:N3}", SMINP.GW))),IIF(SMINP.GW==0," ",Format("{0:N3}", SMINP.GW)))}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text128>
+            <Text130 Ref="128" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.2,0,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>803ab0c1d26142f590b1d20aa57379c5</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text130</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <Text>{IIF(SMINP.QTY!=0 &amp;&amp; SMINP.QTY!=SMINP.TTL_QTY,IIF(SMINP.CBM==0," ",("@ "+Format("{0:N4}", SMINP.CBM))),IIF(SMINP.CBM==0," ",Format("{0:N4}", SMINP.CBM)))}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text130>
+            <Text136 Ref="129" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.3,0,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>5a5f133ef0274d61bff6921b311662f7</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text136</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <Text>{IIF(SMINP.QTY!=0 &amp;&amp; SMINP.QTY!=SMINP.TTL_QTY,IIF(SMINP.NW==0," ",("@ "+Format("{0:N3}", SMINP.NW))),IIF(SMINP.NW==0," ",Format("{0:N3}", SMINP.NW)))}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text136>
+            <Text135 Ref="130" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.5,0,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>8ed18647ad6044919cb41f0504890096</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text135</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <Text>{IIF(SMINP.QTY!=0 &amp;&amp; SMINP.QTY!=SMINP.TTL_QTY,IIF(SMINP.QTY==0,"",("@ "+SMINP.QTY+" "+SMINP.QTYU)),IIF(SMINP.QTY==0,"",(SMINP.QTY+" "+SMINP.QTYU)))}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text135>
+            <Text134 Ref="131" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.7,0,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>50c0e62e175c443d8bdabb376ff3348d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text134</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <Text>{SMINP.IHS_CODE}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text134>
+            <HorizontalLinePrimitive2 Ref="132" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,0.8,19,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="133" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>ab8f6b48a06b4f04b72feeb1ac004511</Guid>
+              <Name>HorizontalLinePrimitive2</Name>
+              <Page isRef="7" />
+              <Parent isRef="118" />
+              <StartCap Ref="134" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+              <Style>Dash</Style>
+            </HorizontalLinePrimitive2>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>SMINP</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Guid>bf5acc74582f47f5874f3d18a5f9fdbf</Guid>
+          <Name>DataBand1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+        <GroupFooterBand2 Ref="135" type="GroupFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <CanBreak>True</CanBreak>
+          <ClientRectangle>0,14.2,19,0.8</ClientRectangle>
+          <Components isList="true" count="11">
+            <Text74 Ref="136" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,2.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>980dea9c70a84d11a5f771c38839dcc7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text74</Name>
+              <Page isRef="7" />
+              <Parent isRef="135" />
+              <Text>Total</Text>
+              <TextBrush>Black</TextBrush>
+            </Text74>
+            <Text82 Ref="137" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.8,0,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>ae93900384e1459189a97b0f0243cfc8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text82</Name>
+              <Page isRef="7" />
+              <Parent isRef="135" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text82>
+            <Text91 Ref="138" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.2,0,7.1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>2d6020257fea451f923881119a688db0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text91</Name>
+              <Page isRef="7" />
+              <Parent isRef="135" />
+              <Text>{SMINM.TTL_PLT} {SMINM.TTL_PLT_DESCP}({IIF(SumD(GroupHeaderBand2,SMINP.TTL_QTY)==0,"",SumD(GroupHeaderBand2,SMINP.TTL_QTY))} CTNS)</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text91>
+            <Text92 Ref="139" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.5,0,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>6f6c9847ca5246b3a5a2606fb0e5685f</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text92</Name>
+              <Page isRef="7" />
+              <Parent isRef="135" />
+              <Text>{IIF(SumD(GroupHeaderBand2,SMINP.TTL_QTY)==0,"",SumD(GroupHeaderBand2,SMINP.TTL_QTY)+" "+SMINP.QTYU)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text92>
+            <Text93 Ref="140" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>13.3,0,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>a7ca0c3e644e4fadaa189c77a3efe767</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text93</Name>
+              <Page isRef="7" />
+              <Parent isRef="135" />
+              <Text>{IIF(SMINM.TTL_NW==0,"",Format("{0:N3}", SMINM.TTL_NW))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text93>
+            <Text94 Ref="141" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>15.3,0,1.9,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>75a767e864a04eafa5938b3cbcbf3af4</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text94</Name>
+              <Page isRef="7" />
+              <Parent isRef="135" />
+              <Text>{IIF(SMINM.TTL_GW==0,"",Format("{0:N3}", SMINM.TTL_GW))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text94>
+            <Text95 Ref="142" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>17.2,0,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>efb810c255944e97b9e5be38e7a96b21</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text95</Name>
+              <Page isRef="7" />
+              <Parent isRef="135" />
+              <Text>{IIF(SMINM.TTL_CBM==0,"",Format("{0:N4}", SMINM.TTL_CBM))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text95>
+            <Text123 Ref="143" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0.4,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>be5cc46e97da4fe291ec2158930dddcb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text123</Name>
+              <Page isRef="7" />
+              <Parent isRef="135" />
+              <Text>SAY TOTAL</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text123>
+            <Text137 Ref="144" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>1.8,0.4,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>a64576e3a0c240d9ba8dea97c2e781c8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text137</Name>
+              <Page isRef="7" />
+              <Parent isRef="135" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text137>
+            <Text142 Ref="145" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.2,0.4,16.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>af165f15f271444db5b1a7ecdac42dac</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text142</Name>
+              <Page isRef="7" />
+              <Parent isRef="135" />
+              <Text>{ToUpperCase(NumberToEnglishString((int)SMINM.TTL_PLT))} {ToUpperCase(SMINM.TTL_PLT_DESCP)} ({ToUpperCase(IIF(SumD(GroupHeaderBand2,SMINP.TTL_QTY)==0,"",NumberToEnglishString((int)SumD(GroupHeaderBand2,SMINP.TTL_QTY))))} CTNS))</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text142>
+            <HorizontalLinePrimitive1 Ref="146" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,0.8,19,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="147" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>81b26fee799a47c5aa914ca5daac709c</Guid>
+              <Name>HorizontalLinePrimitive1</Name>
+              <Page isRef="7" />
+              <Parent isRef="135" />
+              <StartCap Ref="148" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>305f0c96b7a34a2b9462072f9b53d178</Guid>
+          <KeepGroupFooterTogether>False</KeepGroupFooterTogether>
+          <Name>GroupFooterBand2</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+        </GroupFooterBand2>
+        <GroupFooterBand1 Ref="149" type="GroupFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,15.8,19,0.8</ClientRectangle>
+          <Components isList="true" count="1">
+            <SubReport1 Ref="150" type="SubReport" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,19,0.8</ClientRectangle>
+              <Components isList="true" count="0" />
+              <Name>SubReport1</Name>
+              <Page isRef="7" />
+              <Parent isRef="149" />
+              <SubReportPageGuid>52245e8b569b41aab979ccd1d181b561</SubReportPageGuid>
+            </SubReport1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>75f56e1f56454f3cb17142009d28e178</Guid>
+          <Name>GroupFooterBand1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+        </GroupFooterBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>a244884f41e2499b97e3c8024de2b1cc</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="151" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+    <subReport_1 Ref="152" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="4">
+        <GroupHeaderBand3 Ref="153" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,0.8</ClientRectangle>
+          <Components isList="true" count="8">
+            <Text76 Ref="154" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,2.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>5dc7daa8789f474f95e4f51209793713</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text76</Name>
+              <Page isRef="152" />
+              <Parent isRef="153" />
+              <Text>REMARK</Text>
+              <TextBrush>Black</TextBrush>
+            </Text76>
+            <Text86 Ref="155" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.8,0,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>0269276d42054f0ab87686506e3caba7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text86</Name>
+              <Page isRef="152" />
+              <Parent isRef="153" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text86>
+            <Text143 Ref="156" type="Text" isKey="true">
+              <Border>None;Black;1;Dash;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3.2,0,15.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>2ad45c2c6a0d4c00bbcaadc9a4275877</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text143</Name>
+              <Page isRef="152" />
+              <Parent isRef="153" />
+              <Text>{SMINM.PACKING_RMK}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+            </Text143>
+            <Text77 Ref="157" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.4,2.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>b4e5ac5ed56c46d39459052f5c1efe93</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text77</Name>
+              <Page isRef="152" />
+              <Parent isRef="153" />
+              <Text>TPV DN</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text77>
+            <Text144 Ref="158" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>5.5,0.4,2.9,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>aa2d4bb6083844f9869b6b9066aea31e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text144</Name>
+              <Page isRef="152" />
+              <Parent isRef="153" />
+              <Text>Container No.</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text144>
+            <Text145 Ref="159" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>8.5,0.4,2.5,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>3dc2686107e94e8db62a46c933554244</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text145</Name>
+              <Page isRef="152" />
+              <Parent isRef="153" />
+              <Text>Seal No.</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text145>
+            <Text146 Ref="160" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>2.8,0.4,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>b4632a06b0394ab8a3e9ae70b21bfff0</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text146</Name>
+              <Page isRef="152" />
+              <Parent isRef="153" />
+              <Text>Q'TY</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text146>
+            <Text147 Ref="161" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>11.2,0.4,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>fb2ca849a49547b6b59cd3369fbb275e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text147</Name>
+              <Page isRef="152" />
+              <Parent isRef="153" />
+              <Text>Container Type</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text147>
+          </Components>
+          <Condition>{SMINM.U_ID}</Condition>
+          <Conditions isList="true" count="0" />
+          <Guid>705a2507f4c74469a38b00a7e0a975ae</Guid>
+          <KeepGroupHeaderTogether>False</KeepGroupHeaderTogether>
+          <Name>GroupHeaderBand3</Name>
+          <Page isRef="152" />
+          <Parent isRef="152" />
+        </GroupHeaderBand3>
+        <GroupHeaderBand5 Ref="162" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <CanBreak>True</CanBreak>
+          <ClientRectangle>0,2,19,0.4</ClientRectangle>
+          <Components isList="true" count="5">
+            <Text149 Ref="163" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>10.8,0,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>2fcf906e71fc4646a2344c7d2a1fbcc4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text149</Name>
+              <Page isRef="152" />
+              <Parent isRef="162" />
+              <Text>{IIF(SMDN.CNT20==0,"","20GP*"+SMDN.CNT20)} {IIF(SMDN.CNT40==0,"","40GP*" + SMDN.CNT40)} {IIF(SMDN.CNT40HQ==0,"","40HQ*"+SMDN.CNT40HQ)} {IIF(SMDN.CNT_TYPE=="","",SMDN.CNT_TYPE)} </Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text149>
+            <Text150 Ref="164" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,0,2.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>fe5ed455aec544e6a6ec118a08bd2111</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text150</Name>
+              <Page isRef="152" />
+              <Parent isRef="162" />
+              <Text>{IIF(Length(SMINP.DN_NO)&gt;10,Substring(SMINP.DN_NO,4,(int)Length(SMINP.DN_NO)),SMINP.DN_NO)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text150>
+            <Text151 Ref="165" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.9,0,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>76549ffa72b445c2aaa1d2b30d1a59bd</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text151</Name>
+              <Page isRef="152" />
+              <Parent isRef="162" />
+              <Text>{SMINP.TTL_QTY}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text151>
+            <Text152 Ref="166" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5.3,0,2.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>f00a1d088afa4ddcbc8315627993ef92</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text152</Name>
+              <Page isRef="152" />
+              <Parent isRef="162" />
+              <Text>{IIF(SMDN.DN_NO_CMP_REF!="",GetSMRV(SMDN.DN_NO_CMP_REF,"CNTR_NO"),GetSMRV(SMDN.DN_NO,"CNTR_NO"))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+            </Text152>
+            <Text153 Ref="167" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>8.3,0,2.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>2b8d9c09072d46128ffa607c55ab8d03</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text153</Name>
+              <Page isRef="152" />
+              <Parent isRef="162" />
+              <Text>{IIF(SMDN.DN_NO_CMP_REF!="",GetSMRV(SMDN.DN_NO_CMP_REF,"SEAL_NO1"),GetSMRV(SMDN.DN_NO,"SEAL_NO1"))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+            </Text153>
+          </Components>
+          <Condition>{SMINP.DN_NO}</Condition>
+          <Conditions isList="true" count="0" />
+          <Guid>c8d577bb0f1143ed9fc0fa441b8b0ec2</Guid>
+          <Name>GroupHeaderBand5</Name>
+          <Page isRef="152" />
+          <Parent isRef="152" />
+        </GroupHeaderBand5>
+        <DataBand2 Ref="168" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,3.2,19,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>SMINP</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Guid>7345ffbb67dd4a2dae87e7467dd01f8d</Guid>
+          <Name>DataBand2</Name>
+          <Page isRef="152" />
+          <Parent isRef="152" />
+          <Sort isList="true" count="0" />
+        </DataBand2>
+        <GroupFooterBand3 Ref="169" type="GroupFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <CanBreak>True</CanBreak>
+          <ClientRectangle>0,4,19,1.6</ClientRectangle>
+          <Components isList="true" count="12">
+            <Text87 Ref="170" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,0,2.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>16318f9d550a484ea4a0704b35937769</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text87</Name>
+              <Page isRef="152" />
+              <Parent isRef="169" />
+              <Text>SHIPPING MARK</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text87>
+            <Text75 Ref="171" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3.2,0,15.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>52e135b41e8c4ca7a02d20776abd495c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text75</Name>
+              <Page isRef="152" />
+              <Parent isRef="169" />
+              <Text>{Replace(Replace(Replace(SMINM.MARKS,"SHIPPINGMARK:"," "),"NO:"," NO:"),"  ","")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text75>
+            <Text78 Ref="172" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.8,0,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>0ea405578ea247788feec0072c34875f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text78</Name>
+              <Page isRef="152" />
+              <Parent isRef="169" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text78>
+            <Text79 Ref="173" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,0.4,2.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>49e060aa4bd0448fa1728119f0deead5</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text79</Name>
+              <Page isRef="152" />
+              <Parent isRef="169" />
+              <Text>Net Weight(KGS)</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text79>
+            <Text80 Ref="174" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,0.8,2.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>edf10df5024c439da23600a4de7755d3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text80</Name>
+              <Page isRef="152" />
+              <Parent isRef="169" />
+              <Text>Gross weight(KGS)</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text80>
+            <Text81 Ref="175" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3.2,0.4,15,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>0b678c0b67b94df18b48907db010cf77</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text81</Name>
+              <Page isRef="152" />
+              <Parent isRef="169" />
+              <Text>{Format("{0:N2}", SMINM.TTL_NW)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text81>
+            <Text83 Ref="176" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3.2,0.8,15,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>753ad6670d5742cb86b89e3a48c426ed</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text83</Name>
+              <Page isRef="152" />
+              <Parent isRef="169" />
+              <Text>{Format("{0:N2}", SMINM.TTL_GW)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text83>
+            <Text85 Ref="177" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.8,0.4,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>9c6ca43a162446b7976529bdd675586f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text85</Name>
+              <Page isRef="152" />
+              <Parent isRef="169" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text85>
+            <Text88 Ref="178" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.8,0.8,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>3a054c9a7269402d89c062bcbe74d76e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text88</Name>
+              <Page isRef="152" />
+              <Parent isRef="169" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text88>
+            <Text89 Ref="179" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,1.2,2.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>85e010edf3a94bf293c8ee1c426b4ce0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text89</Name>
+              <Page isRef="152" />
+              <Parent isRef="169" />
+              <Text>Volume(CBM)</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text89>
+            <Text90 Ref="180" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3.2,1.2,15,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>7aa501631f5f4cdeb7989dac7afc4978</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text90</Name>
+              <Page isRef="152" />
+              <Parent isRef="169" />
+              <Text>{Format("{0:N3}",SMINM.TTL_CBM)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text90>
+            <Text148 Ref="181" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.8,1.2,0.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>449a79662d31494889b1b3c6bacc7019</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text148</Name>
+              <Page isRef="152" />
+              <Parent isRef="169" />
+              <Text>:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text148>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>9b6919f80aac450d82bc905d3b1fc8cd</Guid>
+          <KeepGroupFooterTogether>False</KeepGroupFooterTogether>
+          <Name>GroupFooterBand3</Name>
+          <Page isRef="152" />
+          <Parent isRef="152" />
+        </GroupFooterBand3>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>52245e8b569b41aab979ccd1d181b561</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>subReport_1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="182" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </subReport_1>
+  </Pages>
+  <PrinterSettings Ref="183" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>9/5/2016 3:28:52 PM</ReportChanged>
+  <ReportCreated>8/10/2016 3:07:16 PM</ReportCreated>
+  <ReportFile>C:\Users\maker\Desktop\2016.9.5\IPQ09.mrt</ReportFile>
+  <ReportGuid>90389d67e28641dd8d7754da27d660e1</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2011.3.1200</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+			this.Text32.GetValue += new Stimulsoft.Report.Events.StiGetValueEventHandler(this.REFNO_GetValue);
+		}
+		public void REFNO_GetValue(object sender, Stimulsoft.Report.Events.StiGetValueEventArgs e)
+		{
+			GetDTValue(sender,e,"REF_NO");
+		}
+		public string GetSMRV(string DNNO,string type)
+		{
+			DataTable dt= SMRV.DataTable;
+			foreach(DataRow dr in dt.Rows)
+			{
+				if((GetValueToStr(dr["DN_NO"])).Contains(DNNO))
+				{
+					return GetValueToStr(dr[type]);
+				}
+			}
+			return "";
+		}
+		public void GetDTValue(object sender, Stimulsoft.Report.Events.StiGetValueEventArgs e,String type)
+		{
+			string line1="";
+			DataTable dt= SMINM.DataTable;
+			foreach(DataRow dr in dt.Rows)
+			{
+				string val="";
+				val=GetValueToStr(dr[type]);		
+				if(type=="REF_NO")
+				{
+					string[] str1=val.Split(',');
+					string str5=string.Empty;
+					foreach(string s in str1)
+					{
+						if(s.Length&gt;10)
+						{
+							val=s.Substring(4, s.Length-4);		
+						}
+						if(str5.IndexOf(val)&lt;0){
+							str5+=val+",";
+						}
+					}
+					line1=str5;
+				}	
+			}
+			line1=line1.Substring(0, line1.Length-1);
+			e.Value = line1; 	
+		}
+		public string GetValueToStr(object obj)
+		{
+			if (obj == null || obj==DBNull.Value)
+				return "";
+			return obj.ToString();
+		}
+		public string GetPayDescp()
+		{
+			string line1="";
+			DataTable dt= SMDN.DataTable;
+			foreach(DataRow dr in dt.Rows)
+			{
+				string paydescp=GetValueToStr(dr["PAY_DESCP"]);
+				if(!string.IsNullOrEmpty(paydescp))
+					return paydescp;
+			}
+			return string.Empty;
+		}
+		private static readonly String[] enSmallNumber = { "", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN", "ELEVEN", "TWELVE", "THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN", "SEVENTEEN", "EIGHTEEN", "NINETEEN" };
+		private static readonly String[] enLargeNumber = { "TWENTY", "THIRTY", "FORTY", "FIFTY", "SIXTY", "SEVENTY", "EIGHTY", "NINETY" };
+		public string getEngNum(double a){
+			string strNum=(string)a.ToString();
+			string [] strNums=strNum.Split('.');
+			if(strNums.Length&gt;=2)
+			{
+				string decNum=strNums[1];
+				decNum=decNum.Substring(0,2);
+				string ten=decNum.Substring(0,1);
+				string Units=decNum.Substring(1,1);
+				int tenNum=getNum(ten);
+				int UnitsNum=getNum(Units);
+				int ttl=tenNum*10+UnitsNum;
+				if(tenNum&lt;=1)
+				{
+					if(ttl&lt;=0)
+					{
+						return "and zero cents";
+					}
+					return "and "+enSmallNumber[ttl]+" cents";
+				}
+				else if (tenNum&gt;1){
+					string values= "and "+enLargeNumber[tenNum-2];
+					values +=" "+enSmallNumber[UnitsNum]+" cents";
+					return values;
+				}
+			}
+			return "and zero cents";
+		}
+		public int getNum(string a )
+		{
+			switch(a)
+			{
+				case "0":return 0;
+				case "1":return 1;
+				case "2":return 2;
+				case "3":return 3;
+				case "4":return 4;
+				case "5":return 5;
+				case "6":return 6;
+				case "7":return 7;
+				case "8":return 8;
+				case "9":return 9;
+			}
+			return 0;
+		}
+		public System.Drawing.Image loadImg(string path)
+		{		
+			return Image.FromFile(this.SMINM.PIC);
+		}	public string BackStr(string a,string b,string c ,string d)
+		{
+			string val="";
+			val+=EmptyStr(a);
+		    string e=b.Substring(4,b.Length-4);
+			val+=EmptyStr("DN:",e);
+			val+=EmptyStr("SO:",c);
+			val+=EmptyStr("PO:",d);
+			return val;
+		}
+		public string EmptyStr(string desc,string a)
+		{
+			return a==""?"":desc+a+"\r\n";
+		}
+		public string EmptyStr(string a)
+		{
+			return a==""?"":a+"\r\n";
+		}
+		public string NumberToEnglishString(int number)  
+		{ 
+			if (number &lt; 0) //暂不考虑负数 
+			{ 
+				return ""; 
+			} 
+			if (number &lt; 20) //0到19 
+			{ 
+				switch (number) 
+				{ 
+					case 0: 
+						return "zero"; 
+					case 1: 
+						return "one"; 
+					case 2: 
+						return "two"; 
+					case 3: 
+						return "three"; 
+					case 4: 
+						return "four"; 
+					case 5: 
+						return "five"; 
+					case 6: 
+						return "six"; 
+					case 7: 
+						return "seven"; 
+					case 8: 
+						return "eight"; 
+					case 9: 
+						return "nine"; 
+					case 10: 
+						return "ten"; 
+					case 11: 
+						return "eleven"; 
+					case 12: 
+						return "twelve"; 
+					case 13: 
+						return "thirteen"; 
+					case 14: 
+						return "fourteen"; 
+					case 15: 
+						return "fifteen"; 
+					case 16: 
+						return "sixteen"; 
+					case 17: 
+						return "seventeen"; 
+					case 18: 
+						return "eighteen"; 
+					case 19: 
+						return "nineteen"; 
+					default: 
+						return ""; 
+				} 
+
+			} 
+
+			if (number &lt; 100) //20到99 
+			{ 
+				if (number % 10 == 0) //20,30,40,...90的输出 
+				{ 
+					switch (number) 
+					{ 
+						case 20: 
+
+							return "twenty"; 
+
+						case 30: 
+
+							return "thirty"; 
+
+						case 40: 
+
+							return "forty"; 
+
+						case 50: 
+
+							return "fifty"; 
+
+						case 60: 
+
+							return "sixty"; 
+
+						case 70: 
+
+							return "seventy"; 
+
+						case 80: 
+
+							return "eighty"; 
+
+						case 90: 
+
+							return "ninety"; 
+
+						default: 
+
+							return ""; 
+
+					} 
+				} 
+				else //21.22,....99 思路：26=20+6 
+				{ 
+					return string.Format("{0} {1}", NumberToEnglishString(10 * (number / 10)),  
+						NumberToEnglishString(number % 10)); 
+				} 
+			} 
+			if (number &lt; 1000) //100到999  百级 
+			{ 
+				if (number % 100 == 0) 
+				{ 
+					return string.Format("{0} hundred", NumberToEnglishString(number / 100)); 
+				} 
+				else  
+				{ 
+					return string.Format("{0} hundred and {1}", NumberToEnglishString(number / 100),  
+						NumberToEnglishString(number % 100)); 
+				} 
+			} 
+			if (number &lt; 1000000) //1000到999999 千级 
+			{ 
+				if (number % 1000 == 0) 
+				{ 
+					return string.Format("{0} thousand", NumberToEnglishString(number / 1000)); 
+				} 
+				else 
+				{ 
+					return string.Format("{0} thousand and {1}", NumberToEnglishString(number / 1000),  
+						NumberToEnglishString(number % 1000)); 
+				} 
+			} 
+			if (number &lt; 1000000000) //1000 000到999 999 999 百万级 
+			{ 
+				if (number % 1000 == 0) 
+				{
+					return string.Format("{0} million", NumberToEnglishString(number / 1000000)); 
+				} 
+				else 
+				{ 
+					return string.Format("{0} million and {1}", NumberToEnglishString(number / 1000000), 
+						NumberToEnglishString(number % 1000000)); 
+				} 
+			} 
+			if (number &lt;= int.MaxValue) //十亿 级 
+			{
+				if (number % 1000000000 == 0) 
+				{ 
+					return string.Format("{0} billion", NumberToEnglishString(number / 1000000000)); 
+				}
+				else 
+				{ 
+					return string.Format("{0} billion and {1}", NumberToEnglishString(number / 1000000000), 
+						NumberToEnglishString(number % 1000000000)); 
+				} 
+			} 
+			return ""; 
+		}
+
+        #region StiReport Designer generated code - do not modify
+        #endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

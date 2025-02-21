@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.Title = "ShipFeeQueryView";
+}
+
+
+<script type="text/javascript">
+    var SpId = "@ViewBag.ShipmentId";
+
+    $(function(){
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 260;
+        gop.gridColModel = [
+             { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, hidden: true },
+             { name: 'ShipmentId', title: 'Shipment ID', index: 'ShipmentId', sorttype: 'string', width: 120, hidden: false, init:true, dv:SpId},
+             { name: 'LspNo', title: '@Resources.Locale.L_DRule_LspNo', index: 'LspNo', sorttype: 'string', width: 120, hidden: false},
+             { name: 'LspNm', title: '@Resources.Locale.L_AirQuery_LspNm', index: 'LspNm', sorttype: 'string', width: 120, hidden: false},
+             { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', sorttype: 'string', width: 80, hidden: false},
+             { name: 'ChgDescp', title: '@Resources.Locale.L_SMCHGSetup_ChgDescp', index: 'ChgDescp', sorttype: 'string', width: 120, hidden: false},
+             { name: 'Qcur', title: '@Resources.Locale.L_BaseLookup_WithholdCur', index: 'Qcur', sorttype: 'string', width: 80, hidden: false},
+             {
+                 name: 'QunitPrice', title: '@Resources.Locale.L_BaseLookup_WithholdPrice', index: 'QunitPrice',
+                 width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, sorttype: 'float',
+                 hidden: false
+             },
+             { name: 'Qqty', title: '@Resources.Locale.L_BaseLookup_WithholdQty', index: 'Qqty', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, sorttype: 'string', width: 100, hidden: false },
+             { name: 'Qamt', title: '@Resources.Locale.L_ActSetup_Qamt', index: 'Qamt', sorttype: 'string', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, width: 100 },
+             {
+                 name: 'QexRate', title: '@Resources.Locale.L_ActSetup_ExRate', index: 'QexRate',
+                 width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, sorttype: 'float',
+                 hidden: false
+             },
+             { name: 'Qlamt', title: '@Resources.Locale.L_ActManage_LocWithAmt', index: 'Qlamt', sorttype: 'string', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, width: 100 },
+             { name: 'Qtax', title: '@Resources.Locale.L_ActManage_WithTax', index: 'Qtax', sorttype: 'float', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, width: 80, hidden: false },
+             { name: 'CheckDescp', title: '@Resources.Locale.L_ActManage_AuditReason', index: 'CheckDescp', sorttype: 'string', width: 150, hidden: false, classes: "normal-white-space" },
+             { name: 'Cur', title: '@Resources.Locale.L_ActQuery_Cur', index: 'Cur', sorttype: 'string', width: 80, hidden: false },
+             {
+                 name: 'UnitPrice', title: '@Resources.Locale.L_QTManage_IvUP', index: 'UnitPrice',
+                 width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, sorttype: 'float',
+                 hidden: false
+             },
+             { name: 'Qty', title: '@Resources.Locale.L_QTManage_IvQty', index: 'Qty', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, sorttype: 'string', width: 100, hidden: false },
+             { name: 'Bamt', title: '@Resources.Locale.L_ActSetup_Amt', index: 'Bamt', sorttype: 'string', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00'}, width: 100 },
+             {
+                 name: 'ExRate', title: '@Resources.Locale.L_QTManage_ExRate', index: 'ExRate',
+                 width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, sorttype: 'float',
+                 hidden: false
+             },
+             { name: 'Lamt', title: '@Resources.Locale.L_ActManage_LocIvAmt', index: 'Lamt', sorttype: 'string', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00'}, width: 100 },
+             { name: 'Tax', title: '@Resources.Locale.L_QTManage_IvTax', index: 'Tax', sorttype: 'float', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, width: 80, hidden: false},
+             { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', sorttype: 'string', width: 200, hidden: false },
+             { name: 'CostCenter', title: '@Resources.Locale.L_SMCHGSetup_ChgLevel', index: 'CostCenter', sorttype: 'string', width: 200, hidden: false },
+             { name: 'ProfitCenter', title: '@Resources.Locale.L_ActManage_ProCenter', index: 'ProfitCenter', sorttype: 'string', width: 200, hidden: false  }
+        ];
+
+        gop.AddUrl = { "url": rootPath + "QtManage/ShipFeeSetup?ShipmentId=" + SpId, "title": "@Resources.Locale.L_QTManage_EntLspChg", "id": "ShipFeeSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_QTManage_LspChgDetail", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "QtManage/ShipFeeQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea"; 
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            //dblClick(map);
+            var UId = map.UId;
+            if (!UId) {
+                CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                return;
+            }
+            top.topManager.openPage({
+                href: rootPath + "QtManage/ShipFeeSetup/" + UId,
+                title: '@Resources.Locale.L_QTManage_EntLspChg',
+                id: 'ShipFeeSetup',
+                reload: true
+            });
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        initSearch(gop);
+        if (SpId != "") {
+            $("#sel_ShipmentId").val(SpId);
+        }
+
+        setTimeout(function () {
+
+        $("#SummarySearch").click();
+
+        }, 100);
+
+    });
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body" style="overflow-x:inherit">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="SubGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "POManagementQuery";
+}
+
+
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 330;
+        gop.gridColModel = [
+            { name: 'UId', showname: 'UId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'PoNo', title: 'PO NO', index: 'PoNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Etd', title: 'ETD', index: 'Etd', width: 100, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'CreadyDate', title: 'Cargo Ready Date', index: 'CreadyDate', width: 100, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'FshippingDate', title: 'F.SHIPPING DATE', index: 'FshippingDate', width: 100, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            //{ name: 'Status', title: 'Status', index: 'Status', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Status', title: 'Status', index: 'Status', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: "P:Prepare;R:Cargo Ready;O:On The Way;F:Finish;I:Invalid" } },
+            { name: 'BuyerCd', title: 'Buyer', index: 'BuyerCd', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BuyerNm', title: 'Buyer Name', index: 'BuyerNm', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BuyerAddr', title: 'Buyer Address', index: 'BuyerAddr', width: 200, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BuyerMail', title: 'Buyer Mail', index: 'BuyerMail', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SupplierCd', title: 'Supplier', index: 'SupplierCd', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SupplierNm', title: 'Supplier Name', index: 'SupplierNm', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SupplierAddr', title: 'Supplier Address', index: 'SupplierAddr', width: 200, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SupplierMail', title: 'Supplier Mail', index: 'SupplierMail', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SupplierTel', title: 'Supplier Tel', index: 'SupplierTel', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SupplierFax', title: 'Supplier Fax', index: 'SupplierFax', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SupplierAttn', title: 'Supplier Attn', index: 'SupplierAttn', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Incoterm', title: 'Incoterm', index: 'Incoterm', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'IncotermDescp', title: 'IncotermDescp', index: 'IncotermDescp', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'FreightTerm', title: 'FreightTerm', index: 'FreightTerm', width: 80, align: 'right', sorttype: 'string', hidden: false },
+            { name: 'DeliveryWay', title: 'Delivery Way', index: 'DeliveryWay', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:Air;S:Sea;R:Railroad;T:Truck' } },
+            { name: 'Qty', title: '@Resources.Locale.L_DNApproveManage_Qty', index: 'Qty', width: 80, align: 'right', sorttype: 'integer', hidden: false },
+            { name: 'Qtyu', title: '@Resources.Locale.L_DNApproveManage_Qtyu', index: 'Qtyu', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Oqty', title: 'On the way Qty', index: 'Oqty', width: 80, align: 'right', sorttype: 'integer', hidden: false },
+            { name: 'Dqty', title: 'Delivery QTY', index: 'Dqty', width: 80, align: 'right', sorttype: 'integer', hidden: false },
+            { name: 'Bqty', title: 'Balance QTY', index: 'Bqty', width: 80, align: 'right', sorttype: 'integer', hidden: false },
+            { name: 'FromCd', title: 'Original', index: 'FromCd', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'FromNm', title: 'Original Name', index: 'FromNm', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ToCd', title: 'Destation', index: 'ToCd', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ToNm', title: 'Destation Name', index: 'ToNm', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'OriginLsp', title: 'Original LSP', index: 'OriginLsp', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'OriginLnm', title: 'LSP Name', index: 'OriginLnm', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DestLsp', title: 'DEST LSP', index: 'DestLsp', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DestLnm', title: 'DEST Name', index: 'DestLnm', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Marks', title: 'Marks', index: 'Marks', width: 300, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Commodity', title: 'Commodity', index: 'Commodity', width: 300, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Remark', title: 'Remark', index: 'Remark', width: 300, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SiInfo', title: 'Shipping Instruction', index: 'SiInfo', width: 300, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateBy', title: '@Resources.Locale.L_DNApproveManage_CreateBy', index: 'CreateBy', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateDate', title: '@Resources.Locale.L_DNApproveManage_CreateDate', index: 'CreateDate', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ModifyBy', title: '@Resources.Locale.L_DNApproveManage_ModifyBy', index: 'ModifyBy', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ModifyDate', title: '@Resources.Locale.L_DNApproveManage_ModifyDate', index: 'ModifyDate', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Cmp', title: 'Cmp', index: 'Cmp', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Stn', title: 'Station', index: 'Stn', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'GroupId', title: 'Group', index: 'GroupId', width: 80, align: 'left', sorttype: 'string', hidden: false }
+        ];
+        gop.AddUrl = { "url": rootPath + "TKBL/POManagementSetup", "title": "@Resources.Locale.L_SYS_PoManageINPUT", "id": "POManagementSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "PO Managerment", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "TKBL/SmpomQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "CreateDate";
+        }
+
+        gop.statusGroup = [
+            { "id": "", "label": "@Resources.Locale.L_UserSetUp_All" },
+
+        ];
+
+        gop.statusField = "Status";
+        //gop.statusDefaultId = "A";
+        initSearch(gop);
+
+        function dblClick(map) {
+            var UId = map.UId;
+
+            top.topManager.openPage({
+                href: rootPath + "TKBL/POManagementSetup/" + UId,
+                title: '@Resources.Locale.L_SYS_PoManageINPUT',
+                id: 'POManagementSetup',
+                search: 'uid=' + UId
+            });
+        }
+    });
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,954 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 10">
+<link rel=File-List href="cnlRpt9.files/filelist.xml">
+<link rel=Edit-Time-Data href="cnlRpt9.files/editdata.mso">
+<link rel=OLE-Object-Data href="cnlRpt9.files/oledata.mso">
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>leo</o:Author>
+  <o:LastAuthor>linhui</o:LastAuthor>
+  <o:LastPrinted>2006-09-05T06:33:29Z</o:LastPrinted>
+  <o:Created>2006-06-06T03:06:30Z</o:Created>
+  <o:LastSaved>2006-09-05T06:33:55Z</o:LastSaved>
+  <o:Company>prolink</o:Company>
+  <o:Version>10.3501</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:DownloadComponents/>
+  <o:LocationOfComponents HRef="file:///F:\lhsoftware\Office%25202000\Disk%25201\msowc.cab"/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+<style>
+<!--table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{margin:.98in .24in .98in .47in;
+	mso-header-margin:.51in;
+	mso-footer-margin:.51in;
+	mso-page-orientation:landscape;
+	mso-horizontal-page-align:center;
+	mso-vertical-page-align:center;}
+.font8
+	{color:windowtext;
+	font-size:10.0pt;
+	font-weight:700;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Times New Roman", serif;
+	mso-font-charset:0;}
+tr
+	{mso-height-source:auto;
+	mso-ruby-visibility:none;}
+col
+	{mso-width-source:auto;
+	mso-ruby-visibility:none;}
+br
+	{mso-data-placement:same-cell;}
+.style0
+	{mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	white-space:nowrap;
+	mso-rotate:0;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	color:purple;
+	font-size:12.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:新細明體, serif;
+	mso-generic-font-family:auto;
+	mso-font-charset:134;
+	border:none;
+	mso-protection:locked visible;
+	mso-style-name:常规;
+	mso-style-id:0;}
+td
+	{mso-style-parent:style0;
+	padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	mso-ignore:padding;
+	color:purple;
+	font-size:12.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:新細明體, serif;
+	mso-generic-font-family:auto;
+	mso-font-charset:134;
+	mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	border:none;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	mso-protection:locked visible;
+	white-space:nowrap;
+	mso-rotate:0;}
+.xl24
+	{mso-style-parent:style0;
+	text-align:center;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl25
+	{mso-style-parent:style0;
+	mso-number-format:0;
+	text-align:center;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl26
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl27
+	{mso-style-parent:style0;
+	mso-number-format:0;
+	text-align:center;
+	vertical-align:middle;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl28
+	{mso-style-parent:style0;
+	text-align:left;
+	vertical-align:middle;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl29
+	{mso-style-parent:style0;
+	color:windowtext;
+	font-size:10.0pt;
+	font-family:新細明體, serif;
+	mso-font-charset:0;
+	text-align:center;
+	vertical-align:middle;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl30
+	{mso-style-parent:style0;
+	color:windowtext;
+	font-size:10.0pt;
+	font-family:新細明體, serif;
+	mso-font-charset:0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl31
+	{mso-style-parent:style0;
+	color:windowtext;
+	font-size:10.0pt;
+	font-family:新細明體, serif;
+	mso-font-charset:0;
+	mso-number-format:0;
+	text-align:center;
+	vertical-align:middle;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl32
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;
+	background:#FFFF99;
+	mso-pattern:auto none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl33
+	{mso-style-parent:style0;
+	text-align:center;
+	background:#FFFF99;
+	mso-pattern:auto none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl34
+	{mso-style-parent:style0;
+	text-align:center;
+	border:.5pt solid windowtext;
+	background:#FFFF99;
+	mso-pattern:auto none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl35
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FFFF99;
+	mso-pattern:auto none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl36
+	{mso-style-parent:style0;
+	mso-number-format:0;
+	text-align:center;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl37
+	{mso-style-parent:style0;
+	color:red;
+	font-weight:700;
+	font-family:"Times New Roman", serif;
+	mso-font-charset:0;
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;
+	background:#FFFF99;
+	mso-pattern:auto none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl38
+	{mso-style-parent:style0;
+	mso-number-format:"mm\/dd\/yy";
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;
+	background:#CCFFCC;
+	mso-pattern:auto none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl39
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;
+	background:#CCFFCC;
+	mso-pattern:auto none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl40
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FFFF99;
+	mso-pattern:auto none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl41
+	{mso-style-parent:style0;
+	mso-number-format:0;
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl42
+	{mso-style-parent:style0;
+	color:windowtext;
+	font-size:10.0pt;
+	font-family:新細明體, serif;
+	mso-font-charset:0;
+	text-align:center;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl43
+	{mso-style-parent:style0;
+	color:windowtext;
+	font-size:10.0pt;
+	font-family:新細明體, serif;
+	mso-font-charset:0;
+	mso-number-format:0;
+	text-align:center;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl44
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border:.5pt solid windowtext;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl45
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl46
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl47
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid black;
+	border-right:.5pt solid black;
+	border-bottom:.5pt solid black;
+	border-left:none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl48
+	{mso-style-parent:style0;
+	mso-number-format:0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl49
+	{mso-style-parent:style0;
+	color:windowtext;
+	font-size:10.0pt;
+	font-weight:700;
+	font-family:"Times New Roman", serif;
+	mso-font-charset:0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl50
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl51
+	{mso-style-parent:style0;
+	color:windowtext;
+	font-size:10.0pt;
+	font-weight:700;
+	font-family:"Times New Roman", serif;
+	mso-font-charset:0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl52
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl53
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl54
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl55
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl56
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl57
+	{mso-style-parent:style0;
+	mso-number-format:0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl58
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl59
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid black;
+	border-right:.5pt solid black;
+	border-bottom:.5pt solid black;
+	border-left:none;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl60
+	{mso-style-parent:style0;
+	text-align:right;
+	vertical-align:middle;
+	border-top:.5pt solid black;
+	border-right:.5pt solid black;
+	border-bottom:.5pt solid black;
+	border-left:none;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl61
+	{mso-style-parent:style0;
+	mso-number-format:"0_\)\;\[Red\]\\\(0\\\)";
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl62
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FFFF99;
+	mso-pattern:auto none;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl63
+	{mso-style-parent:style0;
+	mso-number-format:0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl64
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;
+	background:#FFFF99;
+	mso-pattern:auto none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl65
+	{mso-style-parent:style0;
+	text-align:center;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid black;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FFFF99;
+	mso-pattern:auto none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl66
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl67
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl68
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid black;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl69
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl70
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid black;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl71
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid black;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl72
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid black;
+	white-space:nowrap;
+	mso-text-control:shrinktofit;}
+.xl73
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl74
+	{mso-style-parent:style0;
+	mso-number-format:0000000000;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid black;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl75
+	{mso-style-parent:style0;
+	mso-number-format:0000000000;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid black;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl76
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;
+	background:#FFFF99;
+	mso-pattern:auto none;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl77
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FFFF99;
+	mso-pattern:auto none;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+.xl78
+	{mso-style-parent:style0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid black;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FFFF99;
+	mso-pattern:auto none;
+	white-space:normal;
+	mso-text-control:shrinktofit;}
+ruby
+	{ruby-align:left;}
+rt
+	{color:purple;
+	font-size:12.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:新細明體, serif;
+	mso-generic-font-family:auto;
+	mso-font-charset:134;
+	mso-char-type:none;
+	display:none;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <x:ExcelWorkbook>
+  <x:ExcelWorksheets>
+   <x:ExcelWorksheet>
+    <x:Name>附件九(大亨廈門清關假單)</x:Name>
+    <x:WorksheetOptions>
+     <x:DefaultRowHeight>285</x:DefaultRowHeight>
+     <x:Print>
+      <x:ValidPrinterInfo/>
+      <x:PaperSizeIndex>9</x:PaperSizeIndex>
+      <x:Scale>90</x:Scale>
+      <x:HorizontalResolution>600</x:HorizontalResolution>
+      <x:VerticalResolution>600</x:VerticalResolution>
+     </x:Print>
+     <x:Zoom>75</x:Zoom>
+     <x:Selected/>
+     <x:Panes>
+      <x:Pane>
+       <x:Number>3</x:Number>
+       <x:ActiveRow>6</x:ActiveRow>
+       <x:ActiveCol>21</x:ActiveCol>
+      </x:Pane>
+     </x:Panes>
+     <x:ProtectContents>False</x:ProtectContents>
+     <x:ProtectObjects>False</x:ProtectObjects>
+     <x:ProtectScenarios>False</x:ProtectScenarios>
+    </x:WorksheetOptions>
+   </x:ExcelWorksheet>
+  </x:ExcelWorksheets>
+  <x:WindowHeight>9000</x:WindowHeight>
+  <x:WindowWidth>14940</x:WindowWidth>
+  <x:WindowTopX>240</x:WindowTopX>
+  <x:WindowTopY>30</x:WindowTopY>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ProtectWindows>False</x:ProtectWindows>
+ </x:ExcelWorkbook>
+</xml><![endif]-->
+</head>
+
+<body link=blue vlink=purple class=xl24>
+
+<table x:str border=0 cellpadding=0 cellspacing=0 width=1161 style='border-collapse:
+ collapse;table-layout:fixed;width:874pt'>
+ <col class=xl24 width=78 style='mso-width-source:userset;mso-width-alt:2496;
+ width:59pt'>
+ <col class=xl24 width=16 style='mso-width-source:userset;mso-width-alt:512;
+ width:12pt'>
+ <col class=xl24 width=60 style='mso-width-source:userset;mso-width-alt:1920;
+ width:45pt'>
+ <col class=xl24 width=11 style='mso-width-source:userset;mso-width-alt:352;
+ width:8pt'>
+ <col class=xl24 width=125 style='mso-width-source:userset;mso-width-alt:4000;
+ width:94pt'>
+ <col class=xl24 width=5 style='mso-width-source:userset;mso-width-alt:160;
+ width:4pt'>
+ <col class=xl24 width=49 style='mso-width-source:userset;mso-width-alt:1568;
+ width:37pt'>
+ <col class=xl24 width=50 style='mso-width-source:userset;mso-width-alt:1600;
+ width:38pt'>
+ <col class=xl24 width=7 style='mso-width-source:userset;mso-width-alt:224;
+ width:5pt'>
+ <col class=xl24 width=114 style='mso-width-source:userset;mso-width-alt:3648;
+ width:86pt'>
+ <col class=xl24 width=12 style='mso-width-source:userset;mso-width-alt:384;
+ width:9pt'>
+ <col class=xl24 width=105 style='mso-width-source:userset;mso-width-alt:3360;
+ width:79pt'>
+ <col class=xl24 width=11 style='mso-width-source:userset;mso-width-alt:352;
+ width:8pt'>
+ <col class=xl24 width=62 style='mso-width-source:userset;mso-width-alt:1984;
+ width:47pt'>
+ <col class=xl24 width=7 style='mso-width-source:userset;mso-width-alt:224;
+ width:5pt'>
+ <col class=xl24 width=55 style='mso-width-source:userset;mso-width-alt:1760;
+ width:41pt'>
+ <col class=xl24 width=7 style='mso-width-source:userset;mso-width-alt:224;
+ width:5pt'>
+ <col class=xl24 width=61 style='mso-width-source:userset;mso-width-alt:1952;
+ width:46pt'>
+ <col class=xl24 width=7 style='mso-width-source:userset;mso-width-alt:224;
+ width:5pt'>
+ <col class=xl24 width=57 style='mso-width-source:userset;mso-width-alt:1824;
+ width:43pt'>
+ <col class=xl24 width=53 style='mso-width-source:userset;mso-width-alt:1696;
+ width:40pt'>
+ <col class=xl24 width=50 style='mso-width-source:userset;mso-width-alt:1600;
+ width:38pt'>
+ <col class=xl24 width=42 style='mso-width-source:userset;mso-width-alt:1344;
+ width:32pt'>
+ <col class=xl24 width=44 style='mso-width-source:userset;mso-width-alt:1408;
+ width:33pt'>
+ <col class=xl25 width=73 style='mso-width-source:userset;mso-width-alt:2336;
+ width:55pt'>
+ <tr height=32 style='mso-height-source:userset;height:24.2pt'>
+  <td colspan=25 height=32 class=xl24 width=1161 style='height:24.2pt;
+  width:874pt'>XIAMEN CHANGHAO INTERNATIONAL FREIGHT AGENCY CO.,LTD<span
+  style='mso-spacerun:yes'>       </span>(CHH)</td>
+ </tr>
+ <tr class=xl26 height=40 style='mso-height-source:userset;height:30.0pt'>
+  <td colspan=21 height=40 class=xl28 style='height:30.0pt'>進口貨物明細</td>
+  <td colspan=3 class=xl28 style='mso-ignore:colspan'></td>
+  <td class=xl27></td>
+ </tr>
+ <tr class=xl26 height=4 style='mso-height-source:userset;height:3.0pt'>
+  <td height=4 class=xl30 style='height:3.0pt'>　</td>
+  <td class=xl29></td>
+  <td class=xl30>　</td>
+  <td colspan=21 class=xl26 style='mso-ignore:colspan'></td>
+  <td class=xl31></td>
+ </tr>
+ <tr height=40 style='mso-height-source:userset;height:30.0pt'>
+  <td height=40 class=xl32 style='height:30.0pt'>起點</td>
+  <td class=xl33>　</td>
+  <td class=xl32>迄點</td>
+  <td class=xl33>　</td>
+  <td class=xl34>空運單號</td>
+  <td class=xl33>　</td>
+  <td colspan=2 class=xl64 style='border-right:.5pt solid black'>航班號</td>
+  <td class=xl33>　</td>
+  <td class=xl34>日期</td>
+  <td class=xl33>　</td>
+  <td class=xl34>列印日期</td>
+  <td class=xl33>　</td>
+  <td class=xl34>總袋數</td>
+  <td class=xl33>　</td>
+  <td class=xl34>總重量</td>
+  <td class=xl33>　</td>
+  <td class=xl34>總件數</td>
+  <td class=xl33>　</td>
+  <td colspan=2 class=xl64 style='border-right:.5pt solid black'>頁數</td>
+  <td class=xl35>　</td>
+  <td class=xl35>　</td>
+  <td class=xl35>　</td>
+  <td class=xl36>　</td>
+ </tr>
+ <tr height=40 style='mso-height-source:userset;height:30.0pt'>
+  <td height=40 class=xl37 style='height:30.0pt'>TWN</td>
+  <td class=xl33>　</td>
+  <td class=xl32>XMN</td>
+  <td class=xl33>　</td>
+  <td class=xl32>　</td>
+  <td class=xl33>　</td>
+  <td colspan=2 class=xl64 style='border-right:.5pt solid black'>　</td>
+  <td class=xl33>　</td>
+  <td class=xl38>{EHU_CNL.OUT_DATE(D:yyyy/MM/dd)}</td>
+  <td class=xl33>　</td>
+  <td class=xl38>{EHU_CNL.OUT_DATE}</td>
+  <td class=xl33>　</td>
+  <td class=xl39>　</td>
+  <td class=xl33>　</td>
+  <td class=xl39>{#EHU_AWBPKG.GW}</td>
+  <td class=xl33>　</td>
+  <td class=xl39>{#EHU_AWBPKG.PKG}</td>
+  <td class=xl33>　</td>
+  <td class=xl39 x:num>1</td>
+  <td class=xl40>　</td>
+  <td class=xl40>　</td>
+  <td class=xl40>　</td>
+  <td class=xl40>　</td>
+  <td class=xl41>　</td>
+ </tr>
+ <tr height=6 style='mso-height-source:userset;height:4.5pt'>
+  <td height=6 colspan=24 class=xl42 style='height:4.5pt;mso-ignore:colspan'></td>
+  <td class=xl43></td>
+ </tr>
+ <tr height=30 style='mso-height-source:userset;height:22.5pt'>
+  <td height=30 class=xl44 style='height:22.5pt'>序號</td>
+  <td colspan=3 class=xl67 style='border-right:.5pt solid black;border-left:
+  none'>袋條碼</td>
+  <td colspan=2 class=xl70 width=130 style='border-right:.5pt solid black;
+  border-left:none;width:98pt'>昌昊運單號<font class=font8><span
+  style='mso-spacerun:yes'>                              </span></font></td>
+  <td class=xl46>件數</td>
+  <td class=xl46>重量</td>
+  <td colspan=5 class=xl67 style='border-right:.5pt solid black;border-left:
+  none'>貨品內容</td>
+  <td class=xl46>價值(USD)</td>
+  <td colspan=4 class=xl67 style='border-right:.5pt solid black;border-left:
+  none'>寄件客戶名稱</td>
+  <td colspan=3 class=xl72 style='border-right:.5pt solid black;border-left:
+  none'>收件客戶名稱</td>
+  <td class=xl59 width=50 style='width:38pt'>付款方式</td>
+  <td class=xl47>金額</td>
+  <td class=xl47>幣別</td>
+  <td class=xl48>備注</td>
+ </tr>
+ <tr height=30 style='mso-height-source:userset;height:22.5pt'>
+  <td height=30 class=xl49 style='height:22.5pt'>(**)</td>
+  <td class=xl50>　</td>
+  <td class=xl51>　</td>
+  <td class=xl51>　</td>
+  <td class=xl52 width=125 style='width:94pt'>　</td>
+  <td class=xl53 width=5 style='width:4pt'>　</td>
+  <td class=xl50>　</td>
+  <td class=xl54>　</td>
+  <td class=xl55>　</td>
+  <td class=xl54>　</td>
+  <td class=xl54>　</td>
+  <td class=xl54>　</td>
+  <td class=xl50>　</td>
+  <td class=xl50>　</td>
+  <td class=xl54>　</td>
+  <td class=xl54>　</td>
+  <td class=xl54>　</td>
+  <td class=xl50>　</td>
+  <td class=xl54>　</td>
+  <td class=xl54>　</td>
+  <td class=xl50>　</td>
+  <td class=xl56>　</td>
+  <td class=xl56>　</td>
+  <td class=xl56>　</td>
+  <td class=xl57>　</td>
+ </tr>
+ <tr class=xl45 height=42 style='mso-height-source:userset;height:31.5pt'>
+  <td height=42 class=xl58 width=78 style='height:31.5pt;width:59pt'>{EHU_AWB.PCK_ID}</td>
+  <td colspan=3 class=xl73 width=87 style='border-right:.5pt solid black;
+  border-left:none;width:65pt'>{EHU_AWBPKG.BAG_NO}</td>
+  <td colspan=2 class=xl74 width=130 style='border-right:.5pt solid black;
+  border-left:none;width:98pt'>{EHU_AWB.AWB_NO}</td>
+  <td class=xl53 width=49 style='width:37pt'>{EHU_AWBPKG.PKG*}</td>
+  <td class=xl52 width=50 style='width:38pt'>{EHU_AWBPKG.GW*}</td>
+  <td colspan=5 class=xl73 width=249 style='border-right:.5pt solid black;
+  width:187pt'>{EHU_AWBPKG.CMDTY_NAME}</td>
+  <td class=xl53 width=62 style='width:47pt'>　</td>
+  <td colspan=4 class=xl73 width=130 style='border-right:.5pt solid black;
+  border-left:none;width:97pt'>{EHU_AWB.SHPR_NAME}</td>
+  <td colspan=3 class=xl70 width=117 style='border-right:.5pt solid black;
+  border-left:none;width:88pt'>{EHU_AWB.CNEE_NAME}</td>
+  <td class=xl59 width=50 style='width:38pt'>{EHU_AWB.AWB_CHARGE_PC}</td>
+  <td class=xl60 width=42 style='width:32pt'>{EHU_AWB.AWB_AMT}</td>
+  <td class=xl59 width=44 style='width:33pt'>{EHU_AWB.AWB_CRNCY}</td>
+  <td class=xl61 width=73 style='width:55pt'>{EHU_AWB.EXPORT_RMK}</td>
+ </tr>
+ <tr class=xl45 height=40 style='mso-height-source:userset;height:30.0pt'>
+  <td colspan=6 height=40 class=xl76 width=295 style='border-right:.5pt solid black;
+  height:30.0pt;width:222pt'>合計</td>
+  <td class=xl62 width=49 style='width:37pt'>{#EHU_AWBPKG.PKG}</td>
+  <td class=xl62 width=50 style='width:38pt'>{#EHU_AWBPKG.GW}</td>
+  <td colspan=5 class=xl76 width=249 style='border-right:.5pt solid black;
+  border-left:none;width:187pt'>共{#EHU_AWBPKG.PKG}袋</td>
+  <td class=xl53 width=62 style='width:47pt'>　</td>
+  <td colspan=4 class=xl73 width=130 style='border-right:.5pt solid black;
+  border-left:none;width:97pt'>　</td>
+  <td colspan=3 class=xl70 width=117 style='border-right:.5pt solid black;
+  border-left:none;width:88pt'>　</td>
+  <td class=xl52 width=50 style='width:38pt'>　</td>
+  <td class=xl52 width=42 style='width:32pt'>　</td>
+  <td class=xl52 width=44 style='width:33pt'>　</td>
+  <td class=xl63 width=73 style='width:55pt'>　</td>
+ </tr>
+ <![if supportMisalignedColumns]>
+ <tr height=0 style='display:none'>
+  <td width=78 style='width:59pt'></td>
+  <td width=16 style='width:12pt'></td>
+  <td width=60 style='width:45pt'></td>
+  <td width=11 style='width:8pt'></td>
+  <td width=125 style='width:94pt'></td>
+  <td width=5 style='width:4pt'></td>
+  <td width=49 style='width:37pt'></td>
+  <td width=50 style='width:38pt'></td>
+  <td width=7 style='width:5pt'></td>
+  <td width=114 style='width:86pt'></td>
+  <td width=12 style='width:9pt'></td>
+  <td width=105 style='width:79pt'></td>
+  <td width=11 style='width:8pt'></td>
+  <td width=62 style='width:47pt'></td>
+  <td width=7 style='width:5pt'></td>
+  <td width=55 style='width:41pt'></td>
+  <td width=7 style='width:5pt'></td>
+  <td width=61 style='width:46pt'></td>
+  <td width=7 style='width:5pt'></td>
+  <td width=57 style='width:43pt'></td>
+  <td width=53 style='width:40pt'></td>
+  <td width=50 style='width:38pt'></td>
+  <td width=42 style='width:32pt'></td>
+  <td width=44 style='width:33pt'></td>
+  <td width=73 style='width:55pt'></td>
+ </tr>
+ <![endif]>
+</table>
+
+</body>
+
+</html>

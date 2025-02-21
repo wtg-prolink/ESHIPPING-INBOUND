@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Table name="Table1"  sql="SELECT * FROM V_IPQ03 WHERE U_ID=':=uid'">	
+	</Table>
+ <Table name="SMRV"  sql="SELECT CNTR_NO, SEAL_NO1, CNTY_TYPE,DN_NO,GW,NW,CBM FROM SMRV WHERE EXISTS
+(SELECT A.DN_NO FROM V_IPQ03 A WHERE A.U_ID=':=uid' AND SMRV.DN_NO LIKE '%'+A.DN_NO+'%')">	
+	</Table>
+</root>

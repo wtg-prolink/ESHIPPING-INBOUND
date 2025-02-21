@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "SetupView";
+}
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+    var ColModelLang = [
+    	'@Resources.Locale.L_BSLIGHTD_UId',
+    	'@Resources.Locale.L_BSLIGHTD_UFid',
+    	'@Resources.Locale.L_BSLIGHTD_Io',
+    	'@Resources.Locale.L_BSLIGHTD_TranType',
+    	'@Resources.Locale.L_BSLIGHTD_L1',
+    	'@Resources.Locale.L_BSLIGHTD_L2',
+    	'@Resources.Locale.L_BSLIGHTD_L3',
+    	'@Resources.Locale.L_BSLIGHTD_L4',
+    	'@Resources.Locale.L_BSLIGHTD_L5',
+    	'@Resources.Locale.L_BSLIGHTD_L6',
+    	'@Resources.Locale.L_BSLIGHTD_L7',
+    	'@Resources.Locale.L_BSLIGHTD_L8',
+    	'@Resources.Locale.L_BSLIGHTD_L9',
+    	'@Resources.Locale.L_BSLIGHTD_L10',
+
+    ];
+
+    var TranSel = '@ViewBag.TranSel';
+    var EdtSel = "@Html.Raw(ViewBag.EdtSel)";
+
+    console.log(EdtSel);
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/BSLIGHT/SetupView.js?20240815")"></script>
+<div id="wrapper">
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="CustCd" class="control-label">@Resources.Locale.L_BSLIGHTM_CustCd</label>
+						</div><!--客户代码-->
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="CustCd" name="CustCd" fieldname="CustCd"  isKey="true" required="required" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="CustCdLookup">
+									<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="CustNm" name="CustNm" fieldname="CustNm"  readonly="readonly" />
+						</div>
+					</div>
+					<div class="ui-jqgrid ui-widget ui-widget-content ui-corner-all">
+						<table id="MainGrid" class="_tableGrid" style="width: 100%">
+							<tr></tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<input type="hidden" class="form-control input-sm" dt="mt" id="UId" name="UId" fieldname="UId" />

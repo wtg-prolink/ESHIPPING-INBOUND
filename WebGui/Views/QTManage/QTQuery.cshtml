@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "QTQuery";
+}
+
+@Html.RazorJSInline("~/Scripts/QTManage/QTQuery.js")
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        var select_tranmode = "@ViewBag.SelectTranMode";
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = getSiteHeight();
+        gridHeight = docHeight - 310;
+        gop.gridColModel = [
+            { name: 'UId', showname: 'UId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'Period', title: '@Resources.Locale.L_RQQuery_Period', index: 'Period', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'R:RFQ;B:BID' } },
+            { name: 'QuotType', title: '@Resources.Locale.L_RQQuery_Status', index: 'QuotType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'Q:@Resources.Locale.L_QTSetup_Quote;N:@Resources.Locale.L_QTSetup_Bid;B:@Resources.Locale.L_QTSetup_GetBid;V:@Resources.Locale.L_QTSetup_Discard;F:@Resources.Locale.L_QTSetup_WinBid' } },
+            { name: 'RfqNo', title: '@Resources.Locale.L_QTQuery_RfqNo', index: 'RfqNo', width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'QuotNo', title: '@Resources.Locale.L_QTQuery_QuotNo', index: 'QuotNo', width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RfqFrom', title: '@Resources.Locale.L_RQQuery_RfqFrom', index: 'RfqFrom', editable: false, formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RfqTo', title: '@Resources.Locale.L_RQQuery_RfqTo', index: 'RfqTo', editable: false, formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'QuotDate', title: '@Resources.Locale.L_QTQuery_QuotDate', index: 'QuotDate', editable: false, formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RfqDate', title: '@Resources.Locale.L_RQQuery_RfqDate', index: 'RfqDate', editable: false, formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TranMode', title: '@Resources.Locale.L_RQQuery_TranMode', index: 'TranMode', width: 90, align: 'left', sorttype: 'string', hidden: false, formatter: "select", formatter: "select", editoptions: { value: select_tranmode } },
+            //{ name: 'TranMode', title: '運輸別', index: 'TranMode', width: 90, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:空运;F:海运整柜;S:国内快递;E:国际快递;L:海运散货;D:国内运输' } },
+            { name: 'Rlocation', title: '@Resources.Locale.L_RQQuery_Rlocation', index: 'Rlocation', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspCd', title: '@Resources.Locale.L_AirSetup_LspCd', index: 'LspCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspNm', title: '@Resources.Locale.L_AirSetup_LspNm', index: 'LspNm', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'FreightTerm', title: '@Resources.Locale.L_RQQuery_FreightTerm', index: 'FreightTerm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Incoterm', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'Incoterm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ServiceMode', title: '@Resources.Locale.L_RQQuery_ServiceMode', index: 'RfqNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'EffectFrom', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', width: 120, align: 'left', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'EffectTo', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', width: 120, align: 'left', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'QuotRmk', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'QuotRmk', width: 300, align: 'left', sorttype: 'string', hidden: false }
+        ];
+        gop.AddUrl = false;
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_RQSetup_QuoList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "QTManage/QTManageQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "CreateDate";
+        }
+
+        gop.statusGroup = [
+            { "id": "", "label": "@Resources.Locale.L_UserSetUp_All" },
+            { "id": "Q", "label": "@Resources.Locale.L_QTSetup_Quote" },
+            { "id": "N", "label": "@Resources.Locale.L_QTSetup_Bid" },
+            { "id": "B", "label": "@Resources.Locale.L_QTSetup_GetBid" },
+            { "id": "F", "label": "@Resources.Locale.L_QTSetup_WinBid" },
+            { "id": "V", "label": "@Resources.Locale.L_QTSetup_Discard" }
+        ];
+
+        gop.statusField = "QuotType";
+        gop.statusDefaultId = "A";
+        initSearch(gop);
+
+        $("#SummarySearch").bind("click", function () {
+            $(".status-box").removeClass("active");
+            $("#searchStatus_").addClass("active");
+        });
+
+        function dblClick(map) {
+            var UId = map.UId;
+            var tranmode = map.TranMode;
+            var title = "";
+            var _url = "RQSetup";
+            if (tranmode == "A") {  //空运
+                _url = "AirSetup";
+                title = "AIR_";
+            } else if (tranmode == "F" || tranmode == "R") {   //海运整柜
+                if (tranmode == "F")
+                    title = "FCL_";
+                else
+                    title = "R_";
+                if (map.Period === "B")
+                    _url = "FCLFSFSetup";
+                else
+                    _url = "FCLFSetup";
+            } else if (tranmode == "D") {   //国内快递  D
+                title = "INLAND EXPRESS_";
+                _url = "DESetup";
+            } else if (tranmode == "E") {   //国际快递
+                title = "EXPRESS_";
+                _url = "IESetup";
+            } else if (tranmode == "L") {   //海运散货
+                title = "LCL_";
+                _url = "LCLSetup";
+            } else if (tranmode == "T") {   //国内运输 T
+                title = "Truck_";
+                _url = "DTSetup";
+            }
+
+            top.topManager.openPage({
+                href: rootPath + "QTManage/" + _url + "?UId=" + UId,
+                title: title + '@Resources.Locale.L_QTSetup_EntQuote',
+                id: _url,
+                search: 'uid=' + UId
+            });
+        }
+    });
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

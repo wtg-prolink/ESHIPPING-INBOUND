@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "TKSetup";
+}
+@{
+    ViewBag.Title = "TKSetUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #page-wrapper {padding: 5px;}
+</style>
+<script src="@Url.Content("~/Scripts/System/TKSetup.js")
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+        	<div class="panel panel-default">
+        	    <div class="panel-body">
+			    	<div class="pure-g">
+						<div class="pure-u-sm-60-60">
+				            <table id="MainGrid" class="_tableGrid" style="width: 100%">
+				                <tr>
+				                
+				                </tr>
+				            </table>
+				        </div>		        
+			    	</div>
+			    </div>
+			</div>
+        </div>
+    </div>
+</div>
+@Html.RazorJSInline("~/Scripts/TKBL/TKSetup.js")

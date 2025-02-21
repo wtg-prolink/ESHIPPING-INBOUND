@@ -1,0 +1,407 @@
+﻿@{
+    ViewBag.Title = "TransloadConfirmQueryView";
+}
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        var gop = {};
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 260;
+        gop.gridColModel = [
+            { name: 'UId', title: 'UID', index: 'UId', sorttype: 'string', hidden: true },
+            { name: 'UFid', title: 'UFID', index: 'UId', sorttype: 'string', hidden: true },
+            { name: 'ShipmentId', title: 'Shipment ID', index: 'ShipmentId', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'MasterNo', title: _getLang("L_BaseLookup_MasterNo", "Master B/L"), index: 'MasterNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'HouseNo', title: _getLang("L_SMORD_HouseNo", "House B/L"), index: 'HouseNo', width: 100, align: 'left', sorttype: 'string', hidden: false },{ name: 'InvNo', title: _getLang("L_SMIDN_InvoiceNo", "Invoice No"), index: 'InvNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntrNo', title: _getLang("L_GateReserve_CntrNo", "货柜号码"), index: 'CntrNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Eta', title: 'ETA', index: 'Eta', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d" } },
+            { name: 'Ata', title: 'ATA', index: 'Ata', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d" } },
+            {
+                name: 'DischargeDate', title: 'Discharge Date', index: 'DischargeDate', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false,
+                formatter: 'date',
+                formatoptions: {
+                    srcformat: 'ISO8601Long',
+                    newformat: 'Y-m-d',
+                    defaultValue: ""
+                }
+            },
+            { name: 'PodCd', title: 'POD', index: 'PodCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PodName', title: 'POD Name', index: 'PodName', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Carrier', title: 'Carrier', index: 'Carrier', width: 100, align: 'left', sorttype: 'string', hidden: false },
+		    { name: 'CarrierNm', title: 'Carrier Name', index: 'CarrierNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DnNo', title: 'Dn No', index: 'DnNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PlaNo', title: 'Pallet No', index: 'PlaNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PlaSize', title: 'Pallet Size', index: 'PlaSize', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CaseNo', title: 'Case No', index: 'CaseNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CaseNum', title: 'Case#', index: 'CaseNum', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'IpartNo', title: _getLang("L_DNApproveManage_IpartNo", "对内机种名"), index: 'IpartNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'GoodsDescp', title:'Goods Description', index: 'GoodsDescp', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LgoodsDescp', title: 'Chinese Goods Description', index: 'LgoodsDescp', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Qty', title: _getLang("L_BaseLookup_Qty", "数量"), index: 'Qty', width: 150, align: 'right', sorttype: 'int', hidden: false, formatter: 'integer' },
+            { name: 'Qtyu', title: _getLang("L_BaseLookup_Qtyu", "数量单位"), index: 'Qtyu', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TtlQty', title: _getLang("L_InvPkgSetup_TtlQty", "总数量"), index: 'TtlQty', width: 150, align: 'right', sorttype: 'int', hidden: false, formatter: 'integer' },
+            {
+                name: 'Nw', title: _getLang("L_BaseLookup_Nw", "净重"), index: 'Nw', width: 150, align: 'right', sorttype: 'float', hidden: false, formatter: 'number',
+                formatoptions: {
+                    decimalSeparator: ".",
+                    thousandsSeparator: ",",
+                    decimalPlaces: 6,
+                    defaultValue: '0.000000'
+                }
+            },
+            {
+                name: 'TtlNw', title: _getLang("L_InvPkgSetup_TtlNw", "总净重"), index: 'TtlNw', width: 150, align: 'right', sorttype: 'float', hidden: false, formatter: 'number',
+                formatoptions: {
+                    decimalSeparator: ".",
+                    thousandsSeparator: ",",
+                    decimalPlaces: 6,
+                    defaultValue: '0.000000'
+                }
+            },
+            {
+                name: 'Gw', title: _getLang("L_BaseLookup_Gw", "毛重"), index: 'Gw', width: 150, align: 'right', sorttype: 'float', hidden: false, formatter: 'number',
+                formatoptions: {
+                    decimalSeparator: ".",
+                    thousandsSeparator: ",",
+                    decimalPlaces: 6,
+                    defaultValue: '0.000000'
+                }
+            },
+            {
+                name: 'TtlGw', title: _getLang("L_InvPkgSetup_TtlGw", "总毛重"), index: 'TtlGw', width: 150, align: 'right', sorttype: 'float', hidden: false, formatter: 'number',
+                formatoptions: {
+                    decimalSeparator: ".",
+                    thousandsSeparator: ",",
+                    decimalPlaces: 6,
+                    defaultValue: '0.000000'
+                }
+            },
+            {
+                name: 'Cbm', title: _getLang("L_BaseLookup_Cbm", "CBM"), index: 'Cbm', width: 150, align: 'right', sorttype: 'float', hidden: false, formatter: 'number',
+                formatoptions: {
+                    decimalSeparator: ".",
+                    thousandsSeparator: ",",
+                    decimalPlaces: 6,
+                    defaultValue: '0.000000'
+                }
+            },
+            {
+                name: 'TtlCbm', title: _getLang("L_InvPkgSetup_TtlCbm", "总CBM"), index: 'TtlCbm', width: 150, align: 'right', sorttype: 'float', hidden: false, formatter: 'number',
+                formatoptions: {
+                    decimalSeparator: ".",
+                    thousandsSeparator: ",",
+                    decimalPlaces: 6,
+                    defaultValue: '0.000000'
+                }
+            },
+            { name: 'IhsCode', title: _getLang("L_DNApproveManage_HisCode", "目的国商品编码"), index: 'IhsCode', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'OpartNo', title: _getLang("L_SMIDNP_OpartNo", "对外机种名"), index: 'OpartNo', sorttype: 'string', width: 90, hidden: false },
+            { name: 'NcmNo', title: 'NCM NO', index: 'NcmNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntryOrn', title: 'Original Country', index: 'CntryOrn', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PartNo', title: _getLang("L_DNApproveManage_PartNo", "客户物料号"), index: 'PartNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'VenCd', title: 'Vendor Code', index: 'VenCd', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'VenNm', title: 'Vendor Name', index: 'VenNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'VenAddr', title: 'Vendor Address', index: 'VenAddr', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Remark', title: _getLang("L_BSCSSetup_Remark", "备注"), index: 'Remark', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'GwByPn', title: 'Gross Weight by PN', index: 'GwByPn', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ModelName', title: 'Customer Model', index: 'ModelName', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CnCode', title: 'CN Code', index: 'CnCode', width: 150, align: 'left', sorttype: 'string', hidden: false }
+        ];
+        gop.AddUrl = false;
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "Pallet List", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "SMSMI/IDNPLTQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        gop.multiselect = true;
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        gop.BtnGroupId = "BtnGroupArea";
+
+        gop.StatusAreaId = "StatusArea";
+
+        gop.onSelectRowFunc = function (jsonMap) {
+
+            var uid = jsonMap.UFid;
+            if (!uid) {
+                $("#SubGrid").jqGrid("clearGridData").trigger("reloadGrid");
+                return;
+            }
+            CommonFunc.ToogleLoading(true);
+            $.post(rootPath + 'SMSMI/GetIDNPLData', { "uid": uid, "Pagesize": 100 }, function (data, textStatus, xhr) {
+                CommonFunc.ToogleLoading(false);
+                $("#SubGrid").jqGrid("clearGridData");
+                $("#SubGrid").jqGrid("setGridParam", {
+                    datatype: 'local',
+                    sortorder: "asc",
+                    sortname: "DnNo",
+                    data: data.rows,
+                }).trigger("reloadGrid");
+            }, "JSON");
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+        gop.btnGroup = [
+            {
+                id: "btn01",
+                name: "@Resources.Locale.L_TransloadDownload",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+                    var responseData = [];
+                    var uid = "";//[];
+                    $.each(selRowId, function (index, val) {
+                        responseData.push(mygrid.getRowData(selRowId[index]));
+                    });
+                    if (responseData.length < 1) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+                    for (var i = 0; i < responseData.length; i++) {
+                        if (uid != "") uid += ";"
+                        uid += responseData[i].UId;
+                    }
+                    $.ajax({
+                        async: true,
+                        url: rootPath + "SMSMI/DownloadTransload",
+                        type: 'POST',
+                        data: {
+                            uids: uid
+                        },
+                        dataType: "json",
+                        "complete": function (xmlHttpRequest, successMsg) {
+
+                        },
+                        "error": function (xmlHttpRequest, errMsg) {
+                        },
+                        success: function (result) {
+                            if (result != null && result.IsOk == "Y") {
+                                //window.open(rootPath + "DNManage/DownLoadXls?FileType=GwCbm&filename=" + result.file);
+                                window.open(rootPath + "SMSMI/DownLoadXls?filename=" + result.file);
+                            }
+                            else {
+                                alert(result.msg);
+                            }
+                        }
+                    });
+                }
+            },
+            {
+                id: "btn02",
+                name:  "@Resources.Locale.L_TransloadUpload",
+                func: function () {
+                    $('#TransloadModel').modal('show');
+                    resetFileInput($("#InboundTransloadUploadExcel"));
+                }
+            }
+        ];
+
+        initSearch(gop);
+
+        var colModel = [
+            { name: 'UId', title: 'UID', index: 'UId', sorttype: 'string', hidden: true },
+            { name: 'CsmNo', title: 'Consignment No', index: 'CsmNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BlNoInfo', title: 'BL NO Info.', index: 'BlNoInfo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntrInfo', title: 'Container No Info.', index: 'CntrInfo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'InvoiceInfo', title: 'Invoice No Info.', index: 'InvoiceInfo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TcDecNo', title: 'Transit Customs Declaration No', index: 'TcDecNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            {
+                name: 'TcDecDate', title: 'Transit Customs Declaration Date', index: 'TcDecDate', width: 150, align: 'left', formatter: 'date', hidden: false,
+                formatter: 'date',
+                formatoptions: {
+                    srcformat: 'ISO8601Long',
+                    newformat: 'Y-m-d',
+                    defaultValue: ""
+                }
+            },
+            { name: 'TsTrailer', title: 'Transload Trailer', index: 'TsTrailer', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TsTruck', title: 'Transload Truck', index: 'TsTruck', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            //{ name: 'CsmNo', title: 'Invoice No', index: 'CsmNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PalletQty', title: 'Pallets QTY', index: 'PalletQty', width: 150, align: 'left', sorttype: 'int', hidden: false, formatter: 'integer' },
+            { name: 'TsSealNo', title: 'Transload Truck Seal', index: 'TsSealNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CiOutNo', title: 'CI Gate Out #', index: 'CiOutNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            {
+                name: 'CiOutDate', title: 'CI Gate Out Date', index: 'CiOutDate', width: 150, align: 'left', formatter: 'date', hidden: false,
+                formatter: 'date',
+                formatoptions: {
+                    srcformat: 'ISO8601Long',
+                    newformat: 'Y-m-d',
+                    defaultValue: ""
+                }
+            },
+            {
+                name: 'CiInDate', title: 'Customs Truck Gate In Date', index: 'CiInDate', width: 150, align: 'left', formatter: 'date', hidden: false,
+                formatter: 'date',
+                formatoptions: {
+                    srcformat: 'ISO8601Long',
+                    newformat: 'Y-m-d',
+                    defaultValue: ""
+                }
+            },
+            { name: 'DecInfo', title: 'Customs Declaration No', index: 'DecInfo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DecDateInfo', title: 'Customs Declaration Date', index: 'DecDateInfo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            {
+                name: 'RelDate', title: 'CC Declaration Release Date', index: 'RelDate', width: 150, align: 'left', formatter: 'date', hidden: false,
+                formatter: 'date',
+                formatoptions: {
+                    srcformat: 'ISO8601Long',
+                    newformat: 'Y-m-d',
+                    defaultValue: ""
+                }
+            },
+            {
+                name: 'PodUpdateDate', title: 'POD Date', index: 'PodUpdateDate', width: 150, align: 'left', sorttype: 'string', formatter: 'date', hidden: false,
+                formatter: 'date',
+                formatoptions: {
+                    srcformat: 'ISO8601Long',
+                    newformat: 'Y-m-d',
+                    defaultValue: ""
+                }
+            }
+        ];
+        $SubGrid = $("#SubGrid");
+        new genGrid(
+			$SubGrid,
+			{
+			    datatype: "local",
+			    data: [],
+			    loadonce: true,
+			    colModel: colModel,
+			    caption: 'Container Information',
+			    height: "AUTO",
+			    refresh: true,
+			    cellEdit: false,//禁用grid编辑功能
+			    exportexcel: false,
+			    footerrow: false,
+			    rowattr: function (rd) {
+			        if (rd.Status == 'V') {
+			            return {
+			                "class": "ui-state-disabled ui-jqgrid-disablePointerEvents"
+			            };
+			        }
+                },
+                gridFunc: function (map) {
+                    //用于回调函数，例如赋值操作等
+                    var UId = map.UId;
+                    top.topManager.openPage({
+                        href: rootPath + "SMSMI/TransloadSetupView/" + UId,
+                        title: 'Transload Setup',
+                        id: 'TransloadSetupView',
+                        search: 'uid=' + UId,
+                        reload: true
+                    });
+                }
+			}
+        );
+
+        $("#TRANS_EXCEL_UPLOAD_FROM").submit(function () {
+            var postData = new FormData($(this)[0]);
+            $.ajax({
+                url: rootPath + "SMSMI/UploadTransload",
+                type: 'POST',
+                data: postData,
+                async: false,
+                beforeSend: function () {
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (data) {
+                    //alert(data)
+                    resetFileInput($("#InboundTransloadUploadExcel"));
+                    CommonFunc.ToogleLoading(false);
+                    if (data.message != "success") {
+                        $("#winmsg").html("Import Failure" + data.message)
+                        $("#TransloadModel").modal("hide");
+                        return false;
+                    }
+                    CommonFunc.Notify("", "Import Success", 500, "success");
+                    if (!isEmpty(data.errorMsg))
+                        CommonFunc.Notify("", data.errorMsg, 1000, "warning");
+                    $("#TransloadModel").modal("hide");
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+
+            return false;
+        });
+    });
+    function resetFileInput(file) {
+        file.after(file.clone().val(""));
+        file.remove();
+        $(".file-input-name").html("");
+    }
+
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body" style="overflow-x:inherit">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea">
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="SubGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="TransloadModel" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Upload Transload Confirm</h4>
+            </div>
+            <form name="TRANS_EXCEL_UPLOAD_FROM" id="TRANS_EXCEL_UPLOAD_FROM" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="选择文件" id="InboundTransloadUploadExcel" name="file" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="modalUploadBtn">Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

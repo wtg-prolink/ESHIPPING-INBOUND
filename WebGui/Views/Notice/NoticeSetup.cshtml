@@ -1,0 +1,330 @@
+﻿@{
+    ViewBag.Title = "NoticeSetup";
+
+}
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/Notice/initNotice.js?20240819")"></script>
+
+<style type="text/css">
+    .pure-u-1{
+        margin-right: 10px;
+    }
+</style>
+<script type="text/javascript">    
+   
+</script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        InitSubFormField(true);
+        var schemas = "@ViewBag.schemas.Content";
+        schemas = JSON.parse(decodeHtml(schemas));
+        CommonFunc.initField(schemas);
+        $("input, textarea").not("[type=submit]").jqBootstrapValidation();
+        //var uId = "@ViewBag.uId"
+        var params = "";
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 270;
+        gop.gridColModel = [
+       { name: 'Id', title: '@Resources.Locale.L_NoticeSetup_id', index: 'Id',width: 70, sorttype: 'string', hidden: false },
+       { name: 'SysCode', title: '@Resources.Locale.L_NoticeSetup_SysCode', index: 'SysCode', width: 70, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'ProgCode', title: '@Resources.Locale.L_NoticeSetup_ProgCode', index: 'ProgCode', width: 70, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'Caption', title: '@Resources.Locale.L_NoticeSetup_Caption', index: 'Caption', width: 120, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'DayNum', title: '@Resources.Locale.L_NoticeSetup_DayNum', index: 'DayNum', width: 70, align: 'right', sorttype: 'Integer', hidden: false },
+       { name: 'Role', title: '@Resources.Locale.L_NoticeSetup_Role', index: 'Role', width: 120, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'NoticeType', title: '@Resources.Locale.L_NoticeSetup_NoticeType', index: 'NoticeType', width: 70, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'TriggerDesc', title: '@Resources.Locale.L_NoticeSetup_TriggerDesc', index: 'TriggerDesc', width: 150, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'NoticeSubject', title: '@Resources.Locale.L_NoticeSetup_NoticeSubject', index: 'NoticeSubject', width: 170, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'NoticeContent', title: '@Resources.Locale.L_NoticeSetup_NoticeContent', index: 'NoticeContent', width: 250, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'GroupId', title: '@Resources.Locale.L_RoleSetUp_U_NAME', index: 'GroupId', width: 50, align: 'left', hidden: false },
+       { name: 'Cmp', title: '@Resources.Locale.L_NRSDataQuery_Cmp', index: 'Cmp', width: 50, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'Stn', title: '@Resources.Locale.L_RoleSetUp_STN', index: 'Stn', width: 50, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'CreateDate', title: '@Resources.Locale.L_NoticeSetup_CreateDate', index: 'CreateDate', width: 120, align: 'left', hidden: true },
+       //{ name: 'Cdate', title: '@Resources.Locale.L_NoticeSetup_Cdate', index: 'Cdate',formatter: 'date', width: 120, align: 'left', hidden: false },
+       { name: 'CreateBy', title: '@Resources.Locale.L_NRSSetup_CreateBy', index: 'CreateBy', width: 70, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'ModifyDate', title: '@Resources.Locale.L_NoticeSetup_ModifyDate', index: 'ModifyDate', width: 120, align: 'left', hidden: true },
+       //{ name: 'Mdate', title: '@Resources.Locale.L_NoticeSetup_Mdate', index: 'Mdate', formatter: 'date', width: 120, align: 'left', hidden: false },
+       { name: 'ModifyBy', title: '@Resources.Locale.L_PartyDocSetup_ModifyBy', index: 'ModifyBy', width: 70, align: 'left', sorttype: 'string', hidden: false }
+       ];
+        gop.AddUrl = '@Url.Content("~/zh-TW/Notice/NoticeSetup")';
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_NoticeSetup_MsgNotice", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "Notice/NoticeSetupInquiryData";
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+           
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.onSelectRowFunc = function (jsonMap) {
+            //var jsonMap = $grid.jqGrid("getRowData", rowid);
+            //console.log(jsonMap);
+            document.forms["subForm"].reset();
+            $("#subForm").setFormByJson(jsonMap);
+            //MenuBarFuncArr.initEapprove('A00003', $("#UId").val()); //eApprove
+            $('#SearchArea1').collapse('hide');
+            $('#AddArea').collapse('show');
+
+            $("#NOTICEADD").prop("disabled", false);
+            $("#NOTICEEDIT").prop("disabled", false);
+            $("#NOTICECOPY").prop("disabled", false);
+            $("#NOTICEDEL").prop("disabled", false);
+            $("#NOTICECANCEL").prop("disabled", true);
+            $("#NOTICESAVES").prop("disabled", true);
+            if (jsonMap.Status == "C") {
+            $("#NOTICEADD").prop("disabled", true);
+            $("#NOTICEEDIT").prop("disabled", true);
+            $("#NOTICECOPY").prop("disabled", true);
+            $("#NOTICEDEL").prop("disabled", true);
+            $("#NOTICECANCEL").prop("disabled", true);
+            $("#NOTICESAVES").prop("disabled", true);
+            }
+            InitSubFormField(true);
+        }
+
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        gop.searchColumns = [
+            { name: 'SysCode', showname: '@Resources.Locale.L_NoticeSetup_SysCode', sorttype: 'string', sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'ProgCode', showname: '@Resources.Locale.L_NoticeSetup_ProgCode', sorttype: 'string', sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'Role', showname: '@Resources.Locale.L_NoticeSetup_Role', sorttype: 'string', sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'CreateBy', showname: '@Resources.Locale.L_PartyDocSetup_CreateBy', sorttype: 'string', sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'Cmp', showname: '@Resources.Locale.L_NRSDataQuery_Cmp', sorttype: 'string', sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'Stn', showname: '@Resources.Locale.L_RoleSetUp_STN', sorttype: 'string', sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] }
+        ]
+
+        initSearch(gop);
+
+        $("#SummaryInput").hide();
+        //$("#SearchArea").hide();
+        //$("#SummaryAddData").show();
+        $('#AddArea').on('show.bs.collapse', function () {
+            $('html, body').animate({
+                scrollTop: $("#AaddPanel").offset().top
+            }, 500);
+        });
+    });
+
+    function dblClick(map) {
+        //window.location.href = "BTMSetup?BatNo=" + map.BatNo;
+
+    }
+
+  
+
+</script>
+<div id="wrapper" class="False">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default" id="approval1">
+                <div class="panel-heading" role="tab" id="headintwo">
+                    <h4 class="panel-title" style="font-weight: 700;">
+                        <a data-toggle="collapse" data-parent="#approval1" href="#SearchArea1" aria-expanded="true" aria-controls="SearchArea1">
+                            <span class="glyphicon glyphicon-search"></span>@Resources.Locale.L_NoticeSetup_SearchA
+                        </a>
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in" id="SearchArea1">
+                    <div class="panel-body">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea"></div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                                    
+                                    </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        <form id="subForm" name="subForm">
+         <div class="panel panel-default" id="AaddPanel">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title" style="font-weight: 700;">
+                        <a data-toggle="collapse" href="#AddArea" aria-expanded="false" aria-controls="AddArea">@Resources.Locale.L_NoticeSetup_EditA</a>
+                    </h4>
+                </div>
+                <div class="collapse" id="AddArea">
+                    <div class="panel-body">
+                        <div class="pure-g">
+                           <div class="pure-u-1">
+                                <ul class="list-inline">
+                                    <li>
+                                        <button type="button" class="btn btn-sm btn-primary" id="NOTICEADD">@Resources.Locale.L_MenuBar_Add</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="btn btn-sm btn-warning" id="NOTICEEDIT" disabled>@Resources.Locale.L_MenuBar_Edit</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="btn btn-sm btn-info" id="NOTICECOPY" disabled>@Resources.Locale.L_MenuBar_Copy</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="btn btn-sm btn-danger" id="NOTICECANCEL" disabled>@Resources.Locale.L_MenuBar_Cancel</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="btn btn-sm btn-success" id="NOTICESAVES" disabled>@Resources.Locale.L_MenuBar_Save</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="btn btn-sm btn-danger" id="NOTICEDEL" disabled>@Resources.Locale.L_MenuBar_Delete</button>
+                                    </li>
+                                </ul>
+                            </div>
+                             </div>
+                        <div class="pure-g">
+                             <div class="pure-u-sm-2-30">
+                                <label for="Id" class="control-label">@Resources.Locale.L_NoticeSetup_id</label>
+                            </div>
+                            <div class="pure-u-sm-5-30 control-group">
+                                <div>
+                                    <input type="text" class="form-control input-sm firstInput" dt="mt"  id="Id" fieldname="Id" name="Id" isKey="true" />                                    
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>       
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label for="SysCode" class="control-label">@Resources.Locale.L_NoticeSetup_SysCode</label>
+                            </div>
+                            <div class="pure-u-sm-4-30 control-group">
+                                <div>
+                                    <input type="text" class="form-control input-sm firstInput" dt="mt"  id="SysCode" fieldname="SysCode" name="SysCode" isKey="true" />                                    
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label for="ProgCode" class="control-label">@Resources.Locale.L_NoticeSetup_ProgCode</label>
+                            </div>
+                            <div class="pure-u-sm-4-30 control-group">
+                                <div>
+                                    <input type="text" class="form-control input-sm firstInput" dt="mt"  id="ProgCode" fieldname="ProgCode" name="ProgCode" isKey="true"/>                                    
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label class="control-label">@Resources.Locale.L_NoticeSetup_NoticeType</label>
+                            </div>
+                            <div class="pure-u-sm-3-30">
+                                <select class="form-control input-sm" dt="mt" name="NoticeType" fieldname="NoticeType" id="NoticeType">
+                                    <option value="0" selected>MESSAGE</option>
+                                    <option value="1">MAIL</option>
+                                    <option value="2">BOTH</option>
+                                </select>
+                            </div>
+                            <div class="pure-u-sm-2-30  label-right">
+                                <label for="DayNum" class="control-label">@Resources.Locale.L_NoticeSetup_DayNum</label>
+                            </div>
+                            <div class="pure-u-sm-4-30 control-group">
+                                <div>
+                                    <input type="text" class="form-control input-sm firstInput" dt="mt"  id="DayNum" fieldname="DayNum" name="DayNum" />                                    
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>                                                      
+                        </div>
+                        <div class="pure-g">                         
+                            <div class="pure-u-sm-2-30 label-left">
+                                <label for="Role" class="control-label">@Resources.Locale.L_NoticeSetup_Role</label>
+                            </div>
+                            <div class="pure-u-sm-5-30 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="Role" name="Role" fieldname="Role" placeholder="" />
+                                    <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="RoleLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                             <div class="pure-u-sm-2-30  label-right">
+                                <label for="TriggerDesc" class="control-label">@Resources.Locale.L_NoticeSetup_TriggerDesc</label>
+                            </div>
+                            <div class="pure-u-sm-4-30 control-group">
+                                <div>
+                                    <input type="text" class="form-control input-sm firstInput" dt="mt"  id="TriggerDesc" fieldname="TriggerDesc" name="TriggerDesc" />                                    
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>                                                                                
+                        </div>
+                         <div class="pure-g">
+                          <div class="pure-u-sm-2-30  label-left">
+                                <label for="NoticeSubject" class="control-label">@Resources.Locale.L_NoticeSetup_NoticeSubject</label>
+                            </div>
+                            <div class="pure-u-sm-28-30 control-group">
+                                <div>
+                                    <input type="text" class="form-control input-sm firstInput" dt="mt"  id="NoticeSubject" fieldname="NoticeSubject" name="NoticeSubject" />                                    
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>  
+                         </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-2-30">
+                                <label for="NoticeContent" class="control-label">@Resources.Locale.L_NoticeSetup_NoticeContent</label>
+                            </div>
+                            <div class="pure-u-sm-28-30">
+                                <textarea class="form-control lastInput" dt="mt" id="NoticeContent" name="NoticeContent" fieldname="NoticeContent"></textarea>
+                            </div>
+                        </div>                      
+                        <div class="pure-g">
+                            <div class="pure-u-sm-2-30">
+                                <label for="Caption" class="control-label">@Resources.Locale.L_NoticeSetup_Caption</label>
+                            </div>
+                            <div class="pure-u-sm-28-30">
+                                <textarea class="form-control lastInput" dt="mt" id="Caption" name="Caption" fieldname="Caption"></textarea>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-2-30">
+                                <label class="control-label">@Resources.Locale.L_NRSDataQuery_Cmp</label>
+                            </div>
+                            <div class="pure-u-sm-2-30">
+                                <input type="text" id="Cmp" class="form-control input-sm" dt="mt" name="Cmp" fieldname="Cmp" readonly />
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label class="control-label">@Resources.Locale.L_RoleSetUp_STN</label>
+                            </div>
+                            <div class="pure-u-sm-2-30">
+                                <input type="text" id="Stn" class="form-control input-sm" dt="mt" name="Stn" fieldname="Stn" readonly />
+                            </div>
+                            <div class="pure-u-sm-3-30 label-right">
+                                <label for="CreateBy" class="control-label">@Resources.Locale.L_PartyDocSetup_CreateBy</label>
+                            </div>
+                            <div class="pure-u-sm-4-30">
+                                <input type="text" id="CreateBy" class="form-control input-sm" dt="mt" name="CreateBy" fieldname="CreateBy" readonly />
+                            </div>
+                            <div class="pure-u-sm-4-30">
+                                <input type="text" id="CreateDate" class="form-control input-sm" dt="mt" name="CreateDate" fieldname="CreateDate" readonly />
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label for="ModifyBy" class="control-label">@Resources.Locale.L_PartyDocSetup_ModifyBy</label>
+                            </div>
+                            <div class="pure-u-sm-4-30">
+                                <input type="text" id="ModifyBy" class="form-control input-sm" dt="mt" name="ModifyBy" fieldname="ModifyBy" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-30">
+                                <input type="text" id="ModifyDate" class="form-control input-sm" dt="mt" name="ModifyDate" fieldname="ModifyDate" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<input id="rootPath" type="hidden" value="@Url.Content("~")" />

@@ -1,0 +1,893 @@
+﻿DROP TRIGGER [dbo].[UP_SMICNTR_BY_END_DATE]
+DROP TRIGGER [dbo].[UP_SMICNTR_BY_DUE_DATE]
+DROP TRIGGER [dbo].[updateSmsmiEta]
+
+DROP PROC [dbo].[PROC_UP_SMICNTR]
+
+DROP FUNCTION [dbo].[GET_FREE_TIME]
+DROP FUNCTION [dbo].[GET_DUE_DATE]
+
+DROP FUNCTION [dbo].[GET_FORECAST_FREE]
+DROP FUNCTION [dbo].[GET_STO_FORECAST_FREE]
+DROP FUNCTION [dbo].[GET_DEM_FORECAST_FREE]
+DROP FUNCTION [dbo].[GET_DET_FORECAST_FREE]
+DROP FUNCTION [dbo].[WordDayNoHolidayADD]
+DROP FUNCTION [dbo].[CountWorkdays]
+DROP FUNCTION [dbo].[CountWorkdays2]
+ 
+DROP TYPE [dbo].[QTI_DATATABLE]
+
+CREATE TYPE [dbo].[QTI_DATATABLE] AS TABLE(
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[S_DAY] [int] NULL,
+	[E_DAY] [int] NULL,
+	[FEE_PER_DAY] [numeric](18, 2) NULL,
+	[EFFECT_DATE] [date] NULL,
+	[EXPIRAT_DATE] [date] NULL,
+	[CAL_DATE] [nvarchar](1) NULL,
+	[CUR] [nvarchar](3) NULL,
+	[I_TYPE] [nvarchar](20) NULL,
+	[CNT_TYPE] [nvarchar](10) NULL,
+	[CARRIER_CD] [nvarchar](20) NULL,
+	[TERMINAL_CD] [nvarchar](20) NULL,
+	[CAL_TYPE] [nvarchar](1) NULL,
+	[PERCENTAGE] [numeric](5, 2) NULL,
+	[FOB_CIF] [nvarchar](1) NULL,
+	[LSP_NO] [nvarchar](20) NULL
+)
+GO
+
+CREATE  FUNCTION [dbo].WordDayNoHolidayADD(
+@date    datetime,  --基础日期
+@workday int,       --要增加的工作日数
+@cmp nvarchar(10)	--CMP
+)RETURNS datetime
+AS
+BEGIN
+ DECLARE @startday int=0
+ DECLARE @holidayCount INT
+ DECLARE @weekDay int
+ DECLARE @elseDay int=0
+ 
+ WHILE(@startday<@workday)  
+ BEGIN
+  SET @date=DATEADD(DAY,1,@date);
+  SET @startday=@startday+1; 
+  SET @elseDay=1;
+ WHILE((SELECT COUNT(1) FROM BSDATE WHERE  DATEPART(WEEKDAY, D_DAY) NOT IN(1,7) AND CMP=@cmp AND D_DAY=@date)>0 or DATEPART(WEEKDAY,@date) IN(1,7)) 
+	BEGIN
+		SET @date=DATEADD(DAY,1,@date); 
+	END 
+ END  
+
+ IF(@elseDay=0)
+ BEGIN
+  WHILE(@workday<@startday)  
+  BEGIN
+  SET @date=DATEADD(DAY,-1,@date);
+  SET @startday=@startday-1;  
+  WHILE((SELECT COUNT(1) FROM BSDATE WHERE  DATEPART(WEEKDAY, D_DAY) NOT IN(1,7) AND CMP=@cmp AND D_DAY=@date)>0 or DATEPART(WEEKDAY,@date) IN(1,7)) 
+	BEGIN
+		SET @date=DATEADD(DAY,-1,@date); 
+	END  
+	  END
+  END
+
+ RETURN(@date) 
+END
+GO
+
+
+
+CREATE FUNCTION [dbo].[CountWorkdays] (@Days INT,@StartDate DATE ,@ChgDayType nvarchar(1),@Cmp nvarchar(10))
+RETURNS DATE
+AS
+BEGIN
+    DECLARE @Counter INT = 0
+    DECLARE @ResultDate DATE = @StartDate
+	DECLARE @Holidays INT 
+
+	IF(@ChgDayType='W')
+    BEGIN 
+	  SELECT @ResultDate= dbo.WordDayNoHolidayADD(@ResultDate,@Days,@Cmp)  
+	END 
+	 
+	IF(@ChgDayType='C' OR @ChgDayType='' OR @ChgDayType IS NULL)
+	BEGIN
+		SET @ResultDate=dateadd(day,@Days,@StartDate)
+	END
+ 
+    RETURN @ResultDate
+END
+GO
+
+
+CREATE  FUNCTION [dbo].[CountWorkdays2]
+(
+    @StartDate DATE,
+    @EndDate DATE,
+	@Cmp nvarchar(10)
+)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @Workdays INT = 0;
+    DECLARE @CurrentStartDate DATE;
+	DECLARE @CurrentEndDate DATE;
+	DECLARE @CurrentDate DATE;
+	DECLARE @Holidays INT=0;
+	DECLARE @Option INT=0;
+	
+	IF(@StartDate<@EndDate)
+		BEGIN
+			SET @Option=1;
+			SET @CurrentStartDate=@StartDate;
+			SET @CurrentEndDate=@EndDate;
+		END
+	IF(@StartDate>@EndDate)
+		BEGIN
+			SET @Option=-1;
+			SET @CurrentStartDate=@EndDate;
+			SET @CurrentEndDate=@StartDate;
+		END
+    SET @CurrentDate=@CurrentStartDate;
+    WHILE @CurrentDate < @CurrentEndDate
+    BEGIN 
+        -- 检查是否为工作日（1-5工作日，周六和周日不工作）
+        IF DATEPART(WEEKDAY, @CurrentDate) BETWEEN 2 AND 6
+        BEGIN
+            SET @Workdays = @Workdays + @Option;
+        END
+ 
+        -- 移动到下一天
+        SET @CurrentDate = DATEADD(day, 1, @CurrentDate);
+    END
+	SET @Holidays=(SELECT COUNT(DISTINCT D_DAY)  FROM  BSDATE WHERE CMP=@Cmp AND D_DAY>=@CurrentStartDate AND D_DAY<=@CurrentEndDate AND DATEPART(WEEKDAY, D_DAY) NOT IN(1,7)); 
+
+	IF(@Option=1)
+		BEGIN
+			RETURN @Workdays-@Holidays; 
+		END
+	RETURN @Workdays+@Holidays; 
+	 
+END
+GO
+
+CREATE FUNCTION [dbo].[GET_FORECAST_FREE](@free_table QTI_DATATABLE READONLY,@fob_amt numeric(18,2),@cif_amt numeric(18,2),@date_diff INT)
+RETURNS @free TABLE(AMT NUMERIC(18,2),CUR NVARCHAR(3))
+AS
+BEGIN
+	DECLARE @Total INT,@Line INT = 1
+	DECLARE @amt NUMERIC(18,2) = 0,@cur NVARCHAR(3),@fee_per_day NUMERIC(18,2),@s_day INT,@e_day INT,
+	@cal_type NVARCHAR(1),@percentage NUMERIC(5,2),@fob_cif NVARCHAR(1)
+	SELECT @Total = MAX(ID) FROM @free_table
+		WHILE @Line <= @Total
+		BEGIN
+			SELECT @s_day=S_DAY,@e_day=E_DAY,@cur=CUR,@cal_type=CAL_TYPE,@fee_per_day=FEE_PER_DAY,@percentage=PERCENTAGE,@fob_cif=FOB_CIF FROM @free_table WHERE ID=@Line
+			IF(@s_day <= @date_diff)
+			BEGIN
+				IF @percentage<=0
+					SET @percentage = 100
+				IF(@cal_type='C')
+				BEGIN
+					IF (@date_diff>@e_day)
+						SET @fee_per_day= @fee_per_day * (@e_day-@s_day+1)
+					IF (@date_diff<=@e_day)
+						SET @fee_per_day= @fee_per_day * (@date_diff-@s_day+1)
+				END
+				SET @amt = @amt + @fee_per_day*@percentage/100
+			END
+			SET @Line = @Line + 1
+		END
+		IF(@fob_cif='F')
+			SET @amt = @amt + @fob_amt
+		IF(@fob_cif='C')
+			SET @amt = @amt + @cif_amt
+		IF(@fob_cif='B')
+			SET @amt = @amt + @cif_amt + @fob_amt
+		INSERT INTO @free values(@amt,@cur)
+		RETURN
+END
+GO
+
+CREATE FUNCTION [dbo].[GET_STO_FORECAST_FREE](
+@cmp nvarchar(10),@pod_cd nvarchar(5),@carrier nvarchar(20),
+@tran_type nvarchar(10),@cnt_type nvarchar(10),@terminal_cd nvarchar(30),
+@date_diff INT,
+@fob_amt numeric(18,2),@cif_amt numeric(18,2),
+@dep_date date,@arv_date date,@lspno nvarchar(20))
+RETURNS @free TABLE(AMT NUMERIC(18,2),CUR NVARCHAR(3))
+AS
+BEGIN
+	DECLARE @effect_date date,@expirat_date date
+	DECLARE @Total INT,@Line INT = 1
+	DECLARE @amt NUMERIC(18,2) = 0,@cur NVARCHAR(3),@fee_per_day NUMERIC(18,2),@s_day INT,@e_day INT,
+	@cal_type NVARCHAR(1),@percentage NUMERIC(5,2),@fob_cif NVARCHAR(1)
+	DECLARE @Table QTI_DATATABLE
+	DECLARE @tmp_table QTI_DATATABLE
+	INSERT INTO @Table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO
+	FROM SMQTI WHERE CMP=@cmp AND POD_CD=@pod_cd AND TRAN_TYPE=@tran_type AND I_TYPE IN ('DSTF') AND (CNT_TYPE LIKE '%'+@cnt_type+'%' OR CNT_TYPE IS NULL) 
+	AND (CARRIER_CD=@carrier OR CARRIER_CD IS NULL) AND (TERMINAL_CD=@terminal_cd OR TERMINAL_CD IS NULL) AND FEE_PER_DAY>0
+	SELECT @Total = MAX(ID) FROM @Table
+	
+	IF(@Total>0)
+	BEGIN
+		INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE LSP_NO IS NULL OR LSP_NO=''
+		IF(@lspno !='' AND  @lspno IS NOT NULL) 
+		BEGIN 
+			DELETE FROM @tmp_table
+			IF(@tran_type='F')
+				BEGIN
+					INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE LSP_NO=(SELECT TOP 1 HEAD_OFFICE FROM SMPTY WHERE PARTY_NO=@lspno AND STATUS='U')
+					SELECT @Total = MAX(ID) FROM @tmp_table
+					IF(@Total<=0 OR @Total IS NULL)
+					BEGIN
+						INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE LSP_NO=@lspno
+					END
+				END
+			ELSE
+				BEGIN
+					INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE LSP_NO=@lspno
+				END 
+		END 
+
+		DELETE FROM @Table
+		INSERT INTO @Table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @tmp_table
+		DELETE FROM @tmp_table
+		
+		INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE CNT_TYPE LIKE '%'+@cnt_type+'%' AND CARRIER_CD=@carrier AND TERMINAL_CD=@terminal_cd
+		SELECT @Total = MAX(ID) FROM @tmp_table
+		IF(@Total<=0 OR @Total IS NULL)
+		BEGIN
+			INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE CNT_TYPE LIKE '%'+@cnt_type+'%' AND CARRIER_CD=@carrier AND TERMINAL_CD IS NULL
+			SELECT @Total = MAX(ID) FROM @tmp_table
+		END
+		IF(@Total<=0 OR @Total IS NULL)
+		BEGIN
+			INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE CNT_TYPE LIKE '%'+@cnt_type+'%' AND CARRIER_CD IS NULL AND TERMINAL_CD IS NULL
+			SELECT @Total = MAX(ID) FROM @tmp_table
+		END
+		IF(@Total<=0 OR @Total IS NULL)
+		BEGIN
+			INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE CNT_TYPE IS NULL AND CARRIER_CD IS NULL AND TERMINAL_CD IS NULL
+			SELECT @Total = MAX(ID) FROM @tmp_table
+		END
+		DELETE FROM @Table
+		INSERT INTO @Table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @tmp_table WHERE CAL_DATE='A' AND EFFECT_DATE<=@arv_date and EXPIRAT_DATE>=@arv_date ORDER BY EFFECT_DATE ASC,S_DAY ASC
+		SELECT @Total = MAX(ID) FROM @Table
+		IF(@Total<=0 OR @Total IS NULL)
+		BEGIN
+			INSERT INTO @Table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @tmp_table WHERE CAL_DATE='D' AND EFFECT_DATE<=@dep_date and EXPIRAT_DATE>=@dep_date ORDER BY EFFECT_DATE ASC,S_DAY ASC
+			SELECT @Total = MAX(ID) FROM @Table
+		END
+		SELECT @effect_date=EFFECT_DATE,@expirat_date=EXPIRAT_DATE FROM @Table WHERE ID=@Total
+
+		DELETE FROM @tmp_table
+
+		INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE EFFECT_DATE=@effect_date AND EXPIRAT_DATE=@expirat_date ORDER BY EFFECT_DATE ASC,S_DAY ASC
+		
+		INSERT INTO @free SELECT AMT,CUR FROM GET_FORECAST_FREE(@tmp_table,@fob_amt,@cif_amt,@date_diff)
+	END
+	RETURN
+END
+GO
+
+
+CREATE FUNCTION [dbo].[GET_DET_FORECAST_FREE](
+@cmp nvarchar(10),@pod_cd nvarchar(5),@carrier nvarchar(20),
+@tran_type nvarchar(10),@cnt_type nvarchar(10),@terminal_cd nvarchar(30),
+@date_diff INT,
+@fob_amt numeric(18,2),@cif_amt numeric(18,2),
+@dep_date date,@arv_date date,@lspno nvarchar(20))
+RETURNS @free TABLE(AMT NUMERIC(18,2),CUR NVARCHAR(3))
+AS
+BEGIN
+	DECLARE @effect_date date,@expirat_date date
+	DECLARE @Total INT,@Line INT = 1
+	DECLARE @amt NUMERIC(18,2) = 0,@cur NVARCHAR(3),@fee_per_day NUMERIC(18,2),@s_day INT,@e_day INT,
+	@cal_type NVARCHAR(1),@percentage NUMERIC(5,2),@fob_cif NVARCHAR(1)
+	DECLARE @Table QTI_DATATABLE
+	DECLARE @tmp_table QTI_DATATABLE
+	INSERT INTO @Table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO 
+	FROM SMQTI WHERE CMP=@cmp AND POD_CD=@pod_cd AND TRAN_TYPE=@tran_type AND I_TYPE IN ('BOTH','DDET') AND (CNT_TYPE LIKE '%'+@cnt_type+'%' OR CNT_TYPE IS NULL) 
+	AND (CARRIER_CD=@carrier OR CARRIER_CD IS NULL) AND (TERMINAL_CD=@terminal_cd OR TERMINAL_CD IS NULL) AND FEE_PER_DAY>0
+	SELECT @Total = MAX(ID) FROM @Table
+	
+	IF(@Total>0)
+	BEGIN
+		INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE LSP_NO IS NULL OR LSP_NO=''
+		IF(@lspno !='' AND  @lspno IS NOT NULL)
+		BEGIN 
+			DELETE FROM @tmp_table
+			IF(@tran_type='F')
+				BEGIN
+					INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE LSP_NO=(SELECT TOP 1 HEAD_OFFICE FROM SMPTY WHERE PARTY_NO=@lspno AND STATUS='U')
+					SELECT @Total = MAX(ID) FROM @tmp_table
+					IF(@Total<=0 OR @Total IS NULL)
+					BEGIN
+						INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE LSP_NO=@lspno
+					END
+				END
+			ELSE
+				BEGIN
+					INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE LSP_NO=@lspno
+				END 
+		END
+
+		DELETE FROM @Table
+		INSERT INTO @Table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @tmp_table
+		
+		DELETE FROM @tmp_table
+		INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE CNT_TYPE LIKE '%'+@cnt_type+'%' AND CARRIER_CD=@carrier AND TERMINAL_CD=@terminal_cd
+		SELECT @Total = MAX(ID) FROM @tmp_table
+		IF(@Total<=0 OR @Total IS NULL)
+		BEGIN
+			INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE CNT_TYPE LIKE '%'+@cnt_type+'%' AND CARRIER_CD=@carrier AND TERMINAL_CD IS NULL
+			SELECT @Total = MAX(ID) FROM @tmp_table
+		END
+		IF(@Total<=0 OR @Total IS NULL)
+		BEGIN
+			INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE CNT_TYPE LIKE '%'+@cnt_type+'%' AND CARRIER_CD IS NULL AND TERMINAL_CD IS NULL
+			SELECT @Total = MAX(ID) FROM @tmp_table
+		END
+		DELETE FROM @Table
+		INSERT INTO @Table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @tmp_table WHERE CAL_DATE='A' AND EFFECT_DATE<=@arv_date and EXPIRAT_DATE>=@arv_date ORDER BY EFFECT_DATE ASC,S_DAY ASC
+		SELECT @Total = MAX(ID) FROM @Table
+		IF(@Total<=0 OR @Total IS NULL)
+		BEGIN
+			INSERT INTO @Table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @tmp_table WHERE CAL_DATE='D' AND EFFECT_DATE<=@dep_date and EXPIRAT_DATE>=@dep_date ORDER BY EFFECT_DATE ASC,S_DAY ASC
+			SELECT @Total = MAX(ID) FROM @Table
+		END
+		SELECT @effect_date=EFFECT_DATE,@expirat_date=EXPIRAT_DATE FROM @Table WHERE ID=@Total
+
+		DELETE FROM @tmp_table
+
+		INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE EFFECT_DATE=@effect_date AND EXPIRAT_DATE=@expirat_date AND I_TYPE='BOTH' ORDER BY EFFECT_DATE ASC,S_DAY ASC
+		SELECT @Total = MAX(ID) FROM @tmp_table
+		IF(@Total<=0 OR @Total IS NULL)
+		BEGIN
+			INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE EFFECT_DATE=@effect_date AND EXPIRAT_DATE=@expirat_date AND I_TYPE='DDET' ORDER BY EFFECT_DATE ASC,S_DAY ASC
+			SELECT @Total = MAX(ID) FROM @tmp_table
+		END
+		INSERT INTO @free SELECT AMT,CUR FROM GET_FORECAST_FREE(@tmp_table,@fob_amt,@cif_amt,@date_diff)
+	END
+	RETURN
+END
+GO
+
+CREATE FUNCTION [dbo].[GET_DEM_FORECAST_FREE](
+@cmp nvarchar(10),@pod_cd nvarchar(5),@carrier nvarchar(20),
+@tran_type nvarchar(10),@cnt_type nvarchar(10),@terminal_cd nvarchar(30),
+@date_diff INT,
+@fob_amt numeric(18,2),@cif_amt numeric(18,2),
+@dep_date date,@arv_date date,@lspno nvarchar(20))
+RETURNS @free TABLE(AMT NUMERIC(18,2),CUR NVARCHAR(3))
+AS
+BEGIN
+	DECLARE @effect_date date,@expirat_date date
+	DECLARE @Total INT,@Line INT = 1
+	DECLARE @amt NUMERIC(18,2) = 0,@cur NVARCHAR(3),@fee_per_day NUMERIC(18,2),@s_day INT,@e_day INT,
+	@cal_type NVARCHAR(1),@percentage NUMERIC(5,2),@fob_cif NVARCHAR(1)
+	DECLARE @Table QTI_DATATABLE
+	DECLARE @tmp_table QTI_DATATABLE
+	INSERT INTO @Table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO 
+	FROM SMQTI WHERE CMP=@cmp AND POD_CD=@pod_cd AND TRAN_TYPE=@tran_type AND I_TYPE IN ('BOTH','USAGE','DDEM') AND (CNT_TYPE LIKE '%'+@cnt_type+'%' OR CNT_TYPE IS NULL) 
+	AND (CARRIER_CD=@carrier OR CARRIER_CD IS NULL) AND (TERMINAL_CD=@terminal_cd OR TERMINAL_CD IS NULL) AND FEE_PER_DAY>0
+	SELECT @Total = MAX(ID) FROM @Table
+	
+	IF(@Total>0)
+	BEGIN
+		INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE LSP_NO IS NULL OR LSP_NO=''
+		IF(@lspno !='' AND  @lspno IS NOT NULL)
+		BEGIN 
+			DELETE FROM @tmp_table
+			IF(@tran_type='F')
+				BEGIN
+					INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE LSP_NO=(SELECT TOP 1 HEAD_OFFICE FROM SMPTY WHERE PARTY_NO=@lspno AND STATUS='U')
+					SELECT @Total = MAX(ID) FROM @tmp_table
+					IF(@Total<=0 OR @Total IS NULL)
+					BEGIN
+						INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE LSP_NO=@lspno
+					END
+				END
+			ELSE
+				BEGIN
+					INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE LSP_NO=@lspno
+				END 
+		END
+		 
+		DELETE FROM @Table
+		INSERT INTO @Table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @tmp_table
+		
+		DELETE FROM @tmp_table
+		INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE CNT_TYPE LIKE '%'+@cnt_type+'%' AND CARRIER_CD=@carrier AND TERMINAL_CD=@terminal_cd
+		SELECT @Total = MAX(ID) FROM @tmp_table
+		IF(@Total<=0 OR @Total IS NULL)
+		BEGIN
+			INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE CNT_TYPE LIKE '%'+@cnt_type+'%' AND CARRIER_CD=@carrier AND TERMINAL_CD IS NULL
+			SELECT @Total = MAX(ID) FROM @tmp_table
+		END
+		IF(@Total<=0 OR @Total IS NULL)
+		BEGIN
+			INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE CNT_TYPE LIKE '%'+@cnt_type+'%' AND CARRIER_CD IS NULL AND TERMINAL_CD IS NULL
+			SELECT @Total = MAX(ID) FROM @tmp_table
+		END
+		DELETE FROM @Table
+		INSERT INTO @Table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @tmp_table WHERE CAL_DATE='A' AND EFFECT_DATE<=@arv_date and EXPIRAT_DATE>=@arv_date ORDER BY EFFECT_DATE ASC,S_DAY ASC
+		SELECT @Total = MAX(ID) FROM @Table
+		IF(@Total<=0 OR @Total IS NULL)
+		BEGIN
+			INSERT INTO @Table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @tmp_table WHERE CAL_DATE='D' AND EFFECT_DATE<=@dep_date and EXPIRAT_DATE>=@dep_date ORDER BY EFFECT_DATE ASC,S_DAY ASC
+			SELECT @Total = MAX(ID) FROM @Table
+		END
+		SELECT @effect_date=EFFECT_DATE,@expirat_date=EXPIRAT_DATE FROM @Table WHERE ID=@Total
+
+		DELETE FROM @tmp_table
+
+		INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE EFFECT_DATE=@effect_date AND EXPIRAT_DATE=@expirat_date AND I_TYPE='BOTH' ORDER BY EFFECT_DATE ASC,S_DAY ASC
+		SELECT @Total = MAX(ID) FROM @tmp_table
+		IF(@Total<=0 OR @Total IS NULL)
+		BEGIN
+			INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE EFFECT_DATE=@effect_date AND EXPIRAT_DATE=@expirat_date AND I_TYPE='USAGE' ORDER BY EFFECT_DATE ASC,S_DAY ASC
+			SELECT @Total = MAX(ID) FROM @tmp_table
+		END
+		IF(@Total<=0 OR @Total IS NULL)
+		BEGIN
+			INSERT INTO @tmp_table SELECT S_DAY,E_DAY,FEE_PER_DAY,EFFECT_DATE,EXPIRAT_DATE,CAL_DATE,CUR,I_TYPE,CNT_TYPE,CARRIER_CD,TERMINAL_CD,CAL_TYPE,PERCENTAGE,FOB_CIF,LSP_NO FROM @Table WHERE EFFECT_DATE=@effect_date AND EXPIRAT_DATE=@expirat_date AND I_TYPE='DDEM' ORDER BY EFFECT_DATE ASC,S_DAY ASC
+			SELECT @Total = MAX(ID) FROM @tmp_table
+		END
+
+		INSERT INTO @free SELECT AMT,CUR FROM GET_FORECAST_FREE(@tmp_table,@fob_amt,@cif_amt,@date_diff)
+	END
+	RETURN
+END
+GO
+
+
+CREATE FUNCTION [dbo].[GET_FREE_TIME]
+(@dep_date date,@arv_date date,
+@cmp nvarchar(10),
+@pod_cd nvarchar(5),
+@carrier nvarchar(20),
+@tran_type nvarchar(10),@lspno nvarchar(20))
+RETURNS @free TABLE(COMBINE_DET NVARCHAR(2),PORT_FREE_TIME INT,FACT_FREE_TIME INT,CON_FREE_TIME INT,SHOW_COMBINE_DET NVARCHAR(1),PORT_CHG_TYPE NVARCHAR(1),FACT_CHG_TYPE NVARCHAR(1),CON_CHG_TYPE NVARCHAR(1))
+AS
+BEGIN
+	DECLARE @Table TABLE(ID INT IDENTITY(1,1),E_DAY INT,I_TYPE NVARCHAR(20),CHG_DAY_TYPE NVARCHAR(1))
+	DECLARE @tmp_table TABLE(ID INT IDENTITY(1,1),E_DAY INT,I_TYPE NVARCHAR(20),CAL_DATE NVARCHAR(1),EFFECT_DATE DATE,EXPIRAT_DATE DATE,CHG_DAY_TYPE NVARCHAR(1))
+	DECLARE @Total INT,@Line INT = 1
+	DECLARE @COMBINE_DET NVARCHAR(2),@PORT_FREE_TIME INT,@FACT_FREE_TIME INT,@CON_FREE_TIME INT,
+	@iscombine_det NVARCHAR(2),
+	@showcombine_det NVARCHAR(1),
+	@PORT_CHG_DAY_TYPE NVARCHAR(1),@FACT_CHG_DAY_TYPE NVARCHAR(1),@CON_CHG_DAY_TYPE NVARCHAR(1)
+
+	INSERT INTO @tmp_table SELECT E_DAY,I_TYPE,CAL_DATE,EFFECT_DATE,EXPIRAT_DATE,CHG_DAY_TYPE FROM SMQTI WHERE CMP=@cmp AND POD_CD=@pod_cd AND CARRIER_CD=@carrier AND TRAN_TYPE=@tran_type AND FEE_PER_DAY=0 AND (LSP_NO IS NULL OR LSP_NO='') 
+
+	IF(@lspno !='' AND  @lspno IS NOT NULL) 
+	BEGIN 
+		DELETE FROM @tmp_table
+		IF(@tran_type='F')
+			BEGIN
+					INSERT INTO @tmp_table SELECT E_DAY,I_TYPE,CAL_DATE,EFFECT_DATE,EXPIRAT_DATE,CHG_DAY_TYPE FROM SMQTI WHERE CMP=@cmp AND POD_CD=@pod_cd AND CARRIER_CD=@carrier AND TRAN_TYPE=@tran_type AND FEE_PER_DAY=0 AND LSP_NO=(SELECT TOP 1 HEAD_OFFICE FROM SMPTY WHERE PARTY_NO=@lspno AND STATUS='U')
+				SELECT @Total = MAX(ID) FROM @tmp_table
+				IF(@Total<=0 OR @Total IS NULL)
+				BEGIN
+					INSERT INTO @tmp_table SELECT E_DAY,I_TYPE,CAL_DATE,EFFECT_DATE,EXPIRAT_DATE,CHG_DAY_TYPE FROM SMQTI WHERE CMP=@cmp AND POD_CD=@pod_cd AND CARRIER_CD=@carrier AND TRAN_TYPE=@tran_type AND FEE_PER_DAY=0 AND LSP_NO=@lspno
+				END
+			END
+		ELSE
+			BEGIN
+				INSERT INTO @tmp_table SELECT E_DAY,I_TYPE,CAL_DATE,EFFECT_DATE,EXPIRAT_DATE,CHG_DAY_TYPE FROM SMQTI WHERE CMP=@cmp AND POD_CD=@pod_cd AND CARRIER_CD=@carrier AND TRAN_TYPE=@tran_type AND FEE_PER_DAY=0 AND LSP_NO=@lspno
+			END 
+	END 
+	SELECT @Total = MAX(ID) FROM @tmp_table
+	IF(@Total<=0 OR @Total IS NULL)
+	BEGIN
+		INSERT INTO @tmp_table SELECT E_DAY,I_TYPE,CAL_DATE,EFFECT_DATE,EXPIRAT_DATE,CHG_DAY_TYPE FROM SMQTI WHERE CMP=@cmp AND POD_CD=@pod_cd AND CARRIER_CD IS NULL AND TRAN_TYPE=@tran_type AND FEE_PER_DAY=0 AND (LSP_NO IS NULL OR LSP_NO='')
+		SELECT @Total = MAX(ID) FROM @Table
+		IF(@lspno !='' AND  @lspno IS NOT NULL)
+		BEGIN 
+			DELETE FROM @tmp_table
+			IF(@tran_type='F')
+			BEGIN
+				INSERT INTO @tmp_table SELECT E_DAY,I_TYPE,CAL_DATE,EFFECT_DATE,EXPIRAT_DATE,CHG_DAY_TYPE FROM SMQTI WHERE CMP=@cmp AND POD_CD=@pod_cd AND CARRIER_CD IS NULL AND TRAN_TYPE=@tran_type AND FEE_PER_DAY=0 AND LSP_NO=(SELECT TOP 1 HEAD_OFFICE FROM SMPTY WHERE PARTY_NO=@lspno AND STATUS='U')
+				SELECT @Total = MAX(ID) FROM @tmp_table
+				IF(@Total<=0 OR @Total IS NULL)
+				BEGIN
+					INSERT INTO @tmp_table SELECT E_DAY,I_TYPE,CAL_DATE,EFFECT_DATE,EXPIRAT_DATE,CHG_DAY_TYPE FROM SMQTI WHERE CMP=@cmp AND POD_CD=@pod_cd AND CARRIER_CD IS NULL AND TRAN_TYPE=@tran_type AND FEE_PER_DAY=0 AND LSP_NO=@lspno
+				END
+			END
+			ELSE
+				BEGIN
+					INSERT INTO @tmp_table SELECT E_DAY,I_TYPE,CAL_DATE,EFFECT_DATE,EXPIRAT_DATE,CHG_DAY_TYPE FROM SMQTI WHERE CMP=@cmp AND POD_CD=@pod_cd AND CARRIER_CD IS NULL AND TRAN_TYPE=@tran_type AND FEE_PER_DAY=0 AND LSP_NO=@lspno
+				END 
+			END  
+	END
+
+	INSERT INTO @Table SELECT E_DAY,I_TYPE,CHG_DAY_TYPE FROM @tmp_table WHERE I_TYPE IN ('DDEM','BOTH','USAGE') AND CAL_DATE='A' AND EFFECT_DATE<=@arv_date and EXPIRAT_DATE>=@arv_date ORDER BY EFFECT_DATE ASC,EXPIRAT_DATE ASC,I_TYPE DESC
+	SELECT @Total = MAX(ID) FROM @Table
+	set @COMBINE_DET= 'N'
+	if(@Total<=0 OR @Total IS NULL)
+	BEGIN
+		INSERT INTO @Table SELECT E_DAY,I_TYPE,CHG_DAY_TYPE FROM @tmp_table WHERE I_TYPE IN ('DDEM','BOTH','USAGE') AND CAL_DATE='D' AND EFFECT_DATE<=@dep_date and EXPIRAT_DATE>=@dep_date ORDER BY EFFECT_DATE ASC,EXPIRAT_DATE ASC,I_TYPE DESC
+		SELECT @Total = MAX(ID) FROM @Table
+	END
+	WHILE @Line <= @Total
+	BEGIN
+		SELECT @PORT_FREE_TIME=E_DAY,@COMBINE_DET=CASE WHEN I_TYPE='BOTH' THEN 'Y' WHEN I_TYPE='USAGE' THEN 'U' ELSE 'N' END,@PORT_CHG_DAY_TYPE=CHG_DAY_TYPE FROM @Table WHERE ID= @Line
+		SET @Line = @Line + 1
+	END
+	set @iscombine_det=@COMBINE_DET
+	set @COMBINE_DET= 'N'
+	SET @Line = 1
+	DELETE FROM @Table
+	INSERT INTO @Table SELECT E_DAY,I_TYPE,CHG_DAY_TYPE FROM @tmp_table WHERE I_TYPE IN ('DDET','BOTH') AND CAL_DATE='A' AND EFFECT_DATE<=@arv_date and EXPIRAT_DATE>=@arv_date ORDER BY EFFECT_DATE ASC,EXPIRAT_DATE ASC,I_TYPE DESC
+	SELECT @Total = MAX(ID) FROM @Table
+	if(@Total<=0 OR @Total IS NULL)
+	BEGIN
+		INSERT INTO @Table SELECT E_DAY,I_TYPE,CHG_DAY_TYPE FROM @tmp_table WHERE I_TYPE IN ('DDET','BOTH') AND CAL_DATE='D' AND EFFECT_DATE<=@dep_date and EXPIRAT_DATE>=@dep_date ORDER BY EFFECT_DATE ASC,EXPIRAT_DATE ASC,I_TYPE DESC
+		SELECT @Total = MAX(ID) FROM @Table
+	END
+	WHILE @Line <= @Total
+	BEGIN
+		SELECT @CON_FREE_TIME=E_DAY,@COMBINE_DET=CASE WHEN I_TYPE='BOTH' THEN 'Y' ELSE 'N' END,@CON_CHG_DAY_TYPE=CHG_DAY_TYPE FROM @Table WHERE ID= @Line
+		SET @Line = @Line + 1
+	END
+	if(@CON_FREE_TIME>0)
+	BEGIN
+		set @showcombine_det=@COMBINE_DET
+	END
+	set @iscombine_det=@iscombine_det+@COMBINE_DET
+	SET @Line = 1
+	DELETE FROM @Table
+	INSERT INTO @Table SELECT E_DAY,I_TYPE,CHG_DAY_TYPE FROM @tmp_table WHERE I_TYPE IN ('DSTF') AND CAL_DATE='A' AND EFFECT_DATE<=@arv_date and EXPIRAT_DATE>=@arv_date ORDER BY EFFECT_DATE ASC,EXPIRAT_DATE ASC,I_TYPE DESC
+	SELECT @Total = MAX(ID) FROM @Table
+	if(@Total<=0 OR @Total IS NULL)
+	BEGIN
+		INSERT INTO @Table SELECT E_DAY,I_TYPE,CHG_DAY_TYPE FROM @tmp_table WHERE I_TYPE IN ('DSTF') AND CAL_DATE='D' AND EFFECT_DATE<=@dep_date and EXPIRAT_DATE>=@dep_date ORDER BY EFFECT_DATE ASC,EXPIRAT_DATE ASC,I_TYPE DESC
+		SELECT @Total = MAX(ID) FROM @Table
+	END
+	WHILE @Line <= @Total
+	BEGIN
+		SELECT @FACT_FREE_TIME=E_DAY,@FACT_CHG_DAY_TYPE=CHG_DAY_TYPE FROM @Table WHERE ID= @Line
+		SET @Line = @Line + 1
+	END
+	
+	if(@showcombine_det = 'Y')
+	BEGIN
+		set @PORT_FREE_TIME=NULL
+	END
+	INSERT INTO @free values(@iscombine_det,@PORT_FREE_TIME,@FACT_FREE_TIME,@CON_FREE_TIME,@showcombine_det,@PORT_CHG_DAY_TYPE,@FACT_CHG_DAY_TYPE,@CON_CHG_DAY_TYPE)
+	RETURN
+END
+GO
+
+
+CREATE FUNCTION [dbo].[GET_DUE_DATE]
+(@fact_free_time int,@port_free_time int,@con_free_time int,
+@eta date,@discharge_date date,@emp_pick_date date,@pickup_cdate date,@combine_det nvarchar(2),@fact_chg_type nvarchar(1),@port_chg_type nvarchar(1),@con_chg_type nvarchar(1),@cmp nvarchar(10))
+RETURNS @due_date TABLE(DEMURRAGE_DUE_DATE DATE,DETENTION_DUE_DATE DATE,STORAGE_DUE_DATE DATE)
+BEGIN
+	DECLARE @sto_due_date date,@dem_due_date date,@det_due_date date
+	SET @sto_due_date=NULL
+	IF (@fact_free_time>0)
+	BEGIN
+		IF @eta IS NOT NULL
+			SELECT @sto_due_date= dbo.CountWorkdays(@fact_free_time,@eta,@fact_chg_type,@cmp) 
+		IF @discharge_date IS NOT NULL
+			SELECT @sto_due_date=dbo.CountWorkdays(@fact_free_time,@discharge_date,@fact_chg_type,@cmp)
+	END
+	
+	SET @dem_due_date=NULL
+	IF (@port_free_time>0)
+	BEGIN
+		IF @eta IS NOT NULL
+			SET @dem_due_date=dbo.CountWorkdays(@port_free_time,@eta,@port_chg_type,@cmp)
+		IF @emp_pick_date IS NOT NULL AND @combine_det IN ('UY','UN')
+			SET @dem_due_date=dbo.CountWorkdays(@port_free_time,@emp_pick_date,@port_chg_type,@cmp)
+		IF (@discharge_date IS NOT NULL and (@combine_det NOT IN ('UY','UN') or @combine_det is null))
+			SET @dem_due_date=dbo.CountWorkdays(@port_free_time,@discharge_date,@port_chg_type,@cmp)
+	END
+	
+	SET @det_due_date=NULL
+	IF (@con_free_time>0)
+	BEGIN
+		IF @combine_det IN ('YY','UY') AND @eta IS NOT NULL
+			SET @det_due_date=dbo.CountWorkdays(@con_free_time,@eta,@con_chg_type,@cmp)
+		IF @combine_det IN ('YY','UY') AND @discharge_date IS NOT NULL
+			SET @det_due_date=dbo.CountWorkdays(@con_free_time,@discharge_date,@con_chg_type,@cmp)
+		IF (@combine_det NOT IN ('YY','UY') OR @combine_det IS NULL) AND @pickup_cdate IS NOT NULL
+			SET @det_due_date=dbo.CountWorkdays(@con_free_time,@pickup_cdate,@con_chg_type,@cmp)
+	END
+	INSERT INTO @due_date values(@dem_due_date,@det_due_date,@sto_due_date)
+	RETURN
+END
+GO
+
+CREATE TRIGGER [dbo].[UP_SMICNTR_BY_END_DATE]
+   ON  [dbo].[SMICNTR]
+   AFTER INSERT,UPDATE
+AS 
+BEGIN
+	DECLARE @Total INT,@Line INT = 1
+	DECLARE @u_id nvarchar(50),@shipment_id nvarchar(20),@cntr_no nvarchar(20),@combine_det nvarchar(2),@showcombine_det nvarchar(1),@port_free_time int,
+	@fact_free_time int,@con_free_time int,@lspno nvarchar(20),@port_chg_type nvarchar(1),@fact_chg_type nvarchar(1),@con_chg_type nvarchar(1)
+	DECLARE @dem_due_date date,@det_due_date date,@sto_due_date date
+	DECLARE @dep_date date,@arv_date date,@cmp nvarchar(10),@pod_cd nvarchar(5),@carrier nvarchar(20),@tran_type nvarchar(10),
+			@eta date,@discharge_date date,@emp_pick_date date,@pickup_cdate date
+	DECLARE @Table TABLE(ID INT IDENTITY(1,1),U_ID NVARCHAR(50),SHIPMENT_ID NVARCHAR(20),CNTR_NO NVARCHAR(20),
+	PICKUP_CDATE DATE,EMPTY_TIME DATE,TRAN_TYPE NVARCHAR(10),CMP NVARCHAR(10),
+	POD_CD NVARCHAR(5),CARRIER NVARCHAR(20),ETA DATE,DISCHARGE_DATE DATE,EMP_PICK_DATE DATE,ARV_DATE DATE,DEP_DATE DATE,LSP_NO NVARCHAR(20))
+	if(UPDATE(EMPTY_TIME) OR UPDATE(PICKUP_CDATE) OR  UPDATE(DISCHARGE_DATE))
+	BEGIN
+		INSERT INTO @Table SELECT  C.U_ID,I.SHIPMENT_ID,C.CNTR_NO,C.PICKUP_CDATE,C.EMPTY_TIME,I.TRAN_TYPE,I.CMP,I.POD_CD,I.CARRIER,I.ETA,C.DISCHARGE_DATE,C.EMP_PICK_DATE,
+CASE WHEN I.ATA IS NULL THEN I.ETA ELSE I.ATA END,CASE WHEN I.ATD IS NULL THEN I.ETD ELSE I.ATD END,
+(SELECT TOP 1 PARTY_NO FROM SMSMIPT PT WHERE PT.SHIPMENT_ID=I.SHIPMENT_ID AND PT.PARTY_TYPE='SP') AS LSP_NO
+FROM inserted C LEFT JOIN SMSMI I ON C.SHIPMENT_ID=I.SHIPMENT_ID
+
+		SELECT @Total = MAX(ID) FROM @Table        
+		WHILE @Line <= @Total
+		BEGIN
+			SELECT @u_id=U_ID,@shipment_id=SHIPMENT_ID,@cntr_no=CNTR_NO,@tran_type=TRAN_TYPE,@cmp=CMP,@pod_cd=POD_CD,@carrier=CARRIER,
+			@arv_date=ARV_DATE,@dep_date=DEP_DATE,
+			@eta=ETA,@discharge_date=DISCHARGE_DATE,@emp_pick_date=EMP_PICK_DATE,@pickup_cdate=PICKUP_CDATE,@lspno=LSP_NO FROM @Table WHERE ID = @Line
+			if (@tran_type IN ('F','R'))
+			BEGIN
+				SELECT @combine_det= COMBINE_DET,@port_free_time=PORT_FREE_TIME,@fact_free_time=FACT_FREE_TIME,@con_free_time=CON_FREE_TIME,@showcombine_det=SHOW_COMBINE_DET,@port_chg_type=PORT_CHG_TYPE,@fact_chg_type=FACT_CHG_TYPE,@con_chg_type=CON_CHG_TYPE FROM GET_FREE_TIME(@dep_date,@arv_date,@cmp,@pod_cd,@carrier,@tran_type,@lspno)
+				
+				select @sto_due_date=STORAGE_DUE_DATE,@dem_due_date=DEMURRAGE_DUE_DATE,@det_due_date=DETENTION_DUE_DATE from GET_DUE_DATE(@fact_free_time,@port_free_time,@con_free_time,@eta,@discharge_date,@emp_pick_date,@pickup_cdate,@combine_det,@fact_chg_type,@port_chg_type,@con_chg_type,@cmp)
+				
+				UPDATE SMORD SET COMBINE_DET=@combine_det,SHOW_COMBINE_DET=@showcombine_det,PORT_FREE_TIME=@port_free_time,
+				FACT_FREE_TIME=@fact_free_time,CON_FREE_TIME=@con_free_time,
+				DEMURRAGE_DUE_DATE=@dem_due_date,DETENTION_DUE_DATE=@det_due_date,STORAGE_DUE_DATE=@sto_due_date WHERE SHIPMENT_ID=@shipment_id AND CNTR_NO=@cntr_no
+				UPDATE SMSMI SET COMBINE_DET=@combine_det,SHOW_COMBINE_DET=@showcombine_det,PORT_FREE_TIME=@port_free_time,
+				FACT_FREE_TIME=@fact_free_time,CON_FREE_TIME=@con_free_time WHERE SHIPMENT_ID=@shipment_id
+				UPDATE SMICNTR SET DEMURRAGE_DUE_DATE=@dem_due_date,DETENTION_DUE_DATE=@det_due_date,STORAGE_DUE_DATE=@sto_due_date,PORT_CHG_TYPE=@port_chg_type,FACT_CHG_TYPE=@fact_chg_type,CON_CHG_TYPE=@con_chg_type WHERE U_ID=@u_id
+			END
+			SET @Line = @Line + 1
+		END
+	END
+END
+GO
+
+
+CREATE TRIGGER [dbo].[UP_SMICNTR_BY_DUE_DATE]
+   ON  [dbo].[SMICNTR]
+   AFTER INSERT,UPDATE
+AS 
+BEGIN
+	DECLARE @Table TABLE(ID INT IDENTITY(1,1),U_ID NVARCHAR(50),TRAN_TYPE NVARCHAR(1),PICKUP_CDATE DATE,
+	EMPTY_TIME DATE,COMBINE_DET NVARCHAR(2),PORT_FREE_TIME INT,FACT_FREE_TIME INT, CON_FREE_TIME INT,
+	DETENTION_DUE_DATE DATE,DEMURRAGE_DUE_DATE DATE,STORAGE_DUE_DATE DATE,
+	CON_CHG_TYPE NVARCHAR(1),PORT_CHG_TYPE NVARCHAR(1),FACT_CHG_TYPE NVARCHAR(1),
+	CNT_TYPE NVARCHAR(10),CNTR_TYPE NVARCHAR(10),
+	SHIPMENT_ID NVARCHAR(20),CNTR_NO NVARCHAR(20),STO_EXCEED_TIME INT,DEM_EXCEED_TIME INT, DET_EXCEED_TIME INT,
+	CMP NVARCHAR(10),POD_CD NVARCHAR(5),CARRIER NVARCHAR(20),TERMINAL_CD NVARCHAR(30),FOB_AMT NUMERIC(18,2),CIF_AMT NUMERIC(18,2),ARV_DATE DATE,DEP_DATE DATE,LSP_NO NVARCHAR(20))
+	DECLARE @tran_type nvarchar(1),@cnt_type nvarchar(10),@pick_cdate date,@empty_time date,
+			@u_id nvarchar(50),@shipment_id nvarchar(20),@cntr_no nvarchar(20),@cmp nvarchar(10),
+			@pod_cd nvarchar(10),@carrier nvarchar(20),@terminal_cd nvarchar(30),
+			@fob_amt numeric(18,2),@cif_amt numeric(18,2),@dep_date date,@arv_date date,
+			@storage_due_date date,@demurrage_due_date date,@detention_due_date date,
+			@fact_chg_type nvarchar(1),@port_chg_type nvarchar(1),@con_chg_type nvarchar(1),
+			@port_free_time int,@fact_free_time int,@con_free_time int,
+			@combine_det nvarchar(2),@det_exceed_time INT,@dem_exceed_time INT,@sto_exceed_time INT,
+			@dem_amt_forecast NUMERIC(18,2),@det_amt_forecast NUMERIC(18,2),@sto_amt_forecast NUMERIC(18,2),
+			@dem_cur_forecast nvarchar(3),@det_cur_forecast nvarchar(3),@sto_cur_forecast nvarchar(3),
+			@lspno nvarchar(20)
+	DECLARE @Total INT,@Line INT = 1
+    if(UPDATE(DETENTION_DUE_DATE) OR UPDATE(STORAGE_DUE_DATE) OR UPDATE(DEMURRAGE_DUE_DATE))
+	BEGIN
+		INSERT INTO @Table SELECT C.U_ID,I.TRAN_TYPE,C.PICKUP_CDATE,C.EMPTY_TIME,I.COMBINE_DET,I.PORT_FREE_TIME,I.FACT_FREE_TIME,I.CON_FREE_TIME,C.DETENTION_DUE_DATE,C.DEMURRAGE_DUE_DATE,C.STORAGE_DUE_DATE,
+		C.CON_CHG_TYPE,C.PORT_CHG_TYPE,C.FACT_CHG_TYPE,
+(SELECT TOP 1 CHG_CD FROM ECREFFEE WHERE CHG_DESCP=C.CNTR_TYPE AND (CMP='*' OR CMP=C.CMP)) AS CNT_TYPE,C.CNTR_TYPE,I.SHIPMENT_ID,C.CNTR_NO,
+
+CASE WHEN C.STORAGE_DUE_DATE IS NULL THEN NULL 
+WHEN C.PICKUP_CDATE IS NULL THEN  CASE WHEN FACT_CHG_TYPE='W' THEN dbo.CountWorkdays2(C.STORAGE_DUE_DATE,GETDATE(),C.CMP) ELSE  DATEDIFF(DAY,C.STORAGE_DUE_DATE,GETDATE()) END
+ELSE CASE WHEN C.FACT_CHG_TYPE='W' THEN  dbo.CountWorkdays2(C.STORAGE_DUE_DATE,C.PICKUP_CDATE,C.CMP) ELSE DATEDIFF(DAY,C.STORAGE_DUE_DATE,C.PICKUP_CDATE) END END AS STO_EXCEED_TIME,
+
+
+
+CASE WHEN C.DEMURRAGE_DUE_DATE IS NULL THEN NULL 
+WHEN (C.PICKUP_CDATE IS NULL AND (I.COMBINE_DET ='NN' OR I.COMBINE_DET IS NULL)) OR (C.EMPTY_TIME IS NULL AND I.COMBINE_DET IN ('UY','UN','YY'))
+THEN CASE WHEN C.PORT_CHG_TYPE='W' THEN dbo.CountWorkdays2(C.DEMURRAGE_DUE_DATE,GETDATE(),C.CMP) ELSE DATEDIFF(DAY,C.DEMURRAGE_DUE_DATE,GETDATE()) END 
+WHEN I.COMBINE_DET='NN' OR I.COMBINE_DET IS NULL THEN
+CASE WHEN C.PORT_CHG_TYPE='W' THEN dbo.CountWorkdays2(C.DEMURRAGE_DUE_DATE,C.PICKUP_CDATE,C.CMP) ELSE DATEDIFF(DAY,C.DEMURRAGE_DUE_DATE,C.PICKUP_CDATE) END
+
+ELSE CASE WHEN C.PORT_CHG_TYPE='W' THEN dbo.CountWorkdays2(C.DEMURRAGE_DUE_DATE,C.EMPTY_TIME,C.CMP) ELSE   DATEDIFF(DAY,C.DEMURRAGE_DUE_DATE,C.EMPTY_TIME) END END AS DEM_EXCEED_TIME,
+
+
+
+CASE WHEN C.DETENTION_DUE_DATE IS NULL THEN NULL WHEN C.EMPTY_TIME IS NULL THEN
+CASE WHEN C.CON_CHG_TYPE='W' THEN dbo.CountWorkdays2(C.DETENTION_DUE_DATE,GETDATE(),C.CMP) ELSE  DATEDIFF(DAY,C.DETENTION_DUE_DATE,GETDATE()) END
+ELSE CASE WHEN  C.CON_CHG_TYPE='W' THEN  dbo.CountWorkdays2(C.DETENTION_DUE_DATE,C.EMPTY_TIME,C.CMP)  ELSE DATEDIFF(DAY,C.DETENTION_DUE_DATE,C.EMPTY_TIME) END END AS DET_EXCEED_TIME,
+
+ 
+
+I.CMP,I.POD_CD,I.CARRIER,I.TERMINAL_CD,ISNULL(C.FOB_AMT,0),ISNULL(C.CIF_AMT,0),CASE WHEN I.ATA IS NULL THEN I.ETA ELSE I.ATA END,CASE WHEN I.ATD IS NULL THEN I.ETD ELSE I.ATD END,
+(SELECT TOP 1 PARTY_NO FROM SMSMIPT PT WHERE PT.SHIPMENT_ID=I.SHIPMENT_ID AND PT.PARTY_TYPE='SP') AS LSP_NO
+		FROM inserted C LEFT JOIN SMSMI I ON C.SHIPMENT_ID=I.SHIPMENT_ID
+		SELECT @Total = MAX(ID) FROM @Table
+        
+		WHILE @Line <= @Total
+		BEGIN
+			select @u_id=U_ID, @tran_type=TRAN_TYPE,@pick_cdate=PICKUP_CDATE,@empty_time=EMPTY_TIME,
+		@combine_det=COMBINE_DET,@port_free_time=PORT_FREE_TIME,@fact_free_time=FACT_FREE_TIME,@con_free_time=CON_FREE_TIME,
+		@detention_due_date=DETENTION_DUE_DATE,@cnt_type=CASE WHEN CNT_TYPE IS NULL THEN CNTR_TYPE ELSE CNT_TYPE END,
+		@demurrage_due_date=DEMURRAGE_DUE_DATE,@storage_due_date=STORAGE_DUE_DATE,@det_exceed_time=DET_EXCEED_TIME,
+		@dem_exceed_time=DEM_EXCEED_TIME,@sto_exceed_time=STO_EXCEED_TIME,@cmp=CMP,@pod_cd=POD_CD,@carrier=CARRIER,
+		@terminal_cd=TERMINAL_CD,@fob_amt=FOB_AMT,@cif_amt=CIF_AMT,@dep_date=DEP_DATE,@arv_date=ARV_DATE,@cntr_no=CNTR_NO,
+		@fact_free_time=FACT_FREE_TIME,@port_free_time=PORT_FREE_TIME,@con_free_time=CON_FREE_TIME,@shipment_id=SHIPMENT_ID,@lspno=LSP_NO,
+		@fact_chg_type=FACT_CHG_TYPE,@port_chg_type=PORT_CHG_TYPE,@con_chg_type=CON_CHG_TYPE from @Table WHERE ID = @Line
+			if (@tran_type IN ('F','R'))
+			BEGIN
+				DECLARE @det_from date=null,@det_to date=null,
+				@dem_from date=null,@dem_to date=null,
+				@sto_from date=null,@sto_to date=null
+				if(@sto_exceed_time>0)
+				BEGIN
+					SELECT @sto_from =dbo.CountWorkdays(1,@storage_due_date,@fact_chg_type,@cmp)
+					SET @sto_to = @pick_cdate
+					if(@sto_to is null)
+						SET @sto_to = GETDATE()
+					SELECT @sto_amt_forecast=AMT,@sto_cur_forecast=CUR FROM GET_STO_FORECAST_FREE(@cmp,@pod_cd,@carrier,@tran_type,@cnt_type,@terminal_cd,@sto_exceed_time+@fact_free_time,@fob_amt,@cif_amt,@dep_date,@arv_date,@lspno)
+				END
+				if(@dem_exceed_time>0)
+				BEGIN
+					SELECT @dem_from =dbo.CountWorkdays(1,@demurrage_due_date,@port_chg_type,@cmp)
+					SET @dem_to = @pick_cdate
+					if(@combine_det IN ('UY','UN','YY'))
+					    SET @dem_to = @empty_time
+					if(@dem_to is null)
+						SET @dem_to = GETDATE()
+					SELECT @dem_amt_forecast=AMT,@dem_cur_forecast=CUR FROM GET_DEM_FORECAST_FREE(@cmp,@pod_cd,@carrier,@tran_type,@cnt_type,@terminal_cd,@dem_exceed_time+@port_free_time,@fob_amt,@cif_amt,@dep_date,@arv_date,@lspno)
+				END
+
+				if(@det_exceed_time>0)
+				BEGIN
+					SELECT @det_from =dbo.CountWorkdays(1,@detention_due_date,@fact_chg_type,@cmp)
+					SET @det_to = @empty_time
+					if(@det_to is null)
+						SET @det_to = GETDATE()
+					SELECT @det_amt_forecast=AMT,@det_cur_forecast=CUR FROM GET_DET_FORECAST_FREE(@cmp,@pod_cd,@carrier,@tran_type,@cnt_type,@terminal_cd,@det_exceed_time+@con_free_time,@fob_amt,@cif_amt,@dep_date,@arv_date,@lspno)
+				END
+
+				if (UPDATE(STORAGE_DUE_DATE) OR UPDATE(DEMURRAGE_DUE_DATE) OR UPDATE(DETENTION_DUE_DATE))
+				BEGIN
+					UPDATE SMICNTR SET STO_EXCEED_TIME=@sto_exceed_time,STO_EST_FROM=@sto_from,STO_EST_TO=@sto_to,
+					DEM_EXCEED_TIME=@dem_exceed_time,DEM_EST_FROM=@dem_from,DEM_EST_TO=@dem_to,
+					DET_EXCEED_TIME=@det_exceed_time,DET_EST_FROM=@det_from,DET_EST_TO=@det_to,
+					DET_AMT_FORECAST=@det_amt_forecast,DET_CUR_FORECAST=@det_cur_forecast,
+					DEM_AMT_FORECAST=@dem_amt_forecast,DEM_CUR_FORECAST=@dem_cur_forecast,
+					STO_AMT_FORECAST=@sto_amt_forecast,STO_CUR_FORECAST=@sto_cur_forecast WHERE U_ID = @u_id
+					UPDATE SMORD SET STO_EXCEED_TIME=@sto_exceed_time,STO_EST_FROM=@sto_from,STO_EST_TO=@sto_to,
+					DEM_EXCEED_TIME=@dem_exceed_time,DEM_EST_FROM=@dem_from,DEM_EST_TO=@dem_to,
+					DET_EXCEED_TIME=@det_exceed_time,DET_EST_FROM=@det_from,DET_EST_TO=@det_to,
+					DET_AMT_FORECAST=@det_amt_forecast,DET_CUR_FORECAST=@det_cur_forecast,
+					DEM_AMT_FORECAST=@dem_amt_forecast,DEM_CUR_FORECAST=@dem_cur_forecast,
+					STO_AMT_FORECAST=@sto_amt_forecast,STO_CUR_FORECAST=@sto_cur_forecast WHERE SHIPMENT_ID = @shipment_id AND CNTR_NO=@cntr_no
+				END
+			END
+			SET @Line = @Line + 1
+		END
+	END
+END
+GO
+
+CREATE TRIGGER [dbo].[updateSmsmiEta]
+   ON  [dbo].[SMSMI]
+   AFTER INSERT,UPDATE
+AS 
+BEGIN
+    DECLARE @Table TABLE(ID INT IDENTITY(1,1),U_ID NVARCHAR(50),SHIPMENT_ID NVARCHAR(20),CNTR_NO NVARCHAR(20),TRAN_TYPE NVARCHAR(1),CMP NVARCHAR(10),POD_CD NVARCHAR(5)
+	,CARRIER NVARCHAR(20),ETA DATE,DISCHARGE_DATE DATE,EMP_PICK_DATE DATE,PICKUP_CDATE DATE,ARV_DATE DATE,DEP_DATE DATE,LSP_NO NVARCHAR(20))
+	
+	DECLARE @shipment_id NVARCHAR(20),@cntr_no NVARCHAR(20),@u_id nvarchar(50),
+	        @cmp nvarchar(10),@pod_cd nvarchar(5),@carrier nvarchar(20),@tran_type nvarchar(10),
+			@eta date,@arv_date date,@dep_date date,
+			@combine_det nvarchar(2),@showcombine_det nvarchar(1),
+			@port_free_time int,@fact_free_time int,@con_free_time int,
+			@sto_due_date date,@dem_due_date date,@det_due_date date,
+			@discharge_date date,@emp_pick_date date,@pickup_cdate date,@lspno nvarchar(20),
+			@port_chg_type nvarchar(1),@fact_chg_type nvarchar(1),@con_chg_type nvarchar(1)
+	DECLARE @Total INT,@Line INT = 1
+	if (UPDATE(ETA))
+	BEGIN
+		INSERT INTO @Table SELECT C.U_ID,I.SHIPMENT_ID,CNTR_NO,TRAN_TYPE,I.CMP,POD_CD,CARRIER,ETA,C.DISCHARGE_DATE,C.EMP_PICK_DATE,C.PICKUP_CDATE,
+		CASE WHEN ATA IS NULL THEN ETA ELSE ATA END,CASE WHEN ATD IS NULL THEN ETD ELSE ATD END,
+		(SELECT TOP 1 PARTY_NO FROM SMSMIPT PT WHERE PT.SHIPMENT_ID=I.SHIPMENT_ID AND PT.PARTY_TYPE='SP') AS LSP_NO
+		FROM inserted I LEFT JOIN SMICNTR C ON I.SHIPMENT_ID=C.SHIPMENT_ID
+		SELECT @Total = MAX(ID) FROM @Table
+        
+		WHILE @Line <= @Total
+		BEGIN
+			SELECT @u_id=U_ID,@shipment_id=SHIPMENT_ID,@cntr_no=CNTR_NO, @tran_type=TRAN_TYPE,@cmp=CMP,@pod_cd=POD_CD,@carrier=CARRIER,@eta=ETA,
+			@discharge_date=DISCHARGE_DATE,@emp_pick_date=EMP_PICK_DATE,@pickup_cdate=PICKUP_CDATE,@arv_date=ARV_DATE,
+			@dep_date=DEP_DATE,@lspno=LSP_NO FROM @Table WHERE ID = @Line
+			SET @Line = @Line + 1
+			if (@tran_type IN ('F','R'))
+			BEGIN
+				SELECT @combine_det= COMBINE_DET,@port_free_time=PORT_FREE_TIME,@fact_free_time=FACT_FREE_TIME,@con_free_time=CON_FREE_TIME,@showcombine_det=SHOW_COMBINE_DET,@port_chg_type=PORT_CHG_TYPE,@fact_chg_type=FACT_CHG_TYPE,@con_chg_type=CON_CHG_TYPE FROM GET_FREE_TIME(@dep_date,@arv_date,@cmp,@pod_cd,@carrier,@tran_type,@lspno)
+					
+				select @sto_due_date=STORAGE_DUE_DATE,@dem_due_date=DEMURRAGE_DUE_DATE,@det_due_date=DETENTION_DUE_DATE from GET_DUE_DATE(@fact_free_time,@port_free_time,@con_free_time,@eta,@discharge_date,@emp_pick_date,@pickup_cdate,@combine_det,@fact_chg_type,@port_chg_type,@con_chg_type,@cmp)
+
+				UPDATE SMORD SET COMBINE_DET=@combine_det,SHOW_COMBINE_DET=@showcombine_det,PORT_FREE_TIME=@port_free_time,
+				FACT_FREE_TIME=@fact_free_time,CON_FREE_TIME=@con_free_time,
+				DEMURRAGE_DUE_DATE=@dem_due_date,DETENTION_DUE_DATE=@det_due_date,STORAGE_DUE_DATE=@sto_due_date WHERE SHIPMENT_ID=@shipment_id AND CNTR_NO=@cntr_no
+				UPDATE SMSMI SET COMBINE_DET=@combine_det,SHOW_COMBINE_DET=@showcombine_det,PORT_FREE_TIME=@port_free_time,
+				FACT_FREE_TIME=@fact_free_time,CON_FREE_TIME=@con_free_time WHERE SHIPMENT_ID=@shipment_id
+				UPDATE SMICNTR SET DEMURRAGE_DUE_DATE=@dem_due_date,DETENTION_DUE_DATE=@det_due_date,STORAGE_DUE_DATE=@sto_due_date,PORT_CHG_TYPE=@port_chg_type,FACT_CHG_TYPE=@fact_chg_type,CON_CHG_TYPE=@con_chg_type WHERE U_ID=@u_id
+			END
+		END
+	END
+END
+GO
+
+CREATE PROC [dbo].[PROC_UP_SMICNTR]
+AS
+BEGIN
+	DECLARE @Total INT,@Line INT = 1
+	DECLARE @u_id nvarchar(50),@shipment_id nvarchar(20),@cntr_no nvarchar(20),@combine_det nvarchar(2),@showcombine_det nvarchar(1),
+	@port_free_time int,@fact_free_time int,@con_free_time int
+	DECLARE @dem_due_date date,@det_due_date date,@sto_due_date date,@port_chg_type nvarchar(1),@fact_chg_type nvarchar(1),@con_chg_type nvarchar(1)
+	DECLARE @dep_date date,@arv_date date,@cmp nvarchar(10),@pod_cd nvarchar(5),@carrier nvarchar(20),@tran_type nvarchar(10),
+			@eta date,@discharge_date date,@emp_pick_date date,@pickup_cdate date,@lspno nvarchar(20)
+	DECLARE @Table TABLE(ID INT IDENTITY(1,1),U_ID NVARCHAR(50),SHIPMENT_ID NVARCHAR(20),CNTR_NO NVARCHAR(20),PICKUP_CDATE DATE,
+	EMPTY_TIME DATE,TRAN_TYPE NVARCHAR(10),CMP NVARCHAR(10),
+	POD_CD NVARCHAR(5),CARRIER NVARCHAR(20),ETA DATE,DISCHARGE_DATE DATE,EMP_PICK_DATE DATE,ARV_DATE DATE,DEP_DATE DATE,LSP_NO NVARCHAR(20))
+
+	INSERT INTO @Table 
+	 SELECT C.U_ID,I.SHIPMENT_ID,C.CNTR_NO,C.PICKUP_CDATE,C.EMPTY_TIME,I.TRAN_TYPE,I.CMP,I.POD_CD,I.CARRIER,I.ETA,C.DISCHARGE_DATE,C.EMP_PICK_DATE,
+	CASE WHEN I.ATA IS NULL THEN I.ETA ELSE I.ATA END,CASE WHEN I.ATD IS NULL THEN I.ETD ELSE I.ATD END,
+	(SELECT TOP 1 PARTY_NO FROM SMSMIPT PT WHERE PT.SHIPMENT_ID=I.SHIPMENT_ID AND PT.PARTY_TYPE='SP') AS LSP_NO 
+	FROM SMICNTR C LEFT JOIN SMSMI I ON C.SHIPMENT_ID=I.SHIPMENT_ID WHERE I.TRAN_TYPE IN ('F','R') 
+	AND (I.ETA IS NOT NULL OR I.DISCHARGE_DATE IS NOT NULL) AND C.PICKUP_CDATE IS NULL
+	AND I.ETA>'2022-01-01'
+	UNION SELECT C.U_ID,I.SHIPMENT_ID,C.CNTR_NO,C.PICKUP_CDATE,C.EMPTY_TIME,I.TRAN_TYPE,I.CMP,I.POD_CD,I.CARRIER,I.ETA,C.DISCHARGE_DATE,C.EMP_PICK_DATE,
+	CASE WHEN I.ATA IS NULL THEN I.ETA ELSE I.ATA END,CASE WHEN I.ATD IS NULL THEN I.ETD ELSE I.ATD END,
+	(SELECT TOP 1 PARTY_NO FROM SMSMIPT PT WHERE PT.SHIPMENT_ID=I.SHIPMENT_ID AND PT.PARTY_TYPE='SP') AS LSP_NO 
+	FROM SMICNTR C LEFT JOIN SMSMI I ON C.SHIPMENT_ID=I.SHIPMENT_ID WHERE I.TRAN_TYPE IN ('F','R') AND 
+	C.EMPTY_TIME IS NULL AND combine_det IN ('UY','UN') AND (I.ETA IS NOT NULL OR C.EMP_PICK_DATE IS NOT NULL)
+	AND I.ETA>'2022-01-01'
+	UNION SELECT C.U_ID,I.SHIPMENT_ID,C.CNTR_NO,C.PICKUP_CDATE,C.EMPTY_TIME,I.TRAN_TYPE,I.CMP,I.POD_CD,I.CARRIER,I.ETA,C.DISCHARGE_DATE,C.EMP_PICK_DATE,
+	CASE WHEN I.ATA IS NULL THEN I.ETA ELSE I.ATA END,CASE WHEN I.ATD IS NULL THEN I.ETD ELSE I.ATD END,
+	(SELECT TOP 1 PARTY_NO FROM SMSMIPT PT WHERE PT.SHIPMENT_ID=I.SHIPMENT_ID AND PT.PARTY_TYPE='SP') AS LSP_NO 
+	FROM SMICNTR C LEFT JOIN SMSMI I ON C.SHIPMENT_ID=I.SHIPMENT_ID WHERE I.TRAN_TYPE IN ('F','R') AND 
+	(C.EMPTY_TIME IS NULL AND combine_det IN ('YY') AND (I.ETA IS NOT NULL OR C.DISCHARGE_DATE IS NOT NULL))
+	AND I.ETA>'2022-01-01'
+	UNION SELECT C.U_ID,I.SHIPMENT_ID,C.CNTR_NO,C.PICKUP_CDATE,C.EMPTY_TIME,I.TRAN_TYPE,I.CMP,I.POD_CD,I.CARRIER,I.ETA,C.DISCHARGE_DATE,C.EMP_PICK_DATE,
+	CASE WHEN I.ATA IS NULL THEN I.ETA ELSE I.ATA END,CASE WHEN I.ATD IS NULL THEN I.ETD ELSE I.ATD END,
+	(SELECT TOP 1 PARTY_NO FROM SMSMIPT PT WHERE PT.SHIPMENT_ID=I.SHIPMENT_ID AND PT.PARTY_TYPE='SP') AS LSP_NO 
+	FROM SMICNTR C LEFT JOIN SMSMI I ON C.SHIPMENT_ID=I.SHIPMENT_ID WHERE I.TRAN_TYPE IN ('F','R')  AND 
+	((combine_det ='NN' OR combine_det IS NULL) AND C.PICKUP_CDATE IS NULL AND C.DISCHARGE_DATE IS NOT NULL)
+	AND I.ETA>'2022-01-01'
+	UNION SELECT C.U_ID,I.SHIPMENT_ID,C.CNTR_NO,C.PICKUP_CDATE,C.EMPTY_TIME,I.TRAN_TYPE,I.CMP,I.POD_CD,I.CARRIER,I.ETA,C.DISCHARGE_DATE,C.EMP_PICK_DATE,
+	CASE WHEN I.ATA IS NULL THEN I.ETA ELSE I.ATA END,CASE WHEN I.ATD IS NULL THEN I.ETD ELSE I.ATD END,
+	(SELECT TOP 1 PARTY_NO FROM SMSMIPT PT WHERE PT.SHIPMENT_ID=I.SHIPMENT_ID AND PT.PARTY_TYPE='SP') AS LSP_NO 
+	FROM SMICNTR C LEFT JOIN SMSMI I ON C.SHIPMENT_ID=I.SHIPMENT_ID WHERE I.TRAN_TYPE IN ('F','R')  AND 
+	(C.EMPTY_TIME IS NULL AND combine_det IN ('YY','UY') AND (I.ETA IS NOT NULL OR C.DISCHARGE_DATE IS NOT NUlL)) 
+	AND I.ETA>'2022-01-01'
+	UNION SELECT C.U_ID,I.SHIPMENT_ID,C.CNTR_NO,C.PICKUP_CDATE,C.EMPTY_TIME,I.TRAN_TYPE,I.CMP,I.POD_CD,I.CARRIER,I.ETA,C.DISCHARGE_DATE,C.EMP_PICK_DATE,
+	CASE WHEN I.ATA IS NULL THEN I.ETA ELSE I.ATA END,CASE WHEN I.ATD IS NULL THEN I.ETD ELSE I.ATD END,
+	(SELECT TOP 1 PARTY_NO FROM SMSMIPT PT WHERE PT.SHIPMENT_ID=I.SHIPMENT_ID AND PT.PARTY_TYPE='SP') AS LSP_NO 
+	FROM SMICNTR C LEFT JOIN SMSMI I ON C.SHIPMENT_ID=I.SHIPMENT_ID WHERE I.TRAN_TYPE IN ('F','R')  AND 
+	(C.EMPTY_TIME IS NULL AND (combine_det NOT IN ('YY','UY') OR combine_det IS NULL) AND C.PICKUP_CDATE IS NOT NULL)
+	AND I.ETA>'2022-01-01'
+
+	SELECT @Total = MAX(ID) FROM @Table        
+	WHILE @Line <= @Total
+	BEGIN
+		SELECT @u_id=U_ID,@shipment_id=SHIPMENT_ID,@cntr_no=CNTR_NO,@tran_type=TRAN_TYPE,@cmp=CMP,@pod_cd=POD_CD,@carrier=CARRIER,@arv_date=ARV_DATE,@dep_date=DEP_DATE,
+		@eta=ETA,@discharge_date=DISCHARGE_DATE,@emp_pick_date=EMP_PICK_DATE,@pickup_cdate=PICKUP_CDATE,@lspno=LSP_NO FROM @Table WHERE ID = @Line
+
+		SELECT @combine_det= COMBINE_DET,@port_free_time=PORT_FREE_TIME,@fact_free_time=FACT_FREE_TIME,@con_free_time=CON_FREE_TIME,@showcombine_det=SHOW_COMBINE_DET,@port_chg_type=PORT_CHG_TYPE,@fact_chg_type=FACT_CHG_TYPE,@con_chg_type=CON_CHG_TYPE FROM GET_FREE_TIME(@dep_date,@arv_date,@cmp,@pod_cd,@carrier,@tran_type,@lspno)
+		
+		select @sto_due_date=STORAGE_DUE_DATE,@dem_due_date=DEMURRAGE_DUE_DATE,@det_due_date=DETENTION_DUE_DATE from GET_DUE_DATE(@fact_free_time,@port_free_time,@con_free_time,@eta,@discharge_date,@emp_pick_date,@pickup_cdate,@combine_det,@fact_chg_type,@port_chg_type,@con_chg_type,@cmp)
+		
+		UPDATE SMORD SET COMBINE_DET=@combine_det,SHOW_COMBINE_DET=@showcombine_det,PORT_FREE_TIME=@port_free_time,FACT_FREE_TIME=@fact_free_time,CON_FREE_TIME=@con_free_time,
+		DEMURRAGE_DUE_DATE=@dem_due_date,DETENTION_DUE_DATE=@det_due_date,STORAGE_DUE_DATE=@sto_due_date WHERE SHIPMENT_ID=@shipment_id AND CNTR_NO=@cntr_no
+		UPDATE SMSMI SET COMBINE_DET=@combine_det,SHOW_COMBINE_DET=@showcombine_det,PORT_FREE_TIME=@port_free_time,FACT_FREE_TIME=@fact_free_time,CON_FREE_TIME=@con_free_time WHERE SHIPMENT_ID=@shipment_id
+		UPDATE SMICNTR SET DEMURRAGE_DUE_DATE=@dem_due_date,DETENTION_DUE_DATE=@det_due_date,STORAGE_DUE_DATE=@sto_due_date,PORT_CHG_TYPE=@port_chg_type,FACT_CHG_TYPE=@fact_chg_type,CON_CHG_TYPE=@con_chg_type WHERE U_ID=@u_id
+		SET @Line = @Line + 1
+	END
+END
+GO

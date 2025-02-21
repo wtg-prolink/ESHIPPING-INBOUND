@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "ExchangeRate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #page-wrapper {
+        padding: 5px;
+    }
+</style>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+
+@Html.RazorJSInline("~/Scripts/ExchangeRate/ExchangeRate.js")
+<div id="wrapper">
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form id="SearchForm">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-4-60 label-right">
+                            <label for="SampleName" class="control-label" >@Resources.Locale.L_ExchangeRate_Edate</label>
+                        </div>
+                        <div class="pure-u-sm-7-60 control-group">
+                            <input type="text" class="form-control input-sm" id="FSearchRDate" name="FSearchRDate" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-4-60 label-right">
+                            <label  class="control-label">@Resources.Locale.L_ExchangeRate_Fcur</label>
+                        </div>
+                        <div class="pure-u-sm-7-60 control-group">
+                            <input type="text" class="form-control input-sm" id="Fcur" name="Fcur" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-4-60 label-right">
+                            <label class="control-label">@Resources.Locale.L_ExchangeRate_Tcur</label>
+                        </div>
+                        <div class="pure-u-sm-7-60 control-group">
+                            <input type="text" class="form-control input-sm" id="Tcur" name="Tcur" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-2-60"></div>
+                        <div class="pure-u-sm-5-60">
+                            <button class="btn btn-sm btn-info" type="button" id="searchBtn">@Resources.Locale.L_MenuBar_Search</button>
+                        </div>
+                     </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="ExchangeRateGrid" class="_tableGrid" style="width: 100%">
+                        <tr>
+                            <td />
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

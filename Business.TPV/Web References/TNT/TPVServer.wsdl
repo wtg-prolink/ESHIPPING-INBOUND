@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:intf="http://example" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://example" targetNamespace="http://example" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://example">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="ArrayOf_xsd_string">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="mainResponse" />
+  <wsdl:message name="callByTPVResponse">
+    <wsdl:part name="callByTPVReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="callByTPVRequest">
+    <wsdl:part name="xml" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="mainRequest">
+    <wsdl:part name="args" type="impl:ArrayOf_xsd_string" />
+  </wsdl:message>
+  <wsdl:portType name="TPVServer">
+    <wsdl:operation name="main" parameterOrder="args">
+      <wsdl:input name="mainRequest" message="impl:mainRequest" />
+      <wsdl:output name="mainResponse" message="impl:mainResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="callByTPV" parameterOrder="xml">
+      <wsdl:input name="callByTPVRequest" message="impl:callByTPVRequest" />
+      <wsdl:output name="callByTPVResponse" message="impl:callByTPVResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TPVServerSoapBinding" type="impl:TPVServer">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="main">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="mainRequest">
+        <wsdlsoap:body use="literal" namespace="http://example" />
+      </wsdl:input>
+      <wsdl:output name="mainResponse">
+        <wsdlsoap:body use="literal" namespace="http://example" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="callByTPV">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="callByTPVRequest">
+        <wsdlsoap:body use="literal" namespace="http://example" />
+      </wsdl:input>
+      <wsdl:output name="callByTPVResponse">
+        <wsdlsoap:body use="literal" namespace="http://example" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TPVServerService">
+    <wsdl:port name="TPVServer" binding="impl:TPVServerSoapBinding">
+      <wsdlsoap:address location="http://211.147.67.167:8099/TNT_TPV_WS/services/TPVServer" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

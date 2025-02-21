@@ -1,0 +1,591 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <连接 Ref="2" type="Stimulsoft.Report.Dictionary.StiXmlDatabase" isKey="true">
+        <Alias>连接</Alias>
+        <Name>连接</Name>
+        <PathData>C:\Users\Administrator\Desktop\Schemas.xml</PathData>
+        <PathSchema />
+      </连接>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <Table1 Ref="3" type="DataTableSource" isKey="true">
+        <Alias>Table1</Alias>
+        <Columns isList="true" count="49">
+          <value>U_ID,System.Guid</value>
+          <value>GROUP_ID,System.String</value>
+          <value>CMP,System.String</value>
+          <value>STN,System.String</value>
+          <value>DEP,System.String</value>
+          <value>BU,System.String</value>
+          <value>LC_NO,System.String</value>
+          <value>LC_DATE,System.DateTime</value>
+          <value>STATUS,System.String</value>
+          <value>BANK_NM,System.String</value>
+          <value>CUR,System.String</value>
+          <value>LC_AMT,System.Decimal</value>
+          <value>EFFECT_DATE,System.DateTime</value>
+          <value>FAMT,System.Decimal</value>
+          <value>SAMT,System.Decimal</value>
+          <value>PRATE,System.Decimal</value>
+          <value>PAMT,System.Decimal</value>
+          <value>PAY_DATE,System.DateTime</value>
+          <value>END_DATE,System.DateTime</value>
+          <value>LAST_DATE,System.DateTime</value>
+          <value>DAMT,System.Decimal</value>
+          <value>DEPOSIT_DATE,System.DateTime</value>
+          <value>XAMT,System.Decimal</value>
+          <value>REMARK,System.String</value>
+          <value>SUPPLIER_CD,System.String</value>
+          <value>SUPPLIER_NM,System.String</value>
+          <value>CONTACT_CD,System.String</value>
+          <value>CONTACT_NM,System.String</value>
+          <value>GOODS_CD,System.String</value>
+          <value>GOODS_NM,System.String</value>
+          <value>EX_RATE,System.Decimal</value>
+          <value>LC_CD,System.String</value>
+          <value>LC_NM,System.String</value>
+          <value>CNTRY_CD,System.String</value>
+          <value>CNTRY_NM,System.String</value>
+          <value>CT_NO,System.String</value>
+          <value>Llc_AMT,System.Decimal</value>
+          <value>FINAL_REPAY_DATE,System.DateTime</value>
+          <value>FINAL_REPAY_AMT,System.Decimal</value>
+          <value>NW,System.Decimal</value>
+          <value>AAMT,System.Decimal</value>
+          <value>YRATE,System.Decimal</value>
+          <value>EAMT,System.Decimal</value>
+          <value>MRATE,System.Decimal</value>
+          <value>PO_NO,System.String</value>
+          <value>CHG_CD,System.String</value>
+          <value>LOCAL_AMT,System.Decimal</value>
+          <value>CHG_DESCP,System.String</value>
+          <value>BANK_CD,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>Table1</Name>
+        <NameInSource>连接.Table1</NameInSource>
+      </Table1>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="2">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="4">
+        <PageHeaderBand1 Ref="5" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,18,8.2</ClientRectangle>
+          <Components isList="true" count="17">
+            <Text1 Ref="6" type="Text" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>0,1,18,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,15,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>采购结算单</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text2 Ref="7" type="Text" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>0,2.8,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>采购单号:</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text4 Ref="8" type="Text" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>0,3.6,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>5049a2b6972941a48d56419c029a7333</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>信用证号:</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text5 Ref="9" type="Text" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>2,3.6,5.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>82a276ffb466407082b6ed34e843b031</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{Table1.LC_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text6 Ref="10" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,4.6,6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>付款明细</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text7 Ref="11" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>6,4.6,4.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>092896b906974a8f8005363b890de2a2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>金额</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text8 Ref="12" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>10.8,4.6,4.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>633d6e5c28f44a9884362643633aeeac</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>日期</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text9 Ref="13" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,5.2,6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>68fea46f7ca04e4e9914d213013cd386</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>保证金金额</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text10 Ref="14" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>6,5.2,4.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>b4fd7047a9834e709f00c7849b74ade6</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{Table1.PAMT}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text11 Ref="15" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>10.8,5.2,4.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>6364542fe0434ee68ab09494be89a793</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text12 Ref="16" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,5.8,6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>c08e3f5ee0844b09b4938e43a79ab6ed</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>首款还款金额</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Text13 Ref="17" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>6,5.8,4.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>51579cb529e34b9c850496d0b63ee7d8</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{Table1.DAMT}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text14 Ref="18" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>10.8,5.8,4.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>f71ad033f1d447b588bb96cbcd69ae46</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text15 Ref="19" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,6.4,6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>3ebb7fa5f8e548719097e2a22b8fb202</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>尾款还款金额</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text16 Ref="20" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>6,6.4,4.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>7f8dc6a814504bf488accbe81631c105</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{Table1.EAMT}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text17 Ref="21" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>10.8,6.4,4.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>90b3e448f03e41bc93bcb0c96f8f5bd4</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <SubReport1 Ref="22" type="SubReport" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2,2.8,5.6,0.6</ClientRectangle>
+              <Components isList="true" count="0" />
+              <Name>SubReport1</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <SubReportPageGuid>cf036e99fca04e0f949f0d845f4dbdeb</SubReportPageGuid>
+            </SubReport1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </PageHeaderBand1>
+        <GroupHeaderBand1 Ref="23" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,9.4,18,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Condition>{Table1.CHG_CD}</Condition>
+          <Conditions isList="true" count="0" />
+          <Name>GroupHeaderBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </GroupHeaderBand1>
+        <DataBand2 Ref="24" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,10.2,18,0.6</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text3 Ref="25" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,0,6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>da6a64fa0b874be6b5d3a5b121c3a722</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4" />
+              <Parent isRef="24" />
+              <Text>{Table1.CHG_DESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text19 Ref="26" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>6,0,4.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>bbe84a8b07f64604b0820713b3671e70</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="4" />
+              <Parent isRef="24" />
+              <Text>{Table1.LOCAL_AMT}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text20 Ref="27" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>10.8,0,4.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>4fbd17df98204f8ebf9eb7250ff47072</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="4" />
+              <Parent isRef="24" />
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Table1</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="0" />
+        </DataBand2>
+        <GroupFooterBand1 Ref="28" type="GroupFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,11.6,18,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>GroupFooterBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </GroupFooterBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>a69ccf49b9674181a6c4f904ee319fd4</Guid>
+      <Margins>1.5,1.5,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="29" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+    <subReport_1 Ref="30" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="3">
+        <HeaderBand1 Ref="31" type="HeaderBand" isKey="true">
+          <BeforePrintEvent>ClearHBL_Line();</BeforePrintEvent>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,5.6,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>HeaderBand1</Name>
+          <Page isRef="30" />
+          <Parent isRef="30" />
+        </HeaderBand1>
+        <DataBand1 Ref="32" type="DataBand" isKey="true">
+          <BeforePrintEvent>SetHBL_Line(Table1.PO_NO)</BeforePrintEvent>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,1.2,5.6,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Table1</DataSourceName>
+          <Filters isList="true" count="1">
+            <value>_x007B_Table1.LC_NO_x003D__x003D_Table1.LC_NO_x007D_</value>
+          </Filters>
+          <Name>DataBand1</Name>
+          <Page isRef="30" />
+          <Parent isRef="30" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+        <FooterBand1 Ref="33" type="FooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,2,5.6,0.6</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text18 Ref="34" type="Text" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>0,0,5.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,12</Font>
+              <Guid>ad31b57f80524ff0a6852f014b4e8067</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="30" />
+              <Parent isRef="33" />
+              <Text>{_strHBL_NO_Line}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>FooterBand1</Name>
+          <Page isRef="30" />
+          <Parent isRef="30" />
+        </FooterBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>cf036e99fca04e0f949f0d845f4dbdeb</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>subReport_1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>7.6</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="35" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </subReport_1>
+  </Pages>
+  <PrinterSettings Ref="36" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>8/26/2015 11:12:19 AM</ReportChanged>
+  <ReportCreated>8/25/2015 5:34:17 PM</ReportCreated>
+  <ReportFile>C:\Users\Administrator\Desktop\POL01.mrt</ReportFile>
+  <ReportGuid>c6b30977885a497286aa84d20162dcdc</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2012.1.1300</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+		public string _strHBL_NO_Line = "";
+		
+		public void ClearHBL_Line()
+		{
+			_strHBL_NO_Line = "";
+		}		
+		public void SetHBL_Line(string pStrHBL_NO)
+		{
+			if(string.IsNullOrEmpty(pStrHBL_NO))
+				return;
+			if(_strHBL_NO_Line =="")
+			{
+				_strHBL_NO_Line = pStrHBL_NO;				
+			}
+			else
+			{
+				_strHBL_NO_Line = _strHBL_NO_Line + " / " + pStrHBL_NO;
+			}
+		}  
+        #region StiReport Designer generated code - do not modify
+        #endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

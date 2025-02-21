@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:intf="http://ebpp.coscon.com/NewEBWeb/services/BookingService" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns1="java:com.coscon.neweb.webservices.booking" xmlns:impl="http://ebpp.coscon.com/NewEBWeb/services/BookingService" targetNamespace="http://ebpp.coscon.com/NewEBWeb/services/BookingService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="java:com.coscon.neweb.webservices.booking">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="BookingResult">
+        <xsd:sequence>
+          <xsd:element name="code" nillable="true" type="soapenc:string" />
+          <xsd:element name="debug" nillable="true" type="soapenc:string" />
+          <xsd:element name="flag" type="xsd:boolean" />
+          <xsd:element name="msg" nillable="true" type="soapenc:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="bookingRequest">
+    <wsdl:part name="in0" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="bookingResponse">
+    <wsdl:part name="bookingReturn" type="tns1:BookingResult" />
+  </wsdl:message>
+  <wsdl:portType name="BookingService$$EnhancerByCGLIB$$3a982778">
+    <wsdl:operation name="booking" parameterOrder="in0">
+      <wsdl:input name="bookingRequest" message="impl:bookingRequest" />
+      <wsdl:output name="bookingResponse" message="impl:bookingResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BookingServiceSoapBinding" type="impl:BookingService$$EnhancerByCGLIB$$3a982778">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="booking">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="bookingRequest">
+        <wsdlsoap:body use="encoded" namespace="http://booking.webservices.neweb.coscon.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="bookingResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ebusiness.coscon.com/API/v1/BookingService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BookingService$$EnhancerByCGLIB$$3a982778Service">
+    <wsdl:port name="BookingService" binding="impl:BookingServiceSoapBinding">
+      <wsdlsoap:address location="http://ebusiness.coscon.com/API/v1/BookingService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

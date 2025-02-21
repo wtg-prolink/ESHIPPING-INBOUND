@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "IpGoods";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #page-wrapper {padding: 5px;}
+</style>
+@Html.RazorJSInline("~/Scripts/System/IpGoods.js")
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+        	<div class="row">
+				<div class="col-xs-7">
+		            <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+		                <tr>
+		                    <td />
+		                </tr>
+		            </table>
+		        </div>
+		        <div class="col-xs-5" style="padding-left:0px;">
+		        	<table id="GoodsCInfoGrid" class="_tableGrid" style="width: 100%">
+		        	    <tr>
+		        	        <td />
+		        	    </tr>
+		        	</table>
+		        </div>
+        	</div>
+        </div>
+    </div>
+</div>
+<input id="rootPath" type="hidden" value="@Url.Content("~")" />

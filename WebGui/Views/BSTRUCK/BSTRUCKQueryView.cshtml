@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "BSTRUCKQueryView";
+}
+
+
+<script type="text/javascript">
+    var select_tranmode = "@ViewBag.SelectTranMode";
+    $(document).ready(function ($) {
+
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+            gop.gridColModel = [
+                { name: 'UId', showname: 'ID', sorttype: 'string', hidden: true },
+        	    { name: 'Cmp', title: 'Location', index: 'Cmp', width: 70, align: 'left', sorttype: 'string', classes: "uppercase", hidden: false },
+        	    { name: 'PartyNo', title: '@Resources.Locale.L_BSCSSetup_Cmp', index: 'PartyNo', width: 100, align: 'left', sorttype: 'string', classes: "uppercase", hidden: false },
+                { name: 'PartyType', title: '@Resources.Locale.L_BSCSDataQuery_PartyType', index: 'PartyType', width: 70, align: 'left', sorttype: 'string', hidden: false },
+                //{ name: 'Status', title: '@Resources.Locale.L_GateReserve_Status', index: 'Status', width: 70, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'Abbr', title: '@Resources.Locale.L_BSCSDataQuery_Abbr', index: 'Abbr', width: 120, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'HeadOffice', title: '@Resources.Locale.L_BSCSSetup_HdqCmp', index: 'HeadOffice', width: 120, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'PartyName', title: '@Resources.Locale.L_BSCSSetup_CmpName', index: 'PartyName', width: 150, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'PartAddr1', title: '@Resources.Locale.L_BSCSDataQuery_PartAddr1', index: 'PartAddr1', width: 200, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'PartAddr2', title: '@Resources.Locale.L_BSCSDataQuery_PartAddr2', index: 'PartAddr2', width: 200, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'PartAddr3', title: '@Resources.Locale.L_BSCSDataQuery_PartAddr3', index: 'PartAddr3', width: 200, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'Cnty', title: '@Resources.Locale.L_BSCSDataQuery_Cnty', index: 'Cnty', width: 150, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'CntyNm', title: '@Resources.Locale.L_BSCSDataQuery_CntyNm', index: 'CntyNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'City', title: '@Resources.Locale.L_BSCSSetup_City', index: 'City', width: 150, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'CityNm', title: '@Resources.Locale.L_CitySetup_PortNm', index: 'CityNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'State', title: '@Resources.Locale.L_CitySetup_State', index: 'State', width: 150, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'Zip', title: '@Resources.Locale.L_BSCSDataQuery_Zip', index: 'Zip', width: 150, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'PartyAttn', title: '@Resources.Locale.L_BSCSDataQuery_PartyAttn', index: 'PartyAttn', width: 100, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'PartyTel', title: '@Resources.Locale.L_BSCSSetup_CmpTel', index: 'PartyTel', width: 100, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'PartyMail', title: '@Resources.Locale.L_BSCSDataQuery_PartyMail', index: 'PartyMail', width: 200, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'TaxNo', title: '@Resources.Locale.L_BSCSDataQuery_TaxNo', index: 'TaxNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'BillTo', title: '@Resources.Locale.L_BSCSDataQuery_BillTo', index: 'BillTo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 200, align: 'left', sorttype: 'string', hidden: false },
+                { name: 'DueDay', title: '@Resources.Locale.L_BSCSDataQuery_DueDay', index: 'DueDay', width: 90, align: 'right', sorttype: 'number', hidden: false }
+            ];
+        gop.AddUrl = false;
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_BSCSDataQuery_TruckCmpList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "BSTRUCK/GetTruckByParty";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea"; 
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+        
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        initSearch(gop);
+
+        function dblClick(map) {
+            var UId = map.UId;
+            top.topManager.openPage({
+                href: rootPath + "BSTRUCK/BSTRUCKSetup/" + UId,
+                title: '@Resources.Locale.L_BSCSDataQuery_TruckDriverSet',
+                id: 'BSTRUCKSetup',
+                search : 'uid=' + UId
+            });
+        }
+
+       
+
+    });
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "IPLog";
+}
+
+@Html.RazorJSInline("~/Scripts/BaseColModel.js")
+<script type="text/javascript">
+$(document).ready(function ($) {
+    //init Search
+    var gop = {};
+    var numberTemplate = "2";
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 230;
+    gop.gridColModel = EDILOG = [
+    { name: 'Id', title: 'ID', index: 'Id', sorttype: 'string', hidden: true },
+    { name: 'Cmp', title: 'Cmp', index: 'Cmp', width: 60, align: 'left', sorttype: 'string', hidden: false },
+    { name: 'DataPath', title: 'Path', index: 'DataPath', width: 100, align: 'left', sorttype: 'string', hidden: false },
+    { name: 'Ip', title: 'IP', index: 'Ip', width: 150, align: 'left', sorttype: 'string', hidden: false },
+    { name: 'PcName', title: 'PC Name', index: 'PcName', width: 150, align: 'left', sorttype: 'string', hidden: false },
+    { name: 'KeyWord', title: 'Key Word', index: 'KeyWord', width: 150, align: 'left', sorttype: 'string', hidden: false },
+    { name: 'CreateBy', title: 'Create By', index: 'CreateBy', width: 80, align: 'left', sorttype: 'string', hidden: false },
+    { name: 'CreateDate', title: 'Create Date', index: 'CreateDate', width: 150, align: 'left', sorttype: 'string', hidden: false, formatter: "date", formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d H:i" } }
+    ];
+    gop.AddUrl = false;
+    gop.gridId = "containerInfoGrid";
+    gop.gridAttr = { caption: "IP LOG", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition), sortname: "CreateDate" };
+    gop.gridSearchUrl = rootPath + "System/IpLogQueryData";
+    gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+    gop.baseConditionFunc = function () {
+        return getCreateDateParams("CreateDate", gop);
+    }
+
+    //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea"; 
+    gop.StatusAreaId = "StatusArea";
+    gop.BtnGroupId = "BtnGroupArea";
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+
+    initSearch(gop);
+
+});
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

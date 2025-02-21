@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = "SMCHGSetup";
+}
+
+@Html.RazorJSInline("~/Scripts/SMCHG/SMCHGSetup.js")
+<script type="text/javascript">
+	var _uid = "@ViewBag.UId";
+	var mtSchemas = "@ViewBag.mtSchemas.Content";
+</script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Cmp" class="control-label">@Resources.Locale.L_UserSetUp_Cmp</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" ref="Cmp" id="CmpNm" name="CmpNm" fieldname="CmpNm" readonly />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="TranMode" class="control-label required">@Resources.Locale.L_PartyDocSetup_TranMode</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="TranMode" name="TranMode" fieldname="TranMode">
+                            </select>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="IoType" class="control-label">@Resources.Locale.L_SMCHGSetup_IoType</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="IoType" name="IoType" fieldname="IoType">
+                                <option value="O">@Resources.Locale.L_BSEXACCT_Ex</option>
+                                <option value="I">@Resources.Locale.L_BSEXACCT_TwIm</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ChgCd" class="control-label required">@Resources.Locale.L_SMCHGSetup_ChgCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ChgCd" name="ChgCd" fieldname="ChgCd" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+
+                        <div class="pure-u-sm-5-60 ">
+                            <label for="ChgDescp" class="control-label required">@Resources.Locale.L_SMCHGSetup_ChgDescp</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ChgDescp" name="ChgDescp" fieldname="ChgDescp" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ChgDescp" class="control-label">@Resources.Locale.L_SMCHGSetup_ChgEDescp</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ChgEdescp" name="ChgEdescp" fieldname="ChgEdescp" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="VatFlag" class="control-label">@Resources.Locale.L_SMCHGSetup_VatFlag</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="VatFlag" name="VatFlag" fieldname="VatFlag">
+                                <option value="Y">YES</option>
+                                <option value="N">NO</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="VatRate" class="control-label">@Resources.Locale.L_SMCHGSetup_VatRate</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="VatRate" name="VatRate" fieldname="VatRate" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Repay" class="control-label">@Resources.Locale.L_SMCHGSetup_ChgRepay</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="Repay" name="Repay" fieldname="Repay">
+                                <option value="M">M:@Resources.Locale.L_SMCHGSetup_MustChg</option>
+                                <option value="C">C:@Resources.Locale.L_SMCHGSetup_OcrChg</option>
+                                <option value="Y">Y:@Resources.Locale.L_SMCHGSetup_Repay</option>
+                                <option value="A">A:@Resources.Locale.L_SMCHGSetup_AtCost</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ChgType" class="control-label required">@Resources.Locale.L_SMCHGSetup_ChgType</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="ChgType" name="ChgType" fieldname="ChgType">
+                                <option value="F">Freight Charge</option>
+                                <option value="O">Original Fee </option>
+                                <option value="D">Destination Fee</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ChgLevel" class="control-label">@Resources.Locale.L_SMCHGSetup_ChgLevel</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ChgLevel" name="ChgLevel" fieldname="ChgLevel" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="ChgLevelLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="SapAc" class="control-label">@Resources.Locale.L_SMCHGSetup_SapAc</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="SapAc" name="SapAc" fieldname="SapAc" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Remark" class="control-label">@Resources.Locale.L_BSCSSetup_Remark</label>
+                        </div>
+                        <div class="pure-u-sm-55-60 control-group">
+                            <textarea class="form-control" dt="mt" id="Remark" name="Remark" fieldname="Remark"></textarea>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="CreateBy" class="control-label">@Resources.Locale.L_IpPart_CreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" fieldname="CreateBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" fieldname="CreateDate" readonly>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ModifyBy" class="control-label">@Resources.Locale.L_IpPart_ModifyBy</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" fieldname="ModifyBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" fieldname="ModifyDate" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" isKey="true"/>

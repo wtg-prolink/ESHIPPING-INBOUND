@@ -1,0 +1,306 @@
+﻿@{
+    ViewBag.Title = "ActUpdate";
+}
+
+<style type="text/css">
+    .gridTagClass td {
+        background-color: #FF9F9F !important;
+    }
+</style>
+<script type="text/javascript">
+    var schemas = "@ViewBag.schemas.Content";
+    var _uid = "@ViewBag.Uid";
+    var _add = "@ViewBag.add";
+    var _op = '@Request["op"]';
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/ActManage/ActUpdate.js?20240815")"></script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+
+
+            <div class="panel panel-default" id="main_body">
+                <div class="panel-heading">@Resources.Locale.L_DNManage_MainInfo</div>
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="ShipmentId" class="control-label required">Shipment ID</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ShipmentId" name="ShipmentId" fieldname="ShipmentId" required />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right"> 
+							<label for="Cmp" class="control-label ">Location</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+					        <input type="text" class="form-control input-sm" dt="mt" id="Cmp" fieldname="Cmp" name="Cmp" iskey="true" readonly/>
+						</div>
+
+                        <div class="pure-u-sm-5-60  label-right">
+                            <label for="LspNo" class="control-label required">@Resources.Locale.L_AirQuery_LspCd</label>
+                        </div>
+                        <div class="pure-u-sm-8-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="LspNo" name="LspNo" fieldname="LspNo" required />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="LspNoLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="pure-u-sm-15-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="LspNm" name="LspNm" fieldname="LspNm" />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+
+                        <div class="pure-u-sm-5-60">
+                            <label for="BlNo" class="control-label">@Resources.Locale.L_ActSetup_BlNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="BlNo" name="BlNo" fieldname="BlNo" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60  label-right">
+                            <label for="DebitDate" class="control-label required">@Resources.Locale.L_BaseLookup_DebitDate</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="DebitDate" name="DebitDate" fieldname="DebitDate" required />
+                        </div>
+
+                        <div class="pure-u-sm-5-60  label-right">
+                            <label for="ChgCd" class="control-label required">@Resources.Locale.L_SMCHGSetup_ChgCd</label>
+                        </div>
+                        <div class="pure-u-sm-8-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ChgCd" name="ChgCd" fieldname="ChgCd" required />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="ChgCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="pure-u-sm-9-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ChgDescp" name="ChgDescp" fieldname="ChgDescp" />
+                        </div>
+                        <div class="pure-u-sm-6-60 control-group">
+                             <select class="form-control input-sm" dt="mt" id="ChgType" name="ChgType" fieldname="ChgType">
+                                <option value="F">Freight Charge</option>
+                                <option value="O">Original Fee</option>
+                                <option value="D">Destination Fee</option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="IpartNo" class="control-label">@Resources.Locale.L_DNApproveManage_IpartNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="IpartNo" name="IpartNo" fieldname="IpartNo" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60  label-right">
+                            <label for="CheckDescp" class="control-label">@Resources.Locale.L_DNManage_AuditDescp</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CheckDescp" name="CheckDescp" fieldname="CheckDescp" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+							<label for="DebitTo" class="control-label required">@Resources.Locale.L_ActManage_Payer</label>
+						</div>
+						<div class="pure-u-sm-8-60 control-group">
+						    <select class="form-control input-sm" dt="mt" id="DebitTo" name="DebitTo" fieldname="DebitTo" required>
+                			</select>
+						</div>
+
+                         <div class="pure-u-sm-15-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="DebitNm" name="DebitNm" fieldname="DebitNm" />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="DebitNo" class="control-label">@Resources.Locale.L_ActUpdate_Views_162</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="DebitNo" name="DebitNo" fieldname="DebitNo" />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label class="control-label" style="color: rgb(255, 0, 0);">@Resources.Locale.L_ActUpdate_Script_0</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <label for="Status_descp" id="Status_descp" class="control-label" style="color: rgb(255, 0, 0);"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">@Resources.Locale.L_ActManage_Invoice</div>
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-3-60 required">
+                            <label for="Cur" class="control-label required">@Resources.Locale.L_InvPkgSetup_Cur</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cur" name="Cur" fieldname="Cur" required/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CurLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="ExRate" class="control-label">@Resources.Locale.L_ActSetup_ExRate</label>
+                        </div>
+                        <div class="pure-u-sm-4-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ExRate" fieldname="ExRate" name="ExRate" number="6" readonly />
+                        </div>
+
+
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="UnitPrice" class="control-label">@Resources.Locale.L_DNApproveManage_UnitPrice</label>
+                        </div>
+                        <div class="pure-u-sm-4-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="UnitPrice" name="UnitPrice" fieldname="UnitPrice" number="6" />
+                        </div>
+
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="ShipmentId" class="control-label">@Resources.Locale.L_BaseLookup_Qty</label>
+                        </div>
+                        <div class="pure-u-sm-4-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Qty" name="Qty" fieldname="Qty" number="4" />
+                        </div>
+
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="DebitNo" class="control-label">@Resources.Locale.L_BaseLookup_Unit</label>
+                        </div>
+                        <div class="pure-u-sm-4-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="ChgUnit" name="ChgUnit" fieldname="ChgUnit">
+                			</select>
+                        </div>
+
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="Bamt" class="control-label required">@Resources.Locale.L_DNDetailVeiw_Value</label>
+                        </div>
+                        <div class="pure-u-sm-4-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Bamt" name="Bamt" fieldname="Bamt" number="2" required />
+                        </div>
+
+                        <div class="pure-u-sm-4-60 label-right">
+                            <label for="Lamt" class="control-label">@Resources.Locale.L_ActManage_Lamt</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Lamt" name="Lamt" fieldname="Lamt" number="2" readonly />
+                        </div>
+
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="Tax" class="control-label">@Resources.Locale.L_ActSetup_Tax</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                           <input type="text" class="form-control input-sm" dt="mt" id="Tax" name="Tax" fieldname="Tax" />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-3-60">
+                            <label for="Remark" class="control-label">@Resources.Locale.L_BSCSSetup_Remark</label>
+                        </div>
+                        <div class="pure-u-sm-55-60">
+                            <textarea class="form-control lastInput" dt="mt" id="BiRemark" fieldname='BiRemark' style="height: 60px;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default" id="q_body">
+                <div class="panel-heading">@Resources.Locale.L_DNFlowManage_With</div>
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-3-60">
+                            <label for="Cur" class="control-label">@Resources.Locale.L_InvPkgSetup_Cur</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Qcur" name="Qcur" fieldname="Qcur" readonly />
+                            </div>
+                        </div>
+
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="ExRate" class="control-label">@Resources.Locale.L_ActSetup_ExRate</label>
+                        </div>
+                        <div class="pure-u-sm-4-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="QexRate" fieldname="QexRate" name="QexRate" number="6" readonly />
+                        </div>
+
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="DebitNo" class="control-label">@Resources.Locale.L_DNApproveManage_UnitPrice</label>
+                        </div>
+                        <div class="pure-u-sm-4-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="QunitPrice" name="QunitPrice" fieldname="QunitPrice" number="6" readonly />
+                        </div>
+
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="ShipmentId" class="control-label">@Resources.Locale.L_BaseLookup_Qty</label>
+                        </div>
+
+                        <div class="pure-u-sm-4-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Qqty" name="Qqty" fieldname="Qqty" number="4" readonly />
+                        </div>
+
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="DebitNo" class="control-label">@Resources.Locale.L_BaseLookup_Unit</label>
+                        </div>
+                        <div class="pure-u-sm-4-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="QchgUnit" name="QchgUnit" fieldname="QchgUnit" readonly>
+                			</select>
+                        </div>
+
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="DebitDate" class="control-label">@Resources.Locale.L_DNDetailVeiw_Value</label>
+                        </div>
+                        <div class="pure-u-sm-4-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Qamt" name="Qamt" fieldname="Qamt" number="2" readonly />
+                        </div>
+
+                        <div class="pure-u-sm-4-60 label-right">
+                            <label for="Qlamt" class="control-label">@Resources.Locale.L_ActManage_Lamt</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Qlamt" name="Qlamt" fieldname="Qlamt" number="2" readonly />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-3-60">
+                            <label for="Remark" class="control-label">@Resources.Locale.L_BSCSSetup_Remark</label>
+                        </div>
+                        <div class="pure-u-sm-55-60">
+                            <textarea class="form-control lastInput" dt="mt" fieldname='Remark' style="height: 60px;" readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" iskey="true" id="UId" name="UId" fieldname="UId" />
+<input type="hidden" dt="mt" iskey="true" id="UFid" name="UFid" fieldname="UFid" />
+<input type="hidden" dt="mt" iskey="true" id="ApproveStatus" name="ApproveStatus" fieldname="ApproveStatus" />
+<input type="hidden" dt="mt" id="Status" name="Status" fieldname="Status" />
+@*<input type="hidden" dt="mt" id="PodCd" name="PodCd" fieldname="PodCd" />
+<input type="hidden" dt="mt" id="MasterNo" name="MasterNo" fieldname="MasterNo" />
+<input type="hidden" dt="mt" id="CntrInfo" name="CntrInfo" fieldname="CntrInfo" />*@

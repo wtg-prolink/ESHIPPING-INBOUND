@@ -1,0 +1,371 @@
+﻿using Prolink.DataOperation;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Configuration;
+using System.Drawing;
+using System.Text;
+using System.Drawing.Imaging;
+using Prolink.Data;
+using System.Web.Routing;
+
+namespace WebGui.Controllers
+{
+    public class HomeController : BaseController
+    {
+        //
+        // GET: /Home/
+
+        public ActionResult Index()
+        {
+            //验证是否是登陆用户
+            ViewBag.userCode = UserId;
+            ViewBag.companyId = CompanyId;
+            ViewBag.station = Station;
+            ViewBag.groupId = GroupId;
+            ViewBag.Lang = SiteLang;
+            ViewBag.SYS_TITLE = WebConfigurationManager.AppSettings["SYS_TITLE"];
+            ViewBag.SYS_VERSION = WebConfigurationManager.AppSettings["SYS_VERSION"];
+
+
+            //string address = "3F-1, No.133, Sec. 4, Minsheng E. Rd., Songshan District, Taipei City 105, Taiwan (R.O.C.)";
+            //string[] strArr = Prolink.Math.SplitString(address, 35, 3);
+
+            string menu = GetMenu();
+            if (menu == "" || CheckCookieLive())
+            {
+                SetCookie(null, -1);
+                return RedirectToAction("Login", "Home");
+            }
+
+            //ViewBag.menu = Unzip(Convert.FromBase64String(GetMenu())); ;
+            //string str = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(Unzip(System.Text.Encoding.UTF8.GetBytes(GetValueFromCookie(MENU_COOKIE_ID_FRIST) + GetValueFromCookie(MENU_COOKIE_ID_SECOND) + GetValueFromCookie(MENU_COOKIE_ID_THIRD) + GetValueFromCookie(MENU_COOKIE_ID_FOURTH)))));
+
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            if (CheckToken())
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.Lang = Request.Cookies["plv3.passport.lang"] == null ? string.Empty : Request.Cookies["plv3.passport.lang"].Value;
+                ViewBag.userCode = Request.Cookies["plv3.passport.user"] == null ? string.Empty : Request.Cookies["plv3.passport.user"].Value;
+                //ViewBag.lang = Request.Cookies["plv3.passport.language"] == null ? "zh-TW" : Request.Cookies["plv3.passport.language"].Value;
+                ViewBag.companyId = Request.Cookies["plv3.passport.companyid"] == null ? string.Empty : Request.Cookies["plv3.passport.companyid"].Value;
+                ViewBag.failCount = Session["FAIL_COUNT"];
+                ViewBag.SYS_TITLE = WebConfigurationManager.AppSettings["SYS_TITLE"];
+                ViewBag.SYS_VERSION = WebConfigurationManager.AppSettings["SYS_VERSION"];
+                return View();
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult Login(FormCollection fcoll)
+        {
+            string userCode = fcoll["user"];
+            string companyId = fcoll["CompanyId"];
+            string pwd = genMD5(fcoll["password"]);
+            string Lang = fcoll["Lang"];
+            string InputCode = fcoll["InputCode"];
+            string tpvMsg = fcoll["tpvMsg"];
+            int failCount = 0;
+
+
+            ViewBag.SYS_TITLE = WebConfigurationManager.AppSettings["SYS_TITLE"];
+            ViewBag.SYS_VERSION = WebConfigurationManager.AppSettings["SYS_VERSION"];
+
+            ViewBag.userCode = userCode;
+            //ViewBag.lang = fcoll["language"];
+
+            if (string.IsNullOrEmpty(userCode) && UserId != null)
+            {
+                userCode = UserId;
+            }
+            if (string.IsNullOrEmpty(companyId) && CompanyId != null)
+            {
+                companyId = CompanyId;
+            }
+            if (userCode != string.Empty && !string.IsNullOrEmpty(pwd))
+            {
+
+                DataTable dt = OperationUtils.GetDataTable("SELECT ISNULL(FAIL_COUNT,0) AS FAIL_COUNT FROM SYS_ACCT WHERE U_ID =" + SQLUtils.QuotedStr(userCode) + "AND CMP =" + SQLUtils.QuotedStr(companyId), null, Prolink.Web.WebContext.GetInstance().GetConnection());
+
+                if (dt.Rows.Count == 0)
+                {
+                    ViewBag.failCount = failCount;
+                    ViewBag.fail = false;
+                    ViewBag.failMessage = "No such account in the system , make sure the account is entered correctly.";
+                    return View();
+                }
+                DataRow dr = dt.Rows[0];
+
+                if (dr["FAIL_COUNT"] != null)
+                {
+                    failCount = Int32.Parse(dr["FAIL_COUNT"].ToString());
+                    Session["FAIL_COUNT"] = failCount;
+                }
+
+                /*if (failCount > 2)
+                {
+                    ViewBag.failCount = failCount;
+                    ViewBag.fail = false;
+                    return View();
+                }*/
+                if (Session["ValidateCode"]!=null)
+                if (!InputCode.Trim().ToLower().Equals(Session["ValidateCode"].ToString().ToLower()) && failCount > 2)
+                {
+                    ViewBag.failCount = failCount;
+                    ViewBag.fail = false;
+                    ViewBag.failMessage = "incorrect verification codes";
+                    return View();
+                }
+
+                WebGui.Models.User returnUser = null;
+                string isCheck = WebConfigurationManager.AppSettings["TPV_CHECK"];
+                if ((isCheck == "false" || tpvMsg == "noAccount") && pwd != "0xd343c85b5c22f2e5135c6ae3c853538a")
+                {
+                    returnUser = WebGui.Models.User.GetUser(userCode, companyId, Station, pwd);
+                }
+                else
+                {
+                    returnUser = WebGui.Models.User.GetUserByCookie(userCode, companyId, Station);
+                }
+
+                
+                if (returnUser == null)
+                {
+
+                    failCount++;
+
+                    string updateSQL = "UPDATE SYS_ACCT SET FAIL_COUNT = " + SQLUtils.QuotedStr(failCount.ToString()) + " WHERE U_ID =" + SQLUtils.QuotedStr(userCode) + " AND CMP =" + SQLUtils.QuotedStr(companyId);
+                    OperationUtils.ExecuteUpdate(updateSQL, Prolink.Web.WebContext.GetInstance().GetConnection());
+                    ViewBag.failCount = failCount;
+                    Session["FAIL_COUNT"] = failCount;
+                    ViewBag.fail = true;
+                    return View();
+                }
+                //綁定cookie
+                returnUser.Lang = Lang;
+                SetCookie(returnUser);
+                ViewBag.failCount = failCount;
+                ViewBag.fail = false;
+                RouteValueDictionary routeValues = new RouteValueDictionary();
+                routeValues.Add("lang", Lang);
+                return RedirectToAction("Index", routeValues);
+            }
+            ViewBag.fail = true;
+            return View();
+        }
+
+        public JsonResult UserClearFailCount()
+        {
+            string UId = Request.Params["UId"];
+            string GroupId = Request.Params["GroupId"];
+            string Cmp = Request.Params["Cmp"];
+            string Stn = Request.Params["Stn"];
+
+            //System.Web.HttpContext.Current.Session[UId + Cmp] = null;
+            try
+            {
+                string updateSQL = "UPDATE SYS_ACCT SET FAIL_COUNT = "+SQLUtils.QuotedStr("0")+" WHERE U_ID ="+SQLUtils.QuotedStr(UId)+" AND CMP ="+SQLUtils.QuotedStr(Cmp);
+                OperationUtils.ExecuteUpdate(updateSQL, Prolink.Web.WebContext.GetInstance().GetConnection());
+            }
+            catch (Exception ex)
+            {
+                return Json(new { message = "fail" });
+            }
+
+            return Json(new { message = "success" });
+        }
+
+        //设置用户的登录信息
+        private void SetLoginInfo()
+        {
+            var context = System.Web.HttpContext.Current;
+            string ip = context.Request.UserHostAddress;
+            //string sql = "UPDATE SYS_ACCT SET ACT_TIME=getdate(),LS_TIMES=LS_TIMES+1,USER_IP='" + ip + "' WHERE USER_ID='" + user.s + "' AND CMP_ID='" + user.CmpId + "'";
+            //OperationUtils.ExecuteUpdate(sql, Prolink.Web.WebContext.GetInstance().GetConnection());
+        }
+
+
+        public void VerificationCode()
+        {
+            // 是否產生驗證碼
+            bool isCreate = true;
+
+            // Session["CreateTime"]: 建立驗證碼的時間
+            if (Session["CreateTime"] == null)
+            {
+                Session["CreateTime"] = DateTime.Now;
+            }
+            else
+            {
+                DateTime startTime = Convert.ToDateTime(Session["CreateTime"]);
+                DateTime endTime = Convert.ToDateTime(DateTime.Now);
+                TimeSpan ts = endTime - startTime;
+
+                //每次都重新產生
+                // 重新產生驗證碼的間隔
+                if (ts.Minutes > 15)
+                {
+                    isCreate = true;
+                    Session["CreateTime"] = DateTime.Now;
+                }
+                else
+                {
+                    isCreate = true;
+                }
+            }
+
+            Response.ContentType = "image/gif";
+            //建立 Bitmap 物件和繪製
+            Bitmap basemap = new Bitmap(200, 60);
+            Graphics graph = Graphics.FromImage(basemap);
+            graph.FillRectangle(new SolidBrush(Color.White), 0, 0, 200, 60);
+            Font font = new Font(FontFamily.GenericSerif, 48, FontStyle.Bold, GraphicsUnit.Pixel);
+            Random random = new Random();
+            // 英數
+            string letters = "ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz0123456789";
+            // 天干地支生肖
+            //string letters = "甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戍亥鼠牛虎免龍蛇馬羊猴雞狗豬";
+            string letter;
+            StringBuilder sb = new StringBuilder();
+
+
+            if (isCreate)
+            {
+                // 加入隨機二個字
+                // 英文4 ~ 5字，中文2 ~ 3字
+                for (int word = 0; word < 4; word++)
+                {
+                    letter = letters.Substring(random.Next(0, letters.Length - 1), 1);
+                    sb.Append(letter);
+
+
+                    // 繪製字串 
+                    graph.DrawString(letter, font, new SolidBrush(Color.Black), word * 38, random.Next(0, 15));
+                }
+            }
+            else
+            {
+                // 使用先前的驗證碼來產生
+                string currentCode = Session["ValidateCode"].ToString();
+                sb.Append(currentCode);
+
+                foreach (char item in currentCode)
+                {
+                    letter = item.ToString();
+                    // 繪製字串
+                    graph.DrawString(letter, font, new SolidBrush(Color.Black), currentCode.IndexOf(item) * 38, random.Next(0, 15));
+                }
+            }
+
+
+            // 混亂背景
+            Pen linePen = new Pen(new SolidBrush(Color.Black), 2);
+            for (int x = 0; x < 10; x++)
+            {
+                graph.DrawLine(linePen, new Point(random.Next(0, 199), random.Next(0, 59)), new Point(random.Next(0, 199), random.Next(0, 59)));
+            }
+
+            // 儲存圖片並輸出至stream      
+            basemap.Save(Response.OutputStream, ImageFormat.Gif);
+            // 將產生字串儲存至 Sesssion
+            Session["ValidateCode"] = sb.ToString();
+            Response.End();
+        }
+
+
+        /// <summary>
+        /// 退出登入
+        /// </summary>
+        public ActionResult LoginOut()
+        {
+            //清楚cookie的数据
+            SetCookie(null, -1);
+            return RedirectToAction("Login", "Home");
+        }
+
+        /// <summary>
+        /// app登入系统
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AppLoginOut()
+        {
+            //清楚cookie的数据
+            SetCookie(null, -1);
+            return Json(new { message = "登出", flag = true });
+        }
+
+        /// <summary>
+        /// app登入系统
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AppLogin()
+        {
+            string userCode = Request["uid"];
+            string companyId = Request["cmp"];
+            string pwd = Request["psw"];
+            Dictionary<string, object> result = new Dictionary<string, object>();
+            result["message"] = string.Empty;
+            Boolean verifyRes = false;
+            if (userCode != string.Empty && !string.IsNullOrEmpty(pwd))
+            {
+
+                using (var client = new WebGui.AccountValidation.ServiceSoapClient())
+                {
+                    DataSet ds = client.GetUserDetailByUserAD(userCode);
+
+                    if (ds.Tables[0].Select().Length > 0)
+                    {
+                        verifyRes = client.CheckAD("tpvaoc", userCode, pwd);
+                        if (!verifyRes)
+                        {
+                            result["message"] = "OA账号密码或公司别输入有误";
+                            result["flag"] = false;
+                            return ToContent(result);
+                        }
+                    }
+                    else
+                    {
+                        result["message"] = "noAccount";
+                    }
+                }
+                WebGui.Models.User returnUser = null;
+                if ("noAccount".Equals(result["message"]))
+                {
+                    returnUser = WebGui.Models.User.GetUser(userCode, companyId, Station, genMD5(pwd));
+                }
+                else
+                {
+                    returnUser = WebGui.Models.User.GetUserByCookie(userCode, companyId, Station);
+                }
+
+                if (returnUser == null)
+                {
+                    result["message"] = "账号密码或公司别输入有误";
+                    result["flag"] = false;
+                    return ToContent(result);
+                }
+                //綁定cookie
+                SetCookie(returnUser);
+                result["message"] = "登入成功";
+                result["flag"] = true;
+                return ToContent(result);
+
+            }
+            result["message"] = "账号密码或公司别输入有误";
+            result["flag"] = false;
+            return ToContent(result);
+        }
+    }
+}

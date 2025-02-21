@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "TKQuery";
+}
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        //init Search
+        function alarmFormatter(cellvalue, options, rowdata) {
+            var val = 0;
+            if (cellvalue == null || cellvalue == undefined || cellvalue === "")
+                val = 0;
+            return "<span>" + $.fmatter.util.NumberFormat(val, { decimalSeparator: '.', thousandsSeparator: ',', decimalPlaces: 2 }) + "</span>"
+        }
+
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 210;
+        gop.gridColModel = [
+        	{ name: 'StsCd', title: '@Resources.Locale.L_TKQuery_StsCd', index: 'StsCd', align: 'left', width: 80, sorttype: 'string' },
+        	{ name: 'Edescp', title: '@Resources.Locale.L_TKQuery_Edescp', index: 'Edescp', align: 'left', width: 300, sorttype: 'string' },
+        	{ name: 'Ldescp', title: '@Resources.Locale.L_TKQuery_Ldescp', index: 'Ldescp', align: 'left', width: 150, sorttype: 'string' },
+        	{ name: 'Location', title: '@Resources.Locale.L_TKQuery_Location', index: 'Location', width: 150, sorttype: 'string' },
+        	{ name: 'OrderBy', title: '@Resources.Locale.L_TKQuery_OrderBy', index: 'OrderBy', sorttype: 'string', width: 70, hidden: false },
+            { name: 'Issingle', title: '@Resources.Locale.L_TKQuery_Issingle', index: 'Issingle', align: 'left', width: 70, sorttype: 'string' },
+        	{ name: 'RefBy', title: 'Ref By', index: 'RefBy', sorttype: 'string' }
+        ];
+		gop.AddUrl = { "url": rootPath + "TKBL/TKSetup", "title": "@Resources.Locale.L_TKQuery_EntStsCd", "id": "TKSetup" };;
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_TKQuery_StsCdList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "SYSTEM/TKSetupQuery";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+
+
+        initSearch(gop);
+
+        function dblClick(map) {
+        	var StsCd = map.StsCd;
+        	console.log(rootPath + "TKBL/TKSetup/" + StsCd);
+        	top.topManager.openPage({
+        	    href: rootPath + "TKBL/TKSetup/" + StsCd,
+        	    title: '@Resources.Locale.L_TKQuery_EntStsCd',
+        	    id: 'TKSetup'
+        	});
+        }
+    });
+
+</script>
+
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "ExpressAddChargeQuery";
+}
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        //init Search
+        SetCntUnit();
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 220;
+        gop.gridColModel = [
+            { name: 'UId', title: 'UId', index: 'UId', align: 'left', width: 80, sorttype: 'string', hidden: true },
+            { name: 'LspCd', title: '@Resources.Locale.L_AirSetup_LspCd', index: 'LspCd', align: 'left', width: 150, sorttype: 'string' },
+            { name: 'LspNm', title: '@Resources.Locale.L_AirSetup_LspNm', index: 'LspNm', align: 'left', width: 150, sorttype: 'string' },
+            { name: 'Io', title: '@Resources.Locale.L_SMCHGSetup_IoType', index: 'Io', sorttype: 'string', width: 100, hidden: false, editable: true, formatter: "select", editoptions: { value: ': ;O:OutBound;I:InBound' }, edittype: 'select' },
+            { name: 'EffectDate', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectDate', width: 120, align: 'left', sorttype: 'string', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'ExpiratDate', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'ExpiratDate', width: 120, align: 'left', sorttype: 'string', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'PolCd', title: 'POL', index: 'PolCd', align: 'left', width: 150, sorttype: 'string' },
+            { name: 'PolName', title: 'POL Name', index: 'PolName', align: 'left', width: 150, sorttype: 'string' },
+            { name: 'CntryCd', title: 'Country Code', index: 'CntryCd', align: 'left', width: 150, sorttype: 'string' },
+            { name: 'CntryNm', title: 'Country Name', index: 'CntryNm', align: 'left', width: 150, sorttype: 'string' },
+            { name: 'Region', title: 'Region', index: 'Region', align: 'left', width: 150, sorttype: 'string' },
+            { name: 'Fsc', title: '@Resources.Locale.L_ExpressAdd_FSC', index: 'Fsc', align: 'right', width: 150, sorttype: 'string' },
+            { name: 'Cmp', title: 'Location', index: 'Cmp', align: 'left', width: 150, sorttype: 'string' },
+            { name: 'CreateBy', title: '@Resources.Locale.L_IQTManage_CreateBy', index: 'CreateBy', align: 'left', width: 150, sorttype: 'string' },
+            { name: 'CreateDate', title: '@Resources.Locale.L_IQTManage_CreateDate', index: 'CreateDate', width: 120, align: 'left', sorttype: 'string', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'ModifyBy', title: '@Resources.Locale.L_IQTManage_ModifyBy', index: 'ModifyBy', align: 'left', width: 150, sorttype: 'string' },
+            { name: 'ModifyDate', title: '@Resources.Locale.L_IQTManage_ModifyDate', index: 'ModifyDate', width: 120, align: 'left', sorttype: 'string', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } }
+
+        ];
+        gop.AddUrl = { "url": rootPath + "IQTManage/ExpressAddSetup", "title": "@Resources.Locale.L_ExpressAdd_Input", "id": "ExpressAddSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_ExpressAdd_List", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "IQTManage/GetExpressAddData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        //gop.gridAttr.sortname = "ValidFrom";
+        //gop.gridAttr.sortable = true;
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        gop.btnGroup = [
+            
+        ];
+
+        initSearch(gop);
+
+        function dblClick(map) {
+        	var UId = map.UId;
+            console.log(rootPath + "IQTManage/ExpressAddSetup/" + UId);
+        	top.topManager.openPage({
+                href: rootPath + "IQTManage/ExpressAddSetup/" + UId,
+        	    title: '@Resources.Locale.L_ExpressAdd_Input',
+                id: 'ExpressAddSetup'
+        	});
+        }
+    });
+
+</script>
+
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

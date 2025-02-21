@@ -1,0 +1,227 @@
+﻿@{
+    ViewBag.Title = "NRSSetup";
+}
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>;
+@Html.RazorJSInline("~/Scripts/TKBL/NRSSetup.js");
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="SeqNo" class="control-label">@Resources.Locale.L_NRSSetup_SeqNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="hidden" id="UId" dt="mt" fieldname="UId" iskey="true" />
+                            <input type="text" dt="mt" class="form-control input-sm" id="SeqNo" name="@Resources.Locale.L_NRSSetup_SeqNo" fieldname="SeqNo" iskey="true" readonly="readonly">
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="NotifyFormat" class="control-label">@Resources.Locale.L_NRSSetup_NotifyFormat</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select type="text" class="form-control input-sm" dt="mt" id="NotifyFormat" name="NotifyFormat" fieldname="NotifyFormat"></select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PartyType" class="control-label" style="color: rgb(255, 0, 0);">@Resources.Locale.L_NRSSetup_PartyType</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PartyType" fieldname="PartyType" name="@Resources.Locale.L_NRSSetup_PartyType" iskey="true" required />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PartyTypeLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="PartyDescp" name="PartyDescp" fieldname="PartyDescp" readonly="readonly" >
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="NotifyCd" class="control-label" style="color: rgb(255, 0, 0);">@Resources.Locale.L_NRSSetup_NotifyCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="NotifyCd" fieldname="NotifyCd" name="@Resources.Locale.L_NRSSetup_NotifyCd" iskey="true" required />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="NotifyCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="NotifyDescp" name="NotifyDescp" fieldname="NotifyDescp" readonly="readonly" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PartyType" class="control-label">@Resources.Locale.L_PartyDocSetup_PartyNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PartyNo" fieldname="PartyNo" name="@Resources.Locale.L_PartyDocSetup_PartyNo"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PartyNoLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="PartyName" name="PartyName" fieldname="PartyName" readonly="readonly" >
+                        </div>
+                       
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="RequestCd" class="control-label">@Resources.Locale.L_NRSSetup_RequestCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="RequestCd" fieldname="RequestCd" name="RequestCd" iskey="true" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="RequestCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="RequestDescp" name="RequestDescp" fieldname="RequestDescp" readonly="readonly"/>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="StartHour" class="control-label">@Resources.Locale.L_NRSSetup_StartHour</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="StartHour" name="StartHour" fieldname="StartHour" number maxlength="3"/>
+                        </div>
+
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="NotifyTimes" class="control-label">@Resources.Locale.L_NRSSetup_NotifyTimes</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="NotifyTimes" name="NotifyTimes" fieldname="NotifyTimes" number maxnum="5" minnum="0"/>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="NotifyPeriod" class="control-label">@Resources.Locale.L_NRSSetup_NotifyPeriod</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="NotifyPeriod" name="NotifyPeriod" fieldname="NotifyPeriod" number minnum="0" />
+                        </div>
+                    </div>
+                    
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PolCd" class="control-label">@Resources.Locale.L_NRSSetup_PolCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PolCd" fieldname="PolCd" name="PolCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PolCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="PolNm" name="PolNm" fieldname="PolNm" readonly="readonly" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="NotifyGroup" class="control-label">@Resources.Locale.L_NRSSetup_NotifyGroup</label><!--Priority-->
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select dt="mt" name="NotifyGroup" id="NotifyGroup" fieldname="NotifyGroup" class="form-control input-sm">
+                                @Html.Raw(ViewBag.NotifyGroup);
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PodCd" class="control-label">@Resources.Locale.L_NRSSetup_PodCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PodCd" fieldname="PodCd" name="PodCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PodCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="PodNm" name="PodNm" fieldname="PodNm" readonly="readonly" />
+                        </div>
+                    </div>
+
+
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+						    <label for="Remark" class="control-label">@Resources.Locale.L_NRSSetup_Remark</label>
+						</div>
+						<div class="pure-u-sm-55-60">
+						    <textarea class="form-control lastInput" dt="mt" id="Remark" name="Remark" fieldname="Remark" ></textarea>
+						</div>
+					</div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="U_ID" class="control-label">@Resources.Locale.L_NRSSetup_U_ID</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                             <input type="text" dt="mt" class="form-control input-sm" fieldname="Cmp" id="Cmp" name="Cmp" iskey="true" readonly>
+                            @*<div class="input-group">
+                                <input type="text" dt="mt" class="form-control input-sm" fieldname="Cmp" id="Cmp" name="Cmp" iskey="true" required>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>*@
+                        </div>
+                        <div class="pure-u-sm-4-60 label-right">
+                            <label for="CreateBy" class="control-label">@Resources.Locale.L_NRSSetup_CreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" name="CreateBy" fieldname="CreateBy" readonly>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" name="CreateDate" fieldname="CreateDate" readonly>
+                        </div>
+                        <div class="pure-u-sm-6-60 label-right">
+                            <label for="ModifyBy" class="control-label">@Resources.Locale.L_NRSSetup_ModifyBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" name="ModifyBy" fieldname="ModifyBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" name="ModifyDate" fieldname="ModifyDate" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

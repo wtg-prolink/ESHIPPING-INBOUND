@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  设置哪些表及表中的哪些字段需要做日志记录
+-->
+<config>
+  <table name="EHU_PICKUP">
+    <!--
+	  name:字段名
+	  languageid:字段显示名称的多语言ID
+	  -->
+    <field name="CUSTOM_NO" languageid="COL_0010" />
+    <field name="PHONE_NO" languageid="COL_0035" />
+    <field name="CNAME" languageid="COL_0045" />
+    <field name="CADDR" languageid="COL_0046" />
+    <field name="LINKMAN" languageid="COL_0036" />
+    <field name="TYPE" languageid="COL_0018" />
+    <field name="PAYCASH" languageid="LBL_0117" />
+    <field name="DEST" languageid="COL_0054" />
+    <field name="COLOAD" languageid="LBL_0140" />
+    <field name="CNEE_NAME" languageid="COL_0059" />
+    <field name="REMARK" languageid="COL_0021" />
+    <field name="AREA_CODE" languageid="COL_0033" />
+    <field name="CANPICKTIME" languageid="COL_0048" />
+    <field name="SENDER" languageid="COL_0034" />
+    <field name="SENDTIME" languageid="COL_0049" />
+    <field name="PICKER" languageid="COL_0050" />
+    <field name="PICKTIME" languageid="COL_0051" />
+    <field name="QTY" languageid="COL_0052" />
+    <field name="GW" languageid="COL_0022" />
+    <field name="CBM" languageid="COL_0053" />
+    <field name="GOODS" languageid="COL_0057" />
+    <field name="DECL" languageid="COL_0058" />
+  </table>
+  <table name="EMPLOYEE">
+  </table>
+  <table name="EHU_WGTLVL">
+    <!--
+	  name:字段名
+	  languageid:字段显示名称的多语言ID
+	  -->
+    <field name="CODE" languageid="COL_0017" />
+    <field name="AREACODE" languageid="COL_0005" />
+    <field name="GOODTYPE" languageid="COL_0018" />
+    <field name="PERCENT" languageid="COL_0019" />
+    <field name="COLOAD" languageid="LBL_0140" />
+    <field name="CLIENT_ID" languageid="COL_0010" />
+    <field name="TERMINI_ID" languageid="COL_0054" />
+    <field name="GOODS_NAME" languageid="COL_0089" />
+    <field name="DESCP" languageid="COL_0021" />
+    <field name="EHU_WGTLVLD" languageid="COL_00124" />
+  </table>
+  <table name="EHU_AWB">
+    <!--
+	  name:字段名
+	  languageid:字段显示名称的多语言ID
+	  -->
+    <field name="AWB_NO" languageid="COL_0043" />
+    <field name="TEMP_NO" languageid="LBL_0204" />
+    <field name="CNL_NO" languageid="LBL_0093" />
+    <field name="CLEAR_CMP" languageid="COL_0058" />
+    <field name="AWB_DATE" languageid="LBL_0031" />
+    <field name="AWB_TIME" languageid="LBL_0031" />
+    <field name="SHPR_CD1" languageid="LBL_0033" />
+    <field name="SHPR_NAME" languageid="LBL_0209" />
+    <field name="SHPR_ADDR" languageid="LBL_0210" />
+    <field name="SHPR_ATTN" languageid="LBL_0211" />
+    <field name="SHPR_TEL" languageid="LBL_0212" />
+    <field name="SHPR_FAX" languageid="LBL_0213" />
+    <field name="CNEE_CD1" languageid="LBL_0035" />
+    <field name="TO_CITY" languageid="COL_0054" />
+    <field name="BUSINESS_ATTN" languageid="LBL_0075" />
+    <field name="CNEE_NAME" languageid="LBL_0214" />
+    <field name="CNEE_ADDR" languageid="LBL_0215" />
+    <field name="CNEE_ATTN" languageid="LBL_0216" />
+    <field name="CNEE_TEL" languageid="LBL_0217" />
+    <field name="CNEE_FAX" languageid="LBL_0218" />
+    <field name="MAWB_NO" languageid="LBL_0040" />
+    <field name="ETD" languageid="LBL_0041" />
+    <field name="ETD_TIME" languageid="LBL_0041" />
+    <field name="COLOAD" languageid="LBL_0140" />
+    <field name="FLIGHT_NO" languageid="LBL_0042" />
+    <field name="ETA" languageid="LBL_0043" />
+    <field name="ETA_TIME" languageid="LBL_0043" />
+    <field name="POD" languageid="LBL_0046" />
+    <field name="POD_TIME" languageid="LBL_0046" />
+    <field name="DELIVERY_TO" languageid="LBL_0044" />
+    <field name="CW" languageid="LBL_0145" />
+    <field name="R_TOTAL_AMT" languageid="LBL_0144" />
+    <field name="AWB_CHARGE_PC" languageid="LBL_0192" />
+    <field name="AWB_CRNCY" languageid="TTL_0004" />
+    <field name="AWB_AMT" languageid="COL_0029" />
+    <field name="ORIGIN_STN" languageid="LBL_0200" />
+    <field name="CCN_STN" languageid="LBL_0191" />
+    <field name="DEST_STN" languageid="LBL_0048" />
+    <field name="EXPORT_RMK" languageid="LBL_0049" />
+    <field name="IMPORT_RMK" languageid="LBL_0050" />
+    <field name="EXPORT_FRT" languageid="COL_0169" />
+    <field name="SP_FLAG" languageid="COL_0170" />
+  </table>
+
+  <table name="EHU_AWBCHG">
+    <!--
+	  name:字段名
+	  languageid:字段显示名称的多语言ID
+	  -->
+    <field name="AWB_NO" languageid="COL_0043" />
+    <field name="PCL" languageid="COL_0028" />
+    <field name="CHG_CD" languageid="COL_0060" />
+    <field name="CHG_DESCP" languageid="COL_0026" />
+    <field name="CRNCY" languageid="TTL_0004" />
+    <field name="EX_RATE" languageid="LBL_0009" />
+    <field name="WEIGHT" languageid="COL_0022" />
+    <field name="CBM" languageid="COL_0053" />
+    <field name="RATE" languageid="COL_0082" />
+    <field name="AMT" languageid="COL_0029" />
+    <field name="VAT_FLAG" languageid="LBL_0256" />
+    <field name="LAMT" languageid="COL_0083" />
+    <field name="REMARK" languageid="COL_0021" />
+    <field name="DEBIT_TO" languageid="LBL_0016" />
+    <field name="DEBIT_NAME" languageid="COL_0045" />
+    <field name="DN_NO" languageid="COL_0063" />
+  </table>
+
+  <table name="EHU_SQBM">
+    <field name="WGT_UNIT" languageid="COL_0177" />
+    <field name="CUSTOMER_NAME" languageid="LBL_0009" />
+  </table>
+
+  <table name="EHU_SQBD">
+    <field name="CHG_CD" languageid="COL_00135" />
+    <field name="CHG_DESCP" languageid="COL_00136" />
+    <field name="DEST" languageid="COL_0054" />
+    <field name="SHIP_TYPE" languageid="LBL_0348" />
+    <field name="CARGO_TYPE" languageid="LBL_0349" />
+    <field name="FLIGHT_TYPE" languageid="LBL_0350" />
+    <field name="BOUNDARY_POINT" languageid="LBL_0361" />
+    <field name="PAYMENT_TERMS" languageid="LBL_0192" />
+    <field name="CRNCY" languageid="TTL_0004" />
+    <field name="FIRST_WGT" languageid="COL_0178" />
+    <field name="FIRST_PRICE" languageid="COL_0179" />
+    <field name="WGT_BREAK1" languageid="重量區間1" />
+    <field name="WGT_UNIT1" languageid="重量單位1" />
+    <field name="WGT_PRICE1" languageid="重量價格1" />
+    <field name="WGT_BREAK2" languageid="重量區間2" />
+    <field name="WGT_UNIT2" languageid="重量單位2" />
+    <field name="WGT_PRICE2" languageid="重量價格2" />
+    <field name="WGT_BREAK3" languageid="重量區間3" />
+    <field name="WGT_UNIT3" languageid="重量單位3" />
+    <field name="WGT_PRICE3" languageid="重量價格3" />
+    <field name="WGT_BREAK4" languageid="重量區間4" />
+    <field name="WGT_UNIT4" languageid="重量單位4" />
+    <field name="WGT_PRICE4" languageid="重量價格4" />
+    <field name="WGT_BREAK5" languageid="重量區間5" />
+    <field name="WGT_UNIT5" languageid="重量單位5" />
+    <field name="WGT_PRICE5" languageid="重量價格5" />
+    <field name="WGT_BREAK6" languageid="重量區間6" />
+    <field name="WGT_UNIT6" languageid="重量單位6" />
+    <field name="WGT_PRICE6" languageid="重量價格6" />
+    <field name="WGT_BREAK7" languageid="重量區間7" />
+    <field name="WGT_UNIT7" languageid="重量單位7" />
+    <field name="WGT_PRICE7" languageid="重量價格7" />
+    <field name="WGT_BREAK8" languageid="重量區間8" />
+    <field name="WGT_UNIT8" languageid="重量單位8" />
+    <field name="WGT_PRICE8" languageid="重量價格8" />    
+  </table>
+  <table name="CUSTOM">
+    <field name="CUSTOM_NO" languageid="COL_0010" />
+    <field name="CITY" languageid="TTL_0015" />
+    <field name="COUNTRY" languageid="TTL_0014" />
+    <field name="ZIP" languageid="LBL_0308" />
+    <field name="CUSTOM_TYPE" languageid="客戶類型" />
+    <field name="TYPE_NAME" languageid="類型名稱" />
+    <field name="TAX_NO" languageid="LBL_0014" />
+    <field name="CNAME" languageid="COL_0014" />
+    <field name="CADDRI" languageid="COL_0015" />
+
+    <field name="LIM_DAYS" languageid="Credit" />
+    <field name="PAY_TYPE" languageid="LBL_0013" />
+
+    <field name="CADDR" languageid="COL_0015" />
+    <field name="NAME" languageid="名稱" />
+    <field name="ADDR" languageid="地址" />
+    <field name="CABBN" languageid="LBL_0015" />
+    <field name="MEC_CODE" languageid="LBL_0239" />
+    <field name="CADDRM" languageid="LBL_0092" />
+    <field name="REF_FLAG1" languageid="LBL_0398" />
+    <field name="REF_FLAG2" languageid="LBL_0165" />
+
+    <field name="DEBIT_AC" languageid="LBL_0016" />
+    <field name="PAY_DESCP" languageid="LBL_0020" />
+    <field name="SALES_NO" languageid="中港臺業務員" />
+    <field name="REF1" languageid="國外業務員" />
+    <!--<field name="FUEL_FEE" languageid="" />-->
+
+    <field name="USER_ID" languageid="用戶ID" />
+    <field name="SYS_DATE" languageid="系統時間" />
+    <field name="CMP" languageid="公司" />
+    <field name="STATION" languageid="LBL_0085" />
+    <field name="MAJOR_PCKAREA" languageid="COL_0165" />
+    <field name="PAYMENT_TERMS" languageid="LBL_0192" />
+    <field name="FROZEN_FLAG" languageid="COL_0175" />
+	<field name="EFX_NO" languageid="LBL_0282" />
+      
+  </table>
+
+   <table name="AEMPK">
+    <field name="CUSTOM_NO" languageid="COL_0010" />
+    <field name="SEQ_NO" languageid="序號" />
+    <field name="ATTN" languageid="COL_0036" />
+    <field name="ADDR" languageid="COL_0037" />
+    <field name="PK_PORT" languageid="COL_0033" />
+    <field name="TEL" languageid="LBL_EOI_0007" />
+    <field name="FAX" languageid="COL_0038" />
+    <field name="MTEL" languageid="COL_0039" />
+    <field name="EMAIL" languageid="LBL_0127" />
+    <field name="REMARK" languageid="COL_0041" />
+   
+
+    
+      
+  </table>
+
+</config>

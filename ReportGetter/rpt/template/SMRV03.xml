@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Table name="SMDNP"  sql="SELECT (SELECT ISNULL(LTRUCK_NO,'')+';' FROM SMRV WHERE SMRV.BAT_NO=A.BAT_NO  FOR XML PATH('')) AS LTRUCK_NO,
+         (SELECT ISNULL(LDRIVER,'')+';' FROM SMRV WHERE SMRV.BAT_NO=A.BAT_NO  FOR XML PATH('')) AS LDRIVER,
+         B.PKG_UNIT AS PKG_UNIT_UB,B.PKG_NUM,B.PKG_UNIT,B.PKG_UNIT_DESC,
+C.TRAN_TYPE,POD AS POD_CD,POD_NM AS POD_NM,C.SHIPMENT_ID,C.DN_NO,C.PORT_POL,C.PORT_POLNM,D.*,A.TRUCKER,A.TRUCKER_NM,A.CNTR_NO,A.SEAL_NO1 ,
+C.CUSTOMER_INNUMBER,(SELECT TOP 1 CASE
+                 WHEN PARTY_NAME IS NOT NULL THEN
+                  PARTY_NAME + ' '
+                 ELSE
+                  ''
+               END +CASE
+                 WHEN (PARTY_NAME2 IS NOT NULL) THEN
+                  PARTY_NAME2 + ' '
+                 ELSE
+                  ''
+               END +CASE
+                 WHEN (PARTY_NAME3 IS NOT NULL) THEN
+                  PARTY_NAME3 + ' '
+                 ELSE
+                  ''
+               END +CASE
+                 WHEN (PARTY_NAME4 IS NOT NULL) THEN
+                  PARTY_NAME4 + ' '
+                 ELSE
+                  ''
+               END
+                 FROM SMPTY
+                WHERE SMPTY.STATUS='U' AND SMPTY.PARTY_NO =
+                      (SELECT TOP 1 C.PLANT
+                         FROM SMDN
+                        WHERE C.PLANT IS NOT NULL
+                          AND B.SHIPMENT_ID = SMDN.SHIPMENT_ID)) AS P_NAME,
+                          A.QTY V_QTY,A.QTYU V_QTYU 
+  FROM SMRV A
+  LEFT JOIN SMSM B ON A.SHIPMENT_ID = B.SHIPMENT_ID
+  LEFT JOIN SMDN C ON A.DN_NO LIKE '%'+C.DN_NO+'%'
+  LEFT JOIN SMDNP D ON C.U_ID = D.U_FID AND C.DN_NO=D.DN_NO
+ WHERE A.BAT_NO = ':=batno'">
+  </Table>
+  <Table name="PARTY"  sql="SELECT *
+  FROM SMDNPT A
+  LEFT JOIN SMPTY
+    ON A.PARTY_NO = SMPTY.PARTY_NO AND SMPTY.STATUS='U'
+ WHERE A.DN_NO =':=val'">
+  </Table>
+<Table name="SMSMPT"  sql="SELECT *  FROM  SMSMPT WHERE  SHIPMENT_ID=':=uid'">
+  </Table>
+  <Paramter name="listNo"></Paramter>
+</root>

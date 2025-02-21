@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "InsurancePayDetailView";
+}
+<script type="text/javascript">
+	var _uid = "@ViewBag.UId";
+	var Schemas = "@ViewBag.Schemas.Content";
+	var JobNo = "@ViewBag.JobNo";
+	var JobType = "@ViewBag.JobType";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                	<div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <table id="MainGrid" class="_tableGrid" style="width: 100%">
+                                <tr></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" isKey="true" />
+@Html.RazorJSInline("~/Scripts/ActManage/InsurancePayDetailView.js")

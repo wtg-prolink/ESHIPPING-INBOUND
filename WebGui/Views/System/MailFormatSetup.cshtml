@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "MailFormatSetup";
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/ckeditor/ckeditor.js")"></script>
+@Html.RazorJSInclude("~/Scripts/System/MailFormatSetup.js")
+<script type="text/javascript">
+	var schemas = "@ViewBag.schemas.Content";
+    var UId     = "@ViewBag.UId";
+
+	jQuery(document).ready(function($) {
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 250;
+	    var editor = CKEDITOR.replace('MtContent',{allowedContent: true, height: gridHeight});
+
+	    CKEDITOR.instances.MtContent.on('instanceReady', function () {
+	        CKEDITOR.instances.MtContent.setReadOnly(true);
+	    });
+	});
+</script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Cmp" class="control-label">@Resources.Locale.L_RoleSetUp_CMP</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" value="@ViewBag.Cmp"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                    	<div class="pure-u-sm-5-60 label-right">
+                    	    <label for="MtType" class="control-label">@Resources.Locale.L_MailFormatSetup_MtType</label>
+                    	</div>
+                    	<div class="pure-u-sm-10-60 control-group">
+                    	    <div class="input-group">
+                    	        <input type="text" class="form-control input-sm" dt="mt" id="MtType" name="MtType" fieldname="MtType" value="@ViewBag.MtType"/>
+                    	        <span class="input-group-btn">
+                    	            <button class="btn btn-sm btn-default" type="button" id="MtTypeLookup">
+                    	                <span class="glyphicon glyphicon-search"></span>
+                    	            </button>
+                    	        </span>
+                    	    </div>
+                    	    <p class="help-block tooltips"></p>
+                    	</div>
+                    	<div class="pure-u-sm-15-60">
+                    	    <input type="text" class="form-control input-sm" dt="mt" id="MtName" name="MtName" fieldname="MtName" value="@ViewBag.MtName" readonly />
+                    	</div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Cmp" class="control-label">@Resources.Locale.L_DNApproveManage_CreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <label class="control-label" dt="mt" id="CreateBy" name="CreateBy" fieldname="CreateBy">@ViewBag.CreateBy</label>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="MtType" class="control-label">@Resources.Locale.L_DNApproveManage_CreateDate</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <label class="control-label" dt="mt" id="CreateBy" name="CreateDate" fieldname="CreateDate">@ViewBag.CreateDate</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                        <label for="Cmp" class="control-label">@Resources.Locale.L_DNApproveManage_ModifyBy</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <label class="control-label" dt="mt" id="ModifyBy" name="ModifyBy" fieldname="ModifyBy">@ViewBag.ModifyBy</label>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="MtType" class="control-label">@Resources.Locale.L_DNApproveManage_ModifyDate</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <label class="control-label" dt="mt" id="ModifyDate" name="ModifyDate" fieldname="ModifyDate">@ViewBag.ModifyDate</label>
+                        </div>
+                    </div>
+
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="MtContent" class="control-label">@Resources.Locale.L_MailFormatSetup_MtContent</label>
+						</div>
+					</div>
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-60-60 control-group">
+                    		@Html.TextArea("MtContent",
+                                new {id="MtContent", @name="MtContent", @fieldname="MtContent"})
+                    	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

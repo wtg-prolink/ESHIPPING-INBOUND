@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D8508579-5BC4-493E-AF6F-E9696F9999F3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ReportGetter</RootNamespace>
+    <AssemblyName>ReportGetter</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Prolink.Tool_2008">
+      <HintPath>..\lib\V3Kernel\Prolink.Tool_2008.dll</HintPath>
+    </Reference>
+    <Reference Include="Prolink.V6.Core_2008">
+      <HintPath>..\lib\V3Kernel\Prolink.V6.Core_2008.dll</HintPath>
+    </Reference>
+    <Reference Include="Prolink.WebReport">
+      <HintPath>..\lib\V3Kernel\Prolink.WebReport.dll</HintPath>
+    </Reference>
+    <Reference Include="Prolink.WebStimulReport">
+      <HintPath>..\lib\V3Kernel\Prolink.WebStimulReport.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataGetter\DefaultDataGetter.cs" />
+    <Compile Include="DataGetter\FCL01DataGetter.cs" />
+    <Compile Include="DataGetter\FCL02DataGetter.cs" />
+    <Compile Include="DataGetter\FCL03DataGetter.cs" />
+    <Compile Include="DataGetter\IPQ01DataGetter.cs" />
+    <Compile Include="DataGetter\IPQ02DataGetter.cs" />
+    <Compile Include="DataGetter\IPQ03DataGetter.cs" />
+    <Compile Include="DataGetter\IPQ04DataGetter.cs" />
+    <Compile Include="DataGetter\IPQ05CDataGetter.cs" />
+    <Compile Include="DataGetter\IPQ05DataGetter.cs" />
+    <Compile Include="DataGetter\IPQ06CDataGetter.cs" />
+    <Compile Include="DataGetter\IPQ06DataGetter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReporterRegister.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\AIR01.mrt" />
+    <Content Include="rpt\template\AIR01.xml" />
+    <Content Include="rpt\template\AsdSql.xml" />
+    <Content Include="rpt\template\IPQ07.xml" />
+    <Content Include="rpt\template\IPQ08.xml" />
+    <Content Include="rpt\template\IPQ09.xml" />
+    <Content Include="rpt\template\IPQ10.xml" />
+    <Content Include="rpt\template\ISF01.xml" />
+    <Content Include="rpt\template\PACK01.xml" />
+    <Content Include="rpt\template\RFB01.xml" />
+    <Content Include="rpt\template\SEQUO.xml" />
+    <Content Include="rpt\template\SMRV01.xml" />
+    <Content Include="rpt\template\SMRV02.xml" />
+    <Content Include="rpt\template\SMRV03.xml" />
+    <Content Include="rpt\template\TEST.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\CHM01.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\CHM02.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\CHM03.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\COM01.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\FCL01.mrt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\FCL02.mrt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\FCL03.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\GUM01.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\IPQ01.mrt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\IPQ02.mrt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\IPQ03.mrt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\IPQ04.mrt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\IPQ05.mrt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\IPQ05C.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\IPQ06.mrt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\IPQ06C.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\IPQ07.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\IPQ08.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\IPQ09.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\IPQ10.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\ISF01.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\PACK01.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\POL01.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\POL02.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\POM01.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\POM02.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\POM03.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\POM04.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\POM05.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\POM06.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\POM07.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\POMCHM01.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\POMPOP01.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\POP01.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rpt\template\RFB01.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="rpt\template\SEQUO.mrt" />
+    <Content Include="rpt\template\SMRV01.mrt" />
+    <Content Include="rpt\template\SMRV02.mrt" />
+    <Content Include="rpt\template\SOM01.mrt" />
+    <Content Include="rpt\template\WIC01.mrt" />
+    <Content Include="rpt\template\WIC02.mrt" />
+    <Content Include="rpt\template\WIC03.mrt" />
+    <Content Include="rpt\template\WOC01.mrt" />
+    <Content Include="rpt\template\WOC03.mrt" />
+    <Content Include="rpt\template\WTM01.mrt" />
+    <Content Include="rpt\template\WTM02.mrt" />
+    <Content Include="rpt\template\付款计划.mrt" />
+    <Content Include="rpt\template\冷链日报.mrt" />
+    <Content Include="rpt\template\冷链业务预收款及赎单时间表.mrt" />
+    <Content Include="rpt\template\矿采购和销售物流动态日报（日化品的报表）.mrt" />
+    <Content Include="rpt\template\粤龙台账（日化品的报表）.mrt" />
+    <None Include="rpt\template\SMRV03.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="rpt\temp\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

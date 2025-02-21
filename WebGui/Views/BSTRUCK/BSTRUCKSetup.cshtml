@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "BSTRUCKSetup";
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+		        	<div class="pure-g">
+		        		<!-- <div class="pure-u-sm-5-60">
+		        		    <label for="Cmp" class="control-label">@Resources.Locale.L_PartyDocSetup_Cmp</label>
+		        		</div>
+		        		<div class="pure-u-sm-10-60 control-group">
+		        			<input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" value="@ViewBag.Cmp" readonly/>
+		        		    <div class="input-group">
+		        		        <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" />
+		        		        <span class="input-group-btn">
+		        		            <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+		        		                <span class="glyphicon glyphicon-search"></span>
+		        		            </button>
+		        		        </span>
+		        		    </div>
+		        		    <p class="help-block tooltips"></p>
+		        		</div>
+		        		<div class="pure-u-sm-15-60">
+		        		    <input type="text" class="form-control input-sm" dt="mt" id="CmpNm" name="CmpNm" fieldname="CmpNm" value="@ViewBag.CmpNm" readonly />
+		        		</div> -->
+		        		<input type="hidden" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" value="@ViewBag.Cmp" readonly/>
+		        		<div class="pure-u-sm-5-60">
+		        		    <label for="PartyNo" class="control-label">@Resources.Locale.L_GateReserve_Trucker</label>
+		        		</div>
+		        		<div class="pure-u-sm-10-60 control-group">
+		        			<!-- <input type="text" class="form-control input-sm" dt="mt" id="PartyNo" name="PartyNo" fieldname="PartyNo" value="@ViewBag.PartyNo" readonly/> -->
+		        		    <div class="input-group">
+		        		        <input type="text" class="form-control input-sm" dt="mt" id="PartyNo" name="PartyNo" fieldname="PartyNo" value="@ViewBag.PartyNo"/>
+		        		        <span class="input-group-btn">
+		        		            <button class="btn btn-sm btn-default" type="button" id="PartyNoLookup">
+		        		                <span class="glyphicon glyphicon-search"></span>
+		        		            </button>
+		        		        </span>
+		        		    </div>
+		        		    <p class="help-block tooltips"></p>
+		        		</div>
+		        		<div class="pure-u-sm-15-60">
+		        		    <input type="text" class="form-control input-sm" dt="mt" id="PartyNm" name="PartyNm" fieldname="PartyNm" value="@ViewBag.PartyName" readonly />
+		        		</div>
+		        	</div>
+		        	<div class="pure-g">
+		        		
+		        		<!-- <div class="pure-u-sm-10-60">
+		        			<button class="btn btn-sm btn-info" id="SearchBtn">查詢</button>
+		        		</div> -->
+		        	</div>
+		        	<div class="pure-g">
+						<div class="pure-u-sm-12-24">
+				            <table id="MainGrid" class="_tableGrid" style="width: 100%">
+				                <tr></tr>
+				            </table>
+				        </div>
+				        <div class="pure-u-sm-12-24">
+				        	<table id="SubGrid" class="_tableGrid" style="width: 100%">
+				        	    <tr></tr>
+				        	</table>
+				        </div>
+		        	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UFid" name="UFid" fieldname="UFid" value="@ViewBag.UFid" isKey="true">
+
+@Html.RazorJSInline("~/Scripts/BSTRUCK/BSTRUCKSetup.js")
+

@@ -1,0 +1,2252 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <DateSet Ref="2" type="Stimulsoft.Report.Dictionary.StiXmlDatabase" isKey="true">
+        <Alias>DateSet</Alias>
+        <Name>DateSet</Name>
+        <PathData>C:\Users\user\Desktop\Schemas.xml</PathData>
+        <PathSchema />
+      </DateSet>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <Table1 Ref="3" type="DataTableSource" isKey="true">
+        <Alias>Table1</Alias>
+        <Columns isList="true" count="100">
+          <value>DN_NO,System.String</value>
+          <value>INVOICE_TYPE,System.String</value>
+          <value>U_ID,System.Guid</value>
+          <value>D_UID,System.Guid</value>
+          <value>SHPR_CD,System.String</value>
+          <value>SHPR_NM,System.String</value>
+          <value>INV_NO,System.String</value>
+          <value>PO_NO,System.String</value>
+          <value>INV_DATE,System.DateTime</value>
+          <value>SHIP_TO,System.String</value>
+          <value>SHIP_NM,System.String</value>
+          <value>BILL_TO,System.String</value>
+          <value>BILL_NM,System.String</value>
+          <value>VAT_NO,System.String</value>
+          <value>NOTIFY_NO,System.String</value>
+          <value>NOTIFY_NM,System.String</value>
+          <value>CNTRY_DESCP,System.String</value>
+          <value>BL_NO,System.String</value>
+          <value>M_TTL_GR,System.Decimal</value>
+          <value>PART_NO,System.String</value>
+          <value>TTL_VALUE,System.Decimal</value>
+          <value>CNEE_CD,System.String</value>
+          <value>CNEE_NM,System.String</value>
+          <value>SO_NO,System.String</value>
+          <value>DLV_WAY,System.String</value>
+          <value>CMDTY_CD,System.String</value>
+          <value>CMDTY_DESCP,System.String</value>
+          <value>FROM_CD,System.String</value>
+          <value>FROM_DESCP,System.String</value>
+          <value>TO_CD,System.String</value>
+          <value>TO_DESCP,System.String</value>
+          <value>GOODS_DESCP,System.String</value>
+          <value>QTY,System.Decimal</value>
+          <value>QTYU,System.String</value>
+          <value>UNIT_PRICE1,System.Decimal</value>
+          <value>AMT,System.Decimal</value>
+          <value>IHS_CODE,System.String</value>
+          <value>ISSUE_FEE,System.Decimal</value>
+          <value>FREIGHT_FEE,System.Decimal</value>
+          <value>CREATE_BY,System.String</value>
+          <value>TRADE_TERM,System.String</value>
+          <value>TRADETERM_DESCP,System.String</value>
+          <value>INCOTERM,System.String</value>
+          <value>INCOTERM_DESCP,System.String</value>
+          <value>SEQ_NO,System.Decimal</value>
+          <value>IU_FID,System.Guid</value>
+          <value>IPART_NO,System.String</value>
+          <value>VEN_NM,System.String</value>
+          <value>TTL_NW,System.Decimal</value>
+          <value>TTL_GW,System.Decimal</value>
+          <value>TTL_CBM,System.Decimal</value>
+          <value>CUR,System.String</value>
+          <value>M_TTL_CBM,System.Decimal</value>
+          <value>M_TTL_GW,System.Decimal</value>
+          <value>PIC,System.String</value>
+          <value>TITLE_NAME,System.String</value>
+          <value>TITLE_ADDR1,System.String</value>
+          <value>TITLE_ADDR2,System.String</value>
+          <value>TITLE_ADDR3,System.String</value>
+          <value>SHPR_ADDR1,System.String</value>
+          <value>SHPR_ADDR2,System.String</value>
+          <value>SHPR_ADDR3,System.String</value>
+          <value>SHPR_TEL,System.String</value>
+          <value>SHPR_FAX,System.String</value>
+          <value>CNEE_ADDR1,System.String</value>
+          <value>CNEE_ADDR2,System.String</value>
+          <value>CNEE_ADDR3,System.String</value>
+          <value>CNEE_TEL,System.String</value>
+          <value>CNEE_FAX,System.String</value>
+          <value>NOTIFY_ADDR1,System.String</value>
+          <value>NOTIFY_ADDR2,System.String</value>
+          <value>NOTIFY_ADDR3,System.String</value>
+          <value>NOTIFY_TEL,System.String</value>
+          <value>NOTIFY_MAIL,System.String</value>
+          <value>NOTIFY_FAX,System.String</value>
+          <value>SHIP_ADDR1,System.String</value>
+          <value>SHIP_ADDR2,System.String</value>
+          <value>SHIP_ADDR3,System.String</value>
+          <value>SHIP_TEL,System.String</value>
+          <value>SHIP_FAX,System.String</value>
+          <value>BILL_ADDR1,System.String</value>
+          <value>BILL_ADDR2,System.String</value>
+          <value>BILL_ADDR3,System.String</value>
+          <value>BILL_TEL,System.String</value>
+          <value>BILL_FAX,System.String</value>
+          <value>PAY_TERM_CD,System.String</value>
+          <value>PAY_DESCP,System.String</value>
+          <value>M_TTL_PLT,System.Decimal</value>
+          <value>CASE_NUM,System.Decimal</value>
+          <value>NW,System.Decimal</value>
+          <value>GW,System.Decimal</value>
+          <value>CBM,System.Decimal</value>
+          <value>CASE_NO,System.String</value>
+          <value>PU_FID,System.Guid</value>
+          <value>CNTR_NO,System.String</value>
+          <value>SEAL_NO1,System.String</value>
+          <value>VEN_CD,System.String</value>
+          <value>VEN_ADDR,System.String</value>
+          <value>NCM_NO,System.String</value>
+          <value>PLA_SIZE,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>Table1</Name>
+        <NameInSource>DateSet.Table1</NameInSource>
+      </Table1>
+      <SMRV Ref="4" type="DataTableSource" isKey="true">
+        <Alias>SMRV</Alias>
+        <Columns isList="true" count="4">
+          <value>CNTR_NO,System.String</value>
+          <value>SEAL_NO1,System.String</value>
+          <value>CNTY_TYPE,System.String</value>
+          <value>DN_NO,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>SMRV</Name>
+        <NameInSource>DateSet.SMRV</NameInSource>
+      </SMRV>
+    </DataSources>
+    <Relations isList="true" count="1">
+      <Table1 Ref="5" type="DataRelation" isKey="true">
+        <Alias>Table1</Alias>
+        <ChildColumns isList="true" count="1">
+          <value>DN_NO</value>
+        </ChildColumns>
+        <ChildSource isRef="4" />
+        <Dictionary isRef="1" />
+        <Name>Table1</Name>
+        <NameInSource>Relation1</NameInSource>
+        <ParentColumns isList="true" count="1">
+          <value>DN_NO</value>
+        </ParentColumns>
+        <ParentSource isRef="3" />
+      </Table1>
+    </Relations>
+    <Report isRef="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="2">
+    <Page1 Ref="6" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="10">
+        <PageFooterBand1 Ref="7" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,25.8,27.7,2.2</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text103 Ref="8" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>21.2,1.6,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>71eec0b908424b78b129febe0007ca9f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text103</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>Print Date :</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text103>
+            <Text104 Ref="9" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>23.2,1.6,4.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>541618b2abf04529836e5489bd9e0add</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text104</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Text>{Format("{0:yyyy/MM/dd}", Today)} {Format("{0:HH:mm:ss}", Time)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text104>
+            <Image1 Ref="10" type="Image" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>22.2,-0.1,5,2.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Guid>93190fcc14e24994a2213156bd84de6a</Guid>
+              <ImageData>{loadImg(Table1.PIC)}</ImageData>
+              <Name>Image1</Name>
+              <Page isRef="6" />
+              <Parent isRef="7" />
+              <Stretch>True</Stretch>
+            </Image1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>2800f5bed95f4c589b9f5ac2d5ab1b35</Guid>
+          <Name>PageFooterBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+        </PageFooterBand1>
+        <GroupHeaderBand1 Ref="11" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,27.7,15.2</ClientRectangle>
+          <Components isList="true" count="67">
+            <Text1 Ref="12" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,0,27.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,20</Font>
+              <Guid>18b71e43cae245f7b651e9fd5702c4c7</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.TITLE_NAME}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text1>
+            <Text2 Ref="13" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,0.8,27.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,16</Font>
+              <Guid>434fb54e85b1497c85480c8e6f7987e6</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.TITLE_ADDR1+Table1.TITLE_ADDR2+Table1.TITLE_ADDR3}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text2>
+            <Text3 Ref="14" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,2,27.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,16</Font>
+              <Guid>925322ab02094f48a254980aecf0c451</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>INVOICE</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text3>
+            <Text4 Ref="15" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,2.6,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>dd022d6de534474baa74a520d393bcfd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Company 出售单位:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text5 Ref="16" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,3.2,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>c6b26aa402cd48b9b6a6ddc9b01cc58d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Address 地址:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text16 Ref="17" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,2.6,7.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>4bde645c11754b26b96ee8bc23857197</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.CNEE_NM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text6 Ref="18" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,3.2,7.6,1.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>e983495dba434d7badac4914824a90f9</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.CNEE_ADDR1+Table1.CNEE_ADDR2+Table1.CNEE_ADDR3}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text6>
+            <Text7 Ref="19" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>16.6,2.6,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>15333dd68399414cb59f2188fcf2552e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>发票号 Invoice No.</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text8 Ref="20" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>20.2,2.6,7.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>7a6e69f3b14a4a9cbcf7bd3309e6a8dc</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.INV_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text9 Ref="21" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>16.6,3.2,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>2ed9e8ef9272498aab873a08f3406b18</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>PO NO.</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text10 Ref="22" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>20.2,3.2,7.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>6426b4d763804fdd96d3dd78ee81764b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.PO_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text11 Ref="23" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,5,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>78dc04d60fe543b897786530c1d75a0c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Tel No. 电话:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text12 Ref="24" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,5,7.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>ce1518f0273e4817aae0ae16b929eb80</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.CNEE_TEL}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Text13 Ref="25" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>16.6,5,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>0c68c29a8b124836b3b02258889dd79c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>开票日期 Date:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text14 Ref="26" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>20.2,5,7.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>7c696150d1b04cbe807086a13a9cb7ff</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.INV_DATE}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text17 Ref="27" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,5.6,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>27ceee2da46d47dfae16f7b69050d41c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Invoice from 开票人:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text15 Ref="28" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>11,5,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>82c7ac0fd30a4af680be1ad4760d41da</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Fax 传真:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text18 Ref="29" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,5,3.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>b74e2e9f8f734b69b614504ae5b0454d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.CNEE_FAX}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <Text19 Ref="30" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,5.6,7.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>f0be580b888742b29b2b85a7bce45765</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.CNEE_NM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text20 Ref="31" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,6.2,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>f4b27bd999b84e10899d2467c276f54d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Shipped to 运往</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+            <Text21 Ref="32" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,6.8,12.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>1bcd76103d294c5d993840886bd89f41</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.SHIP_NM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text22 Ref="33" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,8,6.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>beba2b27b11b49ac9c3e9f6d138c6f40</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>TEL:{Table1.SHIP_TEL}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+            <Text23 Ref="34" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,8.6,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>a3ef2fdaa8ca4d7bac9e05d55d4aad4c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>SR#</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+            <Text24 Ref="35" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,9.2,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>96bf7641460543debf5af5b5af488913</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>PO#</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text24>
+            <Text25 Ref="36" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,9.2,9.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>0cd3bf5e076846829787d25f05bc9c3d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.PO_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text25>
+            <Text26 Ref="37" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,10.2,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>1d4bec3b5c5842d99fb129f568be7bad</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Original Country:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text26>
+            <Text27 Ref="38" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,10.8,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>8fa033322aa7428ba0379deb80bd3919</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Price Term</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+            <Text28 Ref="39" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,11.4,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>ebb2b24fd7e44ec482c507e3d8dbf513</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Payment Term</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text28>
+            <Text29 Ref="40" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,12,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>06923aec4717477e9498b0cbdd3b0179</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Mode of transport</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text29>
+            <Text30 Ref="41" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,12.6,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>409b6dd02a9148f29cea9512f454c6f4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>B/L:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text30>
+            <Text31 Ref="42" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,13.2,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>f1486bd902284633b6ef932653ab33e3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text31</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Container No:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text31>
+            <Text32 Ref="43" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,13.8,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>558f5183fcbf4551a57b3b005c65e966</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text32</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Description:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text32>
+            <Text33 Ref="44" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,10.2,9.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>5239b5ea5e5441a2a85653105c6eaf20</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.CNTRY_DESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text33>
+            <Text34 Ref="45" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,10.8,9.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>1d3de0bcf2104a6dbf4db0debee14922</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text34</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.INCOTERM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text34>
+            <Text35 Ref="46" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,11.4,9.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>4fb6d10e2a9c4cd0b9ab59a3880bd2ec</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text35</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.TRADETERM_DESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text35>
+            <Text36 Ref="47" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,12,9.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>8f8dd65908af4755b592d1dfad40f29d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text36</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.DLV_WAY}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text36>
+            <Text37 Ref="48" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,8.6,9.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>34bbb416e83b485e8ffa747e554ef6c1</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text37</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.SO_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text37>
+            <Text38 Ref="49" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,12.6,9.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>82db97b63c674216b58a4c4a381b5eca</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text38</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.BL_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text38>
+            <Text39 Ref="50" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,15.2,9.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>0c15021928d842fdaa5d4b73b48ee818</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text39</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.CNTR_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text39>
+            <Text40 Ref="51" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,13.8,9.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>c96ba8b9ee544929870e37c3f9e647de</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text40</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.CMDTY_CD}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text40>
+            <Text41 Ref="52" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,6.2,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>fd5295b8e45545ea95e2be50cf2328ec</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text41</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Invoiced to</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text41>
+            <Text42 Ref="53" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.8,6.8,14.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>39259457429f4f3e8bccc7e0d1cf23da</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text42</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.BILL_NM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text42>
+            <Text43 Ref="54" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.8,7.4,14.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>0a4bdca8af13431087eb48ee5c926e01</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text43</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.BILL_ADDR1+Table1.BILL_ADDR2+Table1.BILL_ADDR3}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text43>
+            <Text45 Ref="55" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,7.4,12.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>2e9b240310504ea1abf2d5ac334413d4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text45</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.SHIP_ADDR1+Table1.SHIP_ADDR2+Table1.SHIP_ADDR3}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text45>
+            <Text46 Ref="56" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,8.6,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>f60c1ef41a614bb5bf061a7e7947d31c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text46</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>VAT ID:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text46>
+            <Text47 Ref="57" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>16.4,8.6,11.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>3a0c8461bdac43619f456bb918c2866d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text47</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.VAT_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text47>
+            <Text48 Ref="58" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,10.2,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>167fe9ab087146d3bce574070a2716ce</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text48</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Notify Party:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text48>
+            <Text49 Ref="59" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.8,10.8,14.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>4f9a1602c2734720b7a26d4b6fde8416</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text49</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.NOTIFY_NM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text49>
+            <Text50 Ref="60" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.8,11.4,14.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>8a6f6d23dc3f460fbbe36707c8234cc8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text50</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.NOTIFY_ADDR1}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text50>
+            <Text51 Ref="61" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.8,12,14.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>4778cf8c743a4c7f8fe1bf9aa13706c9</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text51</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>TEL: {Table1.NOTIFY_TEL}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text51>
+            <Text52 Ref="62" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.8,13.2,14.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>0d50c63dfdf34f50a6dfbda6db3d81cf</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text52</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.NOTIFY_MAIL}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text52>
+            <Text53 Ref="63" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,14.4,3.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>06f35742be07401b82b88a6669dcf602</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text53</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Port of shipment</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text53>
+            <Text54 Ref="64" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.6,14.4,9.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>c124f6f50fee4106b86ccf54c347ecea</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text54</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.FROM_DESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text54>
+            <Text55 Ref="65" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,14.4,3.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>968b39b4a1704a3bbd2446dd160ee9ae</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text55</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>Port of destination</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text55>
+            <Text56 Ref="66" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>16.4,14.4,11.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>f16ccbf5a65242079a894dbe7798ceef</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text56</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>{Table1.TO_DESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text56>
+            <Text102 Ref="67" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>6.4,8,6.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>405d6196eaf54ac6a21e6025de82468b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text102</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>FAX: {Table1.SHIP_FAX}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text102>
+            <Text44 Ref="68" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.8,12.6,14.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>f453339ec0e34d2bbe4574d49fd0447f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text44</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <Text>FAX: {Table1.NOTIFY_FAX}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text44>
+            <Panel1 Ref="69" type="Stimulsoft.Report.Components.StiPanel" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3.6,13.2,9.2,0.6</ClientRectangle>
+              <Components isList="true" count="1">
+                <SubReport1 Ref="70" type="SubReport" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <ClientRectangle>0,0,9.2,0.6</ClientRectangle>
+                  <Components isList="true" count="0" />
+                  <Name>SubReport1</Name>
+                  <Page isRef="6" />
+                  <Parent isRef="69" />
+                  <SubReportPageGuid>c5af8d331760419d8340b5b22bba5375</SubReportPageGuid>
+                </SubReport1>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Name>Panel1</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+            </Panel1>
+            <HorizontalLinePrimitive1 Ref="71" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,6.2,27.7,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="72" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive1</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <StartCap Ref="73" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive1>
+            <StartPointPrimitive1 Ref="74" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>12.8,6.2,0,0</ClientRectangle>
+              <Name>StartPointPrimitive1</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <ReferenceToGuid>fbb9dd9561f14361bdf056682a0754fd</ReferenceToGuid>
+            </StartPointPrimitive1>
+            <HorizontalLinePrimitive2 Ref="75" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,14.4,27.7,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="76" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive2</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <StartCap Ref="77" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive2>
+            <StartPointPrimitive3 Ref="78" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>0,6.2,0,0</ClientRectangle>
+              <Name>StartPointPrimitive3</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <ReferenceToGuid>79235e4d9a744dd1baa26d9498b811d6</ReferenceToGuid>
+            </StartPointPrimitive3>
+            <StartPointPrimitive4 Ref="79" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>27.7,6.2,0,0</ClientRectangle>
+              <Name>StartPointPrimitive4</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <ReferenceToGuid>8d8376a048c647c2aca7a1e98b0cab5f</ReferenceToGuid>
+            </StartPointPrimitive4>
+            <EndPointPrimitive1 Ref="80" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>12.8,15.2,0,0</ClientRectangle>
+              <Name>EndPointPrimitive1</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <ReferenceToGuid>fbb9dd9561f14361bdf056682a0754fd</ReferenceToGuid>
+            </EndPointPrimitive1>
+            <HorizontalLinePrimitive3 Ref="81" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,15.2,27.7,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="82" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive3</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <StartCap Ref="83" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive3>
+            <EndPointPrimitive4 Ref="84" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>27.7,15.2,0,0</ClientRectangle>
+              <Name>EndPointPrimitive4</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <ReferenceToGuid>8d8376a048c647c2aca7a1e98b0cab5f</ReferenceToGuid>
+            </EndPointPrimitive4>
+            <EndPointPrimitive3 Ref="85" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>0,15.2,0,0</ClientRectangle>
+              <Name>EndPointPrimitive3</Name>
+              <Page isRef="6" />
+              <Parent isRef="11" />
+              <ReferenceToGuid>79235e4d9a744dd1baa26d9498b811d6</ReferenceToGuid>
+            </EndPointPrimitive3>
+          </Components>
+          <Condition>{Table1.U_ID}</Condition>
+          <Conditions isList="true" count="0" />
+          <Name>GroupHeaderBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+        </GroupHeaderBand1>
+        <GroupHeaderBand2 Ref="86" type="GroupHeaderBand" isKey="true">
+          <Border>Right;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,16.4,27.7,1.2</ClientRectangle>
+          <Components isList="true" count="17">
+            <Text57 Ref="87" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,0,1,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>bd71ab0902984a9fbc2895469349ad22</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text57</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>ITEM</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text57>
+            <Text58 Ref="88" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>1,0,1.4,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>38d4f7e4aab84f66a5a5027a268903bb</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text58</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>carton#</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text58>
+            <Text59 Ref="89" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>2.4,0,2.2,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>42e66caa621a4f38ad4055df5894840c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text59</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>part number</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text59>
+            <Text60 Ref="90" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>4.6,0,2.2,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>e716b1ebf61747bdb0027e84dff1d1cc</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text60</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>description</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text60>
+            <Text61 Ref="91" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>6.8,0,3,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>1730434b485b4d05a797f8286c09ee0f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text61</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>VENDOR NAME</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text61>
+            <Text62 Ref="92" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>9.8,0,1.6,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>99629a40f65147f3b9ffdff98a7dc8cf</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text62</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>quantity</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text62>
+            <Text63 Ref="93" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>11.4,0,1.4,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>175379d47a724b12a74e9324c0e04e6d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text63</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>Unit</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text63>
+            <Text64 Ref="94" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,0,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>3d263a06c52146bfbd9a41ad3902f859</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text64</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>Unit price</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text64>
+            <Text65 Ref="95" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>14.6,0,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>33373847a9b740b1b56b082c5c00b3dd</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text65</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>Amount</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text65>
+            <Text66 Ref="96" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>16.4,0,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>c4467dbcf43a45e4842f4417fe0453ad</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text66</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>Net Weight</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text66>
+            <Text67 Ref="97" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>18.4,0,2.2,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>4020633f348740a3b7d46607384efe9f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text67</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>gross weight </Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text67>
+            <Text68 Ref="98" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>20.6,0,2.2,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>c2244498cc2e4474a55543f08dcc75da</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text68</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>Measurement</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text68>
+            <Text69 Ref="99" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>22.8,0,2.2,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>5e501573160542339510caade1f313df</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text69</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>HS code</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text69>
+            <Text70 Ref="100" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>25,0,2.7,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>2c98143ba57c4369ba0d6507904c6c18</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text70</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>Original country</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text70>
+            <Text71 Ref="101" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,0.6,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>60f8f72306fa446fa3927ec5e3968a74</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text71</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>{Table1.CUR}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text71>
+            <Text72 Ref="102" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>14.6,0.6,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>aae13e6f6395403dbe1f5d1ee3933f0d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text72</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>{Table1.CUR}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text72>
+            <Text73 Ref="103" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>16.4,0.6,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>c7e876610aeb404aa94732716c9f36f1</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text73</Name>
+              <Page isRef="6" />
+              <Parent isRef="86" />
+              <Text>{Table1.CUR}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text73>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>GroupHeaderBand2</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <PrintOnAllPages>True</PrintOnAllPages>
+        </GroupHeaderBand2>
+        <DataBand1 Ref="104" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,18.4,27.7,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Table1</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <Sort isList="true" count="2">
+            <value>ASC</value>
+            <value>SEQ_NO</value>
+          </Sort>
+        </DataBand1>
+        <ChildBand1 Ref="105" type="ChildBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,19.2,27.7,0.6</ClientRectangle>
+          <Components isList="true" count="14">
+            <Text74 Ref="106" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,0,1,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>c161fef246dd4a93911680550b0fc42f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text74</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <Text>{Table1.SEQ_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text74>
+            <Text75 Ref="107" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>1,0,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>d193d380b65d492081526b3610d57110</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text75</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text75>
+            <Text76 Ref="108" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>2.4,0,2.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>eac872038a9240fe8f3614e7932884a2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text76</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <Text>{Table1.IPART_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text76>
+            <Text77 Ref="109" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>4.6,0,2.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>855eb39686f040baa16fe2474d02df45</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text77</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <Text>{Table1.GOODS_DESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text77>
+            <Text78 Ref="110" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>6.8,0,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>cb41142ef5c04d578cf4008266fc7ee8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text78</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <Text>{Table1.VEN_NM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text78>
+            <Text79 Ref="111" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>9.8,0,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>8fc4f11c706443c88aa5344c9b269876</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text79</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <Text>{Table1.QTY}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text79>
+            <Text80 Ref="112" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>11.4,0,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>82bc66d2c7314b8bb1c9f47325e120bf</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text80</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <Text>{Table1.QTYU}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text80>
+            <Text81 Ref="113" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,0,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>395ce446e57f4209a80e60be0eb72303</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text81</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <Text>{Format("{0:N0}", Table1.UNIT_PRICE1)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text81>
+            <Text82 Ref="114" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>14.6,0,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>e95f00e1dc7f454c8d8c3f668888c29c</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text82</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <Text>{Format("{0:N0}", Table1.AMT)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text82>
+            <Text83 Ref="115" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>16.4,0,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>b3dc402786414b2d95190a8b17fb708b</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text83</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <Text>{Format("{0:N2}", Table1.TTL_NW)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text83>
+            <Text84 Ref="116" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>18.4,0,2.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>ea154b5e930544e7b377305bc2a56464</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text84</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <Text>{Format("{0:N2}", Table1.TTL_GW)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text84>
+            <Text85 Ref="117" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>20.6,0,2.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>a496fc8239364e919489ec60bb969f26</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text85</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <Text>{Format("{0:N3}", Table1.TTL_CBM)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text85>
+            <Text86 Ref="118" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>25,0,2.7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>76f59af89e0940aa8ea4128c577433ba</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text86</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <Text>{Table1.CNTRY_DESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text86>
+            <Text87 Ref="119" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>22.8,0,2.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>e2b2eeb3ff10411da595c263d30011fb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text87</Name>
+              <Page isRef="6" />
+              <Parent isRef="105" />
+              <Text>{Table1.IHS_CODE}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text87>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>ChildBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+        </ChildBand1>
+        <GroupFooterBand1 Ref="120" type="GroupFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,20.6,27.7,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>GroupFooterBand1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+        </GroupFooterBand1>
+        <GroupFooterBand2 Ref="121" type="GroupFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,21.4,27.7,4</ClientRectangle>
+          <Components isList="true" count="14">
+            <Text88 Ref="122" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>2.4,0,10.4,2.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>59f5fb29cbdd41e0b55ec58164bbf127</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text88</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <Text>{"SAY TOTAL ("+Table1.CUR+"):"} {ToUpperCase(ToWords(Table1.TTL_VALUE))} ONLY</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text88>
+            <Text89 Ref="123" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,0,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>a953163d6183456bb63a0b6ee2e2523f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text89</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <Text>Total:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text89>
+            <Text90 Ref="124" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>14.6,0,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>3b5490f07ce647b68e9d4cb893d20383</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text90</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <Text>{Format("{0:N0}", Table1.TTL_VALUE)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text90>
+            <Text91 Ref="125" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,0.6,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Guid>48823e552e714c61b26e689712bad14e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text91</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <Text>Total gross weight </Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text91>
+            <Text92 Ref="126" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>16.4,0,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>1557b60757c44417a5e2dd1ac039a692</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text92</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <Text>{Format("{0:N3}", Table1.M_TTL_CBM)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text92>
+            <Text93 Ref="127" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>16.4,0.6,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>ab863fb19b8d40f992f5ec2804cae042</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text93</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <Text>{Format("{0:N2}", Table1.M_TTL_GW)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text93>
+            <Text94 Ref="128" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,1.6,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>7ae200e0ef3643d69e11625fced6e483</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text94</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <Text>Total amount (EXW):</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text94>
+            <Text95 Ref="129" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>16.4,1.6,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>1ac3ebc8563f45e2b969e33e45e910dc</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text95</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text95>
+            <Text96 Ref="130" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,2.2,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>466470f615e344fa9aed8d78d7cd87f3</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text96</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <Text>Insurance:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text96>
+            <Text97 Ref="131" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,2.8,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>0e8098346dd44316a229993d6e74cea3</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text97</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <Text>Freight:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text97>
+            <Text99 Ref="132" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>16.4,2.2,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>b1507aa0a28842c3bfe08dadc64a5358</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text99</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <Text>{Table1.ISSUE_FEE}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text99>
+            <Text100 Ref="133" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>16.4,2.8,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>a59703c782b9479da51aae6732a3f49b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text100</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <Text>{Table1.FREIGHT_FEE}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text100>
+            <Text98 Ref="134" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>12.8,3.4,3.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>d2cf7b9ba04e489faa514457ef23ca7c</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text98</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <Text>Total amount (CIF):</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text98>
+            <Text101 Ref="135" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>16.4,3.4,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>88af8e43c7354665b7b912ea098fe1c2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text101</Name>
+              <Page isRef="6" />
+              <Parent isRef="121" />
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text101>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>GroupFooterBand2</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+        </GroupFooterBand2>
+        <VerticalLinePrimitive1 Ref="136" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>12.8,6.6,0.0254,9</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="137" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>fbb9dd9561f14361bdf056682a0754fd</Guid>
+          <Name>VerticalLinePrimitive1</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <StartCap Ref="138" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive1>
+        <VerticalLinePrimitive3 Ref="139" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>0,6.6,0.0254,9</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="140" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>79235e4d9a744dd1baa26d9498b811d6</Guid>
+          <Name>VerticalLinePrimitive3</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <StartCap Ref="141" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive3>
+        <VerticalLinePrimitive4 Ref="142" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>27.7,6.6,0.0254,9</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="143" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>8d8376a048c647c2aca7a1e98b0cab5f</Guid>
+          <Name>VerticalLinePrimitive4</Name>
+          <Page isRef="6" />
+          <Parent isRef="6" />
+          <StartCap Ref="144" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive4>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>23ac52fceb73415d95e61eda3987a251</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>30</PageHeight>
+      <PageWidth>29.7</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="145" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+    <subReport_1 Ref="146" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <DataBand2 Ref="147" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,9.2,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>SMRV</DataSourceName>
+          <Filters isList="true" count="1">
+            <value>_x007B_SMRV.Table1.DN_NO_x003D__x003D_SMRV.DN_NO_x007D_</value>
+          </Filters>
+          <Name>DataBand2</Name>
+          <Page isRef="146" />
+          <Parent isRef="146" />
+          <Sort isList="true" count="0" />
+        </DataBand2>
+        <ChildBand2 Ref="148" type="ChildBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,1.2,9.2,0.6</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text105 Ref="149" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,0,9.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>PMingLiU,10</Font>
+              <Guid>50464ef49c5c40e0b7478d23d1c63df1</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text105</Name>
+              <Page isRef="146" />
+              <Parent isRef="148" />
+              <Text>{SMRV.CNTR_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text105>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>ChildBand2</Name>
+          <Page isRef="146" />
+          <Parent isRef="146" />
+        </ChildBand2>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>c5af8d331760419d8340b5b22bba5375</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>subReport_1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>11.2</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="150" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </subReport_1>
+  </Pages>
+  <PrinterSettings Ref="151" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>6/28/2016 2:36:28 PM</ReportChanged>
+  <ReportCreated>2/3/2016 1:53:39 PM</ReportCreated>
+  <ReportFile>E:\U_DISK\TPV\WebGui\rpt\template\IPQ04.mrt</ReportFile>
+  <ReportGuid>13f25ddd37fa47068b8286e48d1881f0</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2011.3.1200</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+		public System.Drawing.Image loadImg(string path)
+		{		
+			return Image.FromFile(this.Table1.PIC);
+		}
+
+        #region StiReport Designer generated code - do not modify
+        #endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

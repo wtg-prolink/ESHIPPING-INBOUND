@@ -1,0 +1,794 @@
+﻿@{
+    ViewBag.Title = "GateStatus";
+}
+<style type="text/css">
+	#RVTable{cursor: pointer;}
+	#RVTable td{width: 50px;}
+	thead tr {background-color: #EFEFEF}
+	td.broke, .bbroke{background-color: #FFA8A8}
+	td.hasCntr, .bhasCntr{background-color: #79CDE0}
+	td.hasR, .bhasR{background-color: #57E670}
+	td.nonGate, .bnonGate{background-color: #F9EE6A}
+	td.moveGt{border: 4px solid #FF5252 !important;}
+
+	td.clicked{border: 3px solid #666 !important;}
+
+	.showBox{
+		width: 16px;
+		height: 16px;
+		float: left
+	}
+	ul li{color: #544B4B;}
+</style>
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/css/lib/bootstrap-switch.min.css")">
+@Html.RazorJSInline("~/Scripts/lib/bootstrap-switch.min.js")
+<!--離廠確認视窗-->
+<div class="modal fade" id="confirmDailog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_DNManage_ConfWd</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-60-60">
+                        <h2>@Resources.Locale.L_DNManage_IfLeave</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirmBtn">@Resources.Locale.L_Layout_Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="ModalClose">@Resources.Locale.L_BSCSDateQuery_Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--離廠確認视窗-->
+<!--進月台確認视窗-->
+<div class="modal fade" id="confirmEnterDailog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_DNManage_ConfWd</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-60-60">
+                        <h2>@Resources.Locale.L_DNManage_EntGate</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirmEnterBtn">@Resources.Locale.L_Layout_Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="ModalClose">@Resources.Locale.L_BSCSDateQuery_Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--進月台確認视窗-->
+
+<!--移櫃確認视窗-->
+<div class="modal fade" id="confirmMoveDailog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_DNManage_ConfWd</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-60-60">
+                        <h2>@Resources.Locale.L_DNManage_MoveinGate</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirmMoveBtn">@Resources.Locale.L_Layout_Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="ModalClose">@Resources.Locale.L_BSCSDateQuery_Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--移櫃確認视窗-->
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body" style="overflow-x:scroll;">
+                    <div class="pure-g">
+                    	<form id="SearchForm">
+                            <div class="pure-u-sm-5-60">
+                                <label class="control-label">Location</label>
+                            </div>
+                            <div class="pure-u-sm-8-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="SearchCmp" name="SearchCmp" value="@ViewBag.Cmp" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-info" type="button" id="CmpLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-17-60">
+                                <input type="text" class="form-control input-sm" id="CmpNm" value="@ViewBag.CmpNm" readonly />
+                            </div>
+                            <div class="pure-u-sm-1-60"></div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="hidden" class="form-control input-sm" id="SearchRDate" name="SearchRDate" />
+                                <button class="btn btn-sm btn-info" type="button" id="searchBtn">@Resources.Locale.L_MenuBar_Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="pure-g">
+                        <!-- <div class="pure-u-sm-5-60">
+                            <label for="SearchRDate" class="control-label">預約日期</label>
+                        </div>
+                        <div class="pure-u-sm-8-60 control-group">
+                            <input type="text" class="form-control input-sm" id="SearchRDate" name="SearchRDate" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-1-60"></div> -->
+                    </div>
+                    
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-60-60">
+                    		<ul class="list-inline">
+                    			<li>
+                    				<button class="btn btn-primary" id="GetEnterTruck">@Resources.Locale.L_DNManage_IbCar</button>
+                    			</li>
+                    			<!-- <li>
+                    				<button class="btn btn-sm btn-default" id="EnterToGateBtn">進入月台</button>
+                    			</li> -->
+                    			<li></li>
+                    			<li id="moveGatePms">
+                    				<span style="font-size:14px;"><strong>@Resources.Locale.L_DNManage_MoceCnt</strong></span>&nbsp;<input id="turnOnOff" type="checkbox" data-size="small">
+                    			</li>
+                    		</ul>
+                    	</div>
+                    </div>
+					
+                	<div class="pure-g">
+                		<div class="pure-u-sm-60-60">
+                			<ul class="list-inline">
+                				<li>
+                					<div class="showBox bhasCntr"></div>@Resources.Locale.L_DNManage_HasStopCnt
+                				</li>
+                				<li>
+                					<div class="showBox bhasR"></div>@Resources.Locale.L_DNManage_HasReserve
+                				</li>
+                				<li>
+                					<div class="showBox bbroke"></div>@Resources.Locale.L_DNManage_FixNoPark
+                				</li>
+                				<li>
+                					<div class="showBox bnonGate"></div>@Resources.Locale.L_DNManage_NoGate
+                				</li>
+                			</ul>
+                		</div>
+                	</div>
+                	<div class="pure-g">
+                		<div class="pure-u-sm-60-60">
+                			<table class="table table-bordered" id="RVTable">
+                			    <thead>
+
+                			    </thead>
+                			    <tbody>
+                			        
+                			    </tbody>
+                			</table>
+                		</div>
+                	</div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+            	<div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                                <label class="control-label">Shipment id</label>
+                            </div>
+                            <div class="pure-u-sm-8-60 control-group">
+                                <input type="text" class="form-control input-sm" id="SearchShipment" name="SearchShipment" placeholder="Shipmentid / @Resources.Locale.L_GateReserve_ReveseNo"  />
+                            </div>
+                            <div class="pure-u-sm-5-60  label-right">
+                                <label class="control-label">Dn No</label>
+                            </div>
+                            <div class="pure-u-sm-8-60">
+                                <input type="text" class="form-control input-sm" id="SearchDnNo" name="SearchDnNo"   />
+                            </div>
+                            <div class="pure-u-sm-1-60"></div>
+                            <div class="pure-u-sm-10-60">
+                                <button class="btn btn-sm btn-info" type="button" id="GetSearchTruck">@Resources.Locale.L_BaseLookup_Ser</button>
+                            </div>
+                    </div>
+            		<div class="pure-g">
+            			<div class="pure-u-sm-60-60">
+            			    <table id="SubGrid1" class="_tableGrid" style="width: 100%">
+            			        <tr>                                        
+            			        </tr>
+            			    </table>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+	$SubGrid1 = $("#SubGrid1");
+	jQuery(document).ready(function($) {
+		$("#turnOnOff").bootstrapSwitch();
+		$("#SearchRDate").val(getToday());
+		_initGenGrid();
+
+		var CmpOpt = {};
+		CmpOpt.gridUrl = rootPath + "TPVCommon/GetSiteCmpData";
+		CmpOpt.param = "";
+		CmpOpt.baseCondition = " GROUP_ID='"+groupId+"' AND TYPE='1'";
+		CmpOpt.registerBtn = $("#CmpLookup");
+		CmpOpt.focusItem = $("#SearchCmp");
+		CmpOpt.gridFunc = function (map) {
+		    var value = map.Cd;
+		    $("#SearchCmp").val(value);
+		    $("#CmpNm").val(map.CdDescp);
+		};
+		CmpOpt.lookUpConfig = LookUpConfig.SiteLookup;
+		initLookUp(CmpOpt);
+		CommonFunc.AutoComplete("#SearchCmp", 1, "", "dt=stn&GROUP_ID=" + groupId + "&TYPE=1&CMP=", "CMP=showValue,CMP,NAME", function (event, ui) {
+		    $(this).val(ui.item.returnValue.CMP);
+		    $("#CmpNm").val(ui.item.returnValue.NAME);
+		    return false;
+		});
+		//setSmptyData("CmpLookup", "SearchCmp", "CmpNm", "LC");
+
+		/*$("#SearchRDate").wrap('<div class="input-group">')
+		.datepicker({
+		    showOn: "button",
+		    changeYear: true,
+		    dateFormat: "yy-mm-dd",
+		    beforeShow: function() {
+		        setTimeout(function(){
+		            $('.ui-datepicker').css('z-index', 99999999999999);
+		        }, 0);
+		    },
+		    onClose: function (text, inst) {
+		        $(this).focus();
+		    }
+		})
+		.next("button").button({
+		    icons: { primary: "ui-icon-calendar" },
+		    label: "Select a date",
+		    text: false
+		})
+		.addClass("btn btn-sm btn-info").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+		.wrap('<span class="input-group-btn">')
+		.find('.ui-button-text')
+		.css({
+		    'visibility': 'hidden',
+		    'display': 'inline'
+		});*/
+
+		$("#searchBtn").click(function(){
+			$.ajax({
+				url: rootPath + 'GateManage/getWhGateReserve',
+				type: 'POST',
+				dataType: 'json',
+				data: {Cmp: $("#SearchCmp").val(), ReserveDate: $("#SearchRDate").val()},
+				beforeSend: function(){
+					CommonFunc.ToogleLoading(true);
+				},
+				error: function(){
+					CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 500, "danger");
+					CommonFunc.ToogleLoading(false);
+				},
+				success: function(result){
+					var rData = result.returnData.wh;
+					var max = 0;
+					var thead = "<tr>";
+					thead += "<th style='width:63px'>@Resources.Locale.L_GateReserve_WsCd \\ @Resources.Locale.L_GateAnalysis_GateNo</th>";
+					var tbody = "";
+					if(rData.length > 0)
+					{
+						$.each(rData, function(i, val) {
+							var o = rData[i].Gates.length;
+							if(o > max)
+							{
+								max = o;
+							}
+						});
+
+						for(var i=1; i<=max; i++)
+						{
+							thead += "<th>" + i + "</th>";
+						}
+						thead += "</th>"
+						$("#RVTable thead").html(thead);
+						//console.log(rData);
+						$.each(rData, function(i, val) {
+							tbody += "<tr>";
+							tbody += "<td>"+rData[i].WsCd+"</td>"
+							for(var j=1; j<=max; j++)
+							{
+
+								if(typeof rData[i].Gates[j-1] == "object")
+								{
+									console.log(rData[i].Gates[j-1]);
+									//console.log(rData[i].Gates[j-1].GateNo + "===" + j);
+									//if(rData[i].Gates[j-1].GateNo == j)
+									//{
+										if (rData[i].Gates[j-1].GateStatus == "1")
+			                            {
+			                                tbody += "<td class='hasCntr gt' Wscd='"+rData[i].WsCd+"' GateNo='"+rData[i].Gates[j-1].GateNo+"' CntrNo='"+rData[i].Gates[j-1].CntrNo+"' ReserveNo='"+rData[i].Gates[j-1].ReserveNo+"'><ul class='list-unstyled'><li name='liGateNO'>NO."+rData[i].Gates[j-1].GateNo+"</li><li name='liCntrNo'>"+ rData[i].Gates[j-1].CntrNo +"</li></ul></td>";
+			                            }
+			                            else if (rData[i].Gates[j-1].GateStatus == "2")
+			                            {
+			                                tbody += "<td class='choseGt hasR' Wscd='"+rData[i].WsCd+"' GateNo='"+rData[i].Gates[j-1].GateNo+"'><ul class='list-unstyled'><li name='liGateNO'>NO."+rData[i].Gates[j-1].GateNo+"</li><li name='liCntrNo'></li></ul></td>";
+			                            }
+			                            else if (rData[i].Gates[j-1].GateStatus == "0")
+			                            {
+			                                tbody += "<td class='broke'><ul class='list-unstyled'><li name='liGateNO'>NO."+rData[i].Gates[j-1].GateNo+"</li><li name='liCntrNo'></li></ul></td>";
+			                            }
+			                            else
+			                            {
+			                                if(rData[i].Gates.length < max || rData[i].Gates.length == max)
+			                                {
+			                                	tbody += "<td class='choseGt emptygt' Wscd='"+rData[i].WsCd+"' GateNo='"+rData[i].Gates[j-1].GateNo+"'><ul class='list-unstyled'><li name='liGateNO'>NO."+rData[i].Gates[j-1].GateNo+"</li><li name='liCntrNo'></li></ul></td>";
+			                                }
+			                                else
+			                                {
+			                                	tbody += "<td class='nonGate'></td>";
+			                                }
+			                            }	
+									//}
+									//else
+									//{
+										//tbody += "<td class='nonGate'></td>";
+									//}
+								}
+								else
+								{
+									tbody += "<td class='nonGate'></td>";
+								}
+							}
+							tbody += "</tr>";
+						});
+						//console.log(tbody);
+						$("#RVTable tbody").html(tbody);
+						$("#RVTable").width(max * 100);
+					}
+
+					CommonFunc.ToogleLoading(false);
+				}
+			});
+			
+		});
+
+		$("#searchBtn").click();
+
+		$("#RVTable").on("click", ".choseGt", function(){
+			var moveGt = $("#turnOnOff").bootstrapSwitch("state");
+			var newGateNo = $(this).attr("GateNo");
+			var newWsCd = $(this).attr("WsCd");
+
+			if(moveGt == false || $("#turnOnOff").length == 0)
+			{
+				var selRowId = $SubGrid1.jqGrid('getGridParam', 'selrow');
+				if(selRowId == null || selRowId == "")
+				{
+					return false;
+				}
+				else
+				{
+					$(this).addClass('selected');
+					$(this).siblings().removeClass('selected');
+					$(this).parent().siblings().children().removeClass('selected');
+					$("#confirmEnterDailog").modal("show");
+				}
+			}
+			else
+			{
+				$("#confirmMoveBtn").attr("newGateNo", newGateNo);
+				$("#confirmMoveBtn").attr("newWsCd", newWsCd);
+				$("#confirmMoveDailog").modal("show");
+			}
+		});
+
+		$("#confirmMoveBtn").click(function(){
+			var newGateNo = $(this).attr("newGateNo");
+			var newWsCd = $(this).attr("newWsCd");
+			var info = getClickedGt();
+			$.ajax({
+				url: rootPath + 'GateManage/setMoveGate',
+				type: 'POST',
+				dataType: 'json',
+				data: { "ReserveNo": info[2], "oldWsCd": info[0], "oldGateNo": info[1], "newWsCd":newWsCd, "newGateNo": newGateNo},
+				beforeSend: function(){
+					CommonFunc.ToogleLoading(true);
+				},
+				error: function(){
+					CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 500, "danger");
+					$("#confirmMoveDailog").modal("hide");
+					CommonFunc.ToogleLoading(false);
+				},
+				success: function(result){
+					CommonFunc.ToogleLoading(false);
+					$("#confirmMoveDailog").modal("hide");
+					if(result.msg == "success")
+					{
+						CommonFunc.Notify("", "@Resources.Locale.L_DNManage_MCntS", 500, "success");
+						$('#turnOnOff').bootstrapSwitch('state', false, true);
+						$("#searchBtn").click();
+						$("#GetEnterTruck").click();
+					}
+					else
+					{
+						CommonFunc.Notify("", result.msg, 500, "warning");
+					}
+					$("#RVTable td").removeClass('clicked');
+				}
+			});
+		});
+
+		$("#confirmEnterBtn").click(function(){
+			var info = getSelectGt();
+			var selRowId = $SubGrid1.jqGrid('getGridParam', 'selrow');
+			if(selRowId == null || selRowId == "")
+			{
+				CommonFunc.Notify("", "@Resources.Locale.L_GateStatus_Script_39", 500, "warning");
+				$("#confirmEnterDailog").modal("hide");
+				return false;
+			}
+			var ReserveNo = $SubGrid1.jqGrid("getCell", selRowId, "ReserveNo");
+			if(ReserveNo == null || ReserveNo == "")
+			{
+				CommonFunc.Notify("", "@Resources.Locale.L_DNManage_NoRsv", 500, "warning");
+				$("#confirmEnterDailog").modal("hide");
+				return false;
+			}
+
+			$.ajax({
+				url: rootPath + 'GateManage/setEnterToGate',
+				type: 'POST',
+				dataType: 'json',
+				data: { "ReserveNo": ReserveNo, "WsCd": info[0], "GateNo": info[1]},
+				beforeSend: function(){
+					CommonFunc.ToogleLoading(true);
+				},
+				error: function(){
+					CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 500, "danger");
+					$("#confirmEnterDailog").modal("hide");
+					CommonFunc.ToogleLoading(false);
+				},
+				success: function(result){
+					CommonFunc.ToogleLoading(false);
+					$("#confirmEnterDailog").modal("hide");
+					if(result.msg == "success")
+					{
+						CommonFunc.Notify("", "@Resources.Locale.L_DNManage_EntingDate", 500, "success");
+						$("#searchBtn").click();
+						$("#GetEnterTruck").click();
+					}
+					else
+					{
+						CommonFunc.Notify("", result.msg, 500, "warning");
+					}
+
+				}
+			});
+
+		});
+
+		$("#RVTable").on("click", ".gt", function() {
+			//$("#CancelMoveCnty").click();
+			$(this).addClass('clicked');
+			$(this).siblings().removeClass('clicked');
+			$(this).parent().siblings().children().removeClass('clicked');
+
+			if($("#turnOnOff").bootstrapSwitch("state") === false)
+			{
+				//$("#confirmDailog").modal("show");
+			}
+
+			/*var WsCd = $(this).attr("WsCd");
+			var GateNo = parseInt($(this).attr("GateNo"));
+			var Today = getToday();
+			$SubGrid1.jqGrid("clearGridData");
+			$.ajax({
+				url: rootPath + 'GateManage/getTodayWaitTrucker',
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					"WsCd": WsCd, 
+					"GateNo": GateNo,
+					"Today": Today
+				},
+				beforeSend: function(){
+					CommonFunc.ToogleLoading(true);
+				},
+				error: function(){
+					CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 500, "danger");
+					CommonFunc.ToogleLoading(false);
+				},
+				success: function(result){
+					console.log(result);
+					$SubGrid1.jqGrid("setGridParam", {
+					    datatype: 'local',
+					    data: result.rows,
+					}).trigger("reloadGrid");
+					CommonFunc.ToogleLoading(false);
+				}
+			});*/
+		});
+
+		$("#EnterToGateBtn").click(function(){
+			var selRowId = $SubGrid1.jqGrid('getGridParam', 'selrow');
+			if(selRowId == null || selRowId == "")
+			{
+				CommonFunc.Notify("", "@Resources.Locale.L_GateStatus_Script_39", 500, "warning");
+				return false;
+			}
+			var ReserveNo = $SubGrid1.jqGrid("getCell", selRowId, "ReserveNo");
+
+			if(ReserveNo == null || ReserveNo == "")
+			{
+				CommonFunc.Notify("", "@Resources.Locale.L_DNManage_NoRsv", 500, "warning");
+				return false;
+			}
+
+			$.ajax({
+				url: rootPath + 'GateManage/setEnterToGate',
+				type: 'POST',
+				dataType: 'json',
+				data: { "ReserveNo": ReserveNo},
+				beforeSend: function(){
+					CommonFunc.ToogleLoading(true);
+				},
+				error: function(){
+					CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 500, "danger");
+					CommonFunc.ToogleLoading(false);
+				},
+				success: function(result){
+					console.log(result);
+					CommonFunc.ToogleLoading(false);
+					if(result.msg == "success")
+					{
+						CommonFunc.Notify("", "@Resources.Locale.L_DNManage_IbS", 500, "success");
+						$("#searchBtn").click();
+					}
+					else
+					{
+						CommonFunc.Notify("", result.msg, 500, "warning");
+					}
+
+				}
+			});
+		});
+
+		$("#MoveCnty").click(function(){
+			/*var CntrNo = $("#RVTable tr").find(".clicked").attr("CntrNo");
+			if(CntrNo == "" || typeof CntrNo === "undefined")
+			{
+				CommonFunc.Notify("", "此月台沒有貨櫃", 500, "warning");
+				return false;
+			}*/
+			//$("#RVTable tr").find(".clicked").siblings('.emptygt').addClass('moveGt');
+		});
+
+		$("#RVTable").on("click", ".moveGt", function(){
+			var GateNo = $(this).attr("GateNo");
+			var WsCd = $(this).attr("WsCd");
+		});
+
+		$("#GetSearchTruck").click(function(){
+		    var shipmentid=$("#SearchShipment").val();
+		    var dnno=$("#SearchDnNo").val();
+		    $.ajax({
+		        url: rootPath + 'GateManage/getTodayWaitTrucker',
+		        type: 'POST',
+		        dataType: 'json',
+		        data: {
+		            "Shipmentid": shipmentid,
+                    "DnNo":dnno
+		        },
+		        beforeSend: function(){
+		            CommonFunc.ToogleLoading(true);
+		        },
+		        error: function(){
+		            CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 500, "danger");
+				    CommonFunc.ToogleLoading(false);
+				},
+                success: function(result){
+                    $SubGrid1.jqGrid("clearGridData");
+                    $SubGrid1.jqGrid("setGridParam", {
+                        datatype: 'local',
+                        data: result.rows,
+                    }).trigger("reloadGrid");
+                    CommonFunc.ToogleLoading(false);
+                }
+            });
+		});
+
+		$("#GetEnterTruck").click(function(){
+			var Today = getToday();
+
+			$.ajax({
+				url: rootPath + 'GateManage/getTodayWaitTrucker',
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					"Today": Today
+				},
+				beforeSend: function(){
+					CommonFunc.ToogleLoading(true);
+				},
+				error: function(){
+					CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 500, "danger");
+					CommonFunc.ToogleLoading(false);
+				},
+				success: function(result){
+					$SubGrid1.jqGrid("clearGridData");
+					$SubGrid1.jqGrid("setGridParam", {
+					    datatype: 'local',
+					    data: result.rows,
+					}).trigger("reloadGrid");
+					CommonFunc.ToogleLoading(false);
+				}
+			});
+		});
+
+		$("#confirmBtn").click(function(){
+			var info = getClickedGt();
+			$.ajax({
+				url: rootPath + 'GateManage/setLeaveGate',
+				type: 'POST',
+				dataType: 'json',
+				data: { "ReserveNo": info[2], "WsCd": info[0], "GateNo": info[1]},
+				beforeSend: function(){
+					CommonFunc.ToogleLoading(true);
+				},
+				error: function(){
+					CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 500, "danger");
+					$("#confirmDailog").modal("hide");
+					CommonFunc.ToogleLoading(false);
+				},
+				success: function(result){
+					CommonFunc.ToogleLoading(false);
+					$("#confirmDailog").modal("hide");
+					if(result.msg == "success")
+					{
+						CommonFunc.Notify("", "@Resources.Locale.L_DNManage_LeGateS", 500, "success");
+						$("#searchBtn").click();
+						$("#GetEnterTruck").click();
+					}
+					else
+					{
+						CommonFunc.Notify("", result.msg, 500, "warning");
+					}
+
+				}
+			});
+		})
+
+		$('#turnOnOff').on('switchChange.bootstrapSwitch', function(event, state) {
+			$("#RVTable td").removeClass('clicked');
+			$SubGrid1.jqGrid("resetSelection");
+		});
+
+		pmsBtnCheck("GetEnterTruck");
+		pmsBtnCheck("moveGatePms");
+	});
+
+	function getToday()
+	{
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+
+		if(dd<10) {
+		    dd='0'+dd
+		} 
+
+		if(mm<10) {
+		    mm='0'+mm
+		} 
+
+		today = yyyy + "-" + mm + "-" + dd;
+
+		return today;
+	}
+
+	function setSmptyData(lookUp, Cd, Nm, pType)
+	{
+	    //SMPTY放大鏡
+	    options = {};
+	    options.gridUrl = rootPath + "TPVCommon/GetSmptyDataForLookup";
+	    options.registerBtn = $("#"+lookUp);
+	    options.focusItem = $("#" + Cd);
+	    options.baseCondition = " PARTY_TYPE LIKE '%"+pType+"%'";
+	    options.isMutiSel = true;
+	    options.gridFunc = function (map) {
+	        $("#" + Cd).val(map.PartyNo);
+
+	        if(Nm != "")
+	            $("#" + Nm).val(map.PartyName);
+	    }
+
+	    options.lookUpConfig = LookUpConfig.SmptyLookup;
+	    initLookUp(options);
+
+	    CommonFunc.AutoComplete("#"+Cd, 1, "", "dt=smpty&GROUP_ID=" + groupId + "&PARTY_TYPE~"+pType+"&PARTY_NO=", "PARTY_NO=showValue,PARTY_NO,PARTY_NAME", function (event, ui) {
+	        $(this).val(ui.item.returnValue.PARTY_NO);
+
+	        if(Nm != "")
+	            $("#" + Nm).val(ui.item.returnValue.PARTY_NAME);
+	        return false;
+	    });
+	}
+
+	function _initGenGrid()
+	{
+		var colModel1 = [
+		    { name: 'ReserveNo', title: '@Resources.Locale.L_GateReserve_ReveseNo', index: 'ReserveNo', width: 150, sorttype: 'string', editable: false },
+		    { name: 'BatNo', title: '@Resources.Locale.L_GateReserve_BatNo', index: 'BatNo', width: 150, sorttype: 'string', editable: false },
+		    { name: 'DnNo', title: '@Resources.Locale.L_DNApproveManage_DnNo', index: 'DnNo', width: 100, sorttype: 'string', editable: false },
+		    { name: 'ReserveDate', title: '@Resources.Locale.L_GateReserve_ReserveDate', index: 'ReserveDate', width: 100, sorttype: 'string', editable: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+		    { name: 'ReserveFrom', title: '@Resources.Locale.L_GateStatus_ReserveFrom', index: 'ReserveFrom', width: 100, sorttype: 'string', editable: false, formatter: "select", editoptions: { value: '0:00\:00;1:01\:00;2:02\:00;3:03\:00;4:04\:00;5:05\:00;6:06\:00;7:07\:00;8:08\:00;9:09\:00;10:10\:00;11:11\:00;12:12\:00;13:13\:00;14:14\:00;15:15\:00;16:16\:00;17:17\:00;18:18\:00;19:19\:00;20:20\:00;21:21\:00;22:22\:00;23:23\:00' } },
+		    { name: 'ReserveHour', title: '@Resources.Locale.L_GateReserveSetup_ReserveHour', index: 'ReserveHour', width: 100, sorttype: 'string', editable: false },
+		    { name: 'GateNo', title: '@Resources.Locale.L_GateReserve_GateNo', index: 'GateNo', width: 100, sorttype: 'string', editable: false },
+		    { name: 'TruckerNm', title: '@Resources.Locale.L_GateReserve_Trucker', index: 'TruckerNm', width: 100, sorttype: 'string', editable: false },
+		    { name: 'TruckNo', title: '@Resources.Locale.L_GateReserve_TruckNo', index: 'TruckNo', width: 100, sorttype: 'string', editable: false },
+		    { name: 'Driver', title: '@Resources.Locale.L_GateReserve_Driver', index: 'Driver', width: 100, sorttype: 'string', editable: false },
+		    { name: 'Tel', title: '@Resources.Locale.L_GateReserve_Tel', index: 'Tel', width: 100, sorttype: 'string', editable: false },
+		    { name: 'WsCd', title: '@Resources.Locale.L_GateReserve_WsCd', index: 'WsCd', width: 100, sorttype: 'string', editable: false },
+		    { name: 'RefGate', title: '@Resources.Locale.L_GateReserveSetup_REFGate', index: 'RefGate', width: 100, sorttype: 'string', editable: false },
+		    { name: 'CntrNo', title: '@Resources.Locale.L_GateReserve_CntrNo', index: 'CntrNo', width: 100, sorttype: 'string', editable: false },
+		    { name: 'TruckCntrno', title: '@Resources.Locale.L_GateReserve_TruckCntrno', index: 'TruckCntrno', width: 100, sorttype: 'string', editable: false },
+		    { name: 'OrderBy', title: '@Resources.Locale.L_GateReserve_ReserveBy', index: 'OrderBy', width: 100, sorttype: 'string', editable: false },
+		    { name: 'OrderDate', title: '@Resources.Locale.L_GateStatus_OrderDate', index: 'OrderDate', width: 100, sorttype: 'string', editable: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+		    //{ name: 'ConfirmBy', title: '確認部門', index: 'ConfirmBy', width: 100, sorttype: 'string', editable: false },
+		    //{ name: 'ConfirmExt', title: '確認分機', index: 'ConfirmExt', width: 100, sorttype: 'string', editable: false },
+		    { name: 'ConfirmBy', title: '@Resources.Locale.L_GateReserve_ConfirmBy', index: 'ConfirmBy', width: 100, sorttype: 'string', editable: false },
+		    { name: 'ConfirmDate', title: '@Resources.Locale.L_GateReserve_ConfirmDate', index: 'ConfirmDate', width: 100, sorttype: 'string', editable: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'ShipmentId', title: '@Resources.Locale.L_DNApproveManage_ShipmentId', index: 'ShipmentId', width: 100, align: 'left', sorttype: 'string', hidden: false }
+		];
+
+		 new genGrid(
+		 	$SubGrid1,
+		 	{
+		 	    datatype: "local",
+		        loadonce:true,
+		 	    colModel: colModel1,
+		 	    caption: "@Resources.Locale.L_GateStatus_Views_431",
+		 	    height: 250,
+		 	    rows: 9999,
+		        refresh: true,
+		 	    cellEdit: false,//禁用grid编辑功能
+		        pginput: false,
+		        sortable: true,
+		        pgbuttons: false,
+		 	    exportexcel: false
+			}
+		 );
+	}
+
+	function getSelectGt()
+	{
+		var WsCd   = $("#RVTable").find(".selected").attr("WsCd");
+		var GateNo = $("#RVTable").find(".selected").attr("GateNo");
+
+		return [WsCd, GateNo];
+	}
+
+	function getClickedGt()
+	{
+		var WsCd   = $("#RVTable").find(".clicked").attr("WsCd");
+		var GateNo = $("#RVTable").find(".clicked").attr("GateNo");
+		var ReserveNo = $("#RVTable").find(".clicked").attr("ReserveNo");
+
+		return [WsCd, GateNo, ReserveNo];
+	}
+</script>

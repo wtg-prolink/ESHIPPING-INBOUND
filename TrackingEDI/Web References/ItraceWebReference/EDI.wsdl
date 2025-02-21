@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PostEDIForFilePath">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PostEDIForFilePathResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PostEDIForFilePathResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PostEDI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strDataXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PostEDIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PostEDIResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDILogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserPSW" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDILoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EDILoginResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendToItrace">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strDataXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendToItraceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendToItraceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="PostEDIForFilePathSoapIn">
+    <wsdl:part name="parameters" element="tns:PostEDIForFilePath" />
+  </wsdl:message>
+  <wsdl:message name="PostEDIForFilePathSoapOut">
+    <wsdl:part name="parameters" element="tns:PostEDIForFilePathResponse" />
+  </wsdl:message>
+  <wsdl:message name="PostEDISoapIn">
+    <wsdl:part name="parameters" element="tns:PostEDI" />
+  </wsdl:message>
+  <wsdl:message name="PostEDISoapOut">
+    <wsdl:part name="parameters" element="tns:PostEDIResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDILoginSoapIn">
+    <wsdl:part name="parameters" element="tns:EDILogin" />
+  </wsdl:message>
+  <wsdl:message name="EDILoginSoapOut">
+    <wsdl:part name="parameters" element="tns:EDILoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendToItraceSoapIn">
+    <wsdl:part name="parameters" element="tns:SendToItrace" />
+  </wsdl:message>
+  <wsdl:message name="SendToItraceSoapOut">
+    <wsdl:part name="parameters" element="tns:SendToItraceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="EDISoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PostEDIForFilePath">
+      <wsdl:input message="tns:PostEDIForFilePathSoapIn" />
+      <wsdl:output message="tns:PostEDIForFilePathSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PostEDI">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">發送EDI</wsdl:documentation>
+      <wsdl:input message="tns:PostEDISoapIn" />
+      <wsdl:output message="tns:PostEDISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDILogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">會員登入驗證</wsdl:documentation>
+      <wsdl:input message="tns:EDILoginSoapIn" />
+      <wsdl:output message="tns:EDILoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendToItrace">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">發送EDI给IXX</wsdl:documentation>
+      <wsdl:input message="tns:SendToItraceSoapIn" />
+      <wsdl:output message="tns:SendToItraceSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EDISoap" type="tns:EDISoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostEDIForFilePath">
+      <soap:operation soapAction="http://tempuri.org/PostEDIForFilePath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostEDI">
+      <soap:operation soapAction="http://tempuri.org/PostEDI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDILogin">
+      <soap:operation soapAction="http://tempuri.org/EDILogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendToItrace">
+      <soap:operation soapAction="http://tempuri.org/SendToItrace" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EDISoap12" type="tns:EDISoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostEDIForFilePath">
+      <soap12:operation soapAction="http://tempuri.org/PostEDIForFilePath" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostEDI">
+      <soap12:operation soapAction="http://tempuri.org/PostEDI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDILogin">
+      <soap12:operation soapAction="http://tempuri.org/EDILogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendToItrace">
+      <soap12:operation soapAction="http://tempuri.org/SendToItrace" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EDI">
+    <wsdl:port name="EDISoap" binding="tns:EDISoap">
+      <soap:address location="http://edihub.myifreight.com/src/webgui/webservice/EDI.asmx" />
+    </wsdl:port>
+    <wsdl:port name="EDISoap12" binding="tns:EDISoap12">
+      <soap12:address location="http://edihub.myifreight.com/src/webgui/webservice/EDI.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

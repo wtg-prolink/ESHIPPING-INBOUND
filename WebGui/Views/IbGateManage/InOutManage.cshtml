@@ -1,0 +1,657 @@
+﻿@{
+ViewBag.Title = "@Resources.Locale.L_InOutManage_Views_432";
+}
+<style>
+	.pod{background:#5bc0de !important;}
+
+	.gatein{background:#5cb85c !important;}
+
+	.normal{background:#d9534f !important;}
+
+    .oriange{background:#E5F316 !important;}
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        var actFormatter = function (cellvalue, options, rawObject) {
+            var val = 0;
+            if (cellvalue == null || cellvalue === undefined || cellvalue == 0)
+                val = "";
+            else
+                val = cellvalue;
+            if (1 === cellvalue)
+                return '<div style="color: green;font-weight: bold;background-color: greenyellow;">' + val + '</div>';
+            return val;
+        };
+        var select_tranmode = "@ViewBag.SelectTranMode";
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(window).height();
+        gridHeight = docHeight - 300;
+
+
+        gop.AddUrl = false;
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_DNManage_ResList", height: "auto", refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "Api/GetInOutGateForIb";
+        gop.multiselect = true;
+        gop.multiboxonly = true;
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        //gop.BtnGroupId = "BtnGroupArea";
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "CreateDate";
+
+            var col = $grid.jqGrid('getCol', 'Status', false);
+            $.each(col, function (index, colname) {
+                console.log(colname);
+                if (colname == "U") {
+                    $grid.jqGrid('setRowData', index + 1, false, 'pod');
+                }
+                else if (colname == "G" || colname == "I") {
+                    $grid.jqGrid('setRowData', index + 1, false, 'gatein');
+                }
+                else if (colname == "C" || colname == "R") {
+                    $grid.jqGrid('setRowData', index + 1, false, 'normal');
+                }
+                else if (colname == "A") {
+                    $grid.jqGrid('setRowData', index + 1, false, 'oriange');
+                }
+            });
+        }
+
+        gop.btnGroup = [
+            {
+                id: "MBArrival",
+                name: "@Resources.Locale.L_InOut_Arrival",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', "selarrrow");
+
+                    if (selRowId.length == 0) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+
+                    var responseData = [];
+                    var dnitems = "", reserves = "";
+                    $.each(selRowId, function (index, val) {
+                        responseData.push(mygrid.getRowData(selRowId[index]));
+                    });
+
+                    for (var i = 0; i < responseData.length; i++) {
+                        dnitems += responseData[i].ReserveNo + ",";
+                        if (reserves.length > 0)
+                            reserves += ",";
+                        reserves += responseData[i].ReserveNo;
+                    }
+
+                    $.ajax({
+                        url: rootPath + 'IbGateManage/SetArrival',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: { "reserves": reserves },
+                        beforeSend: function () {
+                            StatusBarArr.nowStatus("processing...");
+                            CommonFunc.ToogleLoading(true);
+                        },
+                        success: function (result) {
+                            if (result.msg == "success") {
+                                CommonFunc.Notify("", "success", 1000, "success");
+                                $("#SummarySearch").click();
+                            }
+                            else {
+                                CommonFunc.Notify("", result.msg, 1000, "warning");
+                            }
+
+                            StatusBarArr.nowStatus("");
+                            CommonFunc.ToogleLoading(false);
+
+                        },
+                        error: function () {
+                            CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+                            CommonFunc.ToogleLoading(false);
+                        }
+                    });
+                }
+            },
+            {
+                id: "MBCancel",
+                name: "@Resources.Locale.L_InOut_Cancel",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', "selarrrow");
+
+                    if (selRowId.length == 0) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+
+                    var responseData = [];
+                    var dnitems = "", reserves = "";
+                    $.each(selRowId, function (index, val) {
+                        responseData.push(mygrid.getRowData(selRowId[index]));
+                    });
+
+                    for (var i = 0; i < responseData.length; i++) {
+                        var status = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'Status');
+                        var ReserveNo = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'ReserveNo');
+
+                        if (status != "I") {
+                            alert("Reserve No:" + ReserveNo + "  status is not in Gate In.");
+                            return;
+                        }
+
+                        dnitems += responseData[i].ReserveNo + ",";
+                        if (reserves.length > 0)
+                            reserves += ",";
+                        reserves += responseData[i].ReserveNo;
+
+                    }
+
+                    $.ajax({
+                        url: rootPath + 'IbGateManage/SetCancel',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: { "reserves": reserves },
+                        beforeSend: function () {
+                            StatusBarArr.nowStatus("processing...");
+                            CommonFunc.ToogleLoading(true);
+                        },
+                        success: function (result) {
+                            if (result.msg == "success") {
+                                CommonFunc.Notify("", "success", 1000, "success");
+                                $("#SummarySearch").click();
+                            }
+                            else {
+                                CommonFunc.Notify("", result.msg, 1000, "warning");
+                            }
+
+                            StatusBarArr.nowStatus("");
+                            CommonFunc.ToogleLoading(false);
+
+                        },
+                        error: function () {
+                            CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+                            CommonFunc.ToogleLoading(false);
+                        }
+                    });
+                }
+            },
+            {
+                id: "MBIn0",
+                name: "@Resources.Locale.L_DNManage_InConfNtEmp",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', "selarrrow");
+
+                    if (selRowId.length == 0) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+
+                    for (var i = 0; i < selRowId.length; i++) {
+                        var Trucker = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'Trucker');
+                        var TruckNo = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'TruckNo');
+                        var Driver = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'Driver');
+                        var DriverId = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'DriverId');
+                        var Tel = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'Tel');
+                        console.log(Trucker);
+                        $("#TruckNo").val(TruckNo);
+                        $("#Driver").val(Driver);
+                        $("#DriverId").val(DriverId);
+                        $("#Tel").val(Tel);
+                    }
+
+                    //車號放大鏡
+                    var options = {};
+                    options.gridUrl = rootPath + "TPVCommon/GetBstruckcForLookup";
+                    options.param = "";
+                    options.registerBtn = $("#TruckNoLookup");
+                    options.focusItem = $("#TruckNo");
+                    options.isMutiSel = true;
+                    options.baseConditionFunc = function () {
+                        return " PARTY_NO='" + Trucker + "'";
+                    }
+                    options.gridFunc = function (map) {
+                        $("#TruckNo").val(map.TruckNo);
+                    }
+
+                    options.lookUpConfig = LookUpConfig.BstruckcLookup;
+                    initLookUp(options);
+
+                    //司機放大鏡
+                    var options = {};
+                    options.gridUrl = rootPath + "TPVCommon/GetBstruckdForLookup";
+                    options.param = "";
+                    options.registerBtn = $("#DriverLookup");
+                    options.focusItem = $("#Driver");
+                    options.isMutiSel = true;
+                    options.baseConditionFunc = function () {
+                        return " PARTY_NO='" + Trucker + "'";
+                    }
+                    options.gridFunc = function (map) {
+                        $("#Driver").val(map.DriverName);
+                        $("#Tel").val(map.DriverPhone);
+                        $("#DriverId").val(map.DriverId);
+                    }
+
+                    options.lookUpConfig = LookUpConfig.BstruckdLookup;
+                    initLookUp(options);
+
+                    $("#GateInDailog").modal('show');
+                }
+            },
+            {
+                id: "MBOut0",
+                name: "@Resources.Locale.L_DNManage_OutConfNtEmp",
+                func: function () {
+                        OutConfirm(0);
+                }
+            },
+            {
+                id: "MBToday",
+                name: "Today Delivery",
+                func: function () {
+                    getData(rootPath + "IbGateManage/TodayDev", {}, function (result) {
+                        $("#containerInfoGrid").jqGrid("clearGridData");
+                        $("#containerInfoGrid").jqGrid("setGridParam", {
+                            datatype: 'local',
+                            data: result.rows,
+                        }).trigger("reloadGrid");
+                    });
+                }
+            },
+            {
+                id: "MBTomorrow",
+                name: "Tomorrow Delivery",
+                func: function () {
+                    getData(rootPath + "IbGateManage/TomorrowDev", {}, function (result) {
+                        $("#containerInfoGrid").jqGrid("clearGridData");
+                        $("#containerInfoGrid").jqGrid("setGridParam", {
+                            datatype: 'local',
+                            data: result.rows,
+                        }).trigger("reloadGrid");
+                    });
+                }
+            },
+                    {
+                        id: "WHBoard",
+                        name: "Warehouse Board",
+                        func: function () {
+                            window.open("/INBOUND/WHBoard.aspx");
+                        }
+                    },
+                    {
+                        id:"HZTWHboard",
+                        name: "Horizontal Warehouse Board",
+                        func: function () {
+                            window.open("/INBOUND/WHBoardV2.aspx");
+                        }
+                    }
+        ]
+
+        var colModelSetting = [
+         { name: 'CsNm', width: 130, hidden:true},
+            { name: 'Status', formatter: "select", remark: 'A:Arrival;D:@Resources.Locale.L_DNManage_Called;R:@Resources.Locale.L_DNManage_Reserved;C:@Resources.Locale.L_DNManage_Confirmed;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;V:@Resources.Locale.L_BSCSDateQuery_Cancel;P:@Resources.Locale.L_UserQuery_SealCnt;O:@Resources.Locale.L_UserQuery_Out;Z:Finish;E:@Resources.Locale.L_DNManage_TempOut;U:POD;M:Archived', editoptions: { value: 'A:Arrival;D:@Resources.Locale.L_DNManage_Called;R:@Resources.Locale.L_DNManage_Reserved;C:@Resources.Locale.L_DNManage_Confirmed;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;V:@Resources.Locale.L_BSCSDateQuery_Cancel;P:@Resources.Locale.L_UserQuery_SealCnt;O:@Resources.Locale.L_UserQuery_Out;E:@Resources.Locale.L_DNManage_TempOut;U:POD;Z:Finish;M:Archived' } },
+            { name: 'CallType', width: 90, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: 'S:Call InterModal;C:Call Container;D:Call DN', editoptions: { value: 'S:Call InterModal;C:Call Container;D:Call DN' } },
+            { name: 'IbatNo', title: '@Resources.Locale.L_BaseLookup_BatNo', index: 'IbatNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+        ];
+
+        var table = "SMIRV";
+        genColModel(table, "U_ID", "L_IbGateManage", colModelSetting).done(function (result) { 
+            for (var i = 0; i < result.length; i++) {
+                var columns = result[i];
+                switch (columns.index) {
+                    case "EmptyTime":
+                        columns.width = 200;
+                        columns.title = 'Empty Return Time';
+                        break;
+                    case "EmptyReturnTime":
+                        columns.width = 200;
+                        columns.title = 'LFD/Empty Return';
+                        break;
+                    case "ScRemark":
+                        columns.width = 200;
+                        columns.title = "Security Remark";
+                        break;
+                }
+            }
+             
+            gop.gridColModel = result;
+
+            gop.searchColumns = getSelectColumn(gop.gridColModel);
+            initSearch(gop);
+        });
+
+        function dblClick(map) {
+            var UId = map.UId;
+            var flag = 0;
+            var status = map.Status;
+            //E','P','C','R','G'";
+            switch (status) {
+                case "O":
+                case "Z":
+                case "A":
+                case "E":
+                case "R":
+                case "C":
+                    flag = 0;
+                    break;
+                case "I":
+                case "P":
+                case "G":
+                case "U":
+                    flag = 1;
+                    break;
+                default:
+                    flag = 1;
+                    break;
+            }
+            top.topManager.openPage({
+                href: rootPath + "IbGateManage/SmrvSetup?id=" + UId + "&flag=" + flag,
+                title: '@Resources.Locale.L_DNManage_InOutConf',
+                id: 'SmrvSetup_io',
+                search: 'uid=' + UId,
+                reload: true
+            });
+        }
+
+        $("#GateInBtn").click(function (event) {
+            var TruckNo = $("#TruckNo").val();
+            var Driver = $("#Driver").val();
+            var DriverId = $("#DriverId").val();
+            var Tel = $("#Tel").val();
+
+            var postData = TruckNo + "," + Driver + "," + DriverId + "," + Tel;
+            console.log(postData);
+            InConfirm(0, postData);
+            $("#GateInDailog").modal("hide");
+        });
+
+        var updatengc = ["TruckNo", "Driver", "DriverId"];
+        for (var i = 0; i < updatengc.length; i++) {
+            $("#" + updatengc[i]).attr('disabled', true);
+            $("#" + updatengc[i]).parent().find("button").attr("disabled", true);
+        }
+    });
+
+    function InConfirm(mode, data) {
+        var msg = "";
+        var iscontinue = window.confirm("@Resources.Locale.L_DNManage_Whether5" + msg + "@Resources.Locale.L_DNManage_InboundConf");
+        if (!iscontinue) {
+            return;
+        }
+
+        var mygrid = $("#containerInfoGrid");
+        var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+        var responseData = [];
+        var UIds = "";
+        var ReverseNo = "";
+        var CntrNo = "";
+        var SealNo1 = "";
+        var TranType = "";
+        var Status = "";
+        var Wscd = "";
+
+        $.each(selRowId, function (index, val) {
+            responseData.push(mygrid.getRowData(selRowId[index]));
+        });
+        if (responseData.length < 1) {
+            CommonFunc.Notify("", "@Resources.Locale.L_ChgApproveManage_Views_185", 500, "warning");
+            return;
+        }
+        for (var i = 0; i < responseData.length; i++) {
+            UIds += responseData[i].UId + ",";
+            //Wscd += responseData[i].WsCd + ",";
+            Status = responseData[i].Status;
+            if (Status == "P") {
+                CommonFunc.Notify("", "@Resources.Locale.L_DNManage_HasSeal", 1000, "warning");
+                return;
+            }
+            if (Status == "O") {
+                CommonFunc.Notify("", "@Resources.Locale.L_DNManage_HasOut", 1000, "warning");
+                return;
+            }
+            if (Status !== "R" && Status !== "C" && Status !== "E" && Status !== "A") {
+                CommonFunc.Notify("", "@Resources.Locale.L_DNManage_HasIn", 1000, "warning");
+                return;
+            }
+        }
+
+            $.ajax({
+                async: true,
+                url: rootPath + "Api/GateInConfirm",
+                type: 'POST',
+                data: { mode: mode, id: UIds, data:data },
+                dataType: "json",
+                beforeSend: function () {
+                    CommonFunc.ToogleLoading(true);
+                },
+                "complete": function (xmlHttpRequest, successMsg) {
+                    CommonFunc.ToogleLoading(false);
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                    CommonFunc.Notify("", errMsg, 1000, "danger");
+                    CommonFunc.ToogleLoading(false);
+                },
+                success: function (data) {
+                    CommonFunc.ToogleLoading(false);
+                    if (!data.IsOk) {
+                        alert(data.message);
+                        return false;
+                    }
+                    else {
+                        CommonFunc.Notify("", data.message, 500, "success");
+                        $("#SummarySearch").click();
+                        //initLoadData(_uid);
+                    }
+                }
+            });
+        }
+
+        function OutConfirm(mode) {
+            var msg = "";
+            var iscontinue = window.confirm("@Resources.Locale.L_DNManage_Whether5" + msg + "@Resources.Locale.L_SmrvSetup_Script_165");
+            if (!iscontinue) {
+                return;
+            }
+
+            var mygrid = $("#containerInfoGrid");
+            var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+            var responseData = [];
+            var UIds = "";
+            var LtruckNos = "";
+            var Status = "";
+            var PutDate = "";
+            var SealDate = "";
+            var Wscd = "";
+            $.each(selRowId, function (index, val) {
+                responseData.push(mygrid.getRowData(selRowId[index]));
+            });
+            if (responseData.length < 1) {
+                CommonFunc.Notify("", "@Resources.Locale.L_ChgApproveManage_Views_185", 500, "warning");
+                return;
+            }
+            for (var i = 0; i < responseData.length; i++) {
+                UIds += responseData[i].UId + ",";
+                Wscd += responseData[i].WsCd + ",";
+                Status = responseData[i].Status;
+                if (Status == "O") {
+                    CommonFunc.Notify("", "@Resources.Locale.L_DNManage_HasOut", 1000, "warning");
+                    return;
+                }
+                if (Status === "R" || Status === "C" || Status === "E") {
+                    CommonFunc.Notify("", "@Resources.Locale.L_DNManage_NotIn", 1000, "warning");
+                    return;
+                }
+                PutDate = responseData[i].PutDate;
+                SealDate = responseData[i].SealDate;
+                if (PutDate == "" && SealDate == "") {
+                    CommonFunc.Notify("", "@Resources.Locale.L_DNManage_CantOut", 1000, "warning");
+                    return;
+                }
+            }
+
+            $.ajax({
+                async: true,
+                url: rootPath + "Api/GateOutConfirm",
+                type: 'POST',
+                data: { mode: mode, id: UIds, wscd: Wscd },
+                dataType: "json",
+                beforeSend: function () {
+                    CommonFunc.ToogleLoading(true);
+                },
+                "complete": function (xmlHttpRequest, successMsg) {
+                    CommonFunc.ToogleLoading(false);
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                    CommonFunc.Notify("", errMsg, 1000, "danger");
+                    CommonFunc.ToogleLoading(false);
+                },
+                success: function (data) {
+                    CommonFunc.ToogleLoading(false);
+                    if (!data.IsOk) {
+                        alert(data.message);
+                        return false;
+                    }
+                    else {
+                        CommonFunc.Notify("", data.message, 500, "success");
+                        $("#SummarySearch").click();
+                        //initLoadData(_uid);
+                    }
+                }
+            });
+        }
+
+        function getData(url, data, callBackFn) {
+        CommonFunc.ToogleLoading(true);
+        $.ajax({
+            async: true,
+            url: url,
+            type: 'POST',
+            data: data,
+            "complete": function (xmlHttpRequest, successMsg) {
+                CommonFunc.ToogleLoading(false);
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+            },
+            success: function (result) {
+                console.log(result);
+                var resJson = $.parseJSON(result);
+                callBackFn(resJson);
+            }
+        });
+    }
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g" id="BtnGroupArea">
+					</div>
+					<div class="pure-g" id="StatusArea">
+					</div>
+					<div class="form-group">
+						<div class="pure-g">
+							<div class="pure-u-sm-60-60">
+								<table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+									<tr></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Gate in視窗-->
+<div class="modal fade" id="GateInDailog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Check Truck Information</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-5-60">
+                        <label for="TruckNo" class="control-label">@Resources.Locale.L_GateReserve_TruckNo</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="TruckNo" name="TruckNo" fieldname="TruckNo" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="TruckNoLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label for="Driver" class="control-label">@Resources.Locale.L_GateReserve_Driver</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Driver" name="Driver" fieldname="Driver" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="DriverLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label for="DriverId" class="control-label">@Resources.Locale.L_GateReserve_DriverId</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="DriverId" name="DriverId" fieldname="DriverId" ref="Driver" />
+                    </div>
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label for="Tel" class="control-label">@Resources.Locale.L_GateReserve_Tel</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="Tel" name="Tel" fieldname="Tel" ref="Driver" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-sm btn-info" id="GateInBtn">@Resources.Locale.L_Layout_Confirm</button>
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">@Resources.Locale.L_BSCSDateQuery_Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Gate in視窗-->

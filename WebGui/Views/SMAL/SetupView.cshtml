@@ -1,0 +1,241 @@
+﻿@{
+    ViewBag.Title = "SetupView";
+}
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/SMAL/SetupView.js?20241010")"></script>
+<div id="wrapper">
+	<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">Allocation Rule</div>
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="TranType" class="control-label">@Resources.Locale.L_SMAL_TranType</label><!--运输类别-->
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select name="TranType" id="TranType" fieldname="TranType" dt="mt" class="form-control input-sm">
+                                @Html.Raw(ViewBag.TranType)
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Cmp" class="control-label">@Resources.Locale.L_SMAL_Cmp</label>
+                        </div><!--Location-->
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="FreightTerm" class="control-label">@Resources.Locale.L_SMAL_FreightTerm</label>
+                        </div><!--Freight Term-->
+                        <div class="pure-u-sm-10-60 control-group">
+                            <select name="FreightTerm" id="FreightTerm" fieldname="FreightTerm" dt="mt" class="form-control input-sm">
+                                <option value="P">Prepaid</option>
+                                <option value="C">Collect</option>
+                                <option value="O">Other</option>
+                            </select>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PodCd" class="control-label">@Resources.Locale.L_SMAL_ConnCd</label>
+                        </div><!--Consignee-->
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ConnCd" name="ConnCd" fieldname="ConnCd" />
+                                <input type="hidden" class="form-control input-sm" dt="mt" id="ConnNm" name="ConnNm" fieldname="ConnNm" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="ConnCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PodCd" class="control-label">@Resources.Locale.L_SMAL_PodCd</label>
+                        </div><!--POD-->
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PodCd" name="PodCd" fieldname="PodCd" />
+                                <input type="hidden" class="form-control input-sm" dt="mt" id="PodNm" name="PodNm" fieldname="PodNm" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PodCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="TerminalCd" class="control-label">@Resources.Locale.L_SMAL_TerminalCd</label>
+                        </div><!--Consignee-->
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="TerminalCd" name="TerminalCd" fieldname="TerminalCd" />
+                                <input type="hidden" class="form-control input-sm" dt="mt" id="TerminalNm" name="TerminalNm" fieldname="TerminalNm" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="TerminalCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60  label-right">
+                            <label for="IncotermCd" class="control-label">@Resources.Locale.L_SMAL_IncotermCd</label>
+                        </div><!--Inco Term-->
+                        <div class="pure-u-sm-4-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="IncotermCd" name="IncotermCd" fieldname="IncotermCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="IncotermCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-6-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="IncotermDescp" name="IncotermDescp" fieldname="IncotermDescp" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Carrier" class="control-label">Carrier</label>
+                        </div><!--POD-->
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Carrier" name="Carrier" fieldname="Carrier" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CarrierLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div> 
+                    <div class="pure-g"> 
+                        <div class="pure-u-sm-5-60">
+                            <label for="WeCd" class="control-label">Ship to</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="WeCd" name="WeCd" fieldname="WeCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="WeCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-8-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="WeNm" name="WeNm" fieldname="WeNm" readonly />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Remark" class="control-label">@Resources.Locale.L_SMAL_Remark</label><!--BL Remark-->
+                        </div>
+                        <div class="pure-u-sm-55-60">
+                            <textarea class="form-control" dt="mt" id="Remark" name="Remark" fieldname="Remark"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Allocation LSP</div>
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="PartyType" class="control-label">@Resources.Locale.L_SMAL_PartyType</label>
+                        </div><!--POD-->
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PartyType" name="PartyType" fieldname="PartyType" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PartyTypeLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="LspCd" class="control-label">@Resources.Locale.L_SMAL_LspCd</label>
+                        </div><!--POD-->
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="LspCd" name="LspCd" fieldname="LspCd" />
+                                <input type="hidden" class="form-control input-sm" dt="mt" id="LspNm" name="LspNm" fieldname="LspNm" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="LspCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="DlvAreaNm" class="control-label">Delivery Area</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="DlvAreaNm" name="DlvAreaNm" fieldname="DlvAreaNm" />
+                                <input type="hidden" class="form-control input-sm" dt="mt" id="DlvArea" name="DlvArea" fieldname="DlvArea" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="DlvAreaLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="AddrCode" class="control-label">Delivery Address</label>
+                        </div> 
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="DlvAddr" name="DlvAddr" fieldname="DlvAddr" />
+                                <input type="hidden" class="form-control input-sm" dt="mt" id="AddrCode" name="AddrCode" fieldname="AddrCode" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="AddrCodeLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="WsCd" name="WsCd" fieldname="WsCd" />
+                        </div>
+                        <div class="pure-u-sm-8-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="WsNm" name="WsNm" fieldname="WsNm" />
+                        </div>
+                        <div class="pure-u-sm-2-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="FinalWh" name="FinalWh" fieldname="FinalWh" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+<input type="hidden" id="UId" dt="mt" fieldname="UId" iskey="true" />

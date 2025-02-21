@@ -1,0 +1,629 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <!--本文档用于配置各个界面-->
+  <!--如果一个系统实例有多公司，则可以按如下配置,COMPANY.EL中的"EL"表示公司代码 -->
+
+  <!--远达界面配置-->
+  <COMPANY.PM>
+    <AEAWB caption="提单输入">
+      <AEAWB_PRINT caption="提单列印" visible="N" />
+      <AEAWB_REPORT caption="报表" visible="N" />
+    </AEAWB>
+    <CABINLIST caption="仓单设定">
+      <REPORT caption="报表" visible="Y" />
+      <MAINLAND_REPORT caption="大陆到付总表" visible="Y" />
+      <CNL_REPORT caption="上海专用仓单" visible="N" />
+    </CABINLIST>
+    <CLEAR_CMP caption="清关公司" visible="Y">
+    </CLEAR_CMP>
+    <DESTINATION caption="目的地建档">
+      <ADCP caption="報表區域歸屬" visible="N" />
+      <TYPE caption="航线栏位"  visible="N" />
+      <PLMAREA caption="報價區域"  visible="Y" />
+    </DESTINATION>
+    <GROUP_CHARGE caption="费用组别" visible="Y">
+    </GROUP_CHARGE>
+  </COMPANY.PM>
+
+
+  <!--钧麟界面配置-->
+  <COMPANY.EL>
+    <AEAWB caption="提单输入">
+      <AEAWB_PRINT caption="提单列印" visible="Y" />
+      <AEAWB_REPORT caption="报表" visible="N" />
+
+      <AEAWB_TABLE>
+        <column id="BAG_NO" align="left" width="100" html="N" caption="LBL_0045" />
+        <column id="CMDTY_NAME" align="left" width="100" html="N" caption="LBL_0036" />
+        <column id="DP" align="left" width="80" html="N" caption="COL_0018" />
+        <column id="CLASS" align="left" width="60" html="N" caption="COL_0080" />
+        <column id="PKG" align="left" width="60" html="N" caption="COL_0052" />
+        <column id="GW" align="left" width="65" html="N" caption="COL_0022" />
+        <column id="CW" align="left" width="65" html="N" caption="LBL_0038" />
+        <column id="QTY" align="left" width="65" html="N" caption="COL_0101" />
+        <column id="UNIT" align="left" width="80" html="N" caption="LBL_0234" />
+        <column id="UNIT_PRICE" align="left" width="50" html="N" caption="COL_0082" />
+        <column id="AMOUNT" align="left" width="50" html="N" caption="COL_0029" />
+        <column id="AWB_GW" align="left" width="65" html="N" caption="LBL_0039" />
+        <column id="CBM_STR" align="left" width="65" html="N" caption="COL_0053" />
+        <column id="CBM" align="left" width="65" html="N" caption="=" />
+        <column id="BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+        <column id="CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+        <column id="EI_BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+        <column id="EI_CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+      </AEAWB_TABLE>
+    </AEAWB>
+    <CABINLIST caption="仓单设定">
+      <REPORT caption="报表" visible="Y" />
+      <MAINLAND_REPORT caption="大陆到付总表" visible="N" />
+    </CABINLIST>
+    <CLEAR_CMP caption="清关公司" visible="Y">
+    </CLEAR_CMP>
+    <DESTINATION caption="目的地建档">
+      <ADCP caption="報表區域歸屬" visible="Y" />
+      <TYPE caption="航线栏位"  visible="Y" />
+      <PLMAREA caption="報價區域"  visible="Y" />
+    </DESTINATION>
+    <GROUP_CHARGE caption="费用组别" visible="Y">
+    </GROUP_CHARGE>
+  </COMPANY.EL>
+
+
+  <!--和光界面配置-->
+  <COMPANY.WE>
+    <AEAWB caption="提单输入">
+      <AEAWB_PRINT caption="提单列印" visible="N" />
+      <AEAWB_REPORT caption="报表" visible="Y" />
+      <AEAWB_EFX_NO caption="EFX客戶編號" visible="Y" />
+      <AEAWB_LINEX_TRANS caption="LINEX資料拋轉" visible="Y" />
+    </AEAWB>
+
+    <CABINLIST caption="仓单设定">
+      <REPORT caption="报表" visible="Y" />
+      <MAINLAND_REPORT caption="大陆到付总表" visible="N" />
+      <FLOWNO caption="流水編號" visible="Y" />
+      <HAWB_EXPORT caption="HAWB Export" visible="Y" />
+    </CABINLIST>
+    <CLEAR_CMP caption="清关公司" visible="N">
+    </CLEAR_CMP>
+    <CLEAR_WEIGH caption="清关重" visible="N" />
+    <CLEAR_TYPE caption="清关类别" visible="N" />
+    <DESTINATION caption="目的地建档">
+      <ADCP caption="報表區域歸屬" visible="N" />
+      <TYPE caption="航线栏位"  visible="N" />
+      <PLMAREA caption="報價區域"  visible="Y" />
+    </DESTINATION>
+    <GROUP_CHARGE caption="费用组别" visible="N">
+    </GROUP_CHARGE>
+    <SALSE_IN caption="中港臺业务员"  visible="N" />
+    <SALSE_OUT caption="国外业务员"  visible="N" />
+    <FUEL_FEE caption="燃油附加費" visible="Y" />
+  </COMPANY.WE>
+
+  <!--台空界面配置-->
+  <COMPANY.TC>
+    <AEAWB caption="提单输入">
+      <AEAWB_PRINT caption="提单列印" visible="Y" />
+      <AEAWB_REPORT caption="报表" visible="N" />
+      <AEAWB_DAHENG_NO caption="大亨條碼" visible="Y" />
+      <AEAWB_CLEAR_NO caption="清關條碼" visible="Y" />
+    </AEAWB>
+
+    <CABINLIST caption="仓单设定">
+      <REPORT caption="报表" visible="Y" />
+      <MAINLAND_REPORT caption="大陆到付总表" visible="N" />
+    </CABINLIST>
+    <CLEAR_CMP caption="清关公司" visible="N">
+    </CLEAR_CMP>
+    <CLEAR_WEIGH caption="清关重" visible="N" />
+    <CLEAR_TYPE caption="清关类别" visible="Y" />
+    <DESTINATION caption="目的地建档">
+      <ADCP caption="報表區域歸屬" visible="N" />
+      <TYPE caption="航线栏位"  visible="N" />
+      <PLMAREA caption="報價區域"  visible="Y" />
+    </DESTINATION>
+    <GROUP_CHARGE caption="费用组别" visible="N">
+    </GROUP_CHARGE>
+    <SALSE_IN caption="中港臺业务员"  visible="N" />
+    <SALSE_OUT caption="国外业务员"  visible="N" />
+
+    <!--提单查询栏位设置，目前主要是设置小数点位数-->
+    <AWB_QUERY>
+      <column id="GW" decimals="1" />
+    </AWB_QUERY>
+  </COMPANY.TC>
+
+  <!--中國速遞界面配置-->
+  <COMPANY.CE>
+    <AEAWB caption="提單輸入" pmsId="AEAWB">
+      <AEAWB_PRINT caption="提單列印" visible="N" />
+      <AEAWB_REPORT caption="報表" visible="N" />
+      <FLIGHT_SELECT caption="" visible="N" />
+      <CNL_NO caption="倉單" required="N" visible="Y" />
+
+      <AEAWB_TABLE>
+        <column id="BAG_NO" align="left" width="100" html="N" caption="LBL_0045" />
+        <column id="CMDTY_NAME" align="left" width="100" html="N" caption="LBL_0036" />
+        <column id="DP" align="left" width="80" html="N" caption="COL_0018" />
+        <column id="CLASS" align="left" width="60" html="N" caption="COL_0080" />
+        <column id="PKG" align="left" width="60" html="N" caption="COL_0052" />
+        <column id="GW" align="left" width="65" html="N" caption="COL_0022" />
+        <column id="CW" align="left" width="65" html="N" caption="LBL_0038" />
+        <column id="AWB_GW" align="left" width="65" html="N" caption="LBL_0039" />
+        <column id="CBM_STR" align="left" width="65" html="N" caption="COL_0053" />
+        <column id="CBM" align="left" width="65" html="N" caption="=" />
+        <column id="QTY" align="left" width="65" html="N" caption="COL_0101" />
+        <column id="UNIT" align="left" width="80" html="N" caption="LBL_0234" />
+        <column id="UNIT_PRICE" align="left" width="50" html="N" caption="COL_0082" />
+        <column id="AMOUNT" align="left" width="50" html="N" caption="COL_0029" />
+        <column id="BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+        <column id="CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+        <column id="EI_BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+        <column id="EI_CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+      </AEAWB_TABLE>      
+
+      <AEAWB_DAHENG_NO caption="大亨條碼" visible="N" />
+      <AEAWB_CLEAR_NO caption="清關條碼" visible="N" />
+      <AEAWB_EFX_NO caption="EFX客戶編號" visible="N" />
+      <AEAWB_LINEX_TRANS caption="LINEX資料拋轉" visible="N" />
+    </AEAWB>
+    <!--固定叫件建檔UI配置-->
+    <PICKUP_SET caption="固定叫件建檔" pmsId="PICKUP_SET">
+      <PRICE_TYPE caption="計價類別" visible="Y" />
+    </PICKUP_SET>
+
+    <!--叫件輸入-->
+    <PICKUP02 caption="叫件輸入" pmsId="PICKUP02">
+      <PRICE_TYPE caption="計價類別" visible="Y" />
+      <_3PL caption="本地3PL" visible="Y" />
+    </PICKUP02>
+    <cargoTypeSelect caption="運送類別">
+      <option name="包裹" value="S" />
+    </cargoTypeSelect>
+    <DECL_Type02>
+      <COLOAD caption="運送類別" required="N" visible="N" />
+    </DECL_Type02>
+    
+  </COMPANY.CE>
+
+  <!--晉越界面配置-->
+  <COMPANY.BX>
+    <AEAWB caption="提單輸入" pmsId="AEAWB">
+      <AEAWB_PRINT caption="提单列印" visible="N" />
+      <AEAWB_REPORT caption="报表" visible="N" />
+      <FLIGHT_SELECT caption="航班類型" visible="Y" />
+      <CNL_NO caption="倉單" required="N" visible="Y" />
+      <GOODSCODE caption="商品類型" required="N" visible="N" />
+
+      <AEAWB_TABLE>
+        <column id="CTN_NO" align="left" width="100" html="N" caption="LBL_0340" />
+        <column id="BAG_NO" align="left" width="100" html="N" caption="COL_0118" />
+        <column id="BAG_NUM" align="left" width="50" html="N" caption="LBL_0383" />
+        <column id="CMDTY_NAME" align="left" width="100" html="N" caption="LBL_0036" />
+        <column id="DP" align="left" width="80" html="N" caption="LBL_0349" />
+        <column id="CLASS" align="left" width="60" html="N" caption="COL_0080" />
+        <column id="PKG" align="left" width="60" html="N" caption="COL_0052" />
+        <column id="CW" align="left" width="65" html="N" caption="LBL_0038" />
+        <column id="AWB_GW" align="left" width="65" html="N" caption="LBL_0039" />
+        <column id="CBM_STR" align="left" width="65" html="N" caption="COL_0053" />
+        <column id="CBM" align="left" width="65" html="N" caption="=" />
+        <column id="QTY" align="left" width="65" html="N" caption="COL_0101" />
+        <column id="UNIT" align="left" width="80" html="N" caption="LBL_0234" />
+        <column id="UNIT_PRICE" align="left" width="50" html="N" caption="COL_0082" />
+        <column id="AMOUNT" align="left" width="50" html="N" caption="COL_0029" />
+        <column id="BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+        <column id="CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+        <column id="EI_BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+        <column id="EI_CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+      </AEAWB_TABLE>    
+    </AEAWB>
+    
+    <!--固定叫件建檔UI配置-->
+    <PICKUP_SET caption="固定叫件建檔" pmsId="PICKUP_SET">
+      <PRICE_TYPE caption="計價類別" visible="N" />
+    </PICKUP_SET>
+    
+    <!--叫件輸入-->
+    <PICKUP02 caption="叫件輸入" pmsId="PICKUP02">
+      <PRICE_TYPE caption="計價類別" visible="N" />
+      <_3PL caption="本地3PL" visible="N" />
+    </PICKUP02>
+
+    <PICKUP_QUERY><!--叫件查詢-->
+      <AWB_NO caption="托運單號" visible="Y"  />
+      <EDI caption="轉提單" visible="Y" />
+      <COL_AWB_NO caption="托運單號" visible="N"  />
+      <COL_SMS_STATUS caption="簡訊狀態" visible="Y" />
+      <COL_KEY_USER caption="叫件記錄者" visible="Y" />
+      <COL_STN_TEXT caption="站別資料" visible="Y" />
+      <COL_PICKUP_TYPE caption="網路叫件" visible="Y" />
+      <COL_CUSTOM_NO caption="客戶代碼" visible="Y" />
+      <TO_PICKUPUI url="PickupBX.aspx"/>
+    </PICKUP_QUERY>
+
+    <cargoTypeSelect caption="貨物類型">
+      <option name="文件" value="1" />
+      <option name="高貨" value="2" />
+      <option name="普貨" value="3" />
+      <option name="特貨" value="4" />
+    </cargoTypeSelect>
+    
+    <flightTypeSelect caption="航班種類">
+      <option name="普通" value="1" />
+      <option name="早機" value="2" />
+      <option name="晚機" value="3" />
+    </flightTypeSelect>
+    <DECL_Type02>
+      <COLOAD caption="運送類別" required="N" visible="Y" />
+    </DECL_Type02>
+    
+  </COMPANY.BX>
+
+  <!--晉越香港界面配置-->
+  <COMPANY.BH>
+    <AEAWB caption="提單輸入" pmsId="AEAWB">
+      <AEAWB_PRINT caption="提单列印" visible="N" />
+      <AEAWB_REPORT caption="报表" visible="N" />
+      <FLIGHT_SELECT caption="航班類型" visible="Y" />
+      <CNL_NO caption="倉單" required="N" visible="Y" />
+      <GOODSCODE caption="商品類型" required="N" visible="Y" />
+      <AREA caption="區域" required="N" visible="Y" readonly="Y" />
+      <TAX_NO caption="統編" required="N" visible="Y" readonly="N" />
+      <CNEE_ATTN caption="聯絡人" required="N" visible="Y" readonly="Y" />
+      <CNEE_TEL caption="電話" required="N" visible="Y" readonly="N" />
+      <CNEE_FAX caption="傳真" required="N" visible="Y" readonly="Y" />
+
+      <AEAWB_TABLE>
+        <column id="CTN_NO" align="left" width="100" html="N" caption="LBL_0340" />
+        <column id="BAG_NO" align="left" width="100" html="N" caption="COL_0118" />
+        <column id="BAG_NUM" align="left" width="50" html="N" caption="LBL_0383" />
+        <column id="CMDTY_NAME" align="left" width="100" html="N" caption="LBL_0036" />
+        <column id="DP" align="left" width="80" html="N" caption="LBL_0349" />
+        <column id="CLASS" align="left" width="60" html="N" caption="COL_0080" />
+        <column id="PKG" align="left" width="60" html="N" caption="COL_0052" />
+        <column id="CW" align="left" width="65" html="N" caption="LBL_0038" />
+        <column id="AWB_GW" align="left" width="65" html="N" caption="LBL_0039" />
+        <column id="CBM_STR" align="left" width="65" html="N" caption="COL_0053" />
+        <column id="CBM" align="left" width="65" html="N" caption="=" />
+        <column id="QTY" align="left" width="65" html="N" caption="COL_0101" />
+        <column id="UNIT" align="left" width="80" html="N" caption="LBL_0234" />
+        <column id="UNIT_PRICE" align="left" width="50" html="N" caption="COL_0082" />
+        <column id="AMOUNT" align="left" width="50" html="N" caption="COL_0029" />
+        <column id="BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+        <column id="CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+        <column id="EI_BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+        <column id="EI_CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+      </AEAWB_TABLE>
+    </AEAWB>
+    <!--客戶建檔畫面客制化-->
+    <ATTN_DOC caption="客戶資料建檔" pmsId="ATTN_DOC">
+      <TAX_NO caption="統編" required="N" />
+      <CNAME caption="中文名稱" required="N" />
+      <CADDR caption="中文地址" required="N" />
+      <CABBN caption="中文簡稱" required="N" />
+      <MAJOR_PCKAREA caption="主要提貨區" required="N" />
+    </ATTN_DOC>
+
+    <PICKUP_QUERY>
+      <!--叫件查詢-->
+      <AWB_NO caption="托運單號" visible="Y"  />
+      <EDI caption="轉提單" visible="Y" />
+      <COL_AWB_NO caption="托運單號" visible="N"  />
+      <COL_SMS_STATUS caption="簡訊狀態" visible="Y" />
+      <COL_KEY_USER caption="叫件記錄者" visible="Y" />
+      <COL_STN_TEXT caption="站別資料" visible="Y" />
+      <COL_PICKUP_TYPE caption="網路叫件" visible="Y" />
+      <COL_CUSTOM_NO caption="客戶代碼" visible="Y" />
+      <TO_PICKUPUI url="PickupBX.aspx"/>
+    </PICKUP_QUERY>
+
+    <!--固定叫件建檔UI配置-->
+    <PICKUP_SET caption="固定叫件建檔" pmsId="PICKUP_SET">
+      <PRICE_TYPE caption="計價類別" visible="N" />
+    </PICKUP_SET>
+
+    <!--叫件輸入-->
+    <PICKUP02 caption="叫件輸入" pmsId="PICKUP02">
+      <PRICE_TYPE caption="計價類別" visible="N" />
+      <_3PL caption="本地3PL" visible="N" />
+    </PICKUP02>
+
+    <cargoTypeSelect caption="貨物類型">
+      <option name="文件" value="1" />
+      <option name="普貨" value="2" />
+      <option name="特貨" value="3" />
+      <option name="*" value="4" />
+    </cargoTypeSelect>
+
+    <flightTypeSelect caption="航班種類">
+      <option name="普通" value="1" />
+      <option name="早機" value="2" />
+      <option name="晚機" value="3" />
+    </flightTypeSelect>
+    <DECL_Type02>
+      <COLOAD caption="運送類別" required="N" visible="Y" />
+    </DECL_Type02>
+
+  </COMPANY.BH>
+
+<!--加揚-->
+  <COMPANY.JY>
+    <AEAWB caption="提單輸入" pmsId="AEAWB">
+      <AEAWB_PRINT caption="提单列印" visible="N" />
+      <AEAWB_REPORT caption="报表" visible="N" />
+      <FLIGHT_SELECT caption="航班類型" visible="Y" />
+      <CNL_NO caption="倉單" required="N" visible="Y" />
+      <GOODSCODE caption="商品類型" required="N" visible="N" />
+      <ORI_AWB caption="原訂單資料" visible="N" />
+      <FROM_CITY caption="出發地" required="Y" />
+      <COLLECTION_PAY caption="代收貨款" visible="Y" />
+      <LDEL_NO caption="LBL_0537" required="Y" />
+      <CENDER caption="外務員" required="Y" />
+
+      <AEAWB_TABLE>
+        <column id="CTN_NO" align="left" width="100" html="N" caption="LBL_0340" />
+        <column id="BAG_NO" align="left" width="100" html="N" caption="COL_0118" />
+        <column id="BAG_NUM" align="left" width="50" html="N" caption="LBL_0383" />
+        <column id="CMDTY_NAME" align="left" width="100" html="N" caption="LBL_0036" />
+        <column id="DP" align="left" width="80" html="N" caption="LBL_0349" />
+        <column id="CLASS" align="left" width="60" html="N" caption="COL_0080" />
+        <column id="PKG" align="left" width="60" html="N" caption="COL_0052" />
+        <column id="CW" align="left" width="65" html="N" caption="LBL_0038" />
+        <column id="AWB_GW" align="left" width="65" html="N" caption="LBL_0039" />
+        <column id="CBM_STR" align="left" width="65" html="N" caption="COL_0053" />
+        <column id="CBM" align="left" width="65" html="N" caption="=" />
+        <column id="QTY" align="left" width="65" html="N" caption="COL_0101" />
+        <column id="UNIT" align="left" width="80" html="N" caption="LBL_0234" />
+        <column id="UNIT_PRICE" align="left" width="50" html="N" caption="COL_0082" />
+        <column id="AMOUNT" align="left" width="50" html="N" caption="COL_0029" />
+        <column id="BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+        <column id="CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+        <column id="EI_BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+        <column id="EI_CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+      </AEAWB_TABLE>
+    </AEAWB>
+
+    <!--客戶建檔畫面客制化-->
+    <ATTN_DOC caption="客戶資料建檔" pmsId="ATTN_DOC">
+      <TAX_NO caption="統編" required="N" />
+    </ATTN_DOC>
+
+    <!--固定叫件建檔UI配置-->
+    <PICKUP_SET caption="固定叫件建檔" pmsId="PICKUP_SET">
+      <PRICE_TYPE caption="計價類別" visible="N" />
+    </PICKUP_SET>
+
+    <!--叫件輸入-->
+    <PICKUP02 caption="叫件輸入" pmsId="PICKUP02">
+      <PRICE_TYPE caption="計價類別" visible="N" />
+      <_3PL caption="本地3PL" visible="N" />
+    </PICKUP02>
+
+    <PICKUP_QUERY>
+      <!--叫件查詢-->
+      <AWB_NO caption="托運單號" visible="Y"  />
+      <EDI caption="轉提單" visible="Y" />
+      <COL_AWB_NO caption="托運單號" visible="N"  />
+      <COL_SMS_STATUS caption="簡訊狀態" visible="N" />
+      <COL_KEY_USER caption="叫件記錄者" visible="Y" />
+      <COL_STN_TEXT caption="站別資料" visible="Y" />
+      <COL_PICKUP_TYPE caption="網路叫件" visible="N" />
+      <COL_CUSTOM_NO caption="客戶代碼" visible="Y" />
+      <COL_SMS_CONTENT caption="簡訊內容" visible="N" />
+      <TO_PICKUPUI url="PickupBX.aspx"/>
+    </PICKUP_QUERY>
+
+    <cargoTypeSelect caption="貨物類型">
+      <option name="自寄代送" value="1" />
+      <option name="自寄自取" value="2" />
+      <option name="代收代送" value="3" />
+      <option name="代收自取" value="4" />
+    </cargoTypeSelect>
+
+    <flightTypeSelect caption="航班種類">
+      <option name="普通" value="1" />
+      <option name="早機" value="2" />
+      <option name="晚機" value="3" />
+    </flightTypeSelect>
+    <DECL_Type02>
+      <COLOAD caption="運送類別" required="N" visible="Y" />
+    </DECL_Type02>
+
+  </COMPANY.JY>
+
+  <!--唯遞-->
+  <COMPANY.WD>
+    <AEAWB caption="提單輸入" pmsId="AEAWB">
+      <AEAWB_PRINT caption="提单列印" visible="N" />
+      <AEAWB_REPORT caption="报表" visible="N" />
+      <FLIGHT_SELECT caption="航班類型" visible="Y" />
+      <CNL_NO caption="倉單" required="N" visible="Y" />
+      <GOODSCODE caption="商品類型" required="N" visible="N" />
+      <ORI_AWB caption="原訂單資料" visible="Y" />
+      <LDEL_NO caption="LBL_0529" required="N" />  <!--本地派送單號-->
+      <CENDER caption="外務員" required="N" />
+      <COLOAD caption="計價運送類別" required="N" />
+      <FLIGHT_TYPE caption="航班類型" required="N" />
+      <AWB_CHARGE_PC caption="付款方式" required="N" />
+      <AWB_DATE caption="提單日期" required="N" />
+      <TO_CITY caption="目的地" required="N" />
+      <DP caption="貨物類型" required="N" />
+
+      <AEAWB_TABLE>
+        <column id="CTN_NO" align="left" width="100" html="N" caption="COL_0279" />
+        <column id="BAG_NO" align="left" width="100" html="N" caption="COL_0118" />
+        <column id="AWB_NO1" align="left" width="100" html="N" caption="LBL_0412" />
+        <column id="BAG_NUM" align="left" width="50" html="N" caption="LBL_0383" />
+        <column id="CMDTY_NAME" align="left" width="100" html="N" caption="LBL_0036" />
+        <column id="DP" align="left" width="80" html="N" caption="LBL_0349" />
+        <column id="CLASS" align="left" width="60" html="N" caption="COL_0080" />
+        <column id="PKG" align="left" width="60" html="N" caption="COL_0052" />
+        <column id="CW" align="left" width="65" html="N" caption="LBL_0038" />
+        <column id="AWB_GW" align="left" width="65" html="N" caption="LBL_0039" />
+        <column id="CBM_STR" align="left" width="65" html="N" caption="COL_0053" />
+        <column id="CBM" align="left" width="65" html="N" caption="=" />
+        <column id="QTY" align="left" width="65" html="N" caption="COL_0101" />
+        <column id="UNIT" align="left" width="80" html="N" caption="LBL_0234" />
+        <column id="UNIT_PRICE" align="left" width="50" html="N" caption="COL_0082" />
+        <column id="AMOUNT" align="left" width="50" html="N" caption="COL_0029" />
+        <column id="BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+        <column id="CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+        <column id="EI_BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+        <column id="EI_CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+      </AEAWB_TABLE>
+    </AEAWB>
+
+    <!--客戶建檔畫面客制化-->
+    <ATTN_DOC caption="客戶資料建檔" pmsId="ATTN_DOC">
+      <TAX_NO caption="統編" required="N" />
+    </ATTN_DOC>
+
+    <!--固定叫件建檔UI配置-->
+    <PICKUP_SET caption="固定叫件建檔" pmsId="PICKUP_SET">
+      <PRICE_TYPE caption="計價類別" visible="N" />
+    </PICKUP_SET>
+
+    <!--叫件輸入-->
+    <PICKUP02 caption="叫件輸入" pmsId="PICKUP02">
+      <PRICE_TYPE caption="計價類別" visible="N" />
+      <_3PL caption="本地3PL" visible="N" />
+    </PICKUP02>
+
+    <PICKUP_QUERY>
+      <!--叫件查詢-->
+      <AWB_NO caption="托運單號" visible="Y"  />
+      <EDI caption="轉提單" visible="Y" />
+      <COL_AWB_NO caption="托運單號" visible="N"  />
+      <COL_SMS_STATUS caption="簡訊狀態" visible="N" />
+      <COL_KEY_USER caption="叫件記錄者" visible="Y" />
+      <COL_STN_TEXT caption="站別資料" visible="Y" />
+      <COL_PICKUP_TYPE caption="網路叫件" visible="N" />
+      <COL_CUSTOM_NO caption="客戶代碼" visible="Y" />
+      <COL_SMS_CONTENT caption="簡訊內容" visible="N" />
+      <TO_PICKUPUI url="PickupBX.aspx"/>
+    </PICKUP_QUERY>
+
+    <cargoTypeSelect caption="貨物類型">
+      <option name="文件" value="1" />
+      <option name="高貨" value="2" />
+      <option name="普貨" value="3" />
+      <option name="特貨" value="4" />
+    </cargoTypeSelect>
+
+    <flightTypeSelect caption="航班種類">
+      <option name="普通" value="1" />
+      <option name="早機" value="2" />
+      <option name="晚機" value="3" />
+    </flightTypeSelect>
+    <DECL_Type02>
+      <COLOAD caption="運送類別" required="N" visible="Y" />
+    </DECL_Type02>
+
+  </COMPANY.WD>
+  
+  <!--默认公司-->
+  <AEAWB caption="提单输入" pmsId="AEAWB">
+    <AEAWB_PRINT caption="提单列印" visible="N" />
+    <AEAWB_REPORT caption="报表" visible="N" />
+    <FLIGHT_SELECT caption="" visible="N" />
+    <CNL_NO caption="倉單" required="Y" visible="Y" />
+    <GOODSCODE caption="商品類型" required="N" visible="N" />
+    <AREA caption="區域" required="N" visible="Y" readonly="N" />
+    <TAX_NO caption="統編" required="N" visible="Y" readonly="N" />
+    <CNEE_ATTN caption="聯絡人" required="N" visible="Y" readonly="N" />
+    <CNEE_TEL caption="電話" required="N" visible="Y" readonly="N" />
+    <CNEE_FAX caption="傳真" required="N" visible="Y" readonly="N" />
+    <FROM_CITY caption="出發地" required="N" />
+    <COLLECTION_PAY caption="代收貨款" visible="N" />
+    <LDEL_NO caption="LBL_0529" required="Y" /> <!--本地派送單號-->
+    <CENDER caption="外務員" required="N" />
+    <COLOAD caption="計價運送類別" required="Y" />
+    <FLIGHT_TYPE caption="航班類型" required="Y" />
+    <AWB_CHARGE_PC caption="付款方式" required="Y" />
+    <AWB_DATE caption="提單日期" required="Y" />
+    <TO_CITY caption="目的地" required="Y" />
+    <DP caption="貨物類型" required="Y" />
+    
+
+    <AEAWB_TABLE>
+      <column id="BAG_NO" align="left" width="100" html="N" caption="LBL_0045" />
+      <column id="CMDTY_NAME" align="left" width="100" html="N" caption="LBL_0036" />
+      <column id="DP" align="left" width="80" html="N" caption="COL_0018" />
+      <column id="CLASS" align="left" width="60" html="N" caption="COL_0080" />
+      <column id="PKG" align="left" width="60" html="N" caption="COL_0052" />
+      <column id="GW" align="left" width="65" html="N" caption="COL_0022" />
+      <column id="CW" align="left" width="65" html="N" caption="LBL_0038" />
+      <column id="AWB_GW" align="left" width="65" html="N" caption="LBL_0039" />
+      <column id="CBM_STR" align="left" width="65" html="N" caption="COL_0053" />
+      <column id="CBM" align="left" width="65" html="N" caption="=" />
+      <column id="QTY" align="left" width="65" html="N" caption="COL_0101" />
+      <column id="UNIT" align="left" width="80" html="N" caption="LBL_0234" />
+      <column id="UNIT_PRICE" align="left" width="50" html="N" caption="COL_0082" />
+      <column id="AMOUNT" align="left" width="50" html="N" caption="COL_0029" />
+      <column id="BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+      <column id="CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+      <column id="EI_BJCODE" align="left" width="75" html="N" caption="COL_00125" />
+      <column id="EI_CBCODE" align="left" width="75" html="N" caption="COL_00126" />
+    </AEAWB_TABLE>
+
+    <AEAWB_DAHENG_NO caption="大亨條碼" visible="N" />
+    <AEAWB_CLEAR_NO caption="清關條碼" visible="N" />
+    <AEAWB_EFX_NO caption="EFX客戶編號" visible="N" />
+    <AEAWB_LINEX_TRANS caption="LINEX資料拋轉" visible="N" />     
+  </AEAWB>
+  <!--客戶建檔畫面客制化-->
+  <ATTN_DOC caption="客戶資料建檔" pmsId="ATTN_DOC">
+    <TAX_NO caption="統編" required="Y" />
+    <CNAME caption="中文名稱" required="Y" />
+    <CADDR caption="中文地址" required="Y" />
+    <CABBN caption="中文簡稱" required="Y" />
+    <MAJOR_PCKAREA caption="主要提貨區" required="Y" />
+  </ATTN_DOC>
+  <PICKUP_QUERY>
+    <!--叫件查詢-->
+    <AWB_NO caption="Tracking No" visible="Y"  />
+    <EDI caption="EDI" visible="Y" />
+    <COL_AWB_NO caption="托運單號" visible="Y"  />
+    <COL_SMS_STATUS caption="簡訊狀態" visible="N" />
+    <COL_KEY_USER caption="叫件記錄者" visible="N" />
+    <COL_STN_TEXT caption="站別資料" visible="N" />
+    <COL_PICKUP_TYPE caption="網路叫件" visible="N" />
+    <COL_CUSTOM_NO caption="客戶代碼" visible="N" />
+    <TO_PICKUPUI url="Pickup.aspx"/>
+  </PICKUP_QUERY>
+
+  <CABINLIST caption="仓单设定" pmsId="CABINLIST">
+    <REPORT caption="报表" visible="Y" />
+    <MAINLAND_REPORT caption="大陆到付总表" visible="N" />
+    <FLOWNO caption="流水編號" visible="N" />
+    <HAWB_EXPORT caption="HAWB Export" visible="N" />
+  </CABINLIST>
+  <CLEAR_CMP caption="清关公司" visible="Y">
+  </CLEAR_CMP>
+  <CLEAR_WEIGH caption="清关重" visible="Y" />
+  <CLEAR_TYPE caption="清关类别" visible="Y" />
+  <DESTINATION caption="目的地建档" pmsId="EHU_TERMINI">
+    <ADCP caption="報表區域歸屬" visible="Y" />
+    <TYPE caption="航线栏位"  visible="Y" />
+    <PLMAREA caption="報價區域"  visible="Y" />
+  </DESTINATION>
+  <GROUP_CHARGE caption="费用组别" visible="Y">
+  </GROUP_CHARGE>
+  <SALSE_IN caption="中港臺业务员" visible="Y" />
+  <SALSE_OUT caption="国外业务员" visible="Y" />
+  <FUEL_FEE caption="燃油附加費" visible="N" />
+  <flightTypeSelect caption="航班種類">
+    <option name="普通" value="0" />
+    <option name="早機" value="1" />
+    <option name="晚機" value="2" />
+  </flightTypeSelect>
+  <cargoTypeSelect caption="貨物類型">
+    <option name="文件" value="1" />
+    <option name="普貨" value="2" />
+    <option name="特貨" value="3" />
+    <option name="*" value="4" />
+  </cargoTypeSelect>
+  <DECL_Type02>
+    <COLOAD caption="運送類別" required="N" visible="Y" />
+  </DECL_Type02>
+</root>

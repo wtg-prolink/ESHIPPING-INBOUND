@@ -1,0 +1,498 @@
+﻿<style>
+    .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+        color: #763FB2;
+    }
+
+    .navbar-nav > li > button.nav-disabled {
+        color: #DBDBDB;
+        cursor: not-allowed;
+    }
+
+        .navbar-nav > li > button.nav-disabled:hover {
+            color: #DBDBDB;
+            cursor: not-allowed;
+        }
+
+        .navbar-nav > li > button.nav-disabled:focus {
+            color: #DBDBDB;
+            cursor: not-allowed;
+        }
+
+    .navbar-nav > li.nav-hidden {
+        display: none;
+    }
+</style>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navRoot">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="navbar" class="collapse navbar-collapse" aria-expanded="false">
+            <ul class="nav navbar-nav" id="MBList">
+                <li>
+                    <button class="btn btn-link" id="MBAdd">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Resources.Locale.L_SYS_ADD
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-link" id="MBEdit">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> @Resources.Locale.L_SYS_EDIT
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-link" id="MBDel">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> @Resources.Locale.L_SYS_DEL
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-link" id="MBSearch" data-toggle="modal">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> @Resources.Locale.L_SYS_SEARCH
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-link" data-toggle="modal" id="MBEdoc">
+                        <span class="glyphicon glyphicon-file" aria-hidden="true"></span> @Resources.Locale.L_SYS_EDOC
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-link" id="MBCopy">
+                        <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> @Resources.Locale.L_SYS_COPY
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-link" id="MBSave">
+                        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> @Resources.Locale.L_SYS_SAVE
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-link" id="MBCancel">
+                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> @Resources.Locale.L_SYS_CANCEL
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-link" data-toggle="modal" id="MBApprove">
+                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span> @Resources.Locale.L_SYS_APPROVE
+                    </button>
+                </li>
+                <!-- <li>
+                   <button class="btn btn-link" id="MBApprove">
+                   <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 审核
+                   </button>
+                </li> -->
+                <li>
+                    <button class="btn btn-link" id="MBInvalid">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> @Resources.Locale.L_SYS_INVALID
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-link" data-toggle="modal" id="MBErrMsg">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> @Resources.Locale.L_SYS_ADNORMAL
+                    </button>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<script type="text/javascript">
+    var MenuBarFuncArr = { MBAdd: function () { }, MBEdit: function () { }, MBDel: function () { }, MBSearch: function () { }, MBBeforeSave: function () { }, MBSave: function () { }, MBCancel: function () { }, MBEdoc: function () { }, MBCostInfo: function () { } };
+    MenuBarFuncArr.SaveResult = false;
+    MenuBarFuncArr.AddMenu = function (menuId, menuCss, menuName, menuFunc, n) {
+        if (pmsList == "" || pmsList == null || pmsList==undefined) return "";
+        if (pmsList != "") {
+            if (pmsList.indexOf(menuId) == -1) {
+                return;
+            }
+        }
+
+        var newMenu = '<li>\
+                            <button class="btn btn-link" id="' + menuId + '">\
+                            <span class="' + menuCss + '" aria-hidden="true"> </span> ' + menuName + '\
+                                </button>\
+                        </li>';
+
+        if (n) {
+            $("#MBList li:nth-child(" + n + ")").after(newMenu);
+        }
+        else {
+            $("#MBList").append(newMenu);
+        }
+
+
+
+        $("#" + menuId).click(function () {
+            menuFunc();
+        });
+    }
+    MenuBarFuncArr.AddDDLMenu = function (menuId, menuCss, menuName, menuFunc, n, listBar) {
+
+
+
+        var newMenu = '<li class="dropdown"> \
+                         <button id="'+ menuId + '" class="dropdown-toggle btn btn-link " data-toggle="dropdown" aria-expanded="false"><span class="' + menuCss + '" aria-hidden="true"></span> ' + menuName + ' <span class="caret"></span></button> \
+                         <ul class="dropdown-menu" role="menu">';
+
+
+        $.each(listBar, function (key, value) {
+            
+            if (pmsList != "") {
+                if (pmsList.indexOf(listBar[key].menuId) == -1) {
+
+                } else {
+                    newMenu += ' <li><button class="btn btn-link btn-list" id="' + listBar[key].menuId + '">\
+                            <span class="' + listBar[key].menuCss + '" aria-hidden="true"> </span> ' + listBar[key].menuName + '\
+                        </button></li>';
+                }
+            } else {
+                if (!(pmsList == "" || pmsList == null || pmsList == undefined)) {
+                    newMenu += ' <li><button class="btn btn-link btn-list" id="' + listBar[key].menuId + '">\
+                            <span class="' + listBar[key].menuCss + '" aria-hidden="true"> </span> ' + listBar[key].menuName + '\
+                        </button></li>';
+                }
+            }
+        });
+
+
+        newMenu += ' </ul> \
+                    </li>';
+
+
+        if (n) {
+            $("#MBList li:nth-child(" + n + ")").after(newMenu);
+        }
+        else {
+            $("#MBList").append(newMenu);
+        }
+
+
+        $.each(listBar, function (key, value) {
+
+            $("#" + listBar[key].menuId).click(function () {
+                listBar[key].menuFunc();
+            });
+        });
+
+
+
+    }
+    MenuBarFuncArr.DelMenu = function (menuIdArr) {
+
+        $.each(menuIdArr, function (key, value) {
+            $("#" + value).parent().addClass("nav-hidden");
+        });
+    }
+
+    MenuBarFuncArr.Disabled = function (menuIdArr) {
+
+        $.each(menuIdArr, function (key, value) {
+            $("#" + value).addClass("nav-disabled");
+            $("#" + value).prop("disabled", true);
+        });
+    }
+
+    MenuBarFuncArr.RemoveAllMenu = function () {
+
+        $("#navRoot").remove();
+    }
+
+
+    MenuBarFuncArr.Enabled = function (menuIdArr) {
+
+        $.each(menuIdArr, function (key, value) {
+            $("#" + value).removeClass("nav-disabled");
+            $("#" + value).prop("disabled", false);
+        });
+    }
+
+    MenuBarFuncArr.AddStatus = function () {
+        setdisabled(false);
+        //setToolBtnDisabled(false);
+        _editData = { __state: '1' };
+        StatusBarArr.nowStatus("@Resources.Locale.L_SYS_ADD");
+        //MenuBarFuncArr.Disabled(["MBAdd", "MBDel", "MBEdit", "MBCopy", "MBEdoc", "MBSearch", "MBApprove"]);
+        MenuBarFuncArr.DisableAllItem();
+        MenuBarFuncArr.Enabled(["MBCancel", "MBSave"]);
+        //setTimeout(function() { $("input:eq(0)").focus() }, 300);
+        MenuBarFuncArr.EndFunc();
+    }
+
+    MenuBarFuncArr.CancelStatus = function () {
+        //console.log(_dataSource);
+        setFieldValue(_dataSource || []);
+        setdisabled(true);
+        //setToolBtnDisabled(true);
+        StatusBarArr.nowStatus("@Resources.Locale.L_SYS_BROSWSE");
+        MenuBarFuncArr.Disabled(["MBSave", "MBCancel"]);
+        if (_dataSource.length == 0) {
+            MenuBarFuncArr.Enabled(["MBAdd", "MBSearch"]);
+        }
+        else {
+            MenuBarFuncArr.Enabled(["MBAdd", "MBEdit", "MBDel", "MBCopy", "MBEdoc", "MBSearch", "MBApprove", "MBInvalid", "MBSummary"]);
+        }
+    }
+
+    MenuBarFuncArr.SearchStatus = function () {
+        StatusBarArr.nowStatus("@Resources.Locale.L_SYS_SEARCH");
+        //setdisabled(true);
+        //setToolBtnDisabled(true);
+        MenuBarFuncArr.Disabled(["MBSave", "MBCancel"]);
+        MenuBarFuncArr.Enabled(["MBDel", "MBEdit", "MBCopy", "MBEdoc", "MBApprove"]);
+
+    }
+
+    MenuBarFuncArr.DelStatus = function (result) {
+        if (!result && typeof result != "undefined") {
+            StatusBarArr.nowStatus("@Resources.Locale.L_SYS_FAIL")
+        } else {
+            StatusBarArr.nowStatus("@Resources.Locale.L_SYS_SUCCESS");
+            MenuBarFuncArr.Disabled(["MBSave", "MBCancel", "MBEdit", "MBCopy", "MBDel", "MBEdoc", "MBApprove", "MBInvalid"]);
+        }
+
+    }
+
+    MenuBarFuncArr.EditStatus = function (result) {
+        setdisabled(false, true);
+        //setToolBtnDisabled(false);
+        //_editData = { __state: '2' };
+        if (typeof (_editData) == "undefined") {
+            _editData = { __state: '2' };
+        } else {
+            _editData["__state"] = 2;
+        }
+        if (!result && typeof result != "undefined") {
+            StatusBarArr.nowStatus("@Resources.Locale.L_SYS_FAIL");
+        } else {
+            StatusBarArr.nowStatus("@Resources.Locale.L_SYS_EDIT");
+            //MenuBarFuncArr.Disabled(["MBAdd", "MBDel", "MBEdit", "MBCopy", "MBEdoc", "MBApprove","MBSearch"]);
+            MenuBarFuncArr.DisableAllItem();
+            MenuBarFuncArr.Enabled(["MBCancel", "MBSave"]);
+            //setTimeout(function() { $("input:eq(0)").focus() }, 0);
+        }
+
+        MenuBarFuncArr.EndFunc();
+    }
+
+    MenuBarFuncArr.EndFunc = function () {
+
+    }
+
+    MenuBarFuncArr.DisableAllItem = function () {
+        $(".btn-link").not(".btn-list").each(function () {
+            $(this).removeClass("nav-disabled");
+            $(this).prop("disabled", true);
+        });
+    }
+    MenuBarFuncArr.EnableAllItem = function () {
+        $(".btn-link").each(function () {
+            console.log($(this));
+            $(this).removeClass("nav-disabled");
+            $(this).prop("disabled", true);
+        });
+    }
+
+    MenuBarFuncArr.initEdoc = function (jobNo, groupId, cmp, stn, multiData, callBackFunc, sendMail) {
+
+        MenuBarFuncArr.MBEdoc = function (thisItem) {
+            initEdoc(thisItem, { jobNo: jobNo, 'GROUP_ID': groupId, 'CMP': cmp, 'STN': stn }, multiData, callBackFunc , sendMail);
+        }
+        MenuBarFuncArr.MBEdoc($("#MBEdoc"));
+    }
+
+    MenuBarFuncArr.initEdocCus = function (jobNo, groupId, cmp, stn, atd, multiData, callBackFunc, sendMail) {
+
+        MenuBarFuncArr.MBEdoc = function (thisItem) {
+            initEdoc(thisItem, { jobNo: jobNo, 'GROUP_ID': groupId, 'CMP': cmp, 'STN': stn, 'atd': atd }, multiData, callBackFunc, sendMail);
+        }
+        MenuBarFuncArr.MBEdoc($("#MBEdoc"));
+    }
+
+
+    MenuBarFuncArr.initEapprove = function (approveCode, RefNo) {
+
+        MenuBarFuncArr.MBApprove = function (thisItem) {
+            initEapprove(thisItem, { RefNo: RefNo, 'GROUP_ID': groupId, 'CMP': cmp, 'STN': stn, 'approveCode': approveCode });
+        }
+
+        MenuBarFuncArr.MBApprove($("#MBApprove"));
+    }
+
+    MenuBarFuncArr.initErrMsg = function (UId, JobNo) {
+
+        MenuBarFuncArr.MBErrMsg = function (thisItem) {
+            initErrMsg(thisItem, { 'GROUP_ID': groupId, 'CMP': cmp, 'STN': stn, 'UId': UId, 'JobNo': JobNo });
+        }
+
+        MenuBarFuncArr.MBErrMsg($("#MBErrMsg"));
+    }
+
+    MenuBarFuncArr.MBBeforeSave = function (dtd) {
+        if (checkNoAllowNullFields() == false) {
+            MenuBarFuncArr.SaveResult = false;
+            dtd.resolve();
+            return false;
+        }
+        MenuBarFuncArr.SaveResult = true;
+        dtd.resolve();
+        return dtd.promise();
+    }
+
+
+
+    function initMenuBar(MenuBarFuncArr) {
+        //起始時整個畫面鎖定
+        setdisabled(true);
+        //为toolbar绑定事件
+        $("#MBAdd").click(function () {
+            var className = $(this).attr('class');
+            if (className == "nav-disabled") {
+                return false;
+            }
+            setFieldValue(undefined, "");
+            MenuBarFuncArr.MBAdd();
+            MenuBarFuncArr.AddStatus();
+            $("#wrapper").focusFirst();
+        });
+        $("#MBCancel").click(function () {
+            var className = $(this).attr('class');
+            if (className == "nav-disabled") {
+                return false;
+            }
+            MenuBarFuncArr.MBCancel();
+            MenuBarFuncArr.CancelStatus();
+        });
+        MenuBarFuncArr.MBSearch($("#MBSearch"));
+        MenuBarFuncArr.MBEdoc($("#MBEdoc"));
+
+        MenuBarFuncArr.MBCostInfo($("#MBCostInfo"));
+        $("#MBSearch").click(function () {
+            MenuBarFuncArr.SearchStatus();
+        });
+        $("#MBEdoc").click(function () {
+            StatusBarArr.nowStatus("@Resources.Locale.L_SYS_EDOC");
+        });
+        $("#MBApprove").click(function () {
+            StatusBarArr.nowStatus("@Resources.Locale.L_SYS_APPROVE");
+        });
+        $("#MBCostInfo").click(function () {
+            location.href = rootPath + "CostInfo/ShowCostInfo";
+        });
+
+        $("#MBDel").click(function () {
+            var className = $(this).attr('class');
+            if (className == "nav-disabled") {
+                return false;
+            }
+            if (!confirm("@Resources.Locale.M_SYS_CLEARDATA")) {
+                return;
+            }
+            _editData = { __state: '0' };
+            StatusBarArr.nowStatus("@Resources.Locale.M_SYS_DOCLEARDATA");
+            var result = MenuBarFuncArr.MBDel();
+            MenuBarFuncArr.DelStatus(result);
+
+        });
+        $("#MBEdit").click(function () {
+            var className = $(this).attr('class');
+            if (className == "nav-disabled") {
+                return false;
+            }
+
+            _editData = _dataSource[0];
+
+            var result = MenuBarFuncArr.MBEdit();
+            MenuBarFuncArr.EditStatus(result);
+            $("#wrapper").focusFirst();
+
+        });
+        $("#MBCopy").click(function () {
+            var className = $(this).attr('class');
+            if (className == "nav-disabled") {
+                return false;
+            }
+            //setFieldValue(undefined, "");
+            MenuBarFuncArr.MBCopy();
+            MenuBarFuncArr.AddStatus();
+        });
+
+        $("#MBSave").click(function () {
+            CommonFunc.ToogleLoading(true);
+            if (checkInvalid()) {
+                CommonFunc.ToogleLoading(false);
+                return false;
+            }
+            var className = $(this).attr('class');
+            if (className == "nav-disabled") {
+                CommonFunc.ToogleLoading(false);
+                return false;
+            }
+            setTimeout(function () {
+
+                $.Deferred(MenuBarFuncArr.MBBeforeSave).done(function () {
+                    if (!MenuBarFuncArr.SaveResult) {
+                        CommonFunc.ToogleLoading(false);
+                        return false;
+                    }
+                    var colMsgValText = $("#colMsgVal").text();
+                    if (colMsgValText == "Processing...") {
+                        alert("Other Task Processing,Wait a moment!");
+                        CommonFunc.ToogleLoading(false);
+                        return false;
+                    }
+                    
+                    StatusBarArr.nowStatus("@Resources.Locale.M_SYS_DOSAVEDATA");
+
+                    $.Deferred(MenuBarFuncArr.MBSave).done(function () {
+
+                        if (MenuBarFuncArr.SaveResult) {
+                            StatusBarArr.nowStatus("@Resources.Locale.L_SYS_SUCCESS");
+                            MenuBarFuncArr.Disabled(["MBSave", "MBCancel"]);
+                            MenuBarFuncArr.Enabled(["MBAdd", "MBEdit", "MBCopy", "MBApprove", "MBSearch", "MBDel", "MBSummary"]);
+                        } else {
+                            StatusBarArr.nowStatus("@Resources.Locale.L_SYS_FAIL");
+
+                        }
+                        CommonFunc.ToogleLoading(false);
+                    }).fail(function () {
+
+                        StatusBarArr.nowStatus("@Resources.Locale.L_SYS_FAIL");
+                        CommonFunc.ToogleLoading(false);
+                    });
+
+                });
+            }, 500);
+        });
+        $("#MBApply").click(function () {
+            StatusBarArr.nowStatus("@Resources.Locale.L_SYS_APPLY");
+            MenuBarFuncArr.MBApply();
+        });
+
+        $("#MBInvalid").click(function () {
+            StatusBarArr.nowStatus("@Resources.Locale.L_SYS_INVALID");
+            MenuBarFuncArr.MBInvalid();
+        });
+        MenuBarFuncArr.Disabled(["MBCancel", "MBSave", "MBDel", "MBEdit", "MBCopy", "MBEdoc", "MBApprove", "MBInvalid"]);
+
+
+        if (pmsList != "") {
+            var pmsBtns = $("#navbar button");
+            //alert(pmsList);
+            $.each(pmsBtns, function (index, value) {
+
+                if (pmsList.toUpperCase().indexOf($(pmsBtns[index]).prop("id").toUpperCase()) == -1) {
+                    if ($(pmsBtns[index]).attr("id") != "MBCancel" && $(pmsBtns[index]).attr("id") != "MBSave")
+                        $(pmsBtns[index]).parent("li").remove();
+
+                }
+
+            });
+        }
+
+
+    }
+
+</script>

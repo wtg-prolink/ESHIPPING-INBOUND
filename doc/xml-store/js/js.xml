@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<config>
+ <!-- 以下是SQL2000版本的
+  <CUSTOM>
+var flag=false;
+if (condition==null || condition=="") flag=true;
+var result={};
+result.table="CUSTOM";
+var columns="NAME,CUSTOM_NO,ADDR,TAX_NO,CITY,COUNTRY,CNAME,CADDR,CUSTOM_TYPE";
+var telCondition="";
+if (orderColumn!="TEL")
+{
+	columns+=",(select top 1 TEL from AEMPK where CUSTOM_NO=CUSTOM.CUSTOM_NO and TEL is not null and TEL&lt;&gt;'' ) as TEL";
+	condition+=getFieldSQLCondition(orderColumn,fromValue,toValue,flag);
+} else {
+	telCondition=getFieldSQLCondition(orderColumn,fromValue,toValue,false);
+	columns+=",(select top 1 TEL from AEMPK where CUSTOM_NO=CUSTOM.CUSTOM_NO "+telCondition+") as TEL";
+	if (flag==false) condition+=" and ";
+	condition+=" (select count(*) from AEMPK where CUSTOM_NO=CUSTOM.CUSTOM_NO "+telCondition+")&gt;0 ";
+}
+result.columns=columns;
+result.condition=condition;
+return result;
+  </CUSTOM>
+-->
+  <!-- 以下是Oracle版本的-->
+    <CUSTOM>
+      var flag=false;
+      if (condition==null || condition=="") flag=true;
+      var result={};
+      result.table="CUSTOM";
+      var columns="NAME,CUSTOM_NO,ADDR,TAX_NO,CITY,COUNTRY,CNAME,CADDR,CUSTOM_TYPE,STATION";
+      var telCondition="";
+      if (orderColumn!="TEL")
+      {
+      columns+=",(select TEL from AEMPK where CUSTOM_NO=CUSTOM.CUSTOM_NO and TEL is not null and ROWNUM&lt;=1) as TEL";
+	condition+=getFieldSQLCondition(orderColumn,fromValue,toValue,flag);
+} else {
+	telCondition=getFieldSQLCondition(orderColumn,fromValue,toValue,false);
+	columns+=",(select TEL from AEMPK where CUSTOM_NO=CUSTOM.CUSTOM_NO "+telCondition+" and ROWNUM&lt;=1) as TEL";
+	if (flag==false) condition+=" and ";
+	condition+=" (select count(*) from AEMPK where CUSTOM_NO=CUSTOM.CUSTOM_NO "+telCondition+")&gt;0 ";
+}
+result.columns=columns;
+result.condition=condition;
+return result;
+  </CUSTOM>
+</config>

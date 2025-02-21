@@ -1,0 +1,283 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>TPV Global Logistics Platform --- @ViewBag.SYS_TITLE- @ViewBag.SYS_VERSION</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="@Url.Content("~/Scripts/Core/bui/css/dpl-min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Scripts/Core/bui/css//bui-min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Scripts/Core/bui/css/bootstrap.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Scripts/Core/bui/css/main.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Scripts/css/lib/animate.min.css")" rel="stylesheet">
+    </head>
+    <body>
+    <div class="header">
+        <div class="dl-title">
+            <a href="@Url.Content("~/")" title="@ViewBag.SYS_TITLE" target="_blank">
+                <img src="@Url.Content("~/Images/sd_logo_2.png")" style="height:22px" title="@ViewBag.SYS_TITLE"><span class="lp-title-port" style="margin-left:5px;">@ViewBag.SYS_TITLE</span>
+            </a>
+        </div>
+        <div class="dl-log">
+            <span class="btn btn-xs btn-success"><i class="glyphicon glyphicon-user"></i>&nbsp;Hi, (@ViewBag.companyId)@ViewBag.UserCode</span>
+            <button class="btn btn-xs btn-primary msg" type="button" id="btnMessage"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Messages <span class="badge"></span></button>
+            <button type="button" onclick="logout()" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</button>
+        </div>
+    </div>
+         
+    <div class="content">
+        <div class="dl-main-nav">
+            <div class="dl-inform"><div class="dl-inform-title">贴心小秘书<s class="dl-inform-icon dl-up"></s></div></div>
+            <ul id="J_Nav"  class="nav-list ks-clear">
+                <!--<li class="nav-item dl-selected"><div class="nav-item-inner nav-home">首页</div></li>-->
+            </ul>
+        </div>
+        <ul id="J_NavContent" class="dl-tab-conten"></ul>
+    </div>
+
+    <div class="footer-bar">
+        <div class="STATUS-AREA STATUS-USER" style="width: 15%;">用户：<span></span></div>
+        <div class="PIPE"></div>
+        <div class="STATUS-AREA STATUS-TIP" style="width: 30%;">消息提示：<span></span></div>
+        <div class="PIPE"></div>
+        <div class="STATUS-AREA STATUS-MSG" style="width: 15%; ">栏位信息：</div>
+        <div class="PIPE"></div>
+        <div class="STATUS-AREA STATUS-NOW" style="width: 15%;">状态：<span></span></div>
+        
+        <div class="PIPE"></div>
+    </div>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/lib/jquery-1.11.1.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/bui.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/lib//jquery.timer.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/footer.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/config.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap-notify.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/lib/handlebars.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/common.js")"></script>
+    @Html.RazorJSInclude("~/Scripts/BaseLookup.js")
+    <style>
+    body, html{
+        font-family: Arial, 'Microsoft JhengHei', 'Heiti TC', '新細明體', sans-serif !important; 
+        font-size: 14px;
+    }
+    [data-notify="progressbar"] {
+        margin-bottom: 0px;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        height: 5px; 
+    }
+    .alert-info{cursor: pointer !important;}
+    </style>
+    <script>
+    var config, tempNav, newData = new Array();
+    var navData = new Array();
+    var rootPath = "";
+    var lang = "@ViewBag.Lang"+"/";
+    /*if (document.location && document.location.pathname && document.location.pathname.toLowerCase) {
+        var hostpath = document.location.pathname.toLowerCase();
+        if (hostpath.indexOf('/zh-tw/') > -1)
+            lang = 'zh-TW/';
+        else if (hostpath.indexOf('/zh-cn/') > -1)
+            lang = 'zh-CN/';
+        else if (hostpath.indexOf('/en-us/') > -1)
+            lang = 'en-US/';
+    }*/
+    
+    rootPath = "@Url.Content("~")" + lang;
+
+
+    BUI.use('common/main', function () {
+        $.ajax({
+            url: '@Url.Content("~/zh-CN/Common/Menu")',
+                type: 'POST',
+                dataType: "text",
+                crossDomain: true
+            })
+            .done(function (data) {
+                //var Base64 = { _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) { var t = ""; var n, r, i, s, o, u, a; var f = 0; e = Base64._utf8_encode(e); while (f < e.length) { n = e.charCodeAt(f++); r = e.charCodeAt(f++); i = e.charCodeAt(f++); s = n >> 2; o = (n & 3) << 4 | r >> 4; u = (r & 15) << 2 | i >> 6; a = i & 63; if (isNaN(r)) { u = a = 64 } else if (isNaN(i)) { a = 64 } t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a) } return t }, decode: function (e) { var t = ""; var n, r, i; var s, o, u, a; var f = 0; e = e.replace(/[^A-Za-z0-9\+\/\=]/g, ""); while (f < e.length) { s = this._keyStr.indexOf(e.charAt(f++)); o = this._keyStr.indexOf(e.charAt(f++)); u = this._keyStr.indexOf(e.charAt(f++)); a = this._keyStr.indexOf(e.charAt(f++)); n = s << 2 | o >> 4; r = (o & 15) << 4 | u >> 2; i = (u & 3) << 6 | a; t = t + String.fromCharCode(n); if (u != 64) { t = t + String.fromCharCode(r) } if (a != 64) { t = t + String.fromCharCode(i) } } t = Base64._utf8_decode(t); return t }, _utf8_encode: function (e) { e = e.replace(/\r\n/g, "\n"); var t = ""; for (var n = 0; n < e.length; n++) { var r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r) } else if (r > 127 && r < 2048) { t += String.fromCharCode(r >> 6 | 192); t += String.fromCharCode(r & 63 | 128) } else { t += String.fromCharCode(r >> 12 | 224); t += String.fromCharCode(r >> 6 & 63 | 128); t += String.fromCharCode(r & 63 | 128) } } return t }, _utf8_decode: function (e) { var t = ""; var n = 0; var r = c1 = c2 = 0; while (n < e.length) { r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r); n++ } else if (r > 191 && r < 224) { c2 = e.charCodeAt(n + 1); t += String.fromCharCode((r & 31) << 6 | c2 & 63); n += 2 } else { c2 = e.charCodeAt(n + 1); c3 = e.charCodeAt(n + 2); t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63); n += 3 } } return t } }
+
+                // Decode the String
+                //data = jQuery.parseJSON(Base64.decode(data));
+                data = jQuery.parseJSON(data);
+                //data[0].menu = data;
+                //console.log(data);
+                var oldText = "";
+                var oldIndex = 0;
+                var navCount = 0;
+
+                $.each(data[0].menu, function (index, value) {
+                    var temp, temp1 = "";
+                    var text;
+                    var i = index;
+                    text = data[0].menu[i].text.split('@@');
+                    if (typeof text[1] != "undefined") {
+                        if ($.isArray(navData[i]) == false) {
+                            if (text[1] == oldText) {
+                                data[0].menu[i].text = text[0];
+                                navData[oldIndex].menu.push(data[0].menu[i]);
+                            } else {
+                                if ($.isPlainObject(navData[i]) == false) {
+                                    navData[navCount] = new Object();
+                                    navData[navCount].text = text[1];
+                                    navData[navCount].id = text[1];
+                                    navData[navCount].menu = new Array();
+                                    data[0].menu[i].text = text[0];
+
+                                }
+                                navData[navCount].menu.push(data[0].menu[i]);
+                                oldText = text[1];
+                                oldIndex = navCount;
+                                navCount++;
+                            }
+
+
+                        }
+                    }
+
+                });
+
+                $.each(navData, function (index, value) {
+                    var j = index;
+
+                    newData[j] = new Object();
+
+                    newData[j].id = navData[j].id;
+                    newData[j].text = navData[j].text;
+                    if ($.isArray(newData[j].menu) == false) {
+                        newData[j].menu = new Array();
+                        newData[j].menu = navData[j].menu;
+
+                        for (var k = 0; k < newData[j].menu.length; k++) {
+                            for (var f = 0; f < newData[j].menu[k].items.length; f++) {
+                                newData[j].menu[k].items[f].href = rootPath + newData[j].menu[k].items[f].href;
+                            }
+                        }
+                    }
+                });
+
+                var str = "";
+                $.each(navData, function (index, value) {
+                    str += '<li class="nav-item"><div class="nav-item-inner">' + newData[index].text + '</div></li>';
+                });
+
+                $("#J_Nav").append(str);
+
+                newData[0].homePage = newData[0].menu[0].items[0].href.id;
+                newData[0].homePage = "DHBULLETIN";
+                new PageUtil.MainPage({
+                    modulesConfig: newData
+                });
+            })
+            .fail(function (xhr, status, error) {
+                alert("无权限访问此页");
+                location.href = '@Url.Content("~/zh-CN/Home/LoginOut")';
+        });
+
+
+    });
+
+    function logout() {
+
+        location.href = rootPath + "Home/LoginOut";
+
+
+    }
+
+
+
+    $(document).ready(function ($) {
+        var userCode = '@ViewBag.userCode';
+        StatusBarArr.userName(userCode);
+        //$(".dl-second-nav").height($(window).height() - 105);
+        $(window).resize(function (event) {
+            //$(".bui-side-menu").height($(window).height() - 105);
+            //
+            //$(".dl-second-nav").height($(window).height());
+            //$(".tab-content-container").height($(window).height() - 125);
+            //$(".bui-nav-tab").height($(window).height() - 125);
+
+        });
+
+        $("#btnMessage").click(function () {
+
+            top.topManager.openPage({
+                href: rootPath + "Common/Message",
+                title: 'MESSAGE',
+                id: 'MESSAGE'
+            });
+
+
+        });
+
+        $(document).on("click", ".alert-info", function () {
+            //console.log($(".alert-info").attr("msgID"));
+            top.topManager.openPage({
+                href: rootPath + "Common/Message/" + $(".alert-info").attr("msgID"),
+                search: "msgid=" + $(".alert-info").attr("msgID"),
+                title: 'MESSAGE',
+                id: 'MESSAGE'
+            });
+
+        });
+
+        $(document).on("click", ".bui-nav-tab-item", function () {
+            //alert($(".tab-content[style='display: block;']").find("iframe").attr("src"));
+            var thisSrc = $(".tab-content[style='display: block;']").find("iframe").attr("src");
+            var thisContent = $("iframe[src$='" + thisSrc + "']").contents();
+            //console.log($("iframe[src$='" + thisSrc + "']").contents());
+
+            StatusBarArr.msgTip(thisContent.find("#msgTipVal").text());
+            StatusBarArr.colMsg(thisContent.find("#colMsgVal").text());
+            StatusBarArr.nowStatus(thisContent.find("#nowStatusVal").text());
+        });
+        $(document).on("click", ".bui-menu-item a", function () {
+
+            StatusBarArr.msgTip("");
+            StatusBarArr.colMsg("");
+            StatusBarArr.nowStatus("");
+        });
+
+
+    });
+
+    var timer = $.timer(
+    function () {
+        $.ajax({
+            type: "post",
+            url: rootPath + "Common/GetMessageKeep",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                //console.log(data.rows);
+                if (typeof (data.rows[0]) === 'object') {
+                    var title = data.rows[0].Title;
+                    var content = data.rows[0].Content;
+                    var msgid = data.rows[0].MsgId;
+
+                    CommonFunc.IndexNotify(title, content, 5000, "info");
+                    $(".alert-info").attr("msgID", msgid);
+                    var count = parseInt($(window.top.document).find(".badge").text());
+                    $(window.top.document).find(".badge").text(count + 1);
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+
+    },
+    3000000,
+    true
+);
+
+    </script>
+    </body>
+</html>

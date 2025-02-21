@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://ws.wct.com/" targetNamespace="http://ws.wct.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Exception" type="tns:Exception" />
+  <xs:element name="ack" type="tns:ack" />
+  <xs:element name="ackResponse" type="tns:ackResponse" />
+  <xs:element name="dnAck" type="tns:dnAck" />
+  <xs:element name="dnContent" type="tns:dnContent" />
+  <xs:element name="dnMessage" type="tns:dnMessage" />
+  <xs:element name="get" type="tns:get" />
+  <xs:element name="getResponse" type="tns:getResponse" />
+  <xs:element name="set" type="tns:set" />
+  <xs:element name="setResponse" type="tns:setResponse" />
+  <xs:complexType name="set">
+    <xs:sequence>
+      <xs:element name="dc_id" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dn_content" type="tns:dnContent" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dnContent">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="delivery_no" type="xs:string" />
+      <xs:element minOccurs="0" name="ship_from" type="xs:string" />
+      <xs:element minOccurs="0" name="ship_to" type="xs:string" />
+      <xs:element minOccurs="0" name="ship_way" type="xs:string" />
+      <xs:element minOccurs="0" name="condition" type="xs:string" />
+      <xs:element minOccurs="0" name="shipper" type="xs:string" />
+      <xs:element minOccurs="0" name="forwarder" type="xs:string" />
+      <xs:element minOccurs="0" name="incoterm" type="xs:string" />
+      <xs:element minOccurs="0" name="ems_vendor_site_code" type="xs:string" />
+      <xs:element minOccurs="0" name="bill_to" type="xs:string" />
+      <xs:element minOccurs="0" name="ship_to_customer" type="xs:string" />
+      <xs:element minOccurs="0" name="ship_to_location" type="xs:string" />
+      <xs:element minOccurs="0" name="so_line" type="xs:string" />
+      <xs:element minOccurs="0" name="customer_po" type="xs:string" />
+      <xs:element minOccurs="0" name="shipment_priority" type="xs:string" />
+      <xs:element minOccurs="0" name="product_type" type="xs:string" />
+      <xs:element minOccurs="0" name="model_name" type="xs:string" />
+      <xs:element minOccurs="0" name="sa" type="xs:string" />
+      <xs:element minOccurs="0" name="mawb" type="xs:string" />
+      <xs:element minOccurs="0" name="hawb" type="xs:string" />
+      <xs:element minOccurs="0" name="vessel" type="xs:string" />
+      <xs:element minOccurs="0" name="container_no" type="xs:string" />
+      <xs:element minOccurs="0" name="container_type" type="xs:string" />
+      <xs:element minOccurs="0" name="container_size" type="xs:string" />
+      <xs:element minOccurs="0" name="pcs" type="xs:int" />
+      <xs:element minOccurs="0" name="pallet" type="xs:int" />
+      <xs:element minOccurs="0" name="carton" type="xs:int" />
+      <xs:element minOccurs="0" name="chargable_weight" type="xs:double" />
+      <xs:element minOccurs="0" name="gross_weight" type="xs:double" />
+      <xs:element minOccurs="0" name="volume_weight" type="xs:double" />
+      <xs:element minOccurs="0" name="to_cd" type="xs:string" />
+      <xs:element minOccurs="0" name="transfer_date" type="xs:string" />
+      <xs:element minOccurs="0" name="crad" type="xs:string" />
+      <xs:element minOccurs="0" name="ship_confirm_date" type="xs:string" />
+      <xs:element minOccurs="0" name="ex_factory_date" type="xs:string" />
+      <xs:element minOccurs="0" name="pickup_date" type="xs:string" />
+      <xs:element minOccurs="0" name="telex_released" type="xs:string" />
+      <xs:element minOccurs="0" name="telex_released_date" type="xs:string" />
+      <xs:element minOccurs="0" name="etd" type="xs:string" />
+      <xs:element minOccurs="0" name="atd" type="xs:string" />
+      <xs:element minOccurs="0" name="eta" type="xs:string" />
+      <xs:element minOccurs="0" name="ata" type="xs:string" />
+      <xs:element minOccurs="0" name="customs_declaration_date" type="xs:string" />
+      <xs:element minOccurs="0" name="customs_clearance_date" type="xs:string" />
+      <xs:element minOccurs="0" name="nldc_in_date" type="xs:string" />
+      <xs:element minOccurs="0" name="nldc_expected_out_date" type="xs:string" />
+      <xs:element minOccurs="0" name="nldc_out_date" type="xs:string" />
+      <xs:element minOccurs="0" name="slot_date" type="xs:string" />
+      <xs:element minOccurs="0" name="requested_cdc_in_date" type="xs:string" />
+      <xs:element minOccurs="0" name="cdc_in_date" type="xs:string" />
+      <xs:element minOccurs="0" name="cdc_expected_out_date" type="xs:string" />
+      <xs:element minOccurs="0" name="cdc_out_date" type="xs:string" />
+      <xs:element minOccurs="0" name="pod_date" type="xs:string" />
+      <xs:element minOccurs="0" name="event_id" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="setResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dn_message" type="tns:dnMessage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dnMessage">
+    <xs:sequence>
+      <xs:element name="delivery_no" type="xs:string" />
+      <xs:element name="error_code" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="error_messages" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ack">
+    <xs:sequence>
+      <xs:element name="dc_id" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dn_ack" type="tns:dnAck" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dnAck">
+    <xs:sequence>
+      <xs:element name="delivery_no" type="xs:string" />
+      <xs:element minOccurs="0" name="event_id" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ackResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="get">
+    <xs:sequence>
+      <xs:element name="dc_id" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dn_content" type="tns:dnContent" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

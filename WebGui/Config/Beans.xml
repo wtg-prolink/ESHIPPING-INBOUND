@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <!--公司類,沒設置時默認Prolink.V6.Core.DefaultCompany。此類必須為Prolink.V6.Core.Company的派生類且有public CLASS_NAME(string company,string station)構造函數-->
+  <company class="Prolink.V6.Core.DefaultCompany" />
+  
+  <!--用戶類,沒設置時默認Prolink.V6.Core.User。此類必須為Prolink.V6.Core.User的派生類-->
+  <user class="Prolink.ITMS.Default.MyUser" />
+  
+  <!--獲取菜單文件名的類,沒設置時默認Prolink.V6.Core.DefaultFileGetter。此類必須實現為Prolink.V6.Core.FileGetter-->
+  <fileGetter class="Prolink.V6.Core.DefaultFileGetter" />
+
+  <company-list>
+    <company class="Prolink.V6.Core.DefaultCompany" id="PL" poolType="" poolName="" caption="">
+      <user class="Prolink.V6.Core.User" />
+    </company>
+    <company class="Prolink.V6.Core.DefaultCompany" id="PLTPE" poolType="" poolName="" caption="">
+      <user class="Prolink.V6.Core.User" />
+    </company>
+  </company-list>
+</beans>

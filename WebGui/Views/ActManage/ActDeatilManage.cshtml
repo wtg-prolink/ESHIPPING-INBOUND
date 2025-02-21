@@ -1,0 +1,536 @@
+﻿@{
+ViewBag.Title = "@Resources.Locale.L_ActDeatilManage_Views_42";
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/ActManage/ActModle.js")"></script>
+
+<script type="text/javascript">
+	var select_tranmode = ":;" + "@ViewBag.SelectTranMode";
+	var select_location = "@ViewBag.SelectLocation";
+
+	$(document).ready(function ($) {
+		var gop = {};
+		var numberTemplate = "2";
+		var docHeight = $(document).height();
+		gridHeight = docHeight - 230;
+        gop.gridColModel = [
+            { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, editable: false, hidden: true },
+            { name: 'Cmp', title: '@Resources.Locale.L_SeaTransport_Location', index: 'Cmp', sorttype: 'string', width: 120, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_location } },
+            { name: 'TranType', init: true, title: '@Resources.Locale.L_TKBLQuery_TranType', index: 'TranType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_tranmode } },
+            { name: 'ApproveStatus', title: '@Resources.Locale.L_ActManage_ApproveStatus', index: 'ApproveStatus', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: 'Using Code:Y:@Resources.Locale.L_Pass;N:@Resources.Locale.L_ActDeatilManage_Views_46;E:@Resources.Locale.L_ActDeatilManage_Views_47; EX:Y;;N', editoptions: { value: 'Y:@Resources.Locale.L_Pass;N:@Resources.Locale.L_ActDeatilManage_Views_46;E:@Resources.Locale.L_ActDeatilManage_Views_47;:' } },
+            { name: 'Status', title: '@Resources.Locale.L_ActDeatilManage_Views_48', index: 'Status', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'Y:@Resources.Locale.L_ActCheck_Views_3;N:@Resources.Locale.L_ActDeatilManage_Views_49' } },
+            { name: 'Fstatus', title: '@Resources.Locale.L_ActDeatilManage_Views_50', index: 'Fstatus', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:@Resources.Locale.L_DNManage_NotDownload;B:@Resources.Locale.L_DNManage_Dled;C:@Resources.Locale.L_DNManage_Uled;D:@Resources.Locale.L_DNManage_Bled' } },
+            { name: 'CheckDescp', title: '@Resources.Locale.L_ActDeatilManage_Views_51', index: 'CheckDescp', sorttype: 'string', width: 150, hidden: false, classes: "normal-white-space", editable: true },
+            { name: 'UnapproveDescp', title: '@Resources.Locale.L_ActDeatilManage_Views_52', index: 'UnapproveDescp', sorttype: 'string', width: 150, hidden: false, classes: "normal-white-space", editable: true },
+
+            { name: 'DebitDate', title: '@Resources.Locale.L_BaseLookup_DebitDate', index: 'DebitDate', sorttype: 'string', width: 100, editable: false, hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'ShipmentId', title: 'Shipment ID', index: 'ShipmentId', sorttype: 'string', width: 100, editable: false, hidden: false },
+            { name: 'DebitTo', title: 'Debit To', index: 'DebitTo', sorttype: 'string', width: 85, hidden: false, editable: false },
+            { name: 'DebitNm', title: 'Debit To Name', index: 'DebitNm', sorttype: 'string', width: 180, hidden: false, editable: false },
+            { name: 'LspNo', title: '@Resources.Locale.L_AirQuery_LspCd', index: 'LspNo', sorttype: 'string', width: 100, editable: false, hidden: false },
+            { name: 'LspNm', title: '@Resources.Locale.L_ActDeatilManage_Views_54', index: 'LspNm', sorttype: 'string', width: 100, editable: false, hidden: false },
+            { name: 'BlNo', title: '@Resources.Locale.L_ActCheck_Views_13', index: 'BlNo', sorttype: 'string', width: 120, hidden: false, editable: true },
+            { name: 'RfqNo', title: '@Resources.Locale.L_ActDeatilManage_Views_55', index: 'RfqNo', sorttype: 'string', width: 100, editable: true, hidden: false },
+            { name: 'DebitNo', title: '@Resources.Locale.L_ActQuery_DebitNo', index: 'DebitNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TpvDebitNo', title: '@Resources.Locale.L_ActQuery_TpvDebitNo', index: 'TpvDebitNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'QuotNo', title: '@Resources.Locale.L_ActDeatilManage_Views_56', index: 'QuotNo', sorttype: 'string', width: 100, editable: true, hidden: false },
+            { name: 'ChgCd', title: '@Resources.Locale.L_ActCheckSetup_Views_36', index: 'ChgCd', sorttype: 'string', width: 80, editable: true, hidden: false },
+            { name: 'ChgDescp', title: '@Resources.Locale.L_ActDeatilManage_Views_57', index: 'ChgDescp', sorttype: 'string', width: 120, editable: true, hidden: false },
+            { name: 'ChgType', title: '@Resources.Locale.L_ActDeatilManage_Views_58', index: 'ChgType', sorttype: 'string', width: 100, hidden: false, editable: true, formatter: "select", editoptions: { value: 'F:F.Freight Charge;O:O.Original Fee;D:D.Destination Fee' }, edittype: 'select' },
+            { name: 'Qcur', title: '@Resources.Locale.L_ActDeatilManage_Views_59', index: 'Qcur', sorttype: 'string', width: 80, hidden: false, editable: true },
+            { name: 'QchgUnit', title: '@Resources.Locale.L_ActDeatilManage_Views_60', index: 'QchgUnit', sorttype: 'string', width: 80, hidden: false, editable: true },
+            {
+                name: 'QunitPrice', title: '@Resources.Locale.L_ActDeatilManage_Views_61', index: 'QunitPrice',
+                width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, sorttype: 'float',
+                hidden: false, editable: true
+            },
+            { name: 'Qqty', title: '@Resources.Locale.L_ActDeatilManage_Views_62', index: 'Qqty', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, sorttype: 'string', width: 100, hidden: false, editable: true },
+            { name: 'Qamt', title: '@Resources.Locale.L_ActCheck_Views_10', index: 'Qamt', sorttype: 'string', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, width: 100, editable: true },
+            {
+                name: 'QexRate', title: '@Resources.Locale.L_ActCheck_QexRate', index: 'QexRate',
+                width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, sorttype: 'float',
+                hidden: false, editable: true
+            },
+            { name: 'Qlamt', title: '@Resources.Locale.L_ActDeatilManage_Views_63', index: 'Qlamt', sorttype: 'string', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000', editable: true }, width: 100, editable: true },
+            { name: 'Qtax', title: '@Resources.Locale.L_ActDeatilManage_Views_64', index: 'Qtax', sorttype: 'float', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, width: 80, hidden: false, editable: true },
+            { name: 'Cur', title: '@Resources.Locale.L_ActQuery_Cur', index: 'Cur', sorttype: 'string', width: 80, hidden: false, editable: true },
+            {
+                name: 'UnitPrice', title: '@Resources.Locale.L_ActDeatilManage_Views_65', index: 'UnitPrice',
+                width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, sorttype: 'float',
+                hidden: false, editable: true
+            },
+            { name: 'ChgUnit', title: '@Resources.Locale.L_ActDeatilManage_Views_66', index: 'ChgUnit', sorttype: 'string', width: 80, hidden: false, editable: true },
+            { name: 'Qty', title: '@Resources.Locale.L_ActCheck_Views_15', index: 'Qty', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000', editable: true }, sorttype: 'string', width: 100, hidden: false },
+            { name: 'Bamt', title: '@Resources.Locale.L_ActSetup_Amt', index: 'Bamt', sorttype: 'string', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, width: 100, editable: true },
+            {
+                name: 'ExRate', title: '@Resources.Locale.L_ActCheck_Views_19', index: 'ExRate',
+                width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, sorttype: 'float',
+                hidden: false, editable: true
+            },
+            { name: 'Lamt', title: '@Resources.Locale.L_ActDeatilManage_Views_68', index: 'Lamt', sorttype: 'string', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, width: 100, editable: true },
+            { name: 'Tax', title: '@Resources.Locale.L_ActDeatilManage_Views_69', index: 'Tax', sorttype: 'float', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000', editable: true }, width: 80, hidden: false },
+            { name: 'BiRemark', title: '@Resources.Locale.L_ActDeatilManage_BiRemark', index: 'BiRemark', sorttype: 'string', width: 200, hidden: false, editable: true },
+            { name: 'Remark', title: '@Resources.Locale.L_ActDeatilManage_Views_71', index: 'Remark', sorttype: 'string', width: 200, hidden: false, editable: true },
+            { name: 'IpartNo', title: '@Resources.Locale.L_ActDeatilManage_Views_72/DN No', index: 'IpartNo', sorttype: 'string', width: 140, editable: false, hidden: false },
+            { name: 'CntrStdQty', title: '@Resources.Locale.L_ActDeatilManage_Views_73', index: 'CntrStdQty', sorttype: 'string', align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+            { name: 'PolCd', title: 'POL', index: 'PolCd', init: true, sorttype: 'string', width: 100, editable: false, hidden: false },
+            { name: 'CostCenter', title: '@Resources.Locale.L_ActDeatilManage_Views_74', index: 'CostCenter', sorttype: 'string', width: 200, hidden: false, editable: true },
+            { name: 'ProfitCenter', title: '@Resources.Locale.L_ActDeatilManage_Views_75', index: 'ProfitCenter', sorttype: 'string', width: 200, hidden: false, editable: true },
+            { name: 'SmStatus', title: '@Resources.Locale.L_ActDeatilManage_Views_76', index: 'SmStatus', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A: @Resources.Locale.L_ActDeatilManage_Views_77;B: @Resources.Locale.L_ActDeatilManage_Views_78;C: @Resources.Locale.L_ActDeatilManage_Views_79;D: @Resources.Locale.L_ActDeatilManage_Views_80;I: @Resources.Locale.L_ActDeatilManage_Views_81;P: @Resources.Locale.L_ActDeatilManage_Views_82;O: @Resources.Locale.L_ActDeatilManage_Views_83;G: @Resources.Locale.L_ActDeatilManage_Views_84;H: @Resources.Locale.L_ActDeatilManage_Views_85;V: @Resources.Locale.L_ActDeatilManage_Views_86;Z: @Resources.Locale.L_ActDeatilManage_Views_87;U: @Resources.Locale.L_ActDeatilManage_Views_88;Y: @Resources.Locale.L_ActDeatilManage_Views_89' } },
+            { name: 'ScacCd', title: '@Resources.Locale.L_IEBookingSetup_ScacCd', index: 'ScacCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+            { name: 'HouseNo', title: '@Resources.Locale.L_IEBookingSetup_HouseNo', index: 'HouseNo', sorttype: 'string', width: 100, hidden: false, editable: true },
+            { name: 'MasterNo', title: 'Master No', index: 'MasterNo', sorttype: 'string', width: 100, hidden: false, editable: true },
+            
+            { name: 'PodCd', title: 'POD', index: 'PodCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+            { name: 'SecCmp', title: 'Sec Location', index: 'SecCmp', sorttype: 'string', width: 120, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_location } },
+			{ name: 'DecNo', title: 'Reference NO', index: 'DecNo', sorttype: 'string', width: 100, hidden: false, editable: true },
+			{ name: 'InvoiceInfo', title: 'Invoice info.', index: 'InvoiceInfo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Ata', title: 'ATA', index: 'Ata', sorttype: 'string', width: 100, editable: false, hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+			{ name: 'CreateDate', title: 'Create Date', index: 'CreateDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" } },
+			{ name: 'UploadUser', title: 'Upload User', index: 'UploadUser', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'UploadTime', title: 'Upload Time', index: 'UploadTime', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" } },
+			{ name: 'ApproveDate', title: 'Approve Date', index: 'ApproveDate', width: 120, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d h:i A" } }
+        ];
+
+		gop.AddUrl = { "url": rootPath + "ActManage/ActUpdate", "title": "@Resources.Locale.L_ActDeatilManage_Views_90", "id": "ActUpdate" };
+		gop.gridId = "containerInfoGrid";
+		gop.gridAttr = { caption: "@Resources.Locale.L_ActDeatilManage_Views_91", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+	    gop.gridSearchUrl = rootPath + "TKBL/SmbidQueryData";
+
+
+	    gop.searchColModel = [
+			{ name: 'VT_CntrNo', title: 'Container Info', sorttype: 'string' },//货代
+		]; 
+	    var mergeColModel = [];
+	    $.merge(mergeColModel, gop.gridColModel);
+		$.merge(mergeColModel, gop.searchColModel);
+
+		 
+		gop.gridColModel.push({ name: 'CntrInfo', title: 'Container Info', index: 'CntrInfo', sorttype: 'string', chide: "Y", width: 100, hidden: false, editable: true });
+
+	    gop.searchColumns = getSelectColumn(mergeColModel);
+		gop.footerrow = true;
+		gop.multiselect = true;
+		gop.multiboxonly = true;
+
+		//SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+		gop.searchFormId = "ConditionArea";
+		gop.searchDivId = "SearchArea";
+		gop.StatusAreaId = "StatusArea";
+		gop.BtnGroupId = "BtnGroupArea";
+
+
+		gop.gridFunc = function (map) {
+			//用于回调函数，例如赋值操作等
+			dblClick(map);
+		}
+
+		gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+		gop.loadCompleteFunc = function (data) {
+
+			var Qsum = $("#containerInfoGrid").jqGrid("getCol", "Qamt", false, "sum");
+			var Bsum = $("#containerInfoGrid").jqGrid("getCol", "Bamt", false, "sum");
+			var Qlamt = $("#containerInfoGrid").jqGrid("getCol", "Qlamt", false, "sum");
+			var Lamt = $("#containerInfoGrid").jqGrid("getCol", "Lamt", false, "sum");
+			$("#containerInfoGrid").jqGrid("footerData", "set", { "DebitDate": "Total:", "Qamt": Qsum, "Bamt": Bsum, "Qlamt": Qlamt, "Lamt": Lamt });
+
+		}
+		gop.searchFormId = "ConditionArea";
+		gop.searchDivId = "SearchArea";
+		gop.baseCondition = "";
+
+		gop.btnGroup = [
+		   {
+			   id: "Ibde",
+			   name: "@Resources.Locale.L_ActDeatilManage_Views_92" + "(Inbound)",
+			   func: function () {
+				   alert("@Resources.Locale.L_ActDeatilManage_Views_301");
+				   var location = $("#sel_location").val();
+				   if (location == null || location === "" || location === undefined) {
+					   alert("@Resources.Locale.L_ActDeatilManage_Views_98" + location);
+					   $("#sel_location").foucs();
+					   return;
+				   }
+				   var mygrid = $("#containerInfoGrid");
+				   doDownloadExcelForIb(mygrid, $("#sel_tranType").val(), location);
+			   }
+		   },
+		   {
+			   id: "Ibue",
+			   name: "@Resources.Locale.L_ActDeatilManage_Views_99" + "(Inbound)",
+			   func: function () {
+				   var ioFlag = getCookie("plv3.passport.ioflag");
+				   var uploadUser = "";
+				   if (ioFlag == "I") {
+					   uploadUser = prompt("@Resources.Locale.L_ActDeatilManage_Views_100", "");
+					   if (uploadUser === null || uploadUser === "" || uploadUser == undefined) {
+						   CommonFunc.Notify("", "@Resources.Locale.L_ActDeatilManage_Views_101", 500, "warning");
+						   return; //break out of the function early
+					   }
+				   }
+				   $("#hi_lspNoForIb").val(uploadUser);
+                   $("#chgUploadDialogForIb").modal("show");
+                   resetFileInput($("#chgUploadExcelForIb"));
+			   }
+		   }
+		];
+
+		initSearch(gop);
+	    //var content = '<li style="display: inline-flex;"><select class="form-control input-sm" id="sel_tranType" style="width: 100px;"><option value="F1">FCL海运费</option><option value="F">FCL港杂费</option><option value="L">LCL海运+港杂费</option><option value="T">内贸</option><option value="E">国际快递</option><option value="D">国内快递</option><option value="R">铁路</option><option value="A">空运</option></select></li>';
+		//<option value="T">@Resources.Locale.L_ActDeatilManage_Views_105</option><option value="TT">@Resources.Locale.L_ActDeatilManage_Views_106</option><option value="D">@Resources.Locale.L_ActDeatilManage_Views_108</option>
+	    var content = '<li style="display: inline-flex;"><select class="form-control input-sm" id="sel_tranType" style="width: 100px;"><option value="F">@Resources.Locale.L_ActDeatilManage_Views_151</option><option value="F1">@Resources.Locale.L_ActDeatilManage_Views_150</option><option value="L">@Resources.Locale.L_ActDeatilManage_Views_152</option><option value="T">@Resources.Locale.L_ActDeatilManage_Views_105</option><option value="TT">@Resources.Locale.L_ActDeatilManage_Views_106</option><option value="E">@Resources.Locale.L_ActDeatilManage_Views_107</option><option value="R">@Resources.Locale.L_ActDeatilManage_Views_109</option><option value="A">@Resources.Locale.L_ActCheckSetup_Views_38</option></select></li>';
+	    $("#Ibde").parent().parent().prepend(content);
+		content = '<li style="display: inline-flex;"><span style="color:red;">@Resources.Locale.L_ActDeatilManage_Views_302</span><select class="form-control input-sm" id="sel_location" style="width: 100px;">';
+		var locations = select_location.split(";");
+		for (var i = 0; i < locations.length; i++) {
+			if (locations[i] && locations[i].split) {
+				var ll = locations[i].split(":");
+				if (ll == null || ll.length < 2)
+					continue;
+				content += '<option value="' + ll[0] + '">' + ll[1] + '</option>';
+			}
+		}
+		content += '</select></li>';
+		//content = '<li style="display: inline-flex;"><span style="color:red;">请选择下载格式(报价/运费/内贸):</span><select class="form-control input-sm" id="excelType" style="width: 60px;"><option value="L">local报价</option><option value="F">运费</option><option value="D">内贸</option></select></li>';
+		$("#Ibde").parent().parent().prepend(content);
+		var basecompanyid = getCookie("plv3.passport.basecompanyid");
+		$("#sel_location").val(basecompanyid);
+
+		_addTranTypeEvent();
+		$("#ConditionArea").bind('DOMNodeInserted', function (e) {
+		    _doAddTranTypeEvent(e);
+		}).bind('DOMNodeRemoved', function (e) {
+		    _doAddTranTypeEvent(e);
+		});
+
+		function _doAddTranTypeEvent(e) {
+		    var obj = jQuery(e.target);
+		    var html = obj.html() || '';
+		    if (html.indexOf("sel_TranType"))
+		        _addTranTypeEvent();
+		}
+
+		function _changeTranType() {
+		    var val = $("#sel_TranType").val() || '';
+		    var values = "";
+		    switch (val) {
+		        case "F":
+		            values = ";F1;F;";
+		            break;
+		        case "T":
+		            values = ";T;TT;";
+		            break;
+		        default:
+		            values = ";" + val + ";"
+		            break;
+		    }
+		    var types = ['F1', 'F', 'L', 'T', 'TT', 'E', 'D', 'R', 'A'];
+		    for (var i = 0; i < types.length; i++) {
+		        if (values.indexOf(";" + types[i] + ";") > -1 || val === "")
+		            $("#sel_tranType option[value='" + types[i] + "']").show();
+		        else
+		            $("#sel_tranType option[value='" + types[i] + "']").hide();
+		    }
+		    $("#sel_tranType").val(val || 'F');
+		}
+
+		function _addTranTypeEvent() {
+		    $("#sel_TranType").unbind("change").bind("change", function () {
+		        _changeTranType();
+		    });
+		    _changeTranType();
+		}
+
+		function dblClick(map) {
+			var UId = map.UId;
+
+			top.topManager.openPage({
+				href: rootPath + "ActManage/ActUpdate?add=Y&uid=" + UId,
+				title: '@Resources.Locale.L_ActDeatilManage_Views_90',
+			    id: 'ActUpdate',
+			    reload: true
+			});
+		}
+
+		$("#CHG_EXCEL_UPLOAD_FROM_IB").submit(function () {
+			var postData = new FormData($(this)[0]);
+			CommonFunc.ToogleLoading(true);
+			$.ajax({
+				url: rootPath + "ActManage/ImportBillExcelForIb",
+				type: 'POST',
+				data: postData,
+				async: false,
+				beforeSend: function () {
+					CommonFunc.ToogleLoading(true);
+				},
+                error: function () {
+                    resetFileInput($("#chgUploadExcelForIb"));
+					CommonFunc.ToogleLoading(false);
+					CommonFunc.Notify("", "Error", 1300, "warning");
+				},
+				success: function (data) {
+					//alert(data)
+                    resetFileInput($("#chgUploadExcelForIb"));
+					CommonFunc.ToogleLoading(false);
+					if (data.message != "success") {
+						CommonFunc.Notify("", "@Resources.Locale.L_ActDeatilManage_Views_116 " + data.message, 1300, "warning");
+						return false;
+					}
+
+					if (data.excelMsg == "") {
+						CommonFunc.Notify("", "@Resources.Locale.L_ActDeatilManage_Views_117", 500, "success");
+						$("#SummarySearch").trigger("click");
+					}
+					else {
+						CommonFunc.Notify("", data.excelMsg, 500, "warning");
+					}
+
+					$("#chgUploadDialogForIb").modal("hide");
+				},
+				cache: false,
+				contentType: false,
+				processData: false
+			});
+
+			return false;
+        });
+	});
+
+
+	function doDownloadExcelForIb(grid, transType, location) {
+			var btnType = "";
+			if (transType === "F1") {
+				transType = "F";
+				btnType = "F";
+			} else if (transType === "T" || transType === "TT") {
+                btnType = "D";
+            }
+			else {
+				btnType = "L";
+			}
+
+			var selRowIds = grid.jqGrid('getGridParam', 'selarrrow');
+			var ioFlag = getCookie("plv3.passport.ioflag");
+			var TargetCmp = "";
+			if (ioFlag == "I") {
+				TargetCmp = prompt("@Resources.Locale.L_ActDeatilManage_Views_100", "");
+				if (TargetCmp === null) {
+					CommonFunc.Notify("", "@Resources.Locale.L_ActDeatilManage_Views_112", 500, "warning");
+					return;
+				}
+
+			}
+
+			if (TargetCmp == null || TargetCmp === "")
+				TargetCmp = getCookie("plv3.passport.companyid");
+
+			var selRowId = grid.jqGrid('getGridParam', 'selrow');
+        var shipmentCmp = grid.jqGrid('getCell', selRowId, 'Cmp');
+
+        var tt = transType;
+            if (transType === "TT")
+                tt = "T";
+
+			var selKey = "";
+			$.each(selRowIds, function (index, val) {
+				if (shipmentCmp !== grid.jqGrid('getCell', selRowIds[index], 'Cmp')) {
+					CommonFunc.Notify("", "@Resources.Locale.L_ActDeatilManage_Views_303" + grid.jqGrid('getCell', selRowIds[index], 'ShipmentId') + "@Resources.Locale.L_ActDeatilManage_Views_115 ", 500, "warning");
+					return;
+				}
+				selKey += grid.jqGrid('getCell', selRowIds[index], 'UId') + ";";
+			});
+			$.ajax({
+				async: true,
+				url: rootPath + "ActManage/GetTransTypeInfoForIb",
+				type: 'POST',
+				data: {
+					selKey: selKey,
+					"TransType": tt,
+					"Cmp": TargetCmp,
+					"Type": btnType
+				},
+				"complete": function (xmlHttpRequest, successMsg) {
+					CommonFunc.ToogleLoading(false);
+				},
+				"error": function (xmlHttpRequest, errMsg) {
+					CommonFunc.ToogleLoading(false);
+					var resJson = $.parseJSON(errMsg)
+					CommonFunc.Notify("", resJson.message, 500, "warning");
+				},
+				success: function (result) {
+					if (result.message != "success") {
+						CommonFunc.Notify("", result.message, 500, "warning");
+						return;
+					}
+					var url = rootPath + "ActManage/ActDoQuery";
+
+					var colNames = [];
+					var colModel = [
+						{ name: 'rn', title: 'rn', index: 'rn', sorttype: 'string', width: 100, align: 'left', hidden: false },
+						{ name: 'ShipmentId', title: 'Shipment ID||SHIPMENT_ID', index: 'ShipmentId', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                        { name: 'CntrNo', title: 'Container No||CNTR_NO', index: 'CntrNo', sorttype: 'string', align: 'left', width: 120, hidden: false },
+						{ name: 'InvoiceInfo', title: 'Invoice Info||INVOICE_INFO', index: 'InvoiceInfo', sorttype: 'string', align: 'left', width: 120, hidden: false },
+						{ name: 'LspNo1', title: 'LSP No.||LSP_NO1', index: 'LspNo1', sorttype: 'string', align: 'left', width: 120, hidden: false },
+						{ name: 'DebitDate', title: 'ATA||ATA', index: 'DebitDate', sorttype: 'string', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: "" } },
+						{ name: 'CntrInfo', title: 'Container Info||CNTR_INFO', index: 'CntrNo', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                        { name: 'MasterNo', title: 'MAWB||MASTER_NO', index: 'MasterNo', sorttype: 'string', align: 'left', width: 120, hidden: false },
+						{ name: 'HouseNo', title: 'HAWB||HOUSE_NO', index: 'HouseNo', sorttype: 'string', align: 'left', width: 120, hidden: false },
+						{ name: 'PartyName', title: 'FC Customer||PARTY_NAME', index: 'PartyName', sorttype: 'string', align: 'left', width: 120, hidden: false },
+						{ name: 'PolName', title: 'POL||POL_NAME', index: 'PolName', sorttype: 'string', align: 'left', width: 120, hidden: false },
+						{ name: 'PodName', title: 'POD||POD_NAME', index: 'PodName', sorttype: 'string', align: 'left', width: 120, hidden: false },
+						{ name: 'DestName', title: 'Dest.||DEST_NAME', index: 'DestName', sorttype: 'string', align: 'left', width: 120, hidden: false },
+						{ name: 'IncotermCd', title: 'DLV Term||INCOTERM_CD', index: 'IncotermCd', sorttype: 'string', align: 'left', width: 120, hidden: false },
+						{ name: 'Qty', title: 'QTY||QTY', index: 'Qty', sorttype: 'float', width: 120, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: false },
+						{ name: 'Cw', title: 'Chargeable Weight||CW', index: 'Cw', sorttype: 'float', width: 120, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: false },
+						{ name: 'Cbm', title: 'CBM||CBM', index: 'Cbm', sorttype: 'float', width: 120, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: false },
+						{ name: 'Gw', title: 'KGS||GW', index: 'Gw', sorttype: 'float', width: 120, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: false },
+						{ name: 'DebitDate', title: 'DEBIT DATE||DEBIT_DATE', index: 'DebitDate', sorttype: 'string',  width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: "" } },
+						{ name: 'DebitNo', title: 'DEBIT NO||DEBIT_NO', index: 'DebitNo', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                        { name: 'Remark', title: 'Remark||REMARK', index: 'Remark', sorttype: 'string', width: 120, align: 'left', hidden: false }
+					];
+
+					var transTypeCols = result.chgTypeStr.split(";");
+					var transTypeColsN = result.chgTypeColsStr.split(";");
+					var byContainer = result.byContainerChgCd.split(";");
+					var condition = "";
+
+					//var virtualCol = ", ISNULL(ATA,ETA) AS DEBIT_DATE, '' AS DEBIT_NO,(SELECT TOP 1 PARTY_NAME FROM SMSMIPT WHERE SMSMIPT.SHIPMENT_ID=SMSMI.SHIPMENT_ID) AS PARTY_NAME, '"+TargetCmp+"' AS LSP_NO1";
+					//var byContainerCol = virtualCol + ", T.CNTR_NO";
+					//virtualCol = virtualCol + ",'' AS CNTR_NO";
+					var colNames = ["rn", "Shipment ID", "Container No", "InvoiceInfo", "LSP No.", "ATA", "Container Info", "MAWB", "HAWB", "FC Customer", "POL", "POD", "Dest.", "DLV  Term", "QTY", "Chargeable Weight", "CBM", "KGS", "DEBIT DATE", "DEBIT NO", "LSP Reference"];
+					//var i=0;
+					console.log(colModel);
+
+					//var descpReg = /[(].+?(?:[)])/gi;
+					//var curReg = /[a-zA-Z0-9]+/;
+                    $.each(transTypeCols, function (index, val) {
+                        //var arr0 = val.split("-");
+                        //var thisChgCd = arr0[0];
+                        //var cur = "";
+                        //if (arr0.length > 1) {
+                        //    var arr = arr0[arr0.length - 1].match(descpReg);
+                        //    if (arr == null || arr.length <= 0)
+                        //        return;
+                        //    cur = arr[arr.length - 1].match(curReg);
+                        //}
+                        colModel.push({ name: transTypeColsN[index], title: val, index: transTypeColsN[index], sorttype: 'string', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: false });
+                        colNames.push(val);
+                        //for (var i = 0; i < byContainer.length; i++) {
+                        //    if (thisChgCd === byContainer[i] && btnType === "L" && (transType === "F" || transType === "R"))
+                        //        condition = " AND (CNTR_NO IS NULL OR CNTR_NO ='')";
+                        //}
+
+                        //byContainerCol += ", (SELECT TOP 1 QAMT FROM SMBID WHERE CHG_CD='" + thisChgCd + "' AND QCUR='" + cur + "' AND SHIPMENT_ID=T.SHIPMENT_ID AND CNTR_NO=T.CNTR_NO AND LSP_NO='" + TargetCmp + "') AS '" + thisChgCd + "_" + cur + "'";
+                        //virtualCol += ", (SELECT  TOP 1 QAMT  FROM SMBID WHERE SMBID.SHIPMENT_ID=SMSMI.SHIPMENT_ID AND (SMBID.CNTR_NO IS NULL OR SMBID.CNTR_NO='') AND SMBID.CMP=SMSMI.CMP AND CHG_CD='" + thisChgCd + "' AND QCUR='" + cur + "'" + condition + " AND LSP_NO ='" + TargetCmp + "') AS '" + thisChgCd + "_" + cur + "'";
+                        //condition = "";
+                    });
+
+					console.log(colModel);
+					console.log(colNames);
+
+					var caption = "Statement Of Account \r\n Location : " + result.cmp + "  User : " + result.user + "   Date : " + result.createDate;
+					var excelName = transType + "-Statement Of Account";
+
+					var conditions = grid.jqGrid("getGridParam", "postData").conditions;
+					var baseCondition = " TRAN_TYPE='" + transType + "'";
+					//result.virtualCol = virtualCol;
+					//result.byContainerCol = byContainerCol;
+					result.btnType = btnType;
+					result.transType = transType;
+					result.TargetCmp = TargetCmp;
+					var Collist = encodeURIComponent(JSON.stringify(result));
+					var vircondition = grid.jqGrid("getGridParam", "postData").virConditions;
+
+					ExportDataToExcelByParam(url, colModel, colNames, caption, excelName, conditions, baseCondition, Collist, vircondition);
+				}
+			});
+
+		}
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g" id="BtnGroupArea">
+					</div>
+					<div class="pure-g" id="StatusArea">
+					</div>
+					<div class="form-group">
+						<div class="pure-g">
+							<div class="pure-u-sm-60-60">
+								<table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+									<tr>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="chgUploadDialogForIb" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">@Resources.Locale.L_BSTQuery_ImpExcel<span style="color:red;">@Resources.Locale.L_ActDeatilManage_Views_304</span></h4>
+			</div>
+			<form name="CHG_EXCEL_UPLOAD_FROM_IB" id="CHG_EXCEL_UPLOAD_FROM_IB"  method="post" enctype="multipart/form-data">
+				<div class="modal-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-7-60">
+							<label for="StartRow" class="control-label">@Resources.Locale.L_ActDeatilManage_Views_126</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="number" class="form-control input-sm" name="StartRow" isNumber="true" value="1"/>
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-7-60">
+							<label for="autoChk" class="control-label">@Resources.Locale.L_ActDeatilManage_Views_127</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<select class="form-control input-sm"  name="autoChk">
+								<option value="Y">Yes</option>
+								<option value="N">No</option>
+							</select>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-60-60">
+							<input type="file" title="@Resources.Locale.L_ActDeatilManage_Views_128" id="chgUploadExcelForIb" name="file"/>
+							<input type="hidden" id="uploadKeyId" />
+							<input type="hidden" id="hi_lspNoForIb" name="lspNo"/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-sm btn-info" id="chgUploadBtnForIb">@Resources.Locale.L_ActDeatilManage_Views_129</button>
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,2716 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Connection Ref="2" type="Stimulsoft.Report.Dictionary.StiXmlDatabase" isKey="true">
+        <Alias>Connection</Alias>
+        <Name>Connection</Name>
+        <PathData>C:\Users\acer\Desktop\my\SMRV01\Data.xml</PathData>
+        <PathSchema>C:\Users\acer\Desktop\my\SMRV01\Schemas.xml</PathSchema>
+      </Connection>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <PARTY Ref="3" type="DataTableSource" isKey="true">
+        <Alias>PARTY</Alias>
+        <Columns isList="true" count="57">
+          <value>U_ID,System.Guid</value>
+          <value>DN_NO,System.String</value>
+          <value>PARTY_TYPE,System.String</value>
+          <value>TYPE_DESCP,System.String</value>
+          <value>ORDER_BY,System.String</value>
+          <value>PARTY_NO,System.String</value>
+          <value>PARTY_NAME,System.String</value>
+          <value>PART_ADDR,System.String</value>
+          <value>PART_ADDR2,System.String</value>
+          <value>PART_ADDR3,System.String</value>
+          <value>CNTY,System.String</value>
+          <value>CNTY_NM,System.String</value>
+          <value>CITY,System.String</value>
+          <value>CITY_NM,System.String</value>
+          <value>STATE,System.String</value>
+          <value>ZIP,System.String</value>
+          <value>CONTACT,System.String</value>
+          <value>TEL,System.String</value>
+          <value>MAIL,System.String</value>
+          <value>U_ID1,System.String</value>
+          <value>GROUP_ID,System.String</value>
+          <value>CMP,System.String</value>
+          <value>STN,System.String</value>
+          <value>DEP,System.String</value>
+          <value>PARTY_NO1,System.String</value>
+          <value>PARTY_TYPE1,System.String</value>
+          <value>STATUS,System.String</value>
+          <value>ABBR,System.String</value>
+          <value>HEAD_OFFICE,System.String</value>
+          <value>PARTY_NAME1,System.String</value>
+          <value>PART_ADDR1,System.String</value>
+          <value>PART_ADDR21,System.String</value>
+          <value>PART_ADDR31,System.String</value>
+          <value>CNTY1,System.String</value>
+          <value>CNTY_NM1,System.String</value>
+          <value>CITY1,System.String</value>
+          <value>CITY_NM1,System.String</value>
+          <value>STATE1,System.String</value>
+          <value>ZIP1,System.String</value>
+          <value>PARTY_ATTN,System.String</value>
+          <value>PARTY_TEL,System.String</value>
+          <value>PARTY_MAIL,System.String</value>
+          <value>TAX_NO,System.String</value>
+          <value>BILL_TO,System.String</value>
+          <value>REMARK,System.String</value>
+          <value>DUE_DAY,System.Decimal</value>
+          <value>CREATE_BY,System.String</value>
+          <value>CREATE_DATE,System.DateTime</value>
+          <value>MODIFY_BY,System.String</value>
+          <value>MODIFY_DATE,System.DateTime</value>
+          <value>PARTY_FAX,System.String</value>
+          <value>PIC,System.String</value>
+          <value>PARTY_NAME2,System.String</value>
+          <value>PARTY_NAME3,System.String</value>
+          <value>PARTY_NAME4,System.String</value>
+          <value>PART_ADDR4,System.String</value>
+          <value>PART_ADDR5,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <IsCloud>False</IsCloud>
+        <Name>PARTY</Name>
+        <NameInSource>Connection.PARTY</NameInSource>
+      </PARTY>
+      <SMDNP Ref="4" type="DataTableSource" isKey="true">
+        <Alias>SMDNP</Alias>
+        <Columns isList="true" count="85">
+          <value>LTRUCK_NO,System.String</value>
+          <value>LDRIVER,System.String</value>
+          <value>PKG_UNIT_UB,System.String</value>
+          <value>PKG_NUM,System.Decimal</value>
+          <value>PKG_UNIT,System.String</value>
+          <value>PKG_UNIT_DESC,System.String</value>
+          <value>TRAN_TYPE,System.String</value>
+          <value>POD_CD,System.String</value>
+          <value>POD_NM,System.String</value>
+          <value>SHIPMENT_ID,System.String</value>
+          <value>DN_NO,System.String</value>
+          <value>PORT_POL,System.String</value>
+          <value>PORT_POLNM,System.String</value>
+          <value>U_ID,System.Guid</value>
+          <value>U_FID,System.Guid</value>
+          <value>DN_NO1,System.String</value>
+          <value>PLANT,System.String</value>
+          <value>PO_NO,System.String</value>
+          <value>SO_NO,System.String</value>
+          <value>SO_ITEM,System.Decimal</value>
+          <value>CUR1,System.String</value>
+          <value>UNIT_PRICE1,System.Decimal</value>
+          <value>VALUE1,System.Decimal</value>
+          <value>ONE_TIME,System.String</value>
+          <value>DEL_ITEM,System.String</value>
+          <value>RESOLUTION,System.String</value>
+          <value>BRAND,System.String</value>
+          <value>CATEGORY,System.String</value>
+          <value>GOODS_DESCP,System.String</value>
+          <value>PROD_DESCP,System.String</value>
+          <value>PROD_SPEC,System.String</value>
+          <value>OHS_CODE,System.String</value>
+          <value>IHS_CODE,System.String</value>
+          <value>IPART_NO,System.String</value>
+          <value>OPART_NO,System.String</value>
+          <value>PART_NO,System.String</value>
+          <value>SAFETY_MODEL,System.String</value>
+          <value>BRAND_TYPE,System.String</value>
+          <value>PROD_TYPE,System.String</value>
+          <value>ASSEMBLY_ID,System.String</value>
+          <value>MATERIAL_TYPE,System.String</value>
+          <value>SIZE,System.String</value>
+          <value>PRODUCT_DATE,System.DateTime</value>
+          <value>QTY,System.Decimal</value>
+          <value>QTYU,System.String</value>
+          <value>PKG_NUM1,System.Decimal</value>
+          <value>CBM,System.Decimal</value>
+          <value>CBMU,System.String</value>
+          <value>GW,System.Decimal</value>
+          <value>CNTR_STD_QTY,System.Decimal</value>
+          <value>JOB_NO,System.String</value>
+          <value>JQTY,System.Decimal</value>
+          <value>PRODUCT_LINE,System.String</value>
+          <value>IQTY,System.Decimal</value>
+          <value>PQTY,System.Decimal</value>
+          <value>WQTY,System.Decimal</value>
+          <value>ESTIMATE_DATE,System.DateTime</value>
+          <value>ACTURE_DATE,System.DateTime</value>
+          <value>COST,System.Decimal</value>
+          <value>ITEM_NO,System.String</value>
+          <value>ODN_NO,System.String</value>
+          <value>PMATN,System.String</value>
+          <value>REPLACE_PART,System.String</value>
+          <value>BSTKD_E,System.String</value>
+          <value>IHREZ,System.String</value>
+          <value>IHREZ_E,System.String</value>
+          <value>DELIVERY_ITEM,System.String</value>
+          <value>INSPECT,System.String</value>
+          <value>UL,System.String</value>
+          <value>BATTERY,System.String</value>
+          <value>ADDS,System.String</value>
+          <value>DU,System.String</value>
+          <value>CUR,System.String</value>
+          <value>DOWN_FLAG,System.String</value>
+          <value>SEND_SFIS_FLAG,System.String</value>
+          <value>REF_PART,System.String</value>
+          <value>PREPARE_RMK,System.String</value>
+          <value>SLOC,System.String</value>
+          <value>PKG_UNIT1,System.String</value>
+          <value>INTERFACE_CD,System.String</value>
+          <value>DOWN_USER,System.String</value>
+          <value>TRUCKER,System.String</value>
+          <value>TRUCKER_NM,System.String</value>
+          <value>CNTR_NO,System.String</value>
+          <value>SEAL_NO1,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <IsCloud>False</IsCloud>
+        <Name>SMDNP</Name>
+        <NameInSource>Connection.SMDNP</NameInSource>
+      </SMDNP>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="4">
+    <Page1 Ref="5" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="10">
+        <PageHeaderBand1 Ref="6" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,28.9,1.6</ClientRectangle>
+          <Components isList="true" count="8">
+            <Text1 Ref="7" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,13.55,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,16,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>TPV物流出库交接单/For Customer</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text1>
+            <Text2 Ref="8" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.25,0,13.55,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,16,Bold</Font>
+              <Guid>b870780fb3ef48c9b43e72052b14e50e</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>TPV物流出库交接单/For TPV警卫</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text5 Ref="9" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>1b5bce8bc56a4efc8a75874da8d35f6e</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text5>
+            <Text6 Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9,0.8,2.3,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>edb0353019bb4c7982572914decba4d5</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>制单日期：</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text7 Ref="11" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.3,0.8,2.3,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>a3e70b83438242e99e7ebde2aae1f6d1</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{Format("{0:yyyy/MM/dd}", Today)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text8 Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>24.5,0.8,2.1,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>8b3c2965dfdd4767a1715b7cdbce3ff5</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>制单日期：</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text9 Ref="13" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>26.6,0.8,2.3,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <Guid>9c85bfa8acf94dde8507417dab6781de</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{Format("{0:yyyy/MM/dd}", Today)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text15 Ref="14" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,0.8,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>5b96d044cf514afba97d455b867e196e</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text15>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageHeaderBand1>
+        <PageHeaderBand2 Ref="15" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,2.8,28.9,0.8</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text17 Ref="16" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>13dffe2fb2674a068fb223cabc381a21</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="5" />
+              <Parent isRef="15" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text17>
+            <SubReport4 Ref="17" type="SubReport" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,13.65,0.8</ClientRectangle>
+              <Components isList="true" count="0" />
+              <Name>SubReport4</Name>
+              <Page isRef="5" />
+              <Parameters isList="true" count="0" />
+              <Parent isRef="15" />
+              <SubReportPageGuid>8c4da6bb9eb542f1979989fe9b03b13e</SubReportPageGuid>
+            </SubReport4>
+            <SubReport5 Ref="18" type="SubReport" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.25,0,13.65,0.8</ClientRectangle>
+              <Components isList="true" count="0" />
+              <Name>SubReport5</Name>
+              <Page isRef="5" />
+              <Parameters isList="true" count="0" />
+              <Parent isRef="15" />
+              <SubReportPageGuid>629b1028a89841d19b6ec5f314fa4edb</SubReportPageGuid>
+            </SubReport5>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageHeaderBand2</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageHeaderBand2>
+        <PageFooterBand1 Ref="19" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,19.4,28.9,0.8</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text3 Ref="20" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>23,0.2,4.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="5" />
+              <Parent isRef="19" />
+              <Text>{PageNofM}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageFooterBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageFooterBand1>
+        <GroupHeaderBand1 Ref="21" type="GroupHeaderBand" isKey="true">
+          <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,4.4,28.9,1.6</ClientRectangle>
+          <Components isList="true" count="23">
+            <Text26 Ref="22" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,0.8,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>bee3f3377de345d683cc7af6c551a078</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text26>
+            <Text28 Ref="23" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.25,0.8,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>733b87d55c1b48c39cd04b4350c34345</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>TPV DN</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text28>
+            <Text29 Ref="24" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.05,0.8,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>e1e3b73ae60c467b985d618e7847baa3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>柜号</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text29>
+            <Text30 Ref="25" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18.65,0.8,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>8a86c99cc80140d6bb3ff81334eb571a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>铅封号</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text30>
+            <Text31 Ref="26" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>20.25,0.8,2.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>f2d0def4f2414836b042c8958794dfce</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text31</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>商品名称</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text31>
+            <Text32 Ref="27" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>22.65,0.8,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>6aa5fb16fba7465f8f6f4777e89f7d6b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text32</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>对内机种名</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text32>
+            <Text33 Ref="28" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>26.05,0.8,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>b077883113464a8da438281f2684a5ee</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>客户物料号
+</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text33>
+            <Text34 Ref="29" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>27.65,0.8,1.25,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>7f132b7d9e4645a2ba15b365ddb4becf</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text34</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>数量</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text34>
+            <Text80 Ref="30" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>d1f983a6976a44e0bebe41444acc3b2a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text80</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>Shipment ID</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text80>
+            <Text92 Ref="31" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.25,0,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>64451eb5e7e042469a0f37b3e375ab6b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text92</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>Shipment ID</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text92>
+            <Text95 Ref="32" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.8,0,11.85,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>3a6aad1afd2f4fb29aafb042fe438a73</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text95</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>{SMDNP.SHIPMENT_ID}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text95>
+            <Text102 Ref="33" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.05,0,11.85,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>4a483459a01d4f06b0a29903945c990e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text102</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>{SMDNP.SHIPMENT_ID}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text102>
+            <Text103 Ref="34" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>d09ae2a004a543c6a1e05de684ed46cb</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text103</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text103>
+            <Text107 Ref="35" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.8,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>23f40b24bdc84eb6a9caee47d460e293</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text107</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>TPV DN</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text107>
+            <Text108 Ref="36" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.8,0.8,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>d2057c81cd644e6cadbf889d4ac86849</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text108</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>柜号</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text108>
+            <Text109 Ref="37" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,0.8,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>48718760a78a4a7a9c447f02542a57ec</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text109</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>铅封号</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text109>
+            <Text110 Ref="38" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5,0.8,2.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>b0d2417adbc34857889db86513ae395f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text110</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>商品名称</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text110>
+            <Text111 Ref="39" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.4,0.8,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>d03971a7dfe74ff68769543321b3d1f3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text111</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>对内机种名</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text111>
+            <Text112 Ref="40" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.8,0.8,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>3037ca6771c44e9baa7b1b6f29709f04</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text112</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>客户物料号
+</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text112>
+            <Text113 Ref="41" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.4,0.8,1.25,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>f5b88ecb072946c385f3a5f68bf6233b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text113</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>数量</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text113>
+            <Text19 Ref="42" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.2,0.8,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>对外机种名
+</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text21 Ref="43" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>24.45,0.8,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>7906d29a61c74656ba8768a005349534</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <Text>对外机种名
+</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <StartPointPrimitive3 Ref="44" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>0,0.6,0,0</ClientRectangle>
+              <Name>StartPointPrimitive3</Name>
+              <Page isRef="5" />
+              <Parent isRef="21" />
+              <ReferenceToGuid>432e0ceb1fd640c9a3e2dd95a8b5fcb2</ReferenceToGuid>
+            </StartPointPrimitive3>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>GroupHeaderBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </GroupHeaderBand1>
+        <DataBand1 Ref="45" type="DataBand" isKey="true">
+          <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,6.8,28.9,0.8</ClientRectangle>
+          <Components isList="true" count="17">
+            <Text35 Ref="46" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>2c79b9126f154c508d62928bad50268b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text35</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text35>
+            <Text37 Ref="47" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>37c34940c05742e383cb4fa0e0aef53f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text37</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.DN_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text37>
+            <Text38 Ref="48" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.8,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>974f26b5ce894efab947db097d46a441</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text38</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.CNTR_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text38>
+            <Text39 Ref="49" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>84d71171f10d49528eb46d6da9b5447b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text39</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.SEAL_NO1}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text39>
+            <Text40 Ref="50" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5,0,2.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>7123bc9a1de84aadb98aafee9671c9e0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text40</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.GOODS_DESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text40>
+            <Text41 Ref="51" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.4,0,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>606a1aa35bc549eca711f36c05c9091e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text41</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.IPART_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text41>
+            <Text42 Ref="52" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.8,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>1b41f28491f44ceea55f819f03a9a0bc</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text42</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.PART_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text42>
+            <Text43 Ref="53" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.4,0,1.25,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>5085da81cb11439598eda3c311242c8f</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text43</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.QTY}{SMDNP.QTYU}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text43>
+            <Text44 Ref="54" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>27.65,0,1.25,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>b7e39f25bdbb40138b842635a14d8b2e</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text44</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.QTY}{SMDNP.QTYU}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text44>
+            <Text45 Ref="55" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>26.05,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>f1954a3cdbb8434dbfed2a5952547e1c</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text45</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.PART_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text45>
+            <Text46 Ref="56" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>22.65,0,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>bc61808fd83c4244b92841bb35787833</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text46</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.IPART_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text46>
+            <Text47 Ref="57" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>20.25,0,2.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>8cca73aae156492da5404fccde5c0576</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text47</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.GOODS_DESCP}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text47>
+            <Text48 Ref="58" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18.65,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>1a24c58779b4461b9210deee830e765b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text48</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.SEAL_NO1}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text48>
+            <Text49 Ref="59" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.05,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>2aac1db359ba4e778b8357f63fa6f571</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text49</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.CNTR_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text49>
+            <Text50 Ref="60" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.25,0,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>4b99b66515424bda9c1f613cd394648a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text50</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.DN_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text50>
+            <Text20 Ref="61" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.2,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>453726ca556f4d9bbad4b8feef8ae825</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.OPART_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+            <Text22 Ref="62" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>24.45,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>8e03bfe17df34a589edae42490bbc67d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="5" />
+              <Parent isRef="45" />
+              <Text>{SMDNP.OPART_NO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>SMDNP</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+        <GroupFooterBand1 Ref="63" type="GroupFooterBand" isKey="true">
+          <Border>Left, Right, Bottom;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,8.4,28.9,8.8</ClientRectangle>
+          <Components isList="true" count="72">
+            <Text52 Ref="64" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,2.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>be16318ac19748cd908d136f37eea877</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text52</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>合计大包装件数:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text52>
+            <Text53 Ref="65" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.6,0,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>427b3d6cf87a4d619eed9b311bdb7796</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text53</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text53>
+            <Text54 Ref="66" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>25.25,0,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>5b3f6b68bdb84bbabcff20708e291efe</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text54</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text54>
+            <Text55 Ref="67" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,2.4,1.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>579ef92f0a4a44b094aa9fd08d3a6146</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text55</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>承运商</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text55>
+            <Text57 Ref="68" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.8,2.4,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>a1a5262fc284410e8f19f9ef7ee4d544</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text57</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>车号</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text57>
+            <Text58 Ref="69" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.6,2.4,5.05,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>2da651cbf2f94e7eaa18a01839fcc8bf</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text58</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{GetTruck(First(DataBand1,SMDNP.LTRUCK_NO))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text58>
+            <Text59 Ref="70" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>d961308da1594c4a8c9a395ea27ec264</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text59</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text59>
+            <Text60 Ref="71" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,2.4,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>9541d9944f3b4434b06fa6e1583ae4ef</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text60</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text60>
+            <Text63 Ref="72" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.25,0,2.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>5d306a67b8604a11830725f7d56f9538</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text63</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>合计大包装件数:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text63>
+            <Text64 Ref="73" type="Text" isKey="true">
+              <Border>Left, Right, Bottom;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>23.85,2.4,5.05,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>062339af840941019b84c3d05f0e2dc0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text64</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{GetTruck(First(DataBand1,SMDNP.LTRUCK_NO))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text64>
+            <Text65 Ref="74" type="Text" isKey="true">
+              <Border>Left, Right, Bottom;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>22.05,2.4,1.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>a66252f846c94f2d92cc9a40d5c66877</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text65</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>车号</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text65>
+            <Text67 Ref="75" type="Text" isKey="true">
+              <Border>Left, Right, Bottom;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.25,2.4,1.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>cd3482a3c5e94747a49d506e3d4542db</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text67</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>承运商</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text67>
+            <Text74 Ref="76" type="Text" isKey="true">
+              <Border>Bottom;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.25,3.2,13.65,2.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>367da7160a644d4ebf396055b1c659a3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text74</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>Remark</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text74>
+            <Text75 Ref="77" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,3.2,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>f32c32b6174a4665a61bf37e805c2179</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text75</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text75>
+            <Text76 Ref="78" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,4,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>6f090f591f874724bbcb0dd5c53ab8d6</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text76</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text76>
+            <Text77 Ref="79" type="Text" isKey="true">
+              <Border>Bottom;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,4.4,5,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>697b1c90270c46a2983980e6f147bdc4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text77</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>实收情况：</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text77>
+            <Text78 Ref="80" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5,4.4,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>bdac46b17ae24da78ce0ccffc55c7f94</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text78</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>姓名：</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text78>
+            <Text79 Ref="81" type="Text" isKey="true">
+              <Border>Bottom;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5,5,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>8fb58e4343af4d84b3276e1da4a247b9</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text79</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>签收时间</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text79>
+            <Text81 Ref="82" type="Text" isKey="true">
+              <Border>Bottom;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.8,5,1.85,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>f6631d11522343beb6a81a7c99e83b2d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text81</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text81>
+            <Text82 Ref="83" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.8,4.4,1.85,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>b8e29b00f2e040679edb31568a552745</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text82</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text82>
+            <Text83 Ref="84" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,4.8,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>d246572b8f774dcba2f3af8c1068277d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text83</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text83>
+            <Text84 Ref="85" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,5.6,13.65,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>44004cee7e9a4a2ba527690757a97725</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text84</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text84>
+            <Text85 Ref="86" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,5.6,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>a15aca9b6355457da1ffaf22f2f46e51</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text85</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text85>
+            <Text86 Ref="87" type="Text" isKey="true">
+              <Border>Left, Right, Bottom;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.25,5.6,13.65,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>317842aea49b4f648c829c4101e9de58</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text86</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text86>
+            <Text87 Ref="88" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,6,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>6a3d2f53bbe2453aae7510f0087651bd</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text87</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>TPV仓库人员：</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text87>
+            <Text88 Ref="89" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>3.4,6,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>b1737429de1346db9a9b3e3b7c263927</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text88</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>承运公司名称：</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text88>
+            <Text89 Ref="90" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>7,6,2.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>2f1d8d866d604eb48070bc39152eefa0</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text89</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>司机签名栏：</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text89>
+            <Text90 Ref="91" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>10.2,6,2.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>f4334c35558a4f22818095b543163311</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text90</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>警卫签名栏：</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text90>
+            <Text91 Ref="92" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,6.4,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>5928f018add84e33a25b5fac0f4af85c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text91</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text91>
+            <Text93 Ref="93" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,7.2,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>0d821a0448d44e5a9d2c76d014e237df</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text93</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text93>
+            <Text94 Ref="94" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,8,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>34a5c6c781cd4d50a9142070df33503c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text94</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text94>
+            <Text96 Ref="95" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>25.4,6,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>432983d85db04ed48c0b4b96593d4651</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text96</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>警卫签名栏：</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text96>
+            <Text97 Ref="96" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>22.2,6,2.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>9e47ef91c3924b7bafbf949e3977c9d2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text97</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>司机签名栏：</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text97>
+            <Text98 Ref="97" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>18.6,6,2.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>82733889e3124b12b73207ae68ab2d31</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text98</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>承运公司名称：</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text98>
+            <Text99 Ref="98" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>15.3,6,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>02f179b297f84243a6061c7c258a0891</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text99</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>TPV仓库人员：</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text99>
+            <SubReport1 Ref="99" type="SubReport" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,3.2,13.65,1.2</ClientRectangle>
+              <Components isList="true" count="0" />
+              <Name>SubReport1</Name>
+              <Page isRef="5" />
+              <Parameters isList="true" count="0" />
+              <Parent isRef="63" />
+              <SubReportPageGuid>9d0d331c1c544d86aaa420c520470fc2</SubReportPageGuid>
+            </SubReport1>
+            <Text68 Ref="100" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.4,2.4,5.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text68</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{First(DataBand1,SMDNP.TRUCKER_NM)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text68>
+            <Text69 Ref="101" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.65,2.4,5.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text69</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{First(DataBand1,SMDNP.TRUCKER_NM)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text69>
+            <Text4 Ref="102" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.8,0,6.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{First(DataBand1,SMDNP.PKG_NUM)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text10 Ref="103" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18,0,6.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{First(DataBand1,SMDNP.PKG_NUM)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text11 Ref="104" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3.4,6.6,3,2.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{First(DataBand1,SMDNP.TRUCKER_NM)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text11>
+            <Text12 Ref="105" type="Text" isKey="true">
+              <Brush>EmptyBrush</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>18.6,6.6,3,2.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>3629647292f24cc1b104cefe8e57385a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{First(DataBand1,SMDNP.TRUCKER_NM)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text12>
+            <Text13 Ref="106" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,0.8,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>e94bc5d87beb4f119caa74ddb38da43f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text13>
+            <Text14 Ref="107" type="Text" isKey="true">
+              <Border>Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.65,1.6,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <Guid>0912265cff7f41cea47cb174de3649b0</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>*
+*</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text14>
+            <Text18 Ref="108" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.8,1.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>PO</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <Text27 Ref="109" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.25,0.8,1.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>PO</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+            <Text36 Ref="110" type="Text" isKey="true">
+              <Border>Top, Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.25,1.6,1.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>602039d259074c798d730d128fdeb362</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text36</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>送货地</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text36>
+            <Text51 Ref="111" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.4,0.8,12.25,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text51</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{First(DataBand1,SMDNP.PO_NO)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text51>
+            <Text56 Ref="112" type="Text" isKey="true">
+              <Border>Top, Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1.6,1.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>db0413bad7e147049e56cad91924c774</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text56</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>送货地</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text56>
+            <Text71 Ref="113" type="Text" isKey="true">
+              <Border>Top, Left, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.4,1.6,12.25,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>6e35b8d48dce4798a152a20d5a45c245</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text71</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{First(DataBand1,SMDNP.POD_NM)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text71>
+            <Text72 Ref="114" type="Text" isKey="true">
+              <Border>Top, Right, Bottom;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.7,0.8,12.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text72</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{First(DataBand1,SMDNP.PO_NO)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text72>
+            <Text73 Ref="115" type="Text" isKey="true">
+              <Border>Top, Right;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>16.7,1.6,12.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>5c19ce46bf2a4696984c22f2a18d405e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text73</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{First(DataBand1,SMDNP.POD_NM)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text73>
+            <Text23 Ref="116" type="Text" isKey="true">
+              <Border>Bottom;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.6,4.4,5,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,10,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>客户盖章处</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+            <Text24 Ref="117" type="Text" isKey="true">
+              <Border>Bottom;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>7,6.6,2.8,2.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{GetTruck(First(DataBand1,SMDNP.LDRIVER))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text24>
+            <Text25 Ref="118" type="Text" isKey="true">
+              <Border>Bottom;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>22.2,6.6,2.8,2.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8,Bold</Font>
+              <Guid>22dd274a0c5a4306846d50522d471748</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <Text>{GetTruck(First(DataBand1,SMDNP.LDRIVER))}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text25>
+            <HorizontalLinePrimitive1 Ref="119" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>16.4,0.8,5.8,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="120" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive1</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <StartCap Ref="121" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive1>
+            <HorizontalLinePrimitive2 Ref="122" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>16.4,3.2,5.6,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="123" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive2</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <StartCap Ref="124" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive2>
+            <StartPointPrimitive2 Ref="125" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>6.8,4.4,0,0</ClientRectangle>
+              <Name>StartPointPrimitive2</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <ReferenceToGuid>e13b2c88dbd14b318c6cdadee718fdb0</ReferenceToGuid>
+            </StartPointPrimitive2>
+            <EndPointPrimitive2 Ref="126" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>6.8,5.6,0,0</ClientRectangle>
+              <Name>EndPointPrimitive2</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <ReferenceToGuid>e13b2c88dbd14b318c6cdadee718fdb0</ReferenceToGuid>
+            </EndPointPrimitive2>
+            <EndPointPrimitive3 Ref="127" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>0,8.8,0,0</ClientRectangle>
+              <Name>EndPointPrimitive3</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <ReferenceToGuid>432e0ceb1fd640c9a3e2dd95a8b5fcb2</ReferenceToGuid>
+            </EndPointPrimitive3>
+            <HorizontalLinePrimitive4 Ref="128" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,5.6,13.6,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="129" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive4</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <StartCap Ref="130" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive4>
+            <HorizontalLinePrimitive5 Ref="131" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,5.6,13.6,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="132" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive5</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <StartCap Ref="133" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive5>
+            <HorizontalLinePrimitive6 Ref="134" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,0.8,13.65,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="135" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive6</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <StartCap Ref="136" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive6>
+            <HorizontalLinePrimitive7 Ref="137" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,1.6,13.6,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="138" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive7</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <StartCap Ref="139" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive7>
+            <HorizontalLinePrimitive8 Ref="140" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>15.2,1.6,13.7,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="141" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive8</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <StartCap Ref="142" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive8>
+            <HorizontalLinePrimitive9 Ref="143" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>15.2,0.8,13.7,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="144" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive9</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <StartCap Ref="145" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive9>
+            <HorizontalLinePrimitive10 Ref="146" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>15.2,2.4,13.7,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="147" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive10</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <StartCap Ref="148" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive10>
+            <StartPointPrimitive1 Ref="149" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>5,4.4,0,0</ClientRectangle>
+              <Name>StartPointPrimitive1</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <ReferenceToGuid>39141c223e4b495cac8a1ddca08297df</ReferenceToGuid>
+            </StartPointPrimitive1>
+            <EndPointPrimitive1 Ref="150" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>5,5.6,0,0</ClientRectangle>
+              <Name>EndPointPrimitive1</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <ReferenceToGuid>39141c223e4b495cac8a1ddca08297df</ReferenceToGuid>
+            </EndPointPrimitive1>
+            <StartPointPrimitive4 Ref="151" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>8.6,4.4,0,0</ClientRectangle>
+              <Name>StartPointPrimitive4</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <ReferenceToGuid>aa84ec24c6cf4a549fcbe77e30f9e073</ReferenceToGuid>
+            </StartPointPrimitive4>
+            <EndPointPrimitive4 Ref="152" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>8.6,5.6,0,0</ClientRectangle>
+              <Name>EndPointPrimitive4</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <ReferenceToGuid>aa84ec24c6cf4a549fcbe77e30f9e073</ReferenceToGuid>
+            </EndPointPrimitive4>
+            <HorizontalLinePrimitive3 Ref="153" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>5,5,3.6,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <EndCap Ref="154" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive3</Name>
+              <Page isRef="5" />
+              <Parent isRef="63" />
+              <StartCap Ref="155" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive3>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>GroupFooterBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </GroupFooterBand1>
+        <VerticalLinePrimitive2 Ref="156" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>6.8,12.8,0.0254,1.2</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="157" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>e13b2c88dbd14b318c6cdadee718fdb0</Guid>
+          <Name>VerticalLinePrimitive2</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <StartCap Ref="158" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive2>
+        <VerticalLinePrimitive3 Ref="159" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>0,5,0.0254,12.2</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="160" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>432e0ceb1fd640c9a3e2dd95a8b5fcb2</Guid>
+          <Name>VerticalLinePrimitive3</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <StartCap Ref="161" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive3>
+        <VerticalLinePrimitive1 Ref="162" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>5,12.8,0.0254,1.2</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="163" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>39141c223e4b495cac8a1ddca08297df</Guid>
+          <Name>VerticalLinePrimitive1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <StartCap Ref="164" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive1>
+        <VerticalLinePrimitive4 Ref="165" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>8.6,12.8,0.0254,1.2</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="166" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>aa84ec24c6cf4a549fcbe77e30f9e073</Guid>
+          <Name>VerticalLinePrimitive4</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <StartCap Ref="167" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive4>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>0af8757a361c4367bf2c48fbfd4adbec</Guid>
+      <Margins>0.4,0.4,0.4,0.4</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>21</PageHeight>
+      <PageWidth>29.7</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="168" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+    <subReport_1 Ref="169" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <DataBand2 Ref="170" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.4,13.65,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>PARTY</DataSourceName>
+          <Filters isList="true" count="1">
+            <value>_x007B_PARTY.PARTY_TYPE_x003D__x003D__x0022_WE_x0022__x007D_</value>
+          </Filters>
+          <Name>DataBand2</Name>
+          <Page isRef="169" />
+          <Parent isRef="169" />
+          <Sort isList="true" count="0" />
+        </DataBand2>
+        <ChildBand1 Ref="171" type="ChildBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,1.2,13.65,1.2</ClientRectangle>
+          <Components isList="true" count="8">
+            <Text100 Ref="172" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>6ea15393c61d4f2aaa1f5ce49435810f</Guid>
+              <Locked>True</Locked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text100</Name>
+              <Page isRef="169" />
+              <Parent isRef="171" />
+              <Text>客户名称</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text100>
+            <Text61 Ref="173" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.6,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>9ea8823b1ee3483ab940e59529d6f92f</Guid>
+              <Locked>True</Locked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text61</Name>
+              <Page isRef="169" />
+              <Parent isRef="171" />
+              <Text>联系人</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text61>
+            <Text101 Ref="174" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.4,0,5.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>378a06c889814ee0900738eebda43bf4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text101</Name>
+              <Page isRef="169" />
+              <Parent isRef="171" />
+              <Text>{PARTY.PARTY_NAME1}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text101>
+            <Text104 Ref="175" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.8,0,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>bd31aec745254bf48986b9a4fdf9a8f8</Guid>
+              <Locked>True</Locked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text104</Name>
+              <Page isRef="169" />
+              <Parent isRef="171" />
+              <Text>地址</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text104>
+            <Text70 Ref="176" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.8,0.6,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>57a3535b296d43a68ed6b695877914b6</Guid>
+              <Locked>True</Locked>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text70</Name>
+              <Page isRef="169" />
+              <Parent isRef="171" />
+              <Text>联系电话</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text70>
+            <Text105 Ref="177" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.6,0,5.05,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>daa950d8a75540bbb71363d6c863a1df</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text105</Name>
+              <Page isRef="169" />
+              <Parent isRef="171" />
+              <Text>{this.GetAddr(PARTY.PART_ADDR1,PARTY.PART_ADDR2,PARTY.PART_ADDR3)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text105>
+            <Text106 Ref="178" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.6,0.6,5.05,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Guid>4c97610bf6714f079c03c28e228521bb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text106</Name>
+              <Page isRef="169" />
+              <Parent isRef="171" />
+              <Text>{PARTY.TEL}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text106>
+            <Text66 Ref="179" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.4,0.6,5.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text66</Name>
+              <Page isRef="169" />
+              <Parent isRef="171" />
+              <Text>{PARTY.PARTY_ATTN}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text66>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>ChildBand1</Name>
+          <Page isRef="169" />
+          <Parent isRef="169" />
+        </ChildBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>9d0d331c1c544d86aaa420c520470fc2</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>subReport_1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>15.65</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="180" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </subReport_1>
+    <subReport_4 Ref="181" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <PageHeaderBand3 Ref="182" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,13.65,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>PageHeaderBand3</Name>
+          <Page isRef="181" />
+          <Parent isRef="181" />
+        </PageHeaderBand3>
+        <DataBand5 Ref="183" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,1.2,13.65,0.8</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text16 Ref="184" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,0,13.65,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,16,Bold</Font>
+              <Guid>9de59bbf211d4fde9ec4a6b93857c4fa</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="181" />
+              <Parent isRef="183" />
+              <Text>{IIF(Line==1,PARTY.PARTY_NAME,"")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>Expression</Type>
+            </Text16>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>PARTY</DataSourceName>
+          <Filters isList="true" count="1">
+            <value>_x007B_PARTY.PARTY_TYPE_x003D__x003D__x0022_SH_x0022__x007D_</value>
+          </Filters>
+          <Name>DataBand5</Name>
+          <Page isRef="181" />
+          <Parent isRef="181" />
+          <Sort isList="true" count="0" />
+        </DataBand5>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>8c4da6bb9eb542f1979989fe9b03b13e</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>subReport_4</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>15.65</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="185" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </subReport_4>
+    <subReport_5 Ref="186" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <PageHeaderBand6 Ref="187" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,13.65,0.8</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text62 Ref="188" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,13.65,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>宋体,16,Bold</Font>
+              <Guid>2b2881925793469aa3179a7f8dd2544b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text62</Name>
+              <Page isRef="186" />
+              <Parent isRef="187" />
+              <Text>{PARTY.PARTY_NAME}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>DataColumn</Type>
+            </Text62>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageHeaderBand6</Name>
+          <Page isRef="186" />
+          <Parent isRef="186" />
+        </PageHeaderBand6>
+        <DataBand6 Ref="189" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,2,13.65,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>PARTY</DataSourceName>
+          <Filters isList="true" count="1">
+            <value>_x007B_PARTY.PARTY_TYPE_x003D__x003D__x0022_SH_x0022__x007D_</value>
+          </Filters>
+          <Guid>3c29d6cc2d4240788062047183c5b1e2</Guid>
+          <Name>DataBand6</Name>
+          <Page isRef="186" />
+          <Parent isRef="186" />
+          <Sort isList="true" count="0" />
+        </DataBand6>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>629b1028a89841d19b6ec5f314fa4edb</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>subReport_5</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>15.65</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="190" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </subReport_5>
+  </Pages>
+  <PrinterSettings Ref="191" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>5/11/2016 6:34:35 PM</ReportChanged>
+  <ReportCreated>4/17/2016 3:15:14 PM</ReportCreated>
+  <ReportFile>D:\360data\重要数据\桌面\SMRV01.mrt</ReportFile>
+  <ReportGuid>21de989e1b854142bc5048a7c030acc1</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2014.3.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+using System.Collections.Generic;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+		
+		public string GetTruck(object obj){
+			string ltruck_no="";
+			if(obj!=null)ltruck_no=obj.ToString();
+			string result = "";
+			if (string.IsNullOrEmpty(ltruck_no))
+				return result;
+			string[] lns = ltruck_no.Split(new string[] { ";"}, StringSplitOptions.RemoveEmptyEntries);
+			List&lt;string&gt; list = new List&lt;string&gt;();
+			foreach (var ln in lns)
+			{
+				if (list.Contains(ln))
+					continue;
+				list.Add(ln);
+				if (result.Length &gt; 0)
+					result += ";";
+				result += ln;
+			}
+			return result;
+		}
+
+		public string GetAddr(string addr1,string addr2,string addr3){
+			string addr="";
+			if(!string.IsNullOrEmpty(addr1))
+			{
+				addr+=addr1;
+			}
+			if(!string.IsNullOrEmpty(addr2))
+			{
+				if(addr.Length&gt;0)
+					addr+=",";
+				addr+=addr2;
+			}
+			if(!string.IsNullOrEmpty(addr3))
+			{
+				if(addr.Length&gt;0)
+					addr+=",";
+				addr+=addr3;
+			}
+			return addr;
+		}
+		
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

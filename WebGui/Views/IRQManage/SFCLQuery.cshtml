@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "SFCLQuery";
+}
+
+
+
+<script type="text/javascript">
+var _dm = new dm();
+var _oldDeatiArray = [];
+var _oldSerialArray = [];
+$(document).ready(function ($) {
+    var actFormatter = function (cellvalue, options, rawObject) {
+        var val = 0;
+        if (cellvalue == null || cellvalue === undefined || cellvalue == 0)
+            val = "";
+        else
+            val = cellvalue;
+        if (1 === cellvalue)
+            return '<div style="color: green;font-weight: bold;background-color: greenyellow;">' + val + '</div>';
+        return val;
+    };
+    //init Search
+    var gop = {};
+    var numberTemplate = "2";
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 280;
+    gop.gridColModel = [
+        { name: 'UId', title: 'ID',showname: 'UId', sorttype: 'string', hidden: true, viewable: false },
+        { name: 'LspCd', dfsopt: 'in',init: true, dv: "@ViewBag.LSP", title: '@Resources.Locale.L_AirQuery_LspCd', index: 'LspCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'LspNm', title: '@Resources.Locale.L_AirQuery_LspNm', index: 'LspNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Region', title: '@Resources.Locale.L_DTQuery_Region', index: 'Region', width: 60, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PodCd', title: '@Resources.Locale.L_BaseLookup_PodCd', index: 'PodCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PodNm', title: '@Resources.Locale.L_BaseLookup_PodName', index: 'PodNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PolCd', title: '@Resources.Locale.L_BaseLookup_PolCd', index: 'PolCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PolNm', title: '@Resources.Locale.L_BaseLookup_PolName', index: 'PolNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'ViaCd', title: 'Via', index: 'ViaCd', sorttype: 'string', width: 80, hidden: false },
+        { name: 'Carrier', title: '@Resources.Locale.L_ContainUsage_Carrier', index: 'Carrier', width: 90, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Incoterm', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'Incoterm', width: 60, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'LoadingFrom', title: 'Loading From', index: 'LoadingFrom', width: 90, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'LoadingTo', title: 'Loading To', index: 'LoadingTo', width: 90, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', width: 60, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'F2', title: "20’", index: 'F2', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'F3', title: "40’", index: 'F3', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L3', title: '@Resources.Locale.L_AirQuery_L1', index: 'L3', width: 60, align: 'right', formatter: actFormatter, hidden: false },
+        { name: 'F4', title: '@Resources.Locale.L_SFCLQuery_F4', index: 'F4', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'F12', title: "@Resources.Locale.L_SFCLQuery_F12", index: 'F12', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'F13', title: "@Resources.Locale.L_SFCLQuery_F13", index: 'F13', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'F14', title: "@Resources.Locale.L_SFCLQuery_F14", index: 'F14', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'SailingDay', title: '@Resources.Locale.L_SFCLQuery_SailingDay', index: 'SailingDay', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'FreeOdt', title: '@Resources.Locale.L_SFCLQuery_FreeOdt', index: 'FreeOdt', width: 150, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+        { name: 'FreeOdm', title: '@Resources.Locale.L_SFCLQuery_FreeOdm', index: 'FreeOdm', width: 150, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+        { name: 'FreeDdt', title: '@Resources.Locale.L_SFCLQuery_FreeDdt', index: 'FreeDdt', width: 150, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+        { name: 'FreeDdm', title: '@Resources.Locale.L_SFCLQuery_FreeDdm', index: 'FreeDdm', width: 150, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+        { name: 'Tt', title: '@Resources.Locale.L_RouteSetup_Tt', index: 'Tt', width: 80, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+        { name: 'ViaNm', title: '@Resources.Locale.L_SFCLQuery_ViaNm', index: 'ViaNm', width: 90, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Note', title: '@Resources.Locale.L_SFCLQuery_Note', index: 'Note', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Remark', title: '@Resources.Locale.L_IpPart_Remark', index: 'Remark', width: 200, align: 'left', sorttype: 'string', hidden: false }
+    ];
+    gop.AddUrl = false;
+    gop.gridId = "containerInfoGrid";
+    //gop.multiselect = true;
+    gop.gridAttr = { caption: "@Resources.Locale.L_RQSetup_FCLComp", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    gop.gridSearchUrl = rootPath + "RQManage/SFCLQueryData";
+    gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        //dblClick(map);
+        var uid = map.UId;
+        if (!uid) {
+            CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+            return;
+        }                                
+    }
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+        
+    var uid = "@ViewBag.UId";
+    gop.baseCondition = "";
+    gop.baseConditionFunc = function () {
+        if (uid === "")
+            return "";
+        return " RFQ_NO='" + uid + "'";
+    };
+    setTimeout(function () {
+        $("#SummarySearch").trigger("click");
+    }, 1000);
+    initSearch(gop);
+});
+</script>
+
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

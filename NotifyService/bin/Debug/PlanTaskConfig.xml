@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<task-list>
+<!--
+server:mail server地址
+id:连接mail server的帐号
+password:连接mail server的密码
+sender:发信人
+-->
+  <mail-connection server="172.20.2.5" id="Fq.oa" password="Fqoa" sender="EShipping&lt;EShipping@tpv.com&gt;" />
+  <!--
+id:任务代码
+class:任务类名,必须实现Prolink.Task.IPlanTask
+params:创建任务类对象的参数
+gapRunMinute:任务执行间隔时间,单位分钟
+threadStepTimeOut:任务每个执行步骤的超时时间,单位秒。小于等于0不限制
+threadTimeOut:整个任务执行的超时时间,单位分。小于等于0不限制
+mailToOnError:任务执行过程中发生错误时,通知对象
+mailCcOnError:任务执行过程中发生错误时,通知cc对象
+-->
+<task id="SendMailTask" class="NotifyService.Task.SendMailTask,NotifyService" gapRunMinute="1" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="InboundOutToIn" class="NotifyService.Task.InboundOutToIn,NotifyService" gapRunMinute="60" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="InboundASDReport" class="NotifyService.Task.InboundASDReport,NotifyService" gapRunMinute="30" params="1" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="PostingBillTask" class="NotifyService.Task.PostingBillTask,NotifyService" params="7;12;15" gapRunMinute="1" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="InboundAsnDetail" class="NotifyService.Task.GetASNDetailTask,NotifyService" gapRunMinute="30" params="1" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="InboundCalculcostTask" class="NotifyService.Task.InboundCalculcostTask,NotifyService" gapRunMinute="5" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="ExportFileToFTPTask" class="NotifyService.Task.ExportFileToFTPTask,NotifyService" gapRunMinute="1" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="ExportSCMInfoToFTP" class="NotifyService.Task.ExportSCMInfoToFTP,NotifyService" params="" gapRunMinute="1" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="OBMCNInboundTruckAutoTask" class="NotifyService.Task.OBMCNInboundTruckAutoTask,NotifyService" gapRunMinute="2" params="" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="AutoDeleteEalertTask" class="NotifyService.Task.AutoDeleteEalertTask,NotifyService" gapRunMinute="180" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="SenASNDateToSAPTask" class="NotifyService.Task.SenASNDateToSAPTask,NotifyService" gapRunMinute="60" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="SendASNDateBYMMDTask" class="NotifyService.Task.SendASNDateBYMMDTask,NotifyService" gapRunMinute="1" params="2" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="AutoUploadDeclarationFromFtp" class="NotifyService.Task.AutoUploadDeclarationFromFtp,NotifyService" gapRunMinute="10" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="AutoCsTask" class="NotifyService.Task.AutoCsTask,NotifyService" gapRunMinute="3" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="InboundProcessFromFTP" class="NotifyService.Task.InboundProcessFromFTP,NotifyService" gapRunMinute="2" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="AutoDeleteSMINPO" class="NotifyService.Task.AutoDeleteSMINPO,NotifyService" gapRunMinute="1" params="6" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+<task id="UpdateSMIEat" class="NotifyService.Task.UpdateSMIEat,NotifyService" gapRunMinute="1" params="" threadStepTimeOut="0" threadTimeOut="0" mailToOnError="Will.Wan@wisetechglobal.com"></task>
+</task-list>

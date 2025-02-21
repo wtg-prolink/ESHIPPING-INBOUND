@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root> 
+    <pool>                               
+      <poolRptPath path="default">
+      </poolRptPath> 
+      <!--
+         //ResetPoolSet.aspx可以重新創建這些對象池
+         //path="default"或者物理地址例F:\Net-Case\ehu_2008\src\WebGui_2008\rpttemplate\
+         <poolRptPath path="default"> 
+             <objectPool rptName="AWB.XMZL" count="3"/>//rptName唯一, count表示池的個數
+             <objectPool rptName="AWB.LABEL" count="3"/>
+         </poolRptPath>
+      -->
+    </pool>
+    <other>
+      <otherRptPath path="default"/>
+    </other>
+</root>

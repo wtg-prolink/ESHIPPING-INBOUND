@@ -1,0 +1,445 @@
+﻿@{
+    ViewBag.Title = "CostStatistics";
+}
+<script type="text/javascript">
+	var select_contract = "@ViewBag.ContractSelect";
+	var ctypoption = "@ViewData["CTYPM"]";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/BaseLookup.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function ($) {
+
+		var gridheight = $(window).height() / 3 * 1;
+		var subgridheight = $(window).height() / 4 * 1;
+        var gop = {};
+        var mainColModel=[
+            { name: 'UId', showname: 'ID', sorttype: 'string', hidden: true, viewable: false },
+             { name: 'TranType', title: '@Resources.Locale.L_BaseLookup_TranType', index: 'TranType', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: 'Using Code:F=FCL;L=LCL;A=AIR;D=INLAND EXPRESS;E=EXPRESS;R=Railroad;T=TRUCK; EX:F;L;D', editoptions: { value: 'F:FCL;L:LCL;A:AIR;D:INLAND EXPRESS;E:EXPRESS;R:Railroad;T:TRUCK;' } },
+			{ name: 'InOut', title: '@Resources.Locale.L_WEEKSETUP_InOut', index: 'InOut', align: 'left',sorttype: 'string', width: 90, hidden: false, editable: true, formatter: "select", editoptions: { value: 'I:IN;O:OUT' } },
+			{ name: 'Chain', title: 'Chain', index: 'Chain', width: 80, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Location', title: 'Location', index: 'Location', sorttype: 'string', width: 90, align: 'left',hidden: false, editable: true },
+			{ name: 'CsYear', title: '@Resources.Locale.L_BookingQuery_Views_284', index: 'CsYear', align: 'right',width: 120, sorttype: "string", hidden: false},
+			{ name: 'CsQuarter', title: '@Resources.Locale.L_CostStatistics_CsQuarter', index: 'CsQuarter', align: 'right', width: 120, sorttype: "string", hidden: false},
+			{ name: 'CsMonth', title: '@Resources.Locale.L_common_Scripts_19', index: 'CsMonth', align: 'right', width: 120, sorttype: "string", hidden: false},
+			{ name: 'CsWeek', title: '@Resources.Locale.L_WEEKSETUP_FcWeek', index: 'CsWeek', sorttype: 'number', align: 'right', width: 90, hidden: false, editable: true },
+            { name: 'Pol', title: '@Resources.Locale.L_ForecastQueryData_PolName', index: 'Pol', width: 60, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'PolNm', title: '@Resources.Locale.L_BaseLookup_PolName', index: 'PolNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Pod', title: '@Resources.Locale.L_ForecastQueryData_PodName', index: 'Pod', width: 60, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'PodNm', title: '@Resources.Locale.L_BaseLookup_PodName', index: 'PodNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Dest', title: '@Resources.Locale.L_BaseLookup_DestCd', index: 'Dest', width: 60, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'DestNm', title: '@Resources.Locale.L_SMORD_DestName', index: 'DestNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'PortPol', title: '@Resources.Locale.L_CostStatistics_PortPol', index: 'PortPol', width: 150, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Carrier', title: '@Resources.Locale.L_IbGateManage_Carrier', index: 'Carrier', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'CarrierAbbr', title: '@Resources.Locale.L_CostStatistics_CarrierAbbr', index: 'CarrierAbbr', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Country', title: '@Resources.Locale.L_SMSMI_DestCnty', index: 'Country', width: 80, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Region', title: 'Region', index: 'Region', sorttype: 'string', width: 90, align: 'left',hidden: false, editable: true },
+			{ name: 'ContactType', title: '@Resources.Locale.L_BaseLookup_ContactType', index: 'ContactType', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_contract } },
+			{ name: 'ShipmentId', title: '@Resources.Locale.L_DNApproveManage_ShipmentId', index: 'ShipmentId', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			@*{ name: 'FsspEstno', title: '@Resources.Locale.L_CostStatistics_FsspEstno', index: 'FsspEstno', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'PostDate', title: '@Resources.Locale.L_post_flagdate', index: 'PostDate', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },*@
+            { name: 'DnNo', title: '@Resources.Locale.L_DNApproveManage_DnNo', index: 'DnNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'InvNo', title: '@Resources.Locale.L_SMIDN_InvoiceNo', index: 'InvNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Incoterm', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'Incoterm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'FrtTerm', title: '@Resources.Locale.L_BSTSetup_FreightTerm', index: 'FrtTerm', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'P:Prepaid;C:Collect;O:Other' } },
+			{ name: 'Bu', title: 'BU', index: 'Bu', width: 80, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Bg', title: 'BG', index: 'Bg', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'SubBg', title: 'SUB BG', index: 'SubBg', width: 130, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'SubBgNm', title: 'SUB BG Name', index: 'SubBgNm', width: 130, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'FiCustCd', title: '@Resources.Locale.L_DNApproveManage_FiCustCd', index: "FiCustCd", width: 80, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'FiCustNm', title: '@Resources.Locale.L_DNApproveManage_FiCustNm', index: 'FiCustNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'IpartNo', title: '@Resources.Locale.L_DNApproveManage_IpartNo', index: 'IpartNo', width: 200, align: 'left', sorttype: 'string', hidden: false},
+            { name: 'Plant', title: '@Resources.Locale.L_DNApproveManage_Plant', index: 'Plant', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Cbm', title: '@Resources.Locale.L_BaseLookup_Cbm', index: 'Cbm', width: 80, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Qty', title: '@Resources.Locale.L_BaseLookup_Qty', index: 'Qty', sorttype: 'string', width: 120, align: 'right', hidden: false },
+			{ name: 'Feu', title: '@Resources.Locale.L_DNApproveManage_Feu', index: 'Feu', width: 80, align: 'right', sorttype: 'number', hidden: false },
+			{ name: 'ChgCode', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCode', sorttype: 'string', width: 80, align: 'left',hidden: false, editable: true },
+			{ name: 'ChgDescp', title: '@Resources.Locale.L_SMCHGSetup_ChgDescp', index: 'ChgDescp', sorttype: 'string', width: 150, align: 'left', hidden: false, editable: false },
+			{ "name": "LspNo", "title": "@Resources.Locale.L_ContractSetup_LspNo", "index": "LspNo", "width": 80, "align": "left", "sorttype": "string", "hidden": false },
+            { "name": "LspNm", "title": "@Resources.Locale.L_ContractSetup_LspNm", "index": "LspNm", "width": 130, "align": "left", "sorttype": "string", "hidden": false },
+			{ "name": "BillTo", "title": '@Resources.Locale.L_CostStatistics_BillTo', "index": "BillTo", "width": 80, "align": "left", "sorttype": "string", "hidden": false },
+            { name: 'ChgType', title: '@Resources.Locale.L_SMCHGSetup_ChgType', index: 'ChgType', width: 90, align: 'left', sorttype: 'string', hidden: false , formatter: "select", editoptions: { value: 'F:F.Freight Charge;O:O.Original Fee;D:D.Destination Fee' }, edittype: 'select' },
+			{ name: 'ChgLevel', title: '@Resources.Locale.L_SMCHGSetup_ChgRepay', index: 'ChgLevel', sorttype: 'string', width: 120, align: 'left',editable: true, hidden: false, formatter: "select", editoptions: { value: 'M:@Resources.Locale.L_SMCHGSetup_MustChg;C:@Resources.Locale.L_SMCHGSetup_OcrChg;Y:@Resources.Locale.L_SMCHGSetup_Repay;A:@Resources.Locale.L_SMCHGSetup_AtCost' }, edittype: 'select' },
+			{ name: 'Qcost', title: '@Resources.Locale.L_CostStatistics_QCost' +'(USD)', index: 'Qcost', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Ecost', title: '@Resources.Locale.L_CostStatistics_ECost' + '(USD)', index: 'Ecost', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Acost', title: '@Resources.Locale.L_CostStatistics_ACost' + '(USD)', index: 'Acost', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Ocrncy', title: '@Resources.Locale.L_CostStatistics_Ocrncy', index: 'Ocrncy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Oqcrncy', title: '@Resources.Locale.L_CostStatistics_Oqcrncy', index: 'Oqcrncy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Oecrncy', title: '@Resources.Locale.L_CostStatistics_Oecrncy', index: 'Oecrncy', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Oqcost', title: '@Resources.Locale.L_CostStatistics_OQCost', index: 'Oqcost', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Oecost', title: '@Resources.Locale.L_CostStatistics_OECost', index: 'Oecost', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Oacost', title: '@Resources.Locale.L_CostStatistics_OACost', index: 'Oacost', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Stn', title: '@Resources.Locale.L_SMSMI_Stn', index: 'Stn', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'DnType', title: '@Resources.Locale.L_DNApproveManage_DnType', index: 'DnType', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'CostCenter', title: '@Resources.Locale.L_BaseColModel_CostCenter', index: 'CostCenter', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'ProfitCenter', title: '@Resources.Locale.L_ActDeatilManage_Views_75', index: 'ProfitCenter', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'RegionGroup', title: 'Region Group', index: 'RegionGroup', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'RefKey', title: 'Ref Key 2', index: 'RefKey', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Bu1', title: '@Resources.Locale.L_DNApproveManage_Bu', index: 'Bu1', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Allocation', title: '@Resources.Locale.L_CostStatistics_Allocation', index: 'Allocation', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'ReCd', title: '@Resources.Locale.L_CostStatistics_ReCd', index: 'ReCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'RgCd', title: 'RG Code', index: 'RgCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'RgNm', title: 'RG Name', index: 'RgNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'TradeTerm', title: 'Incoterm', index: 'TradeTerm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Qtax', title: '@Resources.Locale.L_CostStatistics_Qtax', index: 'Qtax', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Etax', title: '@Resources.Locale.L_CostStatistics_Etax', index: 'Etax', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Atax', title: '@Resources.Locale.L_CostStatistics_Atax', index: 'Atax', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Qlevel', title: '@Resources.Locale.L_CostStatistics_Qlevel', index: 'Qlevel', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Elevel', title: '@Resources.Locale.L_CostStatistics_Elevel', index: 'Elevel', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Alevel', title: '@Resources.Locale.L_CostStatistics_Alevel', index: 'Alevel', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Nqamt', title: '@Resources.Locale.L_CostStatistics_Nqamt', index: 'Nqamt', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Neamt', title: '@Resources.Locale.L_CostStatistics_Neamt', index: 'Neamt', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Naamt', title: '@Resources.Locale.L_CostStatistics_Naamt', index: 'Naamt', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Qtamt', title: '@Resources.Locale.L_CostStatistics_Qtamt', index: 'Qtamt', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Etamt', title: '@Resources.Locale.L_CostStatistics_Etamt', index: 'Etamt', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Atamt', title: '@Resources.Locale.L_CostStatistics_Atamt', index: 'Atamt', width: 100, align: 'right', sorttype: 'string', hidden: false },
+			@*{ name: 'PostFssp', title: '@Resources.Locale.L_CostStatistics_PostFssp', index: 'PostFssp', width: 150, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'PostFlag', title: '@Resources.Locale.L_CostStatistics_PostFlag', index: 'PostFlag', align: 'left', sorttype: 'string', width: 90, hidden: false, editable: true, formatter: "select", editoptions: { value: ':;P:@Resources.Locale.L_PostFlag_P;Y:@Resources.Locale.L_DNManage_Sent;N:@Resources.Locale.L_SendFail' } },*@
+			{ name: 'CardNo', title: '@Resources.Locale.L_CostStatistics_CardNo', index: 'CardNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'CostRule', title: '@Resources.Locale.L_CostStatis_CostRule', index: 'CostRule', width: 100, align: 'left', sorttype: 'string', formatter: "select", editoptions: { value: 'POITEM:by PO Item;INVITEM:by Invoice Item' }, hidden: false },
+            { name: 'RuleType', title: '@Resources.Locale.L_CostStatis_RuleType', index: 'RuleType', width: 100, align: 'left', sorttype: 'string', formatter: "select", editoptions: { value: 'CBM:by CBM;GW:by Gross Weight;NW:by Net Weight;VALUE:by Cargo Value etc.' }, hidden: false },
+		];
+        gop.gridColModel = mainColModel
+        gop.AddUrl = false;
+        gop.gridId = "containerInfoGrid";
+		gop.gridAttr = { caption: '@Resources.Locale.L_CostStatistics_Grid', height: "auto", refresh: true, exportexcel: true, conditions: encodeURI(loadCondition), height: gridheight };
+		gop.gridSearchUrl = rootPath + "StatisticManage/CostQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+        //gop.ShowChart = true;
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.gridFunc = function (map) {
+        }
+		gop.btnGroup = [
+
+		]
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        initSearch(gop);
+
+
+		var colModel = [
+			{ name: 'Condition1', title: '@Resources.Locale.L_WEEKSETUP_InOut', index: 'Condition1', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'I:IN;O:OUT' } },
+			{ name: 'Condition2', title: 'Location', index: 'Condition2', width: 80, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Condition3', title: 'BG', index: 'Condition3', width: 80, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Condition4', title: '@Resources.Locale.L_CostStatistics_Payee', index: 'Condition4', width: 80, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Condition7', title: '@Resources.Locale.L_CostStatistics_PayeeName', index: 'Condition7', width: 100, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Condition5', title: '@Resources.Locale.L_BUDGETPLAN_BpYear', index: 'Condition5', width: 80, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Condition6', title: '@Resources.Locale.L_BUDGETPLAN_BpMonth', index: 'Condition6', width: 80, align: 'left', sorttype: 'string', hidden: false },
+			{ name: 'Feu', title: '@Resources.Locale.L_DNApproveManage_Feu', index: 'Feu', width: 80, align: 'right', sorttype: 'string', hidden: false, formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 3, defaultValue: '0.000' }},
+			{ name: 'Qcost1', title: '@Resources.Locale.L_CostStatistics_Sort' + '1(' + '@Resources.Locale.L_CostStatistics_QCost' + ')', index: 'Qcost1', width: 80, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Ecost1', title: '@Resources.Locale.L_CostStatistics_Sort' + '1(' + '@Resources.Locale.L_CostStatistics_ECost' + ')', index: 'Ecost1', width: 80, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Acost1', title: '@Resources.Locale.L_CostStatistics_Sort' + '1(' + '@Resources.Locale.L_CostStatistics_ACost' + ')', index: 'Acost1', width: 80, align: 'right', sorttype: 'string', hidden: false },
+			{ name: 'Gap1', title: '@Resources.Locale.L_CostStatistics_Sort' + '1(' + 'GAP' + ')', index: 'Gap1', width: 80, align: 'right', sorttype: 'string', hidden: false }
+		];
+		for (var i = 2; i < 11; i++) {
+			colModel.push({ name: 'Qcost' + i, title: '@Resources.Locale.L_CostStatistics_Sort' + i + '(' + '@Resources.Locale.L_CostStatistics_QCost' + ')', index: 'Qcost' + i, width: 80, align: 'right', sorttype: 'string', hidden: false });
+			colModel.push({ name: 'Ecost' + i, title: '@Resources.Locale.L_CostStatistics_Sort' + i + '(' + '@Resources.Locale.L_CostStatistics_ECost' + ')', index: 'Ecost' + i, width: 80, align: 'right', sorttype: 'string', hidden: false });
+			colModel.push({ name: 'Acost' + i, title: '@Resources.Locale.L_CostStatistics_Sort' + i + '(' + '@Resources.Locale.L_CostStatistics_ACost' + ')', index: 'Acost' + i, width: 80, align: 'right', sorttype: 'string', hidden: false });
+			colModel.push({ name: 'Gap' + i, title: '@Resources.Locale.L_CostStatistics_Sort' + i + '(' + 'GAP' + ')', index: 'Gap' + i, width: 80, align: 'right', sorttype: 'string', hidden: false });
+		}
+		$SubGrid = $("#SubGrid");
+		var sorturl = rootPath + "StatisticManage/CostSortQueryData";
+		var _dm = new dm();
+		var _oldDeatiArray = [];
+		_dm.addDs("SubGrid", [], ["UFid"], $SubGrid[0]);
+		new genGrid(
+			$SubGrid,
+			{
+				datatype: "json",
+				loadonce: true,
+				url: "",
+				colModel: colModel,
+				caption: "@Resources.Locale.L_CostStatistics_Reforming",
+				height: subgridheight,
+				refresh: true,
+				cellEdit: false,//禁用grid编辑功能
+				pginput: false,
+				sortable: true,
+				pgbuttons: false,
+				rownumWidth: 50,
+				rows: 200,
+				exportexcel: true,
+				savelayout: true,
+				showcolumns: true
+				,
+				ExportDataToExcel: function (grid) {
+					var colModel = grid.jqGrid("getGridParam", "colModel").slice();
+					var colNames = grid.jqGrid("getGridParam", "colNames");
+					var caption = grid.jqGrid("getGridParam", "caption");
+					var excelName = grid.jqGrid("getGridParam", "excelName");
+					//var sidx = grid.jqGrid("getGridParam", "sortname");
+					//var sord = grid.jqGrid("getGridParam", "sortorder");
+					for (var i = 0; i < colModel.length; i++) {
+						if (i == 0) {
+							delete colModel[0];
+
+							continue;
+						}
+
+						if (colModel[i].hidden == true || typeof colModel[i] == "undefined" || typeof colNames[i] == "undefined") {
+							delete colModel[i];
+							continue;
+						}
+						if (colModel[i].name == "cb") {
+							delete colModel[i];
+							continue;
+						}
+
+						colModel[i].caption = colNames[i];
+
+						if (colModel[i].sorttype == "int") {
+							colModel[i].sorttype = 1;
+						} else if (colModel[i].sorttype == "float") {
+							colModel[i].sorttype = 2;
+						} else {
+							colModel[i].sorttype = 0;
+						}
+					}
+					for (var i = 0; i < colModel.length; i++) {
+						if (colModel[i] == null)
+							continue;
+						if (colModel[i].caption && colModel[i].caption.replace) {
+							colModel[i].caption = colModel[i].caption.replace(new RegExp("&#39;", "gm"), "ft").replace(new RegExp('"', "gm"), "'").replace(new RegExp("'", "gm"), "’");
+						}
+						if (colModel[i].showname && colModel[i].showname.replace) {
+							colModel[i].showname = colModel[i].showname.replace(new RegExp("&#39;", "gm"), "ft").replace(new RegExp('"', "gm"), "'").replace(new RegExp("'", "gm"), "’");
+						}
+					}
+					var InOut = $("#InOut").val();
+					var Location = $("#Location").val();
+					var Bg = $("#Bg").val();
+					var Payee = $("#Payee").val();
+					var Year = $("#Year").val();
+					var Month = $("#Month").val();
+					var Sort = $("#Sort").val();
+					var Analysis1 = $("#Analysis1").val();
+					var Analysis2 = $("#Analysis2").val();
+					var params = loadCondition(gop.searchFormId);
+					postAndRedirect(sorturl, {
+						"ColumnList": JSON.stringify(colModel).replace(new RegExp("&#39;", "gm"), "ft").replace(new RegExp('"', "gm"), "'"),
+						InOut: InOut,
+						Location: Location,
+						Bg: Bg,
+						Payee: Payee,
+						Year: Year,
+						Month: Month,
+						Sort: Sort,
+						Analysis1: Analysis1,
+						Analysis2: Analysis2,
+						conditions: params,// "sidx": sidx, "sord": sord,
+						"resultType": "excel", "ReportTitle": caption, "excelName": excelName,
+					});
+				}
+			}
+		);
+
+		$("#Sort").change(function (e) {
+			var sort = $(this).val();
+			if (sort == "Y") {
+				var ctypoptionjson = CommonFunc.stringToJson(ctypoption);
+				for (var i = 1; i < 11 && i <= ctypoptionjson.length; i++) {
+					$SubGrid.jqGrid('setLabel', 'Qcost' + i, '@Resources.Locale.L_CostStatistics_Sort' + ctypoptionjson[i - 1]["cdDescp"] + '(' + '@Resources.Locale.L_CostStatistics_QCost' + ')');
+					$SubGrid.jqGrid('setLabel', 'Ecost' + i, '@Resources.Locale.L_CostStatistics_Sort' + ctypoptionjson[i - 1]["cdDescp"] + '(' + '@Resources.Locale.L_CostStatistics_ECost' + ')');
+					$SubGrid.jqGrid('setLabel', 'Acost' + i, '@Resources.Locale.L_CostStatistics_Sort' + ctypoptionjson[i - 1]["cdDescp"] + '(' + '@Resources.Locale.L_CostStatistics_ACost' + ')');
+					$SubGrid.jqGrid('setLabel', 'Gap' + i, '@Resources.Locale.L_CostStatistics_Sort' + ctypoptionjson[i - 1]["cdDescp"] + '(' + 'GAP' + ')');
+				}
+			} else {
+				for (var i = 1; i < 11; i++) {
+					$SubGrid.jqGrid('setLabel', 'Qcost' + i, '@Resources.Locale.L_CostStatistics_Sort' + i + '(' + '@Resources.Locale.L_CostStatistics_QCost' + ')');
+					$SubGrid.jqGrid('setLabel', 'Ecost' + i, '@Resources.Locale.L_CostStatistics_Sort' + i + '(' + '@Resources.Locale.L_CostStatistics_ECost' + ')');
+					$SubGrid.jqGrid('setLabel', 'Acost' + i, '@Resources.Locale.L_CostStatistics_Sort' + i + '(' + '@Resources.Locale.L_CostStatistics_ACost' + ')');
+					$SubGrid.jqGrid('setLabel', 'Gap' + i, '@Resources.Locale.L_CostStatistics_Sort' + i + '(' + 'GAP' + ')');
+				}
+			}
+		});
+
+		$("#btn_Sort").bind("click", function () {
+			var InOut = $("#InOut").val();
+			var Location = $("#Location").val();
+			var Bg = $("#Bg").val();
+			var Payee = $("#Payee").val();
+			var Year = $("#Year").val();
+			var Month = $("#Month").val();
+			var Sort = $("#Sort").val();
+			var Analysis1 = $("#Analysis1").val();
+			var Analysis2 = $("#Analysis2").val();
+			var params =loadCondition(gop.searchFormId);
+			$.ajax({
+				async: true,
+				url: sorturl,
+				type: 'POST',
+				data: {
+					InOut: InOut,
+					Location: Location,
+					Bg: Bg,
+					Payee: Payee,
+					Year: Year,
+					Month: Month,
+					Sort: Sort,
+					Analysis1: Analysis1,
+					Analysis2: Analysis2,
+					conditions: params
+				},
+				dataType: "json",
+				beforeSend: function () {
+					CommonFunc.ToogleLoading(true);
+				},
+				"complete": function (xmlHttpRequest, successMsg) {
+					if (successMsg != "success") return null;
+				},
+				"error": function (xmlHttpRequest, errMsg) {
+				},
+				success: function (result) {
+					var mainTable = result;
+					console.log(mainTable);
+					var $grid = $("#SubGrid");
+					$grid.jqGrid("clearGridData");
+					//$grid.jqGrid("clearGridData");
+					$grid.jqGrid("setGridParam", {
+						datatype: 'local',
+						sortorder: "asc",
+						sortname: "",
+						data: mainTable.rows
+					}).trigger("reloadGrid");
+					CommonFunc.ToogleLoading(false);
+				}
+			});
+		});
+
+    });
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label class="control-label">@Resources.Locale.L_CostStatistics_Aggregatecondition</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <select class="form-control input-sm" id="InOut" name="InOut" fieldname="InOut">
+                                <option value=""></option>
+                                <option value="Y">@Resources.Locale.L_BSEXACCT_Io</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <select class="form-control input-sm" id="Location" name="Location" fieldname="Location">
+                                <option value=""></option>
+                                <option value="Y">Location</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <select class="form-control input-sm" id="Bg" name="Bg" fieldname="Bg">
+                                <option value=""></option>
+                                <option value="Y">BG</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <select class="form-control input-sm" id="Payee" name="Payee" fieldname="Payee">
+                                <option value=""></option>
+                                <option value="Y">@Resources.Locale.L_CostStatistics_Payee</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <select class="form-control input-sm" id="Year" name="Year" fieldname="Year">
+                                <option value=""></option>
+                                <option value="Y">@Resources.Locale.L_BUDGETPLAN_BpYear</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <select class="form-control input-sm" id="Month" name="Month" fieldname="Month">
+                                <option value=""></option>
+                                <option value="Y">@Resources.Locale.L_BUDGETPLAN_BpMonth</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label class="control-label">@Resources.Locale.L_CostStatistics_ExpenseSort</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <select class="form-control input-sm" id="Sort" name="Sort" fieldname="Sort">
+                                <option value="">All</option>
+                                <option value="Y">@Resources.Locale.L_CostStatistics_Sort</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label class="control-label">@Resources.Locale.L_CostStatistics_GAPAnalysis</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <select class="form-control input-sm" id="Analysis1" name="Analysis1" fieldname="Analysis1">
+                                <option value="Q">@Resources.Locale.L_CostStatistics_Quotation</option>
+                                <option value="E" selected>@Resources.Locale.L_CostStatistics_Estimated</option>
+                                <option value="A">@Resources.Locale.L_CostStatistics_ACost</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <select class="form-control input-sm" id="Analysis2" name="Analysis2" fieldname="Analysis2">
+                                <option value="Q">@Resources.Locale.L_CostStatistics_Quotation</option>
+                                <option value="E">@Resources.Locale.L_CostStatistics_Estimated</option>
+                                <option value="A" selected>@Resources.Locale.L_CostStatistics_ACost</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <button class="btn btn-sm btn-primary pms-btn" id="btn_Sort">@Resources.Locale.L_CostStatistics_Reforming</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="SubGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 

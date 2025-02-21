@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "FCLChgQueryView";
+}
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        var select_tranmode = "@ViewBag.SelectTranMode";
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = getSiteHeight();
+        gridHeight = docHeight - 310;
+        gop.gridColModel = [
+            { name: 'UId', showname: 'UId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'QuotType', title: '@Resources.Locale.L_RQQuery_Status', index: 'QuotType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'I:Enquiry;A:@Resources.Locale.L_InvCheck_Views_214;Q:@Resources.Locale.L_QTSetup_Quote;P:@Resources.Locale.L_QTSetup_Prepare;B:@Resources.Locale.L_RQSetup_Bidder;V:@Resources.Locale.L_MenuBar_Audit;F:@Resources.Locale.L_RQSetup_Bidder'  } },
+            { name: 'TranType', title: 'TranType', init: true, index: 'TranType', sorttype: 'string', width: 100, hidden: false, editable: true, formatter: "select", editoptions: { value: 'F:F.FCL;A:A.Air;L:L.LCL;R:R.RailWay;D:D.Inland Express;T:T.Truck;E:E.Express' }, edittype: 'select' },
+            { name: 'QuotNo', title: '@Resources.Locale.L_QTQuery_QuotNo', index: 'QuotNo', width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'QuotDate', title: '@Resources.Locale.L_QTQuery_QuotDate', index: 'QuotDate', editable: false, formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Rlocation', title: '@Resources.Locale.L_RQQuery_Rlocation', index: 'Rlocation', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RlocationNm', title: '@Resources.Locale.L_RQQuery_Rlocation' + "@Resources.Locale.L_BaseLookup_Nm", index: 'RlocationNm', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SharedTo', title: 'Shared To', index: 'SharedTo', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SharedNm', title: 'Shared To Name', index: 'SharedNm', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspCd', title: '@Resources.Locale.L_AirSetup_LspCd', index: 'LspCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspNm', title: '@Resources.Locale.L_AirSetup_LspCd' + "@Resources.Locale.L_BaseLookup_Nm", index: 'LspNm', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'EffectFrom', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', width: 120, align: 'left', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'EffectTo', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', width: 120, align: 'left', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateBy', init: true, title: "@Resources.Locale.L_DNApproveManage_CreateBy", index: 'CreateBy', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'QuotRmk', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'QuotRmk', width: 300, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateDate', title: '@Resources.Locale.L_DNApproveManage_CreateDate', index: 'CreateDate', editable: false, formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: null }, width: 130, align: 'left', sorttype: 'string', hidden: false }
+        ];
+        gop.AddUrl = { "url": rootPath + "IQTManage/FCLChgSetup", "title": "@Resources.Locale.L_QTSetup_VesCmpDetl", "id": "FCLChgSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_QTSetup_DelaQuoList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "IQTManage/QTCarrierQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "CreateDate";
+        }
+
+        gop.statusGroup = [
+            { "id": "", "label": "@Resources.Locale.L_UserSetUp_All" },
+            { "id": "P", "label": "@Resources.Locale.L_QTSetup_Prepare" },
+            { "id": "I", "label": "Enquiry" },
+            { "id": "Q", "label": "@Resources.Locale.L_QTSetup_Quote" },
+            { "id": "A", "label": "@Resources.Locale.L_InvCheck_Views_214" },
+            { "id": "V", "label": "@Resources.Locale.L_MenuBar_Audit" }
+        ];
+
+        gop.statusField = "QuotType";
+        gop.statusDefaultId = "Q";
+
+        initSearch(gop);
+
+        $("#SummarySearch").bind("click", function () {
+            $(".status-box").removeClass("active");
+            $("#searchStatus_").addClass("active");
+        });
+
+        function dblClick(map) {
+            var UId = map.UId;
+            var tranmode = map.TranMode;
+            var title = "";
+            var _url = "FCLChgSetup";
+
+            top.topManager.openPage({
+                href: rootPath + "IQTManage/" + _url + "?UId=" + UId,
+                title: title + '@Resources.Locale.L_QTSetup_VesCmpDetl',
+                id: _url,
+                search: 'uid=' + UId,
+                reload: true
+            });
+        }
+    });
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,675 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>TPV Global Logistics Platform --- @ViewBag.SYS_TITLE- @ViewBag.SYS_VERSION</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="@Url.Content("~/Scripts/css/lib/grids-responsive.css")" rel="stylesheet">
+        <link href="@Url.Content("~/Scripts/Core/bui/css/dpl-min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Scripts/Core/bui/css//bui-min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Scripts/Core/bui/css/bootstrap.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Scripts/Core/bui/css/main.css?01")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Scripts/css/lib/animate.min.css")" rel="stylesheet">
+    </head>
+    <body>
+        <div class="header_2">
+            <div class="dl-title">
+                <a href="@Url.Content("~/")" title="@ViewBag.SYS_TITLE" target="_blank">
+                    <img src="@Url.Content("~/Images/sd_logo_2.png")" style="height:22px" title="@ViewBag.SYS_TITLE"><span class="lp-title-port" style="margin-left:5px;">@ViewBag.SYS_TITLE</span>
+                </a>
+            </div>
+            @*<div class="dl-log">
+                <span class="btn btn-xs btn-success"><i class="glyphicon glyphicon-user"></i>&nbsp;Hi, (@ViewBag.companyId)@ViewBag.UserCode</span>
+                <button class="btn btn-xs btn-primary msg" type="button" id="btnMessage"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Messages <span class="badge"></span></button>
+                <button class="btn btn-xs btn-info" type="button" id="btnHelp"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;Help <span class="badge"></span></button>
+                <button type="button" onclick="logout()" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</button>
+            </div>*@
+            <div class="dl-log">
+                <div class="btn-group">
+                    <button type="button" id="LoginUser" class="btn btn-xs btn-success">
+                        <i class="glyphicon glyphicon-user"></i>&nbsp; Hi, (@ViewBag.companyId)@ViewBag.UserCode
+                    </button>
+                    <input type="hidden" id="hidCmp" value="@ViewBag.companyId" />
+                    <input type="hidden" id="hidLang" value="@ViewBag.Lang" />
+                    @*<button class="btn btn-xs btn-primary msg" type="button" id="btnMessage"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Messages <span class="badge"></span></button>*@
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Site
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu maxzindex" id="otherCmp">
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Lang
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu maxzindex" id="changeLang">
+                            <li id="zh-CN"><a href="#">@Resources.Locale.L_Login_Views_461</a></li>
+                            <li id="zh-TW"><a href="#">@Resources.Locale.L_Login_Views_462</a></li>
+                            <li id="en-US"><a href="#">English</a></li>
+                            <li id="ru-RU"><a href="#">Russia</a></li>
+                        </ul>
+                    </div>
+                    <button type="button" onclick="SetDefault()" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-wrench"></span>&nbsp;Set</button>
+                    <button class="btn btn-xs btn-info" type="button" id="btnHelp"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;Help <span class="badge"></span></button>
+                    <button type="button" onclick="logout()" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modal-index" id="helpModal" sid="">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Help</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <input type="text" id="searchInfo" /><button class="btn btn-xs btn-info" type="button" id="searchBtn">@Resources.Locale.TLB_Search1</button>
+                            <input type="hidden" id="qaType" />
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 6%">#</th>
+                                        <th id="Title">Title</th>
+                                        <th style="width: 10%">Uploader</th>
+                                        <th style="width: 16%">Update Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="helpTitle"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseCargoDetail">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade modal-index" id="helpDetailModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body" style="overflow: scroll;">
+                        <p>&hellip;</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <div class="modal fade modal-index" id="UserModel" sid="">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">@Resources.Locale.L_UserModal_EditDetail</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pure-g" style="border-bottom: 1px solid black">
+                            <label for="UMEmail" class="control-label">@Resources.Locale.L_UserModal_UserInfo</label>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-10-60">
+                                <label for="UMEmail" style="margin-right: 3px !important;">@Resources.Locale.L_UserSetUp_UEmail</label>
+                            </div>
+                            <div class="pure-u-sm-24-30 control-group">
+                                <input type="text" style="width: calc(100% - 15px)" class="form-control input-sm modal-input" dt="ut" id="UMEmail" name="UMEmail" />
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-10-60">
+                                <label for="UMTel" style="margin-right: 3px !important;">@Resources.Locale.L_UserSetUp_UPhone</label>
+                            </div>
+                            <div class="pure-u-sm-19-60 control-group">
+                                <input type="text" style="width: calc(100% - 15px)" class="form-control input-sm" dt="ut" id="UMTel" name="UMTel" />
+                            </div>
+                            <div class="pure-u-sm-10-60" style="text-align: right !important">
+                                <label for="UMExt" style="margin-right: 3px !important;">@Resources.Locale.L_GateReserveSetup_CreateExt</label>
+                            </div>
+                            <div class="pure-u-sm-19-60 control-group">
+                                <input type="text" style="width: calc(100% - 15px)" class="form-control input-sm" dt="ut" id="UMExt" name="UMExt" />
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-10-60">
+                                <label for="UMWechat" style="margin-right: 3px !important;">Wechat ID</label>
+                            </div>
+                            <div class="pure-u-sm-19-60 control-group">
+                                <input type="text" style="width: calc(100% - 15px)" class="form-control input-sm" dt="ut" id="UMWechat" name="UMWechat" />
+                            </div>
+                            <div class="pure-u-sm-10-60" style="text-align: right !important">
+                                <label for="UMQq" style="margin-right: 3px !important;">QQ ID</label>
+                            </div>
+                            <div class="pure-u-sm-19-60 control-group">
+                                <input type="text" style="width: calc(100% - 15px)" class="form-control input-sm" dt="ut" id="UMQq" name="UMQq" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pure-g" style="border-bottom: 1px solid black">
+                            <label for="UMPassInfo" style="margin-right: 3px !important;">@Resources.Locale.L_UserModal_PSWInfo</label>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-10-60">
+                                <label for="UMUpdatePriDate" style="margin-right: 3px !important;">@Resources.Locale.L_UserSetUp_NextDate</label>
+                            </div>
+                            <div class="pure-u-sm-19-60 control-group">
+                                <input type="text" style="width: calc(100% - 15px)" class="form-control input-sm" dt="ut" id="UMUpdatePriDate" name="UMUpdatePriDate" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="UserModelSave">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="UserModelClose">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modal-index" id="timeOutModal" data-backdrop="static">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">@Resources.Locale.L_UserModal_MsgTitle</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pure-g">
+                            <label id="TimeOutMsg" class="control-label"></label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="toModifyPassword()">@Resources.Locale.L_UserModal_ChangeNow</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Locale.L_UserModal_ChangeLater</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <div class="content">
+            <div class="dl-main-nav content newTopMargin">
+                <div class="dl-inform"><div class="dl-inform-title">@Resources.Locale.L_EDISetup_Notice<s class="dl-inform-icon dl-up"></s></div></div>
+                <ul id="J_Nav" class="nav-list ks-clear">
+                    <!--<li class="nav-item dl-selected"><div class="nav-item-inner nav-home">首页</div></li>-->
+                </ul>
+            </div>
+            <ul id="J_NavContent" class="dl-tab-conten"></ul>
+        </div>
+
+        <div class="footer-bar">
+            <div class="STATUS-AREA STATUS-USER" style="width: 15%;">@Resources.Locale.L_UserPermission_User<span></span></div>
+            <div class="PIPE"></div>
+            <div class="STATUS-AREA STATUS-TIP" style="width: 30%;">@Resources.Locale.L_EDISetup_Message<span></span></div>
+            <div class="PIPE"></div>
+            <div class="STATUS-AREA STATUS-MSG" style="width: 15%; ">@Resources.Locale.L_EDISetup_Info</div>
+            <div class="PIPE"></div>
+            <div class="STATUS-AREA STATUS-NOW" style="width: 15%;">@Resources.Locale.L_GroupRelation_stnStatus<span></span></div>
+
+            <div class="PIPE"></div>
+        </div>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/lib/jquery-1.11.1.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/bui.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/lib//jquery.timer.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/footer.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/config.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap-notify.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/lib/handlebars.js")"></script>
+        <script src="~/Scripts/lang.js?20241106"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/common.js?20240509")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/BaseLookup.js?20241216")"></script>
+        <style>
+            body, html {
+                font-family: Arial, 'Microsoft JhengHei', 'Heiti TC', '新細明體', sans-serif !important;
+                font-size: 14px;
+            }
+
+            [data-notify="progressbar"] {
+                margin-bottom: 0px;
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+                width: 100%;
+                height: 5px;
+            }
+
+            .alert-info {
+                cursor: pointer !important;
+            }
+
+            .modal-index {
+                z-index: 100000;
+            }
+        </style>
+        <script>
+    var config, tempNav, newData = new Array();
+    var navData = new Array();
+    var rootPath = "";
+    var edocUrl = "@ViewBag.EDOC_URL";
+    var lang = "@ViewBag.Lang" + "/";
+    var SearchReportStr = '@ViewBag.SearchReportData.Content';
+    var SearchReportData = JSON.parse(SearchReportStr.replace(/&quot;/g, '"'));
+    var Timeoutmsg = "@ViewBag.Timeoutmsg";
+        var Timeout = "@ViewBag.Timeout";
+
+    var DetailReportStr = '@ViewBag.DetailReportData.Content';
+    var DetailReportData = JSON.parse(DetailReportStr.replace(/&quot;/g, '"'));
+    var titleClick = 0;
+    var umEmail = '@ViewBag.UEmail';
+    var umTel = '@ViewBag.UPhone';
+    var umExt = '@ViewBag.UExt';
+    var umWechat = '@ViewBag.UWechat';
+    var umQq = '@ViewBag.UQq';
+    var umUpdatePriDate = '@ViewBag.UpdatePriDate';
+
+    rootPath = "@Url.Content("~")" + lang;
+
+
+    BUI.use('common/main', function () {
+        $.ajax({
+            url: '@Url.Content("~/zh-CN/Common/Menu")',
+            type: 'POST',
+            dataType: "text",
+            crossDomain: true
+        })
+            .done(function (data) {
+                //var Base64 = { _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) { var t = ""; var n, r, i, s, o, u, a; var f = 0; e = Base64._utf8_encode(e); while (f < e.length) { n = e.charCodeAt(f++); r = e.charCodeAt(f++); i = e.charCodeAt(f++); s = n >> 2; o = (n & 3) << 4 | r >> 4; u = (r & 15) << 2 | i >> 6; a = i & 63; if (isNaN(r)) { u = a = 64 } else if (isNaN(i)) { a = 64 } t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a) } return t }, decode: function (e) { var t = ""; var n, r, i; var s, o, u, a; var f = 0; e = e.replace(/[^A-Za-z0-9\+\/\=]/g, ""); while (f < e.length) { s = this._keyStr.indexOf(e.charAt(f++)); o = this._keyStr.indexOf(e.charAt(f++)); u = this._keyStr.indexOf(e.charAt(f++)); a = this._keyStr.indexOf(e.charAt(f++)); n = s << 2 | o >> 4; r = (o & 15) << 4 | u >> 2; i = (u & 3) << 6 | a; t = t + String.fromCharCode(n); if (u != 64) { t = t + String.fromCharCode(r) } if (a != 64) { t = t + String.fromCharCode(i) } } t = Base64._utf8_decode(t); return t }, _utf8_encode: function (e) { e = e.replace(/\r\n/g, "\n"); var t = ""; for (var n = 0; n < e.length; n++) { var r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r) } else if (r > 127 && r < 2048) { t += String.fromCharCode(r >> 6 | 192); t += String.fromCharCode(r & 63 | 128) } else { t += String.fromCharCode(r >> 12 | 224); t += String.fromCharCode(r >> 6 & 63 | 128); t += String.fromCharCode(r & 63 | 128) } } return t }, _utf8_decode: function (e) { var t = ""; var n = 0; var r = c1 = c2 = 0; while (n < e.length) { r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r); n++ } else if (r > 191 && r < 224) { c2 = e.charCodeAt(n + 1); t += String.fromCharCode((r & 31) << 6 | c2 & 63); n += 2 } else { c2 = e.charCodeAt(n + 1); c3 = e.charCodeAt(n + 2); t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63); n += 3 } } return t } }
+
+                // Decode the String
+                //data = jQuery.parseJSON(Base64.decode(data));
+                data = jQuery.parseJSON(data);
+                //data[0].menu = data;
+                //console.log(data);
+                var oldText = "";
+                var oldIndex = 0;
+                var navCount = 0;
+                //console.log(data);
+                $.each(data[0].menu, function (index, value) {
+                    var temp, temp1 = "";
+                    var text;
+                    var i = index;
+                    text = data[0].menu[i].text.split('@@');
+                    if (typeof text[1] != "undefined") {
+                        if ($.isArray(navData[i]) == false) {
+                            if (text[1] == oldText) {
+                                data[0].menu[i].text = text[0];
+                                navData[oldIndex].menu.push(data[0].menu[i]);
+                            } else {
+                                if ($.isPlainObject(navData[i]) == false) {
+                                    navData[navCount] = new Object();
+                                    navData[navCount].text = text[1];
+                                    navData[navCount].id = text[1];
+                                    navData[navCount].menu = new Array();
+                                    data[0].menu[i].text = text[0];
+
+                                }
+                                navData[navCount].menu.push(data[0].menu[i]);
+                                oldText = text[1];
+                                oldIndex = navCount;
+                                navCount++;
+                            }
+
+
+                        }
+                    }
+
+                });
+
+                //console.log(navData);
+                $.each(navData, function (index, value) {
+                    var j = index;
+
+                    newData[j] = new Object();
+
+                    newData[j].id = navData[j].id;
+                    newData[j].text = navData[j].text;
+                    if ($.isArray(newData[j].menu) == false) {
+                        newData[j].menu = new Array();
+                        newData[j].menu = navData[j].menu;
+
+                        for (var k = 0; k < newData[j].menu.length; k++) {
+                            for (var f = 0; f < newData[j].menu[k].items.length; f++) {
+                                newData[j].menu[k].items[f].href = rootPath + newData[j].menu[k].items[f].href;
+                            }
+                        }
+                    }
+                });
+
+                var str = "";
+                $.each(navData, function (index, value) {
+                    str += '<li class="nav-item"><div class="nav-item-inner">' + newData[index].text + '</div></li>';
+                });
+
+                $("#J_Nav").append(str);
+
+                newData[0].homePage = newData[0].menu[0].items[0].href.id;
+                if (Timeoutmsg != "") {
+                    $("#TimeOutMsg").text(Timeoutmsg);
+                    $("#timeOutModal").modal('show');
+                }
+                newData[0].homePage = "DHBULLETIN";
+                new PageUtil.MainPage({
+                    modulesConfig: newData
+                });
+            })
+            .fail(function (xhr, status, error) {
+                alert("@Resources.Locale.L_EDISetup_NoRight");
+                location.href = '@Url.Content("~/zh-CN/Home/LoginOut")';
+            });
+
+
+    });
+
+    function logout() {
+        var reg = new RegExp("INBOUND/", "g"); //创建正则RegExp对象
+        var newstr = rootPath.replace(reg, "");
+        location.href = newstr + "Home/LoginOut";
+    }
+
+            function SetDefault() {
+                $.ajax({
+                    type: "post",
+                    url: rootPath + "Home/SetDefaultSite",
+                    data: { "Cmp": $("#hidCmp").val(), "Lang": $("#hidLang").val() },
+                    dataType: "json",
+                    success: function (result) {
+                        alert(result.message);
+                        if (result.message == "success") {
+                            $("#otherCmp li").each(function () {
+                                var inhtml = $(this)[0].innerHTML;
+                                if (inhtml.indexOf("(Default)") != -1) {
+                                    $(this)[0].innerHTML = inhtml.replace(" (Default)", "");
+                                }
+
+                            });
+                        }
+                    }, error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+
+
+    var helpData = null;
+    $(document).ready(function ($) {
+        var userCode = '@ViewBag.userCode';
+        StatusBarArr.userName(userCode);
+        ajustamodal("#helpModal");
+        ajustamodal("#helpDetailModal");
+        //$(".dl-second-nav").height($(window).height() - 105);
+        $(window).resize(function (event) {
+            $(".bui-side-menu").height($(window).height() - 105);
+            $(".dl-second-nav").height($(window).height());
+            $(".tab-content-container").height($(window).height() - 125);
+            $(".bui-nav-tab").height($(window).height() - 125);
+            $("#page-wrapper").height($(window).height() - 25);
+        });
+
+        $("#btnMessage").click(function () {
+
+            top.topManager.openPage({
+                href: rootPath + "Common/Message",
+                title: 'MESSAGE',
+                id: 'MESSAGE'
+            });
+
+
+        });
+
+        $("#btnHelp").click(function () {
+            $("#searchInfo").val("");
+            var url = $("#J_NavContent").find('[class="dl-tab-item"]').find('.tab-content:visible iframe').attr("src");
+            var item = url.replace('INBOUND/', '').split('/');
+            var Type = "";
+            if (item.length >= 4)
+                Type = item[3];
+            $.ajax({
+                type: "post",
+                url: rootPath + "QA/byGroupGetDetail",
+                //contentType: "application/json; charset=utf-8",
+                data: { "Type": Type },
+                dataType: "json",
+                success: function (data) {
+                    helpData = data["main"];
+                    qaType = data["qaType"];
+                    if (data["sub"] == "Y") {
+                        $("#qaType").val(qaType);
+                        if (data["main"].length > 0) {
+                            var str = "";
+                            for (var i = 0; i < helpData.length; i++) {
+                                var title = helpData[i]["QaTitle"];
+                                var uploader = helpData[i]["Uploader"];
+                                var updateDate = helpData[i]["UpdateDate"];
+                                str += '<tr>';
+                                str += '<td>' + (i + 1) + '</td>';
+                                str += '<td><a href="#helpDetailModal" data-toggle="modal" data-target="#helpDetailModal" i=' + i + ' >' + title + '</a></td>';
+                                str += '<td>' + uploader + '</td>';
+                                str += '<td>' + updateDate + '</td>';
+                                str += '</tr>';
+                            }
+                            $('#helpTitle').html(str);
+                            $('#helpModal').modal('show');
+                        }
+                        else {
+                            alert("@Resources.Locale.L_QAhelp_NoData");
+                        }
+                    } else
+                        alert("@Resources.Locale.L_QAhelp_NotModule");
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        $("#searchBtn").click(function () {
+            titleClick = 0;
+            searchDetail(titleClick);
+        });
+
+        $("#LoginUser").click(function () {
+            $('#UserModel').modal('show');
+            $("#UMEmail").val(umEmail);
+            $("#UMTel").val(umTel);
+            $("#UMExt").val(umExt);
+            $("#UMWechat").val(umWechat);
+            $("#UMQq").val(umQq);
+            var date = umUpdatePriDate.substring(0, 10);
+            $("#UMUpdatePriDate").val(date);
+        });
+
+        $("#UserModelSave").click(function () {
+            var umail = $("#UMEmail").val();
+            var utel = $("#UMTel").val();
+            var uext = $("#UMExt").val();
+            var uwechat = $("#UMWechat").val();
+            var uqq = $("#UMQq").val();
+            umail = umail != umEmail && umail == "" ? "UserClear" : umail;
+            utel = utel != umTel && utel == "" ? "UserClear" : utel;
+            uext = uext != umExt && uext == "" ? "UserClear" : uext;
+            uwechat = uwechat != umWechat && uwechat == "" ? "UserClear" : uwechat;
+            uqq = uqq != umQq && uqq == "" ? "UserClear" : uqq;
+            var data = { "UMEmail": umail, "UMTel": utel, "UMExt": uext, "UMWechat": uwechat, "UMQq": uqq };
+            $.ajax({
+                type: "post",
+                url: rootPath + "Home/SaveUserModel",
+                data: data,
+                dataType: "json",
+                success: function (result) {
+                    alert(result.message);
+                    $('#UserModel').modal('hide');
+                    if (result.message == "success") {
+                        umEmail = umail == "UserClear" ? "" : umail;
+                        umTel = utel == "UserClear" ? "" : utel;
+                        umExt = uext == "UserClear" ? "" : uext;
+                        umWechat = uwechat == "UserClear" ? "" : uwechat;
+                        umQq = uqq == "UserClear" ? "" : uqq;
+                    }
+                }, error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        $("#Title").click(function () {
+            titleClick = titleClick + 1;
+            searchDetail(titleClick);
+        });
+
+        $('#helpDetailModal').on('show.bs.modal', function (e) {
+            targetElem = $(e.relatedTarget);
+            var data = helpData[targetElem.attr("i")];
+            $('#helpDetailModal .modal-title').html(data["QaTitle"]);
+            $('#helpDetailModal .modal-body p').html(data["QaAnswer"]);
+        });
+
+        $(document).on("click", ".alert-info", function () {
+            //console.log($(".alert-info").attr("msgID"));
+            top.topManager.openPage({
+                href: rootPath + "Common/Message/" + $(".alert-info").attr("msgID"),
+                search: "msgid=" + $(".alert-info").attr("msgID"),
+                title: 'MESSAGE',
+                id: 'MESSAGE'
+            });
+
+        });
+
+        $(document).on("click", ".bui-nav-tab-item", function () {
+            //alert($(".tab-content[style='display: block;']").find("iframe").attr("src"));
+            var thisSrc = $(".tab-content[style='display: block;']").find("iframe").attr("src");
+            var thisContent = $("iframe[src$='" + thisSrc + "']").contents();
+            //console.log($("iframe[src$='" + thisSrc + "']").contents());
+
+            StatusBarArr.msgTip(thisContent.find("#msgTipVal").text());
+            StatusBarArr.colMsg(thisContent.find("#colMsgVal").text());
+            StatusBarArr.nowStatus(thisContent.find("#nowStatusVal").text());
+        });
+        $(document).on("click", ".bui-menu-item a", function () {
+
+            StatusBarArr.msgTip("");
+            StatusBarArr.colMsg("");
+            StatusBarArr.nowStatus("");
+        });
+
+
+        $("#changeLang li").click(function () {
+            ChangeLang($(this).attr('id'))
+        });
+        function ChangeLang(lang) {
+            $.ajax({
+                type: "post",
+                url: rootPath + "Home/ChangeLang",
+                data: { "lang": lang },
+                dataType: "json",
+                success: function (result) {
+                    if (result.message != "success") {
+                        CommonFunc.Notify("", result.message, 500, "warning");
+                    } else {
+                        console.log("@Url.Content("~")");
+                        window.location.replace("@Url.Content("~")" + lang + "/Home/index");
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+        function ChangeSite(cmp) {
+            $.ajax({
+                type: "post",
+                url: rootPath + "Home/ChangeSite",
+                data: { "Cmp": cmp },
+                dataType: "json",
+                success: function (result) {
+                    if (result.message != "success") {
+                        CommonFunc.Notify("", result.message, 500, "warning");
+                    } else {
+                        window.location.replace("@Url.Content("~")" + result.lang + "/Home/index");
+                    }
+                }, error: function (err) {
+                    console.log(err);
+                }
+            });
+         }
+
+        var otherCmp = '@ViewBag.OTHER_CMP';
+        console.log(otherCmp);
+        var other= otherCmp.split(';');
+        for (var i = 0; i < other.length; i++)
+        {
+            $("#otherCmp").append('<li><a href="#">' + other[i] + '</a></li>');
+        }
+
+        $('#otherCmp li').click(function () {
+            var siteval = $(this).text();
+            var sitearray = siteval.split(" ");
+            if (sitearray.length > 0) {
+                siteval = sitearray[0];
+            }
+            ChangeSite(siteval);
+        })
+
+    });
+
+    function searchDetail(titleClick) {
+        var searchInfo = $("#searchInfo").val().trim();
+        var type = $("#qaType").val();
+        $.ajax({
+            type: "post",
+            url: rootPath + "QA/GetSearchDetail",
+            data: { "Type": type, "SearchInfo": searchInfo, "titleClick": titleClick },
+            dataType: "json",
+            success: function (data) {
+                helpData = data["main"];
+                if (data["main"].length > 0) {
+                    var str = "";
+                    for (var i = 0; i < helpData.length; i++) {
+                        var title = helpData[i]["QaTitle"];
+                        var uploader = helpData[i]["Uploader"];
+                        var updateDate = helpData[i]["UpdateDate"];
+                        str += '<tr>';
+                        str += '<td>' + (i + 1) + '</td>';
+                        str += '<td><a href="#helpDetailModal" data-toggle="modal" data-target="#helpDetailModal" i=' + i + ' >' + title + '</a></td>';
+                        str += '<td>' + uploader + '</td>';
+                        str += '<td>' + updateDate + '</td>';
+                        str += '</tr>';
+                    }
+                    $('#helpTitle').html(str);
+                } else {
+                    $('#helpTitle').html('');
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+            }
+
+            function toModifyPassword() {
+                top.topManager.openPage({
+                    href: rootPath + "System/ModifyPwd",
+                    title: '@Resources.Locale.TLB_MODIFYPWD',
+                    id: 'MODIFYPWD',
+                    reload: true
+                });
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,829 @@
+﻿@{
+	ViewBag.Title = "ModifyBookingSetupView";
+}
+<style>
+	.modal-body{
+	max-height: calc(100vh - 200px);
+	overflow-y: auto;
+	}
+</style>
+<script type="text/javascript">
+	var _uid = "@ViewBag.Uid";
+	var schemas = "@ViewBag.schemas.Content";
+	var TRAN_TYPE = '@ViewBag.TRAN_TYPE';
+	var CNTRN = "@ViewBag.CntrN";
+	var HASRV = "@ViewBag.HasRv";
+    var Priority = "@ViewBag.Priority";
+	var Ccchannel = "@ViewBag.Ccchannel";
+	var _dnNoList = "@ViewBag.DnList";
+    var PTlist = "@ViewBag.PTlist";
+	if(TRAN_TYPE == 'L' || TRAN_TYPE == 'A' || TRAN_TYPE == 'E')
+		{
+			CNTRN =  99;
+		}
+
+		 var PartyLang = [
+		  	'@Resources.Locale.L_SMSMIPT_UId',
+		  	'@Resources.Locale.L_SMSMIPT_PartyType',
+		  	'@Resources.Locale.L_SMSMIPT_TypeDescp',
+		  	'@Resources.Locale.L_SMSMIPT_PartyNo',
+		  	'@Resources.Locale.L_SMSMIPT_PartyName',
+		  	'@Resources.Locale.L_SMSMIPT_PartyName2',
+		  	'@Resources.Locale.L_SMSMIPT_PartyName3',
+		  	'@Resources.Locale.L_SMSMIPT_PartyName4',
+		  	'@Resources.Locale.L_SMSMIPT_DebitTo',
+		  	'@Resources.Locale.L_SMSMIPT_PartyAttn',
+		  	'@Resources.Locale.L_SMSMIPT_PartyTel',
+		  	'@Resources.Locale.L_SMSMIPT_FaxNo',
+		  	'@Resources.Locale.L_SMSMIPT_PartyMail',
+		  	'@Resources.Locale.L_SMSMIPT_PartyAddr1',
+		  	'@Resources.Locale.L_SMSMIPT_PartyAddr2',
+		  	'@Resources.Locale.L_SMSMIPT_PartyAddr3',
+		  	'@Resources.Locale.L_SMSMIPT_PartyAddr4',
+		  	'@Resources.Locale.L_SMSMIPT_PartyAddr5',
+		  	'@Resources.Locale.L_SMSMIPT_Cnty',
+		  	'@Resources.Locale.L_SMSMIPT_CntyNm',
+		  	'@Resources.Locale.L_SMSMIPT_City',
+		  	'@Resources.Locale.L_SMSMIPT_CityNm',
+		  	'@Resources.Locale.L_SMSMIPT_State',
+		  	'@Resources.Locale.L_SMSMIPT_Zip',
+		  	'@Resources.Locale.L_SMSMIPT_TaxNo',
+		  	'@Resources.Locale.L_SMSMIPT_OrderBy',
+		  ];
+
+		  var SubGrid2 = [];
+	if (TRAN_TYPE != "F" && TRAN_TYPE != "R") {
+
+		SubGrid2Lang = [{ "name": "UId", "title": "UId" },
+		{ "name": "GroupId", "title": "@Resources.Locale.L_SMIDN_GroupId" },
+		{ "name": "Cmp", "title": "@Resources.Locale.L_SMIDN_Cmp" },
+		{ "name": "Stn", "title": "@Resources.Locale.L_SMIDN_Stn" },
+		{ "name": "DnNo", "title": "@Resources.Locale.L_SMIDN_DnNo" },
+		{ "name": "InvNo", "title": "@Resources.Locale.L_SMIDN_InvoiceNo" },
+		{ "name": "ScmrequestDate", "title": "@Resources.Locale.L_SMSMI_ProductionDate" },
+		{ "name": "InvPrice", "title": "@Resources.Locale.L_ActDeatilManage_Views_65" },
+		{ "name": "InvCur", "title": "@Resources.Locale.L_ActUpdate_Views_163" },
+		{ "name": "Amount", "title": "@Resources.Locale.L_DNApproveManage_Amount" },
+		{ "name": "Nw", "title": "@Resources.Locale.L_SMIDN_Nw" },
+		{ "name": "Gw", "title": "@Resources.Locale.L_SMIDN_Gw" },
+		{ "name": "Gwu", "title": "@Resources.Locale.L_SMIDN_Gwu" },
+		{ "name": "Cbm", "title": "@Resources.Locale.L_SMIDN_Cbm" },
+		{ "name": "Cbmu", "title": "@Resources.Locale.L_SMIDN_Cbmu" },
+		{ "name": "Qty", "title": "@Resources.Locale.L_SMIDN_Qty" },
+		{ "name": "Qtyu", "title": "@Resources.Locale.L_SMIDN_Qtyu" },
+		{ "name": "PkgNum", "title": "@Resources.Locale.L_SMIDN_PkgNum" },
+		{ "name": "PkgUnit", "title": "@Resources.Locale.L_SMIDN_PkgUnit" },
+		{ "name": "PkgUnitDesc", "title": "@Resources.Locale.L_SMIDN_PkgUnitDesc" },
+		{ "name": "Cnt20", "title": "@Resources.Locale.L_SMIDN_Cnt20" },
+		{ "name": "Cnt40", "title": "@Resources.Locale.L_SMIDN_Cnt40" },
+		{ "name": "Cnt40hq", "title": "@Resources.Locale.L_SMIDN_Cnt40hq" },
+		{ "name": "OthCntType", "title": "@Resources.Locale.L_SMIDN_OthCntType" },
+		{ "name": "OthCntNum", "title": "@Resources.Locale.L_SMIDN_OthCntNum" },
+		{ "name": "DlvArea", "title": "@Resources.Locale.L_SMIDN_DlvArea" },
+		{ "name": "DlvAreaNm", "title": "@Resources.Locale.L_SMIDN_DlvAreaNm" },
+		{ "name": "AddrCode", "title": "@Resources.Locale.L_SMIDN_AddrCode" },
+		{ "name": "DlvAddr", "title": "@Resources.Locale.L_SMIDN_DlvAddr" },
+		{ "name": "DivisionDescp", "title": "@Resources.Locale.L_SMICNTR_DivisionDescp" },
+		{ "name": "PickupCdate", "title": "@Resources.Locale.L_BaseLookup_PickupCdate" },
+		{ "name": "DischargeDate", "title": "Discharge Date" },
+		{ "name": "StorageDueDate", "title": "End of STO Free Time" },
+		{ "name": "Priority", "title": "@Resources.Locale.L_SMSMI_Priority" },
+		{ "name": "EtaMsl", "title": "ETA MSL (DATE)" },
+		{ "name": "EtaMslTime", "title": "ETA MSL (TIME)" },
+		{ "name": "CallTruckStatus", "title": "Call Truck Status" },
+		{ "name": "IdateL", "title": "In Date" },
+		{ "name": "PodDateL", "title": "Upload POD Date" },
+		{ "name": "OdateL", "title": "Out Date" },
+		{ "name": "PoNo", "title": "PO NO" },
+		{ "name": "IsPostbill", "title": "Is Post bill" },
+		{ "name": "PostBillDate", "title": "Post Bill Date" },
+		{ "name": "Dep", "title": "@Resources.Locale.L_SMIDN_Dep" }
+		];
+	}
+	else {
+		SubGrid2Lang = [{ "name": "UId", "title": "UId" },
+		{ "name": "GroupId", "title": "@Resources.Locale.L_SMIDN_GroupId" },
+		{ "name": "Cmp", "title": "@Resources.Locale.L_SMIDN_Cmp" },
+		{ "name": "Stn", "title": "@Resources.Locale.L_SMIDN_Stn" },
+		{ "name": "DnNo", "title": "@Resources.Locale.L_SMIDN_DnNo" },
+		{ "name": "InvNo", "title": "@Resources.Locale.L_SMIDN_InvoiceNo" },
+		{ "name": "InvPrice", "title": "@Resources.Locale.L_ActDeatilManage_Views_65" },
+		{ "name": "InvCur", "title": "@Resources.Locale.L_ActUpdate_Views_163" },
+		{ "name": "Amount", "title": "@Resources.Locale.L_DNApproveManage_Amount" },
+		{ "name": "Nw", "title": "@Resources.Locale.L_SMIDN_Nw" },
+		{ "name": "Gw", "title": "@Resources.Locale.L_SMIDN_Gw" },
+		{ "name": "Gwu", "title": "@Resources.Locale.L_SMIDN_Gwu" },
+		{ "name": "Cbm", "title": "@Resources.Locale.L_SMIDN_Cbm" },
+		{ "name": "Cbmu", "title": "@Resources.Locale.L_SMIDN_Cbmu" },
+		{ "name": "Qty", "title": "@Resources.Locale.L_SMIDN_Qty" },
+		{ "name": "Qtyu", "title": "@Resources.Locale.L_SMIDN_Qtyu" },
+		{ "name": "PkgNum", "title": "@Resources.Locale.L_SMIDN_PkgNum" },
+		{ "name": "PkgUnit", "title": "@Resources.Locale.L_SMIDN_PkgUnit" },
+		{ "name": "PkgUnitDesc", "title": "@Resources.Locale.L_SMIDN_PkgUnitDesc" },
+		{ "name": "Cnt20", "title": "@Resources.Locale.L_SMIDN_Cnt20" },
+		{ "name": "Cnt40", "title": "@Resources.Locale.L_SMIDN_Cnt40" },
+		{ "name": "Cnt40hq", "title": "@Resources.Locale.L_SMIDN_Cnt40hq" },
+		{ "name": "OthCntType", "title": "@Resources.Locale.L_SMIDN_OthCntType" },
+		{ "name": "OthCntNum", "title": "@Resources.Locale.L_SMIDN_OthCntNum" },
+		{ "name": "DlvArea", "title": "@Resources.Locale.L_SMIDN_DlvArea" },
+		{ "name": "DlvAreaNm", "title": "@Resources.Locale.L_SMIDN_DlvAreaNm" },
+		{ "name": "AddrCode", "title": "@Resources.Locale.L_SMIDN_AddrCode" },
+		{ "name": "DlvAddr", "title": "@Resources.Locale.L_SMIDN_DlvAddr" },
+		{ "name": "DivisionDescp", "title": "@Resources.Locale.L_SMICNTR_DivisionDescp" },
+		{ "name": "PickupCdate", "title": "@Resources.Locale.L_BaseLookup_PickupCdate" },
+		{ "name": "DischargeDate", "title": "Discharge Date" },
+		{ "name": "StorageDueDate", "title": "End of STO Free Time" },
+		{ "name": "EtaMsl", "title": "ETA MSL (DATE)" },
+		{ "name": "EtaMslTime", "title": "ETA MSL (TIME)" },
+		{ "name": "CallTruckStatus", "title": "Call Truck Status" },
+		{ "name": "IsPostbill", "title": "Is Post bill" },
+		{ "name": "PostBillDate", "title": "Post Bill Date" },
+		{ "name": "Dep", "title": "@Resources.Locale.L_SMIDN_Dep" }
+		];
+	}
+
+		  var SubGrid3Lang = [
+		  	'UId',
+		      'UFid',
+		      '@Resources.Locale.L_SMIDNP_CntrNo',
+		      '@Resources.Locale.L_SMIDNP_CntrType',
+		      '@Resources.Locale.L_SMIDNP_DnNo',
+		      '@Resources.Locale.L_SMIDNP_InvNo',
+		      '@Resources.Locale.L_SMIDNP_OpartNo',
+		      '@Resources.Locale.L_SMIDNP_IpartNo',
+		      '@Resources.Locale.L_SMIDNP_GoodsDescp',
+		      '@Resources.Locale.L_SMIDNP_ProdDescp',
+		      '@Resources.Locale.L_SMIDNP_Qty',
+		      '@Resources.Locale.L_SMIDNP_Gw',
+		      '@Resources.Locale.L_SMIDNP_Cbm',
+		      '@Resources.Locale.L_SMIDNP_SealNo1',
+		      '@Resources.Locale.L_SMIDNP_SealNo2',
+		      '@Resources.Locale.L_SMIDN_DlvArea',
+		      '@Resources.Locale.L_SMIDN_DlvAreaNm',
+		      '@Resources.Locale.L_SMIDN_AddrCode',
+		      '@Resources.Locale.L_SMIDN_DlvAddr',
+				'@Resources.Locale.L_SMIDNP_SoNo',
+                'PO NO',
+                'Model Name',
+                'HS of Importation',
+                'HS of Exportation',
+              'Resolution',
+              'ASN NO'
+		  ];
+
+		var DnGridLang = [
+		'Dn No',
+		'@Resources.Locale.L_DNManage_BLType',
+		'@Resources.Locale.L_DNApproveManage_ExportNo',
+		'@Resources.Locale.L_DNApproveManage_Unicode',
+		'@Resources.Locale.L_DNApproveManage_ApprovalNo',
+		'@Resources.Locale.L_DNManage_RqDelaDate',
+		'@Resources.Locale.L_DNApproveManage_EdeclNo',
+		'@Resources.Locale.L_BaseLookup_DeclDate',
+		'@Resources.Locale.L_DNManage_RelDate',
+		'@Resources.Locale.L_NEXT_NUMBER',
+		'@Resources.Locale.L_BSCSSetup_Remark'
+		];
+
+		var str = "";
+		var CcGridLang = [];
+		var TcGridLang = [];
+		//if(CNTRN == 1)
+		//{
+
+		CcGridLang = [
+			'UId',
+			'@Resources.Locale.L_SMICNTR_CntrNo',
+			'New Seal No',
+			'@Resources.Locale.L_SMIDN_ImportNo',
+			'@Resources.Locale.L_SMIDN_DecNo',
+			'@Resources.Locale.L_SMIDN_CerNo',
+			'@Resources.Locale.L_SMIDN_DecDate',
+			'@Resources.Locale.L_SMIDN_RelDate',
+            '@Resources.Locale.L_SMIDN_TcCcChannel',
+			'@Resources.Locale.L_SMIDN_Inspection',
+			'@Resources.Locale.L_SMIDN_DecCust',
+			'@Resources.Locale.L_SMIDN_DecReply',
+			'@Resources.Locale.L_SMIDN_Icdf',
+			'@Resources.Locale.L_SMIDN_HsCode',
+			'@Resources.Locale.L_BaseLookup_Country',
+			'P/D Qty',
+			'FOB',
+            'CIF',
+            'PLI#',
+            'LI#',
+            'SUFRAMA Cost',
+            'CC Declaration Exchange Rate',
+            'Addition QTY',
+            'SISCOMEX Fee'
+        ];
+
+		TcGridLang = [
+			'UId',
+			'@Resources.Locale.L_SMICNTR_CntrNo',
+			'New Seal No',
+			'@Resources.Locale.L_SMIDN_TcImportNo',
+			'@Resources.Locale.L_SMIDN_TcDecNo',
+			'@Resources.Locale.L_SMIDN_TcCerNo',
+			'@Resources.Locale.L_SMIDN_TcDecDate',
+			'@Resources.Locale.L_SMIDN_TcRelDate',
+            '@Resources.Locale.L_SMIDN_TcCcChannel',
+			'@Resources.Locale.L_SMIDN_TcInspection',
+			'@Resources.Locale.L_SMIDN_TcDecCust',
+			'@Resources.Locale.L_SMIDN_TcDecReply',
+			'@Resources.Locale.L_SMIDN_TcIcdf',
+			'@Resources.Locale.L_SMIDN_HsCode',
+			'@Resources.Locale.L_BaseLookup_Country'
+        ];
+    //}
+    //else {
+    //    CcGridLang = [
+	//		'UId',
+	//		'@Resources.Locale.L_SMIDN_InvoiceNo',
+	//		'@Resources.Locale.L_SMIDN_ImportNo',
+	//		'@Resources.Locale.L_SMIDN_DecNo',
+	//		'@Resources.Locale.L_SMIDN_CerNo',
+	//		'@Resources.Locale.L_SMIDN_DecDate',
+	//		'@Resources.Locale.L_SMIDN_RelDate',
+	//		'@Resources.Locale.L_SMIDN_Inspection',
+	//		'@Resources.Locale.L_SMIDN_DecCust',
+	//		'@Resources.Locale.L_SMIDN_DecReply',
+	//		'@Resources.Locale.L_SMIDN_Icdf',
+	//		'HS CODE Qty',
+	//		'@Resources.Locale.L_BaseLookup_Country',
+	//		'P/D Qty',
+	//		'FOB',
+	//		'CIF',
+    //        'CC channel'
+    //    ];
+
+	//	TcGridLang = [
+	//		'UId',
+	//		'@Resources.Locale.L_SMIDN_InvoiceNo',
+	//		'@Resources.Locale.L_SMIDN_TcImportNo',
+	//		'@Resources.Locale.L_SMIDN_TcDecNo',
+	//		'@Resources.Locale.L_SMIDN_TcCerNo',
+	//		'@Resources.Locale.L_SMIDN_TcDecDate',
+	//		'@Resources.Locale.L_SMIDN_TcRelDate',
+	//		'@Resources.Locale.L_SMIDN_TcInspection',
+	//		'@Resources.Locale.L_SMIDN_TcDecCust',
+	//		'@Resources.Locale.L_SMIDN_TcDecReply',
+	//		'@Resources.Locale.L_SMIDN_TcIcdf',
+	//		'HS CODE Qty',
+	//		'@Resources.Locale.L_BaseLookup_Country',
+    //       'CC channel'
+    //    ];
+   // }
+
+
+
+    var CntrGridLang = [
+		   'UId',
+            '@Resources.Locale.L_SMICNTR_CntrNo',
+		'@Resources.Locale.L_SMICNTR_CntrType',
+        '@Resources.Locale.L_SMSMI_ProductionDate',
+        'ETA MSL (DATE)',
+        'ETA MSL (TIME)',
+		'New Seal No',
+		'@Resources.Locale.L_SMICNTR_SealNo1',
+		'@Resources.Locale.L_SMICNTR_SealNo2',
+		'@Resources.Locale.L_SMICNTR_DnNo',
+		'@Resources.Locale.L_SMICNTR_DivisionDescp',
+		'@Resources.Locale.L_SMICNTR_DlvArea',
+		'@Resources.Locale.L_SMICNTR_DlvAreaNm',
+		'@Resources.Locale.L_SMICNTR_AddrCode',
+		'@Resources.Locale.L_SMICNTR_DlvAddr',
+		'@Resources.Locale.L_SMICNTR_Pol1',
+		'@Resources.Locale.L_SMICNTR_PolNm1',
+		'@Resources.Locale.L_SMICNTR_Pod1',
+		'@Resources.Locale.L_SMICNTR_PodNm1',
+		'@Resources.Locale.L_SMICNTR_TranType1',
+        '@Resources.Locale.L_SMICNTR_DepAddr1',
+		'@Resources.Locale.L_SMICNTR_Trucker1',
+		'@Resources.Locale.L_SMICNTR_TruckerNm1',
+		'@Resources.Locale.L_SMICNTR_Pol2',
+		'@Resources.Locale.L_SMICNTR_PolNm2',
+		'@Resources.Locale.L_SMICNTR_Pod2',
+		'@Resources.Locale.L_SMICNTR_PodNm2',
+		'@Resources.Locale.L_SMICNTR_TranType2',
+        '@Resources.Locale.L_SMICNTR_DepAddr2',
+		'@Resources.Locale.L_SMICNTR_Trucker2',
+		'@Resources.Locale.L_SMICNTR_TruckerNm2',
+		'@Resources.Locale.L_SMICNTR_Pol3',
+		'@Resources.Locale.L_SMICNTR_PolNm3',
+		'@Resources.Locale.L_SMICNTR_Pod3',
+		'@Resources.Locale.L_SMICNTR_PodNm3',
+		'@Resources.Locale.L_SMICNTR_TranType3',
+        '@Resources.Locale.L_SMICNTR_DepAddr3',
+		'@Resources.Locale.L_SMICNTR_Trucker3',
+		'@Resources.Locale.L_SMICNTR_TruckerNm3',
+		'@Resources.Locale.L_SMSMI_BackLocation',
+		'@Resources.Locale.L_SMSMI_EmptyTime',
+		'@Resources.Locale.L_BaseLookup_PickupCdate',
+        'Pin No.',
+		'Discharge Date',
+		'@Resources.Locale.L_SMSMI_Priority',
+        'End of DET Free Time',
+        'End of DEM Free Time',
+        'End of STO Free Time',
+        'Call Truck Status',
+        'In Date',
+        'Upload POD Date',
+        'Out Date',
+        'PO NO'
+    ];
+
+
+	var commonLang = [];
+	commonLang["L_SMSMI_InvoiceDetailCC"] = "@Resources.Locale.L_SMSMI_InvoiceDetailCC";
+	commonLang["L_SMSMI_InvoiceDetailTC"] = "@Resources.Locale.L_SMSMI_InvoiceDetailTC";
+	commonLang["L_SMSMI_InvoiceDetail"] = "@Resources.Locale.L_SMSMI_InvoiceDetail";
+	commonLang["L_SMSMI_ContainerInfo"] = "@Resources.Locale.L_SMSMI_ContainerInfo";
+	commonLang["L_DNManage_FCLBDnDetail"] = "@Resources.Locale.L_DNManage_FCLBDnDetail";
+	commonLang["L_DNManage_DNDeclaInfo"] = "@Resources.Locale.L_DNManage_DNDeclaInfo";
+	commonLang["L_UserQuery_ComBA"] = "@Resources.Locale.L_UserQuery_ComBA";
+	commonLang["L_SMSMI_btn02"] = "@Resources.Locale.L_SMSMI_btn02";
+	commonLang["L_SMSMI_MBSendAddr"] = "@Resources.Locale.L_SMSMI_MBSendAddr";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/SMSMI/ModifyBookingSetupView.js?20241021")"></script>
+
+<div id="wrapper">
+	<div id="page-wrapper">
+		<div class="container-fluid">
+
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table id="SubGrid" class="_tableGrid" style="width: 100%">
+						<tr></tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="ShipmentId" class="control-label">@Resources.Locale.L_SMSMI_ShipmentId</label><!--Shipment ID-->
+						</div>
+						<div class="pure-u-sm-10-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="ShipmentId" name="ShipmentId" fieldname="ShipmentId" readonly />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="MasterNo" class="control-label">@Resources.Locale.L_SMSMI_MasterNo</label><!--Master No-->
+						</div>
+						<div class="pure-u-sm-10-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="MasterNo" name="MasterNo" fieldname="MasterNo" readonly/>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="HouseNo" class="control-label">@Resources.Locale.L_SMSMI_HouseNo</label><!--House No-->
+						</div>
+						<div class="pure-u-sm-10-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="HouseNo" name="HouseNo" fieldname="HouseNo" readonly/>
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title" style="font-weight: 700; font-size: 11pt; color: black;">
+                            <a data-toggle="collapse" href="#AddArea1" aria-expanded="true" aria-controls="AddArea1" class="">Intermodal Arranged Info.:</a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse in" id="AddArea1" aria-expanded="true">
+                        <div class="panel-body" id="PickInfo">
+                            <div class="pure-g">
+                                <div class="pure-u-sm-60-60">
+                                    <button id="SetTranPlan" class="btn btn-sm btn-default" style="color: red;">Set to Container</button>
+                                </div>
+                            </div>
+                            <div class="pure-g">
+                                <div class="pure-u-sm-5-60">
+                                    <label for="TranType1" class="control-label">@Resources.Locale.L_SMSMI_1TranType 1</label><!---->
+                                </div>
+                                <div class="pure-u-sm-5-60">
+                                    <select name="TranType1" id="TranType1" fieldname="TranType1" dt="mt" class="form-control input-sm">
+                                        <option value="R">R:Railway</option>
+                                        <option value="S">S:Ocean Shipping</option>
+                                        <option value="A">A: Air</option>
+                                        <option value="T">T: Truck</option>
+                                        <option value="I">I: Intermodal</option>
+                                    </select>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                                <div class="pure-u-sm-5-60 label-right">
+                                    <label for="Pol1" class="control-label">@Resources.Locale.L_SMSMI_1Pol 1</label>
+                                </div>
+                                <div class="pure-u-sm-5-60 control-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" dt="mt" id="Pol1" name="Pol1" fieldname="Pol1" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-default" type="button" id="Pol1Lookup">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                                <div class="pure-u-sm-5-60">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="PolNm1" name="PolNm1" fieldname="PolNm1" readonly="readonly" />
+                                </div>
+                                <div class="pure-u-sm-5-60 label-right ">
+                                    <label for="Pol1" class="control-label">DepAddr 1</label>
+                                </div>
+                                <div class="pure-u-sm-5-60 control-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" dt="mt" id="DepAddrCd1" name="DepAddrCd1" fieldname="DepAddrCd1" readonly="readonly" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-default" type="button" id="DepAddr1Lookup">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                                <div class="pure-u-sm-7-60">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="DepAddr1" name="DepAddr1" fieldname="DepAddr1" readonly="readonly" />
+                                </div>
+                                <div class="pure-u-sm-5-60 label-right ">
+                                    <label for="Trucker1" class="control-label">@Resources.Locale.L_SMSMI_1Truck 1</label>
+                                </div>
+                                <div class="pure-u-sm-5-60 control-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" dt="mt" id="Trucker1" name="Trucker1" fieldname="Trucker1" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-default" type="button" id="Trucker1Lookup">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                                <div class="pure-u-sm-8-60">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="TruckerNm1" name="TruckerNm1" fieldname="TruckerNm1" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="pure-g">
+                                <div class="pure-u-sm-5-60">
+                                    <label for="TranType2" class="control-label">@Resources.Locale.L_SMSMI_1TranType 2</label><!---->
+                                </div>
+                                <div class="pure-u-sm-5-60">
+                                    <select name="TranType2" id="TranType2" fieldname="TranType2" dt="mt" class="form-control input-sm">
+                                        <option value="R">R:Railway</option>
+                                        <option value="S">S:Ocean Shipping</option>
+                                        <option value="A">A: Air</option>
+                                        <option value="T">T: Truck</option>
+                                    </select>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                                <div class="pure-u-sm-5-60 label-right ">
+                                    <label for="Pol2" class="control-label">@Resources.Locale.L_SMSMI_1Pol 2</label>
+                                </div>
+                                <div class="pure-u-sm-5-60 control-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" dt="mt" id="Pol2" name="Pol2" fieldname="Pol2" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-default" type="button" id="Pol2Lookup">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                                <div class="pure-u-sm-5-60">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="PolNm2" name="PolNm2" fieldname="PolNm2" readonly="readonly" />
+                                </div>
+                                <div class="pure-u-sm-5-60 label-right ">
+                                    <label for="Pol1" class="control-label">DepAddr 2</label>
+                                </div>
+                                <div class="pure-u-sm-5-60 control-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" dt="mt" id="DepAddrCd2" name="DepAddrCd2" fieldname="DepAddrCd2" readonly="readonly" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-default" type="button" id="DepAddr2Lookup">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                                <div class="pure-u-sm-7-60">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="DepAddr2" name="DepAddr2" fieldname="DepAddr2" readonly="readonly" />
+                                </div>
+                                <div class="pure-u-sm-5-60 label-right ">
+                                    <label for="Trucker2" class="control-label">@Resources.Locale.L_SMSMI_1Truck 2</label>
+                                </div>
+                                <div class="pure-u-sm-5-60 control-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" dt="mt" id="Trucker2" name="Trucker2" fieldname="Trucker2" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-default" type="button" id="Trucker2Lookup">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                                <div class="pure-u-sm-8-60">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="TruckerNm2" name="TruckerNm2" fieldname="TruckerNm2" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="pure-g">
+                                <div class="pure-u-sm-5-60">
+                                    <label for="TranType3" class="control-label">@Resources.Locale.L_SMSMI_1TranType 3</label><!---->
+                                </div>
+                                <div class="pure-u-sm-5-60">
+                                    <select name="TranType3" id="TranType3" fieldname="TranType3" dt="mt" class="form-control input-sm">
+                                        <option value="R">R:Railway</option>
+                                        <option value="S">S:Ocean Shipping</option>
+                                        <option value="A">A: Air</option>
+                                        <option value="T">T: Truck</option>
+                                    </select>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                                <div class="pure-u-sm-5-60 label-right ">
+                                    <label for="Pol3" class="control-label">@Resources.Locale.L_SMSMI_1Pol 3</label>
+                                </div>
+                                <div class="pure-u-sm-5-60 control-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" dt="mt" id="Pol3" name="Pol3" fieldname="Pol3" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-default" type="button" id="Pol3Lookup">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                                <div class="pure-u-sm-5-60">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="PolNm3" name="PolNm3" fieldname="PolNm3" readonly="readonly" />
+                                </div>
+                                <div class="pure-u-sm-5-60 label-right ">
+                                    <label for="Pol1" class="control-label">DepAddr 3</label>
+                                </div>
+                                <div class="pure-u-sm-5-60 control-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" dt="mt" id="DepAddrCd3" name="DepAddrCd3" fieldname="DepAddrCd3" readonly="readonly" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-default" type="button" id="DepAddr3Lookup">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                                <div class="pure-u-sm-7-60">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="DepAddr3" name="DepAddr3" fieldname="DepAddr3" readonly="readonly" />
+                                </div>
+                                <div class="pure-u-sm-5-60 label-right ">
+                                    <label for="Trucker3" class="control-label">@Resources.Locale.L_SMSMI_1Truck 3</label>
+                                </div>
+                                <div class="pure-u-sm-5-60 control-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" dt="mt" id="Trucker3" name="Trucker3" fieldname="Trucker3" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-default" type="button" id="Trucker3Lookup">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <p class="help-block tooltips"></p>
+                                </div>
+                                <div class="pure-u-sm-8-60">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="TruckerNm3" name="TruckerNm3" fieldname="TruckerNm3" readonly="readonly" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+				</div>
+			</div>
+
+            <div class="panel panel-default">
+				<div class="panel-body">
+					<table id="CntrGrid" class="_tableGrid" style="width: 100%">
+						<tr></tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="panel panel-default" id="ccinfo">
+				<div class="panel-heading">
+					C.C. Information
+				</div>
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Oexporter" class="control-label">@Resources.Locale.L_SMSMI_Oexporter</label>
+                        </div>
+                        <!--报关出口商-->
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Oexporter" name="Oexporter" fieldname="Oexporter" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="OexporterLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="OexporterNm" name="OexporterNm" fieldname="OexporterNm" readonly="readonly" />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="OexporterAddr" class="control-label">@Resources.Locale.L_SMSMI_OexporterAddr</label>
+                        </div>
+                        <!--报关出口商-->
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="OexporterAddr" name="OexporterAddr" fieldname="OexporterAddr" />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Oimporter" class="control-label">@Resources.Locale.L_SMSMI_Oimporter</label>
+                        </div>
+                        <!--报关出口商-->
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Oimporter" name="Oimporter" fieldname="Oimporter" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="OimporterLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="OimporterNm" name="OimporterNm" fieldname="OimporterNm" readonly="readonly" />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="OimporterAddr" class="control-label">@Resources.Locale.L_SMSMI_OimporterAddr</label>
+                        </div>
+                        <!--报关进口商地址-->
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="OimporterAddr" name="OimporterAddr" fieldname="OimporterAddr" />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="CcImporterRemark" class="control-label">CC Declaration Remark to Broker</label><!--Instruction-->
+                        </div>
+                        <div class="pure-u-sm-25-60">
+                            <textarea class="form-control" dt="mt" id="CcImporterRemark" name="CcImporterRemark" fieldname="CcImporterRemark"></textarea>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <table id="CcGrid" class="_tableGrid" style="width: 100%">
+                                <tr></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        Remark: For PLI#, LI#, SUFRAMA Cost, CC Declaration Exchange Rate, Addition Qty and SISCOMEX Fee columns are only for Brazil site.
+                    </div>
+                </div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					T.C. Information
+				</div>
+				<div class="panel-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Oexporter" class="control-label">@Resources.Locale.L_SMSMI_Oexporter</label>
+						</div>
+						<!--报关出口商-->
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Oexporter" name="Oexporter" fieldname="Oexporter" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="OexporterLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="OexporterNm" name="OexporterNm" fieldname="OexporterNm" readonly="readonly" />
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="OexporterAddr" class="control-label">@Resources.Locale.L_SMSMI_OexporterAddr</label>
+						</div>
+						<!--报关出口商-->
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="OexporterAddr" name="OexporterAddr" fieldname="OexporterAddr" />
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="TcImporter" class="control-label">@Resources.Locale.L_SMSMI_TcImporter</label>
+						</div>
+						<!--报关出口商-->
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="TcImporter" name="TcImporter" fieldname="TcImporter" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="TcImporterLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="TcImporterNm" name="TcImporterNm" fieldname="TcImporterNm" readonly="readonly" />
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="TcImporterAddr" class="control-label">@Resources.Locale.L_SMSMI_TcImporterAddr</label>
+						</div>
+						<!--报关进口商地址-->
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="TcImporterAddr" name="TcImporterAddr" fieldname="TcImporterAddr" />
+						</div>
+					</div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="TcImporterRemark" class="control-label">TC Declaration Remark to Broker</label><!--Instruction-->
+                        </div>
+                        <div class="pure-u-sm-25-60">
+                            <textarea class="form-control" dt="mt" id="TcImporterRemark" name="TcImporterRemark" fieldname="TcImporterRemark"></textarea>
+                        </div>
+                    </div>
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<table id="TcGrid" class="_tableGrid" style="width: 100%">
+								<tr></tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table id="SubGrid2" class="_tableGrid" style="width: 100%">
+						<tr></tr>
+					</table>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table id="SubGrid4" class="_tableGrid" style="width: 100%">
+						<tr></tr>
+					</table>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table id="SubGrid3" class="_tableGrid" style="width: 100%">
+						<tr></tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table id="DnGrid" class="_tableGrid" style="width: 100%">
+						<tr></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>		
+</div>
+<input type="hidden" id="UId" dt="mt" fieldname="UId" iskey="true" />
+<input type="hidden" id="OUid" dt="mt" fieldname="OUid"  />
+<input type="hidden" id="OLocation" dt="mt" fieldname="OLocation"  />
+<input type="hidden" id="TranType" dt="mt" fieldname="TranType"/>
+<input type="hidden" id="Status" dt="mt" fieldname="Status" />
+<input type="hidden" id="CntrN" />
+
+<!--新增地址-->
+<div class="modal fade" id="AddrModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Add Address </h4>
+			</div>
+			<div class="modal-body">
+				<button class="btn btn-sm btn-info" id="SetSameAddr">As above</button>
+				<table class="table">
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-md btn-info" id="AddAddrBtn">Insert</button>
+				<button type="button" class="btn btn-md btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="@Url.Content("~/Scripts/SMSMI/iBooking.js?20241206")"></script>
+<!--新增地址-->

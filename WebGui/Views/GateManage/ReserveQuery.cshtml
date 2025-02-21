@@ -1,0 +1,300 @@
+﻿@{
+    ViewBag.Title = "ReserveQuery";
+}
+<style type="text/css">
+    .otherColor{background-color: #91E67B;}
+    .myColor{background-color: #6BBFF1;}
+    .fixColor{background-color: #FFC458;}
+    .upDownColor{
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff84a0+0,ffffff+99 */
+        background: #ff84a0; /* Old browsers */
+        background: -moz-linear-gradient(top,  #ff84a0 0%, #ffffff 99%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top,  #ff84a0 0%,#ffffff 99%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,  #ff84a0 0%,#ffffff 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff84a0', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    }
+    .showBox{
+    	width: 16px;
+    	height: 16px;
+    	float: left
+    }
+</style>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		pmsBtnCheck("SummarySearch");
+		
+	    $("#SearchRDate").wrap('<div class="input-group">').datepicker({
+	        showOn: "button",
+	        changeYear: true,
+	        dateFormat: "yy-mm-dd",
+	        beforeShow: function() {
+	            setTimeout(function(){
+	                $('.ui-datepicker').css('z-index', 99999999999999);
+	            }, 0);
+	        },
+	        onClose: function (text, inst) {
+	            $(this).focus();
+	        }
+	    })
+	    .next("button").button({
+	        icons: { primary: "ui-icon-calendar" },
+	        label: "Select a date",
+	        text: false
+	    })
+	    .addClass("btn btn-sm btn-info").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+	    .wrap('<span class="input-group-btn">')
+	    .find('.ui-button-text')
+	    .css({
+	        'visibility': 'hidden',
+	        'display': 'inline'
+	    });
+
+	    $("#SummarySearch").click(function(){
+	        var form = $("#SearchForm");
+	        var obj = form.serializeArray();
+	        var postData = {};
+	        $.each(obj, function(index, val) {
+	            postData[obj[index].name] = obj[index].value;
+	        });
+
+	        $.ajax({
+	            async: true,
+	            url: rootPath + "GateManage/GetRVD",
+	            type: "POST",
+	            data: postData,
+	            dataType: "json",
+	            beforeSend: function () {
+	                CommonFunc.ToogleLoading(true);
+	            },
+	            success: function (result) {
+	                console.log(result);
+	                if(result.message == "success")
+	                {
+	                    var str = "";
+	                    $.each(result.data, function(i, val) {
+	                        str += "<tr>";
+	                        str += "<td>"+(i+1)+"</td>"
+	                        if(result.data[i].Lift == "Y")
+	                        {
+	                            str += "<td class='upDownColor'>"+result.data[i].GateNo+"</td>";
+	                        }
+	                        else
+	                        {
+	                            str += "<td>"+result.data[i].GateNo+"</td>";
+	                        }
+	                        for(var j=0; j<24 ; j++)
+	                        {
+	                            if(result.data[i]["H"+j] == 1)
+	                            {
+	                                if(result.data[i]["C"+j] == cmp)
+	                                {
+	                                    str += "<td class='myColor'></td>";
+	                                }
+	                                else
+	                                {
+	                                    str += "<td class='otherColor'></td>";
+	                                }
+	                            }
+	                            else
+	                            {
+	                                str += "<td></td>";
+	                            }
+	                        }
+	                        str += "</tr>";
+	                    });
+	                    
+	                    $("#RVTable tbody").html("");
+	                    $("#RVTable tbody").append(str);
+	                }
+	                CommonFunc.ToogleLoading(false);
+	            }
+	        });
+	    });
+
+		//倉庫放大鏡
+		var options = {};
+		options.gridUrl = rootPath + "TPVCommon/GetSmwhForLookup";
+		options.param = "";
+		options.registerBtn = $("#WsCdLookup");
+		options.focusItem = $("#SearchWsCd");
+		options.isMutiSel = true;
+		options.gridFunc = function (map) {
+		    $("#SearchWsCd").val(map.WsCd);
+		}
+
+		options.lookUpConfig = LookUpConfig.SMWHLookup;
+		initLookUp(options);
+
+		CommonFunc.AutoComplete("#SearchWsCd", 1, "", "dt=smwh&GROUP_ID=" + groupId + "&WS_CD=", "WS_CD=showValue,WS_CD,WS_NM", function (event, ui) {
+		    $(this).val(ui.item.returnValue.WS_CD);
+		    return false;
+		});
+
+		//setSmptyData("CmpLookup", "SearchCmp", "CmpNm", "LC");
+		var CmpOpt = {};
+		CmpOpt.gridUrl = rootPath + "TPVCommon/GetSiteCmpData";
+		CmpOpt.param = "";
+		CmpOpt.baseCondition = " GROUP_ID='"+groupId+"' AND TYPE='1'";
+		CmpOpt.registerBtn = $("#CmpLookup");
+		CmpOpt.focusItem = $("#SearchCmp");
+		CmpOpt.gridFunc = function (map) {
+		    var value = map.Cd;
+		    $("#SearchCmp").val(value);
+		    $("#CmpNm").val(map.CdDescp);
+		};
+		CmpOpt.lookUpConfig = LookUpConfig.SiteLookup;
+		initLookUp(CmpOpt);
+		CommonFunc.AutoComplete("#SearchCmp", 1, "", "dt=stn&GROUP_ID=" + groupId + "&TYPE=1&CMP=", "CMP=showValue,CMP,NAME", function (event, ui) {
+		    $(this).val(ui.item.returnValue.CMP);
+		    $("#CmpNm").val(ui.item.returnValue.NAME);
+		    return false;
+		});
+	});
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body" style="overflow-x:scroll;">
+                    <form id="SearchForm">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label class="control-label">@Resources.Locale.L_RoleSetUp_CMP</label>
+                            </div>
+                            <div class="pure-u-sm-8-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="SearchCmp" name="SearchCmp" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-info" type="button" id="CmpLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-17-60">
+                                <input type="text" class="form-control input-sm" id="CmpNm" readonly />
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="SampleName" class="control-label">@Resources.Locale.L_GateReserve_WsCd</label>
+                            </div>
+                            <div class="pure-u-sm-8-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="SearchWsCd" name="SearchWsCd" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-info" type="button" id="WsCdLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="SearchRDate" class="control-label">@Resources.Locale.L_GateReserve_ReserveDate</label>
+                            </div>
+                            <div class="pure-u-sm-12-60 control-group">
+                                <input type="text" class="form-control input-sm" id="SearchRDate" name="SearchRDate" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-1-60"></div>
+                            <div class="pure-u-sm-10-60">
+                                <button class="btn btn-sm btn-info" type="button" id="SummarySearch">@Resources.Locale.L_MenuBar_Search</button>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <ul class="list-inline">
+                                    <li>
+                                        <div class="showBox myColor"></div>@Resources.Locale.L_DNManage_OwnCmp
+                                    </li>
+                                    <li>
+                                        <div class="showBox otherColor"></div>@Resources.Locale.L_DNManage_OtrCmp
+                                    </li>
+                                    <li>
+                                        <div class="showBox fixColor"></div>@Resources.Locale.L_DNManage_FixNoRes
+                                    </li>
+                                    <li>
+                                        <div class="showBox upDownColor"></div>@Resources.Locale.L_DNManage_LiftGt
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <table class="table table-bordered" id="RVTable">
+                                <thead>
+                                    <tr style="background:#F3F3F3">
+                                        <th>Seq</th>
+                                        <th>Gate No.</th>
+                                        <th>00:00</th>
+                                        <th>01:00</th>
+                                        <th>02:00</th>
+                                        <th>03:00</th>
+                                        <th>04:00</th>
+                                        <th>05:00</th>
+                                        <th>06:00</th>
+                                        <th>07:00</th>
+                                        <th>08:00</th>
+                                        <th>09:00</th>
+                                        <th>10:00</th>
+                                        <th>11:00</th>
+                                        <th>12:00</th>
+                                        <th>13:00</th>
+                                        <th>14:00</th>
+                                        <th>15:00</th>
+                                        <th>16:00</th>
+                                        <th>17:00</th>
+                                        <th>18:00</th>
+                                        <th>19:00</th>
+                                        <th>20:00</th>
+                                        <th>21:00</th>
+                                        <th>22:00</th>
+                                        <th>23:00</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="RvTemplate" type="text/x-handlebars-template">
+<tr>
+    <td>1</td>
+    <td class="upDownColor">G1</td>
+    <td class="myColor"></td>
+    <td class="myColor"></td>
+    <td class="myColor"></td>
+    <td class="myColor"></td>
+    <td class="myColor"></td>
+    <td class="myColor"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+</script>

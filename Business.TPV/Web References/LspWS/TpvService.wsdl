@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://penavicoxm.com/LogisticWebServices/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://penavicoxm.com/LogisticWebServices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://penavicoxm.com/LogisticWebServices/">
+      <s:element name="TPVDataExchange">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="className" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="datas" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TPVDataExchangeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TPVDataExchangeResult" type="tns:ResultInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResultCode" type="tns:ResultCodeInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResultDesc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResultData" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ResultCodeInfo">
+        <s:restriction base="s:string">
+          <s:enumeration value="UserPasswordError" />
+          <s:enumeration value="Succeed" />
+          <s:enumeration value="XmlValidateError" />
+          <s:enumeration value="DataError" />
+          <s:enumeration value="SystemError" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="TpvSoapHeader" type="tns:TpvSoapHeader" />
+      <s:complexType name="TpvSoapHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="TPVBrokerExchange">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="className" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="datas" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TPVBrokerExchangeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TPVBrokerExchangeResult" type="tns:ResultInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResultInfo" nillable="true" type="tns:ResultInfo" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TPVDataExchangeSoapIn">
+    <wsdl:part name="parameters" element="tns:TPVDataExchange" />
+  </wsdl:message>
+  <wsdl:message name="TPVDataExchangeSoapOut">
+    <wsdl:part name="parameters" element="tns:TPVDataExchangeResponse" />
+  </wsdl:message>
+  <wsdl:message name="TPVDataExchangeTpvSoapHeader">
+    <wsdl:part name="TpvSoapHeader" element="tns:TpvSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="TPVBrokerExchangeSoapIn">
+    <wsdl:part name="parameters" element="tns:TPVBrokerExchange" />
+  </wsdl:message>
+  <wsdl:message name="TPVBrokerExchangeSoapOut">
+    <wsdl:part name="parameters" element="tns:TPVBrokerExchangeResponse" />
+  </wsdl:message>
+  <wsdl:message name="TPVBrokerExchangeTpvSoapHeader">
+    <wsdl:part name="TpvSoapHeader" element="tns:TpvSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="TPVDataExchangeHttpGetIn">
+    <wsdl:part name="className" type="s:string" />
+    <wsdl:part name="datas" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TPVDataExchangeHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResultInfo" />
+  </wsdl:message>
+  <wsdl:message name="TPVBrokerExchangeHttpGetIn">
+    <wsdl:part name="className" type="s:string" />
+    <wsdl:part name="datas" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TPVBrokerExchangeHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResultInfo" />
+  </wsdl:message>
+  <wsdl:message name="TPVDataExchangeHttpPostIn">
+    <wsdl:part name="className" type="s:string" />
+    <wsdl:part name="datas" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TPVDataExchangeHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResultInfo" />
+  </wsdl:message>
+  <wsdl:message name="TPVBrokerExchangeHttpPostIn">
+    <wsdl:part name="className" type="s:string" />
+    <wsdl:part name="datas" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TPVBrokerExchangeHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResultInfo" />
+  </wsdl:message>
+  <wsdl:portType name="TPVServiceSoap">
+    <wsdl:operation name="TPVDataExchange">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;参数：&lt;/b&gt;1.className, 服务名称, 如订舱资料：BookingInformation; 2.datas, 通信数据:根据具体xml格式定义
+        &lt;br/&gt;&lt;b&gt;功能描述：&lt;/b&gt;货代订舱、申报数据交换</wsdl:documentation>
+      <wsdl:input message="tns:TPVDataExchangeSoapIn" />
+      <wsdl:output message="tns:TPVDataExchangeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TPVBrokerExchange">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;参数：&lt;/b&gt;1.className, 服务名称, 如报关资料：BookingInformation; 2.datas, 通信数据:根据具体xml格式定义
+        &lt;br/&gt;&lt;b&gt;功能描述：&lt;/b&gt;报关行报关数据交换</wsdl:documentation>
+      <wsdl:input message="tns:TPVBrokerExchangeSoapIn" />
+      <wsdl:output message="tns:TPVBrokerExchangeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="TPVServiceHttpGet">
+    <wsdl:operation name="TPVDataExchange">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;参数：&lt;/b&gt;1.className, 服务名称, 如订舱资料：BookingInformation; 2.datas, 通信数据:根据具体xml格式定义
+        &lt;br/&gt;&lt;b&gt;功能描述：&lt;/b&gt;货代订舱、申报数据交换</wsdl:documentation>
+      <wsdl:input message="tns:TPVDataExchangeHttpGetIn" />
+      <wsdl:output message="tns:TPVDataExchangeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TPVBrokerExchange">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;参数：&lt;/b&gt;1.className, 服务名称, 如报关资料：BookingInformation; 2.datas, 通信数据:根据具体xml格式定义
+        &lt;br/&gt;&lt;b&gt;功能描述：&lt;/b&gt;报关行报关数据交换</wsdl:documentation>
+      <wsdl:input message="tns:TPVBrokerExchangeHttpGetIn" />
+      <wsdl:output message="tns:TPVBrokerExchangeHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="TPVServiceHttpPost">
+    <wsdl:operation name="TPVDataExchange">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;参数：&lt;/b&gt;1.className, 服务名称, 如订舱资料：BookingInformation; 2.datas, 通信数据:根据具体xml格式定义
+        &lt;br/&gt;&lt;b&gt;功能描述：&lt;/b&gt;货代订舱、申报数据交换</wsdl:documentation>
+      <wsdl:input message="tns:TPVDataExchangeHttpPostIn" />
+      <wsdl:output message="tns:TPVDataExchangeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TPVBrokerExchange">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;参数：&lt;/b&gt;1.className, 服务名称, 如报关资料：BookingInformation; 2.datas, 通信数据:根据具体xml格式定义
+        &lt;br/&gt;&lt;b&gt;功能描述：&lt;/b&gt;报关行报关数据交换</wsdl:documentation>
+      <wsdl:input message="tns:TPVBrokerExchangeHttpPostIn" />
+      <wsdl:output message="tns:TPVBrokerExchangeHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TPVServiceSoap" type="tns:TPVServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TPVDataExchange">
+      <soap:operation soapAction="http://penavicoxm.com/LogisticWebServices/TPVDataExchange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:TPVDataExchangeTpvSoapHeader" part="TpvSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TPVBrokerExchange">
+      <soap:operation soapAction="http://penavicoxm.com/LogisticWebServices/TPVBrokerExchange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:TPVBrokerExchangeTpvSoapHeader" part="TpvSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TPVServiceSoap12" type="tns:TPVServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TPVDataExchange">
+      <soap12:operation soapAction="http://penavicoxm.com/LogisticWebServices/TPVDataExchange" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:TPVDataExchangeTpvSoapHeader" part="TpvSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TPVBrokerExchange">
+      <soap12:operation soapAction="http://penavicoxm.com/LogisticWebServices/TPVBrokerExchange" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:TPVBrokerExchangeTpvSoapHeader" part="TpvSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TPVServiceHttpGet" type="tns:TPVServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="TPVDataExchange">
+      <http:operation location="/TPVDataExchange" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TPVBrokerExchange">
+      <http:operation location="/TPVBrokerExchange" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TPVServiceHttpPost" type="tns:TPVServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="TPVDataExchange">
+      <http:operation location="/TPVDataExchange" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TPVBrokerExchange">
+      <http:operation location="/TPVBrokerExchange" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TPVService">
+    <wsdl:port name="TPVServiceSoap" binding="tns:TPVServiceSoap">
+      <soap:address location="http://a.penavicoxm.com/LogisticWebServices/TpvService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TPVServiceSoap12" binding="tns:TPVServiceSoap12">
+      <soap12:address location="http://a.penavicoxm.com/LogisticWebServices/TpvService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TPVServiceHttpGet" binding="tns:TPVServiceHttpGet">
+      <http:address location="http://a.penavicoxm.com/LogisticWebServices/TpvService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TPVServiceHttpPost" binding="tns:TPVServiceHttpPost">
+      <http:address location="http://a.penavicoxm.com/LogisticWebServices/TpvService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,429 @@
+﻿@{
+    ViewBag.Title = "GroupRelation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--<script type="text/javascript" src="@Url.Content("~/Scripts/lib/jquery-1.11.1.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/jquery-ui.min.js")"></script>-->
+<script type="text/javascript">
+    var postData = new Array();
+    var localData = new Object();
+    localData.GROUP = new Object();
+    localData.CMP = new Object();
+    localData.STN = new Object();
+    localData.DEP = new Object();
+    var groupEditbtn, comEditbtn, stnEditbtn, depEditbtn;
+    var getSiteUrl  = '@Url.Content("~/zh-cn/System/GetSysSiteInfo")';
+    var postUrl     = '@Url.Content("~/zh-cn/System/GroupRelationUpdateData")';
+
+    $(function() {
+        $('#GROUP').sortable({
+            update: function( event, ui ) {
+                $("#GROUP li").each(function(index, el) {
+                    $(this).attr("index", index);
+                });
+            }
+        });
+
+
+        $('#COMPANY').sortable({
+            update: function( event, ui ) {
+                $("#COMPANY li").each(function(index, el) {
+                    $(this).attr("index", index);
+                });
+            }
+        });
+
+
+        $('#STATION').sortable({
+            update: function( event, ui ) {
+                $("#STATION li").each(function(index, el) {
+                    $(this).attr("index", index);
+                });
+            }
+        });
+    });
+    var groupStr  = "@ViewBag.groupData.Content";
+</script>
+@Html.RazorJSInclude("~/Scripts/System/GroupRelationNew.js");
+<style>
+    .input-group-addon {padding: 2px 7px;}
+    .prolink-container {margin:0px 25px;}
+    #page-wrapper {padding: 5px;}
+    ul li{cursor: pointer;}
+    .clickable{cursor: pointer;}
+    .clickable .glyphicon{background: rgba(0, 0, 0, 0.15);display: inline-block;padding: 6px 12px;border-radius: 4px;}
+    .REMOVE-OLD{float: right;}
+    .GROUP-EDIT{float: right;}
+    .panel-heading span{margin-top: -23px;font-size: 15px; margin-right: -9px;}
+    a.clickable { color: inherit; }
+    a.clickable:hover { text-decoration:none; }
+</style>
+<!--
+<div class="modal fade" id="groupModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_GroupRelation_groupModal</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label f​​or="groupID">@Resources.Locale.L_BSCSSetup_GroupId:</label>
+                            <input type="text" class="form-control" id="groupID">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="groupCName">@Resources.Locale.L_GroupRelation_groupCName:</label>
+                            <input type="text" class="form-control" id="groupCName">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="groupEName">@Resources.Locale.L_GroupRelation_groupEName:</label>
+                            <input type="text" class="form-control" id="groupEName">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="groupContact">@Resources.Locale.L_GroupRelation_groupContact:</label>
+                            <input type="text" class="form-control" id="groupContact">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label f​​or="goupTel">@Resources.Locale.L_GroupRelation_goupTel:</label>
+                            <input type="text" class="form-control" id="groupTel">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="groupEmail">@Resources.Locale.L_GroupRelation_groupEmail:</label>
+                            <input type="text" class="form-control" id="groupEmail">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="groupWeb">@Resources.Locale.L_GroupRelation_groupWeb:</label>
+                            <input type="text" class="form-control" id="groupWeb">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label f​​or="groupCaddr">@Resources.Locale.L_GroupRelation_groupCaddr:</label>
+                            <input type="text" class="form-control" id="groupCaddr">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="groupEaddr">@Resources.Locale.L_GroupRelation_groupEaddr:</label>
+                            <input type="text" class="form-control" id="groupEaddr">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="groupDesc​​">@Resources.Locale.L_GroupRelation_groupDesc:</label>
+                            <input type="text" class="form-control" id="groupDesc​​">
+                        </div>
+                        <div class="form-group">
+                            <label>状态：</label><br /> 
+                            <label class="radio-inline"><input type="radio" name="groupStatus" value="1" CHECKED>启用</label>
+                            <label class="radio-inline"><input type="radio" name="groupStatus" value="0">停用</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default groupSave" data-dismiss="modal">暫存</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<!-- 
+<div class="modal fade" id="comModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_GroupRelation_comModal</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label f​​or="comID">@Resources.Locale.L_GroupRelation_comID:</label>
+                            <input type="text" class="form-control" id="comID">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="comCName">@Resources.Locale.L_GroupRelation_comCName:</label>
+                            <input type="text" class="form-control" id="comCName">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="comEName">@Resources.Locale.L_GroupRelation_comEName:</label>
+                            <input type="text" class="form-control" id="comEName">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="comContact">@Resources.Locale.L_GroupRelation_comContact:</label>
+                            <input type="text" class="form-control" id="comContact">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label f​​or="comTel">@Resources.Locale.L_GroupRelation_comTel:</label>
+                            <input type="text" class="form-control" id="comTel">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="comEmail">@Resources.Locale.L_GroupRelation_comEmail:</label>
+                            <input type="text" class="form-control" id="comEmail">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="comWeb">@Resources.Locale.L_GroupRelation_comWeb:</label>
+                            <input type="text" class="form-control" id="comWeb">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label f​​or="comCaddr">@Resources.Locale.L_GroupRelation_comCaddr:</label>
+                            <input type="text" class="form-control" id="comCaddr">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="comEaddr">@Resources.Locale.L_GroupRelation_comEaddr:</label>
+                            <input type="text" class="form-control" id="comEaddr">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="comDesc">@Resources.Locale.L_GroupRelation_comDesc:</label>
+                            <input type="text" class="form-control" id="comDesc">
+                        </div>
+                        <div class="form-group">
+                            <label>状态：</label><br />
+                            <label class="radio-inline"><input type="radio" name="comStatus" value="1" CHECKED>启用</label>
+                            <label class="radio-inline"><input type="radio" name="comStatus" value="0">停用</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default comSave" data-dismiss="modal">暂存</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<!--
+<div class="modal fade" id="stnModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_GroupRelation_stnModal</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label f​​or="stnID">@Resources.Locale.L_GroupRelation_stnID:</label>
+                            <input type="text" class="form-control" id="stnID">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="stnCName">@Resources.Locale.L_GroupRelation_stnCName:</label>
+                            <input type="text" class="form-control" id="stnCName">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="stnEName">@Resources.Locale.L_GroupRelation_stnEName:</label>
+                            <input type="text" class="form-control" id="stnEName">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="stnContact">@Resources.Locale.L_GroupRelation_stnContact:</label>
+                            <input type="text" class="form-control" id="stnContact">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label f​​or="stnTel">@Resources.Locale.L_GroupRelation_stnTel:</label>
+                            <input type="text" class="form-control" id="stnTel">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="stnEmail">@Resources.Locale.L_GroupRelation_stnEmail:</label>
+                            <input type="text" class="form-control" id="stnEmail">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="stnWeb">@Resources.Locale.L_GroupRelation_stnWeb:</label>
+                            <input type="text" class="form-control" id="stnWeb">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label f​​or="stnCaddr">@Resources.Locale.L_GroupRelation_stnCaddr:</label>
+                            <input type="text" class="form-control" id="stnCaddr">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="stnEaddr">@Resources.Locale.L_GroupRelation_stnEaddr:</label>
+                            <input type="text" class="form-control" id="stnEaddr">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="stnDesc">@Resources.Locale.L_GroupRelation_stnDesc:</label>
+                            <input type="text" class="form-control" id="stnDesc">
+                        </div>
+                        <div class="form-group">
+                            <label>状态：</label><br />
+                            <label class="radio-inline"><input type="radio" name="stnStatus" value="1" CHECKED>启用</label>
+                            <label class="radio-inline"><input type="radio" name="stnStatus" value="0">停用</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default stnSave" data-dismiss="modal">暂存</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- 
+<div class="modal fade" id="depModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_GroupRelation_depModal</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label f​​or="depID">@Resources.Locale.L_GroupRelation_depID:</label>
+                            <input type="text" class="form-control" id="depID">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="depCName">@Resources.Locale.L_GroupRelation_depCName:</label>
+                            <input type="text" class="form-control" id="depCName">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="depEName">@Resources.Locale.L_GroupRelation_depEName:</label>
+                            <input type="text" class="form-control" id="depEName">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="depContact">@Resources.Locale.L_GroupRelation_depContact:</label>
+                            <input type="text" class="form-control" id="depContact">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label f​​or="depTel">@Resources.Locale.L_GroupRelation_depTel:</label>
+                            <input type="text" class="form-control" id="depTel">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="depEmail">@Resources.Locale.L_GroupRelation_depEmail:</label>
+                            <input type="text" class="form-control" id="depEmail">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="depWeb">@Resources.Locale.L_GroupRelation_depWeb:</label>
+                            <input type="text" class="form-control" id="depWeb">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label f​​or="depCaddr">@Resources.Locale.L_GroupRelation_depCaddr:</label>
+                            <input type="text" class="form-control" id="depCaddr">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="depEaddr">@Resources.Locale.L_GroupRelation_depEaddr:</label>
+                            <input type="text" class="form-control" id="depEaddr">
+                        </div>
+                        <div class="form-group">
+                            <label f​​or="depDesc​​">@Resources.Locale.L_GroupRelation_depDesc:</label>
+                            <input type="text" class="form-control" id="depDesc​​">
+                        </div>
+                        <div class="form-group">
+                            <label>状态：</label><br />
+                            <label class="radio-inline"><input type="radio" name="stnStatus" value="1" CHECKED>启用</label>
+                            <label class="radio-inline"><input type="radio" name="stnStatus" value="0">停用</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default depSave" data-dismiss="modal">暂存</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-3 col-md-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">@Resources.Locale.L_GroupRelation_grouptitle</h3>
+                            <span class="pull-right clickable GROUP-ADD"><i class="glyphicon glyphicon-plus"></i></span>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group PERMISION-ROLE" id="GROUP"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-md-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">@Resources.Locale.L_GroupRelation_comtitle</h4>
+                            <span class="pull-right clickable COMPANY-ADD"><i class="glyphicon glyphicon-plus"></i></span>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group PERMISION-ROLE" id="COMPANY">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-md-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">@Resources.Locale.L_GroupRelation_stntitle</h4>
+                            <span class="pull-right clickable STATION-ADD"><i class="glyphicon glyphicon-plus"></i></span>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group PERMISION-ROLE" id="STATION"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-md-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">@Resources.Locale.L_GroupRelation_deptitle</h4>
+                            <span class="pull-right clickable DEP-ADD"><i class="glyphicon glyphicon-plus"></i></span>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group PERMISION-ROLE" id="DEP"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="group-template" type="text/x-handlebars-template">
+    {{#each this}}
+        <li class="list-group-item" groupID="{{GroupId}}" FINDEX="{{FINDEX}}" Name="{{Name}}" Ename="{{Ename}}" Type="{{Type}}" Attn="{{Attn}}" AttnTel="{{AttnTel}}" Email="{{Email}}" Url="{{Url}}" Addr="{{Addr}}" Eaddr="{{Eaddr}}" Status="{{Status}}" Descp="{{Descp}}">                                            
+            <span>{{Name}}</span>
+            <button class="btn btn-xs btn-default REMOVE-OLD" type="button" groupID="{{GroupId}}"><span class="glyphicon glyphicon-remove"></span></button>
+        </li>
+    {{/each}}
+</script>
+<script id="com-template" type="text/x-handlebars-template">
+    {{#each this}}
+        <li class="list-group-item" groupID="{{GroupId}}" comID="{{Cmp}}" FINDEX="{{FINDEX}}" Name="{{Name}}" Ename="{{Ename}}" Type="{{Type}}" Attn="{{Attn}}" AttnTel="{{AttnTel}}" Email="{{Email}}" Url="{{Url}}" Addr="{{Addr}}" Eaddr="{{Eaddr}}" Status="{{Status}}" Descp="{{Descp}}">                                            
+            <span>{{Cmp}}:{{Name}}</span>
+            <button class="btn btn-xs btn-default REMOVE-OLD" type="button" groupID="{{GroupId}}" comID="{{Cmp}}"><span class="glyphicon glyphicon-remove"></span></button>
+        </li>
+    {{/each}}
+</script>
+<script id="stn-template" type="text/x-handlebars-template">
+    {{#each this}}
+        <li class="list-group-item" groupID="{{GroupId}}" comID="{{Cmp}}" stnID="{{Stn}}" FINDEX="{{FINDEX}}" Name="{{Name}}" Ename="{{Ename}}" Type="{{Type}}" Attn="{{Attn}}" AttnTel="{{AttnTel}}" Email="{{Email}}" Url="{{Url}}" Addr="{{Addr}}" Eaddr="{{Eaddr}}" Status="{{Status}}" Descp="{{Descp}}">                                            
+            <span>{{Name}}</span>
+            <button class="btn btn-xs btn-default REMOVE-OLD" type="button" groupID="{{GroupId}}" comID="{{Cmp}}" stnID="{{Stn}}"><span class="glyphicon glyphicon-remove"></span></button>
+        </li>
+    {{/each}}
+</script>
+<script id="dep-template" type="text/x-handlebars-template">
+    {{#each this}}
+        <li class="list-group-item" groupID="{{GroupId}}" comID="{{Cmp}}" stnID="{{Stn}}" depID="{{Dep}}" FINDEX="{{FINDEX}}" Name="{{Name}}" Ename="{{Ename}}" Type="{{Type}}" Attn="{{Attn}}" AttnTel="{{AttnTel}}" Email="{{Email}}" Url="{{Url}}" Addr="{{Addr}}" Eaddr="{{Eaddr}}" Status="{{Status}}" Descp="{{Descp}}">                                            
+            <span>{{Name}}</span>
+            <button class="btn btn-xs btn-default REMOVE-OLD" type="button" groupID="{{GroupId}}" comID="{{Cmp}}" stnID="{{Stn}}" depID="{{Dep}}"><span class="glyphicon glyphicon-remove"></span></button>
+        </li>
+    {{/each}}
+</script>

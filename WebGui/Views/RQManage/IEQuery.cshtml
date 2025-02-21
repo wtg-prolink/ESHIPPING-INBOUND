@@ -1,0 +1,251 @@
+﻿@{
+    ViewBag.Title = "IEQuery";
+}
+
+
+<script type="text/javascript">
+var _dm = new dm();
+var _oldDeatiArray = [];
+var _oldSerialArray = [];
+$(document).ready(function ($) {
+    var actFormatter = function (cellvalue, options, rawObject) {
+        var val = 0;
+        if (cellvalue == null || cellvalue === undefined || cellvalue == 0)
+            val = "";
+        else
+            val = cellvalue;
+        if (1 === cellvalue)
+            return '<div style="color: green;font-weight: bold;background-color: greenyellow;">' + val + '</div>';
+        return val;
+    };
+
+    //init Search
+    var gop = {};
+    var numberTemplate = "2";
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 330;
+    gop.gridColModel = [ 
+        { name: 'UId', title: 'ID', showname: 'ID', sorttype: 'string', hidden: true, viewable: false },
+        { name: 'LspCd', dfsopt: 'in', sopt: ['in', 'eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'cn', 'nu', 'nn', 'ni'], init: true, dv: "@ViewBag.LSP", title: '@Resources.Locale.L_IEQuery_LspCd', index: 'LspCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'LspNm', title: '@Resources.Locale.L_AirQuery_LspNm', index: 'LspNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PolCd', title: '@Resources.Locale.L_IESetup_PolCd', index: 'PolCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+        { name: 'PolNm', title: '@Resources.Locale.L_IESetup_PolCd' + " Name", index: 'PolNm', sorttype: 'string', width: 140, editable: false, hidden: false },
+        { name: 'PodCd', title: '@Resources.Locale.L_IESetup_PodCd', index: 'PodCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+        { name: 'Region', title: 'Country', index: 'Region', sorttype: 'string', width: 100, hidden: false},
+        { name: 'Carrier', title: '@Resources.Locale.L_IEQuery_Carrier', index: 'Carrier', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'ViaNm', title: '@Resources.Locale.L_IEQuery_ViaNm', index: 'ViaNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+      @*  { name: 'EffectDate', title: '@Resources.Locale.L_IEQuery_EffectDate', index: 'EffectDate', width: 100, align: 'left', sorttype: 'string', hidden: false },*@
+        { name: 'Tt', title: '@Resources.Locale.L_RouteSetup_Tt', index: 'Tt', width: 120, align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+        { name: 'F11', title: "0.5", index: 'F11', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L11', title: '@Resources.Locale.L_AirQuery_L1', index: 'L11', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F12', title: "1.0", index: 'F12', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L12', title: '@Resources.Locale.L_AirQuery_L1', index: 'L12', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F13', title: "1.5", index: 'F13', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L13', title: '@Resources.Locale.L_AirQuery_L1', index: 'L13', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F14', title: "2.0", index: 'F14', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L14', title: '@Resources.Locale.L_AirQuery_L1', index: 'L14', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F15', title: "2.5", index: 'F15', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L15', title: '@Resources.Locale.L_AirQuery_L1', index: 'L15', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F16', title: "3.0", index: 'F16', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L16', title: '@Resources.Locale.L_AirQuery_L1', index: 'L16', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F17', title: "3.5", index: 'F17', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L17', title: '@Resources.Locale.L_AirQuery_L1', index: 'L17', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F18', title: "4.0", index: 'F18', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L18', title: '@Resources.Locale.L_AirQuery_L1', index: 'L18', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F19', title: "4.5", index: 'F19', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L19', title: '@Resources.Locale.L_AirQuery_L1', index: 'L19', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F20', title: "5.0", index: 'F20', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L20', title: '@Resources.Locale.L_AirQuery_L1', index: 'L20', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F21', title: "5.5", index: 'F21', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L21', title: '@Resources.Locale.L_AirQuery_L1', index: 'L21', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F22', title: "6", index: 'F22', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L22', title: '@Resources.Locale.L_AirQuery_L1', index: 'L22', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F23', title: "6.5", index: 'F23', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L23', title: '@Resources.Locale.L_AirQuery_L1', index: 'L23', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F24', title: "7", index: 'F24', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L24', title: '@Resources.Locale.L_AirQuery_L1', index: 'L24', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F25', title: "7.5", index: 'F25', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L25', title: '@Resources.Locale.L_AirQuery_L1', index: 'L25', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F26', title: "8", index: 'F26', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L26', title: '@Resources.Locale.L_AirQuery_L1', index: 'L26', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F27', title: "8.5", index: 'F27', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L27', title: '@Resources.Locale.L_AirQuery_L1', index: 'L27', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F28', title: "9", index: 'F28', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L28', title: '@Resources.Locale.L_AirQuery_L1', index: 'L28', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F29', title: "9.5", index: 'F29', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L29', title: '@Resources.Locale.L_AirQuery_L1', index: 'L29', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F30', title: "10", index: 'F30', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L30', title: '@Resources.Locale.L_AirQuery_L1', index: 'L30', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F31', title: "10.5", index: 'F31', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L31', title: '@Resources.Locale.L_AirQuery_L1', index: 'L31', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F32', title: "11", index: 'F32', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L32', title: '@Resources.Locale.L_AirQuery_L1', index: 'L32', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F33', title: "11.5", index: 'F33', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L33', title: '@Resources.Locale.L_AirQuery_L1', index: 'L33', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F34', title: "12", index: 'F34', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L34', title: '@Resources.Locale.L_AirQuery_L1', index: 'L34', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F35', title: "12.5", index: 'F35', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L35', title: '@Resources.Locale.L_AirQuery_L1', index: 'L35', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F36', title: "13", index: 'F36', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L36', title: '@Resources.Locale.L_AirQuery_L1', index: 'L36', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F37', title: "13.5", index: 'F37', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L37', title: '@Resources.Locale.L_AirQuery_L1', index: 'L37', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F38', title: "14", index: 'F38', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L38', title: '@Resources.Locale.L_AirQuery_L1', index: 'L38', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F39', title: "14.5", index: 'F39', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L39', title: '@Resources.Locale.L_AirQuery_L1', index: 'L39', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+         { name: 'F40', title: "15", index: 'F40', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L40', title: '@Resources.Locale.L_AirQuery_L1', index: 'L40', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F41', title: "15.5", index: 'F41', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L41', title: '@Resources.Locale.L_AirQuery_L1', index: 'L41', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F42', title: "16", index: 'F42', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L42', title: '@Resources.Locale.L_AirQuery_L1', index: 'L42', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F43', title: "16.5", index: 'F43', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L43', title: '@Resources.Locale.L_AirQuery_L1', index: 'L43', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F44', title: "17", index: 'F44', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L44', title: '@Resources.Locale.L_AirQuery_L1', index: 'L44', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F45', title: "17.5", index: 'F45', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L45', title: '@Resources.Locale.L_AirQuery_L1', index: 'L45', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F46', title: "18", index: 'F46', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L46', title: '@Resources.Locale.L_AirQuery_L1', index: 'L46', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F47', title: "18.5", index: 'F47', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L47', title: '@Resources.Locale.L_AirQuery_L1', index: 'L47', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F48', title: "19", index: 'F48', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L48', title: '@Resources.Locale.L_AirQuery_L1', index: 'L48', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F49', title: "19.5", index: 'F49', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L49', title: '@Resources.Locale.L_AirQuery_L1', index: 'L49', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F50', title: "20", index: 'F50', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L50', title: '@Resources.Locale.L_AirQuery_L1', index: 'L50', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+
+
+        { name: 'F1', title: "+20", index: 'F1', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false },
+        { name: 'L1', title: '@Resources.Locale.L_AirQuery_L1', index: 'L1', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F2', title: "+30", index: 'F2', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L2', title: '@Resources.Locale.L_AirQuery_L1', index: 'L2', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F3', title: "+40", index: 'F3', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L3', title: '@Resources.Locale.L_AirQuery_L1', index: 'L3', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F4', title: "+50", index: 'F4', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L4', title: '@Resources.Locale.L_AirQuery_L1', index: 'L4', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F5', title: "+100", index: 'F5', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L5', title: '@Resources.Locale.L_AirQuery_L1', index: 'L5', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F6', title: "+200", index: 'F6', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L6', title: '@Resources.Locale.L_AirQuery_L1', index: 'L6', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F7', title: "+300", index: 'F7', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L7', title: '@Resources.Locale.L_AirQuery_L1', index: 'L7', width: 100, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false }
+    ];
+    gop.AddUrl = false;
+    gop.gridId = "containerInfoGrid";
+    //gop.multiselect = true;
+    gop.gridAttr = { caption: "@Resources.Locale.L_RQSetup_InterEpComp", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    gop.gridSearchUrl = rootPath + "RQManage/IEQueryData";
+    gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        //dblClick(map);
+        var uid = map.UId;
+        if (!uid) {
+            CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+            return;
+        }                                
+    }
+
+    gop.onSelectRowFunc = function (jsonMap) {
+        //顯示子表
+        var ufid = jsonMap.DnNo;
+        if (ufid != null && ufid != "") {
+            //此处增加判断，如果tempDeatiArray存在该笔数据的资料，则加载缓存，如果没有则通过请求来更新
+            if (_oldDeatiArray[ufid] != undefined || _oldDeatiArray[ufid] != null) {
+                //将json设置给BsCodeGrid
+                //移除_state状态为0的数据，，因为_state的数据是删除的数据
+                $.each(_oldDeatiArray[ufid], function (i, val) {
+                    if (val._state == "0") {
+                        _oldDeatiArray[ufid].splice(i, 1);
+                    }
+                });
+                _dm.getDs("SubGrid").setData(_oldDeatiArray[ufid]);
+                return;
+            }
+            $.ajax({
+                async: true,
+                url: rootPath + "DNManage/SMDNQueryData/" + ufid,
+                type: 'POST',
+                data: {
+                    Dnno: ufid,
+                    page: 1,
+                    rows: 200
+                },
+                dataType: "json",
+                "complete": function (xmlHttpRequest, successMsg) {
+                    if (successMsg != "success") return null;
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                },
+                success: function (result) {
+
+                    var mainTable = result;
+
+                    console.log(mainTable);
+                    var $grid = $("#SubGrid");
+                    _oldDeatiArray[ufid] = mainTable.rows;
+                    if (_dm.getDs("SubGrid") == null || _dm.getDs("SubGrid") == undefined) {
+                        _dm.addDs("SubGrid", mainTable.rows, ["UId","UFid"], $grid[0]);
+                    } else {
+                        _dm.getDs("SubGrid").setData(mainTable.rows);
+                    }
+                }
+            });
+        }
+    }
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";  
+    var uid = "@ViewBag.UId";
+    gop.baseCondition = "";
+    gop.baseConditionFunc = function () {
+        if (uid === "")
+            return "";
+        return " RFQ_NO='" + uid + "'";
+    };
+    initSearch(gop);
+    setTimeout(function () {
+        $("#SummarySearch").trigger("click");
+    }, 1000);
+    $("#SummarySearch").bind("click", function () {
+        $(".status-box").removeClass("active");
+        $("#searchStatus_").addClass("active");
+    });
+});
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

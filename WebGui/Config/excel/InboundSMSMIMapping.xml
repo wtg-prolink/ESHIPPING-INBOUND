@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+从name插入到fieldname，从订舱转到Truck Calling
+-->
+<table name="SMIDNP">
+  <column name="ISF Seller"  fieldname="HTML_SISF" dataType="string" defalutValue="" > </column>
+  <column name="BookingParty"  fieldname="HTML_IBBK" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Location"  fieldname="SMSMI_CMP" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="TransType"  fieldname="SMSMI_TRAN_TYPE" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="MBL"  fieldname="SMSMI_MASTER_NO" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="HBL"  fieldname="SMSMI_HOUSE_NO" dataType="string" defalutValue=""> </column>
+  <column name="Shipping Marks"  fieldname="SMSMI_MARKS" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Commodity"  fieldname="SMSMI_GOODS" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="BLRemark"  fieldname="SMSMI_BL_RMK" dataType="string" defalutValue=""> </column>
+  <column name="Year"  fieldname="SMSMI_YEAR" dataType="string" defalutValue="" ></column>
+  <column name="Month"  fieldname="SMSMI_MONTH" dataType="string" defalutValue="" ></column>
+  <column name="Weekly"  fieldname="SMSMI_WEEKLY" dataType="string" defalutValue=""></column>
+  <column name="TTL GoodsValue"  fieldname="SMSMI_GVALUE" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Currency"  fieldname="SMSMI_CUR" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Container 20"  fieldname="SMSMI_CNT20" dataType="string" defalutValue=""> </column>
+  <column name="Container 40"  fieldname="SMSMI_CNT40" dataType="string" defalutValue=""> </column>
+  <column name="Container 40HQ"  fieldname="SMSMI_CNT40HQ" dataType="string" defalutValue=""> </column>
+  <column name="Other Container Type"  fieldname="SMSMI_CNT_TYPE" dataType="string" defalutValue=""> </column>
+  <column name="Other Container Number"  fieldname="SMSMI_CNT_NUMBER" dataType="string" defalutValue=""> </column>
+  <column name="TTL PackageNo"  fieldname="SMSMI_PKG_NUM" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="TTL PKG Unit"  fieldname="SMSMI_PKG_UNIT" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="TTL GW"  fieldname="SMSMI_GW" dataType="string" defalutValue=""> </column>
+  <column name="TTL GW Unit"  fieldname="SMSMI_GWU" dataType="string" defalutValue=""> </column>
+  <column name="TTL VW"  fieldname="SMSMI_VW" dataType="string" defalutValue=""> </column>
+  <column name="TTL CBM"  fieldname="SMSMI_CBM" dataType="string" defalutValue=""> </column>
+  <column name="TTL CBM Unit"  fieldname="" dataType="string" defalutValue=""> </column>
+  <column name="TTL CW"  fieldname="SMSMI_CW" dataType="string" defalutValue=""> </column>
+  <column name="Incoterm"  fieldname="SMSMI_INCOTERM_CD" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Incoterm Description"  fieldname="SMSMI_INCOTERM_DESCP" dataType="string" defalutValue=""> </column>
+  <column name="Service Mode From"  fieldname="SMSMI_LOADING_FROM" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Service Mode To"  fieldname="SMSMI_LOADING_TO" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Airline/Carrier Code"  fieldname="SMSMI_CARRIER" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="HTSCode"  fieldname="SMSMI_HTS_CODE" dataType="string" defalutValue=""> </column>
+  <column name="Country"  fieldname="SMSMI_COUNTRY" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="SCAC"  fieldname="SMSMI_SCAC_CD" dataType="string" defalutValue=""> </column>
+  <column name="Freight Term"  fieldname="SMSMI_FRT_TERM" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="POR"  fieldname="SMSMI_POR_CD" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="POL"  fieldname="SMSMI_POL_CD" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="POD"  fieldname="SMSMI_POD_CD" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="DEST"  fieldname="SMSMI_DEST_CD" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Dest.Region"  fieldname="SMSMI_DEST_REGION" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Vessel1"  fieldname="SMSMI_VESSEL1" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Voyage1"  fieldname="SMSMI_VOYAGE1" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="ETD1"  fieldname="SMSMI_ETD1" dataType="Date" defalutValue="" isnotnull="Y"></column>
+  <column name="ETA1"  fieldname="SMSMI_ETA1" dataType="Date" defalutValue="" isnotnull="Y"></column>
+  <column name="Vessel2"  fieldname="SMSMI_VESSEL2" dataType="string" defalutValue=""> </column>
+  <column name="Voyage2"  fieldname="SMSMI_VOYAGE2" dataType="string" defalutValue=""> </column>
+  <column name="ETD2"  fieldname="SMSMI_ETD2" dataType="Date" defalutValue=""> </column>
+  <column name="ETA2"  fieldname="SMSMI_ETA2" dataType="Date" defalutValue=""> </column>
+  <column name="Vessel3"  fieldname="SMSMI_VESSEL3" dataType="string" defalutValue=""> </column>
+  <column name="Voyage3"  fieldname="SMSMI_VOYAGE3" dataType="string" defalutValue=""> </column>
+  <column name="ETD3"  fieldname="SMSMI_ETD3" dataType="Date" defalutValue=""> </column>
+  <column name="ETA3"  fieldname="SMSMI_ETA3" dataType="Date" defalutValue=""> </column>
+  <column name="Vessel4"  fieldname="SMSMI_VESSEL4" dataType="string" defalutValue=""> </column>
+  <column name="Voyage4"  fieldname="SMSMI_VOYAGE4" dataType="string" defalutValue=""> </column>
+  <column name="ETD4"  fieldname="SMSMI_ETD4" dataType="Date" defalutValue=""> </column>
+  <column name="ETA4"  fieldname="SMSMI_ETA4" dataType="Date" defalutValue=""> </column>
+  <column name="ATD1"  fieldname="SMSMI_ATD" dataType="Date" defalutValue=""> </column>
+  <column name="ATA"  fieldname="SMSMI_ATA" dataType="Date" defalutValue=""> </column>
+  <column name="Shipper No(SH)"  fieldname="HTML_SH" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Consignee No(CS)"  fieldname="HTML_CS" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Notify No(NT)"  fieldname="HTML_NT" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Ship_to No(WE)"  fieldname="HTML_WE" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="FI_Customer_Group(FC)"  fieldname="HTML_FC" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Sub_BG(ZT)"  fieldname="HTML_ZT" dataType="string" defalutValue=""> </column>
+  <column name="Bill_to_Party(RE)/Importer"  fieldname="HTML_RE" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Handling_Agent(SP)"  fieldname="HTML_SP" dataType="string" defalutValue=""> </column>
+  <column name="Invoice No"  fieldname="SMIDN_INV_NO" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Inv_Unit_Price"  fieldname="SMIDN_INV_PRICE" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Inv_Currency"  fieldname="SMIDN_INV_CUR" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="CargoType"  fieldname="SMIDN_DIVISION_DESCP" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Inv_NW"  fieldname="SMIDN_NW" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Inv_GW"  fieldname="SMIDN_GW" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Inv_WeightUnit"  fieldname="SMIDN_GWU" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Inv_CBM"  fieldname="SMIDN_CBM" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Inv_CBM_Unit"  fieldname="SMIDN_CBMU" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Inv_Qty"  fieldname="SMIDN_QTY" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Inv_Qty_Unit"  fieldname="SMIDN_QTYU" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Inv_PKG"  fieldname="SMIDN_PKG_NUM" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Inv_PKG_Unit"  fieldname="SMIDN_PKG_UNIT" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Inv_PKG_Desc."  fieldname="SMIDN_PKG_UNIT_DESC" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="InnerModelName"  fieldname="IPART_NO" dataType="string" defalutValue=""> </column>
+  <column name="Q'ty/ModelName"  fieldname="QTY" dataType="string" defalutValue=""> </column>
+  <column name="GW/ModelName"  fieldname="GW" dataType="string" defalutValue=""> </column>
+  <column name="CBM/ModelName"  fieldname="CBM" dataType="string" defalutValue=""> </column>
+  <column name="Container#"  fieldname="CNTR_NO" dataType="string" defalutValue=""> </column>
+  <column name="ContainerType"  fieldname="SMICNTR_CNTR_TYPE" dataType="string" defalutValue=""> </column>
+  <column name="Seal#"  fieldname="SMICNTR_SEAL_NO1" dataType="string" defalutValue=""> </column>
+  <column name="ExternalModelName"  fieldname="OPART_NO" dataType="string" defalutValue=""> </column>
+  <column name="PO NO"  fieldname="PO_NO" dataType="string" defalutValue=""> </column>
+</table>

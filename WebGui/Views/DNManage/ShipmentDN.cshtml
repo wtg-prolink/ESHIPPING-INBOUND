@@ -1,0 +1,32 @@
+@{
+    ViewBag.Title = "ShipmentDN";
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+@Html.RazorJSInline("~/Scripts/DNManage/ShipmentDN.js")
+<script type="text/javascript">
+    var _shipmentid = "@ViewBag.ShipmentId";
+    var select_approve = "@ViewBag.SelectApprove";
+    var default_approve = "@ViewBag.DefaultApprove";
+    var select_role = "@ViewBag.SelectRole";
+    var default_role = "@ViewBag.DefaultRole";
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+        	<div class="panel panel-default">
+        	    <div class="panel-body">        	    	 
+			    	<div class="pure-g">
+						<div class="pure-u-sm-60-60">
+				            <table id="MainGrid" class="_tableGrid" style="width: 100%">
+				                <tr>
+				                
+				                </tr>
+				            </table>
+				        </div>		        
+			    	</div>
+			    </div>
+			</div>
+        </div>
+    </div>
+</div>
+

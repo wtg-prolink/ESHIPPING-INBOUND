@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "QueryView";
+}
+
+
+<script>
+	var TranTypeSel = '@ViewBag.TranTypeSel';
+	$(function () {
+		var gop = {};
+		var numberTemplate = "2";
+		var docHeight = $(document).height();
+		gridHeight = docHeight - 300;
+		gop.AddUrl = { "url": rootPath + "SMAL/SetupView", "title": "@Resources.Locale.L_SMAL_SetupView", "id": "SetupView" };
+		gop.gridId = "containerInfoGrid";
+		gop.gridAttr = { caption: "@Resources.Locale.L_SMAL_QueryList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+		gop.gridSearchUrl = rootPath + "SMAL/QueryData";
+		gop.multiselect = true;
+		gop.multiboxonly = true;
+
+		//SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+		gop.searchFormId = "ConditionArea";
+		gop.searchDivId = "SearchArea";
+		gop.StatusAreaId = "StatusArea";
+		gop.BtnGroupId = "BtnGroupArea";
+
+		gop.gridFunc = function (map) {
+		    //用于回调函数，例如赋值操作等
+		    dblClick(map);
+		}
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+		var colModelSetting = [
+			{ name: 'TranType', formatter: "select", editoptions: { value:  TranTypeSel} },
+			{ name: 'TransacteMode', formatter: "select", editoptions: { value:  'A:@Resources.Locale.L_DNApproveManage_TSModeA;B:@Resources.Locale.L_DNApproveManage_TSModeB;C:@Resources.Locale.L_DNApproveManage_TSModeC;O:@Resources.Locale.L_DNApproveManage_TSModeO'} },
+			{ name: 'FreightTerm', formatter: "select", editoptions: { value: 'P:Prepaid;C:Collect;O:Other' } },
+            { name: 'WeCd', title: 'Ship to', index: 'WeCd', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'WeNm', title: 'Ship to Name', index: 'WeNm', width: 150, align: 'left', sorttype: 'string', hidden: false }
+		];
+
+		genColModel("SMAL", "U_ID", "L_SMAL", colModelSetting).done(function (result) {
+		    gop.gridColModel = result;
+		    gop.searchColumns = getSelectColumn(gop.gridColModel);
+		    initSearch(gop);
+
+		    $("#SummarySearch").click();
+		});
+
+		function dblClick(map) {
+		    var UId = map.UId;
+		    top.topManager.openPage({
+		        href: rootPath + "SMAL/SetupView/" + UId,
+		        title: '@Resources.Locale.L_SMAL_SetupView',
+		        id: 'SetupView',
+		        search: 'uid=' + UId
+		    });
+		}
+	});
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

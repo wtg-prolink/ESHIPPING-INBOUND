@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "TermVSChargeQuery";
+}
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 330;
+        gop.gridColModel = [
+            { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', hidden: true, viewable: false},
+            { name: 'GroupId', title: 'Group ID', index: 'GroupId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'Cmp', title: 'Location', index: 'Cmp', sorttype: 'string', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'IoFlag', title: 'I/O Bound', index: 'IoFlag', width: 100, sorttype: 'string', formatter: 'select', edittype: 'select', editoptions: { value: 'I:InBound;O:OutBound' } },
+            { name: 'FrtTerm', title: 'Freight Term', index: 'FrtTerm', width: 100, sorttype: 'string', formatter: 'select', edittype: 'select', editoptions: { value: 'P:Prepaid;C:Collect' } },
+            { name: 'IncotermCd', title: 'DLV TERM', index: 'IncotermCd', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'IncotermDescp', title: 'DLV Description', index: 'IncotermDescp', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PodCd', title: 'POD', index: 'PodCd', width: 120, align: 'left', sorttype: 'string', hidden: false},
+            { name: 'PodName', title: 'POD Description', index: 'PodName', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'NeedChg', title: 'Need Charge', index: 'NeedChg', width: 300, align: 'left', sorttype: 'string', hidden: false, remark:'FC:Freight Charge,BC:Inbound Broker Charge,TC:Inbound Truck Charge,LC:Inbound Local Charge,OBC:Outbound Broker Charge,OTC:Outbound Truck Charge,OLC:Outbound Local Charge' },
+            { name: 'CreateDate', title: 'Create Date', index: 'CreateDate', width: 120, align: 'left', hidden: true },
+            { name: 'CreateBy', title: 'Create By', index: 'CreateBy', width: 70, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'ModifyDate', title: 'Modify Date', index: 'ModifyDate', width: 120, align: 'left', hidden: true },
+            { name: 'ModifyBy', title: 'Modify By', index: 'ModifyBy', width: 70, align: 'left', sorttype: 'string', hidden: true }
+        ];
+        gop.AddUrl = { "url": rootPath + "Bsdate/TermVSChargeSetup", "title": "Term VS Charge Setup", "id": "TermVSChargeSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "Term vs Charges", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "Bsdate/TermVSChargeQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "";
+        }
+
+        initSearch(gop);
+
+        function dblClick(map) {
+            var UId = map.UId;
+            top.topManager.openPage({
+                href: rootPath + "Bsdate/TermVSChargeSetup?UId=" + UId,
+                title: 'Term VS Charge Setup',
+                id: 'TermVSChargeSetup',
+                search: 'uid=' + UId
+            });
+        }
+    });
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

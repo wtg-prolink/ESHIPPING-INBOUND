@@ -1,0 +1,196 @@
+﻿@{
+    ViewBag.Title = "QueryView";
+}
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap.file-input.js")"></script>
+
+<script>
+	$(function () {
+		var gop = {};
+		var numberTemplate = "2";
+		var docHeight = $(document).height();
+		gridHeight = docHeight - 300;
+		gop.AddUrl = { "url": rootPath + "Bsdate/BsdateSetupView", "title": "@Resources.Locale.L_Bsdate_SetupView", "id": "BsdateSetupView" }; 
+		gop.gridId = "containerInfoGrid";
+		gop.gridAttr = { caption: "@Resources.Locale.L_Bsdate_QueryList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+		gop.gridSearchUrl = rootPath + "Bsdate/QueryData";
+		gop.multiselect = true;
+		gop.multiboxonly = true;
+
+		//SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+		gop.searchFormId = "ConditionArea";
+		gop.searchDivId = "SearchArea"; 
+		gop.StatusAreaId = "StatusArea";
+		gop.BtnGroupId = "BtnGroupArea";
+
+		gop.gridFunc = function (map) {
+		    //用于回调函数，例如赋值操作等
+		    dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+		gop.btnGroup = [
+            {
+                id: "MBImportCalender",
+                name: "@Resources.Locale.L_Bsdate_MBImportCalender",
+                func: function () {
+                    $("#ImportCalenderDailog").modal("show");
+                    resetFileInput($("#ImportCalenderExcel"));
+                }
+            },
+		];
+
+
+		var colModelSetting = [];
+
+		genColModel("Bsdate", "U_ID", "L_Bsdate", colModelSetting).done(function (result) {
+		    gop.gridColModel = result;
+		    gop.searchColumns = getSelectColumn(gop.gridColModel);
+		    initSearch(gop);
+
+		    $("#SummarySearch").click();
+		});
+
+
+		$("#ImportCalenderExcel").bootstrapFileInput();
+		$("#IMPORT_FROM").submit(function () {
+		    var postData = new FormData($(this)[0]);
+		    $.ajax({
+		        url: rootPath + "BSDATE/ImportCalender",
+		        type: 'POST',
+		        data: postData,
+		        async: true,
+		        beforeSend: function () {
+		            CommonFunc.ToogleLoading(true);
+		            StatusBarArr.nowStatus("@Resources.Locale.L_BSTQuery_Uploading");
+		        },
+                error: function (xmlHttpRequest, errMsg) {
+                    resetFileInput($("#ImportCalenderExcel"));
+		            CommonFunc.Notify("", "error", 500, "warning");
+		            CommonFunc.ToogleLoading(false);
+		            StatusBarArr.nowStatus("");
+		        },
+		        success: function (data) {
+		            //alert(data)
+                    resetFileInput($("#ImportCalenderExcel"));
+		            CommonFunc.ToogleLoading(false);
+		            StatusBarArr.nowStatus("");
+		            if (data.errorMsg != "") {
+		                //CommonFunc.Notify("", "汇入失败" + data.message, 1300, "warning");
+		                alert(data.errorMsg);
+		                return false;
+		            }
+		            CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpSuc", 500, "success");
+		            $("#ImportCalenderDailog").modal("hide");
+
+		            $("#SummarySearch").click();
+		        },
+		        cache: false,
+		        contentType: false,
+		        processData: false
+		    });
+
+		    return false;
+		});
+
+
+		function dblClick(map) {
+		    var UId = map.UId;
+		    top.topManager.openPage({
+		        href: rootPath + "Bsdate/BsdateSetupView/" + UId,
+		        title: '@Resources.Locale.L_Bsdate_SetupView',
+		        id: 'BsdateSetupView',
+		        search: 'uid=' + UId
+		    });
+		}
+	});
+
+    function DownLoadExcel() {
+        window.open(rootPath + "Bsdate/DownLoadXls?TranType=calender");
+    }
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->
+<div class="modal fade" id="ImportCalenderDailog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_Bsdate_MBImportCalender</h4>
+            </div>
+            <form name="EXCEL_UPLOAD_FROM" id="IMPORT_FROM" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        @*<div class="pure-u-sm-7-60">
+                                <label for="StartRow" class="control-label">@Resources.Locale.L_BSTQuery_BeginRow</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="number" class="form-control input-sm" id="StartRow" name="StartRow" isnumber="true" value="0" />
+                                <p class="help-block tooltips"></p>
+                            </div>*@
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="ImportCalenderExcel" name="file" />
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <a href="#" onclick="DownLoadExcel()">@Resources.Locale.L_DNManage_ClickDl (BatchCalender_V1_20241124)</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="ImportCalenderBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

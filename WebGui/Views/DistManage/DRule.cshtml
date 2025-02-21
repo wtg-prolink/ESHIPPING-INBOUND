@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "DRule";
+}
+
+
+<script type="text/javascript">
+
+    var select_term = "@ViewBag.SelectTerm";
+    var default_term = "@ViewBag.DefaultTerm";
+    var select_track = "@ViewBag.SelectTrack";
+    var default_track = "@ViewBag.DefaultTrack";
+                        $(document).ready(function ($) {
+                            //init Search
+                            var gop = {};
+                            var numberTemplate = "2";
+                            var docHeight = $(document).height();
+                            gridHeight = docHeight - 330;
+                            gop.gridColModel = [
+                                { name: 'UId', showname: 'ID', sorttype: 'string', hidden: true, viewable: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+	                           	{ name: 'Cmp', title: '@Resources.Locale.L_RoleSetUp_CMP', index: 'Cmp', width: 90, align: 'left', sorttype: 'string', hidden: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+	                           	{ name: 'Term', title: '@Resources.Locale.L_DRule_Term', index: 'Term', width: 90, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_term, defaultValue: default_term } },
+	                           	{ name: 'PickupPort', title: '@Resources.Locale.L_DRule_PickupPort', index: 'PickupPort', width: 90, align: 'left', sorttype: 'string', hidden: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+                                { name: 'TrackWay', title: '@Resources.Locale.L_DNApproveManage_TrackWay', index: 'TrackWay', width: 90, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_track, defaultValue: default_track } },
+	                           	{ name: 'ViaPort', title: '@Resources.Locale.L_DRule_ViaPort', index: 'ViaPort', width: 90, align: 'left', sorttype: 'string', hidden: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+	                           	{ name: 'Region', title: '@Resources.Locale.L_DRule_Region', index: 'Region', width: 90, align: 'left', sorttype: 'string', hidden: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+	                           	{ name: 'State', title: '@Resources.Locale.L_DRule_State', index: 'State', width: 90, align: 'left', sorttype: 'string', hidden: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+	                           	{ name: 'DeliveryPort', title: '@Resources.Locale.L_DRule_DeliveryPort', index: 'DeliveryPort', width: 90, align: 'left', sorttype: 'string', hidden: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+                                { name: 'DeliveryPortnm', title: '@Resources.Locale.L_DNApproveManage_PodNm', index: 'DeliveryPortnm', width: 180, align: 'left', sorttype: 'string', hidden: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+	                           	{ name: 'Customer', title: '@Resources.Locale.L_DRule_Customer', index: 'Customer', width: 90, align: 'left', sorttype: 'string', hidden: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+	                           	{ name: 'Model', title: '@Resources.Locale.L_DRule_Model', index: 'Model', width: 90, align: 'left', sorttype: 'string', hidden: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+	                           	{ name: 'LspNo', title: '@Resources.Locale.L_DRule_LspNo', index: 'LspNo', width: 90, align: 'left', sorttype: 'string', hidden: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+	                           	{ name: 'LspNm', title: '@Resources.Locale.L_DRule_LspNm', index: 'LspNm', width: 90, align: 'left', sorttype: 'string', hidden: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+	                           	@*{ name: 'UseRate', title: '@Resources.Locale.L_DRule_UseRate', index: 'UseRate', width: 90, align: 'right', sorttype: 'string', hidden: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },*@
+	                           	{ name: 'Remark', title: '@Resources.Locale.L_IpPart_Remark', index: 'Remark', width: 90, align: 'left', sorttype: 'string', hidden: false, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+                            ];
+                            gop.AddUrl = { "url": rootPath + "DistManage/DRuleSetup", "title": "@Resources.Locale.L_DNManage_DmAssRuleSet", "id": "DRuleSetup" };
+                            gop.gridId = "containerInfoGrid";
+                            gop.gridAttr = { caption: "@Resources.Locale.L_DNManage_DmAssRule", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+                            //gop.gridSearchUrl = rootPath + "IPPOM/POMSetupInquiryData";
+                            gop.gridSearchUrl = rootPath + "DistManage/GetDRuleData";
+                            gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+
+                            gop.gridFunc = function (map) {
+                                //用于回调函数，例如赋值操作等
+                                dblClick(map);
+                            }
+
+                            gop.searchFormId = "ConditionArea";
+                            gop.searchDivId = "SearchArea";
+                            gop.loadCompleteFunc = function () {
+                                var $grid = $("#containerInfoGrid");
+                                if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                                    $grid[0].p.sortname = "CreateDate";
+                            }
+
+                            initSearch(gop);
+
+                            function dblClick(map) {
+                            	var UId = map.UId;
+                                top.topManager.openPage({
+                                    href: rootPath + "DistManage/DRuleSetup/" + UId,
+                                    title: '@Resources.Locale.L_DNManage_DmAssRuleSet',
+                                    id: 'DRuleSetup',
+                                    search : 'uid=' + UId
+                                });
+                            }
+                        });
+
+                    </script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="pure-g" id="ConditionArea"></form>
+                    <div class="pure-g" id="SearchArea">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

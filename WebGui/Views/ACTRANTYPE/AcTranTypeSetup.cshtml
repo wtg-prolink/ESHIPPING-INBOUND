@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "AcTranTypeSetup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+@Html.RazorJSInline("~/Scripts/System/AcTranTypeSetup.js")
+<script type="text/javascript">
+    var DefaultAtran = "@ViewBag.DefaultAtran";
+    var AtranType = "@ViewBag.AtranType";
+    var CmpNm = "@ViewBag.CmpNm";
+    </script>
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+						    <label for="Cmp" class="control-label">@Resources.Locale.L_UserSetUp_Cmp</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" id="Cmp" name="Cmp" fieldname="SampleName" />
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+						    <input type="text" class="form-control input-sm" ref="Cmp" id="CmpNm" name="CmpNm" readonly />
+						</div>
+					</div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <table id="AcTranTypeGrid" class="_tableGrid" style="width: 100%">
+                                <tr></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

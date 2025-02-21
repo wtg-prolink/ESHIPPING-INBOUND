@@ -1,0 +1,221 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Login Page - @ViewBag.SYS_TITLE</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="@Url.Content("~/Scripts/Core/bui/css/bootstrap.min.css")" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/Core/bui/css/jquery-ui.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/Core/bui/css/login.css")" />
+    <link href="@Url.Content("~/Scripts/css/common.css")" rel="stylesheet" />
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/lib/jquery-1.11.1.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/lib/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/lib/jquery-ui.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/lib/handlebars.js")"></script>
+    <script src="~/Scripts/lang.js?20241106"></script>
+    <style>
+        .divcss5-b{ overflow-y:scroll;}
+
+        /*隐藏ie自带眼睛*/
+        ::-ms-reveal {
+            display: none;
+        }
+
+        #seepwd {
+            display: inline-block;
+            position: absolute;
+            right: 15px;
+            z-index: -100;
+            cursor: pointer;
+            top: 40%;
+        }
+    </style>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/common.js?20240418")"></script>
+    <script type="text/javascript">
+        const countdownTime = 120;
+        let currentCountdown = countdownTime;
+        var countdownInterval = null;
+        $(document).ready(function ($) {
+            var rootPath = "@Url.Content("~")" + "zh-CN/";
+            var LoginFail = "@ViewBag.fail";
+            var FailCount = "@ViewBag.failCount";
+            var FailMessage = "@ViewBag.failMessage";
+            var Lang = "@ViewBag.Lang";
+            var uStatus = "@ViewBag.Ustatus";
+
+            //if (Lang != "" && Lang != null) {
+            //    $("#Lang option").each(function () {this.selected = (this.value == Lang); });
+            //}
+
+            $("#VerificationCode").hide();
+            $("#user").blur(function () {
+                var userid = $("#user").val();
+                if (userid == "" || userid == null) {
+                    return;
+                }
+                $.ajax({
+                    async: false,
+                    url: rootPath + "/Home/GetFailCount",
+                    type: 'POST',
+                    data: { "UId": userid },
+                    dataType: "json",
+                    "beforeSend": function (xhr) {
+                        CommonFunc.ToogleLoading(true);
+                    },
+                    "complete": function (xmlHttpRequest, successMsg) {
+                    },
+                    "error": function (xmlHttpRequest, errMsg) {
+                    },
+                    success: function (result) {
+                        if (result.message > 2) {
+                            $("#VerificationCode").show();
+                            $(".noscroll").css({
+                                "position": "relative"
+                            });
+                            refreshVerificationCode();
+                        } else {
+                            $("#VerificationCode").hide();
+                        }
+                    }
+                });
+
+            });
+
+            if (FailMessage != "") {
+                alert(FailMessage);
+            }
+
+            if (LoginFail == "True" && uStatus == "1") {
+                alert("@Resources.Locale.L_Login_noUse");
+            } else if(LoginFail == "True") {
+                alert("account or password incorrect!!!");
+            }
+ 
+            $("#seepwd").mousedown(function () {
+                $("#password").attr("type", "text");
+            });
+            $("#seepwd").mouseup(function () {
+                $("#password").attr("type", "password");
+            });
+
+            $("#pwdgroup").focusin(function () {
+                $("#seepwd").css("z-index", "100");
+            });
+            $("#pwdgroup").focusout(function () {
+                $("#seepwd").css("z-index", "-100");
+            });
+
+        });
+
+        function updateCountdown() {
+            const countdownElement = document.getElementById('timerLabel');
+            countdownElement.textContent = "This verification code will expire in " + currentCountdown + " seconds";
+
+            // 倒计时结束时的处理
+            if (currentCountdown === 0) {
+                refreshVerificationCode();
+                //countdownElement.textContent = '时间到!';
+                // 这里可以添加其他倒计时结束后的逻辑
+            } else {
+                // 每秒减1
+                currentCountdown--;
+            }
+        }
+
+        function refreshVerificationCode(type) {
+            // 为图像URL添加一个随机参数来防止缓存
+            if (countdownInterval != null)
+                clearInterval(countdownInterval);
+            if (typeof type == "undefined")
+                type = "";
+            var userid = $("#user").val();
+            var img = $("#VerificationCodeImg");
+            var originalSrc = img.attr("src");
+            var urlParts = originalSrc.split('?');
+            var baseUrl = urlParts[0];
+            img.attr("src", baseUrl + "?type="+type+"&user=" + userid + "&random=" + Math.random());
+        }
+
+        function imageLoaded() {
+            var timestampInSeconds = new Date().getTime() / 1000;
+            var cookieTimeStamp = Number(getCookie("plv3.passport.vcodetimestamp"));
+            if (!isNaN(cookieTimeStamp)) {
+                currentCountdown = cookieTimeStamp - timestampInSeconds;
+            } else {
+                currentCountdown = 120;
+            }
+            currentCountdown = Math.max(0, Math.round(currentCountdown))
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+
+        var getCookie = function (Name) {
+            var search = Name + "=";
+            var ck = this.top.document.cookie || document.cookie;
+            if (ck.length > 0) {
+                offset = ck.indexOf(search);
+                if (offset != -1) {
+                    offset += search.length;
+                    end = ck.indexOf(";", offset);
+                    if (end == -1) {
+                        end = ck.length;
+                    }
+                    return unescape(ck.substring(offset, end));
+                } else {
+                    return ("");
+                }
+            } else {
+                return ("");
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row" id="pwd-container">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <section class="login-form">
+                    <form method="post" action="" role="login" novalidate id="loginForm">
+                        <h3 style="font-weight: 600;">
+                            <img src="@Url.Content("~/Images/sd_logo_2.png")" style="height:27px; float:left;" />@ViewBag.SYS_TITLE
+                            
+                        </h3>
+                        <p style="font-size: 10px;">Version @ViewBag.SYS_VERSION</p>
+                        <h2 style="text-align:center;"></h2>
+                        <input type="text" name="user" id="user"  placeholder="Account" class="form-control input-lg" value="" required />
+                        <div id="pwdgroup" style="position:relative;z-index:10;">
+                            <input type="password" autocomplete="off" name="password" id="password" class="form-control input-lg" placeholder="Password" required="" />
+                            <span id="seepwd" class="glyphicon glyphicon-eye-open pwdeye" style=" display: inline-block; position: absolute; right: 10px; z-index: -100; cursor: pointer; top: 40%;"></span>
+                        </div>
+                        <input type="hidden" name="tpvMsg" id="tpvMsg" />
+                        <fieldset id="VerificationCode">
+                            <legend>Verification Codes</legend>
+                            <img id="VerificationCodeImg" src="@Url.Action("VerificationCode")" alt="verification codes" onload="imageLoaded()" />
+                            <div><button id="refreshBtn" type="button" onclick="refreshVerificationCode('refresh')" class="ui-dialog-titlebar-diag"><span class="ui-icon ui-icon-refresh" /></button><label id="timerLabel"></label></div>
+                            <input type="text" name="InputCode" placeholder="please enter verification code(Capitalization does not matter)" class="form-control input-lg" value="" required />
+                        </fieldset>
+                        <div class="pwstrength_viewport_progress"></div>
+                        <p style="color: red; font-size: 10px;">*Use IE10.0 above, or Google Chrome Browser</p>
+                        <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
+                    </form>
+
+                    <div class="form-links">
+                        <p style="color:#fff;">Copyright © 2016 Prolink Solutions All Rights Reserved.</p>
+                        <a href="https://beian.miit.gov.cn" target="_blank">
+                            <span class="lh s-bottom-recordcode">闽ICP备13011732号</span>
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</body>
+</html>

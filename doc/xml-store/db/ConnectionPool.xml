@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<connection-pool>
+  <!--
+  設置默認的連接池類型、名字
+  -->
+  <default poolType="Sql" poolName="IPORT" dbType="Sql2005"/>
+  <Sql>
+    <IPORT>User ID=ESHIPPING;password=tpv2017;Data Source=172.20.4.133;Persist Security Info=False;Initial Catalog=ESHIPPING;MultipleActiveResultSets=true</IPORT>
+    <!--<IPORT>User ID=ESHIPPING;password=Eshipping!;Data Source=172.20.5.94;Persist Security Info=False;Initial Catalog=TPV_ESHIPPING;MultipleActiveResultSets=true</IPORT>
+    <IPORT dbType="Sql2005">User ID=ESHIPPING;password=tpv2017;Data Source=172.20.1.31;Persist Security Info=False;Initial Catalog=ESHIPPING;MultipleActiveResultSets=true</IPORT>-->
+    <!--<IPORT>User ID=ESHIPPING;password=ESHIPPING!;Data Source=192.118.118.22;Persist Security Info=False;Initial Catalog=TPV_IBQ;MultipleActiveResultSets=true</IPORT>-->
+    <!--<IPORT>User ID=ESHIPPING;password=ESHIPPING!;Data Source=192.118.118.22;Persist Security Info=False;Initial Catalog=ESHIPPINGASD;MultipleActiveResultSets=true</IPORT>-->
+    <!--<IPORT>User ID=sa;password=!QAZ2wsx;Data Source=.\SQLEXPRESS;Persist Security Info=False;Initial Catalog=ESHIPPING;MultipleActiveResultSets=true</IPORT>-->
+    <!--<IPORT>User ID=sa;password=!QAZ2wsx;Data Source=.\SQLEXPRESS;Persist Security Info=False;Initial Catalog=ESHIPPING;MultipleActiveResultSets=true</IPORT>-->
+    <!--<IPORT>User ID=ESHIPPING;password=Eshipping!;Data Source=172.20.1.35;Persist Security Info=False;Initial Catalog=ESHIPPINGIBQ;MultipleActiveResultSets=true</IPORT>-->
+    <!--<EDOC dbType="Sql2005">User ID=IFREIGHT;password=IFREIGHT!;Data Source=192.118.118.22;Persist Security Info=False;Initial Catalog=SOUND;MultipleActiveResultSets=true</EDOC>-->
+    <!--<IPORT>User ID=sa;password=wanlinman;Data Source=WILL-PC;Persist Security Info=False;Initial Catalog=TPV;MultipleActiveResultSets=true</IPORT>-->
+    <!--<IPORT>User ID=IFREIGHT;password=IFREIGHT!;Data Source=192.118.118.16;Persist Security Info=False;Initial Catalog=TPV;MultipleActiveResultSets=true</IPORT>-->
+    <EDOC dbType="Sql2005">User ID=IFREIGHT;password=IFREIGHT!;Data Source=10.10.1.181;Persist Security Info=False;Initial Catalog=TPV;MultipleActiveResultSets=true</EDOC>
+  </Sql>
+</connection-pool>

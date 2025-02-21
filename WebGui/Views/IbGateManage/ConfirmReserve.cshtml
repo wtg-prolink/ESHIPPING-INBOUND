@@ -1,0 +1,1095 @@
+﻿@{
+    ViewBag.Title = "ConfirmReserve";
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+
+        gop.AddUrl = false;
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_DNManage_ReserveConf", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "IbGateManage/GetGateData";
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+        gop.multiselect = true;
+
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+    $.fn.modal.Constructor.DEFAULTS.backdrop = false;
+
+    gop.btnGroup = [{
+        id: "CreateSmrv",
+        name: "Create Appointment",
+        func: function () {
+            ajustamodal("#InportSoltTimeDialog");
+            $("#InportSoltTimeDialog").modal("show");
+        }
+    },{
+        id: "BatchAppointment",
+        name: "Upload Appointment",
+        func: function () {
+            $("#UploadAppointWin").modal("show");
+            resetFileInput($("#PackingUploadExcel"));
+        }
+    }, {
+        id: "EditTrucker",
+        name: "Edit Create Appointment",
+        func: function () {
+            var mygrid = $("#containerInfoGrid");
+            var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+            var responseData = [];
+            $.each(selRowId, function (index, val) {
+                responseData.push(mygrid.getRowData(selRowId[index]));
+            });
+            if (responseData.length < 1) {
+                CommonFunc.Notify("", "@Resources.Locale.L_BaseBooking_Scripts_127", 500, "warning");
+                return;
+            }
+            var reservenos = "";
+            var wscd = responseData[0].WsCd;
+            for (var i = 0; i < responseData.length; i++) {
+                if (reservenos.length > 0)
+                    reservenos += ",";
+                reservenos += responseData[i].ReserveNo;
+            }
+            $.ajax({
+                url: rootPath + 'IbGateManage/CheckTrucker',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    ReserveNo: reservenos,
+                    WsCd: wscd
+                },
+                beforeSend: function () {
+                    StatusBarArr.nowStatus("@Resources.Locale.L_OrderCarQuery_Script_42");
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (result) {
+                    CommonFunc.ToogleLoading(false);
+                    if (result.message == "success") {
+                        $("#UpdateTruckerDialog").modal("show");
+                        $("#truckerNmInput").val(responseData[0].TruckerNm);
+                        $("#PoNoInput").val(responseData[0].PoNo);
+                        $("#WsCd1").val(responseData[0].WsCd);
+                        if (result.WHData.length > 0) {
+                            $("#DlvArea1").val(result.WHData[0].DlvArea);
+                            $("#DlvAreaNm1").val(result.WHData[0].DlvAreaNm);
+                            $("#AddrCode1").val(result.WHData[0].DlvAddr);
+                        }
+                    }
+                    else {
+                        alert(result.message+" Is Not Also Directly Create Appointment!");
+                    }
+                },
+                error: function () {
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+                    CommonFunc.ToogleLoading(false);
+                }
+            });
+        }
+    }, {
+        id: "SetVoid",
+        name: "Void",
+        func: function () {
+            var mygrid = $("#containerInfoGrid");
+            var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+            var responseData = [];
+            $.each(selRowId, function (index, val) {
+                responseData.push(mygrid.getRowData(selRowId[index]));
+            });
+            if (responseData.length < 1) {
+                CommonFunc.Notify("", "@Resources.Locale.L_BaseBooking_Scripts_127", 500, "warning");
+                return;
+            }
+            var reservenos = "";
+            for (var i = 0; i < responseData.length; i++) {
+                if (responseData[i].IsAutocreate != "Y") {
+                    CommonFunc.Notify("", "This Appointment " + responseData[i].ReserveNo+ " is not create by Create Appointment Function.So you cann't void it!", 500, "warning");
+                    return;
+                }
+                if (reservenos.length > 0)
+                    reservenos += ",";
+                reservenos += responseData[i].ReserveNo;
+            }
+            var iscontinue = window.confirm("Are you sure to set this appointment [" + reservenos + "] to void?");
+            if (!iscontinue) {
+                return;
+            }
+
+            $.ajax({
+                async: true,
+                url: rootPath + "IbGateManage/SetAutoCreateCancel",
+                type: 'POST',
+                data: { Reserveno: reservenos },
+                dataType: "json",
+                beforeSend: function () {
+                    CommonFunc.ToogleLoading(true);
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                    CommonFunc.Notify("", errMsg, 1000, "danger");
+                },
+                success: function (result) {
+                    CommonFunc.ToogleLoading(false);
+                    if (result.message == "success") {
+                        CommonFunc.Notify("", "Cancel success", 1000, "success");
+                        $("#SummarySearch").trigger("click");
+                    }
+                    else {
+                        CommonFunc.Notify("", result.message, 1000, "warning");
+                    }
+                }
+            });
+        }
+    }
+    ];
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.loadCompleteFunc = function () {
+        var $grid = $("#containerInfoGrid");
+        if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+            $grid[0].p.sortname = "CreateDate";
+    }
+
+    var colModelSetting = [
+        { name: 'Status', title: '@Resources.Locale.L_GateReserve_Status', index: 'Status', width: 70, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: 'A:Arrival;D:@Resources.Locale.L_DNManage_Called;R:@Resources.Locale.L_DNManage_Reserved;C:@Resources.Locale.L_DNManage_Confirmed;E:@Resources.Locale.L_DNManage_TempOut;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;V:@Resources.Locale.L_BSCSDateQuery_Cancel;P:@Resources.Locale.L_UserQuery_SealCnt;O:@Resources.Locale.L_UserQuery_Out;U:POD;Z:Finish;M:Archived', editoptions: { value: 'A:Arrival;D:@Resources.Locale.L_DNManage_Called;R:@Resources.Locale.L_DNManage_Reserved;C:@Resources.Locale.L_DNManage_Confirmed;E:@Resources.Locale.L_DNManage_TempOut;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;V:@Resources.Locale.L_BSCSDateQuery_Cancel;P:@Resources.Locale.L_UserQuery_SealCnt;O:@Resources.Locale.L_UserQuery_Out;U:POD;Z:Finish;M:Archived' } },
+        { name: 'CallType', width: 90, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: 'S:Call InterModal;C:Call Container;D:Call DN', editoptions: { value: 'S:Call InterModal;C:Call Container;D:Call DN' } },
+        { name: 'InvoiceInfo', title: 'Invoice Info.', index: 'InvoiceInfo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+    ];
+
+        genColModel("SMIRV", "U_ID", "L_IbGateManage", colModelSetting).done(function (result) {
+            for (var i = 0; i < result.length; i++) {
+                var columns = result[i];
+                switch (columns.index) {
+                    case "WsNm":
+                        columns.width = 150;
+                        columns.title = 'Warehouse Name';
+                        break;
+                    case "EmptyTime":
+                        columns.width = 200;
+                        columns.title = 'Empty Return Time';
+                        break;
+                    case "EmptyReturnTime":
+                        columns.width = 200;
+                        columns.title = 'LFD/Empty Return';
+                        break;
+                }
+
+            }
+            gop.gridColModel = result;
+            gop.searchColumns = getSelectColumn(gop.gridColModel);
+            initSearch(gop);
+        });
+
+        function dblClick(map) {
+            var UId = map.UId;
+            top.topManager.openPage({
+                href: rootPath + "IbGateManage/ConfirmReserveSetup/" + UId,
+                title: '@Resources.Locale.L_DNManage_ReserveConfSet',
+            id: 'ConfirmReserveSetup',
+            search: 'uid=' + UId,
+            reload: true
+        });
+    };
+        RegiseterAddAppoint();
+
+        $('#InportSoltTimeDialog').on('show.bs.modal', function () {
+            //清空缓存数据
+            setFieldValue([{}]);
+            //重新产生预约单号  + Shipmentid
+            getAutoNo("ShipmentInfo", "rulecode=SHIB_NO&cmp=" + cmp);
+            getAutoNo("ReserveNo", "rulecode=RV_NO&cmp=" + cmp);
+            $("#TrsMode").val("Y");
+        });
+
+        function isempty(val){
+            if(val==""||val==null||val==undefined){
+                return true;
+            }
+            return false;
+        }
+
+        $('#TranType').change(function () {
+            var trantype = $(this).children('option:selected').val()
+            if (trantype == "F"||trantype=="R") {
+                $('#labelCntrNo').addClass("required");
+            }else{
+                $('#labelCntrNo').removeClass("required");
+            }
+        })
+
+        $("#UPLOAD_APPOINT_FROM").submit(function () {
+            var postData = new FormData($(this)[0]);
+
+            $.ajax({
+                url: rootPath + "IbGateManage/BatchCreateNewAppoint",
+                type: 'POST',
+                data: postData,
+                async: false,
+                beforeSend: function () {
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (data) {
+                    //alert(data).
+                    resetFileInput($("#PackingUploadExcel"));
+                    CommonFunc.ToogleLoading(false);
+                    if (data.message != "success") {
+                        CommonFunc.Notify("", "@Resources.Locale.L_ActDeatilManage_Views_116" + data.message, 1300, "warning");
+                    return false;
+                }
+                CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpSuc", 500, "success");
+                $("#UploadAppointWin").modal("hide");
+                $("#SummarySearch").trigger("click");
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+
+            return false;
+        });
+
+        $("#UpdateTrucker").click(function (event) {
+            var mygrid = $("#containerInfoGrid");
+            var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+            var responseData = [];
+            $.each(selRowId, function (index, val) {
+                responseData.push(mygrid.getRowData(selRowId[index]));
+            });
+            if (responseData.length < 1) {
+                CommonFunc.Notify("", "@Resources.Locale.L_BaseBooking_Scripts_127", 500, "warning");
+			            return;
+			        }
+            var reservenos = "";
+            for (var i = 0; i < responseData.length; i++) {
+                if (reservenos.length > 0)
+                    reservenos += ",";
+                reservenos += responseData[i].ReserveNo;
+            }
+
+            var iscontinue = window.confirm("@Resources.Locale.L_DNManage_Is1" + reservenos + "@Resources.Locale.TLB_EditTrucker");
+			        if (!iscontinue) {
+			            return;
+			        }
+            var truckerNm = $("#truckerNmInput").val();
+            if (isempty(truckerNm)) {
+                alert("Trucker Name is Empty!");
+                return false;
+            }
+            var pono = $("#PoNoInput").val();
+            var wscd = $("#WsCd1").val();
+            var dlvarea = $("#DlvArea1").val();
+            var dlvareanm = $("#DlvAreaNm1").val();
+            var addrcode = $("#AddrCode1").val();
+            var dlvaddr = $("#AddrNm").val();
+            //var batchid = $("#BatchIdInput").val();
+
+            $.ajax({
+                url: rootPath + 'IbGateManage/UpdateTrucker',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    PoNo:pono,
+                    truckerNm: truckerNm,
+                    WsCd: wscd,
+                    DlvArea: dlvarea,
+                    DlvAreaNm: dlvareanm,
+                    AddrCode: addrcode,
+                    DlvAddr: dlvaddr,
+                    //BatchId: encodeURIComponent(batchid),
+                    ReserveNo: reservenos
+                },
+                beforeSend: function () {
+                    StatusBarArr.nowStatus("@Resources.Locale.L_OrderCarQuery_Script_42");
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (result) {
+                    if (result.message == "success") {
+                        CommonFunc.Notify("", "Update Trucker Success！", 1000, "success");
+                        $("#UpdateTruckerDialog").modal("hide");
+                    }
+                    else {
+                        //CommonFunc.Notify("", result.message, 1000, "warning");
+                        alert(result.message);
+                    }
+                    CommonFunc.ToogleLoading(false);
+                    $("#UpdateTruckerDialog").modal("hide");
+                },
+                error: function () {
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+                    CommonFunc.ToogleLoading(false);
+                }
+            });
+        });
+
+        $("#CreateBtn").click(function (event) {
+            var trantype = $("#TranType").val();
+            if (isempty(trantype)) {
+                alert("Tran Type is Empty!");
+                $("#TranType").focus();
+                return false;
+            };
+            //if (isempty($("#UseDate").val())) {
+            //    alert("Pickup Date is Empty!");
+            //    $("#UseDate").focus();
+            //    return false;
+            //};
+            if (isempty($("#ReserveDate").val())) {
+                alert("Booking Date is Empty!");
+                $("#ReserveDate").focus();
+                return false;
+            };
+            if (trantype == "F" || trantype == "R") {
+                if (isempty($("#CntrNo").val())) {
+                    alert("Container No is Empty!");
+                    $("#CntrNo").focus();
+                    return false;
+                };
+            }
+            if (isempty($("#WsCd").val())) {
+                alert("Warehouse is Empty!");
+                $("#WsCd").focus();
+                return false;
+            };
+            if (isempty($("#InvoiceNo").val())) {
+                alert("Invoice No is Empty!");
+                $("#InvoiceNo").focus();
+                return false;
+            };
+
+            var UseDatetime = $("#UseDatetime").val();
+            var WsCd = $("#OrderCarWsCd").val();
+            var changeData = getChangeValue();//获取所有改变的值
+            var data = { "changedData": encodeURIComponent(JSON.stringify(changeData)), autoReturnData: false };
+            data["ShipmentId"] = encodeURIComponent($("#ShipmentInfo").val());
+            data["ReserveNo"] = $("#ReserveNo").val();
+            data["TranType"] = $("#TranType").val();
+            data["CntrNo"] = $("#CntrNo").val();
+            var shipmentid = $("#ShipmentInfo").val();
+            if (shipmentid == "" || shipmentid == undefined || shipmentid == null) {
+                alert("Auto Create Shipmentid was error");
+                return false;
+            }
+            $.ajax({
+                url: rootPath + 'IbGateManage/CreateNewAppointMent',
+                type: 'POST',
+                dataType: 'json',
+                data: data,
+                beforeSend: function () {
+                    StatusBarArr.nowStatus("@Resources.Locale.L_OrderCarQuery_Script_42");
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (result) {
+                    if (result.message == "success") {
+                        CommonFunc.Notify("", "Create Appointment Success！", 1000, "success");
+                    }
+                    else {
+                        //CommonFunc.Notify("", result.message, 1000, "warning");
+                        alert(result.message);
+                    }
+                    CommonFunc.ToogleLoading(false);
+                    $("#InportSoltTimeDialog").modal("hide");
+                },
+                error: function () {
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+                    CommonFunc.ToogleLoading(false);
+                }
+            });
+        });
+    });
+
+    function isEmpty(val) {
+        if (val === undefined || val === "" || val == null)
+            return true;
+        return false;
+    }
+
+    function getval(id)
+    {
+        var val = $("#" + id).val();
+        if (!isEmpty(val)) {
+            $("#L" + id[0].toLowerCase() + id.substring(1, id.length)).val(val);
+        }
+    }
+
+    function RegiseterAddAppoint() {
+        setSmptyData("TruckerLookup", "Trucker", "TruckerNm", "CR");
+        setSmptyData("ShipperLookup", "Shipper", "ShipperNm", "SH");
+        var options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetBstruckcForLookup";
+        options.param = "";
+        options.registerBtn = $("#TruckNoLookup");
+        options.focusItem = $("#TruckNo");
+        options.isMutiSel = true;
+        options.baseConditionFunc = function () {
+            var Trucker = $("#Trucker").val()
+
+            return " PARTY_NO='" + Trucker + "'";
+        }
+        options.gridFunc = function (map) {
+            $("#TruckNo").val(map.TruckNo);
+            $("#LtruckNo").val(map.TruckNo);
+        }
+        options.lookUpConfig = LookUpConfig.BstruckcLookup;
+        initLookUp(options);
+
+        var options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetBstruckdForLookup";
+        options.param = "";
+        options.registerBtn = $("#DriverLookup");
+        options.focusItem = $("#Driver");
+        options.isMutiSel = true;
+        options.baseConditionFunc = function () {
+            var Trucker = $("#Trucker").val()
+
+            return " PARTY_NO='" + Trucker + "'";
+        }
+        options.gridFunc = function (map) {
+            $("#Driver").val(map.DriverName);
+            $("#Tel").val(map.DriverPhone);
+            $("#DriverId").val(map.DriverId);
+            $("#Ldriver").val(map.DriverName);
+            $("#Ltel").val(map.DriverPhone);
+            $("#LdriverId").val(map.DriverId);
+
+        }
+        options.lookUpConfig = LookUpConfig.BstruckdLookup;
+        initLookUp(options);
+
+        var options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetBstruckcForLookup";
+        options.param = "";
+        options.registerBtn = $("#LtruckNoLookup");
+        options.focusItem = $("#LtruckNo");
+        options.isMutiSel = true;
+        options.baseConditionFunc = function () {
+            var Trucker = $("#Trucker").val()
+
+            return " PARTY_NO='" + Trucker + "'";
+        }
+        options.gridFunc = function (map) {
+            $("#LtruckNo").val(map.TruckNo);
+        }
+        options.lookUpConfig = LookUpConfig.BstruckcLookup;
+        initLookUp(options);
+
+        var options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetBstruckdForLookup";
+        options.param = "";
+        options.registerBtn = $("#LdriverLookup");
+        options.focusItem = $("#Ldriver");
+        options.isMutiSel = true;
+        options.baseConditionFunc = function () {
+            var Trucker = $("#Trucker").val()
+
+            return " PARTY_NO='" + Trucker + "'";
+        }
+        options.gridFunc = function (map) {
+            $("#Ldriver").val(map.DriverName);
+            $("#Ltel").val(map.DriverPhone);
+            $("#LdriverId").val(map.DriverId);
+        }
+        options.lookUpConfig = LookUpConfig.BstruckdLookup;
+        initLookUp(options);
+
+        var options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetSmwhForLookup";
+        options.param = "";
+        options.registerBtn = $("#WsCdLookup1");
+        options.focusItem = $("#WsCd");
+        options.isMutiSel = true;
+        options.baseConditionFunc = function () {
+            var cmp = getCookie("plv3.passport.companyid");
+            if (cmp == null || cmp == undefined || cmp == "") {
+            } else {
+                return " CMP='" + cmp + "'";
+            }
+        }
+        options.gridFunc = function (map) {
+            $("#WsCd").val(map.WsCd);
+            $("#DlvArea").val(map.DlvArea);
+            $("#DlvAreaNm").val(map.DlvAreaNm);
+            $("#AddrCode").val(map.DlvAddr);//ADDR_CODE
+        }
+
+        options.lookUpConfig = LookUpConfig.SMWHLookup;
+        initLookUp(options);
+
+        CommonFunc.AutoComplete("#WsCd", 1, "", "dt=smwh&GROUP_ID=" + groupId + "&WS_CD=", "WS_CD=showValue,WS_CD,WS_NM,DLV_AREA,DLV_AREA_NM,DLV_ADDR", function (event, ui) {
+            $(this).val(ui.item.returnValue.WS_CD);
+            $("#DlvArea").val(ui.item.returnValue.DLV_AREA);
+            $("#DlvAreaNm").val(ui.item.returnValue.DLV_AREA_NM);
+            $("#AddrCode").val(ui.item.returnValue.DLV_ADDR);
+            return false;
+        });
+
+        var options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetSmwhForLookup";
+        options.param = "";
+        options.registerBtn = $("#WsCdLookup");
+        options.focusItem = $("#WsCd1");
+        options.isMutiSel = true;
+        options.baseConditionFunc = function () {
+            var cmp = getCookie("plv3.passport.companyid");
+            if (cmp == null || cmp == undefined || cmp == "") {
+            } else {
+                return " CMP='" + cmp + "'";
+            }
+        }
+        options.gridFunc = function (map) {
+            $("#WsCd1").val(map.WsCd);
+            $("#DlvArea1").val(map.DlvArea);
+            $("#DlvAreaNm1").val(map.DlvAreaNm);
+            $("#AddrCode1").val(map.DlvAddr);//ADDR_CODE
+        }
+
+        options.lookUpConfig = LookUpConfig.SMWHLookup;
+        initLookUp(options);
+
+        CommonFunc.AutoComplete("#WsCd1", 1, "", "dt=smwh&GROUP_ID=" + groupId + "&WS_CD=", "WS_CD=showValue,WS_CD,WS_NM,DLV_AREA,DLV_AREA_NM,DLV_ADDR", function (event, ui) {
+            $(this).val(ui.item.returnValue.WS_CD);
+            $("#DlvArea1").val(ui.item.returnValue.DLV_AREA);
+            $("#DlvAreaNm1").val(ui.item.returnValue.DLV_AREA_NM);
+            $("#AddrCode1").val(ui.item.returnValue.DLV_ADDR);
+            return false;
+        });
+
+        $("#UseDate").wrap('<div class="input-group">')
+          .datepicker({
+              showOn: "button",
+              changeYear: true,
+              dateFormat: "yy/mm/dd",
+              timeFormat: 'HH:mm',
+              beforeShow: function () {
+                  setTimeout(function () {
+                      $('.ui-datepicker').css('z-index', 99999999999999);
+                  }, 0);
+              },
+              onClose: function (text, inst) {
+                  $(this).focus();
+              }
+          })
+          .next("button").button({
+              icons: { primary: "ui-icon-calendar" },
+              label: "Select a date",
+              text: false
+          })
+          .addClass("btn btn-sm btn-default").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+          .wrap('<span class="input-group-btn">')
+          .find('.ui-button-text')
+          .css({
+              'visibility': 'hidden',
+              'display': 'inline'
+          });
+
+        $("#ReserveDate").wrap('<div class="input-group">')
+        .datepicker({
+            showOn: "button",
+            changeYear: true,
+            dateFormat: "yy/mm/dd",
+            timeFormat: 'HH:mm',
+            beforeShow: function () {
+                setTimeout(function () {
+                    $('.ui-datepicker').css('z-index', 99999999999999);
+                }, 0);
+            },
+            onClose: function (text, inst) {
+                $(this).focus();
+            }
+        })
+        .next("button").button({
+            icons: { primary: "ui-icon-calendar" },
+            label: "Select a date",
+            text: false
+        })
+        .addClass("btn btn-sm btn-default").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+        .wrap('<span class="input-group-btn">')
+        .find('.ui-button-text')
+        .css({
+            'visibility': 'hidden',
+            'display': 'inline'
+        });
+    }
+
+    function setSmptyData(lookUp, Cd, Nm, pType) {
+        //SMPTY放大鏡
+        options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetSmptyDataForLookup";
+        options.registerBtn = $("#" + lookUp);
+        options.focusItem = $("#" + Cd);
+        options.param = "";
+        options.baseCondition = " PARTY_TYPE LIKE '%" + pType + "%'";
+        options.isMutiSel = true;
+        options.gridFunc = function (map) {
+            $("#" + Cd).val(map.PartyNo);
+
+            if (Nm != "")
+                $("#" + Nm).val(map.PartyName);
+        }
+
+        options.lookUpConfig = LookUpConfig.SmptyLookup;
+        initLookUp(options);
+
+        CommonFunc.AutoComplete("#" + Cd, 1, "", "dt=smpty&GROUP_ID=" + groupId + "&PARTY_TYPE~" + pType + "&PARTY_NO=", "PARTY_NO=showValue,PARTY_NO,PARTY_NAME", function (event, ui) {
+            $(this).val(ui.item.returnValue.PARTY_NO);
+
+            if (Nm != "")
+                $("#" + Nm).val(ui.item.returnValue.PARTY_NAME);
+            return false;
+        });
+    }
+
+    function DownLoadExcel() {
+        window.open(rootPath + "IbGateManage/DownLoadXls");
+    }
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="InportSoltTimeDialog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Create New Appointment</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="ReserveNo" class="control-label">@Resources.Locale.L_GateReserve_ReveseNo</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="ReserveNo" name="ReserveNo" fieldname="ReserveNo" iskey="true" readonly />
+                    </div>
+                    <div class="pure-u-sm-5-60 label-right">
+                        <label for="TranType" class="control-label required">Tran Type</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <select name="TranType" id="TranType" dt="mt" class="form-control input-sm">
+                            <option value="E">E:Express</option>
+                            <option value="R">R:Railway</option>
+                            <option value="F">F:FCL</option>
+                            <option value="L">L:LCL</option>
+                            <option value="A">A: Air</option>
+                            <option value="T">T: Truck</option>
+                        </select>
+                    </div>
+                    <div class="pure-u-sm-7-60 label-right">
+                        <label for="TranType" class="control-label">Pickup Date</label>
+                    </div>
+                    <div class="pure-u-sm-15-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="UseDate" name="UseDate" fieldname="UseDate">
+                    </div>
+                    <input type="hidden" dt="mt" id="ShipmentInfo" name="ShipmentInfo" />
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="Trucker" class="control-label">Shipper</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Shipper" name="Shipper" fieldname="Shipper" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="ShipperLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+                    <div class="pure-u-sm-15-60">
+                        <input type="text" class="form-control input-sm" dt="mt" id="ShipperNm" name="ShipperNm" fieldname="ShipperNm" />
+                    </div>
+                    <div class="pure-u-sm-7-60 label-right">
+                        <label for="TrsMode" class="control-label">@Resources.Locale.L_IbGateManage_TrsMode</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <select class="form-control input-sm" dt="mt" id="TrsMode" name="TrsMode" fieldname="TrsMode">
+                            <option value="Y">Y:Full Truck Load</option>
+                            <option value="N">N:Less Than Truck Load</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="Trucker" class="control-label">@Resources.Locale.L_GateReserve_Trucker</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Trucker" name="Trucker" fieldname="Trucker" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="TruckerLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+                    <div class="pure-u-sm-15-60">
+                        <input type="text" class="form-control input-sm" dt="mt" id="TruckerNm" name="TruckerNm" fieldname="TruckerNm" />
+                    </div>
+                    <div class="pure-u-sm-7-60 label-right">
+                        <label for="CarType" class="control-label">@Resources.Locale.L_IbGateManage_CarType</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <select class="form-control input-sm" dt="mt" id="CarType" name="CarType" fieldname="CarType">
+                            @Html.Raw(ViewBag.CarType)
+                        </select>
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="TruckNo" class="control-label">@Resources.Locale.L_GateReserve_TruckNo</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="TruckNo" name="TruckNo" fieldname="TruckNo" onblur="getval(this.id)" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="TruckNoLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+
+                    <div class="pure-u-sm-4-60 label-right">
+                        <label for="Driver" class="control-label">@Resources.Locale.L_GateReserve_Driver</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Driver" name="Driver" fieldname="Driver" onblur="getval(this.id)" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="DriverLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+
+                    <div class="pure-u-sm-4-60 label-right">
+                        <label for="DriverId" class="control-label">@Resources.Locale.L_GateReserve_DriverId</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="DriverId" name="DriverId" fieldname="DriverId" ref="Driver" onblur="getval(this.id)" />
+                    </div>
+
+                    <div class="pure-u-sm-4-60 label-right">
+                        <label for="Tel" class="control-label">@Resources.Locale.L_GateReserve_Tel</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="Tel" name="Tel" fieldname="Tel" ref="Driver" onblur="getval(this.id)" />
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="LtruckNo" class="control-label">@Resources.Locale.L_GateReserve_LtruckNo</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="LtruckNo" name="LtruckNo" fieldname="LtruckNo" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="LtruckNoLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+
+                    <div class="pure-u-sm-4-60 label-right">
+                        <label for="Ldriver" class="control-label">@Resources.Locale.L_GateReserve_Driver</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Ldriver" name="Ldriver" fieldname="Ldriver" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="LdriverLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+
+                    <div class="pure-u-sm-4-60 label-right">
+                        <label for="LdriverId" class="control-label">@Resources.Locale.L_GateReserve_DriverId</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="LdriverId" name="LdriverId" fieldname="LdriverId" ref="Ldriver" />
+                    </div>
+
+                    <div class="pure-u-sm-4-60 label-right">
+                        <label for="Ltel" class="control-label">@Resources.Locale.L_GateReserve_Tel</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="Ltel" name="Ltel" fieldname="Ltel" ref="Ldriver" />
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="ReserveDate" class="control-label required">@Resources.Locale.L_GateReserve_ReserveDate</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="ReserveDate" name="ReserveDate" fieldname="ReserveDate" required />
+                    </div>
+                    <div class="pure-u-sm-6-60">
+                        <select class="form-control input-sm" dt="mt" id="ReserveFrom" name="ReserveFrom" fieldname="ReserveFrom" required>
+                            <option value="0">00:00</option>
+                            <option value="1">01:00</option>
+                            <option value="2">02:00</option>
+                            <option value="3">03:00</option>
+                            <option value="4">04:00</option>
+                            <option value="5">05:00</option>
+                            <option value="6">06:00</option>
+                            <option value="7">07:00</option>
+                            <option value="8">08:00</option>
+                            <option value="9">09:00</option>
+                            <option value="10">10:00</option>
+                            <option value="11">11:00</option>
+                            <option value="12">12:00</option>
+                            <option value="13">13:00</option>
+                            <option value="14">14:00</option>
+                            <option value="15">15:00</option>
+                            <option value="16">16:00</option>
+                            <option value="17">17:00</option>
+                            <option value="18">18:00</option>
+                            <option value="19">19:00</option>
+                            <option value="20">20:00</option>
+                            <option value="21">21:00</option>
+                            <option value="22">22:00</option>
+                            <option value="23">23:00</option>
+                        </select>
+                    </div>
+                    <div class="pure-u-sm-9-60 label-right">
+                        <label for="CntrNo" id="labelCntrNo" class="control-label required">@Resources.Locale.L_GateReserve_CntrNo</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="CntrNo" name="CntrNo" fieldname="CntrNo" />
+                    </div>
+                    <div class="pure-u-sm-7-60 label-right">
+                        <label for="SealNo1" class="control-label">@Resources.Locale.L_GateReserveSetup_SealNo</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="SealNo1" name="SealNo1" fieldname="SealNo1" />
+                    </div>
+                </div>
+                <div class="pure-g">
+                <div class="pure-u-sm-8-60">
+                        <label for="WsCd" class="control-label required">@Resources.Locale.L_GateReserve_WsCd</label>
+                    </div>
+                    <div class="pure-u-sm-10-60 control-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="WsCd" name="WsCd" fieldname="WsCd" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="WsCdLookup1">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+                     <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="DlvArea" name="DlvArea" fieldname="DlvArea" readonly="readonly"/>
+                    </div>
+                     <div class="pure-u-sm-17-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="DlvAreaNm" name="DlvAreaNm" fieldname="DlvAreaNm" readonly="readonly"/>
+                    </div>
+                     <div class="pure-u-sm-15-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="AddrCode" name="AddrCode" fieldname="AddrCode" readonly="readonly"/>
+                    </div>
+                </div>
+                @*<div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="DnNo" class="control-label">@Resources.Locale.L_DNApproveManage_DnNo</label>
+                    </div>
+                    <div class="pure-u-sm-52-60">
+                        <textarea class="form-control" dt="mt" id="DnNo" name="DnNo" fieldname="DnNo"></textarea>
+                    </div>
+                </div>*@
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="PoNo" class="control-label required">Po No</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="PoNo" name="PoNo" fieldname="PoNo" />
+                    </div>
+                    <div class="pure-u-sm-10-60 label-right">
+                        <label for="BatchId" class="control-label">Batch ID</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="BatchId" name="BatchId" fieldname="BatchId" />
+                    </div>
+                    <div class="pure-u-sm-10-60 label-right">
+                        <label for="ProductType" class="control-label">Product Type</label>
+                    </div>
+                    <div class="pure-u-sm-12-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="ProductType" name="ProductType" fieldname="ProductType" />
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="InvoiceNo" class="control-label required">Invoice No</label>
+                    </div>
+                    <div class="pure-u-sm-22-60">
+                        <textarea class="form-control" dt="mt" id="InvoiceNo" name="InvoiceNo" fieldname="InvoiceNo"></textarea>
+                    </div>
+                    <div class="pure-u-sm-8-60 label-right">
+                        <label for="TruckRmk" class="control-label">Truck Remark</label>
+                    </div>
+                    <div class="pure-u-sm-22-60">
+                        <textarea class="form-control" dt="mt" id="TruckRmk" name="TruckRmk" fieldname="TruckRmk"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-info" id="CreateBtn">Create New Appointment</button>
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="UploadAppointWin" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Batch Upload Appoint</h4>
+            </div>
+            <form name="UPLOAD_APPOINT_FROM" id="UPLOAD_APPOINT_FROM"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="PackingUploadExcel" name="file"/>
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                     <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <a href="#" onclick="DownLoadExcel()">@Resources.Locale.L_DNManage_ClickDl (CREATE_APPOINT_V1_20240728)</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="modalUploadBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="UpdateTruckerDialog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Update Trucker</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="truckerNmInput" class="control-label required">Trukcer Name</label>
+                    </div>
+                    <div class="pure-u-sm-15-60">
+                        <input type="text" class="form-control input-sm" dt="mt" id="truckerNmInput" name="truckerNmInput" />
+                    </div>
+                    <div class="pure-u-sm-8-60  label-right">
+                        <label for="PoNoInput" class="control-label">PO No</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" class="form-control input-sm" dt="mt" id="PoNoInput" name="PoNoInput" />
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="WsCd" class="control-label required">@Resources.Locale.L_GateReserve_WsCd</label>
+                    </div>
+                    <div class="pure-u-sm-10-60 control-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="WsCd1" name="WsCd1" fieldname="WsCd" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="WsCdLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="DlvArea1" name="DlvArea1" fieldname="DlvArea" readonly="readonly" />
+                    </div>
+                    <div class="pure-u-sm-15-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="DlvAreaNm1" name="DlvAreaNm1" fieldname="DlvAreaNm" readonly="readonly" />
+                    </div>
+                    <div class="pure-u-sm-15-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="AddrCode1" name="AddrCode1" fieldname="AddrCode" readonly="readonly" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-info" id="UpdateTrucker">Update</button>
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

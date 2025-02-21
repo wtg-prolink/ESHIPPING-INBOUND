@@ -1,0 +1,496 @@
+﻿@{
+    ViewBag.Title = "ForecastQueryData";
+}
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        gop.gridColModel = [
+            { name: 'UId', showname: '@Resources.Locale.L_ForecastQueryData_UId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'OdType', title: '@Resources.Locale.L_ContainUtili_OdType', index: 'OdType', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'D:@Resources.Locale.L_DNManage_IntSa;O:@Resources.Locale.L_DNManage_EtSa' } },
+            { name: 'Year', title: '@Resources.Locale.L_ContainUsage_Year', index: 'Year', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Month', title: '@Resources.Locale.L_ContainUsage_Month', index: 'Month', width: 50, align: 'left', sorttype: 'string', hidden: false},
+            { name: 'Week', title: '@Resources.Locale.L_ContainUsage_Week', index: 'Week', width: 50, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CustNo', title: '@Resources.Locale.L_ForecastSetup_CustNo', index: 'CustNo', width: 60, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CustNm', title: '@Resources.Locale.L_ForecastQueryData_CustNm', index: 'CustNm', width: 200, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Model', title: '@Resources.Locale.L_ForecastSetup_Model', index: 'Model', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Cmp', title: '@Resources.Locale.L_IpPart_Cmp', index: 'Cmp', width: 60, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Pol', title: '@Resources.Locale.L_BaseLookup_PolCd', index: 'Pol', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Region', title: '@Resources.Locale.L_CitySetup_Region', index: 'Region', width: 60, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Pod', title: '@Resources.Locale.L_BaseLookup_PodCd', index: 'Pod', width: 70, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Dest', title: '@Resources.Locale.L_ForcastQueryData_DeliveryTo', index: 'Dest', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Term', title: '@Resources.Locale.L_ForcastQueryData_Term', index: 'Term', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'FreightTerm', title: '@Resources.Locale.L_PartyDocSetup_FreightTerm', index: 'FreightTerm', width: 60, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'F20', title: '@Resources.Locale.L_ForcastQueryData_F20', index: 'F20', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'F40', title: '@Resources.Locale.L_ForcastQueryData_F40', index: 'F40', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'F40hq', title: '@Resources.Locale.L_ForcastQueryData_F40hq', index: 'F40hq', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Ffeu', title: '@Resources.Locale.L_ForcastQueryData_Ffeu', index: 'Ffeu', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'A20', title: '@Resources.Locale.L_ForcastQueryData_A20', index: 'A20', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'A40', title: '@Resources.Locale.L_ForcastQueryData_A40', index: 'A40', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'A40hq', title: '@Resources.Locale.L_ForcastQueryData_A40hq', index: 'A40hq', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Afeu', title: '@Resources.Locale.L_ForcastQueryData_Afeu', index: 'Afeu', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateBy', title: '@Resources.Locale.L_DNApproveManage_CreateBy', index: 'CreateBy', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'CreateDate', title: '@Resources.Locale.L_DNApproveManage_CreateDate', index: 'CreateDate', width: 80, align: 'left', sorttype: 'string', hidden: true }
+        ];
+        gop.AddUrl = {"url": rootPath + "DistManage/ForecastSetup", "title": "@Resources.Locale.L_ForecastQueryData_ForecastSetup", "id": "ForecastSetup"};
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "Forecast", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "DistManage/ForecastInquiryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        gop.multiselect = true;
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea"; 
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+
+
+        gop.btnGroup = [{
+	            id: "btn01",
+	            name: "@Resources.Locale.L_MenuBar_Copy",
+	            func: function () {
+	                var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+	                var uid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+	                if (!uid) {
+	                    alert("@Resources.Locale.L_TKBLQuery_Select");
+	                    return;
+	                }
+	            	top.topManager.openPage({
+	            	    href: rootPath + "DistManage/ForecastSetup?UId=" + uid,
+	            	    title: 'Forecast Setup',
+	            	    id: 'ForecastSetup'
+	            	});
+	            }
+	    	},
+            {
+                id: "btn02",
+                name: "Forecast Excel",
+                func: function () {
+                    $("#ForecastExcelWindow").modal("show");
+                }
+            },
+            {
+                id: "btn03",
+                name: "@Resources.Locale.L_DNManage_SelcAcQty",
+                func: function () {
+                    $("#btn03Window").modal("show");
+                }
+            },
+            {
+                id: "btn04",
+                name: "@Resources.Locale.L_DNManage_TurnAll",
+                func: function () {
+                    var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                    var UId = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+                    if (!UId) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                        return;
+                    }
+
+
+                    var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                    var responseData = [];
+                    var uids = [];
+                    $.each(selRowId, function (index, val) {
+                        responseData.push(mygrid.getRowData(selRowId[index]));
+                    });
+                    if (responseData.length <= 0) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_ActManage_Select1Data", 500, "warning");
+                        return;
+                    }
+                    for (var i = 0; i < responseData.length; i++) {
+                        uids.push(responseData[i].UId);
+                    }
+                    $.ajax({
+                        async: true,
+                        url: rootPath + "DistManage/TurnAllocation",
+                        type: 'POST',
+                        data: {
+                            "UId": uids.toString(),
+                            'conditions': ''//encodeURI(param),
+                        },
+                        dataType: "json",
+                        beforeSend: function () {
+                            CommonFunc.ToogleLoading(true);
+                        },
+                        "complete": function (xmlHttpRequest, successMsg) {
+                            if (successMsg != "success") return null;
+                        },
+                        "error": function (xmlHttpRequest, errMsg) {
+                            CommonFunc.ToogleLoading(false);
+                        },
+                        success: function (result) {
+                            CommonFunc.Notify("", result.message, 500, "success");
+                            //$("#SummarySearch").trigger("click");
+                            CommonFunc.ToogleLoading(false);
+                        }
+                    });
+
+                }
+            }, {
+                id: "BatchRemove",
+                name: "@Resources.Locale.L_ForecastQueryData_Views_240",
+                func: function () {
+                    var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                    var responseData = [];
+                    var uids = [];
+                    $.each(selRowId, function (index, val) {
+                        responseData.push(mygrid.getRowData(selRowId[index]));
+                    });
+                    if (responseData.length <= 0) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_ActManage_Select1Data", 500, "warning");
+                        return;
+                    }
+                    for (var i = 0; i < responseData.length; i++) {
+                        uids.push(responseData[i].UId);
+                    }
+                    var r = confirm("@Resources.Locale.L_ForecastQueryData_Script_4")
+                    if (r == false) {
+                        return;
+                    }
+
+                    $.ajax({
+                        async: true,
+                        url: rootPath + "DistManage/BatchRemove",
+                        type: 'POST',
+                        data: {
+                            "UId": uids.toString(),
+                            'conditions': ''//encodeURI(param),
+                        },
+                        dataType: "json",
+                        beforeSend: function () {
+                            CommonFunc.ToogleLoading(true);
+                        },
+                        "complete": function (xmlHttpRequest, successMsg) {
+                            if (successMsg != "success") return null;
+                        },
+                        "error": function (xmlHttpRequest, errMsg) {
+                            CommonFunc.ToogleLoading(false);
+                        },
+                        success: function (result) {
+                            if (result.IsOk == "Y") {
+                                CommonFunc.Notify("", result.message, 500, "success");
+                            } else {
+                                CommonFunc.Notify("", result.message, 500, "warning");
+                            }
+                            CommonFunc.ToogleLoading(false);
+                            $("#SummarySearch").trigger("click");
+                        }
+                    });
+                }
+            }
+        ];
+
+        initSearch(gop);
+
+        var obj = new initChart({
+            chartTitle: "Forecast/Actual Compare",
+            chartType: [
+                {
+                    label: "Forecast/Actual Compare",
+                    val: "A",
+                    url: rootPath + "DistManage/SingleLineChart",
+                    callBack: function (data) {
+                        $('#MyChart').highcharts({
+
+                            title: {
+                                text: 'Forecast/Actual Compare',
+                                x: -20 //center
+                            },
+                            subtitle: {
+                                text: '',
+                                x: -20
+                            },
+                            xAxis: {
+                                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                            },
+                            yAxis: {
+                                title: {
+                                    text: ''
+                                },
+                                plotLines: [{
+                                    value: 0,
+                                    width: 1,
+                                    color: '#808080'
+                                }]
+                            },
+                            tooltip: {
+                                valueSuffix: ''
+                            },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'right',
+                                verticalAlign: 'middle',
+                                borderWidth: 0
+                            },
+                            series: data.data
+                        });
+                        console.log(data);
+                    }
+                },
+            ],
+            chartTarget: [
+                { "label": "@Resources.Locale.L_ForecastQueryData_Views_242", "val": "Year" }
+            ],
+            chartDataSource: [
+                { "label": "Week", "val": "UNIT_PRICE" }
+            ],
+            chartTable: "IPLMP",
+            beforeShowChart: function (data) {
+                if (data.data.length == 0) {
+                    alert("@Resources.Locale.L_ForecastQueryData_Views_243");
+                    return false;
+                }
+
+                return true;
+            }
+        }, gop);
+
+        function dblClick(map) {
+        	var UId = map.UId;
+            top.topManager.openPage({
+                href: rootPath + "DistManage/ForecastSetup?UId="+UId,
+                title: 'Forecast Setup',
+                id: 'ForecastSetup'
+            });
+        }
+
+        Callfunction();
+    });
+
+    function shift_to() {
+        var fileName = document.getElementById("File1").value;
+        fileName = fileName.toLocaleLowerCase()
+        if (fileName.lastIndexOf(".xls") == -1 && fileName.lastIndexOf(".xlxs") == -1 || fileName.length == 0) {
+            alert("@Resources.Locale.L_ForecastQueryData_Script_5");
+            $("#File1").focus();
+            return false;
+        }
+        else {
+            document.all.Form1.submit();
+            document.all.loading.style.display = "";
+
+        }
+    }
+
+    function CatchActuail() {
+        var odtype = $("#OdType").val();
+        var year = $("#Year").val();
+        var week = $("#Week").val();
+
+        if (year == "" || year == null || year == undefined) {
+            CommonFunc.Notify("", "@Resources.Locale.L_ForecastQueryData_Views_246", 500, "warning");
+            return;
+        }
+        if (week == "" || week == null || week == undefined) {
+            CommonFunc.Notify("", "@Resources.Locale.L_ForecastQueryData_Views_246", 500, "warning");
+            return;
+        }
+        $.ajax({
+            async: true,
+            url: rootPath + "DistManage/CatchActuail",
+            type: 'POST',
+            data: {
+                "odtype": odtype,
+                'year': year,
+                'week': week
+            },
+            dataType: "json",
+            beforeSend: function () {
+                CommonFunc.ToogleLoading(true);
+            },
+            "complete": function (xmlHttpRequest, successMsg) {
+                if (successMsg != "success") return null;
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+            },
+            success: function (result) {
+
+                _dataSource = result.rows;
+                setFieldValue(result.rows);
+
+                setdisabled(true);
+                setToolBtnDisabled(true);
+                MenuBarFuncArr.Disabled(["MBSave"]);
+                MenuBarFuncArr.Enabled(["MBAdd", "MBCopy", "MBDel", "MBEdit", "MBApprove", "MBEdoc"]);
+                CommonFunc.ToogleLoading(false);
+            }
+        });
+    }
+
+    function DownLoadExcel() {
+        window.open(rootPath + "DNManage/DownLoadXls?TranType=FORCAST");
+    }
+
+    function Callfunction(trantype) {
+        $("#PACKING_EXCEL_UPLOAD_FROM").submit(function () {
+            var UId = $("#UId").val();
+            $(this).find("input[type='hidden']").remove();
+            $(this).append('<input type="hidden" name="UId" value="' + UId + '" />');
+            $(this).append('<input type="hidden" name="ConfirmType" value="' + trantype + '" />');
+            var postData = new FormData($(this)[0]);
+
+            $.ajax({
+                url: rootPath + "DistManage/Upload",
+                type: 'POST',
+                data: postData,
+                async: false,
+                beforeSend: function () {
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (data) {
+                    //alert(data)
+                    CommonFunc.ToogleLoading(false);
+                    if (data.message != "success") {
+                        CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpFail" + data.message, 1300, "warning");
+                        return false;
+                    }
+                    CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpSuc", 500, "success");
+                    $("#ForecastExcelWindow").modal("hide");
+                    $("#SummarySearch").trigger("click");
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+
+            return false;
+        });
+    }
+
+</script>
+
+<!--抓取实际货量視窗-->
+<div class="modal fade" id="btn03Window">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">@Resources.Locale.L_DNManage_SelcAcQty</h4>
+      </div>
+      <div class="modal-body">
+			<div class="pure-g">
+				<div class="pure-u-sm-5-60">
+					<label for="OdType" class="control-label">@Resources.Locale.L_EventSetup_TranMode</label>
+				</div>
+				<div class="pure-u-sm-10-60">
+					<select class="form-control input-sm" dt="mt" id="OdType" name="OdType" fieldname="OdType">
+						<option value="O">@Resources.Locale.L_DNManage_ExtTrade</option>
+						<option value="D">@Resources.Locale.L_DNManage_IntSa</option>
+					</select>
+				</div>
+				<div class="pure-u-sm-5-60 label-right">
+					<label for="Year" class="control-label">@Resources.Locale.L_ContainUsage_Year</label>
+				</div>
+				<div class="pure-u-sm-10-60">
+					<input type="number" class="form-control input-sm" dt="mt" id="Year" name="Year" fieldname="Year" />
+				    <p class="help-block tooltips"></p>
+				</div>
+				<div class="pure-u-sm-5-60 label-right">
+					<label for="Week" class="control-label">@Resources.Locale.L_ContainUsage_Week</label>
+				</div>
+				<div class="pure-u-sm-10-60">
+					<input type="number" class="form-control input-sm" dt="mt" id="Week" name="Week" fieldname="Week" />
+				    <p class="help-block tooltips"></p>
+				</div>
+				<div class="pure-u-sm-1-60"></div>
+				<div class="pure-u-sm-10-60">
+					<button class="btn btn-sm btn-primary" onclick="CatchActuail()">@Resources.Locale.L_ForecastQueryData_Views_247</button>
+				</div>
+			</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="ModalClose">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--抓取实际货量視窗-->
+<!--Excel汇入视窗-->
+<div class="modal fade" id="ForecastExcelWindow" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_DNManage_IpForEc</h4>
+            </div>
+            <form name="PACKING_EXCEL_UPLOAD_FROM" id="PACKING_EXCEL_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="PackingUploadExcel" name="file"/>
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                             <a href="#" onclick="DownLoadExcel()" >@Resources.Locale.L_DNManage_ClickDl</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="modalUploadBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

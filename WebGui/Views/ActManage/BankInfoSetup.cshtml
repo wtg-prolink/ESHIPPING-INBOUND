@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "BankInfo Setup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #page-wrapper {
+        padding: 5px;
+    }
+</style>
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-3-60">
+                            <label for="Cmp" class="control-label">@Resources.Locale.L_MailGroupSetup_Cmp</label>
+                        </div>
+                        <div class="pure-u-sm-8-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" id="txt_Cmp" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-18-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="txt_CmpName" readonly />
+                        </div>
+                        <div class="pure-u-sm-1-60"></div>
+
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <table id="MainGrid" class="_tableGrid" style="width: 100%">
+                                <tr>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60"><strong>@Resources.Locale.L_BankInfo_Remark</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript">
+    var _mail_flag = "@@";
+    var _upri = "@ViewBag.UPri";
+    var _mailGroup = "@ViewBag.MailGroup";
+</script>
+@Html.RazorJSInline("~/Scripts/ActManage/BankInfoSetup.js")
+

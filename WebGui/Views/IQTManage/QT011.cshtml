@@ -1,0 +1,1315 @@
+﻿@{
+    ViewBag.Title = "QT011";
+}
+
+<style type="text/css">
+    .otherColor {
+        background-color: #91E67B;
+    }
+
+    .myColor {
+        background-color: #6BBFF1;
+    }
+
+    .fixColor {
+        background-color: #FFC458;
+    }
+
+    .upDownColor {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff84a0+0,ffffff+99 */
+        background: #ff84a0; /* Old browsers */
+        background: -moz-linear-gradient(top, #ff84a0 0%, #ffffff 99%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #ff84a0 0%,#ffffff 99%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #ff84a0 0%,#ffffff 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff84a0', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    }
+
+    .showBox {
+        width: 16px;
+        height: 16px;
+        float: left;
+    }
+</style>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+
+<script type="text/javascript">
+    var _selectTRGN = "@ViewBag.SelectTRGN";
+    var _selectSTATE = "@ViewBag.SelectSTATE";
+    var select_trantype = "@ViewBag.SelectTranType";
+    function getData(url, data, callBackFn) {
+        CommonFunc.ToogleLoading(true);
+        $.ajax({
+            async: true,
+            url: url,
+            type: 'POST',
+            data: data,
+            "complete": function (xmlHttpRequest, successMsg) {
+                CommonFunc.ToogleLoading(false);
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+            },
+            success: function (result) {
+                console.log(result);
+                var resJson = $.parseJSON(result);
+                callBackFn(resJson);
+            }
+        });
+    }
+
+    var _cdata = {};
+    function loadFSubData(rd) {
+        var key = $("#TranMode").val() + "#" + rd.PolCd;
+        if (_cdata[key]) {
+            $("#Fgrid1").jqGrid("clearGridData");
+            $("#Fgrid1").jqGrid("setGridParam", {
+                datatype: 'local',
+                sortorder: "asc",
+                sortname: "DnNo",
+                data: _cdata[key],
+            }).trigger("reloadGrid");
+            return;
+        }
+        getData(rootPath + 'QTManage/GetQTSubFreightData', { tranMode: $("#TranMode").val(), quotNo: rd.QuotNo, pol: rd.PolCd }, function (data) {
+            CommonFunc.ToogleLoading(false);
+            _cdata[key] = data.chg;
+            $("#Fgrid1").jqGrid("clearGridData");
+            $("#Fgrid1").jqGrid("setGridParam", {
+                datatype: 'local',
+                sortorder: "asc",
+                sortname: "DnNo",
+                data: data.chg,
+            }).trigger("reloadGrid");
+        });
+    }
+
+    function loadLSubData(rd) {
+        var key = $("#TranMode").val() + "#" + rd.UFid;
+        if (_cdata[key]) {
+            $("#Lgrid1").jqGrid("clearGridData");
+            $("#Lgrid1").jqGrid("setGridParam", {
+                datatype: 'local',
+                sortorder: "asc",
+                sortname: "DnNo",
+                data: _cdata[key],
+            }).trigger("reloadGrid");
+            return;
+        }
+
+        getData(rootPath + 'QTManage/GetQTSubFreightData', { tranMode: $("#TranMode").val(), quotNo: rd.QuotNo, pol: rd.PolCd, pod: rd.PodCd, UFid: rd.UFid }, function (data) {
+            CommonFunc.ToogleLoading(false);
+            _cdata[key] = data.chg;
+            $("#Lgrid1").jqGrid("clearGridData");
+            $("#Lgrid1").jqGrid("setGridParam", {
+                datatype: 'local',
+                sortorder: "asc",
+                sortname: "DnNo",
+                data: data.chg,
+            }).trigger("reloadGrid");
+        });
+    }
+
+    function loadESubData(rd) {
+        var key = $("#TranMode").val() + "#" + rd.UFid;
+        if (_cdata[key]) {
+            $("#Egrid1").jqGrid("clearGridData");
+            $("#Egrid1").jqGrid("setGridParam", {
+                datatype: 'local',
+                sortorder: "asc",
+                sortname: "DnNo",
+                data: _cdata[key],
+            }).trigger("reloadGrid");
+            return;
+        }
+
+        getData(rootPath + 'QTManage/GetQTSubFreightData', { tranMode: $("#TranMode").val(), quotNo: rd.QuotNo, pol: rd.PolCd, UFid: rd.UFid }, function (data) {
+            CommonFunc.ToogleLoading(false);
+            _cdata[key] = data.chg;
+            $("#Egrid1").jqGrid("clearGridData");
+            $("#Egrid1").jqGrid("setGridParam", {
+                datatype: 'local',
+                sortorder: "asc",
+                sortname: "DnNo",
+                data: data.chg,
+            }).trigger("reloadGrid");
+        });
+    }
+
+    function _initSearchGrid(id, colModel, caption, loadSubData) {
+        var numberTemplate = "2";
+        var gridHeight = 200;
+        //var gridHeight = "auto";
+        var gop = {};
+        gop.gridColModel = colModel
+        gop.AddUrl = false;
+        gop.gridId = id;
+        gop.gridAttr = { caption: caption, height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "QTManage/GetQTDetailData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        gop.onSelectRowFunc = function (jsonMap) {
+            //顯示子表
+            if (loadSubData)
+                loadSubData(jsonMap);
+        }
+        initSearch(gop);
+    }
+
+    _handler.intiGrid1 = function (id, grid, op, loadSubData) {
+        _initSearchGrid(id, op.colModel, op.caption, loadSubData);
+    }
+
+    function initLSubGrid() {
+        var colModel = [
+      { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'UFid', title: 'U FID', index: 'UFid', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'LspCd', title: 'LspCd', index: 'LspCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'AllIn', title: 'AllIn', index: 'AllIn', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'EffectFrom1', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+      { name: 'EffectTo1', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+      { name: 'PolNm', title: 'PolNm', index: 'PolNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'PodNm', title: 'PodNm', index: 'PodNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'Incoterm', title: 'Incoterm', index: 'Incoterm', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'TranMode', title: 'TranMode', index: 'TranMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'PolCd', title: '@Resources.Locale.L_BaseLookup_PolCd', index: 'PolCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+      { name: 'PodCd', title: '@Resources.Locale.L_BaseLookup_PodCd', index: 'PodCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+      { name: 'Carrier', title: '@Resources.Locale.L_DNApproveManage_CaCd', index: 'Carrier', sorttype: 'string', width: 120, hidden: false, editable: true },
+      { name: 'Tt', title: '@Resources.Locale.L_RouteSetup_Tt', index: 'Tt', width: 60, align: 'right', formatter: 'integer', hidden: false, editable: true },
+      { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', sorttype: 'string', width: 90, hidden: false, editable: true },
+      { name: 'ChgDescp', title: '@Resources.Locale.L_SMCHGSetup_ChgDescp', index: 'ChgDescp', sorttype: 'string', width: 150, hidden: false, editable: false },
+      { name: 'ChgType', title: '@Resources.Locale.L_SMCHGSetup_ChgType', index: 'ChgType', sorttype: 'string', width: 90, hidden: false, editable: true, formatter: "select", editoptions: { value: 'F:F.Freight Charge;O:O.Original Fee;D:D.Destination Fee' }, edittype: 'select' },
+      { name: 'Punit', title: '@Resources.Locale.L_AirQuery_Punit', index: 'Punit', sorttype: 'string', width: 90, hidden: false, editable: true },
+      { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', sorttype: 'string', width: 90, align: 'left', hidden: false, editable: true },
+      { name: 'MinAmt', title: '@Resources.Locale.L_AirSetup_MinAmt', index: 'MinAmt', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+      { name: 'F1', title: '@Resources.Locale.L_SLCLQuery_F1', index: 'F1', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+      { name: 'CutOff', title: 'Cut Off', index: 'CutOff', width: 100, align: 'left', sorttype: 'string', hidden: false, editable: true },
+      { name: 'Etd', title: 'ETD', index: 'Etd', width: 100, align: 'left', sorttype: 'string', hidden: false, editable: true },
+      { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 200, align: 'left', sorttype: 'string', hidden: false, editable: true },
+      { name: 'ServiceMode', title: 'Service Mode', index: 'ServiceMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'LoadingFrom', title: 'Loading From', index: 'LoadingFrom', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'LoadingTo', title: 'Loading To', index: 'LoadingTo', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'SeqNo', title: '@Resources.Locale.L_NRSSetup_SeqNo', index: 'SeqNo', sorttype: 'string', width: 250, hidden: true, editable: false }
+         ];
+       _handler.intiGrid("Lgrid1", $("#Lgrid1"), {
+           colModel: colModel, caption: '@Resources.Locale.L_QTSetup_LCL', delKey: ["UId"], height: 'auto'
+       });
+    }
+
+    function initFSubGrid() {
+        var colModel = [
+       { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'RfqNo', title: 'RfqNo', index: 'RfqNo', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'LspCd', title: 'LspCd', index: 'LspCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'AllIn', title: 'AllIn', index: 'AllIn', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'EffectFrom1', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'EffectTo1', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'PodCd', title: 'PodCd', index: 'PodCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'PolNm', title: 'PolNm', index: 'PolNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'PodNm', title: 'PodNm', index: 'PodNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'Incoterm', title: 'Incoterm', index: 'Incoterm', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'TranMode', title: 'TranMode', index: 'TranMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'Carrier', title: '@Resources.Locale.L_DNApproveManage_CaCd', index: 'Carrier', sorttype: 'string', width: 120, hidden: false, editable: true },
+       { name: 'PolCd', title: '@Resources.Locale.L_FCLFSetup_PodCd', index: 'PolCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+       { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+       { name: 'ChgDescp', title: '@Resources.Locale.L_SMCHGSetup_ChgDescp', index: 'ChgDescp', sorttype: 'string', width: 150, hidden: false, editable: false },
+       { name: 'ChgType', title: '@Resources.Locale.L_SMCHGSetup_ChgType', index: 'ChgType', sorttype: 'string', width: 100, hidden: false, editable: true, formatter: "select", editoptions: { value: 'F:F.Freight Charge;O:O.Original Fee;D:D.Destination Fee' }, edittype: 'select' },
+       { name: 'Punit', title: '@Resources.Locale.L_AirQuery_Punit', index: 'Punit', sorttype: 'string', width: 100, hidden: false, editable: true },
+       { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', sorttype: 'string', width: 100, align: 'left', hidden: false, editable: true },
+       { name: 'F3', title: '@Resources.Locale.L_FCLFSetup_F3', index: 'F3', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 300, align: 'left', sorttype: 'string', hidden: false, editable: true },
+       { name: 'LoadingFrom', title: 'Loading From', index: 'LoadingFrom', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'LoadingTo', title: 'Loading To', index: 'LoadingTo', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'SeqNo', title: '@Resources.Locale.L_NRSSetup_SeqNo', index: 'SeqNo', sorttype: 'string', width: 250, hidden: true, editable: false }
+        ];
+
+       _handler.intiGrid("Fgrid1", $("#Fgrid1"), {
+           colModel: colModel, caption: '@Resources.Locale.L_QTSetup_FCLOth', delKey: ["UId"], height: 'auto'
+       });
+   }
+
+    function initFGrid() {
+        var colModel = [
+        { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'RfqNo', title: '@Resources.Locale.L_RQQuery_RfqNo', index: 'RfqNo', sorttype: 'string', width: 100, editable: true, hidden: false },
+         { name: 'AllIn', title: '@Resources.Locale.L_AirQuery_AllIn', index: 'AllIn', sorttype: 'string', width: 100, editable: true, hidden: true },
+         { name: 'EffectFrom1', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+         { name: 'EffectTo1', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+         { name: 'TranMode', title: '@Resources.Locale.L_RQQuery_TranMode', index: 'TranMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+         { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+         { name: 'QuotNo1', title: '@Resources.Locale.L_QTSetup_QuoNo', index: 'QuotNo1', sorttype: 'string', width: 100, editable: true, hidden: false },
+         { name: 'ChgRemark', title: '@Resources.Locale.L_QTSetup_ReherseResult', index: 'ChgRemark', sorttype: 'string', width: 200, editable: true, hidden: false, classes: "normal-white-space" },
+         { name: 'Region', title: '@Resources.Locale.L_BaseLookup_Region', index: 'Region', sorttype: 'string', width: 80, hidden: false, editable: true },
+         { name: 'PolCd', title: '@Resources.Locale.L_BaseLookup_PolCd', index: 'PolCd', sorttype: 'string', width: 80, hidden: false, editable: true },
+         { name: 'PolNm', title: '@Resources.Locale.L_BaseLookup_PolName', index: 'PolNm', sorttype: 'string', width: 120, hidden: false, editable: false },
+         { name: 'PodCd', title: '@Resources.Locale.L_BaseLookup_PodCd', index: 'PodCd', sorttype: 'string', width: 80, hidden: false, editable: true },
+         { name: 'PodNm', title: '@Resources.Locale.L_BaseLookup_PodName', index: 'PodNm', sorttype: 'string', width: 120, hidden: false, editable: false },
+         { name: 'Carrier', title: '@Resources.Locale.L_DNApproveManage_CaCd', index: 'Carrier', sorttype: 'string', width: 90, hidden: false, editable: true },
+         { name: 'LspNm1', title: '@Resources.Locale.L_AirQuery_LspNm', index: 'LspNm1', width: 100, align: 'left', sorttype: 'string', hidden: false },
+         { name: 'LoadingFrom', title: 'Loading From', index: 'LoadingFrom', sorttype: 'string', width: 100, hidden: false, editable: false },
+         { name: 'LoadingTo', title: 'Loading To', index: 'LoadingTo', sorttype: 'string', width: 100, hidden: false, editable: false },
+         //{ name: 'ServiceMode', title: '@Resources.Locale.L_RQQuery_ServiceMode', index: 'ServiceMode', edittype: 'custom', editoptions: gridLookup(getTermop("ServiceMode")), sorttype: 'string', width: 100, hidden: false, editable: false },
+         { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', sorttype: 'string', width: 90, hidden: false, editable: false },
+         { name: 'F2', title: "@Resources.Locale.L_SFCLQuery_F2", index: 'F2', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+         { name: 'F3', title: "@Resources.Locale.L_SFCLQuery_F3", index: 'F3', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+         { name: 'F4', title: "@Resources.Locale.L_SFCLQuery_F4", index: 'F4', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+         { name: 'F12', title: "@Resources.Locale.L_SFCLQuery_F12", index: 'F12', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+         { name: 'F13', title: "@Resources.Locale.L_SFCLQuery_F13", index: 'F13', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+         { name: 'F14', title: "@Resources.Locale.L_SFCLQuery_F14", index: 'F14', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+         { name: 'SailingDay', title: '@Resources.Locale.L_SFCLQuery_SailingDay', index: 'SailingDay', width: 100, align: 'left', sorttype: 'string', hidden: false, editable: true },
+         { name: 'FreeOdt', title: '@Resources.Locale.L_SFCLQuery_FreeOdt', index: 'FreeOdt', width: 200, align: 'right', formatter: 'integer', hidden: false, editable: true },
+         { name: 'FreeOdm', title: '@Resources.Locale.L_SFCLQuery_FreeOdm', index: 'FreeOdm', width: 200, align: 'right', formatter: 'integer', hidden: false, editable: true },
+         { name: 'FreeDdt', title: '@Resources.Locale.L_SFCLQuery_FreeDdt', index: 'FreeDdt', width: 200, align: 'right', formatter: 'integer', hidden: false, editable: true },
+         { name: 'FreeDdm', title: '@Resources.Locale.L_SFCLQuery_FreeDdm', index: 'FreeDdm', width: 200, align: 'right', formatter: 'integer', hidden: false, editable: true },
+         { name: 'Tt', title: '@Resources.Locale.L_RouteSetup_Tt', index: 'Tt', width: 60, align: 'right', formatter: 'integer', hidden: false, editable: true },
+         { name: 'ViaNm', title: '@Resources.Locale.L_SFCLQuery_ViaNm', index: 'ViaNm', sorttype: 'string', width: 200, hidden: false, editable: true, editable: true },
+         { name: 'Note', title: '@Resources.Locale.L_SFCLQuery_Note', index: 'Note', sorttype: 'string', width: 100, hidden: false, editable: true, editable: true },
+         { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', sorttype: 'string', width: 200, hidden: false, editable: true, editable: true },
+         { name: 'LspCd', title: '@Resources.Locale.L_AirQuery_LspCd', index: 'LspCd', width: 80, align: 'left', sorttype: 'string', hidden: false },
+         { name: 'SeqNo', title: '@Resources.Locale.L_NRSSetup_SeqNo', index: 'SeqNo', sorttype: 'string', width: 250, hidden: true, editable: false }
+        ];
+        _handler.intiGrid1("Fgrid", $("#Fgrid"), {
+            colModel: colModel, caption: '@Resources.Locale.L_QTSetup_FCQuo', delKey: ["UId"], height: 200, datatype: "local",
+            data: [],
+            url: rootPath + "QTManage/GetQTDetailData"
+        }, loadFSubData);
+    }
+
+    function initESubGrid() {
+        var colModel = [
+        { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'LspCd', title: 'LspCd', index: 'LspCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'RfqNo', title: 'RfqNo', index: 'RfqNo', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'Cur', title: 'Cur', index: 'Cur', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'AllIn', title: 'AllIn', index: 'AllIn', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'EffectFrom1', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'EffectTo1', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PolCd', title: 'PolCd', index: 'PolCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'PolNm', title: 'PolNm', index: 'PolNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'PodCd', title: 'PodCd', index: 'PodCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'PodNm', title: 'PodNm', index: 'PodNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'Incoterm', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'Incoterm', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'TranMode', title: '@Resources.Locale.L_RQQuery_TranMode', index: 'TranMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+        { name: 'ChgDescp', title: '@Resources.Locale.L_SMCHGSetup_ChgDescp', index: 'ChgDescp', sorttype: 'string', width: 150, hidden: false, editable: false },
+        { name: 'Punit', title: '@Resources.Locale.L_AirQuery_Punit', index: 'Punit',sorttype: 'string', width: 90, hidden: false, editable: true },
+        { name: 'F1', title: "@Resources.Locale.L_IpPart_UnitPrice", index: 'F1', width: 90, align: 'right', formatter: 'integer', editable: true, hidden: false },
+        { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', sorttype: 'string', width: 150, hidden: false, editable: true, editoptions: { size: 500, maxlength: 500 } },
+        { name: 'ServiceMode', title: 'Service Mode', index: 'ServiceMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'LoadingFrom', title: 'Loading From', index: 'LoadingFrom', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'LoadingTo', title: 'Loading To', index: 'LoadingTo', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'SeqNo', title: '@Resources.Locale.L_NRSSetup_SeqNo', index: 'SeqNo', sorttype: 'string', width: 250, hidden: true, editable: false }
+        ];
+
+       _handler.intiGrid("Egrid1", $("#Egrid1"), {
+           colModel: colModel, caption: '@Resources.Locale.L_QTSetup_IntEpOthFee', delKey: ["UId"], height: 'auto'
+       });
+   }
+
+   function initEGrid() {
+       var colModel = [
+       { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'UFid', title: 'U FID', index: 'UFid', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'RfqNo', title: '@Resources.Locale.L_RQQuery_RfqNo', index: 'RfqNo', sorttype: 'string', width: 100, editable: true, hidden: false },
+        { name: 'QuotNo1', title: '@Resources.Locale.L_QTSetup_QuoNo', index: 'QuotNo1', sorttype: 'string', width: 100, editable: true, hidden: false },
+        { name: 'ChgRemark', title: '@Resources.Locale.L_QTSetup_ReherseResult', index: 'ChgRemark', sorttype: 'string', width: 200, editable: true, hidden: false, classes: "normal-white-space" },
+        { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'LspCd', title: '@Resources.Locale.L_AirQuery_LspCd', index: 'LspCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'AllIn', title: '@Resources.Locale.L_AirQuery_AllIn', index: 'AllIn', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'EffectFrom1', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'EffectTo1', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PolNm', title: '@Resources.Locale.L_AirSetup_PolNm', index: 'PolNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'ViaNm', title: 'ViaNm', index: 'ViaNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'PodNm', title: '@Resources.Locale.L_AirSetup_PodNm', index: 'PodNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'Incoterm', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'Incoterm', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'TranMode', title: '@Resources.Locale.L_RQQuery_TranMode', index: 'TranMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+        { name: 'PolCd', title: '@Resources.Locale.L_IESetup_PolCd', index: 'PolCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+        { name: 'PodCd', title: '@Resources.Locale.L_IESetup_PodCd', index: 'PodCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+        { name: 'Region', title: 'Country', index: 'Region', sorttype: 'string', width: 100, hidden: false, editable: true },
+        { name: 'Carrier', title: '@Resources.Locale.L_DNApproveManage_CaCd', index: 'Carrier', sorttype: 'string', width: 100, hidden: false, editable: true },
+        { name: 'ViaNm', title: '@Resources.Locale.L_IEQuery_ViaNm', index: 'ViaNm', sorttype: 'string', width: 80, hidden: false, editable: true },
+        { name: 'Tt', title: '@Resources.Locale.L_RouteSetup_Tt', index: 'Tt', width: 80, align: 'right', formatter: 'integer', editable: true, hidden: false },
+        { name: 'F11', title: "0.5", index: 'F11', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F12', title: "1", index: 'F12', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F13', title: "1.5", index: 'F13', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F14', title: "2", index: 'F14', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F15', title: "2.5", index: 'F15', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F16', title: "3", index: 'F16', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F17', title: "3.5", index: 'F17', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F18', title: "4", index: 'F18', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F19', title: "4.5", index: 'F19', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F20', title: "5", index: 'F20', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F21', title: "5.5", index: 'F21', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F22', title: "6", index: 'F22', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F23', title: "6.5", index: 'F23', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F24', title: "7", index: 'F24', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F25', title: "7.5", index: 'F25', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F26', title: "8", index: 'F26', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F27', title: "8.5", index: 'F27', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F28', title: "9", index: 'F28', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F29', title: "9.5", index: 'F29', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F30', title: "10", index: 'F30', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F31', title: "10.5", index: 'F31', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F32', title: "11", index: 'F32', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F33', title: "11.5", index: 'F33', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F34', title: "12", index: 'F34', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F35', title: "12.5", index: 'F35', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F36', title: "13", index: 'F36', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F37', title: "13.5", index: 'F37', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F38', title: "14", index: 'F38', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F39', title: "14.5", index: 'F39', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F40', title: "15", index: 'F40', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F41', title: "15.5", index: 'F41', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F42', title: "16", index: 'F42', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F43', title: "16.5", index: 'F43', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F44', title: "17", index: 'F44', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F45', title: "17.5", index: 'F45', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F46', title: "18", index: 'F46', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+         { name: 'F47', title: "18.5", index: 'F47', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F48', title: "19", index: 'F48', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F49', title: "19.5", index: 'F49', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F50', title: "20", index: 'F50', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F1', title: "+20", index: 'F1', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F2', title: "+30", index: 'F2', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F3', title: "+40", index: 'F3', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F4', title: "+50", index: 'F4', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F5', title: "+100", index: 'F5', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F6', title: "+200", index: 'F6', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'F7', title: "+300", index: 'F7', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+        { name: 'SeqNo', title: '@Resources.Locale.L_NRSSetup_SeqNo', index: 'SeqNo', sorttype: 'string', width: 250, hidden: true, editable: false }
+        ];
+
+
+        _handler.intiGrid1("Egrid", $("#Egrid"), {
+            colModel: colModel, caption: '@Resources.Locale.L_QTSetup_IntEpQuo', delKey: ["UId"], datatype: "local", height: 'auto',//height: 200, 
+            data: [],
+            url: rootPath + "QTManage/GetQTDetailData"
+        });
+    }
+
+    function initAGrid() {
+        var colModel = [
+       { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'RfqNo', title: '@Resources.Locale.L_RQQuery_RfqNo', index: 'RfqNo', sorttype: 'string', width: 100, editable: true, hidden: false },
+       { name: 'QuotNo1', title: '@Resources.Locale.L_QTSetup_QuoNo', index: 'QuotNo1', sorttype: 'string', width: 100, editable: true, hidden: false },
+       { name: 'ChgRemark', title: '@Resources.Locale.L_QTSetup_ReherseResult', index: 'ChgRemark', sorttype: 'string', width: 200, editable: true, hidden: false, classes: "normal-white-space" },
+       { name: 'AllIn', title: '@Resources.Locale.L_AirQuery_AllIn', index: 'AllIn', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'EffectFrom1', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'EffectTo1', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'PolNm', title: '@Resources.Locale.L_AirSetup_PolNm', index: 'PolNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'PodNm', title: '@Resources.Locale.L_AirSetup_PodNm', index: 'PodNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'LspCd', title: '@Resources.Locale.L_AirQuery_LspCd', index: 'LspCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'Incoterm', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'Incoterm', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'TranMode', title: '@Resources.Locale.L_RQQuery_TranMode', index: 'TranMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'PolCd', title: '@Resources.Locale.L_AirBookingSetup_PolCd', index: 'PolCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+       { name: 'PodCd', title: '@Resources.Locale.L_AirSetup_PodCd', index: 'PodCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+       { name: 'Carrier', title: '@Resources.Locale.L_AirQuery_Carrier', index: 'Carrier', sorttype: 'string', width: 100, hidden: false, editable: true },
+       { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', sorttype: 'string', width: 80, hidden: false, editable: true },
+       { name: 'ChgDescp', title: '@Resources.Locale.L_SMCHGSetup_ChgDescp', index: 'ChgDescp', sorttype: 'string', width: 150, hidden: false, editable: false },
+       { name: 'ChgType', title: '@Resources.Locale.L_SMCHGSetup_ChgType', index: 'ChgType', sorttype: 'string', width: 130, hidden: false, editable: true, formatter: "select", editoptions: { value: 'F:F.Freight Charge;O:O.Original Fee;D:D.Destination Fee' }, edittype: 'select' },
+       { name: 'Tt', title: '@Resources.Locale.L_RouteSetup_Tt', index: 'Tt', width: 60, align: 'right', formatter: 'integer', hidden: false, editable: true },
+       { name: 'Punit', title: '@Resources.Locale.L_AirQuery_Punit', index: 'Punit', sorttype: 'string', width: 80, hidden: false, editable: true },
+       { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', sorttype: 'string', width: 60, align: 'left', hidden: false, editable: false },
+       { name: 'MinAmt', title: '@Resources.Locale.L_AirSetup_MinAmt', index: 'MinAmt', width: 60, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, sorttype: 'string', hidden: false, editable: true },
+       { name: 'AllIn', title: '@Resources.Locale.L_AirSetup_AllIn', index: 'AllIn', width: 80, align: 'left', sorttype: 'string', hidden: false, editable: true },
+       { name: 'F1', title: "-45", index: 'F1', width: 60, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'F2', title: "+45", index: 'F2', width: 60, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'F3', title: "+100", index: 'F3', width: 60, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'F4', title: "+300", index: 'F4', width: 60, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'F5', title: "+500", index: 'F5', width: 60, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'F6', title: "+1000", index: 'F6', width: 60, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'F7', title: "+2000", index: 'F7', width: 60, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 200, align: 'left', sorttype: 'string', hidden: false, editable: true },
+       { name: 'ServiceMode', title: 'Service Mode', index: 'ServiceMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'LoadingFrom', title: 'Loading From', index: 'LoadingFrom', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'LoadingTo', title: 'Loading To', index: 'LoadingTo', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'SeqNo', title: '@Resources.Locale.L_NRSSetup_SeqNo', index: 'SeqNo', sorttype: 'string', width: 250, hidden: true, editable: false }
+        ];
+
+       _handler.intiGrid1("Agrid", $("#Agrid"), {
+           colModel: colModel, caption: '@Resources.Locale.L_QTSetup_AirQuo', delKey: ["UId"], height: 200, datatype: "local",
+           data: [],
+           url: rootPath + "QTManage/GetQTDetailData"
+       });
+    }
+
+    function initTGrid() {
+        var colModel = [
+       { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'UFid', title: 'U FID', index: 'UFid', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'RfqNo', title: '@Resources.Locale.L_RQQuery_RfqNo', index: 'RfqNo', sorttype: 'string', width: 100, editable: true, hidden: false },
+       { name: 'QuotNo1', title: '@Resources.Locale.L_QTSetup_QuoNo', index: 'QuotNo1', sorttype: 'string', width: 100, editable: true, hidden: false },
+       { name: 'ChgRemark', title: '@Resources.Locale.L_QTSetup_ReherseResult', index: 'ChgRemark', sorttype: 'string', width: 200, editable: true, hidden: false, classes: "normal-white-space" },
+       { name: 'EffectFrom1', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'EffectTo1', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'TranType', title: '@Resources.Locale.L_UserSetUp_TranType', index: 'TranType', editable: true, width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_trantype }, edittype: 'select' },
+       //{ name: 'TranType', title: '@Resources.Locale.L_UserSetUp_TranType', index: 'TranType', editoptions: gridLookup(getTranModeop("TranType")),  sorttype: 'string', width: 80, hidden: false, editable: true },
+       { name: 'TranMode', title: '@Resources.Locale.L_RQQuery_TranMode', index: 'TranMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', sorttype: 'string', width: 100, editable: false, hidden: true },
+       { name: 'RfqNo', title: '@Resources.Locale.L_RQQuery_RfqNo', index: 'RfqNo', sorttype: 'string', width: 100, editable: false, hidden: true },
+       { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', sorttype: 'string', width: 100, editable: false, hidden: true },
+       { name: 'LspCd', title: '@Resources.Locale.L_AirQuery_LspCd', index: 'LspCd', sorttype: 'string', width: 100, editable: false, hidden: true },
+       { name: 'AllIn', title: '@Resources.Locale.L_AirSetup_AllIn', index: 'AllIn', sorttype: 'string', width: 100, editable: false, hidden: true },
+       { name: 'Incoterm', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'Incoterm', sorttype: 'string', width: 100, editable: false, hidden: true },
+       { name: 'PolCd', title: '@Resources.Locale.L_AirQuery_PolCd', index: 'PolCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+       { name: 'PolNm', title: '@Resources.Locale.L_AirQuery_PolNm', index: 'PolNm', sorttype: 'string', width: 150, hidden: false },
+       //{ name: 'Region', title: '@Resources.Locale.L_DTQuery_Region', index: 'Region', editoptions: gridLookup(get_regionop("Region")), sorttype: 'string', width: 100, hidden: false, editable: true },
+       //{ name: 'State', title: '@Resources.Locale.L_DTQuery_State', index: 'State', sorttype: 'string', width: 100, hidden: false, editable: true },
+       { name: 'PodCd', title: '@Resources.Locale.L_AirQuery_PodCd', index: 'PodCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+       { name: 'PodNm', title: '@Resources.Locale.L_DTQuery_PodNm', index: 'PodNm', sorttype: 'string', width: 150, hidden: false },
+        { name: 'Region', title: '@Resources.Locale.L_DTQuery_Region', index: 'Region', sorttype: 'string', width: 100, hidden: false, editable: true, formatter: "select", editoptions: { value: _selectTRGN }, edittype: 'select' },
+       { name: 'State', title: '@Resources.Locale.L_DTQuery_State', index: 'State', sorttype: 'string', width: 100, hidden: false, editable: true, formatter: "select", editoptions: { value: _selectSTATE }, edittype: 'select' },
+       { name: 'Tt', title: '@Resources.Locale.L_DTQuery_Tt', index: 'Tt', width: 100, align: 'right', formatter: 'integer', hidden: false, editable: true },
+       //{ name: 'Punit', title: '@Resources.Locale.L_AirQuery_Punit', index: 'Punit', editoptions: gridLookup(getUnit("Punit")), width: 80, align: 'left', sorttype: 'string', hidden: false, editable: true },
+       { name: 'Punit', title: '@Resources.Locale.L_AirQuery_Punit', index: 'Punit', width: 80, align: 'left', sorttype: 'string', hidden: false, editable: true, formatter: "select", editoptions: { value: 'BL:BL;CBM:CBM;T:T;@Resources.Locale.L_DTFreightQuery_Script_49;GW:GW' }, edittype: 'select' },
+       { name: 'F1', title: "@Resources.Locale.L_DTQuery_F1", index: 'F1', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, idden: false, editable: true },
+       { name: 'F2', title: "@Resources.Locale.L_DTQuery_F2", index: 'F2', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'F3', title: "@Resources.Locale.L_DTQuery_F3", index: 'F3', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'F4', title: "@Resources.Locale.L_DTQuery_F4", index: 'F4', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'F5', title: "@Resources.Locale.L_DTQuery_F5", index: 'F5', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'F6', title: "@Resources.Locale.L_DTQuery_F6", index: 'F6', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'F7', title: "@Resources.Locale.L_DTQuery_F7", index: 'F7', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'F8', title: "@Resources.Locale.L_DTQuery_F8", index: 'F8', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+       { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 150, align: 'left', sorttype: 'string', hidden: false, editable: true },
+       { name: 'SeqNo', title: '@Resources.Locale.L_NRSSetup_SeqNo', index: 'SeqNo', sorttype: 'string', width: 250, hidden: true, editable: false }
+        ];
+
+
+        _handler.intiGrid1("Tgrid", $("#Tgrid"), {
+            colModel: colModel, caption: "@Resources.Locale.L_QTSetup_DmQuo", delKey: ["UId"], height: 200, datatype: "local",
+            data: [],
+            url: rootPath + "QTManage/GetQTDetailData"
+        });
+    }
+
+    function initDGrid() {
+        var colModel = [
+              { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'UFid', title: 'U FID', index: 'UFid', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'RfqNo', title: '@Resources.Locale.L_RQQuery_RfqNo', index: 'RfqNo', sorttype: 'string', width: 100, editable: true, hidden: false },
+       { name: 'QuotNo1', title: '@Resources.Locale.L_QTSetup_QuoNo', index: 'QuotNo1', sorttype: 'string', width: 100, editable: true, hidden: false },
+       { name: 'ChgRemark', title: '@Resources.Locale.L_QTSetup_ReherseResult', index: 'ChgRemark', sorttype: 'string', width: 200, editable: true, hidden: false, classes: "normal-white-space" },
+       { name: 'EffectFrom1', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'EffectTo1', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+       { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'PolNm', title: '@Resources.Locale.L_AirSetup_PolNm', index: 'PolNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'LspCd', title: '@Resources.Locale.L_AirQuery_LspCd', index: 'LspCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'AllIn', title: '@Resources.Locale.L_AirQuery_AllIn', index: 'AllIn', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'Incoterm', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'Incoterm', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'TranMode', title: '@Resources.Locale.L_RQQuery_TranMode', index: 'TranMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'PolCd', title: '@Resources.Locale.L_DEQuery_PolCd', index: 'PolCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+       { name: 'PodCd', title: '@Resources.Locale.L_DEQuery_PodCd', index: 'PodCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+       { name: 'PodNm', title: '@Resources.Locale.L_DEQuery_PodNm', index: 'PodNm', sorttype: 'string', width: 180, align: 'left', editable: false, hidden: false },
+       { name: 'Tt', title: '@Resources.Locale.L_DEQuery_Tt', index: 'Tt', width: 80, align: 'right', formatter: 'integer', editable: true, hidden: false },
+       { name: 'F1', title: '@Resources.Locale.L_DEQuery_F1', index: 'F1', width: 120, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, editable: true, hidden: false },
+       { name: 'F2', title: '@Resources.Locale.L_DEQuery_F2', index: 'F2', width: 120, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, editable: true, hidden: false },
+       { name: 'F3', title: '@Resources.Locale.L_DEQuery_F3', index: 'F3', width: 120, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, editable: true, hidden: false },
+       { name: 'F4', title: '@Resources.Locale.L_DEQuery_F4', index: 'F4', width: 120, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, editable: true, hidden: false },
+       { name: 'ServiceMode', title: 'Service Mode', index: 'ServiceMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'LoadingFrom', title: 'Loading From', index: 'LoadingFrom', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'LoadingTo', title: 'Loading To', index: 'LoadingTo', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'SeqNo', title: '@Resources.Locale.L_NRSSetup_SeqNo', index: 'SeqNo', sorttype: 'string', width: 250, hidden: true, editable: false }
+        ];
+
+       _handler.intiGrid1("Dgrid", $("#Dgrid"), {
+           colModel: colModel, caption: '@Resources.Locale.L_QTSetup_TranDmEpQuo', delKey: ["UId"], height: 200, datatype: "local",
+           data: [],
+           url: rootPath + "QTManage/GetQTDetailData"
+       });
+    }
+
+    function initLGrid() {
+        var colModel = [
+      { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'UFid', title: 'U FID', index: 'UFid', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'RfqNo', title: '@Resources.Locale.L_RQQuery_RfqNo', index: 'RfqNo', sorttype: 'string', width: 100, editable: true, hidden: false },
+      { name: 'QuotNo', title: '@Resources.Locale.L_QTSetup_QuoNo', index: 'QuotNo', sorttype: 'string', width: 100, editable: true, hidden: false },
+      { name: 'ChgRemark', title: '@Resources.Locale.L_QTSetup_ReherseResult', index: 'ChgRemark', sorttype: 'string', width: 500, editable: true, hidden: false, classes: "normal-white-space" },
+      { name: 'EffectFrom1', title: '@Resources.Locale.L_RQQuery_EffectFrom', index: 'EffectFrom', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+      { name: 'EffectTo1', title: '@Resources.Locale.L_RQQuery_EffectTo', index: 'EffectTo', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+      { name: 'LspCd', title: 'LspCd', index: 'LspCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'AllIn', title: 'AllIn', index: 'AllIn', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'PolNm', title: 'PolNm', index: 'PolNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'PodNm', title: 'PodNm', index: 'PodNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'Incoterm', title: 'Incoterm', index: 'Incoterm', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'TranMode', title: 'TranMode', index: 'TranMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'PolCd', title: '@Resources.Locale.L_BaseLookup_PolCd', index: 'PolCd', sorttype: 'string', width: 80, hidden: false, editable: true },
+      { name: 'PolNm', title: '@Resources.Locale.L_BaseLookup_PolName', index: 'PolNm', sorttype: 'string', width: 120, hidden: false, editable: false },
+      { name: 'PodCd', title: '@Resources.Locale.L_BaseLookup_PodCd', index: 'PodCd', sorttype: 'string', width: 80, hidden: false, editable: true },
+      { name: 'PodNm', title: '@Resources.Locale.L_BaseLookup_PodName', index: 'PodNm', sorttype: 'string', width: 120, hidden: false, editable: false },
+      { name: 'Carrier', title: '@Resources.Locale.L_DNApproveManage_CaCd', index: 'Carrier', sorttype: 'string', width: 90, hidden: false, editable: true },
+      { name: 'LspNm1', title: '@Resources.Locale.L_AirQuery_LspNm', index: 'LspNm1', width: 100, align: 'left', sorttype: 'string', hidden: false },
+      { name: 'Tt', title: '@Resources.Locale.L_RouteSetup_Tt', index: 'Tt', width: 60, align: 'right', formatter: 'integer', hidden: false, editable: true },
+      { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', sorttype: 'string', width: 90, hidden: false, editable: true },
+      { name: 'ChgDescp', title: '@Resources.Locale.L_SMCHGSetup_ChgDescp', index: 'ChgDescp', sorttype: 'string', width: 150, hidden: false, editable: false },
+      { name: 'ChgType', title: '@Resources.Locale.L_SMCHGSetup_ChgType', index: 'ChgType', sorttype: 'string', width: 90, hidden: false, editable: true, formatter: "select", editoptions: { value: 'F:F.Freight Charge;O:O.Original Fee;D:D.Destination Fee' }, edittype: 'select' },
+      { name: 'Punit', title: '@Resources.Locale.L_AirQuery_Punit', index: 'Punit', sorttype: 'string', width: 90, hidden: false, editable: true },
+      { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', sorttype: 'string', width: 90, align: 'left', hidden: false, editable: true },
+      { name: 'MinAmt', title: '@Resources.Locale.L_AirSetup_MinAmt', index: 'MinAmt', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+      { name: 'F1', title: '@Resources.Locale.L_SLCLQuery_F1', index: 'F1', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+      { name: 'CutOff', title: 'Cut Off', index: 'CutOff', width: 100, align: 'left', sorttype: 'string', hidden: false, editable: true },
+      { name: 'Etd', title: 'ETD', index: 'Etd', width: 100, align: 'left', sorttype: 'string', hidden: false, editable: true },
+      { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 200, align: 'left', sorttype: 'string', hidden: false, editable: true },
+      { name: 'ServiceMode', title: 'Service Mode', index: 'ServiceMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'LoadingFrom', title: 'Loading From', index: 'LoadingFrom', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'LoadingTo', title: 'Loading To', index: 'LoadingTo', sorttype: 'string', width: 100, editable: true, hidden: true },
+      { name: 'SeqNo', title: '@Resources.Locale.L_NRSSetup_SeqNo', index: 'SeqNo', sorttype: 'string', width: 250, hidden: true, editable: false }
+        ];
+
+        _handler.intiGrid1("Lgrid", $("#Lgrid"), {
+            colModel: colModel, caption: '@Resources.Locale.L_QTSetup_LCLQuo', delKey: ["UId"], height: 200
+        }, loadLSubData);
+    }
+
+    jQuery(document).ready(function ($) {
+       function setDate(id) {
+           $("#" + id).wrap('<div class="input-group">').datepicker({
+               showOn: "button",
+               changeYear: true,
+               dateFormat: "yy-mm-dd",
+               beforeShow: function () {
+                   setTimeout(function () {
+                       $('.ui-datepicker').css('z-index', 99999999999999);
+                   }, 0);
+               },
+               onClose: function (text, inst) {
+                   $(this).focus();
+               }
+           }).next("button").button({ icons: { primary: "ui-icon-calendar" }, label: "Select a date", text: false })
+               .addClass("btn btn-sm btn-info").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+               .wrap('<span class="input-group-btn">')
+               .find('.ui-button-text')
+               .css({
+                   'visibility': 'hidden',
+                   'display': 'inline'
+               });
+       }
+       setDate("TSearchRDate");
+       setDate("FSearchRDate");
+       setDate("ASearchRDate");
+
+       var lookup = {
+           caption: "@Resources.Locale.L_BaseLookup_SerPort",
+           sortname: "PortCd",
+           sortorder: "asc",
+           refresh: false,
+           multiselect: true,
+           columns: [
+               { name: "PortCd", title: "@Resources.Locale.L_FCLFSetup_PodCd", width: 60, sorttype: "string", hidden: false, viewable: true, sopt: ['cn', 'eq', 'ne', 'lt', 'le', 'gt', 'ge', 'cn', 'nu', 'nn', 'in', 'ni'] },
+               { name: "PortNm", title: "@Resources.Locale.L_BaseLookup_Nm", init: true, width: 300, sorttype: "string", hidden: false, viewable: true, sopt: ['cn','eq', 'ne', 'lt', 'le', 'gt', 'ge', 'cn', 'nu', 'nn', 'in', 'ni'] }]
+       }
+
+       registBtnLookup($("#PolCd1Lookup"), {
+           isMutiSel: true,
+           item: "#PolCd1", url: rootPath + "TPVCommon/GetBslcpolForLookup", config: LookUpConfig.BslcpolLookup, param: "", selectRowFn: function (map) {
+               $("#PolCd").val(map.Pol);
+               $("#PolCd1").val(map.Pol);
+               $("#PolNm").val(map.PolDescp);
+           }
+       }, {
+           responseMethod: function (data) {
+               console.log(data);
+               var str = "";
+               var str1 = "";
+               $.each(data, function (index, val) {
+                   str = str + data[index].Pol + ";";
+                   str1 = str1 + data[index].PolDescp + ";";
+               });
+               $("#PolCd").val(str);
+               $("#PolCd1").val(str);
+               $("#PolNm").val(str1);
+           }
+       });
+
+       registBtnLookup($("#PolCd2Lookup"), {
+           isMutiSel: true,
+           item: "#PolCd2", url: rootPath + "TPVCommon/GetBslcpolForLookup", config: LookUpConfig.BslcpolLookup, param: "", selectRowFn: function (map) {
+               $("#PolCd").val(map.Pol);
+               $("#PolCd2").val(map.Pol);
+               $("#PolNm").val(map.PolDescp);
+           }
+       }, {
+           responseMethod: function (data) {
+               console.log(data);
+               var str = "";
+               var str1 = "";
+               $.each(data, function (index, val) {
+                   str = str + data[index].Pol + ";";
+                   str1 = str1 + data[index].PolDescp + ";";
+               });
+               $("#PolCd").val(str);
+               $("#PolCd2").val(str);
+               $("#PolNm").val(str1);
+           }
+       });
+
+       registBtnLookup($("#PodCd1Lookup"), {
+           isMutiSel: true,
+           item: "#PodCd1", url: rootPath + "QTManage/GetQTPorts1", config: lookup, param: "", selectRowFn: function (map) {
+               $("#PodCd").val(map.PortCd);
+               $("#PodCd1").val(map.PortCd);
+               $("#PodNm").val(map.PortNm);
+           }
+       }, {
+           responseMethod: function (data) {
+               console.log(data);
+               var str = "";
+               var str1 = "";
+               $.each(data, function (index, val) {
+                   str = str + data[index].PortCd + ";";
+                   str1 = str1 + data[index].PortNm + ";";
+               });
+               $("#PodCd").val(str);
+               $("#PodNm").val(str1);
+           }
+       });
+
+       registBtnLookup($("#PodCd2Lookup"), {
+           isMutiSel: true,
+           item: "#PodCd2", url: rootPath + LookUpConfig.TruckPortCdUrl, config: LookUpConfig.TruckPortCdLookup, param: "", selectRowFn: function (map) {
+               $("#PodCd").val(map.PortCd);
+               $("#PodCd2").val(map.PortCd);
+               $("#PodNm").val(map.PortNm);
+           }
+       }, {
+           responseMethod: function (data) {
+               console.log(data);
+               var str = "";
+               var str1 = "";
+               $.each(data, function (index, val) {
+                   str = str + data[index].PortCd + ";";
+                   str1 = str1 + data[index].PortNm + ";";
+               });
+               $("#PodCd").val(str);
+               $("#PodNm").val(str1);
+           }
+       });
+
+       var lookup1 = {
+           caption: "@Resources.Locale.L_QT011_Views_513",
+           sortname: "CntryCd",
+           sortorder: "asc",
+           refresh: false,
+           multiselect: true,
+           columns: [
+               { name: "CntryCd", title: "@Resources.Locale.L_BaseLookup_Country", width: 60, sorttype: "string", hidden: false, viewable: true, sopt: ['cn', 'eq', 'ne', 'lt', 'le', 'gt', 'ge', 'cn', 'nu', 'nn', 'in', 'ni'] },
+               { name: "CntryNm", title: "@Resources.Locale.L_BaseLookup_Nm", init: true, width: 300, sorttype: "string", hidden: false, viewable: true, sopt: ['cn', 'eq', 'ne', 'lt', 'le', 'gt', 'ge', 'cn', 'nu', 'nn', 'in', 'ni'] }]
+       }
+       registBtnLookup($("#regionLookup"), {
+           isMutiSel: true,
+           item: "#region", url: rootPath + "QTManage/GetQTCountrys", config: lookup1, param: "", selectRowFn: function (map) {
+               $("#region").val(map.CntryCd); 
+               $("#regionNm").val(map.CntryNm);
+           }
+       }, {
+           responseMethod: function (data) {
+               console.log(data);
+               var str = "";
+               var str1 = "";
+               $.each(data, function (index, val) {
+                   str = str + data[index].CntryCd + ";";
+                   str1 = str1 + data[index].CntryNm + ";";
+               });
+               $("#region").val(str);
+               $("#regionNm").val(str1);
+           }
+       });
+
+       var GetSiteCmpAuto = function (groupId, $grid, autoFn, clearFn) {
+           var op =
+           {
+               autoCompDt: "dt=stn&GROUP_ID=" + groupId + "&TYPE=1&CMP=",
+               autoCompParams: "CMP=showValue,CMP,NAME",
+               autoCompFunc: function (elem, event, ui, rowid) {
+                   autoFn($grid, ui.item.returnValue, elem, rowid);
+               },
+               autoClearFunc: function (elem, event, rowid) {
+                   clearFn($grid, elem, rowid);
+               }
+           };
+           return op;
+       }
+
+       registBtnLookup($("#CmpLookup"), {
+           item: "#SearchCmp", url: rootPath + "TPVCommon/GetSiteCmpData", config: LookUpConfig.SiteLookup, param: "", selectRowFn: function (map) {
+               $("#SearchCmp").val(map.Cd);
+               $("#CmpNm").val(map.CdDescp);
+           }
+       }, { baseCondition: " GROUP_ID='" + groupId + "' AND TYPE='1'" }, GetSiteCmpAuto(groupId, undefined, function ($grid, rd, elem) {
+           $("#SearchCmp").val(rd.CMP);
+           $("#CmpNm").val(rd.NAME);
+       }, function ($grid, elem, rowid) {
+           $("#SearchCmp").val("");
+           $("#CmpNm").val("");
+       }));
+       getSelectOptions();
+
+
+       function getSelectOptions() {
+           $.ajax({
+               async: false,
+               url: rootPath + "TKBL/GetSelects",
+               type: 'POST',
+               data: { type: encodeURIComponent("QT") },
+               "error": function (xmlHttpRequest, errMsg) {
+                   alert(errMsg);
+               },
+               success: function (data) {
+                   var tdtkOptions = data.TDTK || [];
+                   var tdOptions = data.TD || [];
+                   tdOptions.splice(0, 0, { cdDescp: "", cd: "" });
+                   tdtkOptions.splice(0, 0, { cdDescp: "", cd: "" });
+                   //appendSelectOption($("#TranMode"), trnOptions);
+                   appendSelectOption($("#TranType"), tdtkOptions);
+                   appendSelectOption($("#Incoterm"), tdOptions);
+                   showView();
+               }
+           });
+       }
+
+       showView();
+
+       $("#TranMode").change(function () {
+           showView();
+       });
+
+       var _grid;
+       function showView() {
+           var tranModes = ["A", "D", "E", "F", "L", "T"];
+           var val = $("#TranMode").val();
+           //$("#cityDiv").show();
+           //$("#portDiv").hide();
+           //if (val === "D" || val === "T") {
+           //    $("#cityDiv").hide();
+           //    $("#portDiv").show();
+           //}
+           $("[view='E1']").show();
+           $("[view='F']").hide();
+           $("[view='A']").hide();
+           $("[view='T']").hide();
+           $("[view='E']").hide();
+           if (val === "A" || val === "D" || val === "E" || val === "L")
+               $("[view='A']").show();
+           else
+               $("[view='" + val + "']").show();
+           if (val === "E") {
+               $("[view='E']").show();
+               $("[view='E1']").hide();
+           }
+           for (var i = 0; i < tranModes.length; i++) {
+               var tran = tranModes[i];
+               if (val === tran) {
+                   _grid = $("#" + tran + "grid");
+                   $("#" + tran + "gridView").show();
+               }
+               else
+                   $("#" + tran + "gridView").hide();
+           }
+
+           if(val == "D" || val == "T")
+           {
+              $("#PolCd2").show();
+              $("#PodCd2").show();
+              $("button.iPod").show();
+              $("button.iPol").show();
+
+              $("#PolCd1").hide();
+              $("#PodCd1").hide();
+              $("button.oPod").hide();
+              $("button.oPol").hide();
+           }
+           else
+           {
+              $("#PolCd2").hide();
+              $("#PodCd2").hide();
+              $("button.iPod").hide();
+              $("button.iPol").hide();
+
+              $("#PolCd1").show();
+              $("#PodCd1").show();
+              $("button.oPod").show();
+              $("button.oPol").show();
+           }
+       }
+       initLSubGrid();
+       initESubGrid();
+       initFSubGrid();
+       initAGrid();
+       initFGrid();
+       initEGrid();
+       initDGrid();
+       initTGrid();
+       initLGrid();
+       function inqData() {
+           if (!_grid) return;
+           _cdata = {};
+           var pms = [];
+           var tranMode = $("#TranMode").val();
+           pms.push({ name: "TranMode", sopt: "eq", val: tranMode, dt: "" });
+
+           var params = "";
+           var name = "", sopt;
+           for (var i = 0; i < pms.length; i++) {
+               name = pms[i].name || "";
+               sopt = pms[i].sopt || "eq";
+               if (isEmpty(name))
+                   continue;
+               if (isEmpty(pms[i].val))
+                   continue;
+               if (params.length > 0)
+                   params += "&";
+               params += "sopt_" + name + "=" + sopt + "&" + name + "=" + pms[i].val + "&dt_" + name + "=" + (pms[i].dt || '');
+           }
+
+           var baseCondition = "";
+           var vir_params = "";
+           var gw = "",cbm="";
+           var etd = encodeURIComponent($("#" + tranMode + "SearchRDate").val() || '');
+           gw = encodeURIComponent($("#gw1").val() || '');
+
+           var gwu = encodeURIComponent($("#gwu1").val() || '');
+           cbm = encodeURIComponent($("#cbm1").val() || '');
+           if (tranMode === "E" || tranMode === "A" || tranMode === "D" || tranMode === "L") {
+               etd = encodeURIComponent($("#ASearchRDate").val() || '');
+               gw = encodeURIComponent($("#gw").val() || '');
+               cbm = encodeURIComponent($("#cbm").val() || '');
+               gwu = encodeURIComponent($("#gwu").val() || '');
+           }
+           else if (tranMode === "T") {
+               gw = encodeURIComponent($("#gw2").val() || '');
+               cbm = encodeURIComponent($("#cbm2").val() || '');
+               gwu = encodeURIComponent($("#gwu2").val() || '');
+           }
+           _grid.jqGrid('setGridParam', {
+               url: rootPath + "QTManage/GetQTDetailData", datatype: "json",
+               postData: {
+                   TranMode: encodeURIComponent($("#TranMode").val() || ''),
+                   TranType: encodeURIComponent($("#TranType").val() || ''),
+                   carType: encodeURIComponent($("#carType").val() || ''),
+                   car_cw: encodeURIComponent($("#car_cw").val() || ''),
+                   cnt: encodeURIComponent($("#cnt").val() || ''),
+                   region: encodeURIComponent($("#region").val() || ''),
+                   cbm: cbm,
+                   gwu: gwu,
+                   gw:gw,
+                   //cw: encodeURIComponent($("#cw").val()),
+                   cw: encodeURIComponent($("#cw").val()||''),
+                   y: encodeURIComponent($("#year").val()),
+                   w: encodeURIComponent($("#week").val()),
+                   Cnt20: encodeURIComponent($("#Cnt20").val()),
+                   Cnt40: encodeURIComponent($("#Cnt40").val()),
+                   Cnt40hq: encodeURIComponent($("#Cnt40hq").val()),
+                   etd: etd || '',
+                   y: encodeURIComponent($("#year").val()),
+                   y: encodeURIComponent($("#year").val()),
+                   y: encodeURIComponent($("#year").val()),
+                   pol: encodeURIComponent($("#PolCd").val()),
+                   pod: encodeURIComponent($("#PodCd").val()),
+                   rlocation: encodeURIComponent($("#SearchCmp").val()),
+                   incoterm: encodeURIComponent($("#Incoterm").val()),
+                   'conditions': params,//jQuery.serialize()已经是进行URL编码过的。
+                   'baseCondition': baseCondition,
+                   'virConditions': vir_params
+               }
+           }).trigger("reloadGrid")
+       }
+
+       $("#searchBtn").click(function () {
+           inqData();
+       });
+
+       $("#searchBtn1").click(function () {
+           inqData();
+       });
+
+       $("#searchBtn2").click(function () {
+           inqData();
+       });
+   });
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form id="SearchForm">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-4-60">
+                                <label class="control-label">Location</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="SearchCmp" name="SearchCmp" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-info" type="button" id="CmpLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" id="CmpNm" readonly />
+                            </div>
+
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="SampleName" class="control-label">@Resources.Locale.L_BaseLookup_TranMode</label>
+                            </div>
+                            <div class="pure-u-sm-6-60 control-group">
+                                <select class="form-control input-sm" id="TranMode" name="TranMode">
+                                    <option value="F">F:FCL</option>
+                                    <option value="L">L:LCL</option>
+                                    <option value="T">T:Truck</option>
+                                    <option value="D">D:INLAND EXPRESS</option>
+                                    <option value="E">E:EXPRESS</option>
+                                    <option value="A">A:AIR</option>
+                                </select>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label class="control-label">Term</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <select class="form-control input-sm" id="Incoterm" name="Incoterm">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pure-g" view="T" style="display: none;">
+                            <div class="pure-u-sm-4-60">
+                                 <select class="form-control input-sm" id="carType" name="carType">
+                                   @* <option value="F1">按米报价</option>
+    <option value="F2">按吨报价</option>*@
+                                    <option value="">@Resources.Locale.L_BaseLookup_CarType</option>
+                                    <option value="F3">4.2 @Resources.Locale.L_QTSetup_MeterCar</option>
+                                    <option value="F4">20'</option>
+                                    <option value="F5">7.2 @Resources.Locale.L_QTSetup_Meter</option>
+                                    <option value="F6">9.2 @Resources.Locale.L_QTSetup_Meter</option>
+                                    <option value="F7">12 @Resources.Locale.L_QTSetup_Meter</option>
+                                    <option value="F8">16 @Resources.Locale.L_QTSetup_Meter</option>
+                                </select>
+                            </div>
+                            <div class="pure-u-sm-4-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="car_cw" />
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="SampleName" class="control-label">@Resources.Locale.L_DNApproveManage_TranMode</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <select class="form-control input-sm" id="TranType" name="TranType">
+                                </select>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-60 label-right">
+                                <label class="control-label">CBM</label>
+                            </div>
+                            <div class="pure-u-sm-3-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="cbm2" />
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-60 label-right">
+                                <label class="control-label">GW</label>
+                            </div>
+                            <div class="pure-u-sm-3-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="gw2" />
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-60">
+                                 <select class="form-control input-sm" id="gwu2" name="gwu2">
+                                    <option value="T">T</option>
+                                </select>
+                            </div>
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="SampleName" class="control-label">@Resources.Locale.L_DNApproveManage_ETD</label>
+                            </div>
+                            <div class="pure-u-sm-7-60 control-group">
+                                <input type="text" class="form-control input-sm" id="TSearchRDate" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="pure-g" view="F">
+                            <div class="pure-u-sm-4-60">
+                                <label class="control-label">20'</label>
+                            </div>
+                            <div class="pure-u-sm-3-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="Cnt20" />
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-60 label-right">
+                                <label for="SampleName" class="control-label">40'</label>
+                            </div>
+                            <div class="pure-u-sm-3-60 control-group">
+                                <input type="text" class="form-control input-sm" id="Cnt40" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-60 label-right">
+                                <label for="SampleName" class="control-label">40'HQ</label>
+                            </div>
+                            <div class="pure-u-sm-3-60 control-group">
+                                <input type="text" class="form-control input-sm" id="Cnt40hq" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-60 label-right">
+                                <label class="control-label">CBM</label>
+                            </div>
+                            <div class="pure-u-sm-3-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="cbm1" />
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-60 label-right">
+                                <label class="control-label">GW</label>
+                            </div>
+                            <div class="pure-u-sm-3-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="gw1" />
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-60">
+                                 <select class="form-control input-sm" id="gwu1" name="gwu1">
+                                    <option value="K">K</option>
+                                    <option value="L">L</option>
+                                </select>
+                            </div>
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="SampleName" class="control-label">@Resources.Locale.L_DNApproveManage_ETD</label>
+                            </div>
+                            <div class="pure-u-sm-7-60 control-group">
+                                <input type="text" class="form-control input-sm" id="FSearchRDate" name="FSearchRDate" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="pure-g" view="A" style="display: none;">
+                            <div class="pure-u-sm-4-60">
+                                <label class="control-label">GW</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="gw" />
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                           @* <div class="pure-u-sm-2-60">
+                                 <select class="form-control input-sm" id="gwu" name="gwu">
+                                    <option value="K">K</option>
+                                    <option value="L">L</option>
+                                </select>
+                            </div>*@
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label class="control-label">CBM</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="cbm" />
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                             <div class="pure-u-sm-4-60 label-right">
+                                <label class="control-label">CNT</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="cnt" />
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="SampleName" class="control-label">@Resources.Locale.L_DNApproveManage_ETD</label>
+                            </div>
+                            <div class="pure-u-sm-7-60 control-group">
+                                <input type="text" class="form-control input-sm" id="ASearchRDate" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="pure-g" id="cityDiv">
+                            <div class="pure-u-sm-4-60">
+                                <label for="PolCd" class="control-label">@Resources.Locale.L_BaseLookup_PolCd</label>
+                            </div>
+                            <div class="pure-u-sm-15-60 control-group">
+                                <div class="input-group">
+                                    <input type="hidden" class="form-control input-sm" id="PolCd" name="PolCd" fieldname1="PolCd" />
+                                    <input type="text" class="form-control input-sm" id="PolCd1" name="PolCd1" fieldname1="PolCd1" />
+                                    <input type="text" class="form-control input-sm" id="PolCd2" name="PolCd2" fieldname1="PolCd2" style="display: none"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default oPol" type="button" id="PolCd1Lookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                        <button class="btn btn-sm btn-default iPol" type="button" id="PolCd2Lookup" style="display: none">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-21-60">
+                                <input type="text" class="form-control input-sm" id="PolNm" fieldname1="PolNm" name="PolNm" readonly />
+                            </div>
+                        </div>
+                        <div class="pure-g" view="E" style="display: none;">
+                            <div class="pure-u-sm-4-60">
+                                <label for="PolCd" class="control-label">@Resources.Locale.L_BaseLookup_Country</label>
+                            </div>
+                            <div class="pure-u-sm-15-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="region" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="regionLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-21-60">
+                                <input type="text" class="form-control input-sm" id="regionNm" readonly />
+                            </div>
+                            <div class="pure-u-sm-1-60"></div>
+                            <div class="pure-u-sm-5-60">
+                                <button class="btn btn-sm btn-info" type="button" id="searchBtn2">@Resources.Locale.L_MenuBar_Search</button>
+                            </div>
+                        </div>
+                        <div class="pure-g" view="E1">
+                            <div class="pure-u-sm-4-60">
+                                <label for="PodCd" class="control-label">@Resources.Locale.L_BaseLookup_PodCd</label>
+                            </div>
+                            <div class="pure-u-sm-15-60 control-group">
+                                <div class="input-group">
+                                    <input type="hidden" class="form-control input-sm" id="PodCd" name="PodCd" fieldname1="PodCd" />
+                                    <input type="text" class="form-control input-sm" id="PodCd1" name="PodCd1" fieldname1="PodCd1" />
+                                    <input type="text" class="form-control input-sm" id="PodCd2" name="PodCd2" fieldname1="PodCd2" style="display: none"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default oPod" type="button" id="PodCd1Lookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                        <button class="btn btn-sm btn-default iPod" type="button" id="PodCd2Lookup" style="display: none">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-21-60">
+                                <input type="text" class="form-control input-sm" id="PodNm" fieldname1="PodNm" name="PodNm" readonly />
+                            </div>
+
+                            <div class="pure-u-sm-1-60"></div>
+                            <div class="pure-u-sm-5-60">
+                                <button class="btn btn-sm btn-info" type="button" id="searchBtn">@Resources.Locale.L_MenuBar_Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="AgridView" style="display: none;">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Agrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default" id="DgridView" style="display: none;">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Dgrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default" id="EgridView" style="display: none;">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Egrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Egrid1" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="FgridView" style="display: none;">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Fgrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Fgrid1" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="LgridView" style="display: none;">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Lgrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Lgrid1" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="TgridView" style="display: none;">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Tgrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

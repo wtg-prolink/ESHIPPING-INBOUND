@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Table name="SMSMI"  sql="select *  from SMSMI where shipment_id IN (SELECT shipment_id FROM SMRV WHERE Reserve_No=':=uid')">
+  </Table>
+  <Table name="SMRV"  sql="select * from SMRV where Reserve_No=':=uid'">
+  </Table>
+  <Table name="SMBID" sql="SELECT SMBID.* FROM SMBID , SMRV A WHERE SMBID.SHIPMENT_ID= A.SHIPMENT_ID AND LSP_NO=A.TRUCKER     AND SMBID.TRAN_TYPE='T' AND  A.RESERVE_NO=':=uid'"></Table>
+  <Table name="SMRCNTR" sql="select * from  SMRCNTR where shipment_id IN (SELECT shipment_id FROM SMRV WHERE Reserve_No=':=uid')"></Table>
+ <Table name="SMRDN" sql="select * from  SMRDN where shipment_id IN (SELECT shipment_id FROM SMRV WHERE Reserve_No=':=uid')"></Table>
+
+</root>

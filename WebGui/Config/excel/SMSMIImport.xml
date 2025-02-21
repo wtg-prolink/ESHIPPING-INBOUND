@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+从name插入到fieldname，  帳單
+-->
+<table name="SMSMI">
+  <column name="ISF Seller" fieldname="PARTY_NO_SISF" dataType="string" defalutValue="" ></column>
+  <column name="BookingParty"  fieldname="PARTY_NO_IBBK" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="Location" fieldname="CMP" dataType="string"  defalutValue="" isnotnull="Y"></column>
+  <column name="TransType" fieldname="TRANS_TYPE" dataType="string" defaultValue="" isnotnull="Y"></column>
+  <column name="MBL"  fieldname="MASTER_NO" dataType="string" defalutValue="" isnotnull="Y"></column>
+  <column name="HBL"  fieldname="HOUSE_NO" dataType="string" defalutValue=""></column>
+  <column name="Shipping Marks"  fieldname="MARKS" isnotnull="Y" dataType="string" defalutValue=""></column>
+  <column name="Commodity"  fieldname="GOODS" isnotnull="Y" dataType="string" defalutValue=""></column>
+  <column name="BLRemark"  fieldname="BL_RMK" dataType="string" defalutValue=""></column>
+  <column name="Year"  fieldname="YEAR" dataType="number" defalutValue=""></column>
+  <column name="Month"  fieldname="MONTH" dataType="number" defalutValue=""></column>
+  <column name="Weekly"  fieldname="WEEKLY" dataType="number" defalutValue=""></column>
+  <column name="TTL GoodsValue"  fieldname="GVALUE" isnotnull="Y"  dataType="number" defalutValue=""></column>
+  <column name="Currency"  fieldname="CUR" isnotnull="Y"  dataType="string" defalutValue=""></column>
+  <column name="Container 20"  fieldname="CNT20" dataType="string" defalutValue=""></column>
+  <column name="Container 40"  fieldname="CNT40" dataType="string" defalutValue=""></column>
+  <column name="Container 40HQ"  fieldname="CNT40HQ" dataType="string" defalutValue=""></column>
+  <column name="Other Container Type"  fieldname="CNT_TYPE" dataType="string" defalutValue=""></column>
+  <column name="Other Container Number"  fieldname="CNT_NUMBER" dataType="string" defalutValue=""></column>
+  <column name="TTL PackageNo"  fieldname="PKG_NUM" isnotnull="Y" dataType="string" defalutValue=""></column>
+  <column name="TTL PKG Unit"  fieldname="PKG_UNIT" isnotnull="Y" dataType="string" defalutValue=""></column>
+  <column name="TTL GW"  fieldname="GW" dataType="number" defalutValue=""></column>
+  <column name="TTL GW Unit"  fieldname="GWU" dataType="string" defalutValue=""></column>
+  <column name="TTL VW"  fieldname="VW" dataType="number" defalutValue=""></column>
+  <column name="TTL CBM"  fieldname="CBM" dataType="number" defalutValue=""></column>
+  <column name="TTL CBM Unit"  fieldname="CBM_UNIT" dataType="string" defalutValue=""></column>
+  <column name="TTL CW"  fieldname="CW" dataType="number" defalutValue=""></column>
+  <column name="Incoterm"  fieldname="INCOTERM_CD" isnotnull="Y" dataType="string" defalutValue=""></column>
+  <column name="Incoterm Description" fieldname="INCOTERM_DESCP" dataType="string" defaultValue=""></column>
+  <column name="Service Mode From" fieldname="LOADING_FROM" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Service Mode To" fieldname="LOADING_TO" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Airline/Carrier Code" fieldname="CARRIER" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="HTSCode" fieldname="HTC_CODE" dataType="string" defaultValue=""></column>
+  <column name="Country" fieldname="COUNTRY" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="SCAC" fieldname="SCAC_CD" dataType="string" defaultValue=""></column>
+  <column name="Freight Term" fieldname="FRT_TERM" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="POR" fieldname="POR_CD" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="POL" fieldname="POL_CD" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="POD" fieldname="POD_CD" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="DEST" fieldname="DEST_CD" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Dest.Region" fieldname="DEST_REGION" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Vessel1" fieldname="VESSEL1" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Voyage1" fieldname="VOYAGE1" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="ETD1" fieldname="ETD1" isnotnull="Y" dataType="date" defaultValue=""></column>
+  <column name="ETA1" fieldname="ETA1" isnotnull="Y" dataType="date" defaultValue=""></column>
+  <column name="Vessel2" fieldname="VESSEL2" dataType="string" defaultValue=""></column>
+  <column name="Voyage2" fieldname="VOYAGE2" dataType="string" defaultValue=""></column>
+  <column name="ETD2" fieldname="ETD2" dataType="date" defaultValue=""></column>
+  <column name="ETA2" fieldname="ETA2" dataType="date" defaultValue=""></column>
+  <column name="Vessel3" fieldname="Vessel3" dataType="string" defaultValue=""></column>
+  <column name="Voyage3" fieldname="Voyage3" dataType="string" defaultValue=""></column>
+  <column name="ETD3" fieldname="ETD3" dataType="date" defaultValue=""></column>
+  <column name="ETA3" fieldname="ETA3" dataType="date" defaultValue=""></column>
+  <column name="Vessel4" fieldname="VESSEL4" dataType="string" defaultValue=""></column>
+  <column name="Voyage4" fieldname="VOYAGE4" dataType="string" defaultValue=""></column>
+  <column name="ETD4" fieldname="ETD4" dataType="date" defaultValue=""></column>
+  <column name="ETA4" fieldname="ETA4" dataType="date" defaultValue=""></column>
+  <column name="ATD1" fieldname="ATD1" dataType="date" defaultValue=""></column>
+  <column name="ATA" fieldname="ATA" dataType="date" defaultValue=""></column>
+  <column name="Shipper No(SH)" fieldname="PARTY_NO_SH" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Consignee No(CS)" fieldname="PARTY_NO_CS" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Notify No(NT)" fieldname="PARTY_NO_NT" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Ship_to No(WE)" fieldname="PARTY_NO_WE" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="FI_Customer_Group(FC)" fieldname="PARTY_NO_FC" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Sub_BG(ZT)" fieldname="PARTY_NO_ZT" dataType="string" defaultValue=""></column>
+  <column name="Bill_to_Party(RE)/Importer" fieldname="PARTY_NO_RE" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Handling_Agent(SP)" fieldname="PARTY_NO_SP" dataType="string" defaultValue=""></column>
+  <column name="Invoice No" fieldname="INV_NO" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Inv_Unit_Price" fieldname="INV_UNIT_PRICE" isnotnull="Y" dataType="number" defaultValue=""></column>
+  <column name="Inv_Currency" fieldname="INV_CURRENCY" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="CargoType" fieldname="DIVISION_DESCP" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Inv_NW" fieldname="INV_NW" dataType="number" isnotnull="Y" defaultValue=""></column>
+  <column name="Inv_GW" fieldname="INV_GW" dataType="number" isnotnull="Y" defaultValue=""></column>
+  <column name="Inv_WeightUnit" fieldname="INV_GWU" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Inv_CBM" fieldname="INV_CBM" isnotnull="Y" dataType="number" defaultValue=""></column>
+  <column name="Inv_CBM_Unit" fieldname="INV_CBMU" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Inv_Qty" fieldname="INV_QTY" isnotnull="Y" dataType="number" defaultValue=""></column>
+  <column name="Inv_Qty_Unit" fieldname="INV_QTYU" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Inv_PKG" fieldname="INV_PKG_NUM" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Inv_PKG_Unit" fieldname="INV_PKG_UNIT" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="Inv_PKG_Desc." fieldname="INV_PKG_UNIT_DESC" isnotnull="Y" dataType="string" defaultValue=""></column>
+  <column name="InnerModelName" fieldname="IPART_NO" dataType="string" defaultValue=""></column>
+  <column name="Q'ty/ModelName" fieldname="DNP_QTY" dataType="string" defaultValue=""></column>
+  <column name="GW/ModelName" fieldname="DNP_GW" dataType="string" defaultValue=""></column>
+  <column name="CBM/ModelName" fieldname="DNP_CBM" dataType="string" defaultValue=""></column>
+  <column name="Container#" fieldname="CNTR_NO" dataType="string" defaultValue=""></column>
+  <column name="ContainerType" fieldname="CNTR_TYPE" dataType="string" defaultValue=""></column>
+  <column name="Seal#" fieldname="SEAL_NO1" dataType="string" defaultValue=""></column>
+</table>

@@ -1,0 +1,250 @@
+﻿@{
+    ViewBag.Title = "ShipFeeSetup";
+}
+
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+    var SpId = "@ViewBag.SpId";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+@Html.RazorJSInline("~/Scripts/QtManage/ShipFeeSetup.js")
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                	<div class="pure-g">
+            			<div class="pure-u-sm-5-60">
+            		        <label for="ShipmentId" class="control-label">Shipment ID</label>
+            		    </div>
+            		    <div class="pure-u-sm-10-60 control-group">
+            		        <input type="text" class="form-control input-sm" dt="mt" id="ShipmentId" name="ShipmentId" fieldname="ShipmentId" value="@ViewBag.SpId" readonly/>
+            		        <p class="help-block tooltips"></p>
+            		    </div>
+                		
+                	</div>
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-5-60">
+                            <label for="LspNo" class="control-label">@Resources.Locale.L_AirQuery_LspCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="LspNo" name="LspNo" fieldname="LspNo" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="LspNoLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="LspNm" name="LspNm" fieldname="LspNm" ref="LspNo" readonly />
+                        </div>
+						<div class="pure-u-sm-5-60  label-right">
+                            <label for="ChgCd" class="control-label">@Resources.Locale.L_SMCHGSetup_ChgCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ChgCd" name="ChgCd" fieldname="ChgCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="ChgCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ChgDescp" name="ChgDescp" fieldname="ChgDescp" ref="ChgCd" readonly />
+                        </div>
+                    </div>
+                    <div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Qcur" class="control-label">@Resources.Locale.L_BaseLookup_WithholdCur</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Qcur" name="Qcur" fieldname="Qcur" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="QcurLookup">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60  label-right">
+							<label for="QunitPrice" class="control-label">@Resources.Locale.L_DNApproveManage_UnitPrice</label>
+						</div>
+						<div class="pure-u-sm-5-60">
+						    <input type="text" class="form-control input-sm" dt="mt" id="QunitPrice" name="QunitPrice" fieldname="QunitPrice" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="QchgUnit" name="QchgUnit" fieldname="QchgUnit" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="QchgUnitLookup">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Cur" class="control-label">@Resources.Locale.L_ActQuery_Cur</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Cur" name="Cur" fieldname="Cur" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="CurLookup">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60  label-right">
+							<label for="UnitPrice" class="control-label">@Resources.Locale.L_DNApproveManage_UnitPrice</label>
+						</div>
+						<div class="pure-u-sm-5-60">
+						    <input type="text" class="form-control input-sm" dt="mt" id="UnitPrice" name="UnitPrice" fieldname="UnitPrice" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="ChgUnit" name="ChgUnit" fieldname="ChgUnit" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="ChgUnitLookup">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+                    </div>
+                    <div class="pure-g">
+                		<div class="pure-u-sm-5-60">
+                	        <label for="Qqty" class="control-label">@Resources.Locale.L_BaseLookup_Qty</label>
+                	    </div>
+                	    <div class="pure-u-sm-10-60 control-group">
+            	            <input type="text" class="form-control input-sm" dt="mt" id="Qqty" name="Qqty" fieldname="Qqty" />
+                	        <p class="help-block tooltips"></p>
+                	    </div>
+	    	    		<div class="pure-u-sm-5-60 label-right">
+	    	    	        <label for="Qamt" class="control-label">@Resources.Locale.L_DNDetailVeiw_Value</label>
+	    	    	    </div>
+	    	    	    <div class="pure-u-sm-10-60 control-group">
+	    		            <input type="text" class="form-control input-sm" dt="mt" id="Qamt" name="Qamt" fieldname="Qamt" />
+	    	    	        <p class="help-block tooltips"></p>
+	    	    	    </div>
+                		<div class="pure-u-sm-5-60 label-right">
+                	        <label for="Qty" class="control-label">@Resources.Locale.L_BaseLookup_Qty</label>
+                	    </div>
+                	    <div class="pure-u-sm-10-60 control-group">
+            	            <input type="text" class="form-control input-sm" dt="mt" id="Qty" name="Qty" fieldname="Qty" />
+                	        <p class="help-block tooltips"></p>
+                	    </div>
+	    	    		<div class="pure-u-sm-5-60 label-right">
+	    	    	        <label for="Bamt" class="control-label">@Resources.Locale.L_DNDetailVeiw_Value</label>
+	    	    	    </div>
+	    	    	    <div class="pure-u-sm-10-60 control-group">
+	    		            <input type="text" class="form-control input-sm" dt="mt" id="Bamt" name="Bamt" fieldname="Bamt" />
+	    	    	        <p class="help-block tooltips"></p>
+	    	    	    </div>
+                    </div>
+                    <div class="pure-g">
+                		<div class="pure-u-sm-5-60">
+                	        <label for="QexRate" class="control-label">@Resources.Locale.L_ActSetup_ExRate</label>
+                	    </div>
+                	    <div class="pure-u-sm-10-60 control-group">
+            	            <input type="text" class="form-control input-sm" dt="mt" id="QexRate" name="QexRate" fieldname="QexRate" />
+                	        <p class="help-block tooltips"></p>
+                	    </div>
+	    	    		<div class="pure-u-sm-5-60 label-right">
+	    	    	        <label for="Qlamt" class="control-label">@Resources.Locale.L_ActManage_Lamt</label>
+	    	    	    </div>
+	    	    	    <div class="pure-u-sm-10-60 control-group">
+	    		            <input type="text" class="form-control input-sm" dt="mt" id="Qlamt" name="Qlamt" fieldname="Qlamt" />
+	    	    	        <p class="help-block tooltips"></p>
+	    	    	    </div>
+                		<div class="pure-u-sm-5-60 label-right">
+                	        <label for="ExRate" class="control-label">@Resources.Locale.L_ActSetup_ExRate</label>
+                	    </div>
+                	    <div class="pure-u-sm-10-60 control-group">
+            	            <input type="text" class="form-control input-sm" dt="mt" id="ExRate" name="ExRate" fieldname="ExRate" />
+                	        <p class="help-block tooltips"></p>
+                	    </div>
+	    	    		<div class="pure-u-sm-5-60 label-right">
+	    	    	        <label for="Lamt" class="control-label">@Resources.Locale.L_ActManage_Lamt</label>
+	    	    	    </div>
+	    	    	    <div class="pure-u-sm-10-60 control-group">
+	    		            <input type="text" class="form-control input-sm" dt="mt" id="Lamt" name="Lamt" fieldname="Lamt" />
+	    	    	        <p class="help-block tooltips"></p>
+	    	    	    </div>
+                    </div>
+                    <div class="pure-g">
+                		<div class="pure-u-sm-5-60">
+                	        <label for="Qtax" class="control-label">@Resources.Locale.L_ActSetup_Tax</label>
+                	    </div>
+                	    <div class="pure-u-sm-10-60 control-group">
+            	            <input type="text" class="form-control input-sm" dt="mt" id="Qtax" name="Qtax" fieldname="Qtax" />
+                	        <p class="help-block tooltips"></p>
+                	    </div>
+	    	    		<div class="pure-u-sm-15-60 label-right">
+	    	    	        
+                	    </div>
+	    	    		<div class="pure-u-sm-5-60 label-right">
+	    	    	        <label for="Tax" class="control-label">@Resources.Locale.L_ActSetup_Tax</label>
+	    	    	    </div>
+	    	    	    <div class="pure-u-sm-10-60 control-group">
+	    		            <input type="text" class="form-control input-sm" dt="mt" id="Tax" name="Tax" fieldname="Tax" />
+	    	    	        <p class="help-block tooltips"></p>
+	    	    	    </div>
+                    </div>
+                    <div class="pure-g">
+                		<div class="pure-u-sm-5-60">
+                	        <label for="CheckDescp" class="control-label">@Resources.Locale.L_ActManage_AuditReason</label>
+                	    </div>
+                	    <div class="pure-u-sm-25-60 control-group">
+                	    	<textarea class="form-control" dt="mt" id="CheckDescp" name="CheckDescp" fieldname="CheckDescp" readonly="readonly" rows="5"></textarea>
+                	        <p class="help-block tooltips"></p>
+                	    </div>
+
+	    	    		<div class="pure-u-sm-5-60 label-right">
+	    	    	        <label for="Reamrk" class="control-label">@Resources.Locale.L_BSCSSetup_Remark</label>
+	    	    	    </div>
+	    	    	    <div class="pure-u-sm-25-60 control-group">
+	    		            <textarea class="form-control" dt="mt" id="Remark" name="Remark" fieldname="Remark" rows="5"></textarea>
+	    	    	        <p class="help-block tooltips"></p>
+	    	    	    </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="CostCenter" class="control-label">@Resources.Locale.L_SMCHGSetup_ChgLevel</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CostCenter" name="CostCenter" fieldname="CostCenter" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CostCenterLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CostTonm" name="CostTonm" fieldname="CostTonm" ref="CostCenter" readonly />
+                        </div>
+                    </div>
+                	
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" />

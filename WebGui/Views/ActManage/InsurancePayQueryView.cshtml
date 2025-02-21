@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "InsurancePayQueryView";
+}
+
+<script type="text/javascript">
+$(document).ready(function ($) {
+
+    //init Search
+    var gop = {};
+    var numberTemplate = "2";
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 250;
+    gop.AddUrl = { "url": rootPath + "ActManage/InsurancePaySetupView", "title": "@Resources.Locale.L_InsurancePayQueryView_Views_200", "id": "InsurancePaySetupView" };
+    gop.gridId = "containerInfoGrid";
+    gop.gridAttr = { caption: "@Resources.Locale.L_InsurancePayQueryView_Views_201", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    gop.gridSearchUrl = rootPath + "ActManage/SMIPMQueryData";
+
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        dblClick(map);
+    }
+
+    gop.baseConditionFunc = function () {
+        return getCreateDateParams("CreateDate", gop);
+    }
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    gop.StatusAreaId = "StatusArea";
+    gop.BtnGroupId = "BtnGroupArea";
+
+    gop.statusGroup = [
+        { "id": "", "label": "ALL" },
+        { "id": "N", "label": "@Resources.Locale.L_InsuranceManage_StatusN" },
+        { "id": "Y", "label": "@Resources.Locale.L_InsuranceManage_StatusY" },
+        { "id": "C", "label": "@Resources.Locale.L_InsuranceManage_StatusC" },
+        { "id": "A", "label": "@Resources.Locale.L_InsuranceManage_StatusA" },
+        { "id": "F", "label": "@Resources.Locale.L_InsuranceManage_StatusF" },
+        { "id": "I", "label": "@Resources.Locale.L_InsuranceManage_StatusI" }
+    ];
+
+    gop.statusField = "Status";
+    gop.statusDefaultId = "N";
+    
+    gop.loadCompleteFunc = function () {
+        var $grid = $("#containerInfoGrid");
+        if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+            $grid[0].p.sortname = "UId";
+    }
+
+    var colModelSetting = [
+        {name: 'Status', formatter: "select", editoptions: { value: 'N:@Resources.Locale.L_InsuranceManage_StatusN;Y:@Resources.Locale.L_InsuranceManage_StatusY;C:@Resources.Locale.L_InsuranceManage_StatusC;A:@Resources.Locale.L_InsuranceManage_StatusA;F:@Resources.Locale.L_InsuranceManage_StatusF;I:@Resources.Locale.L_InsuranceManage_StatusI' }}
+    ];
+
+    genColModel("SMIPM", "U_ID", "L_SMIPM", colModelSetting).done(function (result) {
+        gop.gridColModel = result;
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        initSearch(gop);
+    });
+
+
+    function dblClick(map) {
+        var UId = map.UId;
+        top.topManager.openPage({
+            href: rootPath + "ActManage/InsurancePaySetupView/" + UId,
+            title: '@Resources.Locale.L_InsurancePayQueryView_Views_200',
+            id: 'InsurancePaySetupView',
+            reload: true
+        });
+    }
+
+});
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

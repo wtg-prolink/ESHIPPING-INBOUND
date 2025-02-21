@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{27011075-17F9-4BB6-96EE-FE8A7403911F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Business.TPV</RootNamespace>
+    <AssemblyName>Business.TPV</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EDOCApi, Version=1.0.5959.17343, Culture=neutral, PublicKeyToken=8b78c2a6703cbc33, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\EDOCApi.dll</HintPath>
+    </Reference>
+    <Reference Include="edtFTPnetPRO">
+      <HintPath>..\lib\edtFTPnetPRO.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Prolink.Tool_2008">
+      <HintPath>..\lib\V3Kernel\Prolink.Tool_2008.dll</HintPath>
+    </Reference>
+    <Reference Include="Prolink.V6.Core_2008">
+      <HintPath>..\lib\V3Kernel\Prolink.V6.Core_2008.dll</HintPath>
+    </Reference>
+    <Reference Include="rscp4n">
+      <HintPath>..\lib\RFC\rscp4n.dll</HintPath>
+    </Reference>
+    <Reference Include="sapnco">
+      <HintPath>..\lib\RFC\sapnco.dll</HintPath>
+    </Reference>
+    <Reference Include="sapnco_utils">
+      <HintPath>..\lib\RFC\sapnco_utils.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\EDIManager.cs" />
+    <Compile Include="BillManager.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="Cosco\Manager.cs" />
+    <Compile Include="CPL\BillingInfo.cs" />
+    <Compile Include="CPL\Manager.cs" />
+    <Compile Include="CPL\Template.cs" />
+    <Compile Include="DHL\BookPickupTemplate.cs" />
+    <Compile Include="DHL\Manager.cs" />
+    <Compile Include="DHL\ShipmentTemplate.cs" />
+    <Compile Include="DHL\Template.cs" />
+    <Compile Include="DHL\TraceImport.cs" />
+    <Compile Include="DHL\TrackingTemplate.cs" />
+    <Compile Include="Export\ASNDateManager.cs" />
+    <Compile Include="Export\CargoManager.cs" />
+    <Compile Include="Export\FSSPExportManager.cs" />
+    <Compile Include="Export\ICAInfoManager.cs" />
+    <Compile Include="Export\PackingManager.cs" />
+    <Compile Include="Export\ShipmentManager.cs" />
+    <Compile Include="Export\WHManager.cs" />
+    <Compile Include="Financial\Bill.cs" />
+    <Compile Include="Financial\CalCualteFeeHandle.cs" />
+    <Compile Include="Financial\CalculateFee.cs" />
+    <Compile Include="Financial\Helper.cs" />
+    <Compile Include="Financial\InboundBill.cs" />
+    <Compile Include="Financial\InboundConfirmHelper.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Import\AirTraceManager.cs" />
+    <Compile Include="Import\ASNManager.cs" />
+    <Compile Include="Import\BaseCodeManager.cs" />
+    <Compile Include="Import\BillingManager.cs" />
+    <Compile Include="Import\CompanyManager.cs" />
+    <Compile Include="Import\DeliveryPostingManager.cs" />
+    <Compile Include="Import\DNManager.cs" />
+    <Compile Include="Import\ExchangeRateManager.cs" />
+    <Compile Include="Export\FeeManager.cs" />
+    <Compile Include="Import\FtpImportForLineText.cs" />
+    <Compile Include="Import\ImportManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Import\OceanTraceManager.cs" />
+    <Compile Include="Import\PackingReceiveManager.cs" />
+    <Compile Include="Import\PartnerManager.cs" />
+    <Compile Include="Import\PlantManager.cs" />
+    <Compile Include="Import\ProfileManager.cs" />
+    <Compile Include="Import\TestEDI.cs" />
+    <Compile Include="Import\TraceManager.cs" />
+    <Compile Include="Import\TraceManagerBase.cs" />
+    <Compile Include="Import\UnloadingPortManager.cs" />
+    <Compile Include="LSP\Manager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrganizationService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RFC\ASNDateEDI.cs" />
+    <Compile Include="RFC\AsusEDI.cs" />
+    <Compile Include="RFC\BaseCodeEDI.cs" />
+    <Compile Include="RFC\CargoEDI.cs" />
+    <Compile Include="RFC\CompanyEDI.cs" />
+    <Compile Include="RFC\CustomerProfileEDI.cs" />
+    <Compile Include="RFC\DeliveryPostingEDI.cs" />
+    <Compile Include="RFC\DestinationConfiguration.cs" />
+    <Compile Include="RFC\DNEDI.cs" />
+    <Compile Include="RFC\EDIBase.cs" />
+    <Compile Include="RFC\ExchangeRateEDI.cs" />
+    <Compile Include="RFC\FeeEDI.cs" />
+    <Compile Include="RFC\ICAInfoEDI.cs" />
+    <Compile Include="RFC\Manager.cs" />
+    <Compile Include="RFC\PackingEDI.cs" />
+    <Compile Include="RFC\PackingReceiveEDI.cs" />
+    <Compile Include="RFC\PartnerEDI.cs" />
+    <Compile Include="RFC\PlantEDI.cs" />
+    <Compile Include="RFC\UnloadingPortEDI.cs" />
+    <Compile Include="Service\BaseWebService.asmx.cs">
+      <DependentUpon>BaseWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SFIS\FTPUploader.cs" />
+    <Compile Include="SFIS\ImportBase.cs" />
+    <Compile Include="SFIS\Manager.cs" />
+    <Compile Include="SFIS\ProductionLineInfoImport.cs" />
+    <Compile Include="SFIS\SendDNStatus.cs" />
+    <Compile Include="SFIS\SendOrderNoTask.cs" />
+    <Compile Include="SFIS\SerialNumberInfoImport.cs" />
+    <Compile Include="SFIS\SerialNumberToDB.cs" />
+    <Compile Include="SI\DataGetter.cs" />
+    <Compile Include="SI\ApplyBase.cs" />
+    <Compile Include="Standard\AirBookingManager.cs" />
+    <Compile Include="Standard\AirBookingResponse.cs" />
+    <Compile Include="Standard\BillingInfo.cs" />
+    <Compile Include="Standard\BillingManager.cs" />
+    <Compile Include="Standard\Booking.cs" />
+    <Compile Include="Standard\BookingManager.cs" />
+    <Compile Include="Standard\ExpressBookingManager.cs" />
+    <Compile Include="Standard\OceanBooking.cs" />
+    <Compile Include="Standard\OceanDeclaration.cs" />
+    <Compile Include="Standard\ShippingBookingManager.cs" />
+    <Compile Include="Standard\BookingResponse.cs" />
+    <Compile Include="Standard\DeclarationInfo.cs" />
+    <Compile Include="Standard\DeclarationManager.cs" />
+    <Compile Include="Standard\ExpressBooking.cs" />
+    <Compile Include="Standard\ExpressBookingResponse.cs" />
+    <Compile Include="Standard\ImprotManager.cs" />
+    <Compile Include="Standard\OceanBookingManager.cs" />
+    <Compile Include="Standard\ResponseInfoBase.cs" />
+    <Compile Include="Standard\Manager.cs" />
+    <Compile Include="Standard\OceanBookingResponse.cs" />
+    <Compile Include="Standard\ShippingBookingResponse.cs" />
+    <Compile Include="Standard\TruckerInfo.cs" />
+    <Compile Include="Standard\TruckerManager.cs" />
+    <Compile Include="Standard\WareHouseInfo.cs" />
+    <Compile Include="TimeZoneHelper.cs" />
+    <Compile Include="TNT\Manager.cs" />
+    <Compile Include="Utils\AutoNOManager.cs" />
+    <Compile Include="Utils\DownLoadFile.cs" />
+    <Compile Include="Utils\EDocHelper.cs" />
+    <Compile Include="Utils\Logger.cs" />
+    <Compile Include="Utils\SecurityUtils.cs" />
+    <Compile Include="Web References\Cosco\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\LspWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\OrganizationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\TNT\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WebApiEdiHandle.cs" />
+    <Compile Include="Web\SendToFSSPManager.cs" />
+    <Compile Include="WebRequstBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Business\Business.csproj">
+      <Project>{4f805b7b-ae69-4f26-9fac-936edd6ce260}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Models.csproj">
+      <Project>{a21c5e99-5f3c-4adb-a51c-d41bf76daffd}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrackingEDI\TrackingEDI.csproj">
+      <Project>{4c0bb241-a99a-4f01-b0f7-bfab4cf05c03}</Project>
+      <Name>TrackingEDI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://211.147.67.167:8099/TNT_TPV_WS/services/TPVServer%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\TNT\</RelPath>
+      <UpdateFromURL>http://211.147.67.167:8099/TNT_TPV_WS/services/TPVServer%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Business_TPV_TNT_TPVServerService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://a.penavicoxm.com/LogisticWebServices/TpvService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\LspWS\</RelPath>
+      <UpdateFromURL>http://a.penavicoxm.com/LogisticWebServices/TpvService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Business_TPV_LspWS_TPVService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://ebpp.coscon.com/NewEBWeb/services/BookingService%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Cosco\</RelPath>
+      <UpdateFromURL>http://ebpp.coscon.com/NewEBWeb/services/BookingService%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Business_TPV_Cosco_BookingService__EnhancerByCGLIB__3a982778Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://ws.tpvaoc.com/orgws/service.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\OrganizationService\</RelPath>
+      <UpdateFromURL>http://ws.tpvaoc.com/orgws/service.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Business_TPV_OrganizationService_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Cosco\BookingResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Cosco\BookingService.wsdl" />
+    <None Include="Web References\Cosco\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\LspWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\LspWS\ResultInfo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\LspWS\TpvService.wsdl" />
+    <None Include="Web References\OrganizationService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\OrganizationService\service.wsdl" />
+    <None Include="Web References\TNT\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\TNT\TPVServer.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\OrganizationService\service.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\LspWS\TpvService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Service\BaseWebService.asmx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "ActCheck";
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 330;
+        gop.gridColModel = [
+            { name: 'UId', title: 'UId', index:'UId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'ApproveStatus', title: '@Resources.Locale.L_ActManage_ApproveStatus', index: 'ApproveStatus', width: 80, align: 'left', sorttype: 'string', hidden: true},
+            { name: 'Status', title: '@Resources.Locale.L_ActCheck_Views_0', index: 'Status', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:@Resources.Locale.L_ActCheck_Views_1;B:@Resources.Locale.L_ActCheck_Views_2;G:@Resources.Locale.L_ActCheck_Views_3;C:@Resources.Locale.L_ActCheck_Views_4;D:@Resources.Locale.L_ActCheck_Views_5;E:@Resources.Locale.L_ActCheck_Views_6;F:@Resources.Locale.L_ActCheck_Views_7;V:@Resources.Locale.L_ActCheck_Views_8' } },
+            { name: 'StatementNo', title: '@Resources.Locale.L_ActQuery_StatementNo', index: 'StatementNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DebitNo', title: '@Resources.Locale.L_ActQuery_DebitNo', index: 'DebitNo', width: 120, align: 'left', sorttype: 'string', hidden: false },          
+            { name: 'PayDate', title: '@Resources.Locale.L_ActQuery_PayDate', index: 'PayDate', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ShipmentId', title: '@Resources.Locale.L_DNApproveManage_ShipmentId', index: 'ShipmentId', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CombineInfo', title: '@Resources.Locale.L_DNApproveManage_CombineInfo', index: 'CombineInfo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspNo', title: '@Resources.Locale.L_DRule_LspNo', index: 'LspNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'LspNm', title: '@Resources.Locale.L_DRule_LspNm', index: 'LspNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            //{ name: 'Cmp', title: '@Resources.Locale.L_RoleSetUp_CMP', index: 'Cmp', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BillTo', title: '@Resources.Locale.L_ActCheck_Views_9', index: 'BillTo', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Pol', title: '@Resources.Locale.L_AirQuery_PolCd', index: 'Pol', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PolNm', title: '@Resources.Locale.L_AirQuery_PolNm', index: 'PolNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Pod', title: '@Resources.Locale.L_AirQuery_PodCd', index: 'Pod', width: 80, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PodNm', title: '@Resources.Locale.L_DNApproveManage_PodNm', index: 'PodNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', width: 60, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Qamt', title: '@Resources.Locale.L_ActCheck_Views_10', index: 'Qamt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+            { name: 'Amt', title: '@Resources.Locale.L_ActCheck_Views_11', index: 'Amt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+            { name: 'SubAmt', title: '@Resources.Locale.L_ActCheck_Views_12', index: 'SubAmt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false },
+            { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 200, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BlNo', title: '@Resources.Locale.L_ActCheck_Views_13', index: 'BlNo', width: 120, align: 'left', sorttype: 'string', hidden: true },          
+            { name: 'VatNo', title: '@Resources.Locale.L_ActCheck_Views_14', index: 'VatNo', width: 120, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'Qty', title: '@Resources.Locale.L_ActCheck_Views_15', index: 'Qty', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, hidden: true },
+            { name: 'Qtyu', title: '@Resources.Locale.L_ActCheck_Views_16', index: 'Qtyu', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'Gw', title: '@Resources.Locale.L_ActCheck_Views_17', index: 'Gw', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 3, defaultValue: '0.000' }, hidden: true },
+            { name: 'Cw', title: '@Resources.Locale.L_ActCheck_Views_18', index: 'Cw', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 3, defaultValue: '0.000' }, hidden: true },
+            { name: 'Cbm', title: 'CBM', index: 'Cbm', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.000' }, hidden: true },
+            { name: 'ExRate', title: '@Resources.Locale.L_ActCheck_Views_19', index: 'ExRate', width: 80, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, hidden: true },
+            { name: 'Lamt', title: '@Resources.Locale.L_ActCheck_Views_20', index: 'Lamt', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: true },
+            { name: 'CheckDescp', title: '@Resources.Locale.L_ActCheck_Views_21', index: 'CheckDescp', width: 200, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'CreateBy', title: '@Resources.Locale.L_DNApproveManage_CreateBy', index: 'CreateBy', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'CreateDate', title: '@Resources.Locale.L_DNApproveManage_CreateDate', index: 'CreateDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'ApplyDate', title: '@Resources.Locale.L_ActCheck_Views_22', index: 'ApplyDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'VerifyBy', title: '@Resources.Locale.L_ActCheck_Views_23', index: 'VerifyBy', width: 80, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'VerifyDate', title: '@Resources.Locale.L_ActCheck_Views_24', index: 'VerifyDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true },
+            { name: 'PrintDate', title: '@Resources.Locale.L_ActCheck_Views_25', index: 'PrintDate', formatter: 'date', formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: true } 
+        ];
+        gop.AddUrl = { "url": rootPath + "ActManage/ActCheckSetup", "title": "@Resources.Locale.L_ActCheck_Views_26", "id": "ActCheckSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_ActCheck_Views_27", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "ActManage/GetActQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.loadCompleteFunc = function () {
+            var $grid = $("#containerInfoGrid");
+            if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+                $grid[0].p.sortname = "CreateDate";
+        }
+
+
+        gop.statusField = "Status";
+        initSearch(gop);
+
+        
+        function dblClick(map) {
+            var UId = map.UId;
+            top.topManager.openPage({
+                href: rootPath + "ActManage/ActCheckSetup/" + UId,
+                title: '@Resources.Locale.L_ActCheck_Views_26',
+                id: 'ActCheckSetup',
+                search: 'uid=' + UId,
+                reload: true
+            });
+        }
+    });
+
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

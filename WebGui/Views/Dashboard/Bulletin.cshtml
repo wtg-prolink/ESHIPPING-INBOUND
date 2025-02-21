@@ -1,0 +1,277 @@
+﻿@{
+    ViewBag.Title = "Bulletin";
+}
+        <style>
+            body{background-color: #eaeaea;}
+            table {background-color: #fff; margin-top:10px;}
+
+            .zoom {
+                float: right;
+                font-size: 17px;
+                font-weight: bold;
+                line-height: 1;
+                color: #000;
+                text-shadow: 0 1px 0 #fff;
+                filter: alpha(opacity=20);
+                opacity: .2;
+            }
+            .zoom-dialog {
+                width: 98vw;
+                height: 98vh;
+            }
+        </style>
+        <script type="text/javascript">
+            var _uType = "@ViewBag.UType";
+            var _IOFlag = "@ViewBag.IOFlag";
+            var BullenData = null;
+            $(document).ready(function ($) {
+                BullenDetail();
+
+                ajustamodal("#myModal");
+                $('#myModal').on('show.bs.modal', function (e) {
+                    targetElem = $(e.relatedTarget);
+                    //var title = event.target.attr('title1');
+                    //var content = event.target.attr('content');
+                    var data = BullenData[targetElem.attr("dt")][targetElem.attr("num")];
+                    $('#myModal .modal-title').html(data["BullTitle"]);
+                    $('#myModal .modal-body p').html(data["BullContent"]);
+                    //$('#myModal .modal-body').html($(event.target.attr('content-id')).html());
+
+                });
+                $("#show1").find("tbody").find("tr").each(function () {
+                    if ($(this).children('td:eq(1)').text() == "满足的条件") {
+                        $("#" + this.id).css("color", "#ff0000");
+                    } else {
+                        $("#" + this.id).css("color", "#696969");
+                    }
+                    //第二列单元格的值eq(索引) 　　alert($(this).children('td:eq(1)').text());
+                });
+            });
+            function MoreDetail(type) {
+                top.topManager.openPage({
+                    href: rootPath + "Dashboard/MoreBulletin?type=" + type,
+                    title: getTitle(type),
+                    id: 'MoreBulletin' + type
+                });
+            }
+                function getTitle(type)
+            {
+                var title = '@Resources.Locale.More_B_title' + type;
+                var lang = getCookie("plv3.passport.lang");
+                    if ("en-US" == lang || "ru-RU" == lang) {
+                    return title;
+                }
+                switch (type) {
+                    case 1: title= '@Resources.Locale.L_Bulletin_Group'; break;
+                    case 2: title ='@Resources.Locale.L_Bulletin_Factory'; break;
+                    case 3: title ='@Resources.Locale.L_Bulletin_Dep'; break;
+                    case 4: title = '@Resources.Locale.L_Bulletin_LSP'; break;
+                    case 5: title = '@Resources.Locale.L_Bulletin_Vendor'; break;
+                    default: title ='@Resources.Locale.More_B_title' + type; break;
+                }
+                return title;
+            }
+
+            function BullenDetail() {
+                $.ajax({
+                    type: "post",
+                    url: rootPath + "Dashboard/getBulletinDetail",
+                    //contentType: "application/json; charset=utf-8",
+                    data: {},
+                    dataType: "json",
+                    success: function (data) {
+                        BullenData = data;
+                        var bullenData = data["BulleData"];
+                        var bullen1Data = data["Bulle1Data"];
+                        var bullen2Data = data["Bulle2Data"];
+                        var bullen3Data = data["Bulle3Data"];
+                        var bullen4Data = data["Bulle4Data"];
+                        BulleDatahtml(bullenData, "BulleData");
+                        //1.外部用户隐藏厂别，部门公告。 2.外部用户的用户别：L.外部物流业者，V.外部供应商 显示对应的公告。
+                        if ("O" == _IOFlag) {
+                            $("#Factory").hide();
+                            $("#Dep").hide();
+                        } else {
+                            BulleDatahtml(bullen1Data, "Bulle1Data");
+                            BulleDatahtml(bullen2Data, "Bulle2Data");
+                        }
+                        if ("L" == _uType) {
+                            $("#Vendor").hide();
+                            BulleDatahtml(bullen3Data, "Bulle3Data");
+                        } else if ("V" == _uType) {
+                            $("#LSP").hide();
+                            BulleDatahtml(bullen4Data, "Bulle4Data");
+                        } else {
+                            BulleDatahtml(bullen3Data, "Bulle3Data");
+                            BulleDatahtml(bullen4Data, "Bulle4Data");
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+
+            function BulleDatahtml(bullenData, Type) {
+                var str = "";
+                for (var i = 0; i < bullenData.length; i++) {
+                    var col = bullenData[i];
+                    str += '<tr>';
+                    if (bullenData[i]["Isnew"] == "NEW") {
+                        str += '<td>' + (i + 1) + ' <img src="@Url.Content("~/Images/IsNew.gif")" /></td>';
+                    } else {
+                        str += "<td>" + (i + 1) + "</td>";
+                    }
+                    str += '<td><a href="#myModal" data-toggle="modal" data-target="#myModal" num=' + i + ' dt=' + Type + '>' + bullenData[i]["BullTitle"] + '</a>';
+                    if (bullenData[i]["AttachFlag"] == "Y") {
+                        str += '<a href="#" id=' + bullenData[i]["UId"] + ' onclick="Attach(this)" style="float:right;"><img src="/Images/file-attachment.png"></a>';
+                    }
+                    str += '</td>';
+                    str += '<td style="word-break:break-all">' + bullenData[i]["BullDate"] + '</td>';
+                    str += '<td style="word-break:break-all">' + bullenData[i]["Cmp"] + '</td>';
+                    str += '<td style="word-break:break-all">' + bullenData[i]["Dep"] + '</td>';
+                    str += '<td style="word-break:break-all">' + bullenData[i]["CreateBy"] + '</td>';
+                    str += '</tr>';
+                }
+                $('#' + Type).html(str);
+            }
+
+            function zoom() {
+                if ($(".modal-dialog").hasClass("zoom-dialog")) {
+                    $(".modal-dialog").removeClass("zoom-dialog")
+                } else {
+                    $(".modal-dialog").addClass("zoom-dialog");
+                }
+            }
+
+            function Attach(element) {
+                var uid = element.id;
+                initAttach($("#" + uid), { jobNo: uid, 'GROUP_ID': "TPV", 'CMP': "FQ", 'STN': '*', atd: "", "FileDel": false }, null, null, false);
+            }
+
+        </script>
+        <script src="@Url.Content("~/Scripts/Core/initAttach.js?20220615")" type="text/javascript"></script>
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="zoom" style="border:none;float:right;" onclick="zoom()"><span aria-hidden="true">口</span></button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body" style="overflow: scroll;">
+                        <p>&hellip;</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <td colspan="6" class="info">@Resources.Locale.L_Bulletin_Views_228<span style="float:right;"><a href="javascript:MoreDetail(1)">More...</a></span></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 6%">#</th>
+                                    <th>Title</th>
+                                    <th style="width: 16%">Publish Date</th>
+                                    <th style="width: 10%">Location</th>
+                                    <th style="width: 10%">Department</th>
+                                    <th style="width: 10%">Publisher</th>
+                                </tr>
+                            </thead>
+                            <tbody id="BulleData"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" id="Factory">
+                    <div class="col-md-12">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <td colspan="6" class="info">@Resources.Locale.L_Bulletin_Factory<span style="float:right;"><a href="javascript:MoreDetail(2)">More...</a></span></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 6%">#</th>
+                                    <th>Title</th>
+                                    <th style="width: 16%">Publish Date</th>
+                                    <th style="width: 10%">Location</th>
+                                    <th style="width: 10%">Department</th>
+                                    <th style="width: 10%">Publisher</th>
+                                </tr>
+                            </thead>
+                            <tbody id="Bulle1Data"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" id="Dep">
+                    <div class="col-md-12">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <td colspan="6" class="info">@Resources.Locale.L_Bulletin_Dep<span style="float:right;"><a href="javascript:MoreDetail(3)">More...</a></span></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 6%">#</th>
+                                    <th>Title</th>
+                                    <th style="width: 16%">Publish Date</th>
+                                    <th style="width: 10%">Location</th>
+                                    <th style="width: 10%">Department</th>
+                                    <th style="width: 10%">Publisher</th>
+                                </tr>
+                            </thead>
+                            <tbody id="Bulle2Data">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" id="LSP">
+                    <div class="col-md-12">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <td colspan="6" class="info">@Resources.Locale.L_Bulletin_LSP<span style="float:right;"><a href="javascript:MoreDetail(4)">More...</a></span></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 6%">#</th>
+                                    <th>Title</th>
+                                    <th style="width: 16%">Publish Date</th>
+                                    <th style="width: 10%">Location</th>
+                                    <th style="width: 10%">Department</th>
+                                    <th style="width: 10%">Publisher</th>
+                                </tr>
+                            </thead>
+                            <tbody id="Bulle3Data">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" id="Vendor">
+                    <div class="col-md-12">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <td colspan="6" class="info">@Resources.Locale.L_Bulletin_Vendor<span style="float:right;"><a href="javascript:MoreDetail(5)">More...</a></span></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 6%">#</th>
+                                    <th>Title</th>
+                                    <th style="width: 16%">Publish Date</th>
+                                    <th style="width: 10%">Location</th>
+                                    <th style="width: 10%">Department</th>
+                                    <th style="width: 10%">Publisher</th>
+                                </tr>
+                            </thead>
+                            <tbody id="Bulle4Data">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>

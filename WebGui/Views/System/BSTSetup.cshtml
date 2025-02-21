@@ -1,0 +1,841 @@
+﻿@{
+    ViewBag.Title = "BSTSetup";
+}
+<script type="text/javascript">
+	var _uid = "@ViewBag.Uid";
+	var mtSchemas = "@ViewBag.mtSchemas.Content";
+</script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+        	<div class="panel panel-default">
+        		<div class="panel-body">
+        			<div class="pure-g" style="margin-top:10px;">
+	        			<div class="pure-u-sm-5-60">
+   							<label for="CustCd" class="control-label required">@Resources.Locale.L_BSTSetup_Customer</label>
+						</div>
+						<div class="pure-u-sm-8-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="CustCd" name="CustCd" fieldname="CustCd" required/>
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="CustCdLookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-17-60">
+						    <input type="text" class="form-control input-sm" dt="mt" id="CustNm" name="CustNm" fieldname="CustNm" readonly />
+						</div>
+
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Buyer1" class="control-label">@Resources.Locale.L_BSTQuery_Buyer 1</label>
+						</div>
+						<div class="pure-u-sm-7-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="Buyer1" name="Buyer1" fieldname="Buyer1" />
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="Buyer1Lookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-12-60">
+						    <input type="text" class="form-control input-sm" dt="mt" id="Buyer1Nm" name="Buyer1Nm" fieldname="Buyer1Nm" readonly />
+						</div>						
+						<div class="pure-u-sm-6-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="Incoterm1" name="Incoterm1" fieldname="Incoterm1" />
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="Incoterm1Lookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+        			</div>
+
+	        		<div class="pure-g">
+	        			<div class="pure-u-sm-5-60">
+							<label for="InvFlow" class="control-label required">@Resources.Locale.L_BSTQuery_InvFlow</label>
+						</div>
+						<div class="pure-u-sm-25-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="InvFlow" name="InvFlow" fieldname="InvFlow" required/>
+						    <p class="help-block tooltips"></p>
+						</div>
+
+	        			<div class="pure-u-sm-5-60 label-right">
+							<label for="Buyer2" class="control-label">@Resources.Locale.L_BSTQuery_Buyer 2</label>
+						</div>
+						<div class="pure-u-sm-7-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="Buyer2" name="Buyer2" fieldname="Buyer2" />
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="Buyer2Lookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-12-60">
+						    <input type="text" class="form-control input-sm" dt="mt" id="Buyer2Nm" name="Buyer2Nm" fieldname="Buyer2Nm" readonly />
+						</div>
+						<div class="pure-u-sm-6-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="Incoterm2" name="Incoterm2" fieldname="Incoterm2" />
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="Incoterm2Lookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+	        		</div>
+
+	        		<div class="pure-g">
+	        			<div class="pure-u-sm-5-60">
+	   							<label for="Location" class="control-label required">@Resources.Locale.L_UserSetUp_Cmp</label>
+						</div>
+						<div class="pure-u-sm-8-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="Location" name="Location" fieldname="Location" required/>
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="LocationLookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-17-60">
+						    <input type="text" class="form-control input-sm" dt="mt" id="LocationNm" name="LocationNm" fieldname="LocationNm" readonly />
+						</div>
+
+
+	        			<div class="pure-u-sm-5-60 label-right">
+							<label for="Buyer3" class="control-label">@Resources.Locale.L_BSTQuery_Buyer 3</label>
+						</div>
+						<div class="pure-u-sm-7-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="Buyer3" name="Buyer3" fieldname="Buyer3" />
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="Buyer3Lookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-12-60">
+						    <input type="text" class="form-control input-sm" dt="mt" id="Buyer3Nm" name="Buyer3Nm" fieldname="Buyer3Nm" readonly />
+						</div>
+						<div class="pure-u-sm-6-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="Incoterm3" name="Incoterm3" fieldname="Incoterm3" />
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="Incoterm3Lookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+	        		</div>
+
+	        		<div class="pure-g">
+	        			<div class="pure-u-sm-5-60">
+	   							<label for="Seller" class="control-label">@Resources.Locale.L_BSTQuery_Seller</label>
+						</div>
+						<div class="pure-u-sm-8-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="Seller" name="Seller" fieldname="Seller" />
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="SellerLookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-17-60">
+						    <input type="text" class="form-control input-sm" dt="mt" id="SellerNm" name="SellerNm" fieldname="SellerNm" readonly />
+						</div>
+
+
+	        			<div class="pure-u-sm-5-60 label-right">
+							<label for="Buyer4" class="control-label">@Resources.Locale.L_BSTQuery_Buyer 4</label>
+						</div>
+						<div class="pure-u-sm-7-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="Buyer4" name="Buyer4" fieldname="Buyer4" />
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="Buyer4Lookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-12-60">
+						    <input type="text" class="form-control input-sm" dt="mt" id="Buyer4Nm" name="Buyer4Nm" fieldname="Buyer4Nm" readonly />
+						</div>
+						<div class="pure-u-sm-6-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="Incoterm4" name="Incoterm4" fieldname="Incoterm4" />
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="Incoterm4Lookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+	        		</div>
+
+	        		<div class="pure-g">
+	        			<div class="pure-u-sm-30-60"></div>
+
+	        			<div class="pure-u-sm-5-60 label-right">
+							<label for="Buyer5" class="control-label">@Resources.Locale.L_BSTQuery_Buyer 5</label>
+						</div>
+						<div class="pure-u-sm-7-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="Buyer5" name="Buyer5" fieldname="Buyer5" />
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="Buyer5Lookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-12-60">
+						    <input type="text" class="form-control input-sm" dt="mt" id="Buyer5Nm" name="Buyer5Nm" fieldname="Buyer5Nm" readonly />
+						</div>
+						<div class="pure-u-sm-6-60 control-group">
+						    <div class="input-group">
+						        <input type="text" class="form-control input-sm" dt="mt" id="Incoterm5" name="Incoterm5" fieldname="Incoterm5" />
+						        <span class="input-group-btn">
+						            <button class="btn btn-sm btn-default" type="button" id="Incoterm5Lookup">
+						                <span class="glyphicon glyphicon-search"></span>
+						            </button>
+						        </span>
+						    </div>
+						    <p class="help-block tooltips"></p>
+						</div>
+	        		</div>
+
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Remark" class="control-label">@Resources.Locale.L_BSCSSetup_Remark</label>
+						</div>
+						<div class="pure-u-sm-25-60 control-group">
+							<textarea class="form-control" dt="mt" id="Remark" name="Remark" fieldname="Remark" rows="5"></textarea>
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="ModelName" class="control-label">Model Name</label>
+						</div>
+						<div class="pure-u-sm-25-60 control-group">
+							<textarea class="form-control lastInput" dt="mt" id="ModelName" name="ModelName" fieldname="ModelName" rows="5"></textarea>
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+
+	        		<div class="pure-g">
+	        			<div class="pure-u-sm-60-60">
+	        				<ul class="list-inline">
+	        				    <li>
+	        				        <button type="button" class="btn btn-sm btn-stBtn" id="goToAdd">@Resources.Locale.L_SystemController_EntDetail</button>
+	        				    </li>
+	        				    <li>
+	        				        <button type="button" class="btn btn-sm btn-stBtn" id="reloadGrid">@Resources.Locale.L_SystemController_RlDetail</button>
+	        				    </li>	        				   
+	        				</ul>
+	        			</div>
+	        		</div>
+					<div class="pure-g">
+					    <div class="pure-u-sm-60-60">
+					        <table id="SubGrid" class="_tableGrid" style="width: 100%">
+					            <tr>
+					                
+					            </tr>
+					        </table>
+					    </div>
+					</div>
+        			<!-- <ul class="nav nav-tabs" role="tablist">
+        			    <li role="presentation" class="active"><a href="#SMSIM" aria-controls="SMSIM" role="tab" data-toggle="tab">客戶交易主檔</a></li>
+        			    <li role="presentation"><a href="#SMSID" aria-controls="SMSID" role="tab" data-toggle="tab">客戶交易明細檔</a></li>
+        			</ul> -->
+        			<!--<div class="tab-content">
+        				<div role="tabpanel" class="tab-pane active" id="SMSIM">
+		        			
+		        		</div>
+		        		 <div role="tabpanel" class="tab-pane" id="SMSID">
+		        			<form id="subFormData">
+		        					        			<div class="pure-g" style="margin-top:10px;">
+		        					        				<div class="pure-u-sm-60-60">
+		        					        					<ul class="list-inline">
+		        					        					    <li>
+		        					        					        <button type="button" class="btn btn-sm btn-stBtn menuBar" id="STAdd" disabled>新增</button>
+		        					        					    </li>
+		        					        					    <li>
+		        					        					        <button type="button" class="btn btn-sm btn-stBtn menuBar" id="STEdit" disabled>修改</button>
+		        					        					    </li>
+		        					        					    <li>
+		        					        					        <button type="button" class="btn btn-sm btn-stBtn menuBar" id="STCopy" disabled>复制</button>
+		        					        					    </li>
+		        					        					    <li>
+		        					        					        <button type="button" class="btn btn-sm btn-stBtn menuBar" id="STCancel" disabled>撤消</button>
+		        					        					    </li>
+		        					        					    <li>
+		        					        					        <button type="button" class="btn btn-sm btn-stBtn menuBar" id="STSave" disabled>保存</button>
+		        					        					    </li>
+		        					        					    <li>
+		        					        					        <button type="button" class="btn btn-sm btn-stBtn menuBar" id="STDel" disabled>删除</button>
+		        					        					    </li>		        				   
+		        					        					</ul>
+		        					        				</div>
+		        					        			</div>
+		        					        			<div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        					   							<label for="SeqNo" class="control-label">Seq.</label>
+		        											</div>
+		        											<div class="pure-u-sm-4-60 control-group">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="SeqNo" name="SeqNo" fieldname="SeqNo" readonly />
+		        											</div>
+		        					        			</div>
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        					   							<label for="Pol" class="control-label">@Resources.Locale.L_BSTSetup_Pol</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="Pol" name="Pol" fieldname="Pol" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="PolLookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="PolNm" name="PolNm" fieldname="PolNm" readonly />
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        					   							<label for="Pod" class="control-label">@Resources.Locale.L_BSTSetup_Pod</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="Pod" name="Pod" fieldname="Pod" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="PodLookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="PodNm" name="PodNm" fieldname="PodNm" readonly />
+		        											</div>
+		        					                    </div>
+		        		
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        					   							<label for="Dest" class="control-label">@Resources.Locale.L_BSTSetup_Dest</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="Dest" name="Dest" fieldname="Dest" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="DestLookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="DestNm" name="DestNm" fieldname="DestNm" readonly />
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        					   							<label for="FreightTerm" class="control-label">@Resources.Locale.L_BSTSetup_FreightTerm</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        												<select class="form-control input-sm" dt="st" id="FreightTerm" name="FreightTerm" fieldname="FreightTerm">
+		        													<option value="PP">PP</option>
+		        													<option value="CC">CC</option>
+		        													<option value="PC">PC</option>
+		        												</select>
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-5-60 label-right">
+		        					   							<label for="TranMode" class="control-label">@Resources.Locale.L_BSTSetup_TranMode</label>
+		        											</div>
+		        											<div class="pure-u-sm-10-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="TranMode" name="TranMode" fieldname="TranMode" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="TranModeLookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        					                    </div>
+		        		
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        					   							<label for="ShprCd" class="control-label">@Resources.Locale.L_BSTSetup_ShprCd</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="ShprCd" name="ShprCd" fieldname="ShprCd" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="ShprCdLookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="ShprNm" name="ShprNm" fieldname="ShprNm" readonly />
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        					                			<label for="BillType" class="control-label">@Resources.Locale.L_BSTSetup_BillType</label>
+		        					                		</div>
+		        					                		<div class="pure-u-sm-23-60 control-group">
+		        					                			<input type="text" class="form-control input-sm" dt="st" id="BillType" name="BillType" fieldname="BillType"/>
+		        					                		    <p class="help-block tooltips"></p>
+		        					                		</div>
+		        					                    </div>
+		        		
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        					   							<label for="CneeCd" class="control-label">@Resources.Locale.L_BSTSetup_CneeCd</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="CneeCd" name="CneeCd" fieldname="CneeCd" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="CneeCdLookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="CneeNm" name="CneeNm" fieldname="CneeNm" readonly />
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        					   							<label for="Combine" class="control-label">@Resources.Locale.L_BSTSetup_Combine</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <select class="form-control input-sm" dt="st" id="Combine" name="Combine" fieldname="Combine">
+		        											    	<option value="Y">Yes</option>
+		        											    	<option value="N">No</option>
+		        											    </select>
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        					   							<label for="Lc" class="control-label">@Resources.Locale.L_BSTSetup_Lc</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <select class="form-control input-sm" dt="st" id="Lc" name="Lc" fieldname="Lc">
+		        											    	<option value="Y">Yes</option>
+		        											    	<option value="N">No</option>
+		        											    </select>
+		        											</div>
+		        					                    </div>
+		        		
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        					   							<label for="Notify1" class="control-label">@Resources.Locale.L_BSTSetup_Notify 1</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="Notify1" name="Notify1" fieldname="Notify1" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="Notify1Lookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="Notify1Nm" name="Notify1Nm" fieldname="Notify1Nm" readonly />
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        					                			<label for="Commodity" class="control-label">@Resources.Locale.L_BSTSetup_Commodity</label>
+		        					                		</div>
+		        					                		<div class="pure-u-sm-23-60 control-group">
+		        					                			<input type="text" class="form-control input-sm" dt="st" id="Commodity" name="Commodity" fieldname="Commodity"/>
+		        					                		    <p class="help-block tooltips"></p>
+		        					                		</div>
+		        					                    </div> 
+		        		
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        					   							<label for="Notify2" class="control-label">@Resources.Locale.L_BSTSetup_Notify 2</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="Notify2" name="Notify2" fieldname="Notify2" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="Notify2Lookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="Notify2Nm" name="Notify2Nm" fieldname="Notify2Nm" readonly />
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        					   							<label for="DtCd" class="control-label">@Resources.Locale.L_BSTDataSetup_DtCd</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="DtCd" name="DtCd" fieldname="DtCd" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="DtCdLookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="DtNm" name="DtNm" fieldname="DtNm" readonly />
+		        											</div>
+		        					                    </div>
+		        		
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        					   							<label for="Notify3" class="control-label">@Resources.Locale.L_BSTSetup_Notify 3</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="Notify3" name="Notify3" fieldname="Notify3" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="Notify3Lookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="Notify3Nm" name="Notify3Nm" fieldname="Notify3Nm" readonly />
+		        											</div>
+		        		
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        					   							<label for="CcCd" class="control-label">@Resources.Locale.L_BSTDataSetup_CcCd</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="CcCd" name="CcCd" fieldname="CcCd" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="CcCdLookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="CcNm" name="CcNm" fieldname="CcNm" readonly />
+		        											</div>
+		        					                    </div>
+		        		
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60"></div>
+		        					                    	<div class="pure-u-sm-8-60 control-group"><strong>Code</strong></div>
+		        					                    	<div class="pure-u-sm-8-60"><strong>Name</strong></div>
+		        					                    	<div class="pure-u-sm-7-60"><strong>Remark</strong></div>
+		        					                    	<div class="pure-u-sm-7-60 label-right"></div>
+		        					                    	<div class="pure-u-sm-8-60 control-group"><strong>DOC Type</strong></div>
+		        					                    	<div class="pure-u-sm-15-60"><strong>Mail Group</strong></div>
+		        					                    </div>
+		        		
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        					   							<label for="Forwarder1" class="control-label">@Resources.Locale.L_BSTSetup_Forwarder 1</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="Forwarder1" name="Forwarder1" fieldname="Forwarder1" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="Forwarder1Lookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-8-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="Forwarder1Nm" name="Forwarder1Nm" fieldname="Forwarder1Nm" readonly />
+		        											</div>
+		        											<div class="pure-u-sm-7-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="FwdRmk1" name="FwdRmk1" fieldname="FwdRmk1" />
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        					   							<label for="DocReq1" class="control-label">@Resources.Locale.L_BSTSetup_DocReq 1</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="DocReq1" name="DocReq1" fieldname="DocReq1" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="DocReq1Lookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="MailGroup1" name="MailGroup1" fieldname="MailGroup1"  />
+		        											</div>
+		        					                    </div> 
+		        		
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        					   							<label for="Forwarder2" class="control-label">@Resources.Locale.L_BSTSetup_Forwarder 2</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="Forwarder2" name="Forwarder2" fieldname="Forwarder2" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="Forwarder2Lookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-8-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="Forwarder2Nm" name="Forwarder2Nm" fieldname="Forwarder2Nm" readonly />
+		        											</div>
+		        											<div class="pure-u-sm-7-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="FwdRmk2" name="FwdRmk2" fieldname="FwdRmk2" />
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        					   							<label for="DocReq2" class="control-label">@Resources.Locale.L_BSTSetup_DocReq 2</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="DocReq2" name="DocReq2" fieldname="DocReq2" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="DocReq2Lookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="MailGroup2" name="MailGroup2" fieldname="MailGroup2"  />
+		        											</div>
+		        					                    </div>
+		        		
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        					   							<label for="Forwarder3" class="control-label">@Resources.Locale.L_BSTSetup_Forwarder 3</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="Forwarder3" name="Forwarder3" fieldname="Forwarder3" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="Forwarder3Lookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-8-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="Forwarder3Nm" name="Forwarder3Nm" fieldname="Forwarder3Nm" readonly />
+		        											</div>
+		        											<div class="pure-u-sm-7-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="FwdRmk3" name="FwdRmk3" fieldname="FwdRmk3"  />
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        					   							<label for="DocReq3" class="control-label">@Resources.Locale.L_BSTSetup_DocReq 3</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="DocReq3" name="DocReq3" fieldname="DocReq3" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="DocReq3Lookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="MailGroup3" name="MailGroup3" fieldname="MailGroup3"  />
+		        											</div>
+		        					                    </div>
+		        		
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        					   							<label for="Forwarder4" class="control-label">@Resources.Locale.L_BSTSetup_Forwarder 4</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="Forwarder4" name="Forwarder4" fieldname="Forwarder4" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="Forwarder4Lookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-8-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="Forwarder4Nm" name="Forwarder4Nm" fieldname="Forwarder4Nm" readonly />
+		        											</div>
+		        											<div class="pure-u-sm-7-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="FwdRmk4" name="FwdRmk4" fieldname="FwdRmk4"  />
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        					   							<label for="DocReq4" class="control-label">@Resources.Locale.L_BSTSetup_DocReq 4</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="DocReq4" name="DocReq4" fieldname="DocReq4" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="DocReq4Lookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="MailGroup4" name="MailGroup4" fieldname="MailGroup4"  />
+		        											</div>
+		        					                    </div>
+		        					                    
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        					   							<label for="Forwarder5" class="control-label">@Resources.Locale.L_BSTSetup_Forwarder 5</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="Forwarder5" name="Forwarder5" fieldname="Forwarder5" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="Forwarder5Lookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-8-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="Forwarder5Nm" name="Forwarder5Nm" fieldname="Forwarder5Nm" readonly />
+		        											</div>
+		        											<div class="pure-u-sm-7-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="FwdRmk5" name="FwdRmk5" fieldname="FwdRmk5" />
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        					   							<label for="DocReq5" class="control-label">@Resources.Locale.L_BSTSetup_DocReq 5</label>
+		        											</div>
+		        											<div class="pure-u-sm-8-60 control-group">
+		        											    <div class="input-group">
+		        											        <input type="text" class="form-control input-sm" dt="st" id="DocReq5" name="DocReq5" fieldname="DocReq5" />
+		        											        <span class="input-group-btn">
+		        											            <button class="btn btn-sm btn-stBtn" type="button" id="DocReq5Lookup">
+		        											                <span class="glyphicon glyphicon-search"></span>
+		        											            </button>
+		        											        </span>
+		        											    </div>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        											<div class="pure-u-sm-15-60">
+		        											    <input type="text" class="form-control input-sm" dt="st" id="MailGroup5" name="MailGroup5" fieldname="MailGroup5"  />
+		        											</div>
+		        					                    </div>
+		        		
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        												<label for="ShippingMark" class="control-label">@Resources.Locale.L_BSTSetup_ShippingMark</label>
+		        											</div>
+		        											<div class="pure-u-sm-23-60 control-group">
+		        												<textarea class="form-control" dt="st" id="ShippingMark" name="ShippingMark" fieldname="ShippingMark"></textarea>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        												<label for="BlRequest" class="control-label">@Resources.Locale.L_BSTSetup_BlRequest</label>
+		        											</div>
+		        											<div class="pure-u-sm-23-60 control-group">
+		        												<textarea class="form-control" dt="st" id="BlRequest" name="BlRequest" fieldname="BlRequest"></textarea>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        					                    </div> 
+		        		
+		        					                    <div class="pure-g">
+		        					                    	<div class="pure-u-sm-7-60">
+		        												<label for="InvIns" class="control-label">@Resources.Locale.L_BSTSetup_InvIns</label>
+		        											</div>
+		        											<div class="pure-u-sm-23-60 control-group">
+		        												<textarea class="form-control" dt="st" id="InvIns" name="InvIns" fieldname="InvIns"></textarea>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        		
+		        											<div class="pure-u-sm-7-60 label-right">
+		        												<label for="PkgIns" class="control-label">@Resources.Locale.L_BSTSetup_PacIns</label>
+		        											</div>
+		        											<div class="pure-u-sm-23-60 control-group">
+		        												<textarea class="form-control" dt="st" id="PkgIns" name="PkgIns" fieldname="PkgIns"></textarea>
+		        											    <p class="help-block tooltips"></p>
+		        											</div>
+		        					                    </div>
+		        					                    <div class="pure-g">
+		        					                        <div class="pure-u-sm-60-60">
+		        					                            <table id="SubGrid" class="_tableGrid" style="width: 100%">
+		        					                                <tr>
+		        					                                    
+		        					                                </tr>
+		        					                            </table>
+		        					                        </div>
+		        					                    </div>
+		        					                    <input type="hidden" dt="st" fieldname="UId" name="UId"/>
+		        					                </form>
+		        		</div> 
+		        	</div>-->	
+        		</div>        	
+            </div>            
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" isKey="true" />
+@Html.RazorJSInline("~/Scripts/localData.js")
+@Html.RazorJSInline("~/Scripts/System/BSTSetup.js")

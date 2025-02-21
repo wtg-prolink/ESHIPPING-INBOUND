@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "ContainerManage";
+}
+
+
+@Html.RazorJSInline("~/Scripts/GateManage/ContainerManage.js")
+<!--Excel汇入视窗-->
+<div class="modal fade" id="uploadSmrvDailog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_BSTQuery_ImpExcel</h4>
+            </div>
+            <form name="EXCEL_UPLOAD_FROM" id="SMRV_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-7-60">
+                            <label for="StartRow" class="control-label">@Resources.Locale.L_BSTQuery_BeginRow</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="number" class="form-control input-sm" id="StartRow" name="StartRow" isNumber="true"  value="1"/>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="smrvUploadExcel" name="file"/>
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="uploadSmrvBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+			<div class="panel panel-default">
+                <div class="panel-body">
+                	<!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                	<div class="condition-layout">
+                	    <form class="pure-g" id="ConditionArea">
+
+                	    </form>
+                	    <div class="pure-g" id="SearchArea">
+
+                	    </div>
+                	</div>
+		  		</div>
+			</div>
+			<div class="panel panel-default">
+	            <div class="panel-body">
+	            	<div class="pure-g" id="BtnGroupArea">
+
+	            	</div>
+	            	<div class="pure-g" id="StatusArea">
+
+	            	</div>
+	            	<div class="form-group">
+			        	<div class="pure-g">
+			        		<div class="pure-u-sm-30-30">
+			                    <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+			                        <tr>
+			                            
+			                        </tr>
+			                    </table>
+			        		</div>
+			        	</div>
+
+		        		<div class="pure-g">
+		        			<div class="pure-u-sm-30-30">
+		        	            <table id="SubGrid" class="_tableGrid" style="width: 100%">
+		        	                <tr>
+		        	                    
+		        	                </tr>
+		        	            </table>
+		        			</div>
+		        		</div>
+	        		</div>
+	            </div>
+	        </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap.file-input.js")"></script>
+@Html.RazorJSInclude("~/Scripts/DnManage/BaseBooking.js")

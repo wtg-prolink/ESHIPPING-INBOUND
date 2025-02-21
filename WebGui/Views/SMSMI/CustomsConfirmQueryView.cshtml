@@ -1,0 +1,676 @@
+﻿@{
+    ViewBag.Title = "CustomsConfirmQueryView";
+}
+<style>
+	.danger{background:#d9534f !important;}
+	.normal{background:#fff !important;}
+</style>
+<script type="text/javascript" src="@Url.Content("~/Scripts/lib/bootstrap.file-input.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/SMSMI/ExportToFTP.js?20241016")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script>
+    var TranTypeSel = "@ViewBag.TranType";
+	$(function () {
+		var gop = {};
+		var numberTemplate = "2";
+		var docHeight = $(document).height();
+		gridHeight = docHeight - 300;
+		gop.AddUrl = false;
+		gop.gridId = "containerInfoGrid";
+		gop.gridAttr = { caption: "@Resources.Locale.L_SMSMI_CustomsConfirmQueryList", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+		gop.gridSearchUrl = rootPath + "SMSMI/ConfirmCuQueryData";
+		gop.multiselect = true;
+		gop.multiboxonly = true;
+
+		//SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+		gop.searchFormId = "ConditionArea";
+		gop.searchDivId = "SearchArea";
+		gop.StatusAreaId = "StatusArea";
+		gop.BtnGroupId = "BtnGroupArea";
+
+		//gop.statusPreLoad = true;
+		gop.loadCompleteFunc = function () {
+			var $grid = $("#containerInfoGrid");
+			if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+				$grid[0].p.sortname = "CreateDate";
+
+			var col = $grid.jqGrid('getCol', 'Priority', false);
+			$.each(col, function (index, colname) {
+				if (colname == "1") {
+					$grid.jqGrid('setRowData', index + 1, false, 'danger');
+				}
+			});
+
+			var col = $grid.jqGrid('getCol', 'Status', false);
+			$.each(col, function (index, colname) {
+				switch(colname)
+				{
+					case "D":
+					case "E":
+					case "F":
+					case "G":
+					case "P":
+					case "H":
+					case "I":
+					case "J":
+						$grid.find("tr:eq("+(index + 1)+")").removeClass("danger");
+				}
+			});
+		}
+
+		gop.gridFunc = function (map) {
+			//用于回调函数，例如赋值操作等
+			dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+		gop.btnGroup = [
+            {
+                id: "SendToFTP",
+                name: "@Resources.Locale.L_DNManage_IsExport",
+                func: function () { }
+            },
+            {
+                id: "BatchUploadEDOC",//BatchUploadEDOC
+                name: "@Resources.Locale.L_DNApproveManage_Views_316" + " Edoc",
+                func: function () {
+                    _ExportToFTP.InitButtonHandle();
+                }
+            },
+            {
+                id: "MBExcelDownload",
+                name: "@Resources.Locale.L_SMSMI_MBExcelDownload",
+                func: function () {
+                    var mygrid = $("#containerInfoGrid");
+                    var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                    var responseData = [];
+                    $.each(selRowId, function (index, val) {
+                        responseData.push(mygrid.getRowData(selRowId[index]));
+                    });
+
+                    if (responseData.length < 1) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_BaseBooking_Scripts_127", 500, "warning");
+                        return;
+                    }
+                    var isCsm = false;
+                    var shipments = "";
+                    for (var i = 0; i < responseData.length; i++) {
+                        if (shipments.length > 0)
+                            shipments += ",";
+                        shipments += responseData[i].ShipmentId;
+                        csmNo = responseData[i].CsmNo;
+                        isCsm = !isCsm ? responseData[i].ShipmentId == responseData[i].CsmNo : isCsm;
+                        if (isCsm && responseData[i].ShipmentId != responseData[i].CsmNo) {
+                            CommonFunc.Notify("", "It can only Shipment or Consignment", 500, "warning");
+                            return;
+                        }
+                    }
+                      $.ajax({
+                        async: true,
+                        url: rootPath + "SMSMI/NewDownloadExcel",
+                        type: 'POST',
+                          data: {
+                              isCsm: isCsm,
+                            shipments: shipments
+                        },
+                        dataType: "json",
+                        "complete": function (xmlHttpRequest, successMsg) {
+
+                        },
+                        "error": function (xmlHttpRequest, errMsg) {
+                        },
+                        success: function (result) {
+                            if (result != null && result.IsOk == "Y") {
+                                window.open(rootPath + "SMSMI/DownLoadXls?filename=" + result.file);
+                            }
+                            else {
+                                alert(result.msg);
+                            }
+                        }
+                    });
+
+                }
+            },
+            {
+                id: "btn14",
+                name: "@Resources.Locale.L_SMSMI_ImportCCInfo",
+                func: function () {
+                    $("#ImportBrokerDailog").modal("show");
+                    resetFileInput($("#ImportBrokerExcel"));
+                }
+            },
+            {
+                id: "MBTCExcelDownload",
+                name: "@Resources.Locale.TLB_TCDownload",
+                func: function () {
+                    var mygrid = $("#containerInfoGrid");
+                    var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                    var responseData = [];
+                    var dnitems = "";
+                    $.each(selRowId, function (index, val) {
+                        responseData.push(mygrid.getRowData(selRowId[index]));
+                    });
+
+                    if (responseData.length < 1) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_BaseBooking_Scripts_127", 500, "warning");
+                        return;
+                    }
+
+                    var shipments = "";
+                    for (var i = 0; i < responseData.length; i++) {
+                        dnitems += responseData[i].UId + ",";
+                        if (shipments.length > 0)
+                            shipments += ",";
+                        shipments += responseData[i].ShipmentId;
+                    }
+
+                    var url = rootPath + "SMSMI/DownloadExcel";
+                    var colModel = [
+                        { name: 'TranType', title: 'TranType', index: 'TranType', width: 120, align: 'left', sorttype: 'string', hidden: false, caption: 'Tran Type' },
+                        { name: 'ShipmentId', title: 'ShipmentId', index: 'ShipmentId', width: 120, align: 'left', sorttype: 'string', hidden: false, caption: 'Shipment ID' },
+                        { name: 'MasterNo', title: 'MasterNo', index: 'MasterNo', width: 120, align: 'left', sorttype: 'string', hidden: false, caption: 'Master No.' },
+                        { name: 'ContainerNo', title: 'ContainerNo', index: 'ContainerNo', width: 120, align: 'left', sorttype: 'string', hidden: false, caption: 'Container No.' },
+                        { name: 'DnNo', title: 'DnNo', index: 'DnNo', width: 250, align: 'left', sorttype: 'string', hidden: false, caption: 'DN/Invoice No.' },
+                        { name: 'PodCd', title: 'PodCd', index: 'PodCd', width: 100, align: 'left', sorttype: 'string', hidden: false, caption: 'POD' },
+                        { name: 'DestCd', title: 'DestCd', index: 'DestCd', width: 100, align: 'left', sorttype: 'string', hidden: false, caption: 'Dest.' },
+                        { name: 'MaterialType', title: 'MaterialType', index: 'MaterialType', width: 100, align: 'left', sorttype: 'string', hidden: false, caption: 'Material Type' },
+                        { name: 'TcDecNo', title: 'TcDecNo', titlegroundcolor: '255,255,0', index: 'TcDecNo', width: 100, align: 'left', sorttype: 'string', hidden: false, caption: 'DECL NO' },
+                        { name: 'TcImportNo', title: 'TcImportNo', titlegroundcolor: '255,255,0', index: 'TcImportNo', width: 150, align: 'left', sorttype: 'string', hidden: false, caption: 'Import No.' },
+                        { name: 'TcDecDate', title: 'TcDecDate', titlegroundcolor: '255,255,0', index: 'TcDecDate', width: 200, align: 'left', sorttype: 'string', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, caption: 'CLEARANCE DATE' },
+                        { name: 'TcRelDate', title: 'TcRelDate', titlegroundcolor: '255,255,0', index: 'TcRelDate', width: 200, align: 'left', sorttype: 'string', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, caption: 'RELEASE DATE' },
+                        { name: 'TcInspection', title: 'TcInspection', titlegroundcolor: '255,255,0', index: 'TcInspection', width: 100, align: 'left', sorttype: 'string', hidden: false, caption: 'Inspection(Y/N)' },
+                        { name: 'TcCerNo', title: 'TcCerNo', index: 'TcCerNo', width: 200, align: 'left', sorttype: 'string', hidden: false, caption: 'Certificate No.' },
+                        { name: 'TcDecReply', title: 'TcDecReply', index: 'TcDecReply', width: 200, align: 'left', sorttype: 'string', hidden: false, caption: 'Declaration Reply' },
+                        { name: 'TcIcdf', title: 'TcIcdf', index: 'TcIcdf', titlegroundcolor: '255,255,0', width: 200, align: 'left', sorttype: 'string', hidden: false, caption: 'Faster Solution(Y/N)' },
+                        { name: 'TcCcChannel', title: 'TcCcChannel', index: 'TcCcChannel', width: 200, align: 'left', sorttype: 'string', hidden: false, caption: 'Cc Channel(GREEN/YELLOW/GRAY/RED)' },
+                        { name: 'TcHsQty', title: 'TcHsQty', index: 'TcHsQty', width: 200, align: 'left', sorttype: 'string', hidden: false, caption: 'QTY/HS Code' },
+                        { name: 'TcCntryCd', title: 'TcCntryCd', index: 'TcCntryCd', width: 200, align: 'left', sorttype: 'string', hidden: false, caption: 'Country' }
+                    ];//titlegroundcolor:'255,255,0'
+                    var conditions = "";
+                    var baseCondition = "";
+                    var caption = "Customs Transit Declaration Format";
+                    var Result = "";
+                    postAndRedirect(url, { "ColumnList": JSON.stringify(colModel).replace(new RegExp('"', "gm"), "'"), "conditions": conditions, "baseCondition": baseCondition, "resultType": "excel", "shipments": shipments, "dnitems": dnitems, "ReportTitle": caption, "excelName": cmp + "-USER" });
+                    //if (Result.message == "Fail") {
+                    //    CommonFunc.Notify("", "Error", 500, "warning");
+                    //} else {
+                    //    CommonFunc.Notify("", result.message, 500, "success");
+                    //}
+                }
+            },
+            {
+                id: "MBTCExcelUpload",
+                name: "@Resources.Locale.TLB_TCUpload",
+                func: function () {
+                    $("#ImportTCBrokerDailog").modal("show");
+                    resetFileInput($("#ImportTCBrokerExcel"));
+                }
+            },
+            {
+                id: "MBEdoc",
+                name: "EDOC",
+                func: function () {
+                    EdocSet("btnEdoc", "ShipmentId", true, callBackFunc);
+                    //$("#btnEdoc").trigger("click");
+                }
+            }
+        ];
+
+	    gop.statusGroup = [
+            { "id": "B", "label": "Declaration without notice" },
+            { "id": "H", "label": "@Resources.Locale.L_SMSMI_StatusH"},
+            { "id": "I", "label": "@Resources.Locale.L_SMSMI_StatusI"},
+            { "id": "Y", "label": "@Resources.Locale.L_SMSMI_StatusC" },
+            { "id": "C", "label": "@Resources.Locale.L_SMSMI_StatusD"},
+            { "id": "F", "label": "@Resources.Locale.L_SMSMI_StatusF" },
+            { "id": "", "label": "ALL"},
+        ];
+
+        gop.statusField = "Bstatus";
+        gop.statusDefaultId = "Y";
+
+        var colModelSetting = [
+			{ name: 'TranType', formatter: "select",remark: TranTypeSel, editoptions: { value: TranTypeSel } },
+			{ name: 'Status', formatter: "select", remark: "S:ISF Sending;A:@Resources.Locale.L_SMSMI_StatusA;B:@Resources.Locale.L_SMSMI_StatusB;C:@Resources.Locale.L_SMSMI_StatusC;D:@Resources.Locale.L_SMSMI_StatusD;E:@Resources.Locale.L_SMSMI_StatusE;F:@Resources.Locale.L_SMSMI_StatusF;G:@Resources.Locale.L_SMSMI_StatusG;H:@Resources.Locale.L_SMSMI_StatusH;I:@Resources.Locale.L_SMSMI_StatusI;P:@Resources.Locale.L_SMSMI_StatusP;X:@Resources.Locale.L_SMSMI_StatusX;O:Gate Out;Z:Finish;V:Void", editoptions: { value: "S:ISF Sending;A:@Resources.Locale.L_SMSMI_StatusA;B:@Resources.Locale.L_SMSMI_StatusB;C:@Resources.Locale.L_SMSMI_StatusC;D:@Resources.Locale.L_SMSMI_StatusD;E:@Resources.Locale.L_SMSMI_StatusE;F:@Resources.Locale.L_SMSMI_StatusF;G:@Resources.Locale.L_SMSMI_StatusG;H:@Resources.Locale.L_SMSMI_StatusH;I:@Resources.Locale.L_SMSMI_StatusI;P:@Resources.Locale.L_SMSMI_StatusP;X:@Resources.Locale.L_SMSMI_StatusX;O:Gate Out;Z:Finish;V:Void" } },
+            { name: 'Bstatus', formatter: "select", remark: "B:@Resources.Locale.L_SMSMI_BStatusB;Y:@Resources.Locale.L_SMSMI_BstatusY;C:@Resources.Locale.L_SMSMI_StatusD;H:@Resources.Locale.L_SMSMI_StatusH;I:@Resources.Locale.L_SMSMI_StatusI;F:@Resources.Locale.L_SMSMI_StatusF", editoptions: { value: "B:@Resources.Locale.L_SMSMI_BStatusB;Y:@Resources.Locale.L_SMSMI_BstatusY;C:@Resources.Locale.L_SMSMI_StatusD;H:@Resources.Locale.L_SMSMI_StatusH;I:@Resources.Locale.L_SMSMI_StatusI;F:@Resources.Locale.L_SMSMI_StatusF" } }
+        ];
+
+        genColModel("SMSMI", "U_ID", "L_SMSMI", colModelSetting).done(function (result) {
+            for (var i = 0; i < result.length; i++) {
+                if (result[i].name === 'AsnnoInfo')
+                    result[i]["chide"] = "Y";
+                if (result[i].name === 'DecInfo') {
+                    result[i].title = "Declaration No";
+                    result[i]["chide"] = "Y";
+                }
+                if (result[i].name === 'DecDateInfo') {
+                    result[i].title = "Declaration Date";
+                    result[i]["chide"] = "Y";
+                }
+                if (result[i].name == 'OfCost') {
+                    result[i]['formatter'] = function formatofcost(cellValue, options, rowObject) {
+                        htmlStr = "<div>*</div>"
+                        return htmlStr;
+                    }
+                }
+                if (result[i].name == 'Light') {
+                    result[i]['formatter'] = function formatLight(cellValue, options, rowObject) {
+
+                        var htmlStr = "<ul class='light-ul'>";
+
+                        if (cellValue != "" && cellValue != null) {
+                            var array1 = cellValue.split(")*(");
+                            for (var i = 0; i < array1.length; i++) {
+                                var array2 = array1[i].split('(*)');
+                                var li = "";
+                                if (array2[2] == 1) {
+                                    li = "<li><div class='grid-circle circle-green' title='" + array2[1] + "'></div></li>";
+                                }
+                                else {
+                                    li = "<li><div class='grid-circle circle-default' title='" + array2[1] + "'></div></li>";
+                                }
+                                htmlStr += li;
+                            }
+
+
+                        }
+                        else {
+                            for (var i = 0; i < 5; i++) {
+                                var li = "<li><div class='grid-circle circle-default' title=''></div></li>";
+                                htmlStr += li;
+                            }
+                        }
+                        htmlStr += "</ul>";
+
+                        return htmlStr;
+                    }
+                }
+				switch (result[i].name) {
+					case "PortFreeTime":
+					case "FactFreeTime":
+					case "ConFreeTime":
+						result[i].formatoptions = {
+							decimalSeparator: ".",
+							thousandsSeparator: ",",
+							decimalPlaces: 0,
+							defaultValue: ''
+						};
+						break;
+                    case "ProductType":
+					case "DnNo":
+                    case "CombineDet":
+                    case "CntrInfo":
+                        result.splice(i, 1);
+                        break;
+                }
+
+            }
+
+
+            var mergeColModel = [];
+            gop.searchColModel = [
+            { name: 'VT_PLACESmidnInvNo', title: '@Resources.Locale.L_SMIDN_InvoiceNo', sorttype: 'string' },
+            { name: 'VT_PLACESmidnDivisionDescp', title: '@Resources.Locale.L_SMICNTR_DivisionDescp', sorttype: 'string' },
+            { name: 'VT_PLACESmicntrCntrNo', title: 'Container No', sorttype: 'string' },
+                { name: 'VT_PLACESmidnicntrDecNo', title: '@Resources.Locale.L_SMIDN_DecNo', sorttype: 'string' },
+             { name: 'VT_PLACESmidnpAsnNo', title: '@Resources.Locale.L_SMSMI_AsnnoInfo', sorttype: 'string' },
+			{
+			    name: 'VT_PLACESmidnicntrDecDate', title: '@Resources.Locale.L_SMIDN_DecDate', sorttype: 'string', formatter: 'date', formatoptions: { newformat: 'Y-m-d' }, hidden: false, editable: false,
+			    editoptions: myEditDateInit,
+			    formatter: 'date',
+			    formatoptions: {
+			        srcformat: 'ISO8601Long',
+			        newformat: 'Y-m-d',
+			        defaultValue: ""
+			    }
+			}
+            ];
+            $.merge(mergeColModel, result);
+            $.merge(mergeColModel, gop.searchColModel);
+            gop.searchColumns = getSelectColumn(mergeColModel);
+            result.push(
+                { name: 'CntrInfo', title: "Container Info", index: 'CntrInfo', width: 100, align: 'left', sorttype: 'string', hidden: false }
+            );
+            gop.gridColModel = result;
+
+            initSearch(gop);
+            _ExportToFTP.lang = {
+                IsOk: "Send successfully, please wait 10 minutes to view FTP ",
+                BeforSend: "@Resources.Locale.L_BSTQuery_Uploading",
+			    failed: "Uploading is failed",
+			    title: "@Resources.Locale.L_BSTQuery_ImpExcel",
+			    file: "@Resources.Locale.L_BSTQuery_SelectFile",
+                submitbtn: "@Resources.Locale.L_BSTQuery_Upload",
+                NoData: "@Resources.Locale.L_BaseBooking_Scripts_127"
+            };
+_ExportToFTP.ExportToEdocInit();
+
+            $("#ProductionDate").wrap('<div class="input-group">').datepicker({
+                showOn: "button",
+                changeYear: true,
+                dateFormat: "yy/mm/dd",
+                beforeShow: function () {
+                    setTimeout(function () {
+                        $('.ui-datepicker').css('z-index', 99999999999999);
+                    }, 0);
+                },
+                onClose: function (text, inst) {
+                    $(this).focus();
+                }
+            }).next("button").button({
+                icons: { primary: "ui-icon-calendar" },
+                label: "Select a date",
+                text: false
+            }).addClass("btn btn-sm btn-default").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+			.wrap('<span class="input-group-btn">')
+			.find('.ui-button-text')
+			.css({
+			    'visibility': 'hidden',
+			    'display': 'inline'
+			});
+        });
+
+	    $("#ImportBrokerExcel").bootstrapFileInput();
+	    $("#IMPORTBROKER_FROM").submit(function () {
+	        var postData = new FormData($(this)[0]);
+	        var autoChk = $("#autoChk").val();
+	        $.ajax({
+	            url: rootPath + "SMSMI/ImportBrokerExcel",
+	            type: 'POST',
+	            data: postData,
+	            async: true,
+	            beforeSend: function () {
+	                CommonFunc.ToogleLoading(true);
+	                StatusBarArr.nowStatus("@Resources.Locale.L_BSTQuery_Uploading");
+	            },
+                error: function (xmlHttpRequest, errMsg) {
+                    resetFileInput($("#ImportBrokerExcel"));
+	                CommonFunc.Notify("", "error", 500, "warning");
+	                CommonFunc.ToogleLoading(false);
+	                StatusBarArr.nowStatus("");
+	            },
+	            success: function (data) {
+	                //alert(data)
+                    resetFileInput($("#ImportBrokerExcel"));
+	                CommonFunc.ToogleLoading(false);
+	                StatusBarArr.nowStatus("");
+	                if (data.message != "success") {
+	                    //CommonFunc.Notify("", "汇入失败" + data.message, 1300, "warning");
+	                    alert(data.message);
+	                    return false;
+	                }
+	                CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpSuc", 500, "success");
+	                $("#ImportBrokerDailog").modal("hide");
+
+	                $("#SummarySearch").click();
+	            },
+	            cache: false,
+	            contentType: false,
+	            processData: false
+	        });
+
+	        return false;
+	    });
+
+
+	    $("#ImportTCBrokerExcel").bootstrapFileInput();
+	    $("#IMPORT_TC_BROKER_FROM").submit(function () {
+	        var postData = new FormData($(this)[0]);
+	        var autoChk = $("#autoChk").val();
+	        $.ajax({
+	            url: rootPath + "SMSMI/ImportTCBrokerExcel",
+	            type: 'POST',
+	            data: postData,
+	            async: true,
+	            beforeSend: function () {
+	                CommonFunc.ToogleLoading(true);
+	                StatusBarArr.nowStatus("@Resources.Locale.L_BSTQuery_Uploading");
+	            },
+                error: function (xmlHttpRequest, errMsg) {
+                    resetFileInput($("#ImportTCBrokerExcel"));
+	                CommonFunc.Notify("", "error", 500, "warning");
+	                CommonFunc.ToogleLoading(false);
+	                StatusBarArr.nowStatus("");
+	            },
+	            success: function (data) {
+	                //alert(data)
+                    resetFileInput($("#ImportTCBrokerExcel"));
+	                CommonFunc.ToogleLoading(false);
+	                StatusBarArr.nowStatus("");
+	                if (data.message != "success") {
+	                    //CommonFunc.Notify("", "汇入失败" + data.message, 1300, "warning");
+	                    alert(data.message);
+	                    return false;
+	                }
+	                CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpSuc", 500, "success");
+	                $("#ImportTCBrokerDailog").modal("hide");
+
+	                $("#SummarySearch").click();
+	            },
+	            cache: false,
+	            contentType: false,
+	            processData: false
+	        });
+
+	        return false;
+	    });
+
+        function dblClick(map) {
+            var UId = map.UId;
+            top.topManager.openPage({
+                href: rootPath + "SMSMI/CustomsConfirmSetupView/" + UId,
+                title: '@Resources.Locale.L_SMSMI_CustomsConfirmSetupView',
+                id: 'CustomsConfirmSetupView',
+                search: 'uid=' + UId,
+                reload: true
+            });
+        }
+
+        _ExportToFTP.initBathSendToFTP();
+
+        function EdocSet(id, fieldId, notice, callBackFunc) {
+            if (notice === null) {
+                notice = true;
+            }
+            var $_docstn = $("#" + id);
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+            var shipmentid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ShipmentId');
+            var _cmp = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'Cmp');
+            var _groupid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'GroupId');
+            var shipmentUid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+
+            if (!shipmentUid) {
+                if (notice) {
+                    CommonFunc.Notify("", _getLang("L_ChgApproveManage_Views_183", "请先选择一笔记录"), 500, "warning");
+                }
+                return;
+            }
+
+            shipmentid = $("#containerInfoGrid").jqGrid('getCell', selRowId, fieldId);
+            var ouid = $("#containerInfoGrid").jqGrid('getCell', selRowId, "OUid");
+            var oLocation = $("#containerInfoGrid").jqGrid('getCell', selRowId, "OLocation");
+            if (shipmentid != "") {
+                var multiEdocData = [];
+                ajaxHttp(rootPath + "SMSMI/GetDNData", { ShipmentId: shipmentid, loading: true, OUid: ouid },
+                    function (data) {
+                        if (data != null) {
+                            $(data.dn).each(function (index) {
+                                multiEdocData.push({ jobNo: data.dn[index].UId, 'GROUP_ID': data.dn[index].GroupId, 'CMP': data.dn[index].Cmp, 'STN': '*' });
+                            });
+                        }
+                        if (ouid != "") {
+                            multiEdocData.push({ jobNo: shipmentUid, 'GROUP_ID': _groupid, 'CMP': _cmp, 'STN': '*' });
+                            initEdoc($_docstn, { jobNo: ouid, 'GROUP_ID': _groupid, 'CMP': oLocation, 'STN': "*" }, multiEdocData, callBackFunc);
+                            if (notice) {
+                                $_docstn.trigger("click");
+                            }
+                        } else {
+                            initEdoc($_docstn, { jobNo: shipmentUid, 'GROUP_ID': _groupid, 'CMP': _cmp, 'STN': "*" }, multiEdocData, callBackFunc);
+                            if (notice) {
+                                $_docstn.trigger("click");
+                            }
+                        }
+                    });
+            }
+        }
+
+        var callBackFunc = function (jobno, partytypes) {
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+            var shipmentUid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'UId');
+            var ouid = $("#containerInfoGrid").jqGrid('getCell', selRowId, "OUid");
+            $.ajax({
+                url: rootPath + 'SMSMI/setLight',
+                type: 'POST',
+                dataType: 'json',
+                data: { "OUid": ouid, "UId": shipmentUid, "Io": "I" },
+                beforeSend: function () {
+                    //StatusBarArr.nowStatus(language["L_OrderManage_ComfirmNow"]);
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (result) {
+                    if (result.message == "success") {
+                        //CommonFunc.Notify("", language["L_OrderManage_ComfirmSuccess"], 1000, "success");
+                        //$("#SummarySearch").trigger("click");
+                    }
+                    else {
+                        //CommonFunc.Notify("", result.message, 1000, "warning");
+                        //alert(result.message);
+                    }
+                    CommonFunc.ToogleLoading(false);
+                },
+                error: function () {
+                    //CommonFunc.Notify("", "", 1000, "danger");
+                    CommonFunc.ToogleLoading(false);
+                }
+            });
+        }
+    });
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea"></form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->
+<div class="modal fade" id="ImportBrokerDailog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_BSTQuery_ImpExcel</h4>
+            </div>
+            <form name="EXCEL_UPLOAD_FROM" id="IMPORTBROKER_FROM" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        @*<div class="pure-u-sm-7-60">
+                                <label for="StartRow" class="control-label">@Resources.Locale.L_BSTQuery_BeginRow</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="number" class="form-control input-sm" id="StartRow" name="StartRow" isnumber="true" value="0" />
+                                <p class="help-block tooltips"></p>
+                            </div>*@
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-7-60">
+                            <label for="autoChk" class="control-label">Whether C.C.Confirm</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" id="autoChk" name="autoChk">
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="ImportBrokerExcel" name="file" />
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="ImportBrokerBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ImportTCBrokerDailog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_BSTQuery_ImpExcel</h4>
+            </div>
+            <form name="EXCEL_UPLOAD_FROM" id="IMPORT_TC_BROKER_FROM" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-7-60">
+                            <label for="autoChk" class="control-label">Whether C.C.Confirm</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" id="autoChk" name="autoChk">
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="ImportTCBrokerExcel" name="file" />
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="ImportBrokerBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myEdocBtn" role="dialog">
+    <button type="button" class="btn btn-sm btn-primary pms-btn" id="btnEdoc"></button>
+</div>

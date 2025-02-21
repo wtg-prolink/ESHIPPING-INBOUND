@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "@Resources.Locale.L_ShowCostInfo_Views_226";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+        background-color: #eaeaea;
+    }
+
+    #wrapper {
+        margin-top: 50px;
+    }
+
+    #page-wrapper {
+        padding: 5px;
+    }
+</style>
+<script type="text/javascript">
+    var CHMUId = "@ViewBag.CHMUId";
+    var CHMFlamt = "@ViewBag.CHMFlamt";
+    var CHMPlamt = "@ViewBag.CHMPlamt";
+    var CHMSewqNo = "@ViewBag.CHMSewqNo";
+    var Dep = "@ViewBag.Dep";
+    var WicUId = "@ViewBag.WicUId";
+    var PomcUid = "@ViewBag.PomcUid";
+    var LcUid = "@ViewBag.LcUid";
+    var PomUid = "@ViewBag.PomUid";
+    var SomUid = "@ViewBag.SomUid";
+    var CmpStn = "@ViewBag.CmpStn";
+    var BlNo = "@ViewBag.BlNo";
+    var JobNo = "@ViewBag.JobNo";
+    var ChargeDep = "@ViewBag.ChargeDep";
+</script>
+@Html.RazorJSInline("~/Scripts/CostInfo/ShowCostInfo.js")
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default" id="approval1">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-2-24">
+                            <label class="control-label">@Resources.Locale.L_ShowCostInfo_CtNo</label>
+                        </div>
+                        <div class="pure-u-sm-4-24 label-disabled">
+                            <label id="CtNo" class="control-label" dt="mt" name="CtNo" fieldname="CtNo">@ViewBag.CtNo</label>
+                        </div>
+
+                        <div class="pure-u-sm-2-24 label-right">
+                            <label class="control-label">@Resources.Locale.L_ActSetup_BlNo</label>
+                        </div>
+                        <div class="pure-u-sm-4-24 label-disabled">
+                            <label id="BlNo" class="control-label" dt="mt" name="BlNo" fieldname="BlNo">@ViewBag.BlNo</label>
+                        </div>
+
+                        <div class="pure-u-sm-2-24 label-right">
+                            <label class="control-label">@Resources.Locale.L_ShowCostInfo_VerNo</label>
+                        </div>
+                        <div class="pure-u-sm-4-24 label-disabled">
+                            <label id="PoNo" class="control-label" dt="mt" name="PoNo" fieldname="PoNo">@ViewBag.PoNo</label>
+                        </div>
+                         <div class="pure-u-sm-2-24 label-right">
+                            <label class="control-label">@Resources.Locale.L_BaseLookup_WiNo</label>
+                        </div>
+                        <div class="pure-u-sm-4-24 label-disabled">
+                            <label id="WiNo" class="control-label" dt="mt" name="WiNo" fieldname="WiNo">@ViewBag.WiNo</label>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">                      
+
+                        <div class="pure-u-sm-2-24">
+                            <label class="control-label">@Resources.Locale.L_ShowCostInfo_Receive</label>
+                        </div>
+                        <div class="pure-u-sm-4-24 label-disabled">
+                            <label id="chargeAmt" class="control-label" name="chargeAmt" keyin="number">0</label>
+                            @*<input type="text" id="chargeAmt" class="form-control input-sm" readonly="readonly" name="chargeAmt" keyin="number" />*@
+                        </div>
+
+                        <div class="pure-u-sm-2-24 label-right">
+                            <label class="control-label">@Resources.Locale.L_ShowCostInfo_Payment</label>
+                        </div>
+                        <div class="pure-u-sm-4-24 label-disabled">
+                            <label id="costAmt" class="control-label" name="costAmt" keyin="number">0</label>
+                            @*<input type="text" id="costAmt" class="form-control input-sm" name="costAmt" keyin="number" />*@
+                        </div>
+
+                        <div class="pure-u-sm-2-24 label-right">
+                            <label class="control-label">@Resources.Locale.L_ShowCostInfo_Profit</label>
+                        </div>
+                        <div class="pure-u-sm-4-24 label-disabled">
+                            <label id="profitAmt" class="coneutrol-label">0</label>
+                            @*<input type="text" id="profitAmt" class="form-control input-sm" readonly="readonly" name="profitAmt" keyin="number" />*@
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-2-30">
+                            <button id="btncreatebill" class="btn btn-sm btn-default">@Resources.Locale.L_ShowCostInfo_BL</button>
+                        </div>
+                        <div class="pure-u-sm-2-30">
+                            <button id="btndeletebill" class="btn btn-sm btn-default">@Resources.Locale.L_ShowCostInfo_DelBl</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default" id="approval1">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <table id="AccountsGrid" class="_tableGrid" style="width: 100%">
+                                <tr>
+                                    <td />
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:20px;">
+                        <div class="col-xs-12">
+                            <table id="CopeGrid" class="_tableGrid" style="width: 100%">
+                                <tr>
+                                    <td />
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="rootPath" type="hidden" value="@Url.Content("~")" />
+@*<input id="uid" type="hidden" value="@ViewBag.uId" />*@
+@*<input id="pono" type="hidden" value="@ViewBag.poNo" />*@

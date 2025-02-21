@@ -1,0 +1,665 @@
+﻿@{
+    ViewBag.Title = "InvPkgQuery";
+}
+
+
+<script type="text/javascript">
+    var DnNo = "@ViewBag.DnNo";
+    var SpId = "@ViewBag.ShipmentId";
+    var select_role = "@ViewBag.SelectRole";
+    var default_role = "@ViewBag.DefaultRole";
+    //var packo = false;
+    //var invo = false;
+    $(function () {
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 260;
+        gop.gridColModel = [
+            { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'GroupId', title: 'GROUP ID', index: 'GroupId', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'Cmp', title: 'LOCATION ID', index: 'Cmp', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'InvDate', title: '@Resources.Locale.L_DNManage_IvDate', index: 'InvDate', width: 100, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'SendFrt', title: 'SAP', index: 'SendFrt', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'Y:Yes;null:No;:No' } },
+            { name: 'InvoiceType', title: '@Resources.Locale.L_InvPkgQuery_InvoiceType', index: 'InvoiceType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'O:Outbound;I:Inbound;T:Third;A:Other;' } },
+            { name: 'DnNo', title: '@Resources.Locale.L_DNApproveManage_DnNo', index: 'DnNo', init: true, dv: DnNo, width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DnStatus', title: '@Resources.Locale.L_DNApproveManage_ApproveTo', index: 'DnStatus', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_role + ";Finish:Finished;ARCH:Archived", defaultValue: default_role } },
+            { name: 'ShipmentId', title: '@Resources.Locale.L_DNApproveManage_ShipmentId', init: true, dv: SpId, index: 'ShipmentId', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'InvNo', title: '@Resources.Locale.L_DNApproveManage_InvNo', index: 'InvNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PackingNo', title: 'Packing NO', index: 'PackingNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'VatNo', title: '@Resources.Locale.L_ActSetup_VatNo', index: 'VatNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'SoNo', title: '@Resources.Locale.L_BaseLookup_SoNo', index: 'SoNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'RefNo', title: '@Resources.Locale.L_BaseLookup_RefNo', index: 'RefNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PoNo', title: '@Resources.Locale.L_DNApproveManage_PoNo', index: 'PoNo', width: 140, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Etd', title: '@Resources.Locale.L_BaseLookup_Etd', index: 'Etd', width: 100, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'Eta', title: '@Resources.Locale.L_BaseLookup_Eta', index: 'Eta', width: 100, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'ShippingDate', title: 'Shipping Date', index: 'ShippingDate', width: 100, align: 'left', sorttype: 'date', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'BlNo', title: '@Resources.Locale.L_InvPkgSetup_BlNo', index: 'BlNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'DlvWay', title: '@Resources.Locale.L_InvPkgSetup_DlvWay', index: 'DlvWay', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CneeCd', title: '@Resources.Locale.L_BSTSetup_CneeCd', index: 'CneeCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CneeNm', title: '@Resources.Locale.L_BSTSetup_CneeNm', index: 'CneeNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BillTo', title: 'Bill To', index: 'BillTo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BillNm', title: 'Bill Name', index: 'BillNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            //{ name: 'ShipTo', title: 'Ship To', index: 'ShipTo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            //{ name: 'ShipNm', title: 'Ship Name', index: 'ShipNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ShprCd', title: '@Resources.Locale.L_BSTSetup_ShprCd', index: 'ShprCd', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ShprNm', title: 'Ship Name', index: 'ShprNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ShprAddr', title: '@Resources.Locale.L_InvPkgSetup_ShprAddr', index: 'ShprAddr', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'NotifyNo', title: '@Resources.Locale.L_DNApproveManage_NotifyNo', index: 'NotifyNo', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'NotifyNm', title: 'Notify Name', index: 'NotifyNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CmdtyCd', title: '@Resources.Locale.L_DNApproveManage_ProdSpec', index: 'CmdtyCd', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Lgoods', title: '@Resources.Locale.L_TKQuery_Ldescp', index: 'Lgoods', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TradeTerm', title: '@Resources.Locale.L_PartyDocSetup_Term', index: 'TradeTerm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TradetermDescp', title: '@Resources.Locale.L_DNManage_IcoDescp', index: 'TradetermDescp', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Incoterm', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'Incoterm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'IncotermDescp', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'IncotermDescp', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'FromCd', title: 'From Code', index: 'FromCd', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'FromDescp', title: 'From Description', index: 'FromDescp', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ToCd', title: '@Resources.Locale.L_InvPkgSetup_ToCd', index: 'ToCd', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'ToDescp', title: 'To Description', index: 'ToDescp', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntryOrn', title: '@Resources.Locale.L_DNManage_OrgCd', index: 'CntryOrn', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CntryDescp', title: '@Resources.Locale.L_DNManage_OrgNm', index: 'CntryDescp', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'Cur', title: '@Resources.Locale.L_InvPkgSetup_Cur', index: 'Cur', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TtlValue', title: '@Resources.Locale.L_InvPkgSetup_TtlValue', index: 'TtlValue', width: 150, align: 'right', sorttype: 'float', hidden: false, formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' } },
+            { name: 'TtlPlt', title: '@Resources.Locale.L_BaseLookup_TotalPakage', index: 'TtlPlt', width: 150, align: 'right', sorttype: 'string', hidden: false },
+            { name: 'Pltu', title: '@Resources.Locale.L_BaseLookup_Unit', index: 'Pltu', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TtlQty', title: 'Total Qty', index: 'TtlQty', width: 150, align: 'right', sorttype: 'string', hidden: false },
+            { name: 'TtlNw', title: 'Total NW', index: 'TtlNw', width: 150, align: 'right', sorttype: 'string', hidden: false },
+            { name: 'TtlGw', title: 'Total GW', index: 'TtlGw', width: 150, align: 'right', sorttype: 'string', hidden: false },
+            { name: 'TtlCbm', title: 'Total CBM', index: 'TtlCbm', width: 150, align: 'right', sorttype: 'string', hidden: false },
+            { name: 'Marks', title: '@Resources.Locale.L_BSTSetup_ShippingMark', index: 'Marks', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'InvoiceRmk', title: '@Resources.Locale.L_BSTSetup_ShippingMark', index: 'InvoiceRmk', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PackingRmk', title: '@Resources.Locale.L_InvPkgSetup_PackingRmk', index: 'PackingRmk', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'InvIntru', title: '@Resources.Locale.L_BSTSetup_InvIns', index: 'InvIntru', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'PkgIntru', title: '@Resources.Locale.L_BSTSetup_PacIns', index: 'PkgIntru', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'FreightFee', title: '@Resources.Locale.L_InvPkgSetup_FreightFee', index: 'FreightFee', width: 150, align: 'right', sorttype: 'string', hidden: false },
+            { name: 'IssueFee', title: '@Resources.Locale.L_InvPkgSetup_IssueFee', index: 'IssueFee', width: 150, align: 'right', sorttype: 'string', hidden: false },
+            { name: 'CombineInfo', title: 'Combine Infomation', index: 'CombineInfo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'VesselNm', title: '@Resources.Locale.L_InvPkgSetup_Vessel', index: 'VesselNm', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateBy', title: '@Resources.Locale.L_DNApproveManage_CreateBy', index: 'CreateBy', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'CreateDate', title: '@Resources.Locale.L_DNApproveManage_CreateDate', index: 'CreateDate', width: 150, align: 'left', sorttype: 'string', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'SmStatus', title: '@Resources.Locale.L_BaseLookup_Corder', index: 'SmStatus', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: 'A: @Resources.Locale.L_UserQuery_Unprocess_en;B: @Resources.Locale.L_BSTSetup_Book;C: @Resources.Locale.L_UserQuery_ComBA;D: @Resources.Locale.L_UserQuery_Call;I: @Resources.Locale.L_UserQuery_In;P: @Resources.Locale.L_UserQuery_SealCnt;O: @Resources.Locale.L_UserQuery_Out;G: @Resources.Locale.L_UserQuery_Declara;H: @Resources.Locale.L_UserQuery_Release;V: @Resources.Locale.L_BSCSDateQuery_Cancel;Z: @Resources.Locale.L_UserQuery_Return', editoptions: { value: 'A: @Resources.Locale.L_UserQuery_Unprocess_en;B: @Resources.Locale.L_BSTSetup_Book;C: @Resources.Locale.L_UserQuery_ComBA;D: @Resources.Locale.L_UserQuery_Call;I: @Resources.Locale.L_UserQuery_In;P: @Resources.Locale.L_UserQuery_SealCnt;O: @Resources.Locale.L_UserQuery_Out;G: @Resources.Locale.L_UserQuery_Declara;H: @Resources.Locale.L_UserQuery_Release;V: @Resources.Locale.L_BSCSDateQuery_Cancel;Z: @Resources.Locale.L_UserQuery_Return' } },
+            { name: 'SendFrtDate', title: '@Resources.Locale.L_Base_SendFrtDate', index: 'SendBrokerDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'SendBrokerDate', title: '@Resources.Locale.L_Base_SendBrokerDate', index: 'SendBrokerDate', width: 100, align: 'left', formatter: "date", formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d H:i', defaultValue: "" }, viewable: true, sopt: ['eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'] },
+            { name: 'BlWin', title: '@Resources.Locale.L_BaseLookup_BlWin', index: 'BlWin', width: 100, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'BatchFlagp', title: '', index: 'BatchFlagp', width: 100, align: 'left', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'BatchFlagi', title: '', index: 'BatchFlagi', width: 100, align: 'left', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'BatchFlagc', title: '', index: 'BatchFlagc', width: 100, align: 'left', sorttype: 'string', hidden: true, viewable: false },
+            { name: 'SupplierInvNo', title: 'Supplier InvNo', index: 'SupplierInvNo', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'UploadBy', title: 'Upload By', index: 'UploadBy', width: 150, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'UploadDate', title: 'Upload Date', index: 'UploadDate', width: 150, align: 'left', sorttype: 'string', hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } }
+        ];
+
+        gop.AddUrl = { "url": rootPath + "DNManage/InvPkgSetup", "title": "@Resources.Locale.L_DNManage_EntIv", "id": "InvPkgSetup" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "Invoice List", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "DNManage/InvQueryData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.statusGroup = [
+            { "id": "U", "label": "Unfinished" },
+            { "id": "F", "label": "Finished/ATD<3months" },
+            { "id": "A", "label": "Archived/ATD≥3months" }
+        ];
+        gop.statusField = "Status";
+        gop.statusDefaultId = "U";
+        gop.statusPreLoad = true;
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+        gop.multiselect = true;
+        gop.multiboxonly = true;
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            //dblClick(map);
+            var UId = map.UId;
+            if (!UId) {
+                CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                return;
+            }
+            top.topManager.openPage({
+                href: rootPath + "DNManage/InvPkgSetup/" + UId,
+                title: '@Resources.Locale.L_DNManage_EntIv',
+                id: 'InvPkgSetup',
+                reload: true
+            });
+        }
+
+
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        gop.btnGroup = [
+            {
+                id: "uploadPackingBtn",
+                name: "@Resources.Locale.L_DNManage_IpPack",
+                func: function () {
+                    $("#packingUploadWindow").modal("show");
+                    resetFileInput($("#PackingUploadExcel"));
+                }
+            },
+             {
+                 id: "btnBatchSendSAP",
+                 name: "@Resources.Locale.L_DNManage_FSAP",
+                 func: function () {
+                     BatchSendSAP();
+                 }
+             }, {
+                 id: "btnPackingSendToSAP",
+                 name: "@Resources.Locale.TLB_PackingSendToSAP",
+                 func: function () {
+                     var mygrid = $("#containerInfoGrid");
+                     var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                     var responseData = [];
+                     var uids = "";
+                     $.each(selRowId, function (index, val) {
+                         responseData.push(mygrid.getRowData(selRowId[index]));
+                     });
+                     if (responseData.length < 1) {
+                         CommonFunc.Notify("", "@Resources.Locale.L_CustomsNotice_Views_295", 500, "warning");
+                         return;
+                     }
+                     var shipments = "";
+                     for (var i = 0; i < responseData.length; i++) {
+                         uids += responseData[i].UId + ",";
+                         if (shipments.length > 0)
+                             shipments += ",";
+                         shipments += responseData[i].DnNo;
+                     }
+
+                     var iscontinue = window.confirm("@Resources.Locale.L_ActManage_is" + shipments + "】@Resources.Locale.TLB_PackingSendToSAP" + " To SAP");
+                     if (!iscontinue) {
+                         return;
+                     }
+                     CommonFunc.ToogleLoading(true);
+                     $.ajax({
+                         async: true,
+                         url: rootPath + "GateManage/HandSendPackingToSAP",
+                         type: 'POST',
+                         data: {
+                             "uids": uids
+                         },
+                         "complete": function (xmlHttpRequest, successMsg) {
+
+                         },
+                         "error": function (xmlHttpRequest, errMsg) {
+                             CommonFunc.ToogleLoading(false);
+                             var resJson = $.parseJSON(errMsg)
+                             CommonFunc.Notify("", resJson.message, 500, "warning");
+                         },
+                         success: function (result) {
+                             CommonFunc.ToogleLoading(false);
+                             if (result.IsOk == "Y") {
+                                 CommonFunc.Notify("", result.message, 500, "success");
+                                 $("#SummarySearch").trigger("click");
+                             } else {
+                                 CommonFunc.Notify("", result.message, 500, "warning");
+                             }
+                         }
+                     });
+                 }
+             }
+    ];
+
+        $("#PACKING_EXCEL_UPLOAD_FROM").submit(function () {
+            var UId = $("#UId").val();
+            var InvoiceType = $("#InvoiceType").val();
+            var ShipmentId = $("#ShipmentId").val();
+            var DnNo = $("#DnNo").val();
+            var InvNo = $("#InvNo").val();
+            $(this).find("input[type='hidden']").remove();
+            $(this).append('<input type="hidden" name="UId" value="' + UId + '" />');
+            $(this).append('<input type="hidden" name="InvoiceType" value="' + InvoiceType + '" />');
+            $(this).append('<input type="hidden" name="ShipmentId" value="' + ShipmentId + '" />');
+            $(this).append('<input type="hidden" name="DnNo" value="' + DnNo + '" />');
+            $(this).append('<input type="hidden" name="InvNo" value="' + InvNo + '" />');
+            var postData = new FormData($(this)[0]);
+
+            $.ajax({
+                url: rootPath + "GateManage/UploadPackingNew",
+                type: 'POST',
+                data: postData,
+                async: false,
+                beforeSend: function () {
+                    CommonFunc.ToogleLoading(true);
+                },
+                complete: function () {
+                },
+                success: function (data) {
+                    //alert(data)
+                    resetFileInput($("#PackingUploadExcel"));
+                    CommonFunc.ToogleLoading(false);
+                    if (data.message != "success") {
+                        CommonFunc.Notify("", "@Resources.Locale.L_ActDeatilManage_Views_116" + data.message, 1300, "warning");
+                        return false;
+                    }
+                    CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpSuc", 500, "success");
+                    $("#packingUploadWindow").modal("hide");
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+
+            return false;
+        });
+
+        function BatchSendSAP() {
+            var mygrid = $("#containerInfoGrid");
+            var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+            var responseData = [];
+            var dnitems = "";
+            $.each(selRowId, function (index, val) {
+                responseData.push(mygrid.getRowData(selRowId[index]));
+            });
+            if (responseData.length < 1) {
+                CommonFunc.Notify("", "@Resources.Locale.L_InvPkgQuery_Script_23", 500, "warning");
+                return;
+            }
+            var shipments = "";
+            for (var i = 0; i < responseData.length; i++) {
+                dnitems += responseData[i].UId + ",";
+                if (shipments.length > 0)
+                    shipments += ",";
+                shipments += responseData[i].DnNo;
+            }
+
+            var iscontinue = window.confirm("@Resources.Locale.L_InvPkgQuery_Script_24" + " No【" + shipments + "】" + "@Resources.Locale.L_DNManage_FSAP" + "？");
+            if (!iscontinue) {
+                return;
+            }
+            CommonFunc.ToogleLoading(true);
+            $.ajax({
+                async: true,
+                url: rootPath + "Invoice/Fee2Sap",
+                type: 'POST',
+                dataType: 'JSON',
+                data: {
+                    ShipmentId: shipments,
+                    UId: dnitems
+                },
+                "beforeSend": function (xmlHttpRequest, successMsg) {
+                    CommonFunc.ToogleLoading(true);
+                    StatusBarArr.nowStatus("@Resources.Locale.L_InvPkgSetup_Script_138");
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                    CommonFunc.ToogleLoading(false);
+                    var resJson = $.parseJSON(errMsg)
+                    CommonFunc.Notify("", resJson.message, 500, "warning");
+                },
+                success: function (result) {
+                    CommonFunc.ToogleLoading(false);
+                    StatusBarArr.nowStatus("");
+                    console.log(result);
+                    if (result.IsSucceed)
+                        CommonFunc.Notify("", "Send success!", 500, "success");
+                    else
+                    {
+                        CommonFunc.Notify("", result.message, 500, "success"); //alert(result.message);
+                    }
+                    //initLoadData(UId);
+                }
+            });
+        }
+
+        function BatchReloadInvoie() {
+            var mygrid = $("#containerInfoGrid");
+            var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+            var responseData = [];
+            var dnitems = "";
+            $.each(selRowId, function (index, val) {
+                responseData.push(mygrid.getRowData(selRowId[index]));
+            });
+            if (responseData.length < 1) {
+                CommonFunc.Notify("", "@Resources.Locale.L_InvPkgQuery_Script_23", 500, "warning");
+                return;
+            }
+            var shipments = "";
+            for (var i = 0; i < responseData.length; i++) {
+                dnitems += responseData[i].UId + ",";
+                if (shipments.length > 0)
+                    shipments += ",";
+                shipments += responseData[i].DnNo;
+            }
+
+            var iscontinue = window.confirm("@Resources.Locale.L_InvPkgQuery_Script_24 No【" + shipments + "】@Resources.Locale.L_InvPkgQuery_batchreload");
+            if (!iscontinue) {
+                return;
+            }
+            CommonFunc.ToogleLoading(true);
+            $.ajax({
+                async: true,
+                url: rootPath + "Invoice/BatchReloadInvoice",
+                type: 'POST',
+                data: {
+                    "Uid": dnitems
+                },
+                "complete": function (xmlHttpRequest, successMsg) {
+                    CommonFunc.ToogleLoading(false);
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                    CommonFunc.ToogleLoading(false);
+                    var resJson = $.parseJSON(errMsg)
+                    CommonFunc.Notify("", resJson.message, 500, "warning");
+                },
+                success: function (result) {
+                    //var resJson = $.parseJSON(result)
+                    if (result.IsOk == "Y") {
+                        CommonFunc.Notify("", result.message, 500, "success");
+                    }
+                    else {
+                        alert(result.message);
+                    }
+                    $("#SummarySearch").trigger("click");
+                }
+            });
+        }
+        function checkbath(filetype)
+        {
+            var _msg = "";
+            var col = "BatchFlagp";
+            var msg = "@Resources.Locale.L_InvPkgQuery_BATCHFLAGP";
+            switch (filetype) {
+                case "INVO": col = "BatchFlagi"; msg = "@Resources.Locale.L_InvPkgQuery_BATCHFLAGIP"; break;
+                case "CONTRACT": col = "BatchFlagc"; msg = "@Resources.Locale.L_InvPkgQuery_BATCHFLAGCP"; break;
+                case "PACKO": col = "BatchFlagp"; msg = "@Resources.Locale.L_InvPkgQuery_BATCHFLAGPP"; break;
+            }
+            var selRowIds = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+
+            if (selRowIds.length > 0) {
+                for (var i = 0; i < selRowIds.length; i++) {
+                    var selRowId = selRowIds[i];
+                    var BatchFlagp = $("#containerInfoGrid").jqGrid('getCell', selRowId, col);
+                    if (BatchFlagp == "B") {
+                        var DnNo = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'DnNo');
+                        var ShipmentId = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ShipmentId');
+                        if (DnNo != "") {
+                            //alert(DnNo + ":" + msg);
+                            _msg += DnNo + ":" + msg + '\n';
+                        }
+                        else {
+                            _msg += ShipmentId + ":" + msg + '\n';
+                            //alert(ShipmentId + ":" + msg);
+                        }
+                    }
+                }
+                if (_msg != "")
+                {
+                    alert(_msg);
+                    CommonFunc.ToogleLoading(false);
+                    return false;
+                }
+            }
+            return true;
+        }
+        function BatchFile(filetype) {
+            var mygrid = $("#containerInfoGrid");
+            var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+            var responseData = [];
+            var dnitems = "";
+            $.each(selRowId, function (index, val) {
+                responseData.push(mygrid.getRowData(selRowId[index]));
+            });
+            if (responseData.length < 1) {
+                CommonFunc.Notify("", "@Resources.Locale.L_InvPkgQuery_Script_23", 500, "warning");
+                return;
+            }
+            var shipments = "";
+            for (var i = 0; i < responseData.length; i++) {
+                dnitems += responseData[i].UId + ",";
+                if (shipments.length > 0)
+                    shipments += ",";
+                shipments += responseData[i].DnNo;
+            }
+
+            var iscontinue = window.confirm("@Resources.Locale.L_InvPkgQuery_Script_24 No【" + shipments + "】@Resources.Locale.L_InvPkgQuery_Script_25");
+            if (!iscontinue) {
+                return;
+            }
+            CommonFunc.ToogleLoading(true);
+            $.ajax({
+                async: true,
+                url: rootPath + "Invoice/BatchFileToEdoc",
+                type: 'POST',
+                data: {
+                    "Uid": dnitems,
+                    "FileType": filetype
+                },
+                "complete": function (xmlHttpRequest, successMsg) {
+                    CommonFunc.ToogleLoading(false);
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                    CommonFunc.ToogleLoading(false);
+                    var resJson = $.parseJSON(errMsg)
+                    CommonFunc.Notify("", resJson.message, 500, "warning");
+                },
+                success: function (result) {
+                    //var resJson = $.parseJSON(result)
+                    if (result.IsOk == "Y") {
+                        CommonFunc.Notify("", "@Resources.Locale.L_InvPkgQuery_Script_26", 500, "success");
+                    }
+                    else {
+                        alert(result.message);
+                    }
+                    $("#SummarySearch").trigger("click");
+                    //switch (filetype) {
+                    //    case "PACKO": packo = true; break;
+                    //    case "INVO": invo = true; break;
+                    //}
+                }
+            });
+        }
+
+        initSearch(gop);
+        if (DnNo != "") {
+            $("#sel_DnNo").val(DnNo);
+        }
+        if (SpId != "") {
+            $("#sel_ShipmentId").val(SpId);
+        }
+        /*
+            setTimeout(function () {
+
+                $("#SummarySearch").click();
+
+            }, 100);
+                */
+
+        @*$("#PACKING_EXCEL_UPLOAD_FROM").submit(function () {
+            var postData = new FormData($(this)[0]);
+
+            $.ajax({
+                url: rootPath + "Invoice/UploadLntPacking",
+                type: 'POST',
+                data: postData,
+                async: false,
+                beforeSend: function () {
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (data) {
+                    //alert(data)
+                    CommonFunc.ToogleLoading(false);
+                    if (data.message != "success") {
+                        CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpFail" + data.message, 1300, "warning");
+                        return false;
+                    }
+                    CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpSuc", 500, "success");
+                    $("#packingUploadWindow").modal("hide");
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+
+            return false;
+        });*@
+
+        $("#FEE_EXCEL_UPLOAD_FROM").submit(function () {
+            var postData = new FormData($(this)[0]);
+
+            $.ajax({
+                url: rootPath + "Invoice/UploadFreightFee",
+                type: 'POST',
+                data: postData,
+                async: false,
+                beforeSend: function () {
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (data) {
+                    //alert(data)
+                    CommonFunc.ToogleLoading(false);
+                    if (data.message != "success") {
+                        CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpFail" + data.message, 1300, "warning");
+                        return false;
+                    }
+                    CommonFunc.Notify("", "@Resources.Locale.L_BSTQuery_ImpSuc", 500, "success");
+                    $("#feeUploadWindow").modal("hide");
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+
+            return false;
+        });
+    });
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body" style="overflow-x:inherit">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="SubGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Excel汇入视窗-->
+<div class="modal fade" id="feeUploadWindow" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_BSTQuery_ImpExcel</h4>
+            </div>
+            <form name="FEE_EXCEL_UPLOAD_FROM" id="FEE_EXCEL_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-7-60">
+                            <label for="StartRow" class="control-label">@Resources.Locale.L_BSTQuery_BeginRow</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="number" class="form-control input-sm" id="StartRow" name="StartRow" isNumber="true" value="0"/>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="PackingUploadExcel" name="file"/>
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="feeUploadBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Excel汇入视窗-->
+
+<div class="modal fade" id="packingUploadWindow" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_BSTQuery_ImpExcel</h4>
+            </div>
+            <form name="PACKING_EXCEL_UPLOAD_FROM" id="PACKING_EXCEL_UPLOAD_FROM" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-7-60">
+                            <label for="StartRow" class="control-label">L_BSTQuery_BeginRow</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="number" class="form-control input-sm" id="StartRow" name="StartRow" isnumber="true" value="4" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <!-- <div class="pure-g">
+                        <div class="pure-u-sm-7-60">
+                            <label for="ImportStyle" class="control-label">匯入範本</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" id="ImportStyle" name="ImportStyle" >
+                                <option value="1">Style1</option>
+                                <option value="2">Style2</option>
+                                <option value="3">Style3</option>
+                            </select>
+                        </div>
+                    </div> -->
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="PackingUploadExcel" name="file" />
+                            <input type="hidden" id="uploadKeyId" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="modalUploadBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

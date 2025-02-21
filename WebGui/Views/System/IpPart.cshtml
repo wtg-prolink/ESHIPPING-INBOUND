@@ -1,0 +1,381 @@
+﻿@{
+    ViewBag.Title = "IpPart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #page-wrapper {padding: 5px;}
+    .pure-u-1{
+        margin-right: 5px;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        var schemas = "@ViewBag.schemas.Content";
+        schemas = JSON.parse(decodeHtml(schemas));
+        CommonFunc.initField(schemas);
+        //CommonFunc.initField(schemas);
+
+        $("input, textarea").not("[type=submit]").jqBootstrapValidation();
+    });
+</script>
+
+@Html.RazorJSInline("~/Scripts/System/IpPart.js")
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        CommonFunc.ToogleSearch(true);
+        //init Search
+        var gop = {};
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        gop.gridColModel = [
+            { name: 'PartNo', title: '@Resources.Locale.L_IpPart_PartNo', index: 'PartNo', width: 150, sorttype: 'string', hidden: false },
+            { name: 'Cdescp', title: '@Resources.Locale.L_IpPart_Cdescp', index: 'Cdescp', width: 250, sorttype: 'string', hidden: false },
+            { name: 'Descp', title: '@Resources.Locale.L_IpPart_Descp', index: 'Descp', width: 250, hidden: false },
+            { name: 'SupplierCd', title: '@Resources.Locale.L_IpPart_SupplierCd', index: 'SupplierCd', width: 250, sorttype: 'string', hidden: false },
+            { name: 'SupplierNm', title: '@Resources.Locale.L_IpPart_SupplierNm', index: 'SupplierNm', width: 250, sorttype: 'string', hidden: false },
+            { name: 'Goods', title: '@Resources.Locale.L_IpPart_Goods', index: 'Goods', width: 210, sorttype: 'string', hidden: false },
+            { name: 'GoodsDescp', title: '@Resources.Locale.L_IpPart_GoodsDescp', index: 'GoodsDescp', width: 210, sorttype: 'string', hidden: true },
+            { name: 'MafNo', title: '@Resources.Locale.L_IpPart_MafNo', index: 'MafNo', width: 210, sorttype: 'string', hidden: false },
+            { name: 'Cntry', title: '@Resources.Locale.L_IpPart_Cntry', index: 'Cntry', width: 210, sorttype: 'string', hidden: false },
+            { name: 'PartType', title: '@Resources.Locale.L_IpPart_PartType', index: 'PartType', width: 70, align: 'right', sorttype: 'string', hidden: false },
+            { name: 'PartOth', title: '@Resources.Locale.L_IpPart_PartOth', index: 'PartOth', width: 70, sorttype: 'string', hidden: true },
+            { name: 'PartCd', title: '@Resources.Locale.L_IpPart_PartCd', index: 'PartCd', width: 80, hidden: true },
+            { name: 'PartPkg', title: '@Resources.Locale.L_IpPart_PartPkg', index: 'PartPkg', width: 80, hidden: true },
+            { name: 'Crncy', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Crncy', width: 80, hidden: true },
+            { name: 'UnitPrice', title: '@Resources.Locale.L_IpPart_UnitPrice', index: 'UnitPrice', width: 80, hidden: true },
+            { name: 'Bound', title: '@Resources.Locale.L_IpPart_Bound', index: 'Bound', width: 80, hidden: true },
+            { name: 'CheckFlag', title: '@Resources.Locale.L_IpPart_CheckFlag', index: 'CheckFlag', width: 80, hidden: true },
+            { name: 'PaperBox', title: '@Resources.Locale.L_IpPart_PaperBox', index: 'PaperBox', width: 80, hidden: true },
+            { name: 'GroupId', title: 'Group ID', index: 'GroupId', width: 80, hidden: false },
+            { name: 'Remark', title: '@Resources.Locale.L_IpPart_Remark', index: 'Remark', width: 170, sorttype: 'string', hidden: false }
+        ];
+        gop.AddUrl = '#';
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_IpPart_DataTotal", height: gridHeight, rowList: [5, 10, 100], refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "System/IpPartInquiryData";
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+        initSearch(gop);
+
+        function dblClick(map) {
+            var SupplierCd = map.SupplierCd, PartNo = map.PartNo;
+            initLoadData(SupplierCd, PartNo);
+        }
+
+    });
+
+</script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div id="DataSearch">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default" id="approval1">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                        <tr>
+                                            
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="MainArea">
+    			<div class="panel panel-default">
+                    <div class="panel-body" style="padding: 5px 2px;">
+                    	<div class="pure-g">
+                            <div class="pure-u-sm-2-30">
+                                <label f​​or="Dep" class="control-label">@Resources.Locale.L_IpPart_Dep</label>
+                            </div>
+                            <div class="pure-u-sm-3-30">
+                                <select class="form-control input-sm" dt="mt" id="Dep" name="Dep" fieldname="Dep">
+                                </select>
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label f​​or="Bu" class="control-label">@Resources.Locale.L_IpPart_Bu</label>
+                            </div>
+                            <div class="pure-u-sm-3-30">
+                                <select class="form-control input-sm" dt="mt" id="Bu" name="Bu" fieldname="Bu">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-2-30">
+                                <label f​​or="SupplierCd" class="control-label required">@Resources.Locale.L_IpPart_SupplierCd</label>
+                            </div>
+                            <div class="pure-u-sm-4-30">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <div class='input-group'>
+                                            <input class="form-control input-sm" dt="mt" name="SupplierCd" key="true" fieldname="SupplierCd" id="SupplierCd" required />
+                                            <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-default" type="button" id="SupplierCdLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-24-30">
+                                <input type="text" id="SupplierNm" class="form-control input-sm" ref="SupplierCd" dt="mt" name="SupplierNm" fieldname="SupplierNm" readonly />
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-2-30">
+                                <label f​​or="PartNo" class="control-label required">@Resources.Locale.L_IpPart_PartNo</label>
+                            </div>
+                            <div class="pure-u-sm-4-30">
+                                <input type="text" id="PartNo" class="form-control input-sm" dt="mt" name="PartNo" key="true" fieldname="PartNo" required/>
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label f​​or="Descp" class="control-label">@Resources.Locale.L_IpPart_Descp</label>
+                            </div>
+                            <div class="pure-u-sm-22-30">
+                                <input type="text" id="Descp" class="form-control input-sm" dt="mt" name="Descp" fieldname="Descp" />
+                            </div>
+                            
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-2-30">
+                                <label f​​or="Goods" class="control-label">@Resources.Locale.L_IpPart_Goods</label>
+                            </div>
+                            <div class="pure-u-sm-4-30">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <div class="controls">
+                                            <div class="input-group">
+                                                <input type="text" id="Goods" class="form-control input-sm" dt="mt" name="Goods" fieldname="Goods" />
+                                                <span class="input-group-btn">
+                                                <button class="btn btn-sm btn-default" type="button" id="GoodsLookup">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label for="GoodsDescp" class="control-label">@Resources.Locale.L_IpPart_GoodsDescp</label>
+                            </div>
+                            <div class="pure-u-sm-22-30">
+                                <input type="text" id="GoodsDescp" class="form-control input-sm" ref="Goods" dt="mt" name="GoodsDescp" fieldname="GoodsDescp" readonly />
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-2-30">
+                                <label for="MafNo" class="control-label">@Resources.Locale.L_IpPart_MafNo</label>
+                            </div>
+                            <div class="pure-u-sm-4-30 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="MafNo" name="MafNo" fieldname="MafNo" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="MafNoLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label f​​or="Cdescp" class="control-label">@Resources.Locale.L_IpPart_Cdescp</label>
+                            </div>
+                            <div class="pure-u-sm-22-30">
+                                <input type="text" id="Cdescp" class="form-control input-sm" dt="mt" name="Cdescp" fieldname="Cdescp" />
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-2-30">
+                                <label for="Cntry" class="control-label required">@Resources.Locale.L_IpPart_Cntry</label>
+                            </div>
+                            <div class="pure-u-sm-4-30 control-group">
+                                <select class="form-control input-sm" dt="mt" id="Cntry" name="Cntry" fieldname="Cntry" required></select>
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label for="PartType" class="control-label">@Resources.Locale.L_IpPart_PartType</label>
+                            </div>
+                            <div class="pure-u-sm-4-30 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="PartType" name="PartType" fieldname="PartType" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="PartTypeLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label for="PartOth" class="control-label">@Resources.Locale.L_IpPart_PartOth</label>
+                            </div>
+                            <div class="pure-u-sm-4-30 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="PartOth" name="PartOth" fieldname="PartOth" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="PartOthLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label for="PartCd" class="control-label">@Resources.Locale.L_IpPart_PartCd</label>
+                            </div>
+                            <div class="pure-u-sm-4-30 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="PartCd" name="PartCd" fieldname="PartCd" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="PartCdLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label for="PartPkg" class="control-label">@Resources.Locale.L_IpPart_PartPkg</label>
+                            </div>
+                            <div class="pure-u-sm-4-30 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="PartPkg" name="PartPkg" fieldname="PartPkg" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="PartPkgLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="pure-g">
+                            <div class="pure-u-sm-2-30">
+                                <label f​​or="Crncy" class="control-label">@Resources.Locale.L_IpPart_Crncy</label>
+                            </div>
+                            <div class="pure-u-sm-4-30">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <div class="input-group">
+                                            <input type="text" id="Crncy" class="form-control input-sm" dt="mt" name="Crncy" fieldname="Crncy" />
+                                            <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-default" type="button" id="CrncyLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-6-30">
+                                <input type="text" id="UnitPrice" class="form-control input-sm" ref="Crncy" dt="mt" name="UnitPrice" fieldname="UnitPrice">
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label f​​or="Bound" class="control-label">@Resources.Locale.L_IpPart_Bound</label>
+                            </div>
+                            <div class="pure-u-sm-4-30">
+                                <select class="form-control input-sm" id="Bound" dt="mt" name="Bound" fieldname="Bound">
+                                    <option value="Y">Y</option>
+                                    <option value="N">N</option>
+                                </select>
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label f​​or="CheckFlag" class="control-label">@Resources.Locale.L_IpPart_CheckFlag</label>
+                            </div>
+                            <div class="pure-u-sm-4-30">
+                                <select class="form-control input-sm" id="CheckFlag" dt="mt" name="CheckFlag" fieldname="CheckFlag">
+                                    <option value="Y">Y</option>
+                                    <option value="N">N</option>
+                                </select>
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label f​​or="PaperBox" class="control-label">@Resources.Locale.L_IpPart_PaperBox</label>
+                            </div>
+                            <div class="pure-u-sm-4-30">
+                                <select class="form-control input-sm" id="PaperBox" dt="mt" name="PaperBox" fieldname="PaperBox">
+                                    <option value="Y">Y</option>
+                                    <option value="N">N</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-2-30">
+                                <label for="PartdGrid" class="control-label">@Resources.Locale.L_IpPart_PartdGrid</label>
+                            </div>
+                            <div class="pure-u-sm-12-30">
+                                <table id="PartdGrid" class="_tableGrid" style="width: 100%;"></table>
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label for="Remark" class="control-label">@Resources.Locale.L_IpPart_Remark</label>
+                            </div>
+                            <div class="pure-u-sm-14-30">
+                                <textarea type="text" id="Remark" class="form-control lastInput" dt="mt" name="Remark" fieldname="Remark" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-1-30">
+                                <label for="Cmp" class="control-label">@Resources.Locale.L_IpPart_Cmp</label>
+                            </div>
+                            <div class="pure-u-sm-2-30">
+                                <input type="text" id="Cmp" class="form-control input-sm" dt="mt" name="Cmp" fieldname="Cmp" readonly />
+                            </div>
+                            <div class="pure-u-sm-1-30 label-right">
+                                <label for="Stn" class="control-label">@Resources.Locale.L_IpPart_Stn</label>
+                            </div>
+                            <div class="pure-u-sm-2-30">
+                                <input type="text" id="Stn" class="form-control input-sm" dt="mt" name="Stn" fieldname="Stn" readonly />
+                            </div>
+                            <div class="pure-u-sm-4-30 label-right">
+                                <label for="CreateBy" class="control-label">@Resources.Locale.L_IpPart_CreateBy</label>
+                            </div>
+                            <div class="pure-u-sm-4-30">
+                                <input type="text" id="CreateBy" class="form-control input-sm" dt="mt" name="CreateBy" fieldname="CreateBy" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-30">
+                                <input type="text" id="CreateDate" class="form-control input-sm" dt="mt" name="CreateDate" fieldname="CreateDate" readonly />
+                            </div>
+                            <div class="pure-u-sm-2-30 label-right">
+                                <label for="ModifyBy" class="control-label">@Resources.Locale.L_IpPart_ModifyBy</label>
+                            </div>
+                            <div class="pure-u-sm-4-30">
+                                <input type="text" id="ModifyBy" class="form-control input-sm" dt="mt" name="ModifyBy" fieldname="ModifyBy" readonly />
+                            </div>
+                            <div class="pure-u-sm-5-30">
+                                <input type="text" id="ModifyDate" class="form-control input-sm" dt="mt" name="ModifyDate" fieldname="ModifyDate" readonly />
+                            </div>
+                        </div>
+                        
+    		  		</div>
+    			</div>
+            </div>
+
+        </div>
+    </div>
+</div>

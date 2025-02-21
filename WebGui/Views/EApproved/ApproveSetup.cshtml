@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "ApproveSetup";
+}
+<style>
+    #page-wrapper {padding: 5px;}
+</style>
+<script type="text/javascript">
+	var AData  = @Html.Raw(Json.Encode(@ViewBag.AData));
+	var obj = JSON.parse(AData.Content);
+	var DeAData= obj.rows;
+</script>
+
+@Html.RazorJSInline("~/Scripts/EApproved/ApproveSetup.js")
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+        	<div class="row">
+				<div class="col-xs-5">
+		            <table id="ApproveGroup" class="_tableGrid" style="width: 100%">
+		                <tr>
+		                    <td />
+		                </tr>
+		            </table>
+		        </div>
+		        <div class="col-xs-7" style="padding-left:0px;">
+		        	<table id="ApproveFlow" class="_tableGrid" style="width: 100%">
+		        	    <tr>
+		        	        <td />
+		        	    </tr>
+		        	</table>
+		        </div>
+        	</div>
+        </div>
+    </div>
+</div>
+<input id="rootPath" type="hidden" value="@Url.Content("~")" />

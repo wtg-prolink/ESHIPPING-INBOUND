@@ -1,0 +1,197 @@
+﻿@{
+    ViewBag.Title = "DRuleSetup";
+}
+<script type="text/javascript" src="" ></script>
+
+@Html.RazorJSInline("~/Scripts/DistManage/DRule.js")
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var schemas = "@ViewBag.schemas.Content";
+</script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+
+                    	<div class="pure-u-sm-5-60">
+                            <label for="Cmp" class="control-label">Location</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="Cmp" name="Cmp" fieldname="Cmp" readonly/>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Term" class="control-label">@Resources.Locale.L_DNApproveManage_TrackWay</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="TrackWay" name="TrackWay" fieldname="TrackWay">
+                            </select>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Term" class="control-label">@Resources.Locale.L_DNApproveManage_CargoType</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="Term" name="Term" fieldname="Term">
+                            </select>
+                            
+                            <!--<div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Term" name="Term" fieldname="Term"  />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="TermLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>-->
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="PickupPort" class="control-label">@Resources.Locale.L_DRule_PickupPort</label>
+                        </div>                        
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PickupPort" name="PickupPort" fieldname="PickupPort"  />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PickupPortLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="DeliveryPort" class="control-label">@Resources.Locale.L_DNApproveManage_Pod</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                             <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="DeliveryPort" name="DeliveryPort" fieldname="DeliveryPort"  />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="DeliveryPortLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                         <div class="pure-u-sm-15-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="DeliveryPortnm" name="DeliveryPortnm" fieldname="DeliveryPortnm" readonly />
+                        </div>    
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="State" class="control-label">@Resources.Locale.L_BaseLookup_State</label>
+                        </div>                        
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="State" name="State" fieldname="State"  />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="StateLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                                       	
+                        <div class="pure-u-sm-5-60  label-right">
+                    	    <label for="Region" class="control-label ">@Resources.Locale.L_BaseLookup_Region</label>
+                    	</div>
+                    	<div class="pure-u-sm-10-60">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Region" name="Region" fieldname="Region" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="RegionLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+
+                    	</div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="ViaPort" class="control-label">@Resources.Locale.L_DRule_ViaPort</label>
+                        </div>                        
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ViaPort" name="ViaPort" fieldname="ViaPort" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="ViaPortLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-5-60  label-right">
+                            <label for="Model" class="control-label">@Resources.Locale.L_DRule_Model</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Model" name="Model" fieldname="Model"  />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="ModelLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Customer" class="control-label">Customer</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                             <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Customer" name="Customer" fieldname="Customer"  />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CustomerLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="CustomerNm" name="CustomerNm" fieldname="CustomerNm" readonly />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="LspNo" class="control-label">@Resources.Locale.L_DRule_LspNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="LspNo" name="LspNo" fieldname="LspNo"  />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="LspNoLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="LspNm" name="LspNm" fieldname="LspNm" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Remark" class="control-label">@Resources.Locale.L_BSCSSetup_Remark</label>
+                        </div>
+                        <div class="pure-u-sm-25-60">                            
+                            <textarea dt="mt" class="form-control input-sm" id="Remark" name="Remark" fieldname="Remark">
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <input type="hidden" dt="mt"  isKey="true" id="UId" name="UId" fieldname="UId" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

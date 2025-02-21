@@ -1,0 +1,406 @@
+﻿@{
+    ViewBag.Title = "Local @Resources.Locale.L_FCLFSetup_F3";
+}
+<style>
+    .pod {
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var _LspCd = "@ViewBag.LspCd";
+    var _RfqNo = "@ViewBag.RfqNo";
+    var schemas = "@ViewBag.schemas.Content";
+    var _Op = "@ViewBag.Op";
+    var ioflag = "@ViewBag.ioflag";
+    var FMOption = "@ViewData["RN_FM"]";
+    var isa = "@ViewBag.isa";
+</script>
+
+<script type="text/javascript" src="~/Scripts/TKBL/initView.js?20240815"></script>
+<script type="text/javascript" src="~/Scripts/IQTManage/qtBase.js?20231022"></script>
+<script type="text/javascript" src="~/Scripts/IQTManage/QuotLocalSetup.js?20240815"></script>
+<script type="text/javascript" src="~/Scripts/IQTManage/QuotApprove.js?20220523"></script>
+@*<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+    @Html.RazorJSInline("~/Scripts/IQTManage/qtBase.js")
+    @Html.RazorJSInline("~/Scripts/IQTManage/QuotLocalSetup.js")*@
+
+
+<!--Excel汇入视窗-->
+<div class="modal fade" id="ExcelWindow">
+    <div class="modal-dialog modal-lg" style="width:450px;">
+        <div class="modal-content" style="width:450px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_QTSetup_Caution</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <iframe src="FileUpload" style="border:0px;height:100%; width:100%;" id="FileUploadIframe"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="QuotNo" class="control-label">@Resources.Locale.L_QTQuery_QuotNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="hidden" id="UId" dt="mt" fieldname="UId" iskey="true" />
+                            <input type="hidden" id="TranMode" dt="mt" fieldname="TranMode" />
+                            <input type="hidden" id="Period" dt="mt" fieldname="Period" />
+                            <input type="hidden" id="Incoterm" dt="mt" fieldname="Incoterm" />
+                            <input type="text" class="form-control input-sm" dt="mt" id="QuotNo" name="QuotNo" fieldname="QuotNo" readonly />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="QuotDate" class="control-label">@Resources.Locale.L_QTQuery_QuotDate</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="QuotDateL" name="QuotDateL" fieldname="QuotDateL" />
+                            @*<p class="help-block tooltips"></p>*@
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="OutIn" class="control-label">@Resources.Locale.L_RQQuery_OutIn</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="OutIn" name="OutIn" fieldname="OutIn" readonly>
+
+                                <option value="I">I:InBound</option>
+                                <option value="O">O:OutBound</option>
+                            </select>
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="QuotType" class="control-label">@Resources.Locale.L_GateReserve_Status</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="QuotType" name="QuotType" fieldname="QuotType">
+                                <option value="P">P:@Resources.Locale.L_QTSetup_Prepare</option>
+                                <option value="Q">Q:@Resources.Locale.L_QTSetup_Quote</option>
+                                <option value="V">V:@Resources.Locale.L_MenuBar_Audit</option>
+                                <option value="A">A:@Resources.Locale.L_InvCheck_Views_214</option>
+                                <option value="I">I:Enquiry</option>
+                                <option value="R">R:@Resources.Locale.L_ActCheck_Views_4</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Rlocation" class="control-label">@Resources.Locale.L_RQQuery_Rlocation</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Rlocation" name="Location" fieldname="Rlocation" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="RlocationLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="RlocationNm" fieldname="RlocationNm" name="RlocationNm" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="EffectFrom" class="control-label">@Resources.Locale.L_RQQuery_EffectFrom</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="EffectFrom" name="EffectFrom" fieldname="EffectFrom" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="EffectTo" class="control-label">@Resources.Locale.L_RQQuery_EffectTo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="EffectTo" name="EffectTo" fieldname="EffectTo" />
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="LspCd" class="control-label">@Resources.Locale.L_AirSetup_LspCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="LspCd" name="LspCd" fieldname="LspCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="LspCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="LspNm" fieldname="LspNm" name="LspNm" />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Shared" class="control-label">Shared to</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="SharedTo" name="SharedTo" fieldname="SharedTo" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="SharedToLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="SharedNm" fieldname="SharedNm" name="SharedNm" />
+                        </div>
+
+                        @*  <div class="pure-u-sm-5-60 label-right">
+                                <label for="Cur" class="control-label" style="display:none;">@Resources.Locale.L_IpPart_Crncy</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group" style="display:none;">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="Cur" name="Cur" fieldname="Cur" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="CurLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>*@
+
+                        @* <div class="pure-u-sm-5-60 label-right">
+                                <label for="Incoterm" class="control-label">@Resources.Locale.L_DNApproveManage_Incoterm</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="Incoterm" name="Incoterm" fieldname="Incoterm"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="IncotermLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>*@
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="CustCd" class="control-label">Customer</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CustCd" name="CustCd" fieldname="CustCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CustCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CustNm" fieldname="CustNm" name="CustNm" />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="TranType" class="control-label">@Resources.Locale.L_BaseLookup_TranMode</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="TranType" name="TranType" fieldname="TranType">
+                                <option value="A">A:Air</option>
+                                <option value="L">L:LCL</option>
+                                <option value="F">F:FCL</option>
+                                <option value="R">R:RailWay</option>
+                                <option value="D">D:Inland Express</option>
+                                <option value="T">T:Truck</option>
+                                <option value="E">E:Express</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="FreightTerm" class="control-label">Freight Term</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="FreightTerm" name="FreightTerm" fieldname="FreightTerm">
+                                <option value="P">P:Prepaid</option>
+                                <option value="C">C:Collect</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pure-g" id="oport_city">
+                        <div class="pure-u-sm-5-60 pod">
+                            <label for="PodCd" class="control-label">@Resources.Locale.L_BaseLookup_PodCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group pod">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PodCd" name="PodCd" fieldname="PodCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PodCdLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-15-60 pod">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PodNm" fieldname="PodNm" name="PodNm" readonly />
+                        </div>
+
+                        @*<div class="pure-u-sm-5-60 pol">
+                                <label for="PolCd" class="control-label">@Resources.Locale.L_BaseLookup_PolCd</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group pol">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="PolCd" name="PolCd" fieldname="PolCd" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="PolCdLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-15-60 pol">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PolNm" fieldname="PolNm" name="PolNm" readonly />
+                            </div>*@
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="CreditTo" class="control-label">@Resources.Locale.L_QTManage_ClCmp</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CreditTo" name="CreditTo" fieldname="CreditTo" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CreditToLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreditNm" fieldname="CreditNm" name="CreditNm" />
+                        </div>
+                    </div>
+
+                    <div class="pure-g" id="oport_truck_city">
+                        <div class="pure-u-sm-5-60 pod">
+                            <label for="PodCd" class="control-label">@Resources.Locale.L_BaseLookup_PodCd</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group pod">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="PodCd2" name="PodCd" fieldname="PodCd" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PodCdLookup2">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-15-60 pod">
+                            <input type="text" class="form-control input-sm" dt="mt" id="PodNm2" fieldname="PodNm" name="PodNm" readonly />
+                        </div>
+
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="CreditTo" class="control-label">@Resources.Locale.L_QTManage_ClCmp</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CreditTo2" name="CreditTo" fieldname="CreditTo" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CreditToLookup2">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-15-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreditNm2" fieldname="CreditNm" name="CreditNm" />
+                        </div>
+                    </div>
+
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="QuotRmk" class="control-label">@Resources.Locale.L_AirSetup_QuotRmk</label>
+                        </div>
+                        <div class="pure-u-sm-55-60">
+                            <textarea class="form-control lastInput" dt="mt" id="QuotRmk" name="QuotRmk" fieldname="QuotRmk" style="height:110px;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="CreateCmp" class="control-label">@Resources.Locale.L_DNApproveManage_CreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" name="CreateBy" fieldname="CreateBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateDateL" name="CreateDateL" fieldname="CreateDateL" readonly>
+                        </div>
+                        <div class="pure-u-sm-13-60 label-right">
+                            <label for="ApproveCmp" class="control-label">@Resources.Locale.L_ActSetup_VerifyBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ApproveBy" name="ApproveBy" fieldname="ApproveBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ApproveDateL" name="ApproveDateL" fieldname="ApproveDateL" readonly />
+                        </div>
+                    </div>
+
+
+                    <div class="pure-g" id="main_grid">
+                        <div class="pure-u-sm-60-60">
+                            <table id="MainGrid" class="_tableGrid" style="width: 100%">
+                                <tr></tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="pure-g" id="truck_main_grid">
+                        <div class="pure-u-sm-60-60">
+                            <table id="TruckMainGrid" class="_tableGrid" style="width: 100%">
+                                <tr></tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <input type="hidden" dt="mt" iskey="true" id="UId" name="UId" fieldname="UId" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--簽核退回視窗-->
+<div class="modal fade" id="ApproveBack" sid="">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Resources.Locale.L_ActManage_RC</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-60-60">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">@Resources.Locale.L_ActManage_RDescp</label>
+                            <textarea class="form-control" id="BackRemark" name="BackRemark" fieldname="BackRemark"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseBackWin">Close</button>
+                <button type="button" class="btn btn-primary" onclick="BackApprove()" id="BackConfirm">@Resources.Locale.L_BSCSDateQuery_Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>

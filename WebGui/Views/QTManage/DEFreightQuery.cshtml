@@ -1,0 +1,611 @@
+﻿@{
+    ViewBag.Title = "DEFreightQuery";
+}
+
+
+<style type="text/css">
+    .otherColor {
+        background-color: #91E67B;
+    }
+
+    .myColor {
+        background-color: #6BBFF1;
+    }
+
+    .fixColor {
+        background-color: #FFC458;
+    }
+
+    .upDownColor {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff84a0+0,ffffff+99 */
+        background: #ff84a0; /* Old browsers */
+        background: -moz-linear-gradient(top, #ff84a0 0%, #ffffff 99%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #ff84a0 0%,#ffffff 99%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #ff84a0 0%,#ffffff 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff84a0', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    }
+
+    .showBox {
+        width: 16px;
+        height: 16px;
+        float: left;
+    }
+</style>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+
+<script type="text/javascript">
+    var _selectTRGN = "@ViewBag.SelectTRGN";
+    var _selectSTATE = "@ViewBag.SelectSTATE";
+    var select_trantype = "@ViewBag.SelectTranType";
+    function getData(url, data, callBackFn) {
+        CommonFunc.ToogleLoading(true);
+        $.ajax({
+            async: true,
+            url: url,
+            type: 'POST',
+            data: data,
+            "complete": function (xmlHttpRequest, successMsg) {
+                CommonFunc.ToogleLoading(false);
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+            },
+            success: function (result) {
+                console.log(result);
+                var resJson = $.parseJSON(result);
+                callBackFn(resJson);
+            }
+        });
+    }
+
+    var _cdata = {};
+
+    function _initSearchGrid(id, colModel, caption, loadSubData) {
+        var numberTemplate = "2";
+        var gridHeight = 300;
+        var gop = {};
+        gop.gridColModel = colModel
+        gop.AddUrl = false;
+        gop.gridId = id;
+        gop.gridAttr = { caption: caption, height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+        gop.gridSearchUrl = rootPath + "QTManage/GetQTDetailData";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        gop.onSelectRowFunc = function (jsonMap) {
+            //顯示子表
+            if (loadSubData)
+                loadSubData(jsonMap);
+        }
+        initSearch(gop);
+    }
+
+    _handler.intiGrid1 = function (id, grid, op, loadSubData) {
+        _initSearchGrid(id, op.colModel, op.caption, loadSubData);
+    }
+
+    function initDGrid() {
+        var colModel = [
+              { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'UFid', title: 'U FID', index: 'UFid', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'RfqNo', title: '@Resources.Locale.L_RQQuery_RfqNo', index: 'RfqNo', sorttype: 'string', width: 100, editable: true, hidden: false },
+       { name: 'QuotNo1', title: '@Resources.Locale.L_QTSetup_QuoNo', index: 'QuotNo1', sorttype: 'string', width: 100, editable: true, hidden: false },
+       { name: 'ChgRemark', title: '@Resources.Locale.L_QTSetup_ReherseResult', index: 'ChgRemark', sorttype: 'string', width: 200, editable: true, hidden: false, classes: "normal-white-space" },
+       { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'PolNm', title: '@Resources.Locale.L_AirSetup_PolNm', index: 'PolNm', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'LspCd', title: '@Resources.Locale.L_AirQuery_LspCd', index: 'LspCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'AllIn', title: '@Resources.Locale.L_AirQuery_AllIn', index: 'AllIn', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'Incoterm', title: '@Resources.Locale.L_DNApproveManage_Incoterm', index: 'Incoterm', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'TranMode', title: '@Resources.Locale.L_RQQuery_TranMode', index: 'TranMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'PolCd', title: '@Resources.Locale.L_DEQuery_PolCd', index: 'PolCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+       { name: 'PodCd', title: '@Resources.Locale.L_DEQuery_PodCd', index: 'PodCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+       { name: 'PodNm', title: '@Resources.Locale.L_DEQuery_PodNm', index: 'PodNm', sorttype: 'string', width: 180, align: 'left', editable: false, hidden: false },
+       { name: 'Tt', title: '@Resources.Locale.L_DEQuery_Tt', index: 'Tt', width: 80, align: 'right', formatter: 'integer', editable: true, hidden: false },
+       { name: 'F1', title: '@Resources.Locale.L_DEQuery_F1', index: 'F1', width: 120, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, editable: true, hidden: false },
+       { name: 'F2', title: '@Resources.Locale.L_DEQuery_F2', index: 'F2', width: 120, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, editable: true, hidden: false },
+       { name: 'F3', title: '@Resources.Locale.L_DEQuery_F3', index: 'F3', width: 120, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, editable: true, hidden: false },
+       { name: 'F4', title: '@Resources.Locale.L_DEQuery_F4', index: 'F4', width: 120, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, editable: true, hidden: false },
+       { name: 'ServiceMode', title: 'Service Mode', index: 'ServiceMode', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'LoadingFrom', title: 'Loading From', index: 'LoadingFrom', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'LoadingTo', title: 'Loading To', index: 'LoadingTo', sorttype: 'string', width: 100, editable: true, hidden: true },
+       { name: 'SeqNo', title: '@Resources.Locale.L_NRSSetup_SeqNo', index: 'SeqNo', sorttype: 'string', width: 250, hidden: true, editable: false }
+       ];
+    
+        _handler.intiGrid1("Dgrid", $("#Dgrid"), {
+            colModel: colModel, caption: '@Resources.Locale.L_QTManage_DmEpTranMag', delKey: ["UId"], height: 200, datatype: "local",
+            data: [],
+            url: rootPath + "QTManage/GetQTDetailData"
+        });
+    }
+
+    jQuery(document).ready(function ($) {
+        function setDate(id) {
+            $("#" + id).wrap('<div class="input-group">').datepicker({
+                showOn: "button",
+                changeYear: true,
+                dateFormat: "yy-mm-dd",
+                beforeShow: function () {
+                    setTimeout(function () {
+                        $('.ui-datepicker').css('z-index', 99999999999999);
+                    }, 0);
+                },
+                onClose: function (text, inst) {
+                    $(this).focus();
+                }
+            }).next("button").button({ icons: { primary: "ui-icon-calendar" }, label: "Select a date", text: false })
+                .addClass("btn btn-sm btn-info").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+                .wrap('<span class="input-group-btn">')
+                .find('.ui-button-text')
+                .css({
+                    'visibility': 'hidden',
+                    'display': 'inline'
+                });
+        }
+        setDate("FSearchRDate");
+        setDate("ASearchRDate");
+        var lookup = $.extend(LookUpConfig.CityPortLookup, { multiselect: true });
+        registBtnLookup($("#PolCdLookup"), {
+            isMutiSel: true,
+            item: "#PolCd", url: rootPath + LookUpConfig.CityPortUrl, config: lookup, param: "", selectRowFn: function (map) {
+                $("#PolCd").val(map.CntryCd + map.PortCd);
+                $("#PolNm").val(map.PortNm);
+            }
+        }, {
+            responseMethod: function (data) {
+                console.log(data);
+                var str = "";
+                $.each(data, function (index, val) {
+                    str = str + data[index].CntryCd + data[index].PortCd + ";";
+                });
+                $("#PolCd").val(str);
+            }
+        });
+
+        registBtnLookup($("#PodCdLookup"), {
+            isMutiSel: true,
+            item: "#PodCd", url: rootPath + LookUpConfig.CityPortUrl, config: lookup, param: "", selectRowFn: function (map) {
+                $("#PodCd").val(map.CntryCd + map.PortCd);
+                $("#PodNm").val(map.PortNm);
+            }
+        }, {
+            responseMethod: function (data) {
+                console.log(data);
+                var str = "";
+                $.each(data, function (index, val) {
+                    str = str + data[index].CntryCd + data[index].PortCd + ";";
+                });
+                $("#PodCd").val(str);
+            }
+        });
+
+        var GetSiteCmpAuto = function (groupId, $grid, autoFn, clearFn) {
+            var op =
+            {
+                autoCompDt: "dt=stn&GROUP_ID=" + groupId + "&TYPE=1&CMP=",
+                autoCompParams: "CMP=showValue,CMP,NAME",
+                autoCompFunc: function (elem, event, ui, rowid) {
+                    autoFn($grid, ui.item.returnValue, elem, rowid);
+                },
+                autoClearFunc: function (elem, event, rowid) {
+                    clearFn($grid, elem, rowid);
+                }
+            };
+            return op;
+        }
+
+        registBtnLookup($("#CmpLookup"), {
+            item: "#SearchCmp", url: rootPath + "TPVCommon/GetSiteCmpData", config: LookUpConfig.SiteLookup, param: "", selectRowFn: function (map) {
+                $("#SearchCmp").val(map.Cd);
+                $("#CmpNm").val(map.CdDescp);
+            }
+        }, { baseCondition: " GROUP_ID='" + groupId + "' AND TYPE='1'" }, GetSiteCmpAuto(groupId, undefined, function ($grid, rd, elem) {
+            $("#SearchCmp").val(rd.CMP);
+            $("#CmpNm").val(rd.NAME);
+        }, function ($grid, elem, rowid) {
+            $("#SearchCmp").val("");
+            $("#CmpNm").val("");
+        }));
+        getSelectOptions();
+
+
+        function getSelectOptions() {
+            $.ajax({
+                async: false,
+                url: rootPath + "TKBL/GetSelects",
+                type: 'POST',
+                data: { type: encodeURIComponent("PartyDocSetup") },
+                "error": function (xmlHttpRequest, errMsg) {
+                    alert(errMsg);
+                },
+                success: function (data) {
+                    var trnOptions = data.TNT || [];
+                    var tdOptions = data.TD || [];
+                    tdOptions.splice(0, 0, { cdDescp: "", cd: "" });
+                    //appendSelectOption($("#TranMode"), trnOptions);
+                    appendSelectOption($("#Incoterm"), tdOptions);
+                    showView();
+                }
+            });
+        }
+        showView();
+
+        $("#TranMode").change(function () {
+            showView();
+        });
+
+        var _grid;
+        function showView() {
+            var tranModes = ["A", "D", "E", "F", "L", "T"];
+            var val = $("#TranMode").val();
+            //$("#cityDiv").show();
+            //$("#portDiv").hide();
+            //if (val === "D" || val === "T") {
+            //    $("#cityDiv").hide();
+            //    $("#portDiv").show();
+            //}
+            for (var i = 0; i < tranModes.length; i++) {
+                var tran = tranModes[i];
+                if (val === tran) {
+                    _grid = $("#" + tran + "grid");
+                    $("#" + tran + "gridView").show();
+                }
+                else
+                    $("#" + tran + "gridView").hide();
+            }
+        }
+
+        initDGrid();
+
+        function inqData() {
+            if (!_grid) return;
+            var pms = [];
+            var tranMode = $("#TranMode").val();
+            pms.push({ name: "TranMode", sopt: "eq", val: tranMode, dt: "" });
+
+            var params = "";
+            var name = "", sopt;
+            for (var i = 0; i < pms.length; i++) {
+                name = pms[i].name || "";
+                sopt = pms[i].sopt || "eq";
+                if (isEmpty(name))
+                    continue;
+                if (isEmpty(pms[i].val))
+                    continue;
+                if (params.length > 0)
+                    params += "&";
+                params += "sopt_" + name + "=" + sopt + "&" + name + "=" + pms[i].val + "&dt_" + name + "=" + (pms[i].dt || '');
+            }
+
+            var baseCondition = "";
+            var vir_params = "";
+            var etd = encodeURIComponent($("#" + tranMode + "SearchRDate").val());
+            if (tranMode === "E" || tranMode === "A" || tranMode === "D")
+                etd = encodeURIComponent($("#ASearchRDate").val());
+            _grid.jqGrid('setGridParam', {
+                url: rootPath + "QTManage/GetQTDetailData", datatype: "json",
+                postData: {
+                    TranMode: encodeURIComponent($("#TranMode").val() || ''),
+                    TranType: encodeURIComponent($("#TranType").val()||''),
+                    carType: encodeURIComponent($("#carType").val() || ''),
+                    car_cw: encodeURIComponent($("#car_cw").val() || ''),
+                    cw: encodeURIComponent($("#cw").val()),
+                    y: encodeURIComponent($("#year").val()),
+                    w: encodeURIComponent($("#week").val()),
+                    Cnt20: encodeURIComponent($("#Cnt20").val()),
+                    Cnt40: encodeURIComponent($("#Cnt40").val()),
+                    Cnt40hq: encodeURIComponent($("#Cnt40hq").val()),
+                    etd: etd || '',
+                    y: encodeURIComponent($("#year").val()),
+                    y: encodeURIComponent($("#year").val()),
+                    y: encodeURIComponent($("#year").val()),
+                    pol: encodeURIComponent($("#PolCd").val()),
+                    pod: encodeURIComponent($("#PodCd").val()),
+                    rlocation: encodeURIComponent($("#SearchCmp").val()),
+                    incoterm: encodeURIComponent($("#Incoterm").val()),
+                    'conditions': params,//jQuery.serialize()已经是进行URL编码过的。
+                    'baseCondition': baseCondition,
+                    'virConditions': vir_params
+                }
+            }).trigger("reloadGrid")
+        }
+        $("#searchBtn").click(function () {
+            inqData();
+        });
+
+        $("#searchBtn1").click(function () {
+            inqData();
+        });
+    });
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form id="SearchForm">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-4-60">
+                                <label class="control-label">Location</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="SearchCmp" name="SearchCmp" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-info" type="button" id="CmpLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" id="CmpNm" readonly />
+                            </div>
+
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="SampleName" class="control-label">@Resources.Locale.L_BaseLookup_TranMode</label>
+                            </div>
+                            <div class="pure-u-sm-6-60 control-group">
+                                <select class="form-control input-sm" id="TranMode" name="TranMode">
+                                    <option value="F">F:FCL</option>
+                                    <option value="L">L:LCL</option>
+                                    <option value="T">T:Truck</option>
+                                    <option value="D">D:INLAND EXPRESS</option>
+                                    <option value="E">E:EXPRESS</option>
+                                    <option value="A">A:AIR</option>
+                                </select>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label class="control-label">Term</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <select class="form-control input-sm" id="Incoterm" name="Incoterm">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        @*   <div class="pure-g">
+                            <div class="pure-u-sm-4-60">
+                                <label class="control-label">年</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="year" />
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                            </div>
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="SampleName" class="control-label">周</label>
+                            </div>
+                            <div class="pure-u-sm-6-60 control-group">
+                               <input type="text" class="form-control input-sm" id="week" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>*@
+                        <div class="pure-g">
+                            <div class="pure-u-sm-4-60">
+                                <label class="control-label">20'</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="Cnt20" />
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="SampleName" class="control-label">40'</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <input type="text" class="form-control input-sm" id="Cnt40" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="SampleName" class="control-label">40'HQ</label>
+                            </div>
+                            <div class="pure-u-sm-6-60 control-group">
+                                <input type="text" class="form-control input-sm" id="Cnt40hq" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="SampleName" class="control-label">@Resources.Locale.L_DNApproveManage_ETD</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <input type="text" class="form-control input-sm" id="FSearchRDate" name="FSearchRDate" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-4-60">
+                                <label class="control-label">CW</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="cw" />
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="SampleName" class="control-label">@Resources.Locale.L_DNApproveManage_ETD</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <input type="text" class="form-control input-sm" id="ASearchRDate" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+                        <div class="pure-g" id="cityDiv">
+                            <div class="pure-u-sm-4-60">
+                                <label for="PolCd" class="control-label">@Resources.Locale.L_BaseLookup_PolCd</label>
+                            </div>
+                            <div class="pure-u-sm-15-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="PolCd" name="PolCd" fieldname1="PolCd" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="PolCdLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-20-60">
+                                <input type="text" class="form-control input-sm" id="PolNm" fieldname1="PolNm" name="PolNm" readonly />
+                            </div>
+                        </div>
+                        <div class="pure-g" id="cityDiv1">
+                            <div class="pure-u-sm-4-60">
+                                <label for="PodCd" class="control-label">@Resources.Locale.L_BaseLookup_PodCd</label>
+                            </div>
+                            <div class="pure-u-sm-15-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="PodCd" name="PodCd" fieldname1="PodCd" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="PodCdLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-20-60">
+                                <input type="text" class="form-control input-sm" id="PodNm" fieldname1="PodNm" name="PodNm" readonly />
+                            </div>
+
+                            <div class="pure-u-sm-1-60"></div>
+                            <div class="pure-u-sm-5-60">
+                                <button class="btn btn-sm btn-info" type="button" id="searchBtn">@Resources.Locale.L_MenuBar_Search</button>
+                            </div>
+                        </div>
+                        @*  <div class="pure-g" id="portDiv" style="display:none;">
+                            <div class="pure-u-sm-4-60">
+                                <label for="PolCd" class="control-label">@Resources.Locale.L_BaseLookup_PolCd</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="PolCd1" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="PolCdLookup1">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" id="PolNm1" readonly/>
+                            </div>
+
+                            <div class="pure-u-sm-4-60 label-right">
+                                <label for="PodCd" class="control-label">@Resources.Locale.L_BaseLookup_PodCd</label>
+                            </div>
+                            <div class="pure-u-sm-5-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="PodCd1" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="PodCdLookup1">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="pure-u-sm-10-60">
+                                <input type="text" class="form-control input-sm" id="PodNm1" readonly />
+                            </div>
+
+                            <div class="pure-u-sm-1-60"></div>
+                            <div class="pure-u-sm-5-60">
+                                <button class="btn btn-sm btn-info" type="button" id="searchBtn1">查詢</button>
+                            </div>
+                        </div>*@
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="AgridView" style="display: none;">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Agrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default" id="DgridView" style="display: none;">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Dgrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default" id="EgridView" style="display: none;">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Egrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="FgridView" style="display: none;">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Fgrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Fgrid1" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="LgridView" style="display: none;">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Lgrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="TgridView" style="display: none;">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="Tgrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

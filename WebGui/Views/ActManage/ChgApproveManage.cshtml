@@ -1,0 +1,578 @@
+﻿@{
+    ViewBag.Title = "@Resources.Locale.L_ChgApproveManage_Views_164";
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/BaseLookup.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/ActManage/ActModle.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/commonColModel.js")"></script>
+<script type="text/javascript">
+    var select_tranmode = ":;" + "@ViewBag.SelectTranMode";
+    var select_location = "@ViewBag.SelectLocation";
+    var _uploadUser = "";
+    var _uid = "";
+
+    function getData(url, data, callBackFn) {
+        CommonFunc.ToogleLoading(true);
+        $.ajax({
+            async: true,
+            url: url,
+            type: 'POST',
+            data: data,
+            "complete": function (xmlHttpRequest, successMsg) {
+                CommonFunc.ToogleLoading(false);
+            },
+            "error": function (xmlHttpRequest, errMsg) {
+            },
+            success: function (result) {
+                console.log(result);
+                var resJson = $.parseJSON(result);
+                callBackFn(resJson);
+            }
+        });
+    }
+
+    $(document).ready(function ($) {
+        var actFormatter = function (cellvalue, options, rawObject) {
+            var val = rawObject.UId||'';
+            return '<a href="JavaScript:modify_grid(\'' + cellvalue + '\',' + options.rowId + ')">@Resources.Locale.L_SYS_EDIT</a>';
+        };
+
+        //init Search
+        var gop = {};
+        var numberTemplate = "2";
+        var docHeight = $(document).height();
+        gridHeight = docHeight - 230;
+        gop.gridColModel = [
+            { name: 'UId', title: 'U ID', index: 'UId', sorttype: 'string', width: 100, editable: false, hidden: true },
+            { name: 'BookingBy', title: '@Resources.Locale.L_ChgApproveManage_Views_165', index: 'BookingBy', init: true, sorttype: 'string', width: 120, hidden: false, editable: true },
+            { name: 'Cmp', title: 'Location', index: 'Cmp', sorttype: 'string', width: 120, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_location } },
+            { name: 'TranType', init: true, title: '@Resources.Locale.L_TKBLQuery_TranType', index: 'TranType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: select_tranmode } },
+            { name: 'ApproveStatus', title: '@Resources.Locale.L_ActManage_ApproveStatus', index: 'ApproveStatus', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: 'Using Code:Y:@Resources.Locale.L_Pass;N:@Resources.Locale.L_ActDeatilManage_Views_46;E:@Resources.Locale.L_ActDeatilManage_Views_47; EX:Y;;N', editoptions: { value: 'Y:@Resources.Locale.L_Pass;N:@Resources.Locale.L_ActDeatilManage_Views_46;E:@Resources.Locale.L_ActDeatilManage_Views_47;:' } },
+            { name: 'UnapproveDescp', title: '@Resources.Locale.L_GroupRelation_AuditNotthroughreason', index: 'UnapproveDescp', sorttype: 'string', width: 150, hidden: false, classes: "normal-white-space", editable: true },
+            { name: 'Status', title: '@Resources.Locale.L_GateReserve_Status', index: 'Status', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'Y:@Resources.Locale.L_ActManage_Match;N:@Resources.Locale.L_ActDeatilManage_Views_49' } },
+            { name: 'Fstatus', title: '@Resources.Locale.L_DNManage_Pro', index: 'Fstatus', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:@Resources.Locale.L_DNManage_NotDownload;B:@Resources.Locale.L_DNManage_Dled;C:@Resources.Locale.L_DNManage_Uled;D:@Resources.Locale.L_DNManage_Bled' } },
+            { name: 'CheckDescp', title: '@Resources.Locale.L_ActManage_AuditReason', index: 'CheckDescp', sorttype: 'string', width: 150, hidden: false, classes: "normal-white-space", editable: true },
+            //{ name: 'UnapproveMsg', title: '签核原因', index: 'UnapproveMsg', sorttype: 'string', width: 150, hidden: false, classes: "normal-white-space", editable: true },
+
+            { name: 'DebitDate', title: '@Resources.Locale.L_BaseLookup_DebitDate', index: 'DebitDate', sorttype: 'string', width: 100, editable: false, hidden: false, formatter: 'date', formatoptions: { newformat: 'Y-m-d' } },
+            { name: 'ShipmentId', title: 'Shipment ID', index: 'ShipmentId', sorttype: 'string', width: 100, editable: false, hidden: false },
+            { name: 'DebitTo', title: 'Debit To', index: 'DebitTo', sorttype: 'string', width: 85, hidden: false, editable: false },
+            { name: 'DebitNm', title: 'Debit To Name', index: 'DebitNm', sorttype: 'string', width: 180, hidden: false, editable: false },
+            { name: 'LspNo', title: '@Resources.Locale.L_AirQuery_LspCd', index: 'LspNo', sorttype: 'string', width: 100, editable: false, hidden: false },
+            { name: 'LspNm', title: '@Resources.Locale.L_AirQuery_LspNm', index: 'LspNm', sorttype: 'string', width: 100, editable: false, hidden: false },
+            { name: 'BlNo', title: '@Resources.Locale.L_ActSetup_BlNo', index: 'BlNo', sorttype: 'string', width: 120, hidden: false, editable: true },
+            { name: 'RfqNo', title: '@Resources.Locale.L_ActManage_IqNo', index: 'RfqNo', sorttype: 'string', width: 100, editable: true, hidden: false },
+            { name: 'DebitNo', title: '@Resources.Locale.L_ActCheckQueryView_Views_30', index: 'DebitNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'TpvDebitNo', title: '@Resources.Locale.L_ActQuery_TpvDebitNo', index: 'TpvDebitNo', width: 120, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'QuotNo', title: '@Resources.Locale.L_QTQuery_QuotNo', index: 'QuotNo', sorttype: 'string', width: 100, editable: true, hidden: false },
+            { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', sorttype: 'string', width: 80, editable: true, hidden: false },
+            { name: 'ChgDescp', title: '@Resources.Locale.L_ActManage_ChgNm', index: 'ChgDescp', sorttype: 'string', width: 120, editable: true, hidden: false },
+            { name: 'ChgType', title: '@Resources.Locale.L_SMCHGSetup_ChgRepay', index: 'ChgType', sorttype: 'string', width: 100, hidden: false, editable: true, formatter: "select", editoptions: { value: 'F:F.Freight Charge;O:O.Original Fee;D:D.Destination Fee' }, edittype: 'select' },
+            { name: 'Qcur', title: '@Resources.Locale.L_BaseLookup_WithholdCur', index: 'Qcur', sorttype: 'string', width: 80, hidden: false, editable: true },
+            { name: 'QchgUnit', title: '@Resources.Locale.L_BaseLookup_Unit', index: 'QchgUnit', sorttype: 'string', width: 80, hidden: false, editable: true },
+            {
+                name: 'QunitPrice', title: '@Resources.Locale.L_BaseLookup_WithholdPrice', index: 'QunitPrice',
+                width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, sorttype: 'float',
+                hidden: false, editable: true
+            },
+            { name: 'Qqty', title: '@Resources.Locale.L_BaseLookup_WithholdQty', index: 'Qqty', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, sorttype: 'string', width: 100, hidden: false, editable: true },
+            { name: 'Qamt', title: '@Resources.Locale.L_ActSetup_Qamt', index: 'Qamt', sorttype: 'string', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, width: 100, editable: true },
+            {
+                name: 'QexRate', title: '@Resources.Locale.L_ActSetup_ExRate', index: 'QexRate',
+                width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, sorttype: 'float',
+                hidden: false, editable: true
+            },
+            { name: 'Qlamt', title: '@Resources.Locale.L_ActManage_LocWithAmt', index: 'Qlamt', sorttype: 'string', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000', editable: true }, width: 100, editable: true },
+            { name: 'Qtax', title: '@Resources.Locale.L_ActManage_WithTax', index: 'Qtax', sorttype: 'float', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, width: 80, hidden: false, editable: true },
+            { name: 'Cur', title: '@Resources.Locale.L_ActQuery_Cur', index: 'Cur', sorttype: 'string', width: 80, hidden: false, editable: true },
+            {
+                name: 'UnitPrice', title: '@Resources.Locale.L_DNApproveManage_UnitPrice', index: 'UnitPrice',
+                width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, sorttype: 'float',
+                hidden: false, editable: true
+            },
+            { name: 'ChgUnit', title: '@Resources.Locale.L_ActSetup_ChgUnit', index: 'ChgUnit', sorttype: 'string', width: 80, hidden: false, editable: true },
+            { name: 'Qty', title: '@Resources.Locale.L_BaseLookup_Qty', index: 'Qty', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000', editable: true }, sorttype: 'string', width: 100, hidden: false },
+            { name: 'Bamt', title: '@Resources.Locale.L_ActSetup_Amt', index: 'Bamt', sorttype: 'string', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, width: 100, editable: true },
+            {
+                name: 'ExRate', title: '@Resources.Locale.L_ActSetup_ExRate', index: 'ExRate',
+                width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 6, defaultValue: '0.000000' }, sorttype: 'float',
+                hidden: false, editable: true
+            },
+            { name: 'Lamt', title: '@Resources.Locale.L_ActManage_LocIvAmt', index: 'Lamt', sorttype: 'string', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000' }, width: 100, editable: true },
+            { name: 'Tax', title: '@Resources.Locale.L_ActDeatilManage_Views_69', index: 'Tax', sorttype: 'float', align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 4, defaultValue: '0.0000', editable: true }, width: 80, hidden: false },
+            { name: 'BiRemark', title: '@Resources.Locale.L_ActDeatilManage_BiRemark', index: 'BiRemark', sorttype: 'string', width: 200, hidden: false, editable: true },
+            { name: 'Remark', title: '@Resources.Locale.L_IpPart_WithholdingRemark', index: 'Remark', sorttype: 'string', width: 200, hidden: false, editable: true },
+            { name: 'IpartNo', title: '@Resources.Locale.L_ActSetup_Script_69 No', index: 'IpartNo', sorttype: 'string', width: 140, editable: false, hidden: false },
+            { name: 'CntrStdQty', title: '@Resources.Locale.L_CntrStdQty', index: 'CntrStdQty', sorttype: 'string', align: 'right', formatter: 'integer', sorttype: 'string', hidden: false },
+            { name: 'PolCd', title: 'POL', index: 'PolCd', sorttype: 'string', width: 100, editable: false, hidden: false },
+            { name: 'CostCenter', title: '@Resources.Locale.L_SMCHGSetup_ChgLevel', index: 'CostCenter', sorttype: 'string', width: 200, hidden: false, editable: true },
+            { name: 'ProfitCenter', title: '@Resources.Locale.L_ActManage_ProCenter', index: 'ProfitCenter', sorttype: 'string', width: 200, hidden: false, editable: true },
+            { name: 'SmStatus', title: '@Resources.Locale.L_BaseLookup_Corder', index: 'SmStatus', width: 100, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A: @Resources.Locale.c;B: @Resources.Locale.L_BSTSetup_Book;C: @Resources.Locale.L_UserQuery_ComBA;D: @Resources.Locale.L_UserQuery_Call;I: @Resources.Locale.L_UserQuery_In;P: @Resources.Locale.L_UserQuery_SealCnt;O: @Resources.Locale.L_UserQuery_Out;G: @Resources.Locale.L_UserQuery_Declara;H: @Resources.Locale.L_UserQuery_Release;V: @Resources.Locale.L_BSCSDateQuery_Cancel;Z: @Resources.Locale.L_UserQuery_Return;U: @Resources.Locale.L_DNManage_NtConfBL;Y: @Resources.Locale.L_DNManage_ConfBL' } },
+            { name: 'ApproveBy', title: '@Resources.Locale.L_ActSetup_VerifyBy', index: 'ApproveBy', sorttype: 'string', width: 80, hidden: false, editable: true },
+            { name: 'ApproveDate', title: '@Resources.Locale.L_ChgApproveManage_Views_171', index: 'ApproveDate', formatter: 'date', editoptions: myEditDateInit, formatoptions: { srcformat: 'ISO8601Long', newformat: 'Y-m-d', defaultValue: null }, width: 110, align: 'left', sorttype: 'string', hidden: false },
+            { name: 'UFid', title: 'UFid', index: 'UFid', sorttype: 'string', width: 100, editable: false, hidden: true },
+            { name: 'MasterNo', title: 'Master No', index: 'MasterNo', sorttype: 'string', width: 100, hidden: false, editable: true },
+            { name: 'CntrInfo', title: 'Container Info', index: 'CntrInfo', sorttype: 'string', width: 100, hidden: false, editable: true },
+            { name: 'PodCd', title: 'POD', index: 'PodCd', sorttype: 'string', width: 100, hidden: false, editable: true },
+            { name: 'DecNo', title: 'Reference NO', index: 'DecNo', sorttype: 'string', width: 100, hidden: false, editable: true },
+            { name: 'InvoiceInfo', title: 'Invoice info.', index: 'InvoiceInfo', width: 120, align: 'left', sorttype: 'string', hidden: false }
+        ];
+
+        gop.AddUrl = { "url": rootPath + "ActManage/ActUpdate", "title": "@Resources.Locale.L_DNManage_EntBlChg", "id": "ActUpdate" };
+        gop.gridId = "containerInfoGrid";
+        gop.gridAttr = { caption: "@Resources.Locale.L_ChgApproveManage_Views_172", height: gridHeight, refresh: true, exportexcel: true, sortname: "ShipmentId" };
+        gop.gridSearchUrl = rootPath + "TKBL/SmbidQueryData1";
+        gop.searchColumns = getSelectColumn(gop.gridColModel);
+        gop.footerrow = true;
+        gop.multiselect = true;
+        gop.multiboxonly = true;
+        //gop.sortname = "ShipmentId";
+        //gop.sortable = true;
+        //SAVE CONDITION 為避免以後須調整畫面，ID都要傳到元件
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+        gop.StatusAreaId = "StatusArea";
+        gop.BtnGroupId = "BtnGroupArea";
+
+
+        gop.gridFunc = function (map) {
+            //用于回调函数，例如赋值操作等
+            dblClick(map);
+        }
+
+        gop.baseConditionFunc = function () {
+            return getCreateDateParams("CreateDate", gop);
+        }
+
+        gop.loadCompleteFunc = function (data) {
+            var Qsum = $("#containerInfoGrid").jqGrid("getCol", "Qamt", false, "sum");
+            var Bsum = $("#containerInfoGrid").jqGrid("getCol", "Bamt", false, "sum");
+            var Qlamt = $("#containerInfoGrid").jqGrid("getCol", "Qlamt", false, "sum");
+            var Lamt = $("#containerInfoGrid").jqGrid("getCol", "Lamt", false, "sum");
+            $("#containerInfoGrid").jqGrid("footerData", "set", { "DebitDate": "Total:", "Qamt": Qsum, "Bamt": Bsum, "Qlamt": Qlamt, "Lamt": Lamt });
+
+
+        }
+        gop.searchFormId = "ConditionArea";
+        gop.searchDivId = "SearchArea";
+
+        gop.btnGroup = [
+           {
+               id: "ApproveBtn",
+               name: "@Resources.Locale.L_ActManage_Pass",
+               func: function () {
+                   var mygrid = $("#containerInfoGrid");
+                   var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                   var datas = [];
+                   $.each(selRowId, function (index, val) {
+                       datas.push(selRowId[index]);
+                   });
+                   if (datas.length < 1) {
+                       CommonFunc.Notify("", "@Resources.Locale.L_ChgApproveManage_Views_173", 1000, "warning");
+                       return;
+                   }
+                   for (var i = 0; i < datas.length; i++) {
+                       var ufid = mygrid.getRowData(datas[i]).UFid;
+                       if (ufid === "" || ufid === undefined || ufid == null)
+                           continue;
+                       alert("@Resources.Locale.L_ChgApproveManage_Views_174" + datas[i]+"@Resources.Locale.L_ChgApproveManage_Views_175");
+                       return;
+                   }
+
+
+                   var msg = "@Resources.Locale.L_ChgApproveManage_Views_176";
+                   var ids = "";
+                   for (var i = 0; i < datas.length; i++) {
+                       msg += datas[i] + ",";
+                       ids += mygrid.getRowData(datas[i]).UId + ",";
+                   }
+                   msg += "@Resources.Locale.L_ChgApproveManage_Script_1";
+                   var truthBeTold = window.confirm(msg);
+                   if (!truthBeTold) {
+                       return;
+                   }
+
+                   CommonFunc.ToogleLoading(true);
+                   $.ajax({
+                       async: true,
+                       url: rootPath + "ActManage/ApproveSMBID",
+                       type: 'POST',
+                       dataType: "json",
+                       data: {
+                           "ids": ids
+                       },
+                       "complete": function (xmlHttpRequest, successMsg) {
+                           CommonFunc.ToogleLoading(false);
+                       },
+                       "error": function (xmlHttpRequest, errMsg) {
+                           CommonFunc.ToogleLoading(false);
+                       },
+                       success: function (result) {
+                           CommonFunc.Notify("", result.message, 2000, "warning");
+                           if (result.flag) {
+                               $("#SummarySearch").trigger("click");
+                           }
+                       }
+                   });
+                   return false;
+               }
+           },
+            {
+                id: "UnApproveBtn",
+                name: "@Resources.Locale.L_ActDeatilManage_Views_46",
+                func: function () {
+                    var mygrid = $("#containerInfoGrid");
+                    var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                    var datas = [];
+                    $.each(selRowId, function (index, val) {
+                        datas.push(selRowId[index]);
+                    });
+                    if (datas.length < 1) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_ChgApproveManage_Views_173", 1000, "warning");
+                        return;
+                    }
+                    for (var i = 0; i < datas.length; i++) {
+                        var ufid = mygrid.getRowData(datas[i]).UFid;
+                        if (ufid === "" || ufid === undefined || ufid == null)
+                            continue;
+                        alert("@Resources.Locale.L_ChgApproveManage_Views_174" + datas[i] + "@Resources.Locale.L_ChgApproveManage_Views_175");
+                        return;
+                    }
+
+
+                    var msg = "@Resources.Locale.L_ChgApproveManage_Views_176";
+                    var ids = "";
+                    for (var i = 0; i < datas.length; i++) {
+                        msg += datas[i] + ",";
+                        ids += mygrid.getRowData(datas[i]).UId + ",";
+                    }
+                    msg += "@Resources.Locale.L_ChgApproveManage_Script_2";
+                    var truthBeTold = window.confirm(msg);
+                    if (!truthBeTold) {
+                        return;
+                    }
+
+                    var msg = prompt("@Resources.Locale.L_ChgApproveManage_Views_179", "");
+                    if (msg === null || msg === "" || msg === undefined) {
+                        CommonFunc.Notify("", "@Resources.Locale.L_ChgApproveManage_Views_180", 500, "warning");
+                        return;
+                    }
+
+                    CommonFunc.ToogleLoading(true);
+                    $.ajax({
+                        async: true,
+                        url: rootPath + "ActManage/UnApproveSMBIDs",
+                        type: 'POST',
+                        dataType: "json",
+                        data: {
+                            "ids": ids,
+                            "msg": msg
+                        },
+                        "complete": function (xmlHttpRequest, successMsg) {
+                            CommonFunc.ToogleLoading(false);
+                        },
+                        "error": function (xmlHttpRequest, errMsg) {
+                            CommonFunc.ToogleLoading(false);
+                        },
+                        success: function (result) {
+                            CommonFunc.Notify("", result.message, 2000, "warning");
+                            if (result.flag) {
+                                $("#SummarySearch").trigger("click");
+                            }
+                        }
+                    });
+                    return false;
+                }
+            },
+            {
+                 id: "DownloadExcel",
+                 name: "@Resources.Locale.L_ChgApproveManage_Views_181",
+                 func: function () {
+                     $("#downloadDialog").modal("show");
+                 }
+            },
+           {
+               id: "ShipFee",
+               name: "@Resources.Locale.L_ActManage_LspChg",
+               func: function () {
+                   var id = $("#containerInfoGrid").jqGrid('getGridParam', "selrow");
+                   var map = $("#containerInfoGrid").jqGrid('getRowData', id);
+                   var UId;
+                   if (map) UId = map.UId;
+
+                   if (UId === "" || UId === undefined || UId===null) {
+                       CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+                       return false;
+                   }
+
+                   getData(rootPath + "IQTManage/CostDetail", { uid: UId, shipmentId: map.ShipmentId }, function (result) {
+                       $("#ShipFeeDialogGrid").jqGrid("clearGridData");
+                       $("#ShipFeeDialogGrid").jqGrid("setGridParam", {
+                           datatype: 'local',
+                           sortorder: "asc",
+                           sortname: "LspNo",
+                           data: result,
+                       }).trigger("reloadGrid");
+
+                       $('#costDetail').modal('show'); //顯示彈出視窗
+                       ajustamodal("#costDetail");
+                   });
+               }
+           },{
+               id: "ShipmentInboundInfo",
+               name: "@Resources.Locale.TLB_InboundBookingDetails",
+               func: function () {
+                   var mygrid = $("#containerInfoGrid");
+                   var selarrrowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+                   if (selarrrowId.length != 1) {
+                       CommonFunc.Notify("", "@Resources.Locale.L_ChgApproveManage_Views_185", 500, "warning");
+                       return;
+                   }
+                   var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selrow');
+                   var shipmentid = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'ShipmentId');
+                   var trantype = $("#containerInfoGrid").jqGrid('getCell', selRowId, 'TranType');
+                   if (!shipmentid) {
+                       CommonFunc.Notify("", "@Resources.Locale.L_DNManage_DataNoBKInfo", 500, "warning");
+                       return;
+                   }
+                   $.ajax({
+                       async: true,
+                       url: rootPath + "SMSMI/GetUidBySmId",
+                       type: 'POST',
+                       data: { shipmentid: shipmentid, trantype: trantype },
+                       "error": function (xmlHttpRequest, errMsg) {
+                           alert(errMsg);
+                       },
+                       success: function (data) {
+                           if (data.uid) { //data.trantype
+                               if (data.trantype == "R") {
+                                   _url = "SMSMI/RailwayBookingSetupView/";
+                                   _id = "RailwayBookingSetupView";
+                                   _title = "@Resources.Locale.L_SMSMI_RailwayBookingSetupView";
+                               }
+                               if (data.trantype == "A") {
+                                   _url = "SMSMI/AirBookingSetupView/";
+                                   _id = "AirBookingSetupView";
+                                   _title = "@Resources.Locale.L_SMSMI_AirBookingSetupView";
+                               }
+
+                               if (data.trantype == "F") {
+                                   _url = "SMSMI/FclBookingSetupView/";
+                                   _id = "FclBookingSetupView";
+                                   _title = "@Resources.Locale.L_SMSMI_FclBookingSetupView";
+                               }
+
+                               if (data.trantype == "E") {
+                                   _url = "SMSMI/ExBookingSetupView/";
+                                   _id = "ExBookingSetupView";
+                                   _title = "@Resources.Locale.L_SMSMI_ExBookingSetupView";
+                               }
+                               if (data.trantype == "L") {
+                                   _url = "SMSMI/LclBookingSetupView/";
+                                   _id = "LclBookingSetupView";
+                                   _title = "@Resources.Locale.L_SMSMI_LclBookingSetupView";
+                               }
+
+                               top.topManager.openPage({
+                                   href: rootPath + _url + data.uid,
+                                   title: _title,
+                                   id: _id,
+                                   reload: true
+                               });
+                           }
+                       }
+                   });
+               }
+           }
+        ];
+
+
+        $("#dialog_saveBtn").click(function () {
+            var mygrid = $("#containerInfoGrid");
+            doDownloadExcel(mygrid, $("#sel_tranType").val());
+        });
+
+        function doDownloadExcel(grid, transType) {
+            var btnType = "";
+            if (transType === "F1") {
+                transType = "F";
+                btnType = "F";
+            }
+            else if (transType === "T" || transType === "TT") {
+                btnType = "D";
+            }
+            else {
+                btnType = "L";
+            }
+
+            var selRowIds = grid.jqGrid('getGridParam', 'selarrrow');
+            var rowIds = grid.getDataIDs();
+            if (rowIds.length <= 0) {
+                alert("@Resources.Locale.L_ChgApproveManage_Script_3");
+                return;
+            }
+
+            var tt = transType;
+            if (transType === "TT")
+                tt = "T";
+            var conditions = "";
+            conditions = grid.jqGrid("getGridParam", "postData").conditions;
+            if (conditions && conditions.replace) {
+                conditions = conditions.replace("sopt_TranType=cn", "sopt_TranType=eq");
+            }
+
+            var url = rootPath + "ActManage/ExportAllBillExcel";
+            var colNames = [];
+            var colModel = _getColModel(transType, false);
+            $.each(colModel, function (index, val) {
+                colNames.push(val["title"].split("||")[0]);
+            });
+
+            var caption = "Statement Of Account";
+            var excelName = transType + "-Statement Of Account";
+            var conditions = grid.jqGrid("getGridParam", "postData").conditions;
+            var baseCondition = "";
+            var result = {};
+            result.transType = transType;
+            result.haveTransType = "Y";
+            result.excelType = btnType;
+
+            var virtualCol = encodeURIComponent(JSON.stringify(result));;
+            ExportDataToExcelByParam(url, colModel, colNames, caption, excelName, conditions, baseCondition, virtualCol);
+
+        }
+
+        initSearch(gop);
+
+        var basecompanyid = getCookie("plv3.passport.basecompanyid");
+        function dblClick(map) {
+            var UId = map.UId;
+            top.topManager.openPage({
+                href: rootPath + "ActManage/ActUpdate?add=Y&op=1&uid=" + UId,
+                title: '@Resources.Locale.L_DNManage_EntBlChg',
+                id: 'ActUpdate',
+                reload: true
+            });
+        }
+
+        var $ShipFeeDialogGrid = $("#ShipFeeDialogGrid");
+
+        new initGrid(
+			$ShipFeeDialogGrid,
+			{
+			    data: [],
+			    colModel: CommonModelConfig.ShipFeeColModel,
+			    beforeSelectRowFunc: function (rowid) {
+
+			    }
+			},
+			{
+
+			    loadonce: true,
+			    cellEdit: false,//禁用grid编辑功能
+			    caption: "@Resources.Locale.L_QTManage_LspChgDetail",
+			    height: 160,
+			    refresh: true,
+			    rows: 9999,
+			    exportexcel: false,
+			    pginput: false,
+			    pgbuttons: false,
+			    sortorder: "Asc",
+			    sortname: "LspNo",
+			    savelayout: true,
+			    showcolumns: true,
+			    footerrow: true,
+			    dblClickFunc: function (map) {
+			    },
+			    loadComplete: function (data) {
+
+			        var Qsum = $("#ShipFeeDialogGrid").jqGrid("getCol", "Qlamt", false, "sum");
+			        var Bsum = $("#ShipFeeDialogGrid").jqGrid("getCol", "Lamt", false, "sum");
+			        $("#ShipFeeDialogGrid").jqGrid("footerData", "set", { "Qcur": "Total:", "Qlamt": Qsum, "Lamt": Bsum });
+
+			    }
+			}
+		);
+    });
+
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                        <div class="pure-g" id="val">
+                            <label style="color:red">@Resources.Locale.L_CreateDateSixMonthMsg</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g" id="BtnGroupArea">
+
+                    </div>
+                    <div class="pure-g" id="StatusArea">
+
+                    </div>
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr>
+                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="downloadDialog" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">@Resources.Locale.L_DNManage_IvFoemat</h4>
+			</div>
+			<div class="modal-body">
+				<div class="pure-g">
+					<div class="pure-u-sm-7-60">
+						<label class="control-label">@Resources.Locale.L_MailFormatSetup_MtType</label>
+					</div>
+					<div class="pure-u-sm-10-60 control-group">
+						<select class="form-control input-sm" id="sel_tranType" name="autoChk">
+							<option value="F">FCL</option>
+							<option value="L">LCL</option>
+							<option value="T">@Resources.Locale.L_DNManage_CAr</option>
+							<option value="TT">@Resources.Locale.L_DNManage_LTL</option>
+							<option value="E">@Resources.Locale.L_DNManage_EntInt</option>
+							<option value="R">@Resources.Locale.L_DNManage_Rail</option>
+							<option value="A">@Resources.Locale.L_CityDataQuery_Air</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm btn-info" id="dialog_saveBtn">@Resources.Locale.L_DNManage_Download</button>
+				<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="dialog_closeBtn">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+

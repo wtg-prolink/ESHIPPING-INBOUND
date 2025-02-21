@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "FileUpload";
+}
+ 
+<h2>Upload</h2>
+<hr />
+ 
+<form action="@Url.Action("FileUpload")" method="post" enctype="multipart/form-data">  
+  <label for="file">Filename:</label>
+  <input type="text" name="jobNo" id="jobNo" />
+  <input type="file" name="file" id="file" />
+  <input type="submit" />
+</form>
+
+@ViewBag.edocList.Content

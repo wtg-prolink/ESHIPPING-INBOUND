@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+   <CPL>
+    <item user="Eshipping_test" psw="Eshipping_test123!"/>
+  </CPL>
+  <SAP>
+    <item user="Eshipping_test" psw="Eshipping_test123!"/>
+  </SAP>
+  <Trace>
+    <item user="Eshipping_test" psw="Eshipping_test123!"/>
+  </Trace>
+  <Billing>
+    <item user="Eshipping_test" psw="Eshipping_test123!"/>
+  </Billing>
+  <Booking>
+    <item user="Eshipping_test" psw="Eshipping_test123!"/>
+  </Booking>
+  <Declaration>
+    <item user="Eshipping_test" psw="Eshipping_test123!"/>
+  </Declaration>
+<BillLading>
+    <item user="Eshipping_test" psw="Eshipping_test123!"/>
+  </BillLading>
+  <WareHouse>
+    <item user="Eshipping_test" psw="Eshipping_test123!"/>
+  </WareHouse>
+  <DHL>
+    <!-- 测试环境-->
+    <Requst user="prasanta" psw="prasanta" DefaultAccountNumber="600066295" url="https://xmlpitest-ea.dhl.com/XMLShippingServlet"></Requst>
+    <!--<Requst user="prasanta" psw="prasanta" url="https://165.72.205.200/XMLShippingServlet"></Requst>-->    
+    <!-- 正式环境-->
+    <!--<Requst user="" psw="" url="https://xmlpi-ea.dhl.com/XMLShippingServlet"></Requst>-->
+  </DHL>
+  <TNT>
+    <!--<Requst user="MYT_A_T" psw="tnt12345" url="https://iConnection.tnt.com:81/ShipperGate2.asp"></Requst>-->
+    <Requst user="MYT_A_T" psw="tnt12345" url="https://164.39.122.33:81/ShipperGate2.asp"></Requst>
+  </TNT>
+  <PENAVICOXM>
+    <Requst user="TPVTEST" psw="TPVTest012" url="http://a.penavicoxm.com/LogisticWebServices/TpvService.asmx"></Requst>
+  </PENAVICOXM>
+  <Organization>
+    <!--<Service url="http://ws.tpvaoc.com/orgws/service.asmx"/>-->
+     <Service url="https://ws.tpv-tech.com/orgws/Service.asmx"/>
+  </Organization>
+</root>

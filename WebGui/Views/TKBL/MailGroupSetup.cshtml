@@ -1,0 +1,98 @@
+﻿@{
+	ViewBag.Title = "MailGroupSetup";
+}
+<script type="text/javascript">
+	var _mailGroup = "@ViewBag.MailGroup";
+	var _uid = "@ViewBag.UId";
+	var _upri = "@ViewBag.UPri";
+</script>
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/MailGroupSetup.js?20240815")"></script>
+
+<div id="wrapper">
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Cmp" class="control-label">Company</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" />
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Name" class="control-label">Name</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<select class="form-control input-sm" dt="mt" id="Name" name="Name" fieldname="Name">
+							</select>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="MailId" class="control-label">E-Mail</label>
+						</div>
+						<div class="pure-u-sm-25-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="MailId" name="MailId" fieldname="MailId" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Remark" class="control-label">@Resources.Locale.L_BSCSSetup_Remark</label>
+						</div>
+						<div class="pure-u-sm-55-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Remark" name="Remark" fieldname="Remark" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="GroupId" class="control-label">Location</label>
+						</div>
+						<div class="pure-u-sm-7-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="GroupId" name="GroupId" fieldname="GroupId" readonly />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-8-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="Stn" name="Stn" fieldname="Stn" readonly />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="CreateBy" class="control-label">@Resources.Locale.L_PartyDocSetup_CreateBy</label>
+						</div>
+						<div class="pure-u-sm-7-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="CreateBy" name="CreateBy" fieldname="CreateBy" readonly />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-8-60 label-right">
+							<input type="text" class="form-control input-sm" dt="mt" id="CreateDate" name="CreateDate" fieldname="CreateDate" readonly />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="CreateBy" class="control-label">@Resources.Locale.L_PartyDocSetup_ModifyBy</label>
+						</div>
+						<div class="pure-u-sm-7-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" name="ModifyBy" fieldname="ModifyBy" readonly />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-8-60 label-right">
+							<input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" name="ModifyDate" fieldname="ModifyDate" readonly />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<input type="hidden" dt="mt" isKey="true" id="UId" name="UId" fieldname="UId" />

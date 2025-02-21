@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "Bulletin";
+}
+<style>
+    body {
+        background-color: #eaeaea;
+    }
+
+    table {
+        background-color: #fff;
+        margin-top: 10px;
+    }
+
+    .zoom {
+        float: right;
+        font-size: 17px;
+        font-weight: bold;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=20);
+        opacity: .2;
+    }
+
+    .zoom-dialog {
+        width: 98vw;
+        height: 98vh;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        $("#searchInfo").val("@ViewBag.SearchInfo");
+        $('#buttonList').hide();
+        ajustamodal("#myModal");
+        $('#myModal').on('show.bs.modal', function (e) {
+            targetElem = $(e.relatedTarget);
+            //var title = event.target.attr('title1');
+            //var content = event.target.attr('content');
+            $('#myModal .modal-title').html(targetElem.attr("title"));
+            $('#myModal .modal-body p').html(targetElem.attr("content"));
+            //$('#myModal .modal-body').html($(event.target.attr('content-id')).html());
+
+        });
+
+        $("#searchBtn").click(function () {
+            var searchInfo = $("#searchInfo").val().trim();
+            var type = @ViewBag.BulleType;
+            window.location.href = "MoreBulletin?type=" + type + "&searchInfo=" + searchInfo;
+        });
+
+        $("#previousPage").click(function () {
+            var type = "@ViewBag.BulleType";
+            var page = "@ViewBag.PrePage";
+            var searchInfo = $("#searchInfo").val().trim();
+            window.location.href = "MoreBulletin?type=" + type + "&page=" + page + "&searchInfo=" + searchInfo;
+        });
+
+        $("#nextPage").click(function () {
+            var type = "@ViewBag.BulleType";
+            var page = "@ViewBag.NextPage";
+            var searchInfo = $("#searchInfo").val().trim();
+            window.location.href = "MoreBulletin?type=" + type + "&page=" + page + "&searchInfo=" + searchInfo;
+        });
+
+    });
+
+    function zoom() {
+        if ($(".modal-dialog").hasClass("zoom-dialog")) {
+            $(".modal-dialog").removeClass("zoom-dialog")
+        } else {
+            $(".modal-dialog").addClass("zoom-dialog");
+        }
+    }
+    function Attach(element) {
+        var uid = element.id;
+        initAttach($("#" + uid), { jobNo: uid, 'GROUP_ID': "TPV", 'CMP': "FQ", 'STN': '*', atd: "", "FileDel": false }, null, null, false);
+    }
+
+</script>
+<script src="@Url.Content("~/Scripts/Core/initAttach.js?20220615")" type="text/javascript"></script>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="zoom" style="border:none;float:right;" onclick="zoom()"><span aria-hidden="true">口</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body" style="overflow: scroll;">
+                <p>&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <td colspan="6" class="info">
+                                @ViewBag.BulleTitle
+                                <span style="float:right;">
+                                    <input type="text" id="searchInfo"/><button class="btn btn-sm btn-info" type="button" id="searchBtn">@Resources.Locale.TLB_Search1</button>
+                                    <a href="#" id="previousPage">@Resources.Locale.Previous_Page</a>|<a href="#" id="nextPage">@Resources.Locale.Next_Page</a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="width: 6%">#</th>
+                            <th>Title</th>
+                            <th style="width: 16%">Publish Date</th>
+                            <th style="width: 10%">Location</th>
+                            <th style="width: 10%">Department</th>
+                            <th style="width: 10%">Publisher</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (var i = 0; i < ViewBag.BulleData.Rows.Count; i++)
+                        {
+                            System.Data.DataRow col = ViewBag.BulleData.Rows[i];
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>
+                                    <a href="#myModal" data-toggle="modal" data-target="#myModal" title="@col.ItemArray[4]" content="@col.ItemArray[5]">@Html.Raw(@col.ItemArray[16])</a>
+                                    @if ((@col.ItemArray[15]).ToString() == "Y")
+                                    {
+                                        <a href="#" id=@col.ItemArray[0] onclick="Attach(this)" style="float:right;"><img src="/Images/file-attachment.png"></a>
+                                    }
+                                </td>
+                                <td>@col.ItemArray[7]</td>
+                                <td>@col.ItemArray[2]</td>
+                                <td>@col.ItemArray[8]</td>
+                                <td>@col.ItemArray[9]</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

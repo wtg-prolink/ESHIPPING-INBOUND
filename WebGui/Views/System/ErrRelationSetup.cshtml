@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "ErrRelationSetup";
+}
+<style>
+    #page-wrapper {
+        padding: 5px;
+    }
+</style>
+
+@Html.RazorJSInline("~/Scripts/System/ErrRelationSetup.js")
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-6">
+                    <table id="ExpTypeGroup" class="_tableGrid" style="width: 100%">
+                        <tr>
+                            <td />
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-6" style="padding-left:0px;">
+                    <table id="ExpReasonGroup" class="_tableGrid" style="width: 100%">
+                        <tr>
+                            <td />
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,164 @@
+﻿@{
+    ViewBag.Title = "E-Shipping System Status Notice Information";
+}
+<script type="text/javascript">
+    var _evenNo = "@ViewBag.EvenNo";
+    var _blNo = "@ViewBag.BlNo";
+    var _tranType = "@ViewBag.TranType";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+
+@Html.RazorJSInline("~/Scripts/TKBL/ProcessStatus.js");
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-5-60">
+                            <input type="hidden" id="UId" dt="mt" fieldname="UId" iskey="true" />
+                            <label for="ShipmentID" class="control-label">Shipment ID</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="ShipmentId" name="ShipmentId" fieldname="ShipmentId" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                    	    <label for="TranType" class="control-label">@Resources.Locale.L_TKBLQuery_TranType</label>
+                    	</div>
+                    	<div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="TranType" name="TranType" fieldname="TranType" readonly>
+                            </select>
+                    	</div>
+                    	<div class="pure-u-sm-7-60 label-right">
+                            <label for="Cstatus" class="control-label">@Resources.Locale.L_ForecastQueryData_Cstatus</label>
+                        </div>
+                        <div class="pure-u-sm-8-60">
+                            <select class="form-control input-sm" dt="mt" id="Cstatus" name="Cstatus" fieldname="Cstatus" readonly>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="MasterNo" class="control-label">@Resources.Locale.L_ForecastQueryData_MasterNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="MasterNo" name="MasterNo" fieldname="MasterNo" readonly/>
+                        </div>
+
+                    	<div class="pure-u-sm-5-60 label-right">
+                            <label for="HouseNo" class="control-label">@Resources.Locale.L_ForecastQueryData_HouseNo</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="HouseNo" name="HouseNo" fieldname="HouseNo" readonly/>
+                        </div>
+                        <div class="pure-u-sm-7-60 label-right">
+                            <label for="CarrierNm" class="control-label">Carrier</label>
+                        </div>
+                        <div class="pure-u-sm-22-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="CarrierNm" name="CarrierNm" fieldname="CarrierNm" readonly/>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-5-60">
+                            <label for="Etd" class="control-label">ETD</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="Etd" name="Etd" fieldname="Etd" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                    	    <label for="ETA" class="control-label">ETA</label>
+                    	</div>
+                    	<div class="pure-u-sm-10-60">
+                             <input type="text" dt="mt" class="form-control input-sm" id="Eta" name="Eta" fieldname="Eta" readonly />
+                    	</div>
+                    	
+                        <div class="pure-u-sm-7-60 label-right">
+                    	    <label for="Incoterm" class="control-label">Incoterm</label>
+                    	</div>
+                    	<div class="pure-u-sm-4-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Incoterm" name="Incoterm" fieldname="Incoterm" readonly/>
+                    	</div>
+                        <div class="pure-u-sm-18-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="IncotermDescp" name="IncotermDescp" fieldname="IncotermDescp" readonly/>
+                    	</div>
+                    </div>
+                    
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-5-60">
+                            <label for="PolNm" class="control-label">@Resources.Locale.L_ProSts_PolNm</label>
+                        </div>
+                        <div class="pure-u-sm-10-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="PolNm" name="PolNm" fieldname="PolNm" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                    	    <label for="DestNm" class="control-label">@Resources.Locale.L_ProSts_Dest</label>
+                    	</div>
+                    	<div class="pure-u-sm-10-60">
+                            <select class="form-control input-sm" dt="mt" id="DestNm" name="DestNm" fieldname="DestNm" readonly>
+                            </select>
+                    	</div>
+                    	
+                        <div class="pure-u-sm-7-60 label-right">
+                    	    <label for="Vessel1" class="control-label">@Resources.Locale.L_ProSts_Name</label>
+                    	</div>
+                    	<div class="pure-u-sm-11-60">
+                           <input type="text" class="form-control input-sm" dt="mt" id="Vessel1" name="Vessel1" fieldname="Vessel1" readonly/>
+                    	</div>
+                        <div class="pure-u-sm-11-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Voyage1" name="Voyage1" fieldname="Voyage1" readonly/>
+                    	</div>
+                    </div>
+
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-5-60">
+                            <label for="Qty" class="control-label">@Resources.Locale.L_ProSts_QTY</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="Qty" name="Qty" fieldname="Qty" readonly />
+                        </div>
+                        <div class="pure-u-sm-3-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="Qtyu" name="Qtyu" fieldname="Qtyu" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                    	    <label for="Gw" class="control-label">GW</label>
+                    	</div>
+                    	<div class="pure-u-sm-7-60">
+                            <input type="text" dt="mt" class="form-control input-sm" id="Gw" name="Gw" fieldname="Gw" readonly />        
+                    	</div>
+                    	<div class="pure-u-sm-3-60">
+                           <input type="text" dt="mt" class="form-control input-sm" id="Gwu" name="Gwu" fieldname="Gwu" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60 label-right">
+                    	    <label for="Cnt" class="control-label">@Resources.Locale.L_ProSts_Cnt</label>
+                    	</div>
+                    	<div class="pure-u-sm-23-60">
+                            <label class="control-label" dt="mt" id="Cnt" name="Cnt" fieldname="Cnt"></label>
+                    	</div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <table id="SubGrid1" class="_tableGrid" style="width: 100%">
+                                <tr>                                        
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <table id="SubGrid" class="_tableGrid" style="width: 100%">
+                                <tr>                                        
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>       
+        </div>
+    </div>
+</div>

@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Examples</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <link href="@Url.Content("~/Scripts/Core/bui/css/bootstrap.min.css")" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/Core/bui/css/jquery-ui.css")" />
+
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/lib/jquery-1.11.1.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/lib/bootstrap.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/lib/jquery-ui.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/bui.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Core/bui/js/bootstrap-treeview.min.js")"></script>
+        <style>
+            body{background-color: #eaeaea;}
+            .input-group-addon {padding: 2px 7px;}
+            .prolink-container {margin:0px 25px;}
+            .ul-select > li{padding-left: 10px;}
+            .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {background-color: #414DA7;}
+            .edit-area{margin-top: 55px; padding-left: 15px; padding-right: 15px;}
+        </style>
+        <script>
+            jQuery(document).ready(function($) {
+                parent.userStatus("MAN101", "eee", "CCC", "@Resources.Locale.L_MenuBar_Add");
+            });
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div id="navbar" class="collapse navbar-collapse" aria-expanded="false">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Resources.Locale.L_MenuBar_Add
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> @Resources.Locale.L_MenuBar_Edit
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> @Resources.Locale.L_Grid_Search
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> @Resources.Locale.L_MenuBar_Save
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> @Resources.Locale.L_MenuBar_Cancel
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div id="wrapper">
+            <div class="row edit-area">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="U_ID">@Resources.Locale.L_UserAdd_Script_52</label>
+                        <input type="text" class="form-control" id="U_ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="U_NAME">@Resources.Locale.L_UserAdd_Script_53</label>
+                        <input type="text" class="form-control" id="U_NAME">
+                    </div>
+                    <div class="form-group">
+                        <label for="U_PASSWORD">@Resources.Locale.L_UserSetUp_U_PASSWORD:</label>
+                        <input type="text" class="form-control" id="U_PASSWORD">
+                    </div>
+                    <div class="form-group">
+                        <label>@Resources.Locale.L_UserAdd_Script_54</label><br />
+                        <label class="radio-inline"><input type="radio" name="U_STATUS" CHECKED>@Resources.Locale.L_UserSetUp_Enable</label>
+                        <label class="radio-inline"><input type="radio" name="U_STATUS">@Resources.Locale.L_UserSetUp_Disable</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="GROUP_ID">@Resources.Locale.L_UserAdd_Script_55</label>
+                        <input type="text" class="form-control" id="GROUP_ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="CMD">@Resources.Locale.L_UserAdd_Script_56</label>
+                        <input type="text" class="form-control" id="CMD">
+                    </div>
+                    <div class="form-group">
+                        <label for="STN">@Resources.Locale.L_UserAdd_Script_57</label>
+                        <input type="text" class="form-control" id="STN">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!--HTML开头的表示没有对应到DB中的栏位，后期要特殊处理-->
+<table name="SMSM">
+  <column name="筛选条件"  fieldname="HTML_SCREEN_CNDNS" dataType="string" defalutValue="" cellCode="A">
+  </column>
+  <column name="运输类别"  fieldname="TRAN_TYPE" dataType="string" defalutValue="" cellCode="B">
+  </column>
+  <column name="运输方式代码"  fieldname="TRAN_MODE" dataType="string" defalutValue="" cellCode="C">
+  </column>
+  <column name="运输方式"  fieldname="TRAN_TYPE_DESCP" dataType="string" defalutValue="" cellCode="D">
+  </column>
+  <column name="绕物流园区"  fieldname="BAND_TYPE" dataType="string" defalutValue="" cellCode="E">
+  </column>
+  <column name="ETD"  fieldname="ETD" dataType="datetime" defalutValue="" cellCode="F">
+  </column>
+  <column name="SUB-BG"  fieldname="ZT_NM" dataType="string" defalutValue="" cellCode="G">
+  </column>
+  <column name="Company"  fieldname="STN" dataType="string" defalutValue="" cellCode="H">
+  </column>
+  <column name="Factory"  fieldname="HTML_STN" dataType="string" defalutValue="" cellCode="I">
+  </column>
+  <column name="Month"  fieldname="HTML_MONTH" dataType="string" defalutValue="" cellCode="J">
+  </column>
+  <column name="开船日期"  fieldname="ATD" dataType="datetime" defalutValue="" cellCode="K">
+  </column>
+  <column name="发货过账日期"  fieldname="POST_FLAG" dataType="string" defalutValue="" cellCode="L">
+  </column>
+  <column name="船名/航次"  fieldname="VESSEL1" dataType="string" defalutValue="" cellCode="M">
+  </column>
+  <column name="周别"  fieldname="" dataType="string" defalutValue="" cellCode="N">
+  </column>
+  <column name="出口口岸"  fieldname="PORTE_CD" dataType="string" defalutValue="" cellCode="O">
+  </column>
+  <column name="起运港代码"  fieldname="PORT_POL" dataType="string" defalutValue="" cellCode="P">
+  </column>
+  <column name="启运港"  fieldname="POL" dataType="string" defalutValue="" cellCode="Q">
+  </column>
+  <column name="Shipment ID" fieldname="Shipment_ID" dataType="string" defalutValue="" cellCode="R">
+  </column>
+  <column name="并Shipment讯息" fieldname="SHIPMENT_INFO" dataType="string" defalutValue="" cellCode="S">
+  </column>
+  <column name="合并提单号"  fieldname="COMBIN_SHIPMENT" dataType="string" defalutValue="" cellCode="T">
+  </column>
+  <column name="类别" fieldname="DN_TYPE" dataType="string" defalutValue="" cellCode="U">
+  </column>
+  <column name="交货单号" fieldname="DN_NO" dataType="string" defalutValue="" cellCode="V">
+  </column>
+  <column name="并柜信息" fieldname="COMBINE_INFO" dataType="string" defalutValue="" cellCode="W">
+  </column>
+  <!--<column name="TOTAL 大包装件"  fieldname="PKG_NUM" dataType="string" defalutValue="" cellCode="X">
+  </column>-->
+  <!--<column name="TOTAL 体积"  fieldname="CBM" dataType="string" defalutValue="" cellCode="Y">
+  </column>-->
+  <column name="商品名称"  fieldname="LGOODS" dataType="string" defalutValue="" cellCode="Z">
+  </column>
+  <column name="产品形态"  fieldname="CARGO_TYPE" dataType="string" defalutValue="" cellCode="AA">
+  </column>
+  <column name="寸别"  fieldname="SIZE" dataType="string" defalutValue="" cellCode="AB">
+  </column>
+
+  <column name="对内机种名"  fieldname="IPART_NO" dataType="string" defalutValue="" cellCode="AC">
+  </column>
+  <column name="DN item体积"  fieldname="CBM" dataType="string" defalutValue="" cellCode="AD">
+  </column>
+
+  <!--<column name="Total 装货数量"  fieldname="QTY" dataType="string" defalutValue="" cellCode="AE">
+  </column>-->
+  <column name="DN item 装货数量"  fieldname="QTY" dataType="string" defalutValue="" cellCode="AF">
+  </column>
+  <column name="单位"  fieldname="QTYU" dataType="string" defalutValue="" cellCode="AG">
+  </column>
+  <!--<column name="DN毛重(KGS)"  fieldname="GW" dataType="string" defalutValue="" cellCode="AH">
+  </column>-->
+  <column name="item毛重"  fieldname="GW" dataType="string" defalutValue="" cellCode="AI">
+  </column>
+
+  <column name=" 单价"  fieldname="UNIT_PRICE1" dataType="string" defalutValue="" cellCode="AJ">
+  </column>
+
+  <column name="货物总值"  fieldname="VALUE1" dataType="string" defalutValue="" cellCode="AK">
+  </column>
+  <column name="计费重"  fieldname="CW" dataType="string" defalutValue="" cellCode="AL">
+  </column>
+  <column name="标准装柜量（40GP）"  fieldname="CNTR_STD_QTY" dataType="string" defalutValue="" cellCode="AM">
+  </column>
+  <!--<column name="20GP"  fieldname="CNT20" dataType="string" defalutValue="" cellCode="AN">
+  </column>
+  <column name="40GP"  fieldname="CNT40" dataType="string" defalutValue="" cellCode="AO">
+  </column>
+  <column name="HQ"  fieldname="CNT40HQ" dataType="string" defalutValue="" cellCode="AP">
+  </column>
+  <column name="车型"  fieldname="CAR_TYPE" dataType="string" defalutValue="" cellCode="AQ">
+  </column>
+  <column name="LCL"  fieldname="CNT_NUMBER" dataType="string" defalutValue="" cellCode="AR">
+  </column>
+  <column name="车数"  fieldname="CAR_QTY" dataType="string" defalutValue="" cellCode="AS">
+  </column>
+  <column name="柜量（FEU）"  fieldname="HTML_FEU" dataType="string" defalutValue="" cellCode="AT">
+  </column>-->
+  <column name="柜号"  fieldname="CNTR_NO" dataType="string" defalutValue="" cellCode="AU">
+  </column>
+  <column name="封签号"  fieldname="SEAL_NO1" dataType="string" defalutValue="" cellCode="AV">
+  </column>
+  <column name="海关封号"  fieldname="" dataType="string" defalutValue="" cellCode="AW">
+  </column>
+  <column name="船公司代码"  fieldname="CARRIER" dataType="string" defalutValue="" cellCode="AX">
+  </column>
+  <column name="船公司"  fieldname="CARRIER_NM" dataType="string" defalutValue="" cellCode="AY">
+  </column>
+  <column name="订舱代理简称"  fieldname="LSP_NO" dataType="string" defalutValue="" cellCode="AZ">
+  </column>
+  <column name="货代总公司简称"  fieldname="LSP_NM" dataType="string" defalutValue="" cellCode="BA">
+  </column>
+  <column name="货代"  fieldname="LSP_NM" dataType="string" defalutValue="" cellCode="BB">
+  </column>
+  <column name="主提单号"  fieldname="MASTER_NO" dataType="string" defalutValue="" cellCode="BC">
+  </column>
+  <column name="分提单号"  fieldname="HOUSE_NO" dataType="string" defalutValue="" cellCode="BD">
+  </column>
+
+  <column name="拖车代码"  fieldname="CR_CD" dataType="string" defalutValue="" cellCode="BE">
+  </column>
+  <column name="拖车公司"  fieldname="CR_NM" dataType="string" defalutValue="" cellCode="BF">
+  </column>
+  <column name="报关行"  fieldname="BR_NM" dataType="string" defalutValue="" cellCode="BG">
+  </column>
+  <column name="财务客户别"  fieldname="FC_NM" dataType="string" defalutValue="" cellCode="BH">
+  </column>
+  <column name="RG code"  fieldname="RG_CD" dataType="string" defalutValue="" cellCode="BI">
+  </column>
+  <column name="RG 名称"  fieldname="RG_NM" dataType="string" defalutValue="" cellCode="BJ">
+  </column>
+  <column name="Brand"  fieldname="BRAND_TYPE" dataType="string" defalutValue="" cellCode="BK">
+  </column>
+  <column name="目的港代码"  fieldname="POD_CD" dataType="string" defalutValue="" cellCode="BL">
+  </column>
+  <column name="目地港"  fieldname="POD_NAME" dataType="string" defalutValue="" cellCode="BM">
+  </column>
+  <column name="最终目的地代码"  fieldname="DEST_CD" dataType="string" defalutValue="" cellCode="BN">
+  </column>
+  <column name="最终目的地名称"  fieldname="DEST_NAME" dataType="string" defalutValue="" cellCode="BO">
+  </column>
+  <column name="到达地区/国家"  fieldname="HTML_CNTRY" dataType="string" defalutValue="" cellCode="BP">
+  </column>
+  <column name="航线"  fieldname="REGION" dataType="string" defalutValue="" cellCode="BQ">
+  </column>
+  <column name="Region"  fieldname="REGION" dataType="string" defalutValue="" cellCode="BR">
+  </column>
+  <column name="Incoterm"  fieldname="TRADE_TERM" dataType="string" defalutValue="" cellCode="BS">
+  </column>
+  <column name="Freight term"  fieldname="FREIGHT_TERM" dataType="string" defalutValue="" cellCode="BT">
+  </column>
+  <column name="Truk Term"  fieldname="" dataType="string" defalutValue="" cellCode="BU">
+  </column>
+  <column name="DLV TERM"  fieldname="INCOTERM" dataType="string" defalutValue="" cellCode="BV">
+  </column>
+
+  <column name="成本归属/CHARGE单位 ？"  fieldname="" dataType="string" defalutValue="" cellCode="BW">
+  </column>
+  <column name="成本中心"  fieldname="COST_CENTER" dataType="string" defalutValue="" cellCode="BX">
+  </column>
+  <column name="charge back （Y/N） ？"  fieldname="" dataType="string" defalutValue="" cellCode="BY">
+  </column>
+  <column name="CHARGE BACK FROM？"  fieldname="" dataType="string" defalutValue="" cellCode="BZ">
+  </column>
+  <column name="空运原因"  fieldname="" dataType="string" defalutValue="" cellCode="CA">
+  </column>
+  <column name="Approve"  fieldname="" dataType="string" defalutValue="" cellCode="CB">
+  0</column>
+  <column name="海外工厂"  fieldname="" dataType="string" defalutValue="" cellCode="CC">
+  </column>
+  <column name="窗口空运原因简述"  fieldname="" dataType="string" defalutValue="" cellCode="CD">
+  </column>
+  <column name="空运签呈编码"  fieldname="" dataType="string" defalutValue="" cellCode="CE">
+  </column>
+  <column name="原因归类"  fieldname="" dataType="string" defalutValue="" cellCode="CF">
+  </column>
+
+  <!--<column name="运费 -FI"  fieldname="FREIGHT_AMT" dataType="string" defalutValue="" cellCode="CG">
+  </column>
+  <column name="运费币别"  fieldname="FI_TTL" dataType="string" defalutValue="" cellCode="CH">
+  </column>
+  <column name="运费 -LST"  fieldname="FREIGHT_AMT" dataType="string" defalutValue="" cellCode="CI">
+  </column>-->
+</table>

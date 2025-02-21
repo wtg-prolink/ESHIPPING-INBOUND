@@ -1,0 +1,210 @@
+﻿@{
+    ViewBag.Title = "EDIDetialSetupView";
+}
+<script type="text/javascript">
+    var _uid = "@ViewBag.Uid";
+    var _ufid = "@ViewBag.UFid";
+    var schemas = "@ViewBag.schemas.Content";
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+@Html.RazorJSInline("~/Scripts/BSPG/EDIDetailSetup.js")
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="EdiId" class="control-label">EDI Code</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="EdiId" name="EdiId" fieldname="EdiId" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="EdiNm" class="control-label">EDI Name</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="EdiNm" name="EdiNm" fieldname="EdiNm" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="EdiMode" class="control-label">@Resources.Locale.L_EDIDetailSetupView_Use</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<select class="form-control input-sm" dt="mt" id="EdiMode" name="EdiMode" fieldname="EdiMode">
+								<option value="A">@Resources.Locale.L_EDIDetailSetupView_Send</option>
+								<option value="B">@Resources.Locale.L_EDIDetailSetupView_Ask</option>
+							</select>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="SourceType" class="control-label">@Resources.Locale.L_EDIDetailSetupView_Use</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<select class="form-control input-sm" dt="mt" id="SourceType" name="SourceType" fieldname="SourceType">
+								<option value="F">FTP</option>
+								<option value="S">Web Service</option>
+								<option value="M">Mail</option>
+								<option value="L">Local file</option>
+								<option value="C">Crewler Site</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="TriggerType" class="control-label">@Resources.Locale.L_EDIDetailSetupView_Descp</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="TriggerType" name="TriggerType" fieldname="TriggerType" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="CycleData" class="control-label">@Resources.Locale.L_EDIDetailSetupView_Data</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="CycleData" name="CycleData" fieldname="CycleData" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="ServicePath" class="control-label">@Resources.Locale.L_EDIDetailSetupView_AddrM</label>
+						</div>
+						<div class="pure-u-sm-25-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="ServicePath" name="ServicePath" fieldname="ServicePath" />
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="SourcePath" class="control-label">@Resources.Locale.L_EDIDetailSetupView_DAddr</label>
+						</div>
+						<div class="pure-u-sm-25-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="SourcePath" name="SourcePath" fieldname="SourcePath" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="ServicePathQ" class="control-label">@Resources.Locale.L_EDIDetailSetupView_SevAddr (Q)</label>
+						</div>
+						<div class="pure-u-sm-25-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="ServicePathQ" name="ServicePathQ" fieldname="ServicePathQ" />
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60 ">
+							<label for="FuncCode" class="control-label">Function Name</label>
+						</div>
+						<div class="pure-u-sm-25-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="FuncCode" name="FuncCode" fieldname="FuncCode" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="ServicePathD" class="control-label">@Resources.Locale.L_EDIDetailSetupView_SevAddr (D)</label>
+						</div>
+						<div class="pure-u-sm-25-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="ServicePathD" name="ServicePathD" fieldname="ServicePathD" />
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+				
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="SourceFolder" class="control-label">@Resources.Locale.L_EDIDetailSetupView_DCat</label>
+						</div>
+						<div class="pure-u-sm-25-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="SourceFolder" name="SourceFolder" fieldname="SourceFolder" />
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="SourceAccount" class="control-label">@Resources.Locale.L_EDIDetailSetupView_Account</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="SourceAccount" name="SourceAccount" fieldname="SourceAccount" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="SourcePwd" class="control-label">@Resources.Locale.L_EDIDetailSetupView_Password</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="SourcePwd" name="SourcePwd" fieldname="SourcePwd" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="SourceFormat" class="control-label">@Resources.Locale.L_EDIDetailSetupView_Format</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="SourceFormat" name="SourceFormat" fieldname="SourceFormat" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="SourcePort" class="control-label">@Resources.Locale.L_EDIDetailSetupView_Way (Port)</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="SourcePort" name="SourcePort" fieldname="SourcePort" />
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="EdiNamespace" class="control-label">Name Space</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="EdiNamespace" name="EdiNamespace" fieldname="EdiNamespace" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="RefProgram" class="control-label">@Resources.Locale.L_EDIDetailSetupView_Ref</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="RefProgram" name="RefProgram" fieldname="RefProgram" />
+						    <p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="EdiProgramer" class="control-label">@Resources.Locale.L_EDIDetailSetupView_Desiger</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="EdiProgramer" name="EdiProgramer" fieldname="EdiProgramer" />
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+					
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Remark" class="control-label">Remark</label>
+						</div>
+						<div class="pure-u-sm-55-60 control-group">
+							<textarea class="form-control" dt="mt" id="Remark" name="Remark" fieldname="Remark"></textarea>
+						    <p class="help-block tooltips"></p>
+						</div>
+					</div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="CreateBy" class="control-label">@Resources.Locale.L_DNApproveManage_CreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" fieldname="CreateBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" fieldname="CreateDate" readonly>
+                        </div>
+                        <div class="pure-u-sm-6-60 label-right">
+                            <label for="ModifyBy" class="control-label">@Resources.Locale.L_DNApproveManage_ModifyBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" fieldname="ModifyBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" fieldname="ModifyDate" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" />

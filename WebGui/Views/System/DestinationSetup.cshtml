@@ -1,0 +1,195 @@
+﻿@{
+    ViewBag.Title = "DestinationSetup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #page-wrapper {
+        padding: 5px;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        var schemas = "@ViewBag.schemas.Content";
+        schemas = JSON.parse(decodeHtml(schemas));
+        CommonFunc.initField(schemas);
+        //CommonFunc.initField(schemas);
+        $("input, textarea").not("[type=submit]").jqBootstrapValidation();
+
+
+    });
+</script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var PortCd = "@ViewBag.PortCd";
+        var CntryCd = "@ViewBag.CntryCd";
+        var ShipTo = "@ViewBag.ShipTo";
+        var Factory = "@ViewBag.Factory";
+        var Cmp = "@ViewBag.Cmp";
+        initLoadData(PortCd, CntryCd, Factory, ShipTo, Cmp);
+    });
+</script>
+@Html.RazorJSInline("~/Scripts/DestinationSetup/DestinationSetup.js")
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div id="MainArea">
+                <div class="panel panel-default">
+                    <div class="panel-body" style="padding: 5px 2px;">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="PortCd" class="control-label">@Resources.Locale.L_CitySetup_PortCd</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" onblur="this.value = this.value.toUpperCase()" class=" form-control input-sm" dt="mt" id="PortCd" name="PortCd" fieldname="PortCd" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-15-60"></div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="PortNm" class="control-label">@Resources.Locale.L_CitySetup_PortNm</label>
+                            </div>
+                            <div class="pure-u-sm-25-60 control-group">
+                                <input type="text" onblur="this.value = this.value.toUpperCase()" class="form-control input-sm" dt="mt" id="PortNm" name="PortNm" fieldname="PortNm" />
+                                <p class="help-block tooltips"></p>
+                            </div>
+
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="CntryCd" class="control-label">@Resources.Locale.L_CitySetup_CntryCd</label>
+                            </div>
+
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="CntryCd" name="CntryCd" fieldname="CntryCd" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="CntryCdLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CntryNm" name="CntryNm" fieldname="CntryNm" readonly />
+                            </div>
+
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="State" class="control-label">@Resources.Locale.L_CitySetup_State</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="State" name="State" fieldname="State" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="StateLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="Region" class="control-label">@Resources.Locale.L_CitySetup_Region</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="Region" name="Region" fieldname="Region" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="RegionLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="Factory" class="control-label">@Resources.Locale.L_DNApproveManage_Plant</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="Factory" name="Factory" fieldname="Factory" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="FactoryLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="FactoryNm" name="FactoryNm" fieldname="FactoryNm" readonly />
+                            </div>
+
+                            <div class="pure-u-sm-5-60 label-right">
+                                <label for="ShipTo" class="control-label">Ship to Party</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" dt="mt" id="ShipTo" name="ShipTo" fieldname="ShipTo" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" type="button" id="ShipToLookup">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <p class="help-block tooltips"></p>
+                            </div>
+
+                            <div class="pure-u-sm-15-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShipToNm" name="ShipToNm" fieldname="ShipToNm" readonly />
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="Remark" class="control-label">@Resources.Locale.L_BSCSSetup_Remark</label>
+                            </div>
+                            <div class="pure-u-sm-55-60 control-group">
+                                <textarea class="form-control" dt="mt" id="Remark" name="Remark" fieldname="Remark"></textarea>
+                                <p class="help-block tooltips"></p>
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <div class="pure-u-sm-5-60">
+                                <label for="Cmp" class="control-label">@Resources.Locale.L_NRSSetup_U_ID</label>
+                            </div>
+                            <div class="pure-u-sm-5-60">
+                                <input type="text" dt="mt" class="form-control input-sm" id="Cmp" fieldname="Cmp" readonly />
+                            </div>
+                            <div class="pure-u-sm-6-60 label-right">
+                                <label for="CreateBy" class="control-label">@Resources.Locale.L_NRSSetup_CreateBy</label>
+                            </div>
+                            <div class="pure-u-sm-7-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" fieldname="CreateBy" readonly />
+                            </div>
+                            <div class="pure-u-sm-7-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" fieldname="CreateDate" readonly>
+                            </div>
+                            <div class="pure-u-sm-10-60"></div>
+                            <div class="pure-u-sm-6-60 label-right">
+                                <label for="ModifyBy" class="control-label">@Resources.Locale.L_NRSSetup_ModifyBy</label>
+                            </div>
+                            <div class="pure-u-sm-7-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" fieldname="ModifyBy" readonly />
+                            </div>
+                            <div class="pure-u-sm-7-60">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" fieldname="ModifyDate" readonly />
+                            </div>
+                        </div>
+
+                        <div class="pure-g">
+                            <table id="MainGrid" class="_tableGrid" style="width: 100%">
+                                <tr></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,3479 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SMSM">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="U_ID" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:scale="255" msprop:key="False" msprop:allowDBNull="False" type="xs:string" minOccurs="0" />
+              <xs:element name="WEEKLY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MONTH" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="YEAR" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GROUP_ID" msprop:scale="255" msprop:key="False" msprop:allowDBNull="False" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CMP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="STN" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DEP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SHIPMENT_ID" msprop:scale="255" msprop:key="False" msprop:allowDBNull="False" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SHIPMENT_INFO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NO_DECL" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="STATUS" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BL_CHECK" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CARRIER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CARRIER_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SCAC_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SVC_CONTACT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BL_WIN" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SALES_WIN" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BRG_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SIGN_BACK" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INCOTERM_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INCOTERM_DESCP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SERVICE_MODE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FRT_TERM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MARKS" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INSTRUCTION" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BOOKING_INFO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DIMENSION" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HOUSE_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MASTER_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SO_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="REF_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BL_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BL_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CLS_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ETD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ETA" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PICKUP_WMS" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PICKUP_WMS_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PICKUP_WMS_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RCV_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DLV_DOC_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RLS_CNTR_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RCV_DOC_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CUT_PORT_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PORT_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CUSTOMS_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PORT_RLS_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="VESSEL1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VOYAGE1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ETD1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ETA1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="VESSEL2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VOYAGE2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ETD2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ETA2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="VESSEL3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VOYAGE3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ETD3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ETA3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="VESSEL4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VOYAGE4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ETD4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ETA4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="POR_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POR_CNTY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POR_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POL_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POL_CNTY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POL_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VIA_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VIA_CNTY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VIA_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POD_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POD_CNTY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POD_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DEST_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DEST_CNTY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DEST_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="QTY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:int" minOccurs="0" />
+              <xs:element name="QTYU" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NW" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GW" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GWU" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CBM" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PLT_NUM" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CNT20" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CNT40" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CNT40HQ" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CNT_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CNT_NUMBER" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CUR" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FREIGHT_AMT" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="INSURANCE_AMT" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="OPICKUP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ODELIVERY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EXPORT_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EDECL_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="APPROVE_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OEXPORTER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OEXPORTER_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OEXPORTER_ADDR" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="140" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OIMPORTER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OIMPORTER_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OIMPORTER_ADDR" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="140" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DECL_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DECL_RLS_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BROKER_INSTR" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BROKER_INFO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRAN_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CARGO_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PICKUP_PORT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="REGION" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="STATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DELIVERY_PORT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRUCK_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DRIVER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DRIVER_TEL" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRUCK_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LSP_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LSP_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EXPORT_CUR" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OF_COST" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="OT_COST" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CREATE_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATE_DEP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATE_EXT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATE_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="IPICKUP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDELIVERY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IMPORT_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CC_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IAPPROVE_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IEXPORTER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IEXPORTER_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IEXPORTER_ADDR" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="140" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IIMPORTER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IIMPORTER_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IIMPORTER_ADDR" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="140" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CC_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CC_RLS_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CC_INSTR" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CC_INFO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IMPORT_CUR" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IF_COST" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IT_COST" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ICREATE_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ICREATE_DEP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ICREATE_EXT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ICREATE_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DN_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ATD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ATA" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="REMARK" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="400" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MODIFY_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MODIFY_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PPOR_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PPOR_CNTY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PPOR_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PPOL_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PPOL_CNTY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PPOL_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PPOD_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PPOD_CNTY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PPOD_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PDEST_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PDEST_CNTY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PDEST_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PCNT20" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PCNT40" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PCNT40HQ" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PCNT_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PCNT_NUMBER" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PICKUP_CDATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RETURN_CDATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CNTR_DESCP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COMBINE_INFO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DN_ETD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RECEIVE_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="GVALUE" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="INSPECT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRACK_WAY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DEEP_PROCESS" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BAND_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PLT_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ETT" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ATT" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DTT" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AQTY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DQTY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="FQTY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="FDQTY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NDQTY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SEPARATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CAR_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PORT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PORT_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PORT_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POST_CARGO_FLAG" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INV_FLOW" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CORDER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BORDER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TORDER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LOADING_FROM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LOADING_TO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SH_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SH_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CS_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CS_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PT_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PT_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DT_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DT_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PAYTERM_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PAYTERM_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BROKER_USER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PKG_NUM" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PKG_UNIT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PKG_UNIT_DESC" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BOOKING_USER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PRODUCT_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PROFILE_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AG_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AG_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WE_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WE_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ZE_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ZE_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FC_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FC_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RE_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RE_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RO_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RO_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CAR_TYPE1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CAR_TYPE2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CAR_QTY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CAR_QTY1" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CAR_QTY2" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TRANSACTE_MODE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UNICODE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COMBIN_SHIPMENT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="120" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COST_CENTER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PGW" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PCBM" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BROKER_TIMES" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BOOKING_TIMES" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ATA_D" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CUT_BL_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="LGOODS" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BL_RMK" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRADE_TERM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRADETERM_DESCP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BAND_DESCP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BAND_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CENT_DECL" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DRAFT_BL_WIN" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BLNOTIFY_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BR_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BR_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CR_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CR_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PARTIAL_FLAG" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CR_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BR_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SEND_BOOK_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="INTERNAL_BK_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="SEND_BROKER_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ISCOMBINE_BL" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IS_EXPORT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRUCK_COST" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="LSP_COST" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="EXTERNAL_WMS" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EXTERNAL_WMS_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DEBIT_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DEBIT_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ATP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DECL_NUM" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NEXT_NUM" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CW" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IORDER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TCBM" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="COMBINE_OTHER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TELEX_RLS" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HORN" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BATTERY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUSTOMS_CHECK" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ISF_SEND_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ISF_WIN" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VIA" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SORDER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SDATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="SORDER_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DEBIT_TO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POST_CARGO_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="OPTIONS" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SERVICE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COST_CENTERDESCP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HOUSE_NO_FLAG" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SMSMPT">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="U_ID" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:scale="255" msprop:key="False" msprop:allowDBNull="False" type="xs:string" minOccurs="0" />
+              <xs:element name="U_FID" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="SHIPMENT_ID" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PARTY_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="False" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TYPE_DESCP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ORDER_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PARTY_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PARTY_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PART_ADDR1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="60" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PART_ADDR2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PART_ADDR3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CNTY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CNTY_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CITY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CITY_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="STATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ZIP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PARTY_ATTN" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PARTY_TEL" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PARTY_MAIL" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DEBIT_TO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PART_ADDR4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PART_ADDR5" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FAX_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PARTY_NAME2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PARTY_NAME3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PARTY_NAME4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TAX_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SMPART_ADDR1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="60" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SMPART_ADDR2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SMPART_ADDR3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SMPART_ADDR4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SMPART_ADDR5" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SMPARTY_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SMPARTY_NAME2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SMPARTY_NAME3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SMPARTY_NAME4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IM_RECORD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SMDNP">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="U_ID" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:scale="255" msprop:key="False" msprop:allowDBNull="False" type="xs:string" minOccurs="0" />
+              <xs:element name="U_FID" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:scale="255" msprop:key="False" msprop:allowDBNull="False" type="xs:string" minOccurs="0" />
+              <xs:element name="DN_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="False" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PLANT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PO_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="35" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SO_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SO_ITEM" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CUR1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UNIT_PRICE1" msprop:scale="6" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="VALUE1" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ONE_TIME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DEL_ITEM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RESOLUTION" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BRAND" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CATEGORY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_DESCP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PROD_DESCP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PROD_SPEC" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OHS_CODE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IHS_CODE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IPART_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="18" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OPART_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="18" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PART_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="35" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SAFETY_MODEL" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="18" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BRAND_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PROD_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ASSEMBLY_ID" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MATERIAL_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SIZE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PRODUCT_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="QTY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="QTYU" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PKG_NUM" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CBM" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CBMU" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GW" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CNTR_STD_QTY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="JOB_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="JQTY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PRODUCT_LINE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IQTY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PQTY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="WQTY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ESTIMATE_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ACTURE_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="COST" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ITEM_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ODN_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PMATN" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="18" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="REPLACE_PART" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="132" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BSTKD_E" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="35" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IHREZ" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IHREZ_E" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DELIVERY_ITEM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INSPECT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UL" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BATTERY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ADDS" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DU" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUR" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DOWN_FLAG" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SEND_SFIS_FLAG" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="REF_PART" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PREPARE_RMK" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SLOC" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PKG_UNIT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INTERFACE_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DOWN_USER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COST_PRICE" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SMRV">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="U_ID" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:scale="255" msprop:key="False" msprop:allowDBNull="False" type="xs:string" minOccurs="0" />
+              <xs:element name="RESERVE_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="False" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="STATUS" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GROUP_ID" msprop:scale="255" msprop:key="False" msprop:allowDBNull="False" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CMP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DEP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WS_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="REF_GATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CALL_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="USE_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RESERVE_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RESERVE_FROM" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="HOUR" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CNTR_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRUCKER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRUCK_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DRIVER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TEL" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATE_CMP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATE_DEP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATE_EXT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATE_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATE_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ORDER_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ORDER_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CONFIRM_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CONFIRM_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="GATE_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CNTY_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SEAL_NO1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SEAL_NO2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUTPORT_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PICK_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="SEAL_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="APORT_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ATD" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CARRIER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CARRIER_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="YARD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="YARD_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INYARD_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="OUTYARD_DATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="REMARK" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MOVE_NUMBER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DN_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RESERVE_TDATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PRODUCT_LINE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SHIPMENT_INFO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RESERVE_TO" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="RESERVE_HOUR" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TEMP_GATENO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SEAL_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IN_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OUT_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IN_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="OUT_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TRUCK_CNTRNO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRUCK_SEALNO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="S_CODE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TEMP_WSCD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TEMP_RDATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TEMP_RFROM" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TEMP_RH" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SHIPMENT_ID" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LTRUCK_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LDRIVER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LTEL" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="QTY" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="QTYU" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NW" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NWU" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GW" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GWU" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CBM" msprop:scale="4" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="LODING_FROM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LODING_TO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRUCKER_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IS_BATCH" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TRAN_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CARGO_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUT_PORT_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CNT_NUMBER" msprop:scale="0" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CNT_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TARE_WEIGHT" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TWU" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TTL_VGM" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DRIVER_ID" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PORT_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BAT_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LDRIVER_ID" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EPT_IDATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EPT_ODATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PUT_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DIM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SMCREATE_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MF_NO" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CNTR_BE_DAY" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+              <xs:element name="FAC_HOLD_DAY" msprop:scale="2" msprop:key="False" msprop:allowDBNull="True" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SMSIM">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="U_ID" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:scale="255" msprop:key="False" msprop:allowDBNull="False" type="xs:string" minOccurs="0" />
+              <xs:element name="PROFILE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CMP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CMP_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUST_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CUST_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PROFILE_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INV_FLOW" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MODEL_NAME" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="STN" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="STN_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BL_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SELLER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SELLER_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BUYER1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BUYER1_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INCOTERM1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BUYER2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BUYER2_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INCOTERM2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BUYER3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BUYER3_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INCOTERM3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BUYER4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BUYER4_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INCOTERM4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BUYER5" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BUYER5_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INCOTERM5" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DEST" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CNEE_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CNEE_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SHPR_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SHPR_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SHIPPING_MODE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SHIPPING_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NOTIFY1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NOTIFY1_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NOTIFY2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NOTIFY2_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NOTIFY3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NOTIFY3_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CARRIER1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CARRIER_NM1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CONTACT_NO1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LSP_NO1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LSP_NM1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LSP_INFO1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CARRIER2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CARRIER_NM2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CONTACT_NO2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LSP_NO2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LSP_NM2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LSP_INFO2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CARRIER3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CARRIER_NM3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CONTACT_NO3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LSP_NO3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LSP_NM3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LSP_INFO3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CC_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CC_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DT_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DT_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COMMODITY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BILL_TYPE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COMBINE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LC" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FCL_LCL" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DOC1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MAIL_GROUP1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DOC2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MAIL_GROUP2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DOC3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MAIL_GROUP3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DOC4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MAIL_GROUP4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DOC5" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MAIL_GROUP5" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SHIPPING_MARK" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BL_REMARK1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="BL_REMARK2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="BL_REMARK3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="BL_REMARK4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="BL_REMARK5" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="INV_REMARK1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="INV_REMARK2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="INV_REMARK3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="INV_REMARK4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="INV_REMARK5" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="PK_REMARK1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="PK_REMARK2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="PK_REMARK3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="PK_REMARK4" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="PK_REMARK5" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="CREATE_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATE_DEP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATE_EXT" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CREATE_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="MODIFY_BY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MODIFY_DATE" msprop:scale="3" msprop:key="False" msprop:allowDBNull="True" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BL_REMARK6" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="FLOW_DESCP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PRICE_TERM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PAYMENT_TERM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BL_SPC_REQ" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PK_DESCP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FREIGHT_TERM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DEST_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POD_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INV_SPEC" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PK_SPEC" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PO_HEADER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MODEL_HEADER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PKG_DESCP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INV_REMARK6" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="PK_REMARK6" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" type="xs:string" minOccurs="0" />
+              <xs:element name="PART_HEADER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VENDOR_CD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IM_RECORD" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ISF_SELLER" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ISF_SELLERNM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="35" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ISF_SELLERADDR1" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="35" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ISF_SELLERADDR2" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="35" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ISF_SELLERADDR3" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="35" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ISF_SELLERCITY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ISF_SELLERSTATE" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ISF_SELLERCNTY" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ISF_SELLERCNTY_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ISF_SELLERZIP" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ISF_SELLERCITY_NM" msprop:scale="255" msprop:key="False" msprop:allowDBNull="True" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="35" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,795 @@
+﻿@{
+    ViewBag.Title = "InsurancePaySetupView";
+}
+<script type="text/javascript">
+    var _uid = "@ViewBag.UId";
+    var Schemas = "@ViewBag.Schemas.Content";
+    var language = {};
+    language["L_SMIPR_SeqNo"] = "@Resources.Locale.L_SMIPR_SeqNo";
+    language["L_SMIPR_JobNo"] = "@Resources.Locale.L_SMIPR_JobNo";
+    language["L_SMIPR_JobDate"] = "@Resources.Locale.L_SMIPR_JobDate";
+    language["L_SMIPR_Location"] = "@Resources.Locale.L_SMIPR_Location";
+    language["L_SMIPR_CreateBy"] = "@Resources.Locale.L_SMIPR_CreateBy";
+    language["L_SMIPR_Remark"] = "@Resources.Locale.L_SMIPR_Remark";
+    language["L_SMIPC_JobNo"] = "@Resources.Locale.L_SMIPC_JobNo";
+    language["L_SMIPC_JobType"] = "@Resources.Locale.L_SMIPC_JobType";
+    language["L_SMIPC_SeqNo"] = "@Resources.Locale.L_SMIPC_SeqNo";
+    language["L_SMIPC_InsCd"] = "@Resources.Locale.L_SMIPC_InsCd";
+    language["L_SMIPC_ChgDescp"] = "@Resources.Locale.L_SMIPC_ChgDescp";
+    language["L_SMIPC_IpAmt"] = "@Resources.Locale.L_SMIPC_IpAmt";
+    language["L_SMIPC_Remark"] = "@Resources.Locale.L_SMIPC_Remark";
+
+    var CmpNm = '@ViewBag.CmpNm';
+    var vChgDescp = '@ViewBag.ChgDescp';
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+@Html.RazorJSInline("~/Scripts/ActManage/InsurancePaySetupView.js")
+<script type="text/javascript" src="@Url.Content("~/Scripts/BaseLookup.js")"></script>
+<div id="wrapper" InputDep="B">
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div id="InUser">
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="JobNo" class="control-label">@Resources.Locale.L_SMIPM_JobNo</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="JobNo" name="JobNo" fieldname="JobNo" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="JobDate" class="control-label">@Resources.Locale.L_SMIPM_JobDate</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="JobDate" name="JobDate" fieldname="JobDate" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="JobCmp" class="control-label">@Resources.Locale.L_SMIPM_JobCmp</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="JobCmp" name="JobCmp" fieldname="JobCmp" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="JobCmpLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Status" class="control-label">@Resources.Locale.L_SMIPM_Status</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<select class="form-control input-sm" dt="mt" id="Status" name="Status" fieldname="Status">
+								<option value="N">N:@Resources.Locale.L_InsuranceManage_StatusN</option>
+								<option value="Y">Y:@Resources.Locale.L_InsuranceManage_StatusY</option>
+								<option value="C">C:@Resources.Locale.L_InsuranceManage_StatusC</option>
+								<option value="A">A:@Resources.Locale.L_InsuranceManage_StatusA</option>
+								<option value="F">F:@Resources.Locale.L_SMIPM_EndingBy</option>
+								<option value="I">I:@Resources.Locale.L_MenuBar_Problem</option>
+							</select>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="BlNo" class="control-label">@Resources.Locale.L_SMIPM_BlNo</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="BlNo" name="BlNo" fieldname="BlNo" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="BlNoLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="TranType" class="control-label">@Resources.Locale.L_SMIPM_TranType</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<select class="form-control input-sm" dt="mt" id="TranType" name="TranType" fieldname="TranType">
+								<option value="F">F:FCL</option>
+								<option value="L">L:LCL</option>
+								<option value="A">A:AIR</option>
+								<option value="E">E:Express</option>
+								<option value="R">R:Rail</option>
+								<option value="T">T:Truck</option>
+							</select>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Company" class="control-label">@Resources.Locale.L_SMIPM_Company</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Company" name="Company" fieldname="Company" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="CompanyLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="CompanyNm" name="CompanyNm" fieldname="CompanyNm" readonly />
+						</div>
+					</div>
+					<div class="pure-g">
+                         <div class="pure-u-sm-5-60">
+                                <label for="ShipmentId" class="control-label">@Resources.Locale.L_DNApproveManage_ShipmentId</label>
+                            </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="ShipmentId" name="ShipmentId" fieldname="ShipmentId" readonly />
+                                <p class="help-block tooltips"></p>
+                            </div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Goods" class="control-label">@Resources.Locale.L_SMIPM_Goods</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Goods" name="Goods" fieldname="Goods" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="ShipperCd" class="control-label">@Resources.Locale.L_SMIPM_ShipperCd</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="ShipperCd" name="ShipperCd" fieldname="ShipperCd" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="ShipperCdLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="ShipperNm" name="ShipperNm" fieldname="ShipperNm" readonly />
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="EvenPlace" class="control-label required">@Resources.Locale.L_SMIPM_EvenPlace</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="EvenPlace" name="EvenPlace" fieldname="EvenPlace" required/>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Cur" class="control-label">@Resources.Locale.L_SMIPM_Cur</label>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Cur" name="Cur" fieldname="Cur" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="CurLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-6-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Amt" name="Amt" fieldname="Amt" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="FiCd" class="control-label">@Resources.Locale.L_SMIPM_FiCd</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="FiCd" name="FiCd" fieldname="FiCd" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="FiCdLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="FiNm" name="FiNm" fieldname="FiNm" readonly />
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Term" class="control-label">@Resources.Locale.L_SMIPM_Term</label>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Term" name="Term" fieldname="Term" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="TermLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-6-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="TermDescp" name="TermDescp" fieldname="TermDescp" readonly />
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Region" class="control-label">@Resources.Locale.L_SMIPM_Region</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Region" name="Region" fieldname="Region" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="RegionLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="CneeCd" class="control-label">@Resources.Locale.L_SMIPM_CneeCd</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="CneeCd" name="CneeCd" fieldname="CneeCd" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="CneeCdLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="CneeNm" name="CneeNm" fieldname="CneeNm" readonly />
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Pol" class="control-label">@Resources.Locale.L_SMIPM_Pol</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Pol" name="Pol" fieldname="Pol" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="PolLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="PolNm" name="PolNm" fieldname="PolNm" readonly />
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="Carrier" class="control-label">@Resources.Locale.L_SMIPM_Carrier</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Carrier" name="Carrier" fieldname="Carrier" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="CarrierLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="CarrierNm" name="CarrierNm" fieldname="CarrierNm" readonly />
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Pod" class="control-label">@Resources.Locale.L_SMIPM_Pod</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Pod" name="Pod" fieldname="Pod" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="PodLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="PodNm" name="PodNm" fieldname="PodNm" readonly />
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="LspNo" class="control-label">@Resources.Locale.L_SMIPM_LspNo</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="LspNo" name="LspNo" fieldname="LspNo" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="LspNoLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="LspNm" name="LspNm" fieldname="LspNm" readonly />
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Dest" class="control-label">@Resources.Locale.L_SMIPM_Dest</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Dest" name="Dest" fieldname="Dest" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="DestLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="DestNm" name="DestNm" fieldname="DestNm" readonly />
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="InsCd" class="control-label">@Resources.Locale.L_SMIPM_InsCd</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="InsCd" name="InsCd" fieldname="InsCd" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="InsCdLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-15-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="InsNm" name="InsNm" fieldname="InsNm" readonly />
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="CntNo" class="control-label">@Resources.Locale.L_SMIPM_CntNo</label>
+						</div>
+						<div class="pure-u-sm-25-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="CntNo" name="CntNo" fieldname="CntNo" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="InvNo" class="control-label">@Resources.Locale.L_SMIPM_InvNo</label>
+						</div>
+						<div class="pure-u-sm-25-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="InvNo" name="InvNo" fieldname="InvNo" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label for="Reason" class="control-label">@Resources.Locale.L_SMIPM_Reason</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<select class="form-control input-sm" dt="mt" id="Reason" name="Reason" fieldname="Reason">
+							@Html.Raw(ViewBag.Reason)							
+							</select>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="LossQty" class="control-label">@Resources.Locale.L_SMIPM_LossQty</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="LossQty" name="LossQty" fieldname="LossQty" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="LossAmt" class="control-label">@Resources.Locale.L_SMIPM_LossAmt</label>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="LossCur" name="LossCur" fieldname="LossCur" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="LossCurLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="LossAmt" name="LossAmt" fieldname="LossAmt" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" value="USD" readonly/>
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" disabled="">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+                        <div class="pure-u-sm-3-60 control-group">
+                            <input type="text" class="form-control input-sm input-num-right refrate" dt="mt" id="LossRate" name="LossRate" fieldname="LossRate" readonly />
+                            <p class="help-block tooltips"></p>
+                        </div>
+						<div class="pure-u-sm-6-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="LossUamt" name="LossUamt" fieldname="LossUamt" readonly />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-4-60">
+							<label for="Reason" class="control-label">@Resources.Locale.L_SMIPM_Reason1</label>
+						</div>
+						<div class="pure-u-sm-10-60 label-right">
+							<label class="chx">
+							<input type="checkbox" chxName="chxflag" name="Iflag" disabled="">@Resources.Locale.L_SMIPM_Iflag
+							</label>
+							<label for="LossAmt" class="control-label">@Resources.Locale.L_SMIPM_Famt：</label>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Icur" name="Icur" fieldname="Icur" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="IcurLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Iamt" name="Iamt" fieldname="Iamt" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" value="USD" readonly/>
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" disabled="">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+                        <div class="pure-u-sm-3-60 control-group">
+                            <input type="text" class="form-control input-sm refrate" dt="mt" id="IuRate" name="IuRate" fieldname="IuRate" readonly />
+                            <p class="help-block tooltips"></p>
+                        </div>
+						<div class="pure-u-sm-5-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Iuamt" name="Iuamt" fieldname="Iuamt" readonly />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<input type="button" id="IflagButton" class="flag" value="@Resources.Locale.L_InsurancePaySetupView_Views_208" disabled="" />
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="IpayDate" class="control-label">@Resources.Locale.L_SMIPM_IpayDate</label>
+						</div>
+						<div class="pure-u-sm-6-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="IpayDate" name="IpayDate" fieldname="IpayDate" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="PayNo" class="control-label">@Resources.Locale.L_SMIPM_PayNo</label>
+						</div>
+						<div class="pure-u-sm-6-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="PayNo" name="PayNo" fieldname="PayNo" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g" name='OutUser'>
+						<div class="pure-u-sm-4-60"></div>
+						<div class="pure-u-sm-10-60 label-right">
+							<label class="chx">
+							<input type="checkbox" chxName="chxflag" name="Cflag" disabled="">　@Resources.Locale.L_SMIPM_Cflag
+							</label>
+							<label for="LossAmt" class="control-label">@Resources.Locale.L_SMIPM_Camt：</label>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Ccur" name="Ccur" fieldname="Ccur" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="CcurLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Camt" name="Camt" fieldname="Camt" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" value="USD" readonly/>
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" disabled="">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+                        <div class="pure-u-sm-3-60 control-group">
+                            <input type="text" class="form-control input-sm refrate" dt="mt" id="CuRate" name="CuRate" fieldname="CuRate" readonly />
+                            <p class="help-block tooltips"></p>
+                        </div>
+						<div class="pure-u-sm-5-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Cuamt" name="Cuamt" fieldname="Cuamt" readonly />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<input type="button" id="CflagButton" class="flag" value="@Resources.Locale.L_InsurancePaySetupView_Views_208" disabled="" />
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="CpayDate" class="control-label">@Resources.Locale.L_SMIPM_CpayDate</label>
+						</div>
+						<div class="pure-u-sm-8-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="CpayDate" name="CpayDate" fieldname="CpayDate" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g" name='OutUser'>
+						<div class="pure-u-sm-4-60"></div>
+						<div class="pure-u-sm-10-60 label-right">
+							<label class="chx">
+							<input type="checkbox" chxName="chxflag" name="Fflag" disabled="">@Resources.Locale.L_SMIPM_Fflag
+							</label>
+							<label for="LossAmt" class="control-label">@Resources.Locale.L_SMIPM_Famt：</label>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Fcur" name="Fcur" fieldname="Fcur" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="FcurLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Famt" name="Famt" fieldname="Famt" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" value="USD" readonly/>
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" disabled="">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+                        <div class="pure-u-sm-3-60 control-group">
+                            <input type="text" class="form-control input-sm refrate" dt="mt" id="FuRate" name="FuRate" fieldname="FuRate" readonly />
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Fuamt" name="Fuamt" fieldname="Fuamt" readonly />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<input type="button" id="FflagButton" class="flag" value="@Resources.Locale.L_InsurancePaySetupView_Views_208" disabled="" />
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="FpayDate" class="control-label">@Resources.Locale.L_SMIPM_FpayDate</label>
+						</div>
+						<div class="pure-u-sm-8-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="FpayDate" name="FpayDate" fieldname="FpayDate" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g" name='OutUser'>
+						<div class="pure-u-sm-4-60"></div>
+						<div class="pure-u-sm-10-60 label-right">
+							<label class="chx">
+							<input type="checkbox" chxName="chxflag" name="Tflag" disabled="">@Resources.Locale.L_SMIPM_Tflag
+							</label>
+							<label for="LossAmt" class="control-label">@Resources.Locale.L_SMIPM_Tamt：</label>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="Tcur" name="Tcur" fieldname="Tcur" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="TcurLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Tamt" name="Tamt" fieldname="Tamt" />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" value="USD" readonly/>
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" disabled="">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+                        <div class="pure-u-sm-3-60 control-group">
+                            <input type="text" class="form-control input-sm refrate" dt="mt" id="TuRate" name="TuRate" fieldname="TuRate" readonly />
+                            <p class="help-block tooltips"></p>
+                        </div>
+						<div class="pure-u-sm-5-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="Tuamt" name="Tuamt" fieldname="Tuamt" readonly />
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<input type="button" id="TflagButton" class="flag" value="@Resources.Locale.L_InsurancePaySetupView_Views_208" disabled="" />
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="TpayDate" class="control-label">@Resources.Locale.L_SMIPM_TpayDate</label>
+						</div>
+						<div class="pure-u-sm-8-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="TpayDate" name="TpayDate" fieldname="TpayDate" />
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g" name='OutUser'>
+						<div class="pure-u-sm-5-60">
+							<label for="PayType" class="control-label">@Resources.Locale.L_SMIPM_PayType</label>
+						</div>
+						<div class="pure-u-sm-10-60">
+							<select class="form-control input-sm" dt="mt" id="PayType" name="PayType" fieldname="PayType">
+								<option value="T">@Resources.Locale.L_DNManage_TPVAssign</option>
+								<option value="C">@Resources.Locale.L_InsurancePaySetupView_Views_210</option>
+							</select>
+						</div>
+						<div class="pure-u-sm-6-60 label-right">
+							<label for="LossAmt" class="control-label">@Resources.Locale.L_SMIPM_TpvLamt</label>
+						</div>
+						<div class="pure-u-sm-4-60 control-group">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" dt="mt" id="TpvLcur" name="TpvLcur" fieldname="TpvLcur" Value="USD" />
+								<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" id="TpvLcurLookup">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+								</span>
+							</div>
+							<p class="help-block tooltips"></p>
+						</div>
+						<div class="pure-u-sm-5-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="TpvLamt" name="TpvLamt" fieldname="TpvLamt" />
+							<p class="help-block tooltips"></p>
+						</div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ApplicationBy" class="control-label">@Resources.Locale.L_ContractQuery_Views_484</label>
+                        </div>
+                        <div class="pure-u-sm-7-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ApplicationBy" name="ApplicationBy" fieldname="ApplicationBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ApplicationDate" name="ApplicationDate" fieldname="ApplicationDate" readonly />
+                        </div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-9-60">
+							<label for="ConfirmBy " class="control-label">@Resources.Locale.L_SMIPM_ConfirmDate</label>
+						</div>
+						<div class="pure-u-sm-7-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="ConfirmBy" name="ConfirmBy" fieldname="ConfirmBy" readonly />
+						</div>
+						<div class="pure-u-sm-7-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="ConfirmDate" name="ConfirmDate" fieldname="ConfirmDate" readonly>
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="AcBy" class="control-label">@Resources.Locale.L_SMIPM_AcDate</label>
+						</div>
+						<div class="pure-u-sm-7-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="AcBy" name="AcBy" fieldname="AcBy" readonly />
+						</div>
+						<div class="pure-u-sm-7-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="AcDate" name="AcDate" fieldname="AcDate" readonly>
+						</div>
+						<div class="pure-u-sm-4-60 label-right">
+							<label for="EndingBy" class="control-label">@Resources.Locale.L_SMIPM_EndingDate</label>
+						</div>
+						<div class="pure-u-sm-7-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="EndingBy" name="EndingBy" fieldname="EndingBy" readonly />
+						</div>
+						<div class="pure-u-sm-7-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="EndingDate" name="EndingDate" fieldname="EndingDate" readonly />
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-5-60">
+							<label class="control-label">@Resources.Locale.L_RoleSetUp_CMP</label>
+						</div>
+						<div class="pure-u-sm-4-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp" readonly />
+						</div>
+						<div class="pure-u-sm-3-60 label-right">
+							<label class="control-label">@Resources.Locale.L_GateReserveSetup_CreateDep</label>
+						</div>
+						<div class="pure-u-sm-4-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="CreateDep" name="CreateDep" fieldname="CreateDep" readonly />
+						</div>
+						<div class="pure-u-sm-3-60 label-right">
+							<label class="control-label">@Resources.Locale.L_GateReserveSetup_CreateExt</label>
+						</div>
+						<div class="pure-u-sm-4-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="CreateExt" name="CreateExt" fieldname="CreateExt" readonly />
+						</div>
+						<div class="pure-u-sm-5-60 label-right">
+							<label for="CreateBy" class="control-label">@Resources.Locale.L_IpPart_CreateBy</label>
+						</div>
+						<div class="pure-u-sm-7-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="CreateBy" fieldname="CreateBy" readonly />
+						</div>
+						<div class="pure-u-sm-7-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="CreateDate" fieldname="CreateDate" readonly>
+						</div>
+						<div class="pure-u-sm-4-60 label-right">
+							<label for="ModifyBy" class="control-label">@Resources.Locale.L_IpPart_ModifyBy</label>
+						</div>
+						<div class="pure-u-sm-7-60 control-group">
+							<input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" fieldname="ModifyBy" readonly />
+						</div>
+						<div class="pure-u-sm-7-60">
+							<input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" fieldname="ModifyDate" readonly />
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-60-60">
+							<table id="MainGrid" class="_tableGrid" style="width: 100%">
+								<tr></tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="InsFeeWindow" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">@Resources.Locale.L_InsurancePaySetupView_Views_211</h4>
+			</div>
+			<form name="HandCarForm" id="HandCarForm"  method="post" enctype="multipart/form-data">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-12-12">
+							<table id="SubGrid" class="_tableGrid" style="width: 100%">
+								<tr></tr>
+							</table>
+						</div>
+					</div>
+					<input type="hidden" id="JobType" name="JobType" fieldname="JobType" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-info" id="ConfrimBtn">@Resources.Locale.L_Layout_Confirm</button>
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">@Resources.Locale.L_Layout_Close</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" isKey="true" />
+
+
+

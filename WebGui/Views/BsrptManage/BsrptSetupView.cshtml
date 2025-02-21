@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "BsrptSetupView";
+}
+
+
+<script type="text/javascript">
+	var _uid = "@ViewBag.Uid";
+	var schemas = "@ViewBag.schemas.Content";
+	var MenuStr = "@ViewBag.Menu.Content";
+	var MenuData = JSON.parse(MenuStr.replace(/&quot;/g, '"'));
+
+	var ViewData = [];
+
+	for(var i=0; i<MenuData.length; i++)
+	{
+		for(var j=0; j<MenuData[i]["nodes"].length; j++)
+		{
+			var obj = {val: MenuData[i]["nodes"][j]["href"], descp:MenuData[i]["nodes"][j]["text"]};
+
+			ViewData.push(obj);
+		}
+	}
+</script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+@Html.RazorJSInline("~/Scripts/BsrptManage/BsrptSetupView.js")
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="RptId" class="control-label">@Resources.Locale.L_BsrptManage_RptId</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class=" form-control input-sm" dt="mt" id="RptId" name="RptId" fieldname="RptId"  />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="RptNm" class="control-label">@Resources.Locale.L_BsrptManage_RptNm</label>
+                        </div>
+                            <div class="pure-u-sm-10-60 control-group">
+                            <input type="text" class=" form-control input-sm" dt="mt" id="RptNm" name="RptNm" fieldname="RptNm" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="RptType" class="control-label">@Resources.Locale.L_BsrptManage_RptType</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="RptType" name="RptType" fieldname="RptType">
+                                <option value="PREVIEW">Preview</option>
+                                <option value="xls">Excel</option>
+                                <option value="pdf">PDF</option>
+                                <option value="doc">Doc</option>
+                            </select>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="RptWay" class="control-label">@Resources.Locale.L_BsrptManage_RptWay</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="RptWay" name="RptWay" fieldname="RptWay">
+                                <option value="X">X:XML</option>
+                                <option value="G">G:Getter</option>
+                            </select>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="ViewId" class="control-label">@Resources.Locale.L_BsrptManage_ViewId</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="ViewId" name="ViewId" fieldname="ViewId">
+                            </select>
+                            <p class="help-block tooltips"></p>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="ViewType" class="control-label">@Resources.Locale.L_BsrptManage_ViewType</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <select class="form-control input-sm" dt="mt" id="ViewType" name="ViewType" fieldname="ViewType">
+                                <option value="S">S:Search Page</option>
+                                <option value="D">D: Detail Page</option>
+                            </select>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                    	<div class="pure-u-sm-5-60">
+                    	    <label for="RptCondition" class="control-label">@Resources.Locale.L_BsrptManage_RptCondition</label>
+                    	</div>
+                    	<div class="pure-u-sm-25-60 control-group">
+                    	    <input type="text" class=" form-control input-sm" dt="mt" id="RptCondition" name="RptCondition" fieldname="RptCondition" />
+                    	    <p class="help-block tooltips"></p>
+                    	</div>
+                    	<div class="pure-u-sm-5-60 label-right">
+                    	    <label for="RptParameter" class="control-label">@Resources.Locale.L_BsrptManage_RptParameter</label>
+                    	</div>
+                    	<div class="pure-u-sm-25-60 control-group">
+                    	    <input type="text" class=" form-control input-sm" dt="mt" id="RptParameter" name="RptParameter" fieldname="RptParameter" />
+                    	    <p class="help-block tooltips"></p>
+                    	</div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Remark" class="control-label">@Resources.Locale.L_BsrptManage_Remark</label>
+                        </div>
+                        <div class="pure-u-sm-55-60 control-group">
+                            <textarea class=" form-control"  dt="mt" id="Remark" name="Remark" fieldname="Remark"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" dt="mt" id="UId" name="UId" fieldname="UId" isKey="ture" />

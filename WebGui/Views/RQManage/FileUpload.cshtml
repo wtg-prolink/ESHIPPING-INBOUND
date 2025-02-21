@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "FileUpload";
+}
+<style type="text/css">
+    body {
+        background-color: white;
+    }
+</style>
+<div id="wrapper" style="background-color: white;">
+    <form action="@Url.Action("FileUpload")" method="post" enctype="multipart/form-data" style="background-color: white;">
+        <input type="hidden" name="jobNo" id="jobNo" />
+        <div class="modal-body" style="background-color: white;">
+            <input type="file" title="@Resources.Locale.L_BSTQuery_SelectFile" id="file" name="file">
+        </div>
+        <div class="modal-footer" style="background-color: white;">
+           <button type="submit" class="btn btn-sm btn-info" id="modalUploadBtn">@Resources.Locale.L_BSTQuery_Upload</button>
+        </div>
+    </form>
+</div>

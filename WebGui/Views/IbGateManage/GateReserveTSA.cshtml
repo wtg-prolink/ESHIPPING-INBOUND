@@ -1,0 +1,1455 @@
+﻿@{
+    ViewBag.Title = "GateReserveTSA";
+}
+<style>
+	.normal{background:#5cb85c !important;}
+        .danger{background:#d9534f !important;}
+        .pod{background:#5bc0de !important;}
+</style>
+
+<script type="text/javascript">
+    var Priority = "@ViewBag.Priority";
+	$(document).ready(function ($) {
+		var gop = {};
+		var numberTemplate = "2";
+		var docHeight = $(document).height();
+		gridHeight = docHeight - 230;
+		
+	gop.AddUrl = false;
+	gop.gridId = "containerInfoGrid";
+	gop.gridAttr = { caption: "@Resources.Locale.L_GateReserve_GateReserve", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition),sortname:"Status" };
+	gop.gridSearchUrl = rootPath + "IbGateManage/GetGateDataTSA";
+	gop.searchFormId = "ConditionArea";
+	gop.searchDivId = "SearchArea";
+	gop.StatusAreaId = "StatusArea";
+	gop.BtnGroupId = "BtnGroupArea";
+	gop.multiselect = true;
+
+
+	gop.gridFunc = function (map) {
+		dblClick(map);
+	}
+
+	gop.searchFormId = "ConditionArea";
+	gop.searchDivId = "SearchArea";
+	gop.loadCompleteFunc = function () {
+		var $grid = $("#containerInfoGrid");
+		if ($grid.length > 0 && $grid[0].p && !$grid[0].p.sortname)
+		    $grid[0].p.sortname = "CreateDate";
+		var col = $grid.jqGrid('getCol', 'IsCombineDp', false);
+		$.each(col, function (index, colname) {
+		    if (colname == "S") {
+		        $grid.jqGrid('setRowData', index + 1, false, 'normal');
+		    }
+		});
+		var col1 = $grid.jqGrid('getCol', 'FinalWh', false);
+		var col2 = $grid.jqGrid('getCol', 'Status', false);
+		$.each(col1, function (index, colname) {
+		    if (colname == "Temp" && col2[index] == "O") {
+		        $grid.jqGrid('setRowData', index + 1, false, 'danger');
+		    }
+		    else if (col2[index] == "O") {
+		        $grid.jqGrid('setRowData', index + 1, false, 'pod');
+		    }
+		});
+	}
+
+	$("#EMPTYDATE_EXCEL_UPLOAD_FROM").submit(function () {
+	    var postData = new FormData($(this)[0]);
+	    CommonFunc.ToogleLoading(true);
+	    $.ajax({
+	        url: rootPath + "IbGateManage/ImportEmptyDateExcel",
+	        type: 'POST',
+	        data: postData,
+	        async: false,
+	        beforeSend: function () {
+	            CommonFunc.ToogleLoading(true);
+	        },
+            error: function () {
+                resetFileInput($("#EmptytimeUploadExcel"));
+	            CommonFunc.ToogleLoading(false);
+	            CommonFunc.Notify("", "Error", 1300, "warning");
+	        },
+            success: function (data) {
+                resetFileInput($("#EmptytimeUploadExcel"));
+	            CommonFunc.ToogleLoading(false);
+	            alert(data.message);
+	            $("#emptyDateUploadDialog").modal("hide");
+	        },
+	        cache: false,
+	        contentType: false,
+	        processData: false
+	    });
+
+	    return false;
+	});
+
+	function doDownloadAPPTExcel() {
+	    var url = rootPath + "IbGateManage/ExportTruckInfoExcel";
+	    var grid = $("#containerInfoGrid");
+	    var selRowIds = grid.jqGrid('getGridParam', 'selarrrow');
+	    var rowIds = grid.getDataIDs();
+
+	    if (selRowIds.length <= 0) {
+	        alert("Pls select one record!");
+	        return;
+	    }
+
+	    var selKey = "";
+	    $.each(selRowIds, function (index, val) {
+	        selKey += grid.jqGrid('getCell', selRowIds[index], 'ReserveNo') + ";";
+	    });
+	    var colNames = [];
+	    var colModel = [
+                    { name: 'PickAreaNm', title: '@Resources.Locale.L_IbGateManage_PickAreaNm', titlegroundcolor: '0,255,0', index: 'PickAreaNm', sorttype: 'string', width: 100, align: 'left', hidden: false },
+                    { name: 'DepAddr', title: 'Departure', index: 'DepAddr', sorttype: 'string', titlegroundcolor: '0,255,0', align: 'left', width: 120, hidden: false },
+                    { name: 'ReserveNo', title: 'Reserve No', index: 'ReserveNo', sorttype: 'string', titlegroundcolor: '0,255,0', align: 'left', width: 120, hidden: false },
+                    { name: 'ReserveDateStr', title: '@Resources.Locale.L_IbGateManage_ReserveDate', titlegroundcolor: '0,255,0', index: 'ReserveDateStr', sorttype: 'string', width: 100, align: 'left' },
+                    { name: 'CntrNo', title: '@Resources.Locale.L_GateReserve_CntrNo', index: 'CntrNo', titlegroundcolor: '0,255,0', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'ArrivalDateStr', title: 'Arrival Date', index: 'ArrivalDateStr', titlegroundcolor: '0,255,0', sorttype: 'string', width: 100, align: 'left' },
+                    { name: 'BackLocation', title: '@Resources.Locale.L_SMSMI_BackLocation', titlegroundcolor: '0,255,0', index: 'BackLocation', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'DnNo', title: '@Resources.Locale.L_DNApproveManage_DnNo', titlegroundcolor: '0,255,0', index: 'DnNo', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'DecInfo', title: 'Declaration Info.', index: 'DecInfo', titlegroundcolor: '0,255,0', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'UseDateStr', title: 'Pickup Date', index: 'UseDateStr', titlegroundcolor: '255,255,0', sorttype: 'string', width: 100, align: 'left' },
+                    { name: 'TruckNo', title: 'Gate in truck No', index: 'TruckNo', titlegroundcolor: '255,255,0', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'Driver', title: 'Gate in Driver', index: 'Driver', titlegroundcolor: '255,255,0', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'DriverId', title: 'Gate in Driver ID No', index: 'DriverId', titlegroundcolor: '255,255,0', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'Tel', title: 'Gate in Driver Mobile', index: 'Tel', titlegroundcolor: '255,255,0', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'LtruckNo', title: 'Gate out truck No', index: 'LtruckNo', titlegroundcolor: '255,255,0', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'Ldriver', title: 'Gate out Driver', index: 'Ldriver', titlegroundcolor: '255,255,0', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'LdriverId', title: 'Gate out Driver ID No', index: 'LdriverId', titlegroundcolor: '255,255,0', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'Ltel', title: 'Gate out Driver Mobile', index: 'Ltel', titlegroundcolor: '255,255,0', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'HeavyPickupTimeStr', title: 'LFD Heavy Pickup', titlegroundcolor: '255,255,0', index: 'HeavyPickupTimeStr', sorttype: 'string', width: 120, align: 'left' },
+                    { name: 'EmptyReturnTimeStr', title: 'LFD Empty Return', titlegroundcolor: '255,255,0', index: 'EmptyReturnTimeStr', sorttype: 'string', width: 120, align: 'left' },
+                    { name: 'AtYardTimeStr', title: 'LFD At Yard', index: 'AtYardTimeStr', titlegroundcolor: '255,255,0', sorttype: 'string', width: 120, align: 'left' },
+		            { name: 'EtaRailrampDateStr', title: 'ETA Rail ramp Date', index: 'EtaRailrampDateStr', titlegroundcolor: '255,255,0', sorttype: 'string', width: 120, align: 'left' },
+                    { name: 'AutoOnTheWay', title: 'Auto OnTheWay(Y/N)', index: 'AutoOnTheWay', titlegroundcolor: '255,255,0', sorttype: 'string', align: 'left', width: 120, hidden: false },
+	    ];
+	    $.each(colModel, function (index, val) {
+	        colNames.push(val["title"].split("||")[0]);
+	    });
+
+	    var caption = "Truck Information Of Appointment";
+	    var excelName = "Truck Information Of Appointment";
+	    var conditions = {};
+	    var baseCondition = "";
+	    var virtualCol = encodeURIComponent(selKey);
+	    ExportDataToExcelByParam(url, colModel, colNames, caption, excelName, conditions, baseCondition, virtualCol);
+	}
+
+	$("#TRUCKINFO_EXCEL_UPLOAD_FROM").submit(function () {
+	    var postData = new FormData($(this)[0]);
+	    CommonFunc.ToogleLoading(true);
+	    $.ajax({
+	        url: rootPath + "IbGateManage/ImportTruckInfoExcel",
+	        type: 'POST',
+	        data: postData,
+	        async: false,
+	        beforeSend: function () {
+	            CommonFunc.ToogleLoading(true);
+	        },
+            error: function () {
+                resetFileInput($("#truckinfoUploadExcel"));
+	            CommonFunc.ToogleLoading(false);
+	            CommonFunc.Notify("", "Error", 1300, "warning");
+	        },
+            success: function (data) {
+                resetFileInput($("#truckinfoUploadExcel"));
+	            CommonFunc.ToogleLoading(false);
+	            alert(data.message);
+	            $("#truckInfoUploadDialog").modal("hide");
+	        },
+	        cache: false,
+	        contentType: false,
+	        processData: false
+	    });
+
+	    return false;
+	});
+
+
+	gop.btnGroup = [{
+	    id: "TSACreateSmrv",
+	    name: "Transloading",
+	    func: function () {
+	        var mygrid = $("#containerInfoGrid");
+	        var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+	        var responseData = [];
+	        var uidlist = "";
+	        $.each(selRowId, function (index, val) {
+	            responseData.push(mygrid.getRowData(selRowId[index]));
+	        });
+	        if (responseData.length < 1) {
+	            CommonFunc.Notify("", "Please select which container do you want to combine a Trailer", 500, "warning");
+	            return false;
+	        }
+	        var reserveno = '';
+	        var reservenos = '';
+	        for (var i = 0; i < responseData.length; i++) {
+	            if (responseData[i].Status != "D") {
+	                CommonFunc.Notify("", "This status is not in TPV Sending,So you cann't do it!", 500, "warning");
+	                return false;
+	            }
+	            if (responseData[i].IsCombineDp == "C") {
+	                CommonFunc.Notify("", "This Reservation can't do add containerInfo function", 500, "warning");
+	                return false;
+	            }
+	            reservenos += responseData[i].ReserveNo + ",";
+	            if (i == 0)
+	                reserveno += responseData[i].ReserveNo;
+	        }
+	        var _confirm = confirm("Are you sure to Transloading?");
+	        if (!_confirm) {
+	            return;
+	        }
+	        $.ajax({
+	            url: rootPath + 'IbGateManage/CombineCTN',
+	            type: 'POST',
+	            dataType: 'json',
+	            data: {
+	                "reserveno": reserveno,
+	                "pushdata": reservenos
+	            },
+	            beforeSend: function () {
+	                StatusBarArr.nowStatus("@Resources.Locale.L_OrderCarQuery_Script_42");
+	                CommonFunc.ToogleLoading(true);
+	            },
+	            success: function (result) {
+	                if (result.message == "success") {
+	                    CommonFunc.Notify("", "Transloading Success！ The new Appointment NO.:" + result.CombineInfo, 1000, "success");
+	                    $("#SummarySearch").trigger("click");
+	                }
+	                else {
+	                    alert(result.message);
+	                }
+	                CommonFunc.ToogleLoading(false);
+	                //$("#InportSoltTimeDialog").modal("hide");
+	            },
+	            error: function () {
+	                CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+	                CommonFunc.ToogleLoading(false);
+	            }
+	        });
+	    },
+	},{
+	    id: "TSADirectDelivery",
+	    name: "Direct Delivery",
+	    func: function () {
+	        var mygrid = $("#containerInfoGrid");
+	        var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+	        var responseData = [];
+	        var uidlist = "";
+	        $.each(selRowId, function (index, val) {
+	            responseData.push(mygrid.getRowData(selRowId[index]));
+	        });
+	        if (responseData.length < 1) {
+	            CommonFunc.Notify("", "Please select which container do you want to operate direct delivery", 500, "warning");
+	            return false;
+	        }
+	        var reserveno = '';
+	        var reservenos = '';
+	        for (var i = 0; i < responseData.length; i++) {
+	            if (responseData[i].Status != "D") {
+	                CommonFunc.Notify("", "This status is not in TPV Sending,So you cann't operate direct delivery!", 500, "warning");
+	                return false;
+	            }
+	            if (responseData[i].IsCombineDp == "C"||responseData[i].IsCombineDp == "S") {
+	                CommonFunc.Notify("", responseData[i].ReserveNo +" This data is Transloading so you can't do direct delivery", 500, "warning");
+	                return false;
+	            }
+	            reservenos += responseData[i].ReserveNo + ",";
+	            if (i == 0)
+	                reserveno += responseData[i].ReserveNo;
+	        }
+	        var _confirm = confirm("Are you sure to do direct delivery?");
+	        if (!_confirm) {
+	            return;
+	        }
+	        $.ajax({
+	            url: rootPath + 'IbGateManage/DirectDelivery',
+	            type: 'POST',
+	            dataType: 'json',
+	            data: {
+	                "reserveno": reserveno,
+	                "pushdata": reservenos
+	            },
+	            beforeSend: function () {
+	                StatusBarArr.nowStatus("@Resources.Locale.L_OrderCarQuery_Script_42");
+	                CommonFunc.ToogleLoading(true);
+	            },
+	            success: function (result) {
+	                if (result.message == "success") {
+	                    CommonFunc.Notify("", "Direct Delivery Success！", 1000, "success");
+	                    $("#SummarySearch").trigger("click");
+	                }
+	                else {
+	                    alert(result.message);
+	                }
+	                CommonFunc.ToogleLoading(false);
+	                //$("#InportSoltTimeDialog").modal("hide");
+	            },
+	            error: function () {
+	                CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+	                CommonFunc.ToogleLoading(false);
+	            }
+	        });
+
+	        //ajustamodal("#InportSoltTimeDialog");
+	        //$("#InportSoltTimeDialog").modal("show");
+	    },
+	}, {
+	    id: "btnUseDate",
+	    name: "@Resources.Locale.TLB_PartialDelivery",
+	    func: function () {
+	        var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', "selarrrow");
+	        if (selRowId.length == 0) {
+	            CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+	            return;
+	        }
+	        $("#USEDate_MSL").modal('show');
+	    }
+	},{
+	    id: "btnGetET",
+	    name: "Download Input Empty Return",
+	    func: function () {
+	        doDownloadExcel();
+	    }
+	},{
+	    id: "btPutET",
+	    name: "Upload Empty Return",
+	    func: function () {
+            $("#emptyDateUploadDialog").modal("show");
+            resetFileInput($("#EmptytimeUploadExcel"));
+	    }
+	}, {
+	    id: "btnDownApptInfo",
+	    name: "@Resources.Locale.TLB_DownApptInfo",
+	    func: function () {
+	        doDownloadAPPTExcel();
+	    }
+	}, {
+	    id: "btUploadApptInfo",
+	    name: "@Resources.Locale.TLB_UploadApptInfo",
+	    func: function () {
+            $("#truckInfoUploadDialog").modal("show");
+            resetFileInput($("#truckinfoUploadExcel"));
+	    }
+	}, {
+	    id: "UploadPODEDOC",//BatchUploadEDOC
+	    name: "@Resources.Locale.TLB_Upload" + " POD",
+	    func: function () {
+	        var mygrid = $("#containerInfoGrid");
+	        var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+	        var responseData = [];
+	        var uidlist = "";
+	        $.each(selRowId, function (index, val) {
+	            responseData.push(mygrid.getRowData(selRowId[index]));
+	        });
+	        if (responseData.length < 1) {
+	            CommonFunc.Notify("", "Please select data", 500, "warning");
+	            return false;
+	        }
+	        for (var i = 0; i < responseData.length; i++) {
+	            if (responseData[i].Status != "R") {
+	                alert("Not Allow To Upload POD");
+	                return false;
+	            }
+	        }
+            $("#uploadToEdocDailog").modal("show");
+            resetFileInput($("#SMSMIUploadEDOC"));
+	    }
+	}, {
+	    id: "DownShipVizio",
+	    name: "@Resources.Locale.TLB_SHIPReportVizio",
+	    func: function () {
+	        var mygrid = $("#containerInfoGrid");
+	        var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+	        var responseData = [];
+	        var uidlist = "";
+	        $.each(selRowId, function (index, val) {
+	            responseData.push(mygrid.getRowData(selRowId[index]));
+	        });
+	        if (responseData.length < 1) {
+	            CommonFunc.Notify("", "Please select the data!", 500, "warning");
+	            return false;
+	        }
+
+	        var reservenos = '';
+	        for (var i = 0; i < responseData.length; i++) {
+	            reservenos += responseData[i].ReserveNo + ";";
+	        }
+	        var _confirm = confirm("Are you sure to download shipping report?");
+	        if (!_confirm) {
+	            return;
+	        }
+	        var url = rootPath + 'IbGateManage/DownLoadInfoToVizio';
+	        postAndRedirect(url, { "reserveno": reservenos, "TransType": "shipper" });
+	    }
+	}, {
+	    id: "DownClosedVizio",
+	    name: "@Resources.Locale.TLB_ClosedReportVizio",
+	    func: function () {
+	        var mygrid = $("#containerInfoGrid");
+	        var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+	        var responseData = [];
+	        var uidlist = "";
+	        $.each(selRowId, function (index, val) {
+	            responseData.push(mygrid.getRowData(selRowId[index]));
+	        });
+	        if (responseData.length < 1) {
+	            CommonFunc.Notify("", "Please select the data!", 500, "warning");
+	            return false;
+	        }
+	        var reservenos = '';
+	        for (var i = 0; i < responseData.length; i++) {
+	            reservenos += responseData[i].ReserveNo + ";";
+	        }
+	        var _confirm = confirm("Are you sure to download closed report?");
+	        if (!_confirm) {
+	            return;
+	        }
+	        var url = rootPath + 'IbGateManage/DownLoadInfoToVizio';
+	        postAndRedirect(url, { "reserveno": reservenos, "TransType": "closed" });
+	    }
+	}
+	];
+
+	    RegiseterAddAppoint();
+
+	    $('#uploadToEdocDailog').on('show.bs.modal', function () {
+	        var mygrid = $("#containerInfoGrid");
+	        var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+	        var responseData = [];
+	        var uidlist = "";
+	        $.each(selRowId, function (index, val) {
+	            responseData.push(mygrid.getRowData(selRowId[index]));
+	        });
+	        if (responseData.length < 1) {
+	            CommonFunc.Notify("", "Please select data", 500, "warning");
+	            return false;
+	        }
+	        var shipments = "";
+	        for (var i = 0; i < responseData.length; i++) {
+	            uidlist += responseData[i].UId + ",";
+	            if (shipments.length > 0)
+	                shipments += ",";
+	            shipments += responseData[i].ShipmentId;
+	        }
+	        $("#uidlist").val(uidlist);
+	    });
+
+	    $('#uploadToEdocDailog').on('hidden.bs.modal', function () {
+	        $("#uidlist").val("");
+	    });
+
+	    $('#InportSoltTimeDialog').on('show.bs.modal', function () {
+	        setFieldValue([{}]);
+	        getAutoNo("ReserveNo", "rulecode=RV_NO&cmp=" + cmp);
+	        var mygrid = $("#containerInfoGrid");
+	        var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+	        var responseData = [];
+	        var uidlist = "";
+	        var cntrlist = "";
+	        var polist = "";
+	        var invlist = "";
+	        $.each(selRowId, function (index, val) {
+	            responseData.push(mygrid.getRowData(selRowId[index]));
+	        });
+	        if (responseData.length < 1) {
+	            CommonFunc.Notify("", "Please select which container do you want to combine a Trailer", 500, "warning");
+	            return false;
+	        }
+	        for (var i = 0; i < responseData.length; i++) {
+	            cntrlist += responseData[i].CntrNo + ";";
+	            polist += responseData[i].PoNo + ";";
+	            invlist += responseData[i].InvoiceNo + ";";
+	        }
+	        $("#CntrNo").val(cntrlist);
+	        $("#PoNo").val(polist);
+	        $("#InvoiceNo").val(invlist);
+	    });
+
+	    $("#BATCH_UPLOAD_FROM").submit(function () {
+	        var postData = new FormData($(this)[0]);
+	        $.ajax({
+	            url: rootPath + "IbGateManage/BatchUploadEdoc",
+	            type: 'POST',
+	            data: postData,
+	            async: true,
+	            beforeSend: function () {
+	                CommonFunc.ToogleLoading(true);
+	            },
+                error: function (xmlHttpRequest, errMsg) {
+                    resetFileInput($("#SMSMIUploadEDOC"));
+	                CommonFunc.Notify("", "error", 500, "warning");
+	                CommonFunc.ToogleLoading(false);
+	            },
+	            success: function (data) {
+	                //alert(data)
+                    resetFileInput($("#SMSMIUploadEDOC"));
+	                CommonFunc.ToogleLoading(false);
+	                if (data.IsOk == "Y") {
+	                    CommonFunc.Notify("", "Successfully!", 500, "success");
+	                } else {
+	                    alert("Upload Failed");
+	                    return false;
+	                }
+	                //CommonFunc.Notify("", _ExportToFTP.lang.success, 500, "success");
+	                $("#uploadToEdocDailog").modal("hide");
+	                $("#SummarySearch").click();
+	            },
+	            cache: false,
+	            contentType: false,
+	            processData: false
+	        });
+
+	        return false;
+	    });
+
+	    gop.statusGroup = [
+			{ "id": "D", "label": "TPV Sending" },
+			{ "id": "T", "label": "Transloading" },{"id":"W","label":"Direct Delivery"},
+			{ "id": "R", "label": "Slot time booked" },
+            { "id": "C", "label": "@Resources.Locale.L_DNManage_Confirmed" },
+            { "id": "A", "label": "Arrival" },
+            { "id": "I", "label": "@Resources.Locale.L_UserQuery_In" },
+			{ "id": "G", "label": "@Resources.Locale.L_DNManage_Gated" },
+            { "id": "U", "label": "POD" },
+			{ "id": "O", "label": "Received " },
+            { "id": "V", "label": "@Resources.Locale.L_BSCSDateQuery_Cancel" },
+            { "id": "K", "label": "Void" },
+			{ "id": "", "label": "ALL" },
+        ];
+
+	    gop.statusField = "Status";
+	    gop.statusDefaultId = "D";
+
+	var colModelSetting = [
+        { name: 'Status', width: 70, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: 'D:TPV Sending;T:Transloading;W:Direct Delivery;R:Slot time booked;C:@Resources.Locale.L_DNManage_Confirmed;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;O:Received;V:@Resources.Locale.L_BSCSDateQuery_Cancel;K:Void;U:POD', editoptions: { value: 'D:TPV Sending;T:Transloading;W:Direct Delivery;R:Slot time booked;C:@Resources.Locale.L_DNManage_Confirmed;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;O:Received;V:@Resources.Locale.L_BSCSDateQuery_Cancel;K:Void;U:POD' } },
+        { name: 'Priority', formatter: "select", editoptions: { value: Priority } },
+        { name: 'CallType', width: 90, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: 'S:Call InterModal;C:Call Container;D:Call DN', editoptions: { value: 'S:Call InterModal;C:Call Container;D:Call DN' } },
+        { name: 'TranType', width: 70, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: 'R:Railway;S:Ocean Shipping;A:Air;T:Truck;I:Intermodal', editoptions: { value: 'R:Railway;S:Ocean Shipping;A:Air;T:Truck;I:Intermodal' } },
+        { name: 'IsCombineDp', width: 70, align: 'left', sorttype: 'string', hidden: false, formatter: "select", remark: 'S:Combining;C:Combined;D:Direct Delivery', editoptions: { value: 'S:Combining;C:Combined;D:Direct Delivery' } },
+	];
+	    var table="(SELECT SMIRV.*,(SELECT TOP 1 ETD FROM SMSMI WHERE SMSMI.SHIPMENT_ID=SMIRV.SHIPMENT_ID)AS ETD,";
+	    table += "(SELECT TOP 1 FINAL_WH FROM SMRCNTR WHERE SMRCNTR.RESERVE_NO=SMIRV.RESERVE_NO)AS FINAL_WH FROM SMIRV WHERE CMP IN (SELECT CD FROM BSCODE WHERE CD_TYPE='TSA')) SMIRV";
+	    genColModel(table, "U_ID", "L_IbGateManage", colModelSetting).done(function (result) {
+	        for (var i = 0; i < result.length; i++) {
+	            var columns = result[i];
+	            if (columns.name == "ShipmentId") {
+	                result = result.slice(0, i).concat(result.slice(i + 1, result.length))
+	            }
+	            switch (columns.index) {
+	                case "DimensionsInfo":
+	                    columns.width = 200;
+	                    columns.title = 'Dimensions Info.';
+	                    break;
+	                case "WsNm":
+	                    columns.width = 150;
+	                    columns.title = 'Warehouse Name';
+	                    break;
+	            }
+	        }
+		gop.gridColModel = result;
+
+		gop.searchColumns = getSelectColumn(gop.gridColModel);
+		initSearch(gop);
+	});
+
+        function dblClick(map) {
+            var UId = map.UId;
+            top.topManager.openPage({
+                href: rootPath + "IbGateManage/GateReserveTSASetup/" + UId,
+                title: '@Resources.Locale.L_GateReserve_GateReserveSetup',
+                reload: true,
+                id: 'GateReserveTSASetup',
+                search: 'uid=' + UId,
+                reload: true
+            });
+        }
+	});
+
+	$(function(){
+		var $BatDailogGrid = $("#BatDailogGrid");
+		var colModel1 = [
+				{ name: 'UId', title: 'U ID', index: 'UId', width: 120, align: 'left', sorttype: 'string', hidden: true },
+				{ name: 'TranType', title: '@Resources.Locale.L_BaseLookup_TranType', index: 'TranType', width: 80, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'F:FCL;L:LCL;A:AIR;D:INLAND EXPRESS;E:EXPRESS;R:Railroad;T:TRUCK;' },stype: 'select', searchoptions:{ sopt:['eq'], value: ':ALL;F:FCL;L:LCL;A:AIR;D:INLAND EXPRESS;E:EXPRESS;R:Railroad;T:TRUCK;' }},
+				{ name: 'ReserveNo', title: '@Resources.Locale.L_GateReserve_ReveseNo', index: 'ReserveNo', width: 120, align: 'left', sorttype: 'string', hidden: false,searchoptions:{sopt:['cn']} },
+				{ name: 'BatNo', title: '@Resources.Locale.L_GateReserve_BatNo', index: 'BatNo', width: 120, align: 'left', sorttype: 'string', hidden: false, searchoptions:{sopt:['cn']} },
+				{ name: 'Status', title: '@Resources.Locale.L_GateReserve_Status', index: 'Status', width: 120, align: 'left', sorttype: 'string', hidden: false, formatter: "select", editoptions: { value: 'A:Arrival;D:@Resources.Locale.L_DNManage_Called;R:@Resources.Locale.L_DNManage_Reserved;C:@Resources.Locale.L_DNManage_Confirmed;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;V:@Resources.Locale.L_BSCSDateQuery_Cancel;P:@Resources.Locale.L_UserQuery_SealCnt;O:@Resources.Locale.L_UserQuery_Out;' }, stype: 'select', searchoptions: { sopt: ['eq'], value: ':ALL;R:@Resources.Locale.L_DNManage_Reserved;C:@Resources.Locale.L_DNManage_Confirmed;I:@Resources.Locale.L_UserQuery_In;G:@Resources.Locale.L_DNManage_Gated;A:Arrival' } },
+				{ name: 'CallDate', title: '@Resources.Locale.L_GateReserveSetup_CallDate', index: 'CallDate', width: 120, align: 'left', sorttype: 'string', hidden: false,formatter: "date",formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d" },searchoptions:{sopt:['cn']} },
+				{ name: 'UseDate', title: '@Resources.Locale.L_IbGateManage_PickDate', index: 'UseDate', width: 120, align: 'left', sorttype: 'string', hidden: false, formatter: "date", formatoptions: { srcformat: "ISO8601Long", newformat: "Y-m-d" }, searchoptions: { sopt: ['cn'] } },
+				{ name: 'ShipmentId', title: '@Resources.Locale.L_DNApproveManage_ShipmentId', index: 'ShipmentId', width: 120, align: 'left', sorttype: 'string', hidden: false,searchoptions:{sopt:['cn']} },
+				{ name: 'DnNo', title: '@Resources.Locale.L_DNApproveManage_DnNo', index: 'DnNo', width: 500, align: 'left', sorttype: 'string', hidden: false,searchoptions:{sopt:['cn']} },
+				{ name: 'MfNo', title: '@Resources.Locale.L_GateAnalysis_MfNo', index: 'MfNo', width: 70, align: 'left', sorttype: 'string', hidden: false, classes: "uppercase" ,searchoptions:{sopt:['cn']}},
+				{ name: 'WsCd', title: '@Resources.Locale.L_GateReserve_WsCd', index: 'WsCd', width: 80, align: 'left', sorttype: 'string', hidden: false,searchoptions:{sopt:['cn']} },
+				{ name: 'GateNo', title: '@Resources.Locale.L_GateReserve_GateNo', index: 'GateNo', width: 80, align: 'left', sorttype: 'string', hidden: false,searchoptions:{sopt:['cn']} }
+
+		];
+
+		$("#BatDailogGrid").jqGrid('filterToolbar',  {stringResult: true, searchOnEnter: false});
+
+		setTimeout(function () {
+
+			$("#SummarySearch").click();
+
+		}, 100);
+	});
+    $(function () {
+
+        $.ajax({
+            async: false,
+            url: rootPath + "EDOC/GetSelectOptions",
+            type: 'POST',
+            "error": function (xmlHttpRequest, errMsg) {
+                alert(errMsg);
+            },
+            success: function (data) {
+                var options = data.Edt;
+                $("#EdocType").empty();
+                $("#EdocType").append("<option value=\"\"></option>");
+                $.each(options, function (idx, option) {
+                    $("#EdocType").append("<option value=\"" + option.cd + "\">" + option.cdDescp + "</option>");
+                });
+            }
+        });
+
+        $("#InputUseDatebtn").click(function (event) {
+            var selRowId = $("#containerInfoGrid").jqGrid('getGridParam', 'selarrrow');
+            var UseDate = $("#UseDateValue").val();
+            var ReserveNos = "";
+            for (var i = 0; i < selRowId.length; i++) {
+                var ReserveNo = $("#containerInfoGrid").jqGrid('getCell', selRowId[i], 'ReserveNo');
+                ReserveNos += ReserveNo + ",";
+            }
+            $.ajax({
+                async: true,
+                url: rootPath + 'IbGateManage/InputUseDateMsl',
+                type: 'POST',
+                dataType: 'json',
+                data: { "ReserveNos": ReserveNos, 'UseDate': UseDate, },
+                "error": function (xmlHttpRequest, errMsg) {
+                    var resJson = $.parseJSON(errMsg)
+                    CommonFunc.Notify("", resJson.errMsg, 500, "warning");
+                },
+                success: function (data) {
+                    if (data.message == "success") {
+                        CommonFunc.Notify("", "success", 500, "success");
+                    }
+                    else {
+                        alert(data.message);
+                    }
+                    CommonFunc.ToogleLoading(false);
+                    $("#USEDate_MSL").modal("hide");
+                }
+            });
+        });
+
+        $("#USEDate_MSL").on("show.bs.modal", function () {
+            $("#UseDateValue").val("");
+        });
+
+        $("#UseDateValue").wrap('<div class="input-group">')
+		.datepicker({
+		    showOn: "button",
+		    changeYear: true,
+		    dateFormat: "yy-mm-dd",
+		    timeFormat: 'HH:mm',
+		    beforeShow: function () {
+		        setTimeout(function () {
+		            $('.ui-datepicker').css('z-index', 99999999999999);
+		        }, 0);
+		    },
+		    onClose: function (text, inst) {
+		        $(this).focus();
+		    }
+		})
+		.next("button").button({
+		    icons: { primary: "ui-icon-calendar" },
+		    label: "Select a date",
+		    text: false
+		})
+		.addClass("btn btn-sm btn-default").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+		.wrap('<span class="input-group-btn">')
+		.find('.ui-button-text')
+		.css({
+		    'visibility': 'hidden',
+		    'display': 'inline'
+		});
+
+        $("#CreateBtn").click(function (event) {
+            var mygrid = $("#containerInfoGrid");
+            var selRowId = mygrid.jqGrid('getGridParam', 'selarrrow');
+            var responseData = [];
+            var reserveno = $("#ReserveNo").val();
+            var uidlist = "";
+            $.each(selRowId, function (index, val) {
+                responseData.push(mygrid.getRowData(selRowId[index]));
+            });
+            if (responseData.length < 1) {
+                CommonFunc.Notify("", "Please select which container do you want to combine a Trailer", 500, "warning");
+                return false;
+            }
+            for (var i = 0; i < responseData.length; i++) {
+                uidlist += responseData[i].UId + ";";
+            }
+            var shipmentid = $("#ShipmentInfo").val();
+            if (shipmentid == "" || shipmentid == undefined || shipmentid == null) {
+                alert("Auto Create Shipmentid was error");
+                return false;
+            }
+            $.ajax({
+                url: rootPath + 'IbGateManage/SpellCTN',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    rvuid: uidlist,
+                    reserveno:reserveno
+                },
+                beforeSend: function () {
+                    StatusBarArr.nowStatus("@Resources.Locale.L_OrderCarQuery_Script_42");
+                    CommonFunc.ToogleLoading(true);
+                },
+                success: function (result) {
+                    if (result.message == "success") {
+                        CommonFunc.Notify("", "Create Appointment Success！", 1000, "success");
+                    }
+                    else {
+                        alert(result.message);
+                    }
+                    CommonFunc.ToogleLoading(false);
+                    $("#InportSoltTimeDialog").modal("hide");
+                },
+                error: function () {
+                    CommonFunc.Notify("", "@Resources.Locale.L_ActManage_CntF", 1000, "danger");
+                    CommonFunc.ToogleLoading(false);
+                }
+            });
+        });
+    });
+
+    function RegiseterAddAppoint() {
+        setSmptyData("TruckerLookup", "Trucker", "TruckerNm", "CR");
+        setSmptyData("ShipperLookup", "Shipper", "ShipperNm", "SH");
+        var options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetBstruckcForLookup";
+        options.param = "";
+        options.registerBtn = $("#TruckNoLookup");
+        options.focusItem = $("#TruckNo");
+        options.isMutiSel = true;
+        options.baseConditionFunc = function () {
+            var Trucker = $("#Trucker").val()
+
+            return " PARTY_NO='" + Trucker + "'";
+        }
+        options.gridFunc = function (map) {
+            $("#TruckNo").val(map.TruckNo);
+            $("#LtruckNo").val(map.TruckNo);
+        }
+        options.lookUpConfig = LookUpConfig.BstruckcLookup;
+        initLookUp(options);
+
+        var options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetBstruckdForLookup";
+        options.param = "";
+        options.registerBtn = $("#DriverLookup");
+        options.focusItem = $("#Driver");
+        options.isMutiSel = true;
+        options.baseConditionFunc = function () {
+            var Trucker = $("#Trucker").val()
+
+            return " PARTY_NO='" + Trucker + "'";
+        }
+        options.gridFunc = function (map) {
+            $("#Driver").val(map.DriverName);
+            $("#Tel").val(map.DriverPhone);
+            $("#DriverId").val(map.DriverId);
+            $("#Ldriver").val(map.DriverName);
+            $("#Ltel").val(map.DriverPhone);
+            $("#LdriverId").val(map.DriverId);
+
+        }
+        options.lookUpConfig = LookUpConfig.BstruckdLookup;
+        initLookUp(options);
+
+        var options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetBstruckcForLookup";
+        options.param = "";
+        options.registerBtn = $("#LtruckNoLookup");
+        options.focusItem = $("#LtruckNo");
+        options.isMutiSel = true;
+        options.baseConditionFunc = function () {
+            var Trucker = $("#Trucker").val()
+
+            return " PARTY_NO='" + Trucker + "'";
+        }
+        options.gridFunc = function (map) {
+            $("#LtruckNo").val(map.TruckNo);
+        }
+        options.lookUpConfig = LookUpConfig.BstruckcLookup;
+        initLookUp(options);
+
+        var options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetBstruckdForLookup";
+        options.param = "";
+        options.registerBtn = $("#LdriverLookup");
+        options.focusItem = $("#Ldriver");
+        options.isMutiSel = true;
+        options.baseConditionFunc = function () {
+            var Trucker = $("#Trucker").val()
+
+            return " PARTY_NO='" + Trucker + "'";
+        }
+        options.gridFunc = function (map) {
+            $("#Ldriver").val(map.DriverName);
+            $("#Ltel").val(map.DriverPhone);
+            $("#LdriverId").val(map.DriverId);
+        }
+        options.lookUpConfig = LookUpConfig.BstruckdLookup;
+        initLookUp(options);
+
+        var options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetSmwhForLookup";
+        options.param = "";
+        options.registerBtn = $("#WsCdLookup1");
+        options.focusItem = $("#WsCd");
+        options.isMutiSel = true;
+        options.baseConditionFunc = function () {
+            var cmp = getCookie("plv3.passport.companyid");
+            if (cmp == null || cmp == undefined || cmp == "") {
+            } else {
+                return " CMP='" + cmp + "'";
+            }
+        }
+        options.gridFunc = function (map) {
+            $("#WsCd").val(map.WsCd);
+            $("#DlvArea").val(map.DlvArea);
+            $("#DlvAreaNm").val(map.DlvAreaNm);
+            $("#AddrCode").val(map.DlvAddr);//ADDR_CODE
+        }
+
+        options.lookUpConfig = LookUpConfig.SMWHLookup;
+        initLookUp(options);
+
+        CommonFunc.AutoComplete("#WsCd", 1, "", "dt=smwh&GROUP_ID=" + groupId + "&WS_CD=", "WS_CD=showValue,WS_CD,WS_NM,DLV_AREA,DLV_AREA_NM,DLV_ADDR", function (event, ui) {
+            $(this).val(ui.item.returnValue.WS_CD);
+            $("#DlvArea").val(ui.item.returnValue.DLV_AREA);
+            $("#DlvAreaNm").val(ui.item.returnValue.DLV_AREA_NM);
+            $("#AddrCode").val(ui.item.returnValue.DLV_ADDR);
+            return false;
+        });
+
+        var options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetSmwhForLookup";
+        options.param = "";
+        options.registerBtn = $("#WsCdLookup");
+        options.focusItem = $("#WsCd1");
+        options.isMutiSel = true;
+        options.baseConditionFunc = function () {
+            var cmp = getCookie("plv3.passport.companyid");
+            if (cmp == null || cmp == undefined || cmp == "") {
+            } else {
+                return " CMP='" + cmp + "'";
+            }
+        }
+        options.gridFunc = function (map) {
+            $("#WsCd1").val(map.WsCd);
+            $("#DlvArea1").val(map.DlvArea);
+            $("#DlvAreaNm1").val(map.DlvAreaNm);
+            $("#AddrCode1").val(map.DlvAddr);//ADDR_CODE
+        }
+
+        options.lookUpConfig = LookUpConfig.SMWHLookup;
+        initLookUp(options);
+
+        CommonFunc.AutoComplete("#WsCd1", 1, "", "dt=smwh&GROUP_ID=" + groupId + "&WS_CD=", "WS_CD=showValue,WS_CD,WS_NM,DLV_AREA,DLV_AREA_NM,DLV_ADDR", function (event, ui) {
+            $(this).val(ui.item.returnValue.WS_CD);
+            $("#DlvArea1").val(ui.item.returnValue.DLV_AREA);
+            $("#DlvAreaNm1").val(ui.item.returnValue.DLV_AREA_NM);
+            $("#AddrCode1").val(ui.item.returnValue.DLV_ADDR);
+            return false;
+        });
+
+        $("#UseDate").wrap('<div class="input-group">')
+          .datepicker({
+              showOn: "button",
+              changeYear: true,
+              dateFormat: "yy/mm/dd",
+              timeFormat: 'HH:mm',
+              beforeShow: function () {
+                  setTimeout(function () {
+                      $('.ui-datepicker').css('z-index', 99999999999999);
+                  }, 0);
+              },
+              onClose: function (text, inst) {
+                  $(this).focus();
+              }
+          })
+          .next("button").button({
+              icons: { primary: "ui-icon-calendar" },
+              label: "Select a date",
+              text: false
+          })
+          .addClass("btn btn-sm btn-default").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+          .wrap('<span class="input-group-btn">')
+          .find('.ui-button-text')
+          .css({
+              'visibility': 'hidden',
+              'display': 'inline'
+          });
+
+        $("#ReserveDate").wrap('<div class="input-group">')
+        .datepicker({
+            showOn: "button",
+            changeYear: true,
+            dateFormat: "yy/mm/dd",
+            timeFormat: 'HH:mm',
+            beforeShow: function () {
+                setTimeout(function () {
+                    $('.ui-datepicker').css('z-index', 99999999999999);
+                }, 0);
+            },
+            onClose: function (text, inst) {
+                $(this).focus();
+            }
+        })
+        .next("button").button({
+            icons: { primary: "ui-icon-calendar" },
+            label: "Select a date",
+            text: false
+        })
+        .addClass("btn btn-sm btn-default").html("<span class='glyphicon glyphicon-calendar'></sapn>")
+        .wrap('<span class="input-group-btn">')
+        .find('.ui-button-text')
+        .css({
+            'visibility': 'hidden',
+            'display': 'inline'
+        });
+    }
+    function setSmptyData(lookUp, Cd, Nm, pType) {
+        //SMPTY放大鏡
+        options = {};
+        options.gridUrl = rootPath + "TPVCommon/GetSmptyDataForLookup";
+        options.registerBtn = $("#" + lookUp);
+        options.focusItem = $("#" + Cd);
+        options.param = "";
+        options.baseCondition = " PARTY_TYPE LIKE '%" + pType + "%'";
+        options.isMutiSel = true;
+        options.gridFunc = function (map) {
+            $("#" + Cd).val(map.PartyNo);
+
+            if (Nm != "")
+                $("#" + Nm).val(map.PartyName);
+        }
+
+        options.lookUpConfig = LookUpConfig.SmptyLookup;
+        initLookUp(options);
+
+        CommonFunc.AutoComplete("#" + Cd, 1, "", "dt=smpty&GROUP_ID=" + groupId + "&PARTY_TYPE~" + pType + "&PARTY_NO=", "PARTY_NO=showValue,PARTY_NO,PARTY_NAME", function (event, ui) {
+            $(this).val(ui.item.returnValue.PARTY_NO);
+
+            if (Nm != "")
+                $("#" + Nm).val(ui.item.returnValue.PARTY_NAME);
+            return false;
+        });
+    }
+    function isEmpty(val) {
+        if (val === undefined || val === "" || val == null)
+            return true;
+        return false;
+    }
+    function getval(id) {
+        var val = $("#" + id).val();
+        if (!isEmpty(val)) {
+            $("#L" + id[0].toLowerCase() + id.substring(1, id.length)).val(val);
+        }
+    }
+    $("#EMPTYDATE_EXCEL_UPLOAD_FROM").submit(function () {
+        var postData = new FormData($(this)[0]);
+        CommonFunc.ToogleLoading(true);
+        $.ajax({
+            url: rootPath + "IbGateManage/ImportEmptyDateExcel",
+            type: 'POST',
+            data: postData,
+            async: false,
+            beforeSend: function () {
+                CommonFunc.ToogleLoading(true);
+            },
+            error: function () {
+                CommonFunc.ToogleLoading(false);
+                CommonFunc.Notify("", "Error", 1300, "warning");
+            },
+            success: function (data) {
+                CommonFunc.ToogleLoading(false);
+                alert(data.message);
+                $("#emptyDateUploadDialog").modal("hide");
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+
+        return false;
+    });
+
+    function doDownloadExcel() {
+        var url = rootPath + "IbGateManage/ExportCntrExcel";
+        var grid = $("#containerInfoGrid");
+        var selRowIds = grid.jqGrid('getGridParam', 'selarrrow');
+        var rowIds = grid.getDataIDs();
+
+        if (selRowIds.length <= 0) {
+            alert("Pls select one record!");
+            return;
+        }
+
+        var selKey = "";
+        $.each(selRowIds, function (index, val) {
+            selKey += grid.jqGrid('getCell', selRowIds[index], 'ReserveNo') + ";";
+        });
+        var colNames = [];
+        var colModel = [
+                    { name: 'rn', title: 'rn', index: 'rn', sorttype: 'string', width: 100, align: 'left', hidden: false },
+                    { name: 'ReserveNo', title: 'Reserve No', index: 'ReserveNo', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'CntrNo', title: 'Container No', index: 'CntrNo', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'TruckerNm', title: 'Truck Company Name', index: 'TruckerNm', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'PickAreaNm', title: 'Pick Up Area', index: 'PickAreaNm', sorttype: 'string', align: 'left', width: 120, hidden: false },
+                    { name: 'BackLocation', title: 'Empty Return Location', index: 'BackLocation', sorttype: 'string', width: 120, align: 'left', hidden: false },
+                    { name: 'EmptyTimeStr', title: 'Empty Return Date', index: 'EmptyTimeStr', sorttype: 'string', width: 100, align: 'left' },
+        ];
+        $.each(colModel, function (index, val) {
+            colNames.push(val["title"].split("||")[0]);
+        });
+        console.log(colModel);
+        console.log(colNames);
+
+        var caption = "Empty Return Date Of Appointment";
+        var excelName = "Empty Return Date Of Appointment";
+
+        var conditions = {};
+        var baseCondition = "";
+        var virtualCol = encodeURIComponent(selKey);
+        ExportDataToExcelByParam(url, colModel, colNames, caption, excelName, conditions, baseCondition, virtualCol);
+    }
+</script>
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+	<div id="page-wrapper">
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+					<div class="condition-layout">
+						<form class="pure-g" id="ConditionArea">
+
+						</form>
+						<div class="pure-g" id="SearchArea">
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pure-g" id="BtnGroupArea">
+
+					</div>
+					<div class="pure-g" id="StatusArea">
+
+					</div>
+					<div class="form-group">
+						<div class="pure-g">
+							<div class="pure-u-sm-60-60">
+								<table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+									<tr></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="uploadToEdocDailog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Upload POD EDOC</h4>
+            </div>
+           <form name="EXCEL_UPLOAD_FROM" id="BATCH_UPLOAD_FROM" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-20-60">
+                        <label for="OrderCarCntType" class="control-label">EDOC Type</label>
+                    </div>
+                    <div class="pure-u-sm-33-60 control-group">
+                       <select class="form-control input-sm" name="EdocType" id="EdocType">
+                           <option value="ITMDPOD">Intermodal POD</option>
+                        </select>
+                    </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-60-60">
+                            <input type="file" title="upload pod" id="SMSMIUploadEDOC" name="file" />
+                            <input type="hidden" name="uidlist" id="uidlist" />
+                            <input type="hidden" name="istsa" id="istsa" value="TSA"/>
+                       </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="uploadEDOCBtn">Confirm</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="USEDate_MSL">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Input Pickup Date</h4>
+            </div>
+                <div class="modal-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-10-60">
+                            <label for="UseDate" class="control-label">@Resources.Locale.L_IbGateManage_PickDate</label>
+                        </div>
+                        <div class="pure-u-sm-14-60 control-group">
+                            <input type="text" class="form-control input-sm" id="UseDateValue" name="UseDateValue" />
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <input type="hidden" class="form-control input-sm" id="ReserveNo" name="ReserveNo" fieldname="ReserveNo" />
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-sm btn-info" id="InputUseDatebtn">@Resources.Locale.L_Layout_Confirm</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">@Resources.Locale.L_BSCSDateQuery_Cancel</button>
+                </div>
+          </div>
+    </div>
+</div>
+<div class="modal fade" id="truckInfoUploadDialog" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Truck Info. Upload<span style="color:red;"></span></h4>
+			</div>
+			<form name="TRUCKINFO_EXCEL_UPLOAD_FROM" id="TRUCKINFO_EXCEL_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+				<div class="modal-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-7-60">
+							<label for="StartRow" class="control-label">@Resources.Locale.L_ActDeatilManage_Views_126</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="number" class="form-control input-sm" name="StartRow" isNumber="true" value="1"/>
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-60-60">
+							<input type="file" title="@Resources.Locale.L_ActDeatilManage_Views_128" id="truckinfoUploadExcel" name="file"/>
+							<input type="hidden" id="uploadKeyId" />
+							<input type="hidden" id="hi_lspNoForIb" name="lspNo"/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-sm btn-info" id="chgUploadBtnForIb">@Resources.Locale.L_ActDeatilManage_Views_129</button>
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="InportSoltTimeDialog" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Create New Appointment</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="ReserveNo" class="control-label">@Resources.Locale.L_GateReserve_ReveseNo</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="ReserveNo" name="ReserveNo" fieldname="ReserveNo" iskey="true" readonly />
+                    </div>
+                    <div class="pure-u-sm-7-60 label-right">
+                        <label for="TranType" class="control-label">Pickup Date</label>
+                    </div>
+                    <div class="pure-u-sm-15-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="UseDate" name="UseDate" fieldname="UseDate">
+                    </div>
+                    <input type="hidden" dt="mt" id="ShipmentInfo" name="ShipmentInfo" />
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="Trucker" class="control-label">@Resources.Locale.L_GateReserve_Trucker</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Trucker" name="Trucker" fieldname="Trucker" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="TruckerLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+                    <div class="pure-u-sm-15-60">
+                        <input type="text" class="form-control input-sm" dt="mt" id="TruckerNm" name="TruckerNm" fieldname="TruckerNm" />
+                    </div>
+                    <div class="pure-u-sm-7-60 label-right">
+                        <label for="CarType" class="control-label">@Resources.Locale.L_IbGateManage_CarType</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <select class="form-control input-sm" dt="mt" id="CarType" name="CarType" fieldname="CarType">
+                            @Html.Raw(ViewBag.CarType)
+                        </select>
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="TruckNo" class="control-label">@Resources.Locale.L_GateReserve_TruckNo</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="TruckNo" name="TruckNo" fieldname="TruckNo" onblur="getval(this.id)" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="TruckNoLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+
+                    <div class="pure-u-sm-4-60 label-right">
+                        <label for="Driver" class="control-label">@Resources.Locale.L_GateReserve_Driver</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Driver" name="Driver" fieldname="Driver" onblur="getval(this.id)" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="DriverLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+
+                    <div class="pure-u-sm-4-60 label-right">
+                        <label for="DriverId" class="control-label">@Resources.Locale.L_GateReserve_DriverId</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="DriverId" name="DriverId" fieldname="DriverId" ref="Driver" onblur="getval(this.id)" />
+                    </div>
+
+                    <div class="pure-u-sm-4-60 label-right">
+                        <label for="Tel" class="control-label">@Resources.Locale.L_GateReserve_Tel</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="Tel" name="Tel" fieldname="Tel" ref="Driver" onblur="getval(this.id)" />
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="LtruckNo" class="control-label">@Resources.Locale.L_GateReserve_LtruckNo</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="LtruckNo" name="LtruckNo" fieldname="LtruckNo" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="LtruckNoLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+
+                    <div class="pure-u-sm-4-60 label-right">
+                        <label for="Ldriver" class="control-label">@Resources.Locale.L_GateReserve_Driver</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="Ldriver" name="Ldriver" fieldname="Ldriver" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="LdriverLookup">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+
+                    <div class="pure-u-sm-4-60 label-right">
+                        <label for="LdriverId" class="control-label">@Resources.Locale.L_GateReserve_DriverId</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="LdriverId" name="LdriverId" fieldname="LdriverId" ref="Ldriver" />
+                    </div>
+
+                    <div class="pure-u-sm-4-60 label-right">
+                        <label for="Ltel" class="control-label">@Resources.Locale.L_GateReserve_Tel</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="Ltel" name="Ltel" fieldname="Ltel" ref="Ldriver" />
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="ReserveDate" class="control-label required">@Resources.Locale.L_GateReserve_ReserveDate</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="ReserveDate" name="ReserveDate" fieldname="ReserveDate" required />
+                    </div>
+                    <div class="pure-u-sm-6-60">
+                        <select class="form-control input-sm" dt="mt" id="ReserveFrom" name="ReserveFrom" fieldname="ReserveFrom" required>
+                            <option value="0">00:00</option>
+                            <option value="1">01:00</option>
+                            <option value="2">02:00</option>
+                            <option value="3">03:00</option>
+                            <option value="4">04:00</option>
+                            <option value="5">05:00</option>
+                            <option value="6">06:00</option>
+                            <option value="7">07:00</option>
+                            <option value="8">08:00</option>
+                            <option value="9">09:00</option>
+                            <option value="10">10:00</option>
+                            <option value="11">11:00</option>
+                            <option value="12">12:00</option>
+                            <option value="13">13:00</option>
+                            <option value="14">14:00</option>
+                            <option value="15">15:00</option>
+                            <option value="16">16:00</option>
+                            <option value="17">17:00</option>
+                            <option value="18">18:00</option>
+                            <option value="19">19:00</option>
+                            <option value="20">20:00</option>
+                            <option value="21">21:00</option>
+                            <option value="22">22:00</option>
+                            <option value="23">23:00</option>
+                        </select>
+                    </div>
+                    <div class="pure-u-sm-9-60 label-right">
+                        <label for="CntrNo" id="labelCntrNo" class="control-label required">@Resources.Locale.L_GateReserve_CntrNo</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="CntrNo" name="CntrNo" fieldname="CntrNo" />
+                    </div>
+                    <div class="pure-u-sm-7-60 label-right">
+                        <label for="SealNo1" class="control-label">@Resources.Locale.L_GateReserveSetup_SealNo</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="SealNo1" name="SealNo1" fieldname="SealNo1" />
+                    </div>
+                </div>
+                <div class="pure-g">
+                <div class="pure-u-sm-8-60">
+                        <label for="WsCd" class="control-label required">@Resources.Locale.L_GateReserve_WsCd</label>
+                    </div>
+                    <div class="pure-u-sm-10-60 control-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="WsCd" name="WsCd" fieldname="WsCd" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm btn-default" type="button" id="WsCdLookup1">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <p class="help-block tooltips"></p>
+                    </div>
+                     <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="DlvArea" name="DlvArea" fieldname="DlvArea" readonly="readonly"/>
+                    </div>
+                     <div class="pure-u-sm-17-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="DlvAreaNm" name="DlvAreaNm" fieldname="DlvAreaNm" readonly="readonly"/>
+                    </div>
+                     <div class="pure-u-sm-15-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="AddrCode" name="AddrCode" fieldname="AddrCode" readonly="readonly"/>
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="PoNo" class="control-label required">Po No</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="PoNo" name="PoNo" fieldname="PoNo" />
+                    </div>
+                    <div class="pure-u-sm-10-60 label-right">
+                        <label for="BatchId" class="control-label">Batch ID</label>
+                    </div>
+                    <div class="pure-u-sm-10-60">
+                        <input type="text" dt="mt" class="form-control input-sm" id="BatchId" name="BatchId" fieldname="BatchId" />
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-sm-8-60">
+                        <label for="InvoiceNo" class="control-label required">Invoice No</label>
+                    </div>
+                    <div class="pure-u-sm-22-60">
+                        <textarea class="form-control" dt="mt" id="InvoiceNo" name="InvoiceNo" fieldname="InvoiceNo"></textarea>
+                    </div>
+                    <div class="pure-u-sm-8-60 label-right">
+                        <label for="TruckRmk" class="control-label">Truck Remark</label>
+                    </div>
+                    <div class="pure-u-sm-22-60">
+                        <textarea class="form-control" dt="mt" id="TruckRmk" name="TruckRmk" fieldname="TruckRmk"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-info" id="CreateBtn">Create New Appointment</button>
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="emptyDateUploadDialog" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Empty Return Date Upload<span style="color:red;"></span></h4>
+			</div>
+			<form name="EMPTYDATE_EXCEL_UPLOAD_FROM" id="EMPTYDATE_EXCEL_UPLOAD_FROM"  method="post" enctype="multipart/form-data">
+				<div class="modal-body">
+					<div class="pure-g">
+						<div class="pure-u-sm-7-60">
+							<label for="StartRow" class="control-label">@Resources.Locale.L_ActDeatilManage_Views_126</label>
+						</div>
+						<div class="pure-u-sm-10-60 control-group">
+							<input type="number" class="form-control input-sm" name="StartRow" isNumber="true" value="1"/>
+							<p class="help-block tooltips"></p>
+						</div>
+					</div>
+					<div class="pure-g">
+						<div class="pure-u-sm-60-60">
+							<input type="file" title="@Resources.Locale.L_ActDeatilManage_Views_128" id="EmptytimeUploadExcel" name="file"/>
+							<input type="hidden" id="uploadKeyId" />
+							<input type="hidden" id="hi_lspNoForIb" name="lspNo"/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-sm btn-info" id="chgUploadBtnForIb">@Resources.Locale.L_ActDeatilManage_Views_129</button>
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="ModalClose">Close</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,183 @@
+﻿@{
+    ViewBag.Title = "AirQuery";
+}
+
+
+<script type="text/javascript">
+//_uid = "xxxxxxxx";
+var _dm = new dm();
+var _oldDeatiArray = [];
+var _oldSerialArray = [];
+$(document).ready(function ($) {
+    //init Search
+    var gop = {};
+    var numberTemplate = "2";
+    var docHeight = $(document).height();
+    gridHeight = docHeight - 330;
+
+    var actFormatter = function (cellvalue, options, rawObject) {
+        var val = 0;
+        if (cellvalue == null || cellvalue === undefined || cellvalue == 0)
+            val = "";
+        else
+            val = cellvalue;
+        if (1=== cellvalue)
+            return '<div style="color: green;font-weight: bold;background-color: greenyellow;">' + val + '</div>';
+        return val;
+    };
+
+
+    gop.gridColModel = [
+        //{ name: 'UId', title: 'UId', init: true, dv: _uid, index: 'UId', width: 150, align: 'left', sorttype: 'string', hidden: false, viewable: false },
+        { name: 'UId', title: 'ID', showname: 'ID', sorttype: 'string', hidden: true, viewable: false },
+        { name: 'PolCd', title: '@Resources.Locale.L_AirQuery_PolCd', index: 'PolCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'PodCd', title: '@Resources.Locale.L_AirQuery_PodCd', index: 'PodCd', width: 90, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Carrier', title: '@Resources.Locale.L_AirQuery_Carrier', index: 'Carrier', width: 90, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Tt', title: '@Resources.Locale.L_RouteSetup_Tt', index: 'Tt', width: 60, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'AllIn', title: '@Resources.Locale.L_AirQuery_AllIn', index: 'AllIn', width: 60, align: 'left', sorttype: 'string', hidden: false },
+        //{ name: 'ServiceMode', title: '@Resources.Locale.L_DNApproveManage_ServiceMode', index: 'ServiceMode', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'LoadingFrom', title: 'Loading From', index: 'LoadingFrom', width: 90, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'LoadingTo', title: 'Loading To', index: 'LoadingTo', width: 90, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'LspCd', dfsopt: 'in', sopt: ['in', 'eq', 'ne', 'cn', 'lt', 'le', 'gt', 'ge', 'cn', 'nu', 'nn', 'ni'], init: true, dv: "@ViewBag.LSP", title: '@Resources.Locale.L_AirQuery_LspCd', index: 'LspCd', width: 80, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'LspNm', title: '@Resources.Locale.L_AirQuery_LspNm', index: 'LspNm', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'ChgType', title: '@Resources.Locale.L_SMCHGSetup_ChgType', index: 'ChgType', width: 60, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'ChgCd', title: '@Resources.Locale.L_SMCHGSetup_ChgCd', index: 'ChgCd', width: 60, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'ChgDescp', title: '@Resources.Locale.L_SMCHGSetup_ChgDescp', index: 'ChgDescp', width: 100, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Cur', title: '@Resources.Locale.L_IpPart_Crncy', index: 'Cur', width: 60, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'Punit', title: '@Resources.Locale.L_AirQuery_Punit', index: 'Punit', width: 60, align: 'left', sorttype: 'string', hidden: false },
+        { name: 'F1', title: "-45", index: 'F1', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L1', title: '@Resources.Locale.L_AirQuery_L1', index: 'L1', width: 40, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F2', title: "+45", index: 'F2', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L2', title: '@Resources.Locale.L_AirQuery_L1', index: 'L2', width: 40, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F3', title: "+100", index: 'F3', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L3', title: '@Resources.Locale.L_AirQuery_L1', index: 'L3', width: 40, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F4', title: "+300", index: 'F4', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L4', title: '@Resources.Locale.L_AirQuery_L1', index: 'L4', width: 40, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F5', title: "+500", index: 'F5', width: 100, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' },  sorttype: 'string', hidden: false },
+        { name: 'L5', title: '@Resources.Locale.L_AirQuery_L1', index: 'L5', width: 40, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F6', title: "+1000", index: 'F6', width: 60, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+        { name: 'L6', title: '@Resources.Locale.L_AirQuery_L1', index: 'L6', width: 40, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'F7', title: "+2000", index: 'F7', width: 60, align: 'right', formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00' }, hidden: false, editable: true },
+        { name: 'L7', title: '@Resources.Locale.L_AirQuery_L1', index: 'L7', width: 40, align: 'right', formatter: actFormatter, sorttype: 'string', hidden: false },
+        { name: 'Remark', title: '@Resources.Locale.L_BSCSSetup_Remark', index: 'Remark', width: 100, align: 'left', sorttype: 'string', hidden: false }
+    ];
+    gop.AddUrl = false;
+    gop.gridId = "containerInfoGrid";
+    //gop.multiselect = true;
+    gop.gridAttr = { caption: "@Resources.Locale.L_RQSetup_AirComp", height: gridHeight, refresh: true, exportexcel: true, conditions: encodeURI(loadCondition) };
+    gop.gridSearchUrl = rootPath + "RQManage/AirQueryData";
+    gop.searchColumns = getSelectColumn(gop.gridColModel);
+
+
+    gop.gridFunc = function (map) {
+        //用于回调函数，例如赋值操作等
+        //dblClick(map);
+        var uid = map.UId;
+        if (!uid) {
+            CommonFunc.Notify("", "@Resources.Locale.L_TKBLQuery_Select", 500, "warning");
+            return;
+        }                                
+    }
+
+    gop.onSelectRowFunc = function (jsonMap) {
+        //顯示子表
+        var ufid = jsonMap.DnNo;
+        if (ufid != null && ufid != "") {
+            //此处增加判断，如果tempDeatiArray存在该笔数据的资料，则加载缓存，如果没有则通过请求来更新
+            if (_oldDeatiArray[ufid] != undefined || _oldDeatiArray[ufid] != null) {
+                //将json设置给BsCodeGrid
+                //移除_state状态为0的数据，，因为_state的数据是删除的数据
+                $.each(_oldDeatiArray[ufid], function (i, val) {
+                    if (val._state == "0") {
+                        _oldDeatiArray[ufid].splice(i, 1);
+                    }
+                });
+                _dm.getDs("SubGrid").setData(_oldDeatiArray[ufid]);
+                return;
+            }
+            $.ajax({
+                async: true,
+                url: rootPath + "DNManage/SMDNQueryData/" + ufid,
+                type: 'POST',
+                data: {
+                    Dnno: ufid,
+                    page: 1,
+                    rows: 200
+                },
+                dataType: "json",
+                "complete": function (xmlHttpRequest, successMsg) {
+                    if (successMsg != "success") return null;
+                },
+                "error": function (xmlHttpRequest, errMsg) {
+                },
+                success: function (result) {
+
+                    var mainTable = result;
+
+                    console.log(mainTable);
+                    var $grid = $("#SubGrid");
+                    _oldDeatiArray[ufid] = mainTable.rows;
+                    if (_dm.getDs("SubGrid") == null || _dm.getDs("SubGrid") == undefined) {
+                        _dm.addDs("SubGrid", mainTable.rows, ["UId","UFid"], $grid[0]);
+                    } else {
+                        _dm.getDs("SubGrid").setData(mainTable.rows);
+                    }
+                }
+            });
+        }
+    }
+
+    gop.searchFormId = "ConditionArea";
+    gop.searchDivId = "SearchArea";
+    var uid = "@ViewBag.UId";
+    gop.baseCondition = "";
+    gop.baseConditionFunc = function () {
+        if (uid === "")
+            return "";
+        return " RFQ_NO='" + uid + "'";
+    };
+    initSearch(gop);
+
+    $("#SummarySearch").bind("click", function () {
+        $(".status-box").removeClass("active");
+        $("#searchStatus_").addClass("active");
+    });
+    setTimeout(function () {
+        $("#SummarySearch").trigger("click");
+    }, 1000);
+});
+</script>
+
+<div id="wrapper" class='@Html.Raw(ViewBag.MenuBar)'>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!--SAVE CONDITION 固定以下排版，不可在此區植入SCRIPT-->
+                    <div class="condition-layout">
+                        <form class="pure-g" id="ConditionArea">
+
+                        </form>
+                        <div class="pure-g" id="SearchArea">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="pure-g">
+                            <div class="pure-u-sm-60-60">
+                                <table id="containerInfoGrid" class="_tableGrid" style="width: 100%">
+                                    <tr></tr>
+                                </table>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

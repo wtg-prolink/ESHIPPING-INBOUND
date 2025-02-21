@@ -1,0 +1,185 @@
+﻿@{
+    ViewBag.Title = "ContainUtiliSetup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    var schemas = "@ViewBag.schemas.Content";
+    var _uid = "@ViewBag.UId";
+</script>
+@Html.RazorJSInline("~/Scripts/DistManage/ContainUtiliSetup.js")
+<script type="text/javascript" src="@Url.Content("~/Scripts/TKBL/initView.js?20240815")"></script>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="OdType" class="control-label">@Resources.Locale.L_ContainUtili_OdType</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <select class="form-control input-sm" dt="mt" id="OdType" name="OdType" fieldname="OdType">
+                            	<option value="O">@Resources.Locale.L_DNManage_EtSa</option>
+                            	<option value="D">@Resources.Locale.L_DNManage_IntSa</option>
+                            </select>
+                        </div>
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="Year" class="control-label">@Resources.Locale.L_ContainUsage_Year</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input dt="mt" class="form-control input-sm" id="Year" name="Year" fieldname="Year" number  minnum="2014" />
+                        </div>
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="Month" class="control-label">@Resources.Locale.L_ContainUsage_Month</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                            <input dt="mt" class="form-control input-sm" id="Month" name="Month" fieldname="Month"  number maxnum="12" minnum="1"/>
+                        </div>
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="Week" class="control-label">@Resources.Locale.L_ContainUsage_Week</label>
+                        </div>
+                        <div class="pure-u-sm-3-60">
+                            <input dt="mt" class="form-control input-sm" id="Week" name="Week" fieldname="Week" number maxnum="60" minnum="0"/>
+                        </div>
+                        <div class="pure-u-sm-4-60 label-right">
+                            <label for="Cmp" class="control-label">@Resources.Locale.L_RoleSetUp_CMP</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Cmp" name="Cmp" fieldname="Cmp"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="CmpLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-5-60 label-right">
+                            <label for="Region" class="control-label">@Resources.Locale.L_CitySetup_Region</label>
+                        </div>
+                        <div class="pure-u-sm-10-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Region" name="Region" fieldname="Region"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="RegionLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-sm-5-60">
+                            <label for="Pol" class="control-label">@Resources.Locale.L_BaseLookup_PolCd</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Pol" name="Pol" fieldname="Pol" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PolLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="Pod" class="control-label">@Resources.Locale.L_ContainUtili_POD</label>
+                        </div>
+                        <div class="pure-u-sm-5-60 control-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" dt="mt" id="Pod" name="Pod" fieldname="Pod"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button" id="PodLookup">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block tooltips"></p>
+                        </div>
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="No1" class="control-label">@Resources.Locale.L_ContainUtili_No1</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                        	<div class="input-group">
+                            	<input dt="mt" class="form-control input-sm" id="No1" name="No1" fieldname="No1" number maxnum="100" minnum="0" />
+                            	<span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="No2" class="control-label">@Resources.Locale.L_ContainUtili_No2</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                        	<div class="input-group">
+                            	<input dt="mt" class="form-control input-sm" id="No2" name="No2" fieldname="No2" number maxnum="100" minnum="0"  />
+                            	<span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="No3" class="control-label">@Resources.Locale.L_ContainUtili_No3</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                        	<div class="input-group">
+                            	<input dt="mt" class="form-control input-sm" id="No3" name="No3" fieldname="No3" number maxnum="100" minnum="0"  />
+                            	<span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-4-60 label-right">
+                            <label for="No4" class="control-label">@Resources.Locale.L_ContainUtili_No4</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                        	<div class="input-group">
+                            	<input dt="mt" class="form-control input-sm" id="No4" name="No4" fieldname="No4" number maxnum="100" minnum="0"  />
+                            	<span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <div class="pure-u-sm-3-60 label-right">
+                            <label for="No5" class="control-label">@Resources.Locale.L_ContainUtili_No5</label>
+                        </div>
+                        <div class="pure-u-sm-4-60">
+                        	<div class="input-group">
+                            	<input dt="mt" class="form-control input-sm lastInput" id="No5" name="No5" fieldname="No5" number maxnum="100" minnum="0"  />
+                            	<span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="pure-g">
+<!--                         <div class="pure-u-sm-5-60">
+                            <label for="U_ID" class="control-label">公司</label>
+                        </div>
+                        <div class="pure-u-sm-5-60">
+                            <input type="text" dt="mt" class="form-control input-sm">
+                        </div> -->
+                        <div class="pure-u-sm-5-60">
+                            <label for="CreateBy" class="control-label">@Resources.Locale.L_IpPart_CreateBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateBy" name="CreateBy" fieldname="CreateBy" readonly>
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="CreateDate" name="CreateDate" fieldname="CreateDate" readonly>
+                        </div>
+                         <div class="pure-u-sm-10-60"></div>
+                        <div class="pure-u-sm-6-60 label-right">
+                            <label for="ModifyBy" class="control-label">@Resources.Locale.L_IpPart_ModifyBy</label>
+                        </div>
+                        <div class="pure-u-sm-7-60 control-group">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyBy" name="ModifyBy" fieldname="ModifyBy" readonly />
+                        </div>
+                        <div class="pure-u-sm-7-60">
+                            <input type="text" class="form-control input-sm" dt="mt" id="ModifyDate" name="ModifyDate" fieldname="ModifyDate" readonly />
+                        </div>
+                    </div>
+                    <input type="hidden" dt="mt"  isKey="true" id="UId" name="UId" fieldname="UId" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
